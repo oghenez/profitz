@@ -602,7 +602,7 @@
             treeNode32.Text = "MSTG001 - Currency";
             treeNode33.Name = "Node1";
             treeNode33.Text = "MSTG002 - Employee";
-            treeNode34.Name = "Node0";
+            treeNode34.Name = "NodeDivision";
             treeNode34.Text = "MSTG003 - Division";
             this.treeView2.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode32,

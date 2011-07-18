@@ -59,6 +59,12 @@
     <Compile Include="Forms\MasterData\BankForm.Designer.cs">
       <DependentUpon>BankForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MasterData\DivisionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MasterData\DivisionForm.Designer.cs">
+      <DependentUpon>DivisionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MasterData\CurrencyForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +84,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\MasterData\BankForm.resx">
       <DependentUpon>BankForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MasterData\DivisionForm.resx">
+      <DependentUpon>DivisionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MasterData\CurrencyForm.resx">
       <DependentUpon>CurrencyForm.cs</DependentUpon>

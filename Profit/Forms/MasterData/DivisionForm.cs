@@ -12,12 +12,12 @@ using System.Collections;
 
 namespace Profit
 {
-    public partial class BankForm : KryptonForm, IChildForm
+    public partial class DivisionForm : KryptonForm, IChildForm
     {
-        Bank m_bank = new Bank();
+        Division m_div = new Division();
         IMainForm m_mainForm;
 
-        public BankForm(IMainForm mainForm, string formName)
+        public DivisionForm(IMainForm mainForm, string formName)
         {
             InitializeComponent();
             InitializeButtonClick();
@@ -39,8 +39,8 @@ namespace Profit
             {
                 this.Cursor = Cursors.WaitCursor;
                 gridData.Rows.Clear();
-                IList records = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.BANK_REPOSITORY).GetAll(new Bank());
-                foreach (Bank d in records)
+                IList records = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.DIVISION_REPOSITORY).GetAll(new Division());
+                foreach (Division d in records)
                 {
                     int row = gridData.Rows.Add(d.CODE, d.NAME);
                     gridData.Rows[row].Tag = d;
@@ -64,16 +64,16 @@ namespace Profit
                 {
                     this.Cursor = Cursors.WaitCursor;
                     UpdateEntity();
-                    if (m_bank.ID == 0)
+                    if (m_div.ID == 0)
                     {
-                        RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.BANK_REPOSITORY).Save(m_bank);
-                        Bank bank = (Bank)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.BANK_REPOSITORY).GetByCode(m_bank);
-                        int r = gridData.Rows.Add(bank.CODE, bank.NAME);
-                        gridData.Rows[r].Tag = bank;
+                        RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.DIVISION_REPOSITORY).Save(m_div);
+                        Division newdata = (Division)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.DIVISION_REPOSITORY).GetByCode(m_div);
+                        int r = gridData.Rows.Add(newdata.CODE, newdata.NAME);
+                        gridData.Rows[r].Tag = newdata;
                     }
                     else
                     {
-                        RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.BANK_REPOSITORY).Update(m_bank);
+                        RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.DIVISION_REPOSITORY).Update(m_div);
                         updateRecord();
                     }
                     KryptonMessageBox.Show("Record has been saved","Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -96,11 +96,11 @@ namespace Profit
         {
             foreach (DataGridViewRow item in gridData.Rows)
             {
-                Bank dep = (Bank)item.Tag;
-                if (dep.ID == m_bank.ID)
+                Division dep = (Division)item.Tag;
+                if (dep.ID == m_div.ID)
                 {
-                    gridData[0, item.Index].Value = m_bank.CODE;
-                    gridData[1, item.Index].Value = m_bank.NAME;
+                    gridData[0, item.Index].Value = m_div.CODE;
+                    gridData[1, item.Index].Value = m_div.NAME;
                     break;
                 }
             }
@@ -115,8 +115,8 @@ namespace Profit
         }
         private void UpdateEntity()
         {
-            m_bank.CODE = textBoxCode.Text.Trim();
-            m_bank.NAME = textBoxName.Text.Trim();
+            m_div.CODE = textBoxCode.Text.Trim();
+            m_div.NAME = textBoxName.Text.Trim();
         }
         public void ClearForm()
         {
@@ -124,7 +124,7 @@ namespace Profit
             {
                 textBoxCode.Text = "";
                 textBoxName.Text = "";
-                m_bank = new Bank();
+                m_div = new Division();
                 errorProvider1.Clear();
                 textBoxCode.Focus();
             }
@@ -146,10 +146,10 @@ namespace Profit
         }
         private void setEditMode(EditMode editmode)
         {
-            toolStripButtonSave.Enabled = (editmode == EditMode.New || editmode == EditMode.Update);// && m_mainForm.CurrentUser.FORM_CCY_SAVE;
-            toolStripButtonEdit.Enabled = (editmode == EditMode.View);//&& m_mainForm.CurrentUser.FORM_CCY_SAVE;
-            toolStripButtonDelete.Enabled = (editmode == EditMode.View);//&& m_mainForm.CurrentUser.FORM_CCY_DELETE;
-            toolStripButtonClear.Enabled = true;//m_mainForm.CurrentUser.FORM_CCY_SAVE;
+            toolStripButtonSave.Enabled = (editmode == EditMode.New || editmode == EditMode.Update);// && m_mainForm.CurrentUser.FORm_div_SAVE;
+            toolStripButtonEdit.Enabled = (editmode == EditMode.View);//&& m_mainForm.CurrentUser.FORm_div_SAVE;
+            toolStripButtonDelete.Enabled = (editmode == EditMode.View);//&& m_mainForm.CurrentUser.FORm_div_DELETE;
+            toolStripButtonClear.Enabled = true;//m_mainForm.CurrentUser.FORm_div_SAVE;
             ReloadMainFormButton();
         }
         private void ReloadMainFormButton()
@@ -163,12 +163,12 @@ namespace Profit
         {
             try
             {
-                if (m_bank.ID > 0)
+                if (m_div.ID > 0)
                 {
                     this.Cursor = Cursors.WaitCursor;
                     if (KryptonMessageBox.Show("Are you sure to delete this record?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.No) { this.Cursor = Cursors.Default; return; }
-                    RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.BANK_REPOSITORY).Delete(m_bank);
-                    removeRecord(m_bank.ID);
+                    RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.DIVISION_REPOSITORY).Delete(m_div);
+                    removeRecord(m_div.ID);
                     ClearForm();
                     setEnableForm(true);
                     setEditMode(EditMode.New);
@@ -189,7 +189,7 @@ namespace Profit
         {
             foreach (DataGridViewRow item in gridData.Rows)
             {
-                Bank dep = (Bank)item.Tag;
+                Division dep = (Division)item.Tag;
                 if (dep.ID == id)
                 {
                     gridData.Rows.Remove(item);
@@ -210,16 +210,16 @@ namespace Profit
         {
             if (gridData.SelectedRows.Count == 0) return;
             ClearForm();
-            m_bank = (Bank)gridData.SelectedRows[0].Tag;
-            if (m_bank == null) return;
+            m_div = (Division)gridData.SelectedRows[0].Tag;
+            if (m_div == null) return;
             loadData();
             setEnableForm(false);
             setEditMode(EditMode.View);
         }
         private void loadData()
         {
-            textBoxCode.Text = m_bank.CODE;
-            textBoxName.Text = m_bank.NAME;
+            textBoxCode.Text = m_div.CODE;
+            textBoxName.Text = m_div.NAME;
         }
 
         #region IChildForm Members
