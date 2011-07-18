@@ -12,12 +12,12 @@ using System.Collections;
 
 namespace Profit
 {
-    public partial class CurrencyForm : KryptonForm, IChildForm
+    public partial class UnitForm : KryptonForm, IChildForm
     {
-        Currency m_ccy = new Currency();
+        Unit m_unit = new Unit();
         IMainForm m_mainForm;
 
-        public CurrencyForm(IMainForm mainForm, string formName)
+        public UnitForm(IMainForm mainForm, string formName)
         {
             InitializeComponent();
             InitializeButtonClick();
@@ -39,8 +39,8 @@ namespace Profit
             {
                 this.Cursor = Cursors.WaitCursor;
                 gridData.Rows.Clear();
-                IList records = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY).GetAll(new Currency());
-                foreach (Currency d in records)
+                IList records = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY).GetAll(new Unit());
+                foreach (Unit d in records)
                 {
                     int row = gridData.Rows.Add(d.CODE, d.NAME);
                     gridData.Rows[row].Tag = d;
@@ -64,16 +64,16 @@ namespace Profit
                 {
                     this.Cursor = Cursors.WaitCursor;
                     UpdateEntity();
-                    if (m_ccy.ID == 0)
+                    if (m_unit.ID == 0)
                     {
-                        RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY).Save(m_ccy);
-                        Currency newdata = (Currency)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY).GetByCode(m_ccy);
-                        int r = gridData.Rows.Add(newdata.CODE, newdata.NAME);
-                        gridData.Rows[r].Tag = newdata;
+                        RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY).Save(m_unit);
+                        Unit bank = (Unit)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY).GetByCode(m_unit);
+                        int r = gridData.Rows.Add(bank.CODE, bank.NAME);
+                        gridData.Rows[r].Tag = bank;
                     }
                     else
                     {
-                        RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY).Update(m_ccy);
+                        RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY).Update(m_unit);
                         updateRecord();
                     }
                     KryptonMessageBox.Show("Record has been saved","Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -97,11 +97,11 @@ namespace Profit
         {
             foreach (DataGridViewRow item in gridData.Rows)
             {
-                Currency dep = (Currency)item.Tag;
-                if (dep.ID == m_ccy.ID)
+                Unit dep = (Unit)item.Tag;
+                if (dep.ID == m_unit.ID)
                 {
-                    gridData[0, item.Index].Value = m_ccy.CODE;
-                    gridData[1, item.Index].Value = m_ccy.NAME;
+                    gridData[0, item.Index].Value = m_unit.CODE;
+                    gridData[1, item.Index].Value = m_unit.NAME;
                     break;
                 }
             }
@@ -116,8 +116,8 @@ namespace Profit
         }
         private void UpdateEntity()
         {
-            m_ccy.CODE = textBoxCode.Text.Trim();
-            m_ccy.NAME = textBoxName.Text.Trim();
+            m_unit.CODE = textBoxCode.Text.Trim();
+            m_unit.NAME = textBoxName.Text.Trim();
         }
         public void ClearForm()
         {
@@ -125,7 +125,7 @@ namespace Profit
             {
                 textBoxCode.Text = "";
                 textBoxName.Text = "";
-                m_ccy = new Currency();
+                m_unit = new Unit();
                 errorProvider1.Clear();
             }
             catch (Exception x)
@@ -163,12 +163,12 @@ namespace Profit
         {
             try
             {
-                if (m_ccy.ID > 0)
+                if (m_unit.ID > 0)
                 {
                     this.Cursor = Cursors.WaitCursor;
                     if (KryptonMessageBox.Show("Are you sure to delete this record?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.No) { this.Cursor = Cursors.Default; return; }
-                    RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY).Delete(m_ccy);
-                    removeRecord(m_ccy.ID);
+                    RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY).Delete(m_unit);
+                    removeRecord(m_unit.ID);
                     ClearForm();
                     setEnableForm(true);
                     setEditMode(EditMode.New);
@@ -190,7 +190,7 @@ namespace Profit
         {
             foreach (DataGridViewRow item in gridData.Rows)
             {
-                Currency dep = (Currency)item.Tag;
+                Unit dep = (Unit)item.Tag;
                 if (dep.ID == id)
                 {
                     gridData.Rows.Remove(item);
@@ -212,16 +212,16 @@ namespace Profit
         {
             if (gridData.SelectedRows.Count == 0) return;
             ClearForm();
-            m_ccy = (Currency)gridData.SelectedRows[0].Tag;
-            if (m_ccy == null) return;
+            m_unit = (Unit)gridData.SelectedRows[0].Tag;
+            if (m_unit == null) return;
             loadData();
             setEnableForm(false);
             setEditMode(EditMode.View);
         }
         private void loadData()
         {
-            textBoxCode.Text = m_ccy.CODE;
-            textBoxName.Text = m_ccy.NAME;
+            textBoxCode.Text = m_unit.CODE;
+            textBoxName.Text = m_unit.NAME;
         }
 
         #region IChildForm Members

@@ -77,6 +77,7 @@ namespace Profit
                         updateRecord();
                     }
                     KryptonMessageBox.Show("Record has been saved","Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    gridData.ClearSelection();
                     ClearForm();
                     textBoxCode.Focus();
                     this.Cursor = Cursors.Default;
@@ -126,7 +127,6 @@ namespace Profit
                 textBoxName.Text = "";
                 m_div = new Division();
                 errorProvider1.Clear();
-                textBoxCode.Focus();
             }
             catch (Exception x)
             {
@@ -200,6 +200,7 @@ namespace Profit
         }
         public void Clear(object sender, EventArgs e)
         {
+            gridData.ClearSelection();
             ClearForm();
             setEnableForm(true);
             setEditMode(EditMode.New);

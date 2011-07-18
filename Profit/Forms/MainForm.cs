@@ -15,6 +15,9 @@ namespace Profit
         const string BANK_FORM = "BankForm";
         const string CURRENCY_FORM = "CurrencyForm";
         const string DIVISION_FORM = "DivisionForm";
+        const string EMPLOYEE_FORM = "EmployeeForm";
+        const string TOP_FORM = "TOPForm";
+        const string UNIT_FORM = "UnitForm";
 
         public MainForm()
         {
@@ -54,6 +57,26 @@ namespace Profit
             {
                 if (isChild(DIVISION_FORM)) { this.Cursor = Cursors.Default; return; }
                 DivisionForm user = new DivisionForm(this, DIVISION_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            }
+            if (e.Node.Name == "NodeEmployee")
+            {
+                if (isChild(EMPLOYEE_FORM)) { this.Cursor = Cursors.Default; return; }
+                EmployeeForm user = new EmployeeForm(this, EMPLOYEE_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            } 
+            if (e.Node.Name == "NodeTOP")
+            {
+                if (isChild(TOP_FORM)) { this.Cursor = Cursors.Default; return; }
+                TOPForm user = new TOPForm(this, TOP_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            } if (e.Node.Name == "NodeUnit")
+            {
+                if (isChild(UNIT_FORM)) { this.Cursor = Cursors.Default; return; }
+                UnitForm user = new UnitForm(this, UNIT_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
