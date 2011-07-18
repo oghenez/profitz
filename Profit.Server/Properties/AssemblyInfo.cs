@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Profit")]
+[assembly: AssemblyTitle("Profit.Server")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Dagado Software")]
-[assembly: AssemblyProduct("Profit")]
-[assembly: AssemblyCopyright("Copyright © Dagado Software 2011")]
+[assembly: AssemblyCompany("THE ISB")]
+[assembly: AssemblyProduct("Profit.Server")]
+[assembly: AssemblyCopyright("Copyright © THE ISB 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("02f3bebc-9e8d-4af1-b680-b27fbe2e5646")]
+[assembly: Guid("e7485cc6-b7ac-4059-a1e2-e5ff63bd53f3")]
 
 // Version information for an assembly consists of the following four values:
 //
