@@ -12,12 +12,12 @@ using System.Collections;
 
 namespace Profit
 {
-    public partial class CurrencyForm : KryptonForm, IChildForm
+    public partial class EmployeeForm : KryptonForm, IChildForm
     {
-        Currency m_ccy = new Currency();
+        Employee m_emp = new Employee();
         IMainForm m_mainForm;
 
-        public CurrencyForm(IMainForm mainForm, string formName)
+        public EmployeeForm(IMainForm mainForm, string formName)
         {
             InitializeComponent();
             InitializeButtonClick();
@@ -39,10 +39,10 @@ namespace Profit
             {
                 this.Cursor = Cursors.WaitCursor;
                 gridData.Rows.Clear();
-                IList records = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY).GetAll(new Currency());
-                foreach (Currency d in records)
+                IList records = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.EMPLOYEE_REPOSITORY).GetAll(new Employee());
+                foreach (Employee d in records)
                 {
-                    int row = gridData.Rows.Add(d.CODE, d.NAME);
+                    int row = gridData.Rows.Add(d.CODE, d.NAME, d.IS_SALESMAN, d.IS_STOREMAN,d.IS_PURCHASER);
                     gridData.Rows[row].Tag = d;
                 }
                 this.Cursor = Cursors.Default;
@@ -64,16 +64,16 @@ namespace Profit
                 {
                     this.Cursor = Cursors.WaitCursor;
                     UpdateEntity();
-                    if (m_ccy.ID == 0)
+                    if (m_emp.ID == 0)
                     {
-                        RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY).Save(m_ccy);
-                        Currency newdata = (Currency)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY).GetByCode(m_ccy);
-                        int r = gridData.Rows.Add(newdata.CODE, newdata.NAME);
-                        gridData.Rows[r].Tag = newdata;
+                        RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.EMPLOYEE_REPOSITORY).Save(m_emp);
+                        Employee bank = (Employee)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.EMPLOYEE_REPOSITORY).GetByCode(m_emp);
+                        int r = gridData.Rows.Add(bank.CODE, bank.NAME, bank.IS_SALESMAN,bank.IS_STOREMAN,bank.IS_PURCHASER);
+                        gridData.Rows[r].Tag = bank;
                     }
                     else
                     {
-                        RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY).Update(m_ccy);
+                        RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.EMPLOYEE_REPOSITORY).Update(m_emp);
                         updateRecord();
                     }
                     KryptonMessageBox.Show("Record has been saved","Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -97,11 +97,14 @@ namespace Profit
         {
             foreach (DataGridViewRow item in gridData.Rows)
             {
-                Currency dep = (Currency)item.Tag;
-                if (dep.ID == m_ccy.ID)
+                Employee dep = (Employee)item.Tag;
+                if (dep.ID == m_emp.ID)
                 {
-                    gridData[0, item.Index].Value = m_ccy.CODE;
-                    gridData[1, item.Index].Value = m_ccy.NAME;
+                    gridData[0, item.Index].Value = m_emp.CODE;
+                    gridData[1, item.Index].Value = m_emp.NAME;
+                    gridData[2, item.Index].Value = m_emp.IS_SALESMAN;
+                    gridData[3, item.Index].Value = m_emp.IS_STOREMAN;
+                    gridData[4, item.Index].Value = m_emp.IS_PURCHASER;
                     break;
                 }
             }
@@ -116,8 +119,11 @@ namespace Profit
         }
         private void UpdateEntity()
         {
-            m_ccy.CODE = textBoxCode.Text.Trim();
-            m_ccy.NAME = textBoxName.Text.Trim();
+            m_emp.CODE = textBoxCode.Text.Trim();
+            m_emp.NAME = textBoxName.Text.Trim();
+            m_emp.IS_PURCHASER = kryptonCheckBoxPurchaser.Checked;
+            m_emp.IS_SALESMAN = kryptonCheckBoxSalesman.Checked;
+            m_emp.IS_STOREMAN = kryptonCheckBoxStoreman.Checked;
         }
         public void ClearForm()
         {
@@ -125,7 +131,10 @@ namespace Profit
             {
                 textBoxCode.Text = "";
                 textBoxName.Text = "";
-                m_ccy = new Currency();
+                kryptonCheckBoxPurchaser.Checked = false;
+                kryptonCheckBoxSalesman.Checked = false;
+                kryptonCheckBoxStoreman.Checked = false;
+                m_emp = new Employee();
                 errorProvider1.Clear();
             }
             catch (Exception x)
@@ -143,6 +152,9 @@ namespace Profit
         {
             textBoxCode.ReadOnly = !enable;
             textBoxName.ReadOnly = !enable;
+            kryptonCheckBoxPurchaser.Enabled = enable;
+            kryptonCheckBoxSalesman.Enabled = enable;
+            kryptonCheckBoxStoreman.Enabled = enable;
         }
         private void setEditMode(EditMode editmode)
         {
@@ -163,12 +175,12 @@ namespace Profit
         {
             try
             {
-                if (m_ccy.ID > 0)
+                if (m_emp.ID > 0)
                 {
                     this.Cursor = Cursors.WaitCursor;
                     if (KryptonMessageBox.Show("Are you sure to delete this record?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.No) { this.Cursor = Cursors.Default; return; }
-                    RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY).Delete(m_ccy);
-                    removeRecord(m_ccy.ID);
+                    RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.EMPLOYEE_REPOSITORY).Delete(m_emp);
+                    removeRecord(m_emp.ID);
                     ClearForm();
                     setEnableForm(true);
                     setEditMode(EditMode.New);
@@ -190,7 +202,7 @@ namespace Profit
         {
             foreach (DataGridViewRow item in gridData.Rows)
             {
-                Currency dep = (Currency)item.Tag;
+                Employee dep = (Employee)item.Tag;
                 if (dep.ID == id)
                 {
                     gridData.Rows.Remove(item);
@@ -212,16 +224,19 @@ namespace Profit
         {
             if (gridData.SelectedRows.Count == 0) return;
             ClearForm();
-            m_ccy = (Currency)gridData.SelectedRows[0].Tag;
-            if (m_ccy == null) return;
+            m_emp = (Employee)gridData.SelectedRows[0].Tag;
+            if (m_emp == null) return;
             loadData();
             setEnableForm(false);
             setEditMode(EditMode.View);
         }
         private void loadData()
         {
-            textBoxCode.Text = m_ccy.CODE;
-            textBoxName.Text = m_ccy.NAME;
+            textBoxCode.Text = m_emp.CODE;
+            textBoxName.Text = m_emp.NAME;
+            kryptonCheckBoxPurchaser.Checked = m_emp.IS_PURCHASER;
+            kryptonCheckBoxSalesman.Checked = m_emp.IS_SALESMAN;
+            kryptonCheckBoxStoreman.Checked = m_emp.IS_STOREMAN;
         }
 
         #region IChildForm Members

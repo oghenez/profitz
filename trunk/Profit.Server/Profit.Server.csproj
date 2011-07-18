@@ -46,6 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\Bank.cs" />
+    <Compile Include="Entity\Unit.cs" />
+    <Compile Include="Entity\TOP.cs" />
+    <Compile Include="Entity\Employee.cs" />
     <Compile Include="Entity\Division.cs" />
     <Compile Include="Entity\Currency.cs" />
     <Compile Include="Entity\IEntity.cs" />

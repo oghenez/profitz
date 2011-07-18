@@ -128,7 +128,7 @@
             this.statusStrip1.Location = new System.Drawing.Point(0, 576);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
-            this.statusStrip1.Size = new System.Drawing.Size(691, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(803, 22);
             this.statusStrip1.TabIndex = 8;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -141,7 +141,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(691, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(803, 24);
             this.menuStrip1.TabIndex = 9;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -515,6 +515,7 @@
             this.treeView7.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.treeView7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView7.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.treeView7.HideSelection = false;
             this.treeView7.Location = new System.Drawing.Point(0, 249);
             this.treeView7.Name = "treeView7";
             treeNode21.Name = "Node0";
@@ -529,7 +530,7 @@
             treeNode25.Text = "MSTD005 - Price Category";
             treeNode26.Name = "Node3";
             treeNode26.Text = "MSTD006 - Tax";
-            treeNode27.Name = "Node4";
+            treeNode27.Name = "NodeTOP";
             treeNode27.Text = "MSTD007 - Term Of Payment";
             this.treeView7.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode21,
@@ -541,6 +542,7 @@
             treeNode27});
             this.treeView7.Size = new System.Drawing.Size(228, 113);
             this.treeView7.TabIndex = 20;
+            this.treeView7.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
             // 
             // kryptonHeader6
             // 
@@ -560,13 +562,14 @@
             this.treeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Top;
             this.treeView1.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.treeView1.HideSelection = false;
             this.treeView1.Location = new System.Drawing.Point(0, 163);
             this.treeView1.Name = "treeView1";
             treeNode28.Name = "Node0";
             treeNode28.Text = "MSTI001 - Part Group";
             treeNode29.Name = "Node1";
             treeNode29.Text = "MSTI002 - Part Category";
-            treeNode30.Name = "Node0";
+            treeNode30.Name = "NodeUnit";
             treeNode30.Text = "MSTI003 - Unit";
             treeNode31.Name = "Node1";
             treeNode31.Text = "MSTI004 - Warehouse";
@@ -577,6 +580,7 @@
             treeNode31});
             this.treeView1.Size = new System.Drawing.Size(228, 65);
             this.treeView1.TabIndex = 18;
+            this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
             // 
             // kryptonHeader1
             // 
@@ -596,11 +600,13 @@
             this.treeView2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.treeView2.Dock = System.Windows.Forms.DockStyle.Top;
             this.treeView2.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.treeView2.FullRowSelect = true;
+            this.treeView2.HideSelection = false;
             this.treeView2.Location = new System.Drawing.Point(0, 91);
             this.treeView2.Name = "treeView2";
             treeNode32.Name = "NodeCurrency";
             treeNode32.Text = "MSTG001 - Currency";
-            treeNode33.Name = "Node1";
+            treeNode33.Name = "NodeEmployee";
             treeNode33.Text = "MSTG002 - Employee";
             treeNode34.Name = "NodeDivision";
             treeNode34.Text = "MSTG003 - Division";
@@ -630,6 +636,7 @@
             this.treeView8.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.treeView8.Dock = System.Windows.Forms.DockStyle.Top;
             this.treeView8.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.treeView8.HideSelection = false;
             this.treeView8.Location = new System.Drawing.Point(0, 21);
             this.treeView8.Name = "treeView8";
             treeNode35.Name = "NodeBank";
@@ -671,7 +678,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(691, 598);
+            this.ClientSize = new System.Drawing.Size(803, 598);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.kryptonPanel4);
             this.Controls.Add(this.statusStrip1);
