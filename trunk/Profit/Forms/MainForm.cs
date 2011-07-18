@@ -14,6 +14,7 @@ namespace Profit
     {
         const string BANK_FORM = "BankForm";
         const string CURRENCY_FORM = "CurrencyForm";
+        const string DIVISION_FORM = "DivisionForm";
 
         public MainForm()
         {
@@ -46,6 +47,13 @@ namespace Profit
             {
                 if (isChild(CURRENCY_FORM)) { this.Cursor = Cursors.Default; return; }
                 CurrencyForm user = new CurrencyForm(this, CURRENCY_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            }
+            if (e.Node.Name == "NodeDivision")
+            {
+                if (isChild(DIVISION_FORM)) { this.Cursor = Cursors.Default; return; }
+                DivisionForm user = new DivisionForm(this, DIVISION_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }

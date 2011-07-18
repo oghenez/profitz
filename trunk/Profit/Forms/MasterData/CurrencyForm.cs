@@ -67,9 +67,9 @@ namespace Profit
                     if (m_ccy.ID == 0)
                     {
                         RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY).Save(m_ccy);
-                        m_ccy = (Currency)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY).GetByCode(m_ccy);
-                        int r = gridData.Rows.Add(m_ccy.CODE, m_ccy.NAME);
-                        gridData.Rows[r].Tag = m_ccy;
+                        Currency newdata = (Currency)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY).GetByCode(m_ccy);
+                        int r = gridData.Rows.Add(newdata.CODE, newdata.NAME);
+                        gridData.Rows[r].Tag = newdata;
                     }
                     else
                     {
@@ -126,7 +126,7 @@ namespace Profit
                 textBoxName.Text = "";
                 m_ccy = new Currency();
                 errorProvider1.Clear();
-
+                textBoxCode.Focus();
             }
             catch (Exception x)
             {
@@ -196,6 +196,7 @@ namespace Profit
                     break;
                 }
             }
+            gridData.ClearSelection();
         }
         public void Clear(object sender, EventArgs e)
         {

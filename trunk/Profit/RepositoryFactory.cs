@@ -14,6 +14,8 @@ namespace Profit
         static volatile RepositoryFactory m_instance;
         public const string BANK_REPOSITORY = "BankRepository";
         public const string CURRENCY_REPOSITORY = "CurrencyRepository";
+        public const string DIVISION_REPOSITORY = "DivisionRepository";
+
         public static RepositoryFactory GetInstance()
         {
             if (m_instance == null)
@@ -27,8 +29,10 @@ namespace Profit
         {
             Repository bankRepository = new Repository();
             Repository ccyRepository = new Repository();
+            Repository divRepository = new Repository();
             m_listService.Add(BANK_REPOSITORY, bankRepository);
             m_listService.Add(CURRENCY_REPOSITORY, ccyRepository);
+            m_listService.Add(DIVISION_REPOSITORY, divRepository);
         }
         public Repository GetRepository(string name)
         {

@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\Bank.cs" />
+    <Compile Include="Entity\Division.cs" />
     <Compile Include="Entity\Currency.cs" />
     <Compile Include="Entity\IEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
