@@ -39,7 +39,7 @@ namespace Profit
             {
                 this.Cursor = Cursors.WaitCursor;
                 gridData.Rows.Clear();
-                IList records = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.TOP_REPOSITORY).GetAll(new TermOfPayment());
+                IList records = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.TOP_REPOSITORY).GetAll();
                 foreach (TermOfPayment d in records)
                 {
                     int row = gridData.Rows.Add(d.CODE, d.NAME,d.DAYS);
@@ -102,7 +102,7 @@ namespace Profit
                 {
                     gridData[0, item.Index].Value = m_top.CODE;
                     gridData[1, item.Index].Value = m_top.NAME;
-                    gridData[3, item.Index].Value = m_top.DAYS;
+                    gridData[2, item.Index].Value = m_top.DAYS;
                     break;
                 }
             }

@@ -11,7 +11,11 @@ namespace Profit.Server
     public class Repository
     {
         protected OdbcConnection m_connection = new OdbcConnection("Driver={MySQL ODBC 5.1 Driver};server=localhost;database=profit_db;uid=root;pwd=1234");
-        
+        IEntity m_entity = null;
+        public Repository(IEntity e)
+        {
+            m_entity = e;
+        }
         public void SetConnection(OdbcConnection connection)
         {
             m_connection = connection;
@@ -114,14 +118,14 @@ namespace Profit.Server
                 m_connection.Close();
             }
         }
-        public virtual IList GetAll(IEntity e)
+        public virtual IList GetAll()
         {
             try
             {
                 OpenConnection();
-                OdbcCommand aCommand = new OdbcCommand(e.GetAllSQL(), m_connection);
+                OdbcCommand aCommand = new OdbcCommand(m_entity.GetAllSQL(), m_connection);
                 OdbcDataReader aReader = aCommand.ExecuteReader();
-                IList a = e.GetAll(aReader);
+                IList a = m_entity.GetAll(aReader);
                 return a;
             }
             catch (Exception x)
@@ -134,12 +138,12 @@ namespace Profit.Server
             }
         }
         
-        public DataSet GetAllDataSet(IEntity e)
+        public DataSet GetAllDataSet()
         {
             try
             {
                 OpenConnection();
-                OdbcDataAdapter aAdapter = new OdbcDataAdapter(e.GetAllSQL(), m_connection);
+                OdbcDataAdapter aAdapter = new OdbcDataAdapter(m_entity.GetAllSQL(), m_connection);
                 DataSet ds = new DataSet("ds");
                 aAdapter.Fill(ds);
                 return ds;

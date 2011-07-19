@@ -518,17 +518,17 @@
             this.treeView7.HideSelection = false;
             this.treeView7.Location = new System.Drawing.Point(0, 249);
             this.treeView7.Name = "treeView7";
-            treeNode21.Name = "Node0";
+            treeNode21.Name = "NodeCustomer";
             treeNode21.Text = "MSTD001 - Customer";
             treeNode22.Name = "Node1";
             treeNode22.Text = "MSTD002 - Supplier";
-            treeNode23.Name = "Node0";
+            treeNode23.Name = "NodeCustomerCategory";
             treeNode23.Text = "MSTD003 - Customer Category";
-            treeNode24.Name = "Node1";
+            treeNode24.Name = "NodeSupplierCategory";
             treeNode24.Text = "MSTD004 - Supplier Category";
-            treeNode25.Name = "Node2";
+            treeNode25.Name = "NodePriceCategory";
             treeNode25.Text = "MSTD005 - Price Category";
-            treeNode26.Name = "Node3";
+            treeNode26.Name = "NodeTax";
             treeNode26.Text = "MSTD006 - Tax";
             treeNode27.Name = "NodeTOP";
             treeNode27.Text = "MSTD007 - Term Of Payment";
@@ -565,13 +565,13 @@
             this.treeView1.HideSelection = false;
             this.treeView1.Location = new System.Drawing.Point(0, 163);
             this.treeView1.Name = "treeView1";
-            treeNode28.Name = "Node0";
+            treeNode28.Name = "NodePartGroup";
             treeNode28.Text = "MSTI001 - Part Group";
-            treeNode29.Name = "Node1";
+            treeNode29.Name = "NodePartCategory";
             treeNode29.Text = "MSTI002 - Part Category";
             treeNode30.Name = "NodeUnit";
             treeNode30.Text = "MSTI003 - Unit";
-            treeNode31.Name = "Node1";
+            treeNode31.Name = "NodeWarehouse";
             treeNode31.Text = "MSTI004 - Warehouse";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode28,
@@ -641,9 +641,9 @@
             this.treeView8.Name = "treeView8";
             treeNode35.Name = "NodeBank";
             treeNode35.Text = "MSTF001 - Bank";
-            treeNode36.Name = "Node1";
+            treeNode36.Name = "NodeDocumentType";
             treeNode36.Text = "MSTF002 - Document Type";
-            treeNode37.Name = "Node0";
+            treeNode37.Name = "NodeExchangeRate";
             treeNode37.Text = "MSTF003 - Exchange Rate";
             this.treeView8.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode35,

@@ -59,6 +59,66 @@
     <Compile Include="Forms\MasterData\BankForm.Designer.cs">
       <DependentUpon>BankForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MasterData\CustomerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MasterData\CustomerForm.Designer.cs">
+      <DependentUpon>CustomerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MasterData\ExchangeRateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MasterData\ExchangeRateForm.Designer.cs">
+      <DependentUpon>ExchangeRateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MasterData\DocumentTypeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MasterData\DocumentTypeForm.Designer.cs">
+      <DependentUpon>DocumentTypeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MasterData\PartCategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MasterData\PartCategoryForm.Designer.cs">
+      <DependentUpon>PartCategoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MasterData\WarehouseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MasterData\WarehouseForm.Designer.cs">
+      <DependentUpon>WarehouseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MasterData\PartGroupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MasterData\PartGroupForm.Designer.cs">
+      <DependentUpon>PartGroupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MasterData\TaxForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MasterData\TaxForm.Designer.cs">
+      <DependentUpon>TaxForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MasterData\PriceCategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MasterData\PriceCategoryForm.Designer.cs">
+      <DependentUpon>PriceCategoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MasterData\SupplierCategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MasterData\SupplierCategoryForm.Designer.cs">
+      <DependentUpon>SupplierCategoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MasterData\CustomerCategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MasterData\CustomerCategoryForm.Designer.cs">
+      <DependentUpon>CustomerCategoryForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MasterData\UnitForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +162,36 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\MasterData\BankForm.resx">
       <DependentUpon>BankForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MasterData\CustomerForm.resx">
+      <DependentUpon>CustomerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MasterData\ExchangeRateForm.resx">
+      <DependentUpon>ExchangeRateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MasterData\DocumentTypeForm.resx">
+      <DependentUpon>DocumentTypeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MasterData\PartCategoryForm.resx">
+      <DependentUpon>PartCategoryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MasterData\WarehouseForm.resx">
+      <DependentUpon>WarehouseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MasterData\PartGroupForm.resx">
+      <DependentUpon>PartGroupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MasterData\TaxForm.resx">
+      <DependentUpon>TaxForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MasterData\PriceCategoryForm.resx">
+      <DependentUpon>PriceCategoryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MasterData\SupplierCategoryForm.resx">
+      <DependentUpon>SupplierCategoryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MasterData\CustomerCategoryForm.resx">
+      <DependentUpon>CustomerCategoryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MasterData\UnitForm.resx">
       <DependentUpon>UnitForm.cs</DependentUpon>

@@ -18,6 +18,17 @@ namespace Profit
         const string EMPLOYEE_FORM = "EmployeeForm";
         const string TOP_FORM = "TOPForm";
         const string UNIT_FORM = "UnitForm";
+        const string CUSTOMER_CATEGORY_FORM = "CustomerCategoryForm";
+        const string SUPPLIER_CATEGORY_FORM = "SupplierCategoryForm";
+        const string PRICE_CATEGORY_FORM = "PriceCategoryForm";
+        const string TAX_FORM = "TaxForm";
+        const string PART_GROUP_FORM = "PartGroupForm";
+        const string WAREHOUSE_FORM = "WarehouseForm";
+        const string PART_CATEGORY_FORM = "PartCategoryForm";
+        const string DOC_TYPE_FORM = "DocumentTypeForm";
+        const string EXCHANGE_RATE_FORM = "ExchangeRateForm";
+        const string CUSTOMER_FORM = "CustomerForm";
+
 
         public MainForm()
         {
@@ -73,10 +84,80 @@ namespace Profit
                 TOPForm user = new TOPForm(this, TOP_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
-            } if (e.Node.Name == "NodeUnit")
+            } 
+            if (e.Node.Name == "NodeUnit")
             {
                 if (isChild(UNIT_FORM)) { this.Cursor = Cursors.Default; return; }
                 UnitForm user = new UnitForm(this, UNIT_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            }
+            if (e.Node.Name == "NodeCustomerCategory")
+            {
+                if (isChild(CUSTOMER_CATEGORY_FORM)) { this.Cursor = Cursors.Default; return; }
+                CustomerCategoryForm user = new CustomerCategoryForm(this, CUSTOMER_CATEGORY_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            }
+            if (e.Node.Name == "NodeSupplierCategory")
+            {
+                if (isChild(SUPPLIER_CATEGORY_FORM)) { this.Cursor = Cursors.Default; return; }
+                SupplierCategoryForm user = new SupplierCategoryForm(this, SUPPLIER_CATEGORY_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            }
+            if (e.Node.Name == "NodePriceCategory")
+            {
+                if (isChild(PRICE_CATEGORY_FORM)) { this.Cursor = Cursors.Default; return; }
+                PriceCategoryForm user = new PriceCategoryForm(this, PRICE_CATEGORY_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            }
+            if (e.Node.Name == "NodeTax")
+            {
+                if (isChild(TAX_FORM)) { this.Cursor = Cursors.Default; return; }
+                TaxForm user = new TaxForm(this, TAX_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            }
+            if (e.Node.Name == "NodePartGroup")
+            {
+                if (isChild(PART_GROUP_FORM)) { this.Cursor = Cursors.Default; return; }
+                PartGroupForm user = new PartGroupForm(this, PART_GROUP_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            }
+            if (e.Node.Name == "NodeWarehouse")
+            {
+                if (isChild(WAREHOUSE_FORM)) { this.Cursor = Cursors.Default; return; }
+                WarehouseForm user = new WarehouseForm(this, WAREHOUSE_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            } 
+            if (e.Node.Name == "NodePartCategory")
+            {
+                if (isChild(PART_CATEGORY_FORM)) { this.Cursor = Cursors.Default; return; }
+                PartCategoryForm user = new PartCategoryForm(this, PART_CATEGORY_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            } 
+            if (e.Node.Name == "NodeDocumentType")
+            {
+                if (isChild(DOC_TYPE_FORM)) { this.Cursor = Cursors.Default; return; }
+                DocumentTypeForm user = new DocumentTypeForm(this, DOC_TYPE_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            }
+            if (e.Node.Name == "NodeExchangeRate")
+            {
+                if (isChild(EXCHANGE_RATE_FORM)) { this.Cursor = Cursors.Default; return; }
+                ExchangeRateForm user = new ExchangeRateForm(this, EXCHANGE_RATE_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            } if (e.Node.Name == "NodeCustomer")
+            {
+                if (isChild(CUSTOMER_FORM)) { this.Cursor = Cursors.Default; return; }
+                CustomerForm user = new CustomerForm(this, CUSTOMER_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
