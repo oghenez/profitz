@@ -75,6 +75,83 @@ INSERT INTO `table_currency` (`ccy_id`,`ccy_code`,`ccy_name`) VALUES
 
 
 --
+-- Definition of table `table_customer`
+--
+
+DROP TABLE IF EXISTS `table_customer`;
+CREATE TABLE `table_customer` (
+  `cus_id` int(10) unsigned NOT NULL auto_increment,
+  `cus_code` varchar(45) NOT NULL,
+  `cus_name` varchar(45) NOT NULL,
+  `cus_active` tinyint(1) NOT NULL,
+  `cus_address` text NOT NULL,
+  `cus_contact` varchar(45) NOT NULL,
+  `cus_creditlimit` double NOT NULL,
+  `ccy_id` int(10) unsigned NOT NULL,
+  `cuscat_id` int(10) unsigned NOT NULL,
+  `cus_email` varchar(45) NOT NULL,
+  `emp_id` int(10) unsigned NOT NULL,
+  `cus_fax` varchar(45) NOT NULL,
+  `cus_phone` varchar(45) NOT NULL,
+  `pricecat_id` int(10) unsigned NOT NULL,
+  `tax_id` int(10) unsigned NOT NULL,
+  `cus_taxno` varchar(45) NOT NULL,
+  `top_id` int(10) unsigned NOT NULL,
+  `cus_website` varchar(45) NOT NULL,
+  `cus_zipcode` varchar(45) NOT NULL,
+  PRIMARY KEY  (`cus_id`),
+  UNIQUE KEY `Index_2` (`cus_code`),
+  KEY `FK_table_customer_1` (`ccy_id`),
+  KEY `FK_table_customer_2` (`cuscat_id`),
+  KEY `FK_table_customer_3` (`emp_id`),
+  KEY `FK_table_customer_4` (`pricecat_id`),
+  KEY `FK_table_customer_5` (`tax_id`),
+  KEY `FK_table_customer_6` (`top_id`),
+  CONSTRAINT `FK_table_customer_1` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
+  CONSTRAINT `FK_table_customer_2` FOREIGN KEY (`cuscat_id`) REFERENCES `table_customercategory` (`cuscat_id`),
+  CONSTRAINT `FK_table_customer_3` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`),
+  CONSTRAINT `FK_table_customer_4` FOREIGN KEY (`pricecat_id`) REFERENCES `table_pricecategory` (`pricecat_id`),
+  CONSTRAINT `FK_table_customer_5` FOREIGN KEY (`tax_id`) REFERENCES `table_tax` (`tax_id`),
+  CONSTRAINT `FK_table_customer_6` FOREIGN KEY (`top_id`) REFERENCES `table_termofpayment` (`top_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_customer`
+--
+
+/*!40000 ALTER TABLE `table_customer` DISABLE KEYS */;
+INSERT INTO `table_customer` (`cus_id`,`cus_code`,`cus_name`,`cus_active`,`cus_address`,`cus_contact`,`cus_creditlimit`,`ccy_id`,`cuscat_id`,`cus_email`,`emp_id`,`cus_fax`,`cus_phone`,`pricecat_id`,`tax_id`,`cus_taxno`,`top_id`,`cus_website`,`cus_zipcode`) VALUES 
+ (1,'CUS001','PT. MASUK ANGIN',0,'Jl. Imam bonjol BATAM ','2',15000000,2,1,'4',1,'6','3',1,1,'7',1,'5','1');
+/*!40000 ALTER TABLE `table_customer` ENABLE KEYS */;
+
+
+--
+-- Definition of table `table_customercategory`
+--
+
+DROP TABLE IF EXISTS `table_customercategory`;
+CREATE TABLE `table_customercategory` (
+  `cuscat_id` int(10) unsigned NOT NULL auto_increment,
+  `cuscat_code` varchar(45) NOT NULL,
+  `cuscat_name` varchar(45) NOT NULL,
+  PRIMARY KEY  (`cuscat_id`),
+  UNIQUE KEY `Index_2` (`cuscat_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_customercategory`
+--
+
+/*!40000 ALTER TABLE `table_customercategory` DISABLE KEYS */;
+INSERT INTO `table_customercategory` (`cuscat_id`,`cuscat_code`,`cuscat_name`) VALUES 
+ (1,'CUS001','MINI MARKET'),
+ (2,'CUS002','SUPER MARKET'),
+ (3,'CUS003','HYPER MARKET'),
+ (4,'CUS004','DEPARTMENT STORE');
+/*!40000 ALTER TABLE `table_customercategory` ENABLE KEYS */;
+
+
+--
 -- Definition of table `table_division`
 --
 
@@ -85,7 +162,7 @@ CREATE TABLE `table_division` (
   `div_name` varchar(45) NOT NULL,
   PRIMARY KEY  (`div_id`),
   UNIQUE KEY `Index_2` (`div_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_division`
@@ -93,8 +170,33 @@ CREATE TABLE `table_division` (
 
 /*!40000 ALTER TABLE `table_division` DISABLE KEYS */;
 INSERT INTO `table_division` (`div_id`,`div_code`,`div_name`) VALUES 
- (1,'DIV001','Information Technology');
+ (1,'DIV001','Information Technology'),
+ (6,'COM','COMMERCIAL');
 /*!40000 ALTER TABLE `table_division` ENABLE KEYS */;
+
+
+--
+-- Definition of table `table_documenttype`
+--
+
+DROP TABLE IF EXISTS `table_documenttype`;
+CREATE TABLE `table_documenttype` (
+  `doctype_id` int(10) unsigned NOT NULL auto_increment,
+  `doctype_code` varchar(45) NOT NULL,
+  `doctype_name` varchar(45) NOT NULL,
+  PRIMARY KEY  (`doctype_id`),
+  UNIQUE KEY `Index_2` (`doctype_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_documenttype`
+--
+
+/*!40000 ALTER TABLE `table_documenttype` DISABLE KEYS */;
+INSERT INTO `table_documenttype` (`doctype_id`,`doctype_code`,`doctype_name`) VALUES 
+ (1,'DOC001','Document 001'),
+ (2,'DOC002','DOCUMENT 002');
+/*!40000 ALTER TABLE `table_documenttype` ENABLE KEYS */;
 
 
 --
@@ -126,6 +228,159 @@ INSERT INTO `table_employee` (`emp_id`,`emp_code`,`emp_name`,`emp_salesman`,`emp
 
 
 --
+-- Definition of table `table_exchangerate`
+--
+
+DROP TABLE IF EXISTS `table_exchangerate`;
+CREATE TABLE `table_exchangerate` (
+  `excrate_id` int(10) unsigned NOT NULL auto_increment,
+  `excrate_code` varchar(45) NOT NULL,
+  `excrate_start` datetime NOT NULL,
+  `excrate_end` datetime NOT NULL,
+  `excrate_rate` double NOT NULL,
+  `ccy_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY  (`excrate_id`),
+  UNIQUE KEY `Index_2` (`excrate_code`),
+  KEY `FK_table_exchangerate_1` (`ccy_id`),
+  CONSTRAINT `FK_table_exchangerate_1` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_exchangerate`
+--
+
+/*!40000 ALTER TABLE `table_exchangerate` DISABLE KEYS */;
+INSERT INTO `table_exchangerate` (`excrate_id`,`excrate_code`,`excrate_start`,`excrate_end`,`excrate_rate`,`ccy_id`) VALUES 
+ (1,'BASE','2011-07-19 00:00:00','2011-07-30 00:00:00',1,1),
+ (2,'USD','2011-07-19 00:00:00','2011-07-23 00:00:00',9000.15,3),
+ (3,'SGD','2011-07-19 00:00:00','2011-08-19 00:00:00',7000,2);
+/*!40000 ALTER TABLE `table_exchangerate` ENABLE KEYS */;
+
+
+--
+-- Definition of table `table_partcategory`
+--
+
+DROP TABLE IF EXISTS `table_partcategory`;
+CREATE TABLE `table_partcategory` (
+  `prtcat_id` int(10) unsigned NOT NULL auto_increment,
+  `prtcat_code` varchar(45) NOT NULL,
+  `prtcat_name` varchar(45) NOT NULL,
+  PRIMARY KEY  (`prtcat_id`),
+  UNIQUE KEY `Index_2` (`prtcat_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_partcategory`
+--
+
+/*!40000 ALTER TABLE `table_partcategory` DISABLE KEYS */;
+INSERT INTO `table_partcategory` (`prtcat_id`,`prtcat_code`,`prtcat_name`) VALUES 
+ (1,'BSR','BESAR'),
+ (2,'KCL','KECILXXX');
+/*!40000 ALTER TABLE `table_partcategory` ENABLE KEYS */;
+
+
+--
+-- Definition of table `table_partgroup`
+--
+
+DROP TABLE IF EXISTS `table_partgroup`;
+CREATE TABLE `table_partgroup` (
+  `prtgroup_id` int(10) unsigned NOT NULL auto_increment,
+  `prtgroup_code` varchar(45) NOT NULL,
+  `prtgroup_name` varchar(45) NOT NULL,
+  PRIMARY KEY  (`prtgroup_id`),
+  UNIQUE KEY `Index_2` (`prtgroup_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_partgroup`
+--
+
+/*!40000 ALTER TABLE `table_partgroup` DISABLE KEYS */;
+INSERT INTO `table_partgroup` (`prtgroup_id`,`prtgroup_code`,`prtgroup_name`) VALUES 
+ (1,'SNK','SNACK'),
+ (2,'DRK','SOFT DRINK E');
+/*!40000 ALTER TABLE `table_partgroup` ENABLE KEYS */;
+
+
+--
+-- Definition of table `table_pricecategory`
+--
+
+DROP TABLE IF EXISTS `table_pricecategory`;
+CREATE TABLE `table_pricecategory` (
+  `pricecat_id` int(10) unsigned NOT NULL auto_increment,
+  `pricecat_code` varchar(45) NOT NULL,
+  `pricecat_name` varchar(45) NOT NULL,
+  PRIMARY KEY  (`pricecat_id`),
+  UNIQUE KEY `Index_2` (`pricecat_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_pricecategory`
+--
+
+/*!40000 ALTER TABLE `table_pricecategory` DISABLE KEYS */;
+INSERT INTO `table_pricecategory` (`pricecat_id`,`pricecat_code`,`pricecat_name`) VALUES 
+ (1,'NRM','NORMAL'),
+ (2,'DISC10','DISCOUNT 10 %'),
+ (3,'DISC20','DISCOUNT 20 %');
+/*!40000 ALTER TABLE `table_pricecategory` ENABLE KEYS */;
+
+
+--
+-- Definition of table `table_suppliercategory`
+--
+
+DROP TABLE IF EXISTS `table_suppliercategory`;
+CREATE TABLE `table_suppliercategory` (
+  `supcat_id` int(10) unsigned NOT NULL auto_increment,
+  `supcat_code` varchar(45) NOT NULL,
+  `supcat_name` varchar(45) NOT NULL,
+  PRIMARY KEY  (`supcat_id`),
+  UNIQUE KEY `Index_2` (`supcat_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_suppliercategory`
+--
+
+/*!40000 ALTER TABLE `table_suppliercategory` DISABLE KEYS */;
+INSERT INTO `table_suppliercategory` (`supcat_id`,`supcat_code`,`supcat_name`) VALUES 
+ (1,'SUP001','MINI MARKET'),
+ (2,'SUP002','SUPER MARKET'),
+ (3,'SUP003','PT.');
+/*!40000 ALTER TABLE `table_suppliercategory` ENABLE KEYS */;
+
+
+--
+-- Definition of table `table_tax`
+--
+
+DROP TABLE IF EXISTS `table_tax`;
+CREATE TABLE `table_tax` (
+  `tax_id` int(10) unsigned NOT NULL auto_increment,
+  `tax_code` varchar(45) NOT NULL,
+  `tax_name` varchar(45) NOT NULL,
+  `tax_rate` double NOT NULL,
+  PRIMARY KEY  (`tax_id`),
+  UNIQUE KEY `Index_2` (`tax_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_tax`
+--
+
+/*!40000 ALTER TABLE `table_tax` DISABLE KEYS */;
+INSERT INTO `table_tax` (`tax_id`,`tax_code`,`tax_name`,`tax_rate`) VALUES 
+ (1,'PPH','Pajak Penghasilan',10),
+ (2,'PPN','Pajak Pasar',15.16);
+/*!40000 ALTER TABLE `table_tax` ENABLE KEYS */;
+
+
+--
 -- Definition of table `table_termofpayment`
 --
 
@@ -146,7 +401,7 @@ CREATE TABLE `table_termofpayment` (
 /*!40000 ALTER TABLE `table_termofpayment` DISABLE KEYS */;
 INSERT INTO `table_termofpayment` (`top_id`,`top_code`,`top_name`,`top_days`) VALUES 
  (1,'COD','Cash On Delivery',0),
- (2,'30DYS','Thirty Days Payment',30);
+ (2,'30DYS','Thirty Days Payment c',30);
 /*!40000 ALTER TABLE `table_termofpayment` ENABLE KEYS */;
 
 
@@ -173,6 +428,31 @@ INSERT INTO `table_unit` (`unit_id`,`unit_code`,`unit_name`) VALUES
  (2,'KG','Kilogram'),
  (3,'MTR','Meter');
 /*!40000 ALTER TABLE `table_unit` ENABLE KEYS */;
+
+
+--
+-- Definition of table `table_warehouse`
+--
+
+DROP TABLE IF EXISTS `table_warehouse`;
+CREATE TABLE `table_warehouse` (
+  `warehouse_id` int(10) unsigned NOT NULL auto_increment,
+  `warehouse_code` varchar(45) NOT NULL,
+  `warehouse_name` varchar(45) NOT NULL,
+  PRIMARY KEY  (`warehouse_id`),
+  UNIQUE KEY `Index_2` (`warehouse_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_warehouse`
+--
+
+/*!40000 ALTER TABLE `table_warehouse` DISABLE KEYS */;
+INSERT INTO `table_warehouse` (`warehouse_id`,`warehouse_code`,`warehouse_name`) VALUES 
+ (1,'DEF','DEFAULT STORE'),
+ (2,'STR001','GUDANG A'),
+ (3,'STR002','GUDANG B-CD');
+/*!40000 ALTER TABLE `table_warehouse` ENABLE KEYS */;
 
 
 

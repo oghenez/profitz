@@ -39,7 +39,7 @@ namespace Profit
             {
                 this.Cursor = Cursors.WaitCursor;
                 gridData.Rows.Clear();
-                IList records = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY).GetAll(new Unit());
+                IList records = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY).GetAll();
                 foreach (Unit d in records)
                 {
                     int row = gridData.Rows.Add(d.CODE, d.NAME);

@@ -46,6 +46,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\Bank.cs" />
+    <Compile Include="Entity\Customer.cs" />
+    <Compile Include="Entity\ExchangeRate.cs" />
+    <Compile Include="Entity\DocumentType.cs" />
+    <Compile Include="Entity\PartCategory.cs" />
+    <Compile Include="Entity\Warehouse.cs" />
+    <Compile Include="Entity\PartGroup.cs" />
+    <Compile Include="Entity\Tax.cs" />
+    <Compile Include="Entity\PriceCategory.cs" />
+    <Compile Include="Entity\SupplierCategory.cs" />
+    <Compile Include="Entity\CustomerCategory.cs" />
     <Compile Include="Entity\Unit.cs" />
     <Compile Include="Entity\TOP.cs" />
     <Compile Include="Entity\Employee.cs" />
