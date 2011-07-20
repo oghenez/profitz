@@ -113,7 +113,7 @@ CREATE TABLE `table_customer` (
   CONSTRAINT `FK_table_customer_4` FOREIGN KEY (`pricecat_id`) REFERENCES `table_pricecategory` (`pricecat_id`),
   CONSTRAINT `FK_table_customer_5` FOREIGN KEY (`tax_id`) REFERENCES `table_tax` (`tax_id`),
   CONSTRAINT `FK_table_customer_6` FOREIGN KEY (`top_id`) REFERENCES `table_termofpayment` (`top_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_customer`
@@ -121,7 +121,9 @@ CREATE TABLE `table_customer` (
 
 /*!40000 ALTER TABLE `table_customer` DISABLE KEYS */;
 INSERT INTO `table_customer` (`cus_id`,`cus_code`,`cus_name`,`cus_active`,`cus_address`,`cus_contact`,`cus_creditlimit`,`ccy_id`,`cuscat_id`,`cus_email`,`emp_id`,`cus_fax`,`cus_phone`,`pricecat_id`,`tax_id`,`cus_taxno`,`top_id`,`cus_website`,`cus_zipcode`) VALUES 
- (1,'CUS001','PT. MASUK ANGIN',0,'Jl. Imam bonjol BATAM ','2',15000000,2,1,'4',1,'6','3',1,1,'7',1,'5','1');
+ (1,'CUS001','PT. MASUK ANGIN',0,'Jl. Imam bonjol BATAM ','2',15000000,2,1,'4',1,'6','3',1,1,'7',1,'5','1'),
+ (2,'DDW','Drydocks Word Pertama',1,'Tanjung uncang','Mark',500000,3,4,'dfsf.com',1,'43244','321321',3,2,'1132145',2,'fewfe.com','12345'),
+ (3,'POS','POS Customer',0,'','',0,1,1,'',2,'','',1,2,'',2,'','');
 /*!40000 ALTER TABLE `table_customer` ENABLE KEYS */;
 
 
@@ -221,9 +223,9 @@ CREATE TABLE `table_employee` (
 
 /*!40000 ALTER TABLE `table_employee` DISABLE KEYS */;
 INSERT INTO `table_employee` (`emp_id`,`emp_code`,`emp_name`,`emp_salesman`,`emp_storeman`,`emp_purchaser`) VALUES 
- (1,'DWP02825','Dodo',1,1,0),
- (2,'DWP00533','RADY',0,1,1),
- (6,'DWP00165','SEBASTIAN',1,1,1);
+ (1,'DWP02825','Dodo',1,0,0),
+ (2,'DWP00533','RADY',1,1,1),
+ (6,'DWP00165','SEBASTIAN',0,0,1);
 /*!40000 ALTER TABLE `table_employee` ENABLE KEYS */;
 
 
@@ -331,6 +333,58 @@ INSERT INTO `table_pricecategory` (`pricecat_id`,`pricecat_code`,`pricecat_name`
 
 
 --
+-- Definition of table `table_supplier`
+--
+
+DROP TABLE IF EXISTS `table_supplier`;
+CREATE TABLE `table_supplier` (
+  `sup_id` int(10) unsigned NOT NULL auto_increment,
+  `sup_code` varchar(45) NOT NULL,
+  `sup_name` varchar(45) NOT NULL,
+  `sup_active` tinyint(1) NOT NULL,
+  `sup_address` text NOT NULL,
+  `sup_contact` varchar(45) NOT NULL,
+  `sup_creditlimit` double NOT NULL,
+  `ccy_id` int(10) unsigned NOT NULL,
+  `supcat_id` int(10) unsigned NOT NULL,
+  `sup_email` varchar(45) NOT NULL,
+  `emp_id` int(10) unsigned NOT NULL,
+  `sup_fax` varchar(45) NOT NULL,
+  `sup_phone` varchar(45) NOT NULL,
+  `pricecat_id` int(10) unsigned NOT NULL,
+  `tax_id` int(10) unsigned NOT NULL,
+  `sup_taxno` varchar(45) NOT NULL,
+  `top_id` int(10) unsigned NOT NULL,
+  `sup_website` varchar(45) NOT NULL,
+  `sup_zipcode` varchar(45) NOT NULL,
+  PRIMARY KEY  (`sup_id`),
+  UNIQUE KEY `Index_2` (`sup_code`),
+  KEY `FK_table_supplier_1` (`ccy_id`),
+  KEY `FK_table_supplier_2` (`supcat_id`),
+  KEY `FK_table_supplier_3` (`emp_id`),
+  KEY `FK_table_supplier_4` (`pricecat_id`),
+  KEY `FK_table_supplier_5` (`tax_id`),
+  KEY `FK_table_supplier_6` (`top_id`),
+  CONSTRAINT `FK_table_supplier_1` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
+  CONSTRAINT `FK_table_supplier_2` FOREIGN KEY (`supcat_id`) REFERENCES `table_suppliercategory` (`supcat_id`),
+  CONSTRAINT `FK_table_supplier_3` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`),
+  CONSTRAINT `FK_table_supplier_4` FOREIGN KEY (`pricecat_id`) REFERENCES `table_pricecategory` (`pricecat_id`),
+  CONSTRAINT `FK_table_supplier_5` FOREIGN KEY (`tax_id`) REFERENCES `table_tax` (`tax_id`),
+  CONSTRAINT `FK_table_supplier_6` FOREIGN KEY (`top_id`) REFERENCES `table_termofpayment` (`top_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_supplier`
+--
+
+/*!40000 ALTER TABLE `table_supplier` DISABLE KEYS */;
+INSERT INTO `table_supplier` (`sup_id`,`sup_code`,`sup_name`,`sup_active`,`sup_address`,`sup_contact`,`sup_creditlimit`,`ccy_id`,`supcat_id`,`sup_email`,`emp_id`,`sup_fax`,`sup_phone`,`pricecat_id`,`tax_id`,`sup_taxno`,`top_id`,`sup_website`,`sup_zipcode`) VALUES 
+ (1,'DT','DUTA COMPUTER',1,'1','3',1000,2,2,'5',2,'7','4',2,2,'8',2,'6','2'),
+ (2,'OMC','OMEGA COMPUTER',0,'Sungai Panas BATAM','Ku CIAN',0,1,1,'omega@yahoo.com',6,'r4343','44324',1,1,'ffdsfsdf',1,'www.omega.com','33213');
+/*!40000 ALTER TABLE `table_supplier` ENABLE KEYS */;
+
+
+--
 -- Definition of table `table_suppliercategory`
 --
 
@@ -392,7 +446,7 @@ CREATE TABLE `table_termofpayment` (
   `top_days` int(10) unsigned NOT NULL,
   PRIMARY KEY  (`top_id`),
   KEY `Index_2` (`top_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_termofpayment`
@@ -401,7 +455,8 @@ CREATE TABLE `table_termofpayment` (
 /*!40000 ALTER TABLE `table_termofpayment` DISABLE KEYS */;
 INSERT INTO `table_termofpayment` (`top_id`,`top_code`,`top_name`,`top_days`) VALUES 
  (1,'COD','Cash On Delivery',0),
- (2,'30DYS','Thirty Days Payment c',30);
+ (2,'30DYS','Thirty Days Payment c',30),
+ (3,'60DYS','Sixty Days XX',60);
 /*!40000 ALTER TABLE `table_termofpayment` ENABLE KEYS */;
 
 
