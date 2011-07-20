@@ -11,7 +11,7 @@ namespace Profit.Server
     public class Repository
     {
         protected OdbcConnection m_connection = new OdbcConnection("Driver={MySQL ODBC 5.1 Driver};server=localhost;database=profit_db;uid=root;pwd=1234");
-        IEntity m_entity = null;
+        protected IEntity m_entity = null;
         public Repository(IEntity e)
         {
             m_entity = e;

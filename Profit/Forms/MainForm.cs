@@ -28,24 +28,22 @@ namespace Profit
         const string DOC_TYPE_FORM = "DocumentTypeForm";
         const string EXCHANGE_RATE_FORM = "ExchangeRateForm";
         const string CUSTOMER_FORM = "CustomerForm";
+        const string SUPPLIER_FORM = "SupplierForm";
 
 
         public MainForm()
         {
             InitializeComponent();
-            kryptonManager1.GlobalPaletteMode = PaletteModeManager.Office2010Black;
+            kryptonManager1.GlobalPaletteMode = PaletteModeManager.Office2010Blue;
             toolStripComboBox1.Items.AddRange(Enum.GetNames(typeof(PaletteModeManager)));
-        }
-        private void toolStripComboBox1_TextChanged(object sender, EventArgs e)
-        {
-            string c = sender.ToString(); ;
-            kryptonManager1.GlobalPaletteMode = (PaletteModeManager)Enum.Parse(typeof(PaletteModeManager), toolStripComboBox1.SelectedItem.ToString());
+            toolStripComboBox1.Text = PaletteModeManager.Office2010Blue.ToString();
+            toolStripComboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void buttonSpecHeaderGroup1_Click(object sender, EventArgs e)
         {
             kryptonHeaderGroup1.Size = kryptonHeaderGroup1.Collapsed ? new Size(30, 30) : new Size(230, 324);
-            kryptonHeaderGroup2.Size = kryptonHeaderGroup2.Collapsed ? new Size(30, 30) : new Size(230, 392);
+            //kryptonHeaderGroup2.Size = kryptonHeaderGroup2.Collapsed ? new Size(30, 30) : new Size(230, 392);
         }
         void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
@@ -161,6 +159,13 @@ namespace Profit
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
+            if (e.Node.Name == "NodeSupplier")
+            {
+                if (isChild(SUPPLIER_FORM)) { this.Cursor = Cursors.Default; return; }
+                SupplierForm user = new SupplierForm(this, SUPPLIER_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            }
             this.Cursor = Cursors.Default;
         }
         bool isChild(string name)
@@ -242,6 +247,73 @@ namespace Profit
             frm.Delete(sender, e);
         }
 
+        private void toolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string c = sender.ToString(); ;
+            kryptonManager1.GlobalPaletteMode = (PaletteModeManager)Enum.Parse(typeof(PaletteModeManager), toolStripComboBox1.SelectedItem.ToString());
+        }
 
+        private void buttonSpecAny1_Click(object sender, EventArgs e)
+        {
+            treeView8.Visible = buttonSpecAny1.Type == PaletteButtonSpecStyle.ArrowDown;
+            buttonSpecAny1.Type = buttonSpecAny1.Type == PaletteButtonSpecStyle.ArrowUp ? PaletteButtonSpecStyle.ArrowDown : PaletteButtonSpecStyle.ArrowUp;
+            kryptonHeader7.StateCommon.Border.DrawBorders = treeView8.Visible ? PaletteDrawBorders.TopBottom : PaletteDrawBorders.Top;
+        }
+        private void kryptonHeader7_MouseClick(object sender, MouseEventArgs e)
+        {
+            buttonSpecAny1_Click(sender, null);
+        }
+        private void buttonSpecAny2_Click(object sender, EventArgs e)
+        {
+            treeView2.Visible = buttonSpecAny2.Type == PaletteButtonSpecStyle.ArrowDown;
+            buttonSpecAny2.Type = buttonSpecAny2.Type == PaletteButtonSpecStyle.ArrowUp ? PaletteButtonSpecStyle.ArrowDown : PaletteButtonSpecStyle.ArrowUp;
+            kryptonHeader2.StateCommon.Border.DrawBorders = treeView2.Visible ? PaletteDrawBorders.TopBottom : PaletteDrawBorders.Top;
+        }
+        private void kryptonHeader2_Click(object sender, EventArgs e)
+        {
+            buttonSpecAny2_Click(sender, null);
+        }
+        private void buttonSpecAny3_Click(object sender, EventArgs e)
+        {
+            kryptonPanel4.Tag = kryptonHeader8.Orientation == VisualOrientation.Top ? kryptonPanel4.Width : (int)kryptonPanel4.Tag;
+            kryptonHeader8.Orientation = kryptonHeader8.Orientation == VisualOrientation.Top ? VisualOrientation.Left : VisualOrientation.Top;
+            kryptonPanel4.Width = kryptonHeader8.Orientation == VisualOrientation.Left ? 33 : (int)kryptonPanel4.Tag;
+            buttonSpecAny3.Type = kryptonHeader8.Orientation == VisualOrientation.Left ? PaletteButtonSpecStyle.ArrowRight : PaletteButtonSpecStyle.ArrowLeft;
+            kryptonPanel1.Visible = kryptonHeader8.Orientation != VisualOrientation.Left;
+            kryptonHeader8.StateCommon.Border.DrawBorders = kryptonHeader8.Orientation == VisualOrientation.Left ? PaletteDrawBorders.All : PaletteDrawBorders.TopLeftRight;
+        }
+
+        private void buttonSpecAny4_Click(object sender, EventArgs e)
+        {
+            treeView1.Visible = buttonSpecAny4.Type == PaletteButtonSpecStyle.ArrowDown;
+            buttonSpecAny4.Type = buttonSpecAny4.Type == PaletteButtonSpecStyle.ArrowUp ? PaletteButtonSpecStyle.ArrowDown : PaletteButtonSpecStyle.ArrowUp;
+            kryptonHeader1.StateCommon.Border.DrawBorders = treeView1.Visible ? PaletteDrawBorders.TopBottom : PaletteDrawBorders.Top;
+        }
+
+        private void kryptonHeader1_Click(object sender, EventArgs e)
+        {
+            buttonSpecAny4_Click(sender, null);
+        }
+
+        private void buttonSpecAny5_Click(object sender, EventArgs e)
+        {
+            treeView7.Visible = buttonSpecAny5.Type == PaletteButtonSpecStyle.ArrowDown;
+            buttonSpecAny5.Type = buttonSpecAny5.Type == PaletteButtonSpecStyle.ArrowUp ? PaletteButtonSpecStyle.ArrowDown : PaletteButtonSpecStyle.ArrowUp;
+            kryptonHeader6.StateCommon.Border.DrawBorders = treeView7.Visible ? PaletteDrawBorders.TopBottom : PaletteDrawBorders.Top;
+        }
+
+        private void kryptonHeader6_Click(object sender, EventArgs e)
+        {
+            buttonSpecAny5_Click(sender, null);
+        }
+
+        private void kryptonHeader9_Click(object sender, EventArgs e)
+        {
+            kryptonHeader9.HeaderStyle = kryptonHeader9.HeaderStyle == HeaderStyle.DockActive ? HeaderStyle.DockInactive : HeaderStyle.DockActive;
+            kryptonHeader8.Visible = kryptonHeader9.HeaderStyle == HeaderStyle.DockActive;
+            kryptonPanel1.Visible = kryptonHeader8.Orientation != VisualOrientation.Left ? kryptonHeader9.HeaderStyle == HeaderStyle.DockActive : kryptonHeader8.Orientation != VisualOrientation.Left;
+        }
+
+       
     }
 }
