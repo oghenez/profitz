@@ -32,6 +32,7 @@ namespace Profit
             toolStripButtonEdit.Click += new EventHandler(Edit);
             toolStripButtonDelete.Click += new EventHandler(Delete);
             toolStripButtonClear.Click += new EventHandler(Clear);
+            toolStripButtonRefresh.Click += new EventHandler(Refresh);
         }
         private void loadRecords()
         {
@@ -229,7 +230,8 @@ namespace Profit
 
         public void Refresh(object sender, EventArgs e)
         {
-           
+            loadRecords();
+            gridData.ClearSelection();
         }
 
         public void Print(object sender, EventArgs e)

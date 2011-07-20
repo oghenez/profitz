@@ -32,7 +32,7 @@ namespace Profit
         {
             currencykryptonComboBox4.DataSource = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY).GetAll();
             customercatkryptonComboBox5.DataSource = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CUSTOMER_CATEGORY_REPOSITORY).GetAll();
-            purchaserkryptonComboBox2.DataSource = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.EMPLOYEE_REPOSITORY).GetAll();
+            purchaserkryptonComboBox2.DataSource = ((EmployeeRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.EMPLOYEE_REPOSITORY)).GetAllSalesman();
             pricecategorykryptonComboBox6.DataSource = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PRICE_CATEGORY_REPOSITORY).GetAll();
             taxkryptonComboBox3.DataSource = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.TAX_REPOSITORY).GetAll();
             topkryptonComboBox1.DataSource = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.TOP_REPOSITORY).GetAll();
@@ -42,6 +42,7 @@ namespace Profit
             toolStripButtonSave.Click += new EventHandler(Save);
             toolStripButtonEdit.Click += new EventHandler(Edit);
             toolStripButtonDelete.Click += new EventHandler(Delete);
+            toolStripButtonRefresh.Click += new EventHandler(Refresh);
             toolStripButtonClear.Click += new EventHandler(Clear);
         }
         private void loadRecords()
@@ -195,7 +196,7 @@ namespace Profit
             textBoxCode.ReadOnly = !enable;
             textBoxName.ReadOnly = !enable;
 
-            activekryptonCheckBox1.Checked = false;
+            activekryptonCheckBox1.Enabled = enable;
             addresskryptonTextBox1.ReadOnly = !enable;
             contactkryptonTextBox3.ReadOnly = !enable;
             creditlimitkryptonNumericUpDown1.Enabled = enable;
@@ -313,7 +314,21 @@ namespace Profit
 
         public void Refresh(object sender, EventArgs e)
         {
-           
+            loadRecords();
+            //object a = currencykryptonComboBox4.SelectedItem;
+            //object b = customercatkryptonComboBox5.SelectedItem;
+            //object c = purchaserkryptonComboBox2.SelectedItem;
+            //object d = pricecategorykryptonComboBox6.SelectedItem;
+            //object f = taxkryptonComboBox3.SelectedItem;
+            //object g = topkryptonComboBox1.SelectedItem;
+            InitializeDataSource();
+            //currencykryptonComboBox4.Text = a.ToString();
+            //customercatkryptonComboBox5.Text = b.ToString();
+            //purchaserkryptonComboBox2.Text = c.ToString();
+            //pricecategorykryptonComboBox6.Text = d.ToString();
+            //taxkryptonComboBox3.Text = f.ToString();
+            //topkryptonComboBox1.Text = g.ToString();
+            gridData.ClearSelection();
         }
 
         public void Print(object sender, EventArgs e)

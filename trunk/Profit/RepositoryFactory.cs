@@ -28,6 +28,7 @@ namespace Profit
         public const string DOC_TYPE_REPOSITORY = "DocTypeRepository";
         public const string EXCHANGE_RATE_REPOSITORY = "ExchangeRateRepository";
         public const string CUSTOMER_REPOSITORY = "CustomerRepository";
+        public const string SUPPLIER_REPOSITORY = "SupplierRepository";
 
         public static RepositoryFactory GetInstance()
         {
@@ -43,7 +44,7 @@ namespace Profit
             Repository bankRepository = new Repository(new Bank());
             Repository ccyRepository = new Repository(new Currency());
             Repository divRepository = new Repository(new Division());
-            Repository empRepository = new Repository(new Employee());
+            Repository empRepository = new EmployeeRepository(new Employee());
             Repository topRepository = new Repository(new TermOfPayment());
             Repository unitRepository = new Repository(new Unit());
             Repository cuscatRepository = new Repository(new CustomerCategory());
@@ -56,6 +57,7 @@ namespace Profit
             Repository docTypeRepository = new Repository(new DocumentType());
             Repository excRateRepository = new Repository(new ExchangeRate());
             Repository customerRepository = new Repository(new Customer());
+            Repository supplierRepository = new Repository(new Supplier());
 
 
             m_listService.Add(BANK_REPOSITORY, bankRepository);
@@ -74,6 +76,7 @@ namespace Profit
             m_listService.Add(DOC_TYPE_REPOSITORY, docTypeRepository);
             m_listService.Add(EXCHANGE_RATE_REPOSITORY, excRateRepository);
             m_listService.Add(CUSTOMER_REPOSITORY, customerRepository);
+            m_listService.Add(SUPPLIER_REPOSITORY, supplierRepository);
         }
         public Repository GetRepository(string name)
         {

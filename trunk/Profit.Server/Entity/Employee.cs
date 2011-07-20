@@ -125,5 +125,17 @@ namespace Profit.Server
         {
             return String.Format("SELECT max(emp_id) from table_employee");
         }
+        public string GetAllSalesman()
+        {
+            return String.Format("select * from table_employee where emp_salesman = {0}", true);
+        }
+        public string GetAllPurchaser()
+        {
+            return String.Format("select * from table_employee where emp_purchaser = {0}", true);
+        }
+        public string GetAllStoreman()
+        {
+            return String.Format("select * from table_employee where emp_storeman = {0}", true);
+        }
     }
 }
