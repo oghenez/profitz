@@ -12,6 +12,22 @@ namespace Profit.Server
         public int ID = 0;
         public string CODE = "B001";
         public string NAME = "";
+        public string BARCODE = "";
+        public PartGroup PART_GROUP = new PartGroup();
+        public Unit UNIT = new Unit();
+        public Currency CURRENCY = new Currency();
+        public CostMethod COST_METHOD = CostMethod.MovingAverage;
+        public PartCategory PART_CATEGORY = new PartCategory();
+        public double MINIMUM_STOCK = 0;
+        public double MAXIMUM_STOCK = 0;
+        public double COST_PRICE = 0;
+        public double SELL_PRICE = 0;
+        public double CURRENT_STOCK = 0;
+        public bool TAXABLE = false;
+        public bool ACTIVE = true;
+        public IDictionary UNIT_CONVERSION_LIST = new Hashtable();
+        public IDictionary SELLING_PRICE_INFO_LIST = new Hashtable();
+
         public Part()
         {
         }
@@ -24,24 +40,82 @@ namespace Profit.Server
             ID = id;
             CODE = code;
         }
-        public IEntity Get(OdbcDataReader aReader)
+        public IEntity Get(OdbcDataReader r)
         {
             Part part = null;
-            while (aReader.Read())
+            while (r.Read())
             {
                 part = new Part();
-                part.ID = Convert.ToInt32(aReader[0]);
-                part.CODE = aReader[1].ToString();
-                part.NAME = aReader[2].ToString();
+                part.ID = Convert.ToInt32(r[0]);
+                part.CODE = r["part_code"].ToString();
+                part.NAME = r["part_name"].ToString();
+                part.ACTIVE = Convert.ToBoolean(r["part_active"]);
+                part.BARCODE = r["part_barcode"].ToString();
+                part.COST_METHOD = (CostMethod)Enum.Parse(typeof(CostMethod),r["part_costmethod"].ToString());
+                part.COST_PRICE = Convert.ToDouble(r["part_costprice"]);
+                part.CURRENCY = new Currency(Convert.ToInt32(r["ccy_id"]));
+                part.CURRENT_STOCK = Convert.ToDouble(r["part_currentstock"]);
+                part.MAXIMUM_STOCK = Convert.ToDouble(r["part_maximumstock"]);
+                part.MINIMUM_STOCK = Convert.ToDouble(r["part_minimumstock"]);
+                part.PART_CATEGORY = new PartCategory(Convert.ToInt32(r["prtcat_id"]));
+                part.PART_GROUP = new PartGroup(Convert.ToInt32(r["prtgroup_id"]));
+                part.SELL_PRICE = Convert.ToDouble(r["part_sellprice"]);
+                part.TAXABLE = Convert.ToBoolean(r["part_taxable"]);
+                part.UNIT = new Unit(Convert.ToInt32(r["unit_id"]));
             }
             return part;
         }
         public string GetInsertSQL()
         {
             return String.Format(@"insert into table_part 
-                (part_code,part_name) 
-                VALUES ('{0}','{1}')",
-                CODE, NAME);
+                (   part_code, 
+                    part_name,
+                    part_active,
+                    part_barcode,
+                    part_costmethod,
+                    part_costprice,
+                    ccy_id,
+                    part_currentstock,
+                    part_maximumstock,
+                    part_minimumstock,
+                    prtcat_id,
+                    prtgroup_id,
+                    part_sellprice,
+                    part_taxable,
+                    unit_id) 
+                VALUES (
+                    '{0}',
+                    '{1}',
+                    {2},
+                    '{3}',
+                    '{4}',
+                    '{5}',
+                    '{6}',
+                    '{7}',
+                    '{8}',
+                    '{9}',
+                    '{10}',
+                    '{11}',
+                    '{12}',
+                    {13},
+                    '{14}'
+                    )",
+                CODE, 
+                NAME,
+                ACTIVE,
+                BARCODE,
+                COST_METHOD.ToString(),
+                COST_PRICE,
+                CURRENCY.ID,
+                CURRENT_STOCK,
+                MAXIMUM_STOCK,
+                MINIMUM_STOCK,
+                PART_CATEGORY.ID,
+                PART_GROUP.ID,
+                SELL_PRICE,
+                TAXABLE,
+                UNIT.ID
+                );
         }
         public string GetDeleteSQL()
         {
@@ -52,8 +126,33 @@ namespace Profit.Server
             return String.Format(@"update table_part set 
                 part_code = '{0}', 
                 part_name='{1}'
-                where part_id = {2}",
-                CODE, NAME, ID);
+                part_active={2},
+                part_barcode='{3}',
+                part_costmethod='{4}',
+                part_costprice='{5}',
+                ccy_id='{6}',
+                part_currentstock='{7}',
+                part_maximumstock='{8}',
+                part_minimumstock='{9}',
+                prtcat_id='{10}',
+                prtgroup_id='{11}',
+                part_sellprice='{12}',
+                part_taxable={13},
+                unit_id='{14}'
+                where part_id = {15}",
+                CODE, NAME, ACTIVE,
+                BARCODE,
+                COST_METHOD.ToString(),
+                COST_PRICE,
+                CURRENCY.ID,
+                CURRENT_STOCK,
+                MAXIMUM_STOCK,
+                MINIMUM_STOCK,
+                PART_CATEGORY.ID,
+                PART_GROUP.ID,
+                SELL_PRICE,
+                TAXABLE,
+                UNIT.ID,ID);
         }
         public string GetByIDSQL(int ID)
         {
@@ -75,15 +174,28 @@ namespace Profit.Server
         {
             return String.Format("select * from table_part");
         }
-        public IList GetAll(OdbcDataReader aReader)
+        public IList GetAll(OdbcDataReader r)
         {
             IList result = new ArrayList();
-            while (aReader.Read())
+            while (r.Read())
             {
                 Part part = new Part();
-                part.ID = Convert.ToInt32(aReader[0]);
-                part.CODE = aReader[1].ToString();
-                part.NAME = aReader[2].ToString();
+                part.ID = Convert.ToInt32(r[0]);
+                part.CODE = r["part_code"].ToString();
+                part.NAME = r["part_name"].ToString();
+                part.ACTIVE = Convert.ToBoolean(r["part_active"]);
+                part.BARCODE = r["part_barcode"].ToString();
+                part.COST_METHOD = (CostMethod)Enum.Parse(typeof(CostMethod), r["part_costmethod"].ToString());
+                part.COST_PRICE = Convert.ToDouble(r["part_costprice"]);
+                part.CURRENCY = new Currency(Convert.ToInt32(r["ccy_id"]));
+                part.CURRENT_STOCK = Convert.ToDouble(r["part_currentstock"]);
+                part.MAXIMUM_STOCK = Convert.ToDouble(r["part_maximumstock"]);
+                part.MINIMUM_STOCK = Convert.ToDouble(r["part_minimumstock"]);
+                part.PART_CATEGORY = new PartCategory(Convert.ToInt32(r["prtcat_id"]));
+                part.PART_GROUP = new PartGroup(Convert.ToInt32(r["prtgroup_id"]));
+                part.SELL_PRICE = Convert.ToDouble(r["part_sellprice"]);
+                part.TAXABLE = Convert.ToBoolean(r["part_taxable"]);
+                part.UNIT = new Unit(Convert.ToInt32(r["unit_id"]));
                 result.Add(part);
             }
             return result;

@@ -29,6 +29,9 @@ namespace Profit
         public const string EXCHANGE_RATE_REPOSITORY = "ExchangeRateRepository";
         public const string CUSTOMER_REPOSITORY = "CustomerRepository";
         public const string SUPPLIER_REPOSITORY = "SupplierRepository";
+        public const string YEAR_REPOSITORY = "YearRepository";
+        public const string PART_REPOSITORY = "PartRepository";
+
 
         public static RepositoryFactory GetInstance()
         {
@@ -58,6 +61,8 @@ namespace Profit
             Repository excRateRepository = new Repository(new ExchangeRate());
             Repository customerRepository = new Repository(new Customer());
             Repository supplierRepository = new Repository(new Supplier());
+            Repository yearRepository = new YearRepository();
+            Repository partRepository = new PartRepository(new Part());
 
 
             m_listService.Add(BANK_REPOSITORY, bankRepository);
@@ -77,6 +82,8 @@ namespace Profit
             m_listService.Add(EXCHANGE_RATE_REPOSITORY, excRateRepository);
             m_listService.Add(CUSTOMER_REPOSITORY, customerRepository);
             m_listService.Add(SUPPLIER_REPOSITORY, supplierRepository);
+            m_listService.Add(YEAR_REPOSITORY, yearRepository);
+            m_listService.Add(PART_REPOSITORY, partRepository);
         }
         public Repository GetRepository(string name)
         {

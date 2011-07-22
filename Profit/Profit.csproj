@@ -74,6 +74,18 @@
     <Compile Include="Forms\MasterData\BankForm.Designer.cs">
       <DependentUpon>BankForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MasterData\PartForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MasterData\PartForm.Designer.cs">
+      <DependentUpon>PartForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MasterData\YearForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MasterData\YearForm.Designer.cs">
+      <DependentUpon>YearForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MasterData\SupplierForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -183,6 +195,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\MasterData\BankForm.resx">
       <DependentUpon>BankForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MasterData\PartForm.resx">
+      <DependentUpon>PartForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MasterData\YearForm.resx">
+      <DependentUpon>YearForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MasterData\SupplierForm.resx">
       <DependentUpon>SupplierForm.cs</DependentUpon>
