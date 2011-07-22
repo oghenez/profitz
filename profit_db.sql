@@ -260,6 +260,52 @@ INSERT INTO `table_exchangerate` (`excrate_id`,`excrate_code`,`excrate_start`,`e
 
 
 --
+-- Definition of table `table_part`
+--
+
+DROP TABLE IF EXISTS `table_part`;
+CREATE TABLE `table_part` (
+  `part_id` int(10) unsigned NOT NULL auto_increment,
+  `part_code` varchar(45) NOT NULL,
+  `part_name` varchar(45) NOT NULL,
+  `part_active` tinyint(1) NOT NULL,
+  `part_barcode` varchar(45) NOT NULL,
+  `part_costmethod` varchar(45) NOT NULL,
+  `part_costprice` varchar(45) NOT NULL,
+  `ccy_id` int(10) unsigned NOT NULL,
+  `part_currentstock` varchar(45) NOT NULL,
+  `part_maximumstock` varchar(45) NOT NULL,
+  `part_minimumstock` varchar(45) NOT NULL,
+  `prtcat_id` int(10) unsigned NOT NULL,
+  `prtgroup_id` int(10) unsigned NOT NULL,
+  `part_sellprice` varchar(45) NOT NULL,
+  `part_taxable` tinyint(1) NOT NULL,
+  `unit_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY  (`part_id`),
+  UNIQUE KEY `Index_2` (`part_code`),
+  KEY `FK_table_part_1` (`ccy_id`),
+  KEY `FK_table_part_2` (`prtcat_id`),
+  KEY `FK_table_part_3` (`prtgroup_id`),
+  KEY `FK_table_part_4` (`unit_id`),
+  CONSTRAINT `FK_table_part_1` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
+  CONSTRAINT `FK_table_part_2` FOREIGN KEY (`prtcat_id`) REFERENCES `table_partcategory` (`prtcat_id`),
+  CONSTRAINT `FK_table_part_3` FOREIGN KEY (`prtgroup_id`) REFERENCES `table_partgroup` (`prtgroup_id`),
+  CONSTRAINT `FK_table_part_4` FOREIGN KEY (`unit_id`) REFERENCES `table_unit` (`unit_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_part`
+--
+
+/*!40000 ALTER TABLE `table_part` DISABLE KEYS */;
+INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_barcode`,`part_costmethod`,`part_costprice`,`ccy_id`,`part_currentstock`,`part_maximumstock`,`part_minimumstock`,`prtcat_id`,`prtgroup_id`,`part_sellprice`,`part_taxable`,`unit_id`) VALUES 
+ (2,'test','test',1,'12312412424','MovingAverage','1000',1,'0','10000','1200',1,1,'1500',1,1),
+ (5,'12345','COMPUTER P4',1,'123123123123','FIFO','5',2,'0','4','3',1,1,'65',0,3),
+ (6,'33213','44213123',1,'23123123123123','MovingAverage','0',1,'0','0','0',1,1,'0',1,1);
+/*!40000 ALTER TABLE `table_part` ENABLE KEYS */;
+
+
+--
 -- Definition of table `table_partcategory`
 --
 
@@ -305,6 +351,70 @@ INSERT INTO `table_partgroup` (`prtgroup_id`,`prtgroup_code`,`prtgroup_name`) VA
  (1,'SNK','SNACK'),
  (2,'DRK','SOFT DRINK E');
 /*!40000 ALTER TABLE `table_partgroup` ENABLE KEYS */;
+
+
+--
+-- Definition of table `table_period`
+--
+
+DROP TABLE IF EXISTS `table_period`;
+CREATE TABLE `table_period` (
+  `period_id` int(10) unsigned NOT NULL auto_increment,
+  `period_code` varchar(45) NOT NULL,
+  `period_status` varchar(45) NOT NULL,
+  `year_id` int(10) unsigned NOT NULL,
+  `period_start` datetime NOT NULL,
+  `period_end` datetime NOT NULL,
+  `period_close` datetime NOT NULL,
+  PRIMARY KEY  (`period_id`),
+  KEY `Index_2` (`period_code`),
+  KEY `FK_table_period_1` (`year_id`),
+  CONSTRAINT `FK_table_period_1` FOREIGN KEY (`year_id`) REFERENCES `table_year` (`year_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_period`
+--
+
+/*!40000 ALTER TABLE `table_period` DISABLE KEYS */;
+INSERT INTO `table_period` (`period_id`,`period_code`,`period_status`,`year_id`,`period_start`,`period_end`,`period_close`) VALUES 
+ (13,'201101','Open',9,'2011-01-01 00:00:00','2011-01-31 00:00:00','0001-01-01 00:00:00'),
+ (14,'201102','Open',9,'2011-02-01 00:00:00','2011-02-28 00:00:00','0001-01-01 00:00:00'),
+ (15,'201103','Open',9,'2011-03-01 00:00:00','2011-03-31 00:00:00','0001-01-01 00:00:00'),
+ (16,'201104','Open',9,'2011-04-01 00:00:00','2011-04-30 00:00:00','0001-01-01 00:00:00'),
+ (17,'201105','Open',9,'2011-05-01 00:00:00','2011-05-31 00:00:00','0001-01-01 00:00:00'),
+ (18,'201106','Open',9,'2011-06-01 00:00:00','2011-06-30 00:00:00','0001-01-01 00:00:00'),
+ (19,'201107','Open',9,'2011-07-01 00:00:00','2011-07-31 00:00:00','0001-01-01 00:00:00'),
+ (20,'201108','Open',9,'2011-08-01 00:00:00','2011-08-31 00:00:00','0001-01-01 00:00:00'),
+ (21,'201109','Open',9,'2011-09-01 00:00:00','2011-09-30 00:00:00','0001-01-01 00:00:00'),
+ (22,'201110','Open',9,'2011-10-01 00:00:00','2011-10-31 00:00:00','0001-01-01 00:00:00'),
+ (23,'201111','Open',9,'2011-11-01 00:00:00','2011-11-30 00:00:00','0001-01-01 00:00:00'),
+ (24,'201112','Open',9,'2011-12-01 00:00:00','2011-12-31 00:00:00','0001-01-01 00:00:00'),
+ (25,'201201','Open',10,'2012-01-01 00:00:00','2012-01-31 00:00:00','0001-01-01 00:00:00'),
+ (26,'201202','Open',10,'2012-02-01 00:00:00','2012-02-29 00:00:00','0001-01-01 00:00:00'),
+ (27,'201203','Open',10,'2012-03-01 00:00:00','2012-03-31 00:00:00','0001-01-01 00:00:00'),
+ (28,'201204','Open',10,'2012-04-01 00:00:00','2012-04-30 00:00:00','0001-01-01 00:00:00'),
+ (29,'201205','Open',10,'2012-05-01 00:00:00','2012-05-31 00:00:00','0001-01-01 00:00:00'),
+ (30,'201206','Open',10,'2012-06-01 00:00:00','2012-06-30 00:00:00','0001-01-01 00:00:00'),
+ (31,'201207','Open',10,'2012-07-01 00:00:00','2012-07-31 00:00:00','0001-01-01 00:00:00'),
+ (32,'201208','Open',10,'2012-08-01 00:00:00','2012-08-31 00:00:00','0001-01-01 00:00:00'),
+ (33,'201209','Open',10,'2012-09-01 00:00:00','2012-09-30 00:00:00','0001-01-01 00:00:00'),
+ (34,'201210','Open',10,'2012-10-01 00:00:00','2012-10-31 00:00:00','0001-01-01 00:00:00'),
+ (35,'201211','Open',10,'2012-11-01 00:00:00','2012-11-30 00:00:00','0001-01-01 00:00:00'),
+ (36,'201212','Open',10,'2012-12-01 00:00:00','2012-12-31 00:00:00','0001-01-01 00:00:00'),
+ (37,'201301','Open',11,'2013-01-01 00:00:00','2013-01-31 00:00:00','0001-01-01 00:00:00'),
+ (38,'201302','Open',11,'2013-02-01 00:00:00','2013-02-28 00:00:00','0001-01-01 00:00:00'),
+ (39,'201303','Open',11,'2013-03-01 00:00:00','2013-03-31 00:00:00','0001-01-01 00:00:00'),
+ (40,'201304','Open',11,'2013-04-01 00:00:00','2013-04-30 00:00:00','0001-01-01 00:00:00'),
+ (41,'201305','Open',11,'2013-05-01 00:00:00','2013-05-31 00:00:00','0001-01-01 00:00:00'),
+ (42,'201306','Open',11,'2013-06-01 00:00:00','2013-06-30 00:00:00','0001-01-01 00:00:00'),
+ (43,'201307','Open',11,'2013-07-01 00:00:00','2013-07-31 00:00:00','0001-01-01 00:00:00'),
+ (44,'201308','Open',11,'2013-08-01 00:00:00','2013-08-31 00:00:00','0001-01-01 00:00:00'),
+ (45,'201309','Open',11,'2013-09-01 00:00:00','2013-09-30 00:00:00','0001-01-01 00:00:00'),
+ (46,'201310','Open',11,'2013-10-01 00:00:00','2013-10-31 00:00:00','0001-01-01 00:00:00'),
+ (47,'201311','Open',11,'2013-11-01 00:00:00','2013-11-30 00:00:00','0001-01-01 00:00:00'),
+ (48,'201312','Open',11,'2013-12-01 00:00:00','2013-12-31 00:00:00','0001-01-01 00:00:00');
+/*!40000 ALTER TABLE `table_period` ENABLE KEYS */;
 
 
 --
@@ -471,7 +581,7 @@ CREATE TABLE `table_unit` (
   `unit_name` varchar(45) NOT NULL,
   PRIMARY KEY  (`unit_id`),
   KEY `Index_2` (`unit_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_unit`
@@ -481,8 +591,46 @@ CREATE TABLE `table_unit` (
 INSERT INTO `table_unit` (`unit_id`,`unit_code`,`unit_name`) VALUES 
  (1,'PCS','PIECES'),
  (2,'KG','Kilogram'),
- (3,'MTR','Meter');
+ (3,'MTR','Meter'),
+ (4,'DUS','DOZEN'),
+ (5,'LTR','LITER');
 /*!40000 ALTER TABLE `table_unit` ENABLE KEYS */;
+
+
+--
+-- Definition of table `table_unitconversion`
+--
+
+DROP TABLE IF EXISTS `table_unitconversion`;
+CREATE TABLE `table_unitconversion` (
+  `unitconv_id` int(10) unsigned NOT NULL auto_increment,
+  `unitconv_code` varchar(45) NOT NULL,
+  `unitconv_name` varchar(45) NOT NULL,
+  `unitconv_qty` double NOT NULL,
+  `unitconv_unit` int(10) unsigned NOT NULL,
+  `unitconv_costprice` double NOT NULL,
+  `unitconv_sellprice` double NOT NULL,
+  `part_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY  (`unitconv_id`),
+  KEY `FK_table_unitconversion_1` (`unitconv_unit`),
+  KEY `FK_table_unitconversion_2` (`part_id`),
+  CONSTRAINT `FK_table_unitconversion_1` FOREIGN KEY (`unitconv_unit`) REFERENCES `table_unit` (`unit_id`),
+  CONSTRAINT `FK_table_unitconversion_2` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_unitconversion`
+--
+
+/*!40000 ALTER TABLE `table_unitconversion` DISABLE KEYS */;
+INSERT INTO `table_unitconversion` (`unitconv_id`,`unitconv_code`,`unitconv_name`,`unitconv_qty`,`unitconv_unit`,`unitconv_costprice`,`unitconv_sellprice`,`part_id`) VALUES 
+ (1,'-','-',15,1,1222.15,1654.16,5),
+ (3,'-','-',12,4,10,20,5),
+ (4,'-','-',5,2,1,2,6),
+ (5,'-','-',2,3,3,4,6),
+ (6,'-','-',12,4,5,6,6),
+ (7,'-','-',16,5,0,0,5);
+/*!40000 ALTER TABLE `table_unitconversion` ENABLE KEYS */;
 
 
 --
@@ -508,6 +656,33 @@ INSERT INTO `table_warehouse` (`warehouse_id`,`warehouse_code`,`warehouse_name`)
  (2,'STR001','GUDANG A'),
  (3,'STR002','GUDANG B-CD');
 /*!40000 ALTER TABLE `table_warehouse` ENABLE KEYS */;
+
+
+--
+-- Definition of table `table_year`
+--
+
+DROP TABLE IF EXISTS `table_year`;
+CREATE TABLE `table_year` (
+  `year_id` int(10) unsigned NOT NULL auto_increment,
+  `year_code` varchar(45) NOT NULL,
+  `year_name` varchar(45) NOT NULL,
+  `year_start` datetime NOT NULL,
+  `year_end` datetime NOT NULL,
+  PRIMARY KEY  (`year_id`),
+  UNIQUE KEY `Index_2` (`year_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_year`
+--
+
+/*!40000 ALTER TABLE `table_year` DISABLE KEYS */;
+INSERT INTO `table_year` (`year_id`,`year_code`,`year_name`,`year_start`,`year_end`) VALUES 
+ (9,'2011','PERIOD 2011','2011-01-01 00:00:00','2011-12-31 00:00:00'),
+ (10,'2012','PERIOD 2012','2012-01-01 00:00:00','2012-12-31 00:00:00'),
+ (11,'2013','PERIOD 2013','2013-01-01 00:00:00','2013-12-31 00:00:00');
+/*!40000 ALTER TABLE `table_year` ENABLE KEYS */;
 
 
 
