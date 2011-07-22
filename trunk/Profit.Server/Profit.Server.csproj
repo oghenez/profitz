@@ -46,6 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\Bank.cs" />
+    <Compile Include="Entity\PartSellingPriceInformation.cs" />
+    <Compile Include="Entity\UnitConversion.cs" />
+    <Compile Include="Entity\Period.cs" />
+    <Compile Include="Entity\Year.cs" />
     <Compile Include="Entity\Part.cs" />
     <Compile Include="Entity\Supplier.cs" />
     <Compile Include="Entity\Customer.cs" />
@@ -64,9 +68,13 @@
     <Compile Include="Entity\Division.cs" />
     <Compile Include="Entity\Currency.cs" />
     <Compile Include="Entity\IEntity.cs" />
+    <Compile Include="Enum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Repository\EmployeeRepository.cs" />
+    <Compile Include="Repository\PartRepository.cs" />
+    <Compile Include="Repository\YearRepository.cs" />
+    <Compile Include="Utils.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

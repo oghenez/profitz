@@ -29,6 +29,8 @@ namespace Profit
         const string EXCHANGE_RATE_FORM = "ExchangeRateForm";
         const string CUSTOMER_FORM = "CustomerForm";
         const string SUPPLIER_FORM = "SupplierForm";
+        const string YEAR_FORM = "YearForm";
+        const string PART_FORM = "PartForm";
 
 
         public MainForm()
@@ -163,6 +165,20 @@ namespace Profit
             {
                 if (isChild(SUPPLIER_FORM)) { this.Cursor = Cursors.Default; return; }
                 SupplierForm user = new SupplierForm(this, SUPPLIER_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            }
+            if (e.Node.Name == "NodeYear")
+            {
+                if (isChild(YEAR_FORM)) { this.Cursor = Cursors.Default; return; }
+                YearForm user = new YearForm(this, YEAR_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            }
+            if (e.Node.Name == "NodePart")
+            {
+                if (isChild(PART_FORM)) { this.Cursor = Cursors.Default; return; }
+                PartForm user = new PartForm(this, PART_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
