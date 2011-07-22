@@ -105,6 +105,10 @@ namespace Profit
                 foreach (Part d in records)
                 {
                     int row = gridData.Rows.Add(d.CODE, d.NAME);
+                    d.PART_GROUP = (PartGroup)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_GROUP_REPOSITORY).GetById(d.PART_GROUP);
+                    d.UNIT = (Unit)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY).GetById(d.UNIT);
+                    d.CURRENCY = (Currency)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY).GetById(d.CURRENCY);
+                    d.PART_CATEGORY = (PartCategory)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_GROUP_REPOSITORY).GetById(d.PART_CATEGORY);
                     gridData.Rows[row].Tag = d;
                 }
                 this.Cursor = Cursors.Default;
@@ -197,7 +201,7 @@ namespace Profit
             IList unitConversionlist = GetListUom();
             foreach (UnitConversion uc in unitConversionlist)
             {
-                m_part.UNIT_CONVERSION_LIST.Add(uc.CONVERSION_UNIT.CODE, uc);
+                m_part.UNIT_CONVERSION_LIST.Add(uc);
             }
         }
         public void ClearForm()
@@ -219,6 +223,7 @@ namespace Profit
                 sellPricekryptonNumericUpDown4.Value = 0;
                 taxkryptonCheckBox2.Checked = false;
                 unitkryptonComboBox2.SelectedIndex = 0;
+                dataGridViewUOM.Rows.Clear();
                 m_part = new Part();
                 errorProvider1.Clear();
             }
@@ -252,7 +257,10 @@ namespace Profit
             unitkryptonComboBox2.Enabled = enable;
 
             dataGridViewUOM.AllowUserToAddRows = enable;
-
+            ConvUnit.ReadOnly = !enable;
+            CostPrice.ReadOnly = !enable;
+            SellPrice.ReadOnly = !enable;
+            OrigQty.ReadOnly = !enable;
         }
         private void setEditMode(EditMode editmode)
         {
@@ -333,19 +341,24 @@ namespace Profit
             textBoxCode.Text = m_part.CODE;
             textBoxName.Text = m_part.NAME;
 
-             activekryptonCheckBox1.Checked = m_part.ACTIVE;
-             barcodekryptonTextBox1.Text = m_part.BARCODE;
-             costMethodekryptonComboBox4.Text = m_part.COST_METHOD.ToString();
-             costPricekryptonNumericUpDown3.Value = Convert.ToDecimal(m_part.COST_PRICE);
-             currencykryptonComboBox3.Text = m_part.CURRENCY.ToString();
-             currentStockkryptonNumericUpDown5.Value = Convert.ToDecimal(m_part.CURRENT_STOCK);
-             maximumStockkryptonNumericUpDown2.Value = Convert.ToDecimal(m_part.MAXIMUM_STOCK);
-             minimumStockkryptonNumericUpDown1.Value = Convert.ToDecimal(m_part.MINIMUM_STOCK);
-             partCategorykryptonComboBox5.Text = m_part.PART_CATEGORY.ToString();
-             partGroupkryptonComboBox1.Text = m_part.PART_GROUP.ToString();
-             sellPricekryptonNumericUpDown4.Value = Convert.ToDecimal(m_part.SELL_PRICE);
-             taxkryptonCheckBox2.Checked = m_part.TAXABLE ;
-             unitkryptonComboBox2.Text = m_part.UNIT.ToString();
+            activekryptonCheckBox1.Checked = m_part.ACTIVE;
+            barcodekryptonTextBox1.Text = m_part.BARCODE;
+            costMethodekryptonComboBox4.Text = m_part.COST_METHOD.ToString();
+            costPricekryptonNumericUpDown3.Value = Convert.ToDecimal(m_part.COST_PRICE);
+            currencykryptonComboBox3.Text = m_part.CURRENCY.ToString();
+            currentStockkryptonNumericUpDown5.Value = Convert.ToDecimal(m_part.CURRENT_STOCK);
+            maximumStockkryptonNumericUpDown2.Value = Convert.ToDecimal(m_part.MAXIMUM_STOCK);
+            minimumStockkryptonNumericUpDown1.Value = Convert.ToDecimal(m_part.MINIMUM_STOCK);
+            partCategorykryptonComboBox5.Text = m_part.PART_CATEGORY.ToString();
+            partGroupkryptonComboBox1.Text = m_part.PART_GROUP.ToString();
+            sellPricekryptonNumericUpDown4.Value = Convert.ToDecimal(m_part.SELL_PRICE);
+            taxkryptonCheckBox2.Checked = m_part.TAXABLE;
+            unitkryptonComboBox2.Text = m_part.UNIT.ToString();
+
+            dataGridViewUOM.Rows.Clear();
+            IList l = ((PartRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_REPOSITORY)).GetUnitConversions(m_part.ID);
+            foreach (UnitConversion u in l)
+                AddUOM(u);
         }
 
         #region IChildForm Members
@@ -353,6 +366,7 @@ namespace Profit
 
         public void Refresh(object sender, EventArgs e)
         {
+            InitializeDataSource();
             loadRecords(); 
             gridData.ClearSelection(); 
         }
@@ -379,14 +393,15 @@ namespace Profit
             foreach (DataGridViewRow rw in dataGridViewUOM.Rows)
             {
                 //if (rw.Tag == null) continue;
-                if (dataGridViewUOM[1, rw.Index].Value == null) continue;
+                if (dataGridViewUOM[ConvUnit.Index, rw.Index].Value == null) continue;
                 UnitConversion unit = (UnitConversion)rw.Tag;
                 if (unit == null)
                 {
                     unit = new UnitConversion();
                     rw.Tag = unit;
                 }
-                unit.CONVERSION_QTY = Convert.ToDouble(dataGridViewUOM[ConversionQTy.Index, rw.Index].Value);
+                unit.PART = m_part;
+                unit.CONVERSION_QTY = Convert.ToDouble(dataGridViewUOM[OrigQty.Index, rw.Index].Value);
                 unit.CONVERSION_UNIT = (Unit)Utils.FindEntityInList(dataGridViewUOM[ConvUnit.Index, rw.Index].Value.ToString(), (IList)unitkryptonComboBox2.DataSource);
                 unit.ORIGINAL_QTY = Convert.ToDouble(dataGridViewUOM[OrigQty.Index, rw.Index].Value);
                 unit.COST_PRICE = Convert.ToDouble(dataGridViewUOM[CostPrice.Index, rw.Index].Value);
@@ -398,13 +413,23 @@ namespace Profit
         }
         public void AddUOM(UnitConversion u)
         {
-            int index = dataGridViewUOM.Rows.Add(u.CONVERSION_QTY, u.CONVERSION_UNIT.CODE, u.ORIGINAL_QTY,
-                u.PART.UNIT.CODE, u.COST_PRICE, u.SELL_PRICE);
+            u.CONVERSION_UNIT = (Unit)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY).GetById(u.CONVERSION_UNIT);
+            int index = dataGridViewUOM.Rows.Add(1, u.CONVERSION_UNIT.CODE, u.CONVERSION_QTY,
+                m_part.UNIT.CODE, u.COST_PRICE, u.SELL_PRICE);
             dataGridViewUOM.Rows[index].Tag = u;
         }
         private void deleteUomToolStripMenuItem_Click(object sender, EventArgs e)
         {
             dataGridViewUOM.Rows.Remove(dataGridViewUOM.CurrentRow);
+        }
+
+        private void dataGridViewUOM_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Delete)
+            {
+                if (dataGridViewUOM.CurrentRow != null) 
+                    deleteUomToolStripMenuItem_Click(sender, null);
+            }
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Profit.Server
         public double CURRENT_STOCK = 0;
         public bool TAXABLE = false;
         public bool ACTIVE = true;
-        public IDictionary UNIT_CONVERSION_LIST = new Hashtable();
+        public IList UNIT_CONVERSION_LIST = new ArrayList();
         public IDictionary SELLING_PRICE_INFO_LIST = new Hashtable();
 
         public Part()
@@ -125,7 +125,7 @@ namespace Profit.Server
         {
             return String.Format(@"update table_part set 
                 part_code = '{0}', 
-                part_name='{1}'
+                part_name='{1}',
                 part_active={2},
                 part_barcode='{3}',
                 part_costmethod='{4}',

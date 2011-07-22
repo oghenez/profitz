@@ -9,6 +9,7 @@ namespace Profit.Server
 {
     public class UnitConversion : IEntity
     {
+        public bool UPDATED = false; // for updating part
         public int ID = 0;
         public string CODE = "-";
         public string NAME = "-";
@@ -113,11 +114,29 @@ namespace Profit.Server
         {
             return String.Format("select * from table_unitconversion");
         }
-        public string GetAllByPartSQL(int partID)
+        public static string GetAllByPartSQL(int partID)
         {
             return String.Format("select * from table_unitconversion where part_id = '{0}'",partID);
         }
         public IList GetAll(OdbcDataReader aReader)
+        {
+            IList result = new ArrayList();
+            while (aReader.Read())
+            {
+                UnitConversion unitConv = new UnitConversion();
+                unitConv.ID = Convert.ToInt32(aReader[0]);
+                unitConv.CODE = aReader[1].ToString();
+                unitConv.NAME = aReader[2].ToString();
+                unitConv.CONVERSION_QTY = Convert.ToDouble(aReader[3]);
+                unitConv.CONVERSION_UNIT = new Unit(Convert.ToInt32(aReader[4]));
+                unitConv.COST_PRICE = Convert.ToDouble(aReader[5]);
+                unitConv.SELL_PRICE = Convert.ToDouble(aReader[6]);
+                unitConv.PART = new Part(Convert.ToInt32(aReader[7]));
+                result.Add(unitConv);
+            }
+            return result;
+        }
+        public static IList GetAllStatic(OdbcDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())
@@ -158,6 +177,12 @@ namespace Profit.Server
         public string GetMaximumIDSQL()
         {
             return String.Format("SELECT max(unitconv_id) from table_unitconversion");
+        }
+        public override bool Equals(object obj)
+        {
+            UnitConversion comp = (UnitConversion)obj;
+            if (obj == null) return false;
+            return comp.ID == ID; ;
         }
     }
 }
