@@ -35,6 +35,8 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -47,6 +49,11 @@
   <ItemGroup>
     <Compile Include="Entity\Bank.cs" />
     <Compile Include="Entity\PartSellingPriceInformation.cs" />
+    <Compile Include="Entity\Transaction\Event.cs" />
+    <Compile Include="Entity\Transaction\EventItem.cs" />
+    <Compile Include="Entity\Transaction\StockCard.cs" />
+    <Compile Include="Entity\Transaction\StockCardEntry.cs" />
+    <Compile Include="Entity\Transaction\StockTaking.cs" />
     <Compile Include="Entity\UnitConversion.cs" />
     <Compile Include="Entity\Period.cs" />
     <Compile Include="Entity\Year.cs" />

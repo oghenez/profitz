@@ -82,6 +82,11 @@ namespace Profit
                         e.Cancel = true;
                     }
                 }
+                if (unitkryptonComboBox2.SelectedItem.ToString() == e.FormattedValue.ToString())
+                {
+                    dataGridViewUOM.Rows[e.RowIndex].ErrorText = "Unit Conversion tidak bisa sama dengan Unit Master";
+                    e.Cancel = true;
+                }
             }
         }
 

@@ -283,5 +283,14 @@ namespace Profit.Server
         {
             return String.Format("SELECT max(part_id) from table_part");
         }
+        public UnitConversion GetUnitConversion(long unitId)
+        {
+            foreach (UnitConversion u in UNIT_CONVERSION_LIST)
+            {
+                if (u.CONVERSION_UNIT.ID == unitId)
+                    return u;
+            }
+            return null;
+        }
     }
 }
