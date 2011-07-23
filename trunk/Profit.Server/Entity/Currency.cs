@@ -36,6 +36,18 @@ namespace Profit.Server
             }
             return currency;
         }
+        public static Currency GetCurrency(OdbcDataReader aReader)
+        {
+            Currency currency = null;
+            while (aReader.Read())
+            {
+                currency = new Currency();
+                currency.ID = Convert.ToInt32(aReader[0]);
+                currency.CODE = aReader[1].ToString();
+                currency.NAME = aReader[2].ToString();
+            }
+            return currency;
+        }
         public string GetInsertSQL()
         {
             return String.Format(@"insert into table_currency 
@@ -60,6 +72,10 @@ namespace Profit.Server
             return String.Format("select * from table_currency where ccy_id = {0}", ID);
         }
         public string GetByCodeSQL(string code)
+        {
+            return String.Format("select * from table_currency where ccy_code = '{0}'", code);
+        }
+        public static string GetByCodeSQLStatic(string code)
         {
             return String.Format("select * from table_currency where ccy_code = '{0}'", code);
         }

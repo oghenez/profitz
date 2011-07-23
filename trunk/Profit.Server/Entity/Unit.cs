@@ -36,6 +36,18 @@ namespace Profit.Server
             }
             return unit;
         }
+        public static Unit GetUnit(OdbcDataReader aReader)
+        {
+            Unit unit = null;
+            while (aReader.Read())
+            {
+                unit = new Unit();
+                unit.ID = Convert.ToInt32(aReader[0]);
+                unit.CODE = aReader[1].ToString();
+                unit.NAME = aReader[2].ToString();
+            }
+            return unit;
+        }
         public string GetInsertSQL()
         {
             return String.Format(@"insert into table_unit 
@@ -60,6 +72,10 @@ namespace Profit.Server
             return String.Format("select * from table_unit where unit_id = {0}", ID);
         }
         public string GetByCodeSQL(string code)
+        {
+            return String.Format("select * from table_unit where unit_code = '{0}'", code);
+        }
+        public static string GetByCodeSQLStatic(string code)
         {
             return String.Format("select * from table_unit where unit_code = '{0}'", code);
         }

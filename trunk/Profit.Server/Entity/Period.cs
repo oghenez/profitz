@@ -48,9 +48,9 @@ namespace Profit.Server
                 period.CODE = aReader[1].ToString();
                 period.PERIOD_STATUS = (PeriodStatus)Enum.Parse(typeof(PeriodStatus), aReader[2].ToString());
                 period.YEAR = new Year(Convert.ToInt32(aReader[3]));
-                period.START_DATE = DateTime.Parse(aReader[4].ToString());
-                period.END_DATA =  DateTime.Parse(aReader[5].ToString());
-                period.CLOSED_DATE =  DateTime.Parse(aReader[6].ToString());
+                period.START_DATE = Convert.ToDateTime(aReader[4]);
+                period.END_DATA = Convert.ToDateTime(aReader[5]);
+                period.CLOSED_DATE = Convert.ToDateTime(aReader[6]);
             }
             return period;
         }
@@ -146,9 +146,9 @@ namespace Profit.Server
                 period.CODE = aReader[1].ToString();
                 period.PERIOD_STATUS = (PeriodStatus)Enum.Parse(typeof(PeriodStatus), aReader[2].ToString());
                 period.YEAR = (Year)year;
-                period.START_DATE = DateTime.Parse(aReader[4].ToString());
-                period.END_DATA = DateTime.Parse(aReader[5].ToString());
-                period.CLOSED_DATE = DateTime.Parse(aReader[6].ToString());
+                period.START_DATE = Convert.ToDateTime(aReader[4]);
+                period.END_DATA = Convert.ToDateTime(aReader[5]);
+                period.CLOSED_DATE = Convert.ToDateTime(aReader[6]);
                 result.Add(period);
             }
             return result;

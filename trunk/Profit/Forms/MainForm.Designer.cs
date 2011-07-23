@@ -303,7 +303,6 @@
             this.treeView3.Dock = System.Windows.Forms.DockStyle.Top;
             this.treeView3.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.treeView3.FullRowSelect = true;
-            this.treeView3.LineColor = System.Drawing.Color.Empty;
             this.treeView3.Location = new System.Drawing.Point(0, 76);
             this.treeView3.Name = "treeView3";
             treeNode1.Name = "Node0";
@@ -581,6 +580,8 @@
             this.treeView7.Size = new System.Drawing.Size(228, 113);
             this.treeView7.TabIndex = 20;
             this.treeView7.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
+            this.treeView7.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView8_AfterSelect);
+            this.treeView7.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
             // 
             // kryptonHeader6
             // 
@@ -632,6 +633,8 @@
             this.treeView1.Size = new System.Drawing.Size(228, 80);
             this.treeView1.TabIndex = 18;
             this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView8_AfterSelect);
+            this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
             // 
             // kryptonHeader1
             // 
@@ -678,6 +681,8 @@
             this.treeView2.Size = new System.Drawing.Size(228, 51);
             this.treeView2.TabIndex = 16;
             this.treeView2.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
+            this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView8_AfterSelect);
+            this.treeView2.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
             // 
             // kryptonHeader2
             // 
@@ -727,6 +732,8 @@
             this.treeView8.Size = new System.Drawing.Size(228, 64);
             this.treeView8.TabIndex = 14;
             this.treeView8.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
+            this.treeView8.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView8_AfterSelect);
+            this.treeView8.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
             // 
             // kryptonHeader7
             // 

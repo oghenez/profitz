@@ -81,6 +81,13 @@ namespace Profit.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap loadall {
+            get {
+                object obj = ResourceManager.GetObject("loadall", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap newspaper {
             get {
                 object obj = ResourceManager.GetObject("newspaper", resourceCulture);
