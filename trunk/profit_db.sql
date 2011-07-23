@@ -6715,7 +6715,7 @@ INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_
  (15470,'5612','\"TRANSFORMERS TOY 30\"\"355A-1\"',1,'5612','MovingAverage','0',7,'0','0','0',2,4,'0',0,1),
  (15471,'5613','\"SPIDERMEN MOTOR 16\"\"4031\"',1,'5613','MovingAverage','0',7,'0','0','0',2,4,'0',0,1),
  (15472,'5619','\"PESAWAT TOYS 12\"\"838A\"',1,'5619','MovingAverage','0',7,'0','0','0',2,4,'0',0,1),
- (15473,'4877','\"PASEO BABY WIPESPILLOW BAG 10\"\"S*36\"',1,'8993053651027','MovingAverage','0',7,'0','0','0',2,5,'0',0,1),
+ (15473,'4877','PASEO BABY WIPESPILLOW BAG 10\"\"S*36',1,'8993053651027','MovingAverage','0',7,'0','0','0',2,5,'0',0,1),
  (15474,'5617','\"MOBIL TOYS 8\"\" 6688-8\"',1,'5617','MovingAverage','0',7,'0','0','0',2,4,'0',0,1),
  (15475,'5618','\"MOBIL TOYS 24\"\" AV89\"',1,'5618','MovingAverage','0',7,'0','0','0',2,4,'0',0,1),
  (15476,'5620','\"MOBIL TOYS 12\"\"012A\"',1,'5620','MovingAverage','0',7,'0','0','0',2,4,'0',0,1),
@@ -7107,7 +7107,9 @@ CREATE TABLE `table_unitconversion` (
 
 /*!40000 ALTER TABLE `table_unitconversion` DISABLE KEYS */;
 INSERT INTO `table_unitconversion` (`unitconv_id`,`unitconv_code`,`unitconv_name`,`unitconv_qty`,`unitconv_unit`,`unitconv_costprice`,`unitconv_sellprice`,`part_id`) VALUES 
- (10,'-','-',12,4,5000,6000,9068);
+ (10,'-','-',12,4,5000,6000,9068),
+ (11,'-','-',12,4,12000,13000,9908),
+ (12,'-','-',20,4,12000,13000,10083);
 /*!40000 ALTER TABLE `table_unitconversion` ENABLE KEYS */;
 
 
