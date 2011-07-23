@@ -17,6 +17,11 @@ namespace Profit.Server
         public StockTaking()
             : base()
         { }
+        public StockTaking(int id)
+            : base()
+        {
+            ID = id;
+        }
         public override string GetInsertSQL()
         {
             return String.Format(@"insert into table_stocktaking 

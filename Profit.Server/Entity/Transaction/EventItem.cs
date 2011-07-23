@@ -48,7 +48,7 @@ namespace Profit.Server
             throw new NotImplementedException();
         }
 
-        public string GetInsertSQL()
+        public virtual string GetInsertSQL()
         {
             throw new NotImplementedException();
         }

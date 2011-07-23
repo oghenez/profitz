@@ -54,6 +54,7 @@
     <Compile Include="Entity\Transaction\StockCard.cs" />
     <Compile Include="Entity\Transaction\StockCardEntry.cs" />
     <Compile Include="Entity\Transaction\StockTaking.cs" />
+    <Compile Include="Entity\Transaction\StockTakingItem.cs" />
     <Compile Include="Entity\UnitConversion.cs" />
     <Compile Include="Entity\Period.cs" />
     <Compile Include="Entity\Year.cs" />

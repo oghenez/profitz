@@ -7,6 +7,7 @@ namespace Profit.Server
 {
     public class StockCardEntry
     {
+        public int ID=0;
         public StockCard STOCK_CARD;
         public StockCardEntryType STOCK_CARD_ENTRY_TYPE;
         public DateTime TRANSACTION_DATE;
@@ -16,6 +17,10 @@ namespace Profit.Server
 
         public StockCardEntry()
         { }
+        public StockCardEntry(int id)
+        {
+            ID = id;
+        }
         public StockCardEntry(StockCard stockCard, EventItem item)
         {
             STOCK_CARD = stockCard;
