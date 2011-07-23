@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using ComponentFactory.Krypton.Toolkit;
 using Profit.Server;
 using System.Collections;
+using System.IO;
 
 namespace Profit
 {
@@ -16,6 +17,11 @@ namespace Profit
     {
         Part m_part = new Part();
         IMainForm m_mainForm;
+        IList m_partGroupList = new ArrayList();
+        IList m_unitList = new ArrayList();
+        IList m_currencyList = new ArrayList();
+        IList m_partCategoryList = new ArrayList();
+        
 
         public PartForm(IMainForm mainForm, string formName)
         {
@@ -26,7 +32,8 @@ namespace Profit
             this.MdiParent = (Form)mainForm;
             this.Name = formName;
             m_mainForm = mainForm;
-            loadRecords();
+            Clear(null, null);
+            //loadRecords();
         }
 
         private void InitializeGridEvent()
@@ -80,11 +87,20 @@ namespace Profit
 
         private void InitializeDataSource()
         {
-            partGroupkryptonComboBox1.DataSource = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_GROUP_REPOSITORY).GetAll();
-            unitkryptonComboBox2.DataSource = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY).GetAll();
-            currencykryptonComboBox3.DataSource = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY).GetAll();
+            m_partGroupList = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_GROUP_REPOSITORY).GetAll();
+            partGroupkryptonComboBox1.DataSource = m_partGroupList;
+
+            m_unitList = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY).GetAll();
+            unitkryptonComboBox2.DataSource = m_unitList;
+
+            m_currencyList = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY).GetAll();
+            currencykryptonComboBox3.DataSource = m_currencyList;
+
             costMethodekryptonComboBox4.DataSource = Enum.GetValues(typeof(CostMethod));
-            partCategorykryptonComboBox5.DataSource = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_CATEGORY_REPOSITORY).GetAll();
+
+            m_partCategoryList = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_CATEGORY_REPOSITORY).GetAll();
+            partCategorykryptonComboBox5.DataSource = m_partCategoryList;
+
             Utils.GetListCode(ConvUnit.Items, RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY).GetAll());
         }
         private void InitializeButtonClick()
@@ -104,13 +120,15 @@ namespace Profit
                 IList records = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_REPOSITORY).GetAll();
                 foreach (Part d in records)
                 {
-                    int row = gridData.Rows.Add(d.CODE, d.NAME);
-                    d.PART_GROUP = (PartGroup)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_GROUP_REPOSITORY).GetById(d.PART_GROUP);
-                    d.UNIT = (Unit)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY).GetById(d.UNIT);
-                    d.CURRENCY = (Currency)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY).GetById(d.CURRENCY);
-                    d.PART_CATEGORY = (PartCategory)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_GROUP_REPOSITORY).GetById(d.PART_CATEGORY);
+                    int row = gridData.Rows.Add(d.CODE, d.NAME, d.ACTIVE, d.BARCODE);
+                    d.PART_GROUP = (PartGroup)Utils.FindEntityInList(d.PART_GROUP.ID, m_partGroupList); //(PartGroup)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_GROUP_REPOSITORY).GetById(d.PART_GROUP);
+                    d.UNIT = (Unit)Utils.FindEntityInList(d.UNIT.ID, m_unitList);//RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY).GetById(d.UNIT);
+                    d.CURRENCY = (Currency)Utils.FindEntityInList(d.CURRENCY.ID, m_currencyList);//RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY).GetById(d.CURRENCY);
+                    d.PART_CATEGORY = (PartCategory)Utils.FindEntityInList(d.PART_CATEGORY.ID, m_partCategoryList);//RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_GROUP_REPOSITORY).GetById(d.PART_CATEGORY);
                     gridData.Rows[row].Tag = d;
                 }
+                if (gridData.Rows.Count > 0) gridData.Rows[0].Selected = true;
+                gridData_SelectionChanged(null, null);
                 this.Cursor = Cursors.Default;
             }
             catch (Exception x)
@@ -133,9 +151,9 @@ namespace Profit
                     if (m_part.ID == 0)
                     {
                         RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_REPOSITORY).Save(m_part);
-                        Part bank = (Part)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_REPOSITORY).GetByCode(m_part);
-                        int r = gridData.Rows.Add(bank.CODE, bank.NAME);
-                        gridData.Rows[r].Tag = bank;
+                        //Part d = (Part)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_REPOSITORY).GetByCode(m_part);
+                        //int r = gridData.Rows.Add(d.CODE, d.NAME, d.ACTIVE, d.BARCODE);
+                        //gridData.Rows[r].Tag = d;
                     }
                     else
                     {
@@ -168,6 +186,8 @@ namespace Profit
                 {
                     gridData[0, item.Index].Value = m_part.CODE;
                     gridData[1, item.Index].Value = m_part.NAME;
+                    gridData[2, item.Index].Value = m_part.ACTIVE   ;
+                    gridData[3, item.Index].Value = m_part.BARCODE;
                     break;
                 }
             }
@@ -257,6 +277,7 @@ namespace Profit
             unitkryptonComboBox2.Enabled = enable;
 
             dataGridViewUOM.AllowUserToAddRows = enable;
+            dataGridViewUOM.AllowUserToDeleteRows = enable;
             ConvUnit.ReadOnly = !enable;
             CostPrice.ReadOnly = !enable;
             SellPrice.ReadOnly = !enable;
@@ -367,7 +388,8 @@ namespace Profit
         public void Refresh(object sender, EventArgs e)
         {
             InitializeDataSource();
-            loadRecords(); 
+            //loadRecords(); 
+            gridData.Rows.Clear();
             gridData.ClearSelection(); 
         }
 
@@ -423,13 +445,79 @@ namespace Profit
             dataGridViewUOM.Rows.Remove(dataGridViewUOM.CurrentRow);
         }
 
-        private void dataGridViewUOM_KeyDown(object sender, KeyEventArgs e)
+        //private void dataGridViewUOM_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if (ConvUnit.ReadOnly) return;
+        //    if (e.KeyData == Keys.Delete)
+        //    {
+        //        if (dataGridViewUOM.CurrentRow != null) 
+        //            deleteUomToolStripMenuItem_Click(sender, null);
+        //    }
+        //}
+
+        private void toolStripButtonLoadAll_Click(object sender, EventArgs e)
         {
-            if (e.KeyData == Keys.Delete)
+            loadRecords();
+        }
+
+        private void toolStripButtonSearch_Click(object sender, EventArgs e)
+        {
+            try
             {
-                if (dataGridViewUOM.CurrentRow != null) 
-                    deleteUomToolStripMenuItem_Click(sender, null);
+                this.Cursor = Cursors.WaitCursor;
+                gridData.Rows.Clear();
+                IList records = ((PartRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_REPOSITORY)).Search(searchtoolStripTextBox.Text.Trim());
+                foreach (Part d in records)
+                {
+                    int row = gridData.Rows.Add(d.CODE, d.NAME, d.ACTIVE,d.BARCODE);
+                    d.PART_GROUP = (PartGroup)Utils.FindEntityInList(d.PART_GROUP.ID, m_partGroupList); //(PartGroup)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_GROUP_REPOSITORY).GetById(d.PART_GROUP);
+                    d.UNIT = (Unit)Utils.FindEntityInList(d.UNIT.ID, m_unitList);//RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY).GetById(d.UNIT);
+                    d.CURRENCY = (Currency)Utils.FindEntityInList(d.CURRENCY.ID, m_currencyList);//RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY).GetById(d.CURRENCY);
+                    d.PART_CATEGORY = (PartCategory)Utils.FindEntityInList(d.PART_CATEGORY.ID, m_partCategoryList);//RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_GROUP_REPOSITORY).GetById(d.PART_CATEGORY);
+                    gridData.Rows[row].Tag = d;
+                }
+                gridData.ClearSelection();
+                if (gridData.Rows.Count > 0) gridData.Rows[0].Selected = true; ;
+                this.Cursor = Cursors.Default;
+            }
+            catch (Exception x)
+            {
+                KryptonMessageBox.Show(x.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Default;
             }
         }
+
+        private void searchtoolStripTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                toolStripButtonSearch_Click(sender, null);
+            }
+        }
+
+        //private void toolStripButtonMigrate_Click(object sender, EventArgs e)
+        //{
+        //    StreamReader p = new StreamReader(@"part.csv");
+        //    string line = p.ReadLine();
+        //    int i = 1;
+        //    while (!p.EndOfStream)
+        //    {
+        //        line = p.ReadLine();
+        //        i++;
+        //    }
+        //    progressBar1.Maximum = i;
+        //    progressBar1.Value = 0;
+        //    p = new StreamReader(@"part.csv");
+        //    line = p.ReadLine();
+        //    while (!p.EndOfStream)
+        //    {
+        //        progressBar1.Value++;
+        //        line = p.ReadLine();
+        //        ((PartRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_REPOSITORY)).Import(line);
+        //    }
+        //}
     }
 }

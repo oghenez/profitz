@@ -36,6 +36,18 @@ namespace Profit.Server
             }
             return prtCat;
         }
+        public static PartCategory GetPartCategory(OdbcDataReader aReader)
+        {
+            PartCategory prtCat = null;
+            while (aReader.Read())
+            {
+                prtCat = new PartCategory();
+                prtCat.ID = Convert.ToInt32(aReader[0]);
+                prtCat.CODE = aReader[1].ToString();
+                prtCat.NAME = aReader[2].ToString();
+            }
+            return prtCat;
+        }
         public string GetInsertSQL()
         {
             return String.Format(@"insert into table_partcategory 
@@ -60,6 +72,10 @@ namespace Profit.Server
             return String.Format("select * from table_partcategory where prtcat_id = {0}", ID);
         }
         public string GetByCodeSQL(string code)
+        {
+            return String.Format("select * from table_partcategory where prtcat_code = '{0}'", code);
+        }
+        public static string GetByCodeSQLStatic(string code)
         {
             return String.Format("select * from table_partcategory where prtcat_code = '{0}'", code);
         }

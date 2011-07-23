@@ -65,6 +65,31 @@ namespace Profit.Server
             }
             return part;
         }
+        public static Part GetPart(OdbcDataReader r)
+        {
+            Part part = null;
+            while (r.Read())
+            {
+                part = new Part();
+                part.ID = Convert.ToInt32(r[0]);
+                part.CODE = r["part_code"].ToString();
+                part.NAME = r["part_name"].ToString();
+                part.ACTIVE = Convert.ToBoolean(r["part_active"]);
+                part.BARCODE = r["part_barcode"].ToString();
+                part.COST_METHOD = (CostMethod)Enum.Parse(typeof(CostMethod), r["part_costmethod"].ToString());
+                part.COST_PRICE = Convert.ToDouble(r["part_costprice"]);
+                part.CURRENCY = new Currency(Convert.ToInt32(r["ccy_id"]));
+                part.CURRENT_STOCK = Convert.ToDouble(r["part_currentstock"]);
+                part.MAXIMUM_STOCK = Convert.ToDouble(r["part_maximumstock"]);
+                part.MINIMUM_STOCK = Convert.ToDouble(r["part_minimumstock"]);
+                part.PART_CATEGORY = new PartCategory(Convert.ToInt32(r["prtcat_id"]));
+                part.PART_GROUP = new PartGroup(Convert.ToInt32(r["prtgroup_id"]));
+                part.SELL_PRICE = Convert.ToDouble(r["part_sellprice"]);
+                part.TAXABLE = Convert.ToBoolean(r["part_taxable"]);
+                part.UNIT = new Unit(Convert.ToInt32(r["unit_id"]));
+            }
+            return part;
+        }
         public string GetInsertSQL()
         {
             return String.Format(@"insert into table_part 
@@ -162,6 +187,10 @@ namespace Profit.Server
         {
             return String.Format("select * from table_part where part_code = '{0}'", code);
         }
+        public static string GetByCodeSQLStatic(string code)
+        {
+            return String.Format("select * from table_part where part_code = '{0}'", code);
+        }
         public string GetByCodeLikeSQL(string text)
         {
             return String.Format("select * from table_part where part_code like '%{0}%'", text);
@@ -174,7 +203,37 @@ namespace Profit.Server
         {
             return String.Format("select * from table_part");
         }
+        public static string GetSearchSQL(string search)
+        {
+            return String.Format(@"select * from table_part p where concat(p.part_code, p.part_name, p.part_barcode) like '%{0}%'", search);
+        }
         public IList GetAll(OdbcDataReader r)
+        {
+            IList result = new ArrayList();
+            while (r.Read())
+            {
+                Part part = new Part();
+                part.ID = Convert.ToInt32(r[0]);
+                part.CODE = r["part_code"].ToString();
+                part.NAME = r["part_name"].ToString();
+                part.ACTIVE = Convert.ToBoolean(r["part_active"]);
+                part.BARCODE = r["part_barcode"].ToString();
+                part.COST_METHOD = (CostMethod)Enum.Parse(typeof(CostMethod), r["part_costmethod"].ToString());
+                part.COST_PRICE = Convert.ToDouble(r["part_costprice"]);
+                part.CURRENCY = new Currency(Convert.ToInt32(r["ccy_id"]));
+                part.CURRENT_STOCK = Convert.ToDouble(r["part_currentstock"]);
+                part.MAXIMUM_STOCK = Convert.ToDouble(r["part_maximumstock"]);
+                part.MINIMUM_STOCK = Convert.ToDouble(r["part_minimumstock"]);
+                part.PART_CATEGORY = new PartCategory(Convert.ToInt32(r["prtcat_id"]));
+                part.PART_GROUP = new PartGroup(Convert.ToInt32(r["prtgroup_id"]));
+                part.SELL_PRICE = Convert.ToDouble(r["part_sellprice"]);
+                part.TAXABLE = Convert.ToBoolean(r["part_taxable"]);
+                part.UNIT = new Unit(Convert.ToInt32(r["unit_id"]));
+                result.Add(part);
+            }
+            return result;
+        }
+        public static IList GetAllStatic(OdbcDataReader r)
         {
             IList result = new ArrayList();
             while (r.Read())

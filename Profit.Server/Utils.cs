@@ -25,5 +25,14 @@ namespace Profit.Server
             }
             return null;
         }
+        public static IEntity FindEntityInList(int value, IList list)
+        {
+            foreach (IEntity cod in list)
+            {
+                if (cod.GetID() == value)
+                    return cod;
+            }
+            return null;
+        }
     }
 }

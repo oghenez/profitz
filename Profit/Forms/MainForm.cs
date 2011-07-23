@@ -330,6 +330,9 @@ namespace Profit
             kryptonPanel1.Visible = kryptonHeader8.Orientation != VisualOrientation.Left ? kryptonHeader9.HeaderStyle == HeaderStyle.DockActive : kryptonHeader8.Orientation != VisualOrientation.Left;
         }
 
-       
+        private void treeView8_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            treeView1_NodeMouseDoubleClick(sender, new TreeNodeMouseClickEventArgs(e.Node, MouseButtons.Right, 1, 1, 1));
+        }
     }
 }

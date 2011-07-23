@@ -36,6 +36,18 @@ namespace Profit.Server
             }
             return partgroup;
         }
+        public static PartGroup GetPartGroup(OdbcDataReader aReader)
+        {
+            PartGroup partgroup = null;
+            while (aReader.Read())
+            {
+                partgroup = new PartGroup();
+                partgroup.ID = Convert.ToInt32(aReader[0]);
+                partgroup.CODE = aReader[1].ToString();
+                partgroup.NAME = aReader[2].ToString();
+            }
+            return partgroup;
+        }
         public string GetInsertSQL()
         {
             return String.Format(@"insert into table_partgroup 
@@ -60,6 +72,10 @@ namespace Profit.Server
             return String.Format("select * from table_partgroup where prtgroup_id = {0}", ID);
         }
         public string GetByCodeSQL(string code)
+        {
+            return String.Format("select * from table_partgroup where prtgroup_code = '{0}'", code);
+        }
+        public static string GetByCodeSQLStatic(string code)
         {
             return String.Format("select * from table_partgroup where prtgroup_code = '{0}'", code);
         }

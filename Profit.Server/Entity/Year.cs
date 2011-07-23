@@ -38,8 +38,8 @@ namespace Profit.Server
                 year.ID = Convert.ToInt32(aReader[0]);
                 year.CODE = aReader[1].ToString();
                 year.NAME = aReader[2].ToString();
-                year.START_DATE = DateTime.Parse(aReader[3].ToString());
-                year.END_DATE = DateTime.Parse(aReader[4].ToString());
+                year.START_DATE = Convert.ToDateTime(aReader[3]);
+                year.END_DATE = Convert.ToDateTime(aReader[4]);
             }
             return year;
         }
@@ -106,8 +106,8 @@ year_end
                 year.ID = Convert.ToInt32(aReader[0]);
                 year.CODE = aReader[1].ToString();
                 year.NAME = aReader[2].ToString();
-                year.START_DATE = DateTime.Parse(aReader[3].ToString());
-                year.END_DATE = DateTime.Parse(aReader[4].ToString());
+                year.START_DATE = Convert.ToDateTime(aReader[3]);
+                year.END_DATE = Convert.ToDateTime(aReader[4]);
                 result.Add(year);
             }
             return result;
