@@ -38,7 +38,7 @@ namespace Profit.Server
             ID = id;
             CODE = code;
         }
-        public IEntity Get(OdbcDataReader aReader)
+        public static Period TransformReader(OdbcDataReader aReader)
         {
             Period period = null;
             while (aReader.Read())
@@ -119,7 +119,7 @@ namespace Profit.Server
         {
             return String.Format("select * from table_period where year_id = {0}", ID);
         }
-        public IList GetAll(OdbcDataReader aReader)
+        public static IList TransformReaderList(OdbcDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())
@@ -189,5 +189,20 @@ namespace Profit.Server
             if (ob == null) return false;
             return this.GetID() == ob.GetID();
         }
+
+        #region IEntity Members
+
+
+        public IEntity Get(OdbcDataReader aReader)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IList GetAll(OdbcDataReader aReader)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }
