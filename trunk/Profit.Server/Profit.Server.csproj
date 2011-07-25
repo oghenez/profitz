@@ -54,7 +54,7 @@
     <Compile Include="Entity\Transaction\StockCard.cs" />
     <Compile Include="Entity\Transaction\StockCardEntry.cs" />
     <Compile Include="Entity\Transaction\StockTaking.cs" />
-    <Compile Include="Entity\Transaction\StockTakingItem.cs" />
+    <Compile Include="Entity\Transaction\StockTakingItems.cs" />
     <Compile Include="Entity\UnitConversion.cs" />
     <Compile Include="Entity\Period.cs" />
     <Compile Include="Entity\Year.cs" />
@@ -80,7 +80,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Repository\EmployeeRepository.cs" />
+    <Compile Include="Repository\EventRepository.cs" />
+    <Compile Include="Repository\TransactionRepository.cs" />
     <Compile Include="Repository\PartRepository.cs" />
+    <Compile Include="Repository\PeriodRepository.cs" />
+    <Compile Include="Repository\StockCardEntryRepository.cs" />
+    <Compile Include="Repository\StockCardRepository.cs" />
     <Compile Include="Repository\YearRepository.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>

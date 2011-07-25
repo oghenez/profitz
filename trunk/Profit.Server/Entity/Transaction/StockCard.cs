@@ -182,8 +182,11 @@ namespace Profit.Server
             sCard.BOOKED = BOOKED;
             return sCard;
         }
-
-        public IEntity Get(OdbcDataReader aReader)
+        public static StockCard CreateStockCard(EventItem item, Period period)
+        {
+            return new StockCard(item.PART, item.WAREHOUSE, period);
+        }
+        public static StockCard TransformReader(OdbcDataReader aReader)
         {
             StockCard stockcard = null;
             while (aReader.Read())
@@ -280,5 +283,15 @@ namespace Profit.Server
         {
             return String.Format("SELECT max(bank_id) from table_stockcard");
         }
+
+        #region IEntity Members
+
+
+        public IEntity Get(OdbcDataReader aReader)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

@@ -102,5 +102,50 @@ namespace Profit.Server
         }
 
         #endregion
+
+        public override bool Equals(object obj)
+        {
+            IEntity e = (IEntity)obj;
+            if (e == null) return false;
+            return e.GetID() == ID;
+        }
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public void ProcessConfirm()
+        {
+            assertNotConfirmed();
+            foreach (EventItem eventItem in EVENT_ITEMS)
+            {
+                eventItem.ProcessConfirm();
+            }
+            this.EVENT_STATUS = EventStatus.Confirm;
+            this.POSTED = true;
+        }
+        private void assertNotConfirmed()
+        {
+            if (this.EVENT_STATUS.Equals(EventStatus.Confirm))
+                throw new Exception("Event allready Confirmed");
+        }
+        public void ProcessRevised()
+        {
+            assertNotRevised();
+            DELETED_STOCK_CARD_ENTRY.Clear();
+            foreach (EventItem eventItem in EVENT_ITEMS)
+            {
+                eventItem.ProcessRevise();
+                DELETED_STOCK_CARD_ENTRY.Add(eventItem.STOCK_CARD_ENTRY);//test
+                eventItem.STOCK_CARD_ENTRY = null;//test
+            }
+            this.EVENT_STATUS = EventStatus.Entry;
+            this.POSTED = false;
+        }
+        private void assertNotRevised()
+        {
+            if (this.EVENT_STATUS.Equals(EventStatus.Entry))
+                throw new Exception("Event allready Revised");
+        }
     }
 }

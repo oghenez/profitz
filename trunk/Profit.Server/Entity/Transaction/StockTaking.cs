@@ -53,7 +53,7 @@ namespace Profit.Server
         }
         public override string GetUpdateSQL()
         {
-            return String.Format(@"update table_stockcard set 
+            return String.Format(@"update table_stocktaking set 
                     stk_date = '{0}',
                     stk_noticedate= '{1}',
                     stk_scentrytype= '{2}',
@@ -65,7 +65,7 @@ namespace Profit.Server
                     stk_amount= {8},
                     ccy_id= {9}
                     stk_stocktakingtype = '{10}'
-                where sc_id = {11}",
+                where stk_id = {11}",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                 STOCK_CARD_ENTRY_TYPE.ToString(),

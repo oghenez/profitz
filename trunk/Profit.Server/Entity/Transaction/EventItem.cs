@@ -58,7 +58,7 @@ namespace Profit.Server
             throw new NotImplementedException();
         }
 
-        public string GetUpdateSQL()
+        public virtual string GetUpdateSQL()
         {
             throw new NotImplementedException();
         }
@@ -101,6 +101,33 @@ namespace Profit.Server
         public virtual IList GetAll(OdbcDataReader aReader)
         {
             throw new NotImplementedException();
+        }
+
+        public override bool Equals(object obj)
+        {
+            IEntity e = (IEntity)obj;
+            if (e == null) return false;
+            return e.GetID() == ID;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+        public void ProcessConfirm()
+        {
+            asserNotNullStockCard();
+            STOCK_CARD.ProcessConfirm(this);
+        }
+        private void asserNotNullStockCard()
+        {
+            if (STOCK_CARD == null)
+                throw new Exception("Stock Card is not injected");
+        }
+        public void ProcessRevise()
+        {
+            asserNotNullStockCard();
+            STOCK_CARD.ProcessRevise(this);
         }
     }
 }
