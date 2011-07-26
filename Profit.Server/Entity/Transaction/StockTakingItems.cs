@@ -33,9 +33,9 @@ namespace Profit.Server
                 PART.ID,
                 WAREHOUSE.ID,
                 AMOUNT,
-                STOCK_CARD_ENTRY.ID,
+                STOCK_CARD_ENTRY == null ? 0 : STOCK_CARD_ENTRY.ID,
                 STOCK_CARD_ENTRY_TYPE.ToString(),
-                STOCK_CARD.ID,
+                STOCK_CARD == null ? 0 : STOCK_CARD.ID,
                 UNIT.ID,
                 PRICE,
                 TOTAL_AMOUNT
@@ -59,9 +59,9 @@ namespace Profit.Server
                 PART.ID,
                 WAREHOUSE.ID,
                 AMOUNT,
-                STOCK_CARD_ENTRY.ID,
+                STOCK_CARD_ENTRY == null ? 0 : STOCK_CARD_ENTRY.ID,
                 STOCK_CARD_ENTRY_TYPE.ToString(),
-                STOCK_CARD.ID,
+                STOCK_CARD == null ? 0 : STOCK_CARD.ID,
                 UNIT.ID,
                 PRICE,
                 TOTAL_AMOUNT,
@@ -107,6 +107,22 @@ namespace Profit.Server
                 result.Add(transaction);
             }
             return result;
+        }
+        public static string SelectMaxIDSQL()
+        {
+            return String.Format("SELECT max(stki_id) from table_stocktakingitem");
+        }
+        public static string GetByEventIDSQL(int id)
+        {
+            return String.Format("SELECT * from table_stocktakingitem where stk_id = {0}", id);
+        }
+        public static string DeleteSQL(int id)
+        {
+            return String.Format("Delete from table_stocktakingitem where stki_id = {0}", id);
+        }
+        public static string DeleteAllByEventSQL(int id)
+        {
+            return String.Format("Delete from table_stocktakingitem where stk_id = {0}", id);
         }
     }
 }

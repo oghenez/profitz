@@ -10,11 +10,22 @@ namespace Profit.Server
     {
         public static void Update(OdbcCommand cmd, StockCard sc)
         {
- 
+            cmd.CommandText = sc.GetUpdateSQL();
+            cmd.ExecuteNonQuery();
         }
         public static void Save(OdbcCommand cmd, StockCard sc)
         {
-
+            cmd.CommandText = sc.GetInsertSQL();
+            cmd.ExecuteNonQuery();
+            cmd.CommandText = StockCard.SelectMaxIDSQL();
+            sc.ID = Convert.ToInt32(cmd.ExecuteScalar());
+            foreach (StockCardEntry sce in sc.STOCK_CARD_ENTRIES)
+            {
+                cmd.CommandText = sce.GetInsertSQL();
+                cmd.ExecuteNonQuery();
+                cmd.CommandText = StockCardEntry.SelectMaxIDSQL();
+                sce.ID = Convert.ToInt32(cmd.ExecuteScalar());
+            }
         }
       
         public static StockCard FindStockCard(OdbcCommand cmd, long partId, long locationId, long periodId)
@@ -23,6 +34,7 @@ namespace Profit.Server
             OdbcDataReader r =  cmd.ExecuteReader();
             StockCard sc = StockCard.TransformReader(r);
             r.Close();
+            sc.PERIOD = PeriodRepository.FindPeriod(cmd, sc.PERIOD.ID);
             return sc;
         }
         public static StockCard FindStockCard(OdbcCommand cmd, long periodId)

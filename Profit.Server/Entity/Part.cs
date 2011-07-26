@@ -183,6 +183,10 @@ namespace Profit.Server
         {
             return String.Format("select * from table_part where part_id = {0}", ID);
         }
+        public static string GetByIDSQLStatic(int ID)
+        {
+            return String.Format("select * from table_part where part_id = {0}", ID);
+        }
         public string GetByCodeSQL(string code)
         {
             return String.Format("select * from table_part where part_code = '{0}'", code);

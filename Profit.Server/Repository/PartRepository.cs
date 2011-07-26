@@ -157,7 +157,6 @@ namespace Profit.Server
                 throw x;
             }
         }
-
         private Unit GetUnit(OdbcCommand aCommand, string code, string name)
         {
             //OdbcCommand aCommand = new OdbcCommand();
@@ -238,6 +237,7 @@ namespace Profit.Server
             }
             return u;
         }
+        
         public IList Search(string search)
         {
             try
@@ -257,6 +257,25 @@ namespace Profit.Server
                 m_connection.Close();
             }
 
+        }
+
+        //For transaction
+        public static Part GetByID(OdbcCommand cmd, int id)
+        {
+            cmd.CommandText = Part.GetByIDSQLStatic(id);
+            OdbcDataReader r =  cmd.ExecuteReader();
+            Part result = Part.GetPart(r);
+            r.Close();
+            result.UNIT_CONVERSION_LIST = PartRepository.GetUnitConversionsStatic(cmd, id);
+            return result;
+        }
+        public static IList GetUnitConversionsStatic(OdbcCommand cmd, int partID)
+        {
+            cmd.CommandText = UnitConversion.GetAllByPartSQL(partID);
+            OdbcDataReader aReader = cmd.ExecuteReader();
+            IList a = UnitConversion.GetAllStatic(aReader);
+            aReader.Close();
+            return a;
         }
     }
 }

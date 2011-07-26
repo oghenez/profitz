@@ -125,13 +125,13 @@ namespace Profit.Server
             while (aReader.Read())
             {
                 Period period = new Period();
-                period.ID = Convert.ToInt32(aReader[0]);
-                period.CODE = aReader[1].ToString();
-                period.PERIOD_STATUS = (PeriodStatus)Enum.Parse(typeof(PeriodStatus), aReader[2].ToString());
-                period.YEAR = new Year(Convert.ToInt32(aReader[3]));
-                period.START_DATE = DateTime.Parse(aReader[4].ToString());
-                period.END_DATA = DateTime.Parse(aReader[5].ToString());
-                period.CLOSED_DATE = DateTime.Parse(aReader[6].ToString());
+                period.ID = Convert.ToInt32(aReader["period_id"]);
+                period.CODE = aReader["period_code"].ToString();
+                period.PERIOD_STATUS = (PeriodStatus)Enum.Parse(typeof(PeriodStatus), aReader["period_status"].ToString());
+                period.YEAR = new Year(Convert.ToInt32(aReader["year_id"]));
+                period.START_DATE = Convert.ToDateTime(aReader["period_start"]);
+                period.END_DATA = Convert.ToDateTime(aReader["period_end"]);
+                period.CLOSED_DATE = Convert.ToDateTime(aReader["period_close"]);
                 result.Add(period);
             }
             return result;
@@ -142,13 +142,13 @@ namespace Profit.Server
             while (aReader.Read())
             {
                 Period period = new Period();
-                period.ID = Convert.ToInt32(aReader[0]);
-                period.CODE = aReader[1].ToString();
-                period.PERIOD_STATUS = (PeriodStatus)Enum.Parse(typeof(PeriodStatus), aReader[2].ToString());
-                period.YEAR = (Year)year;
-                period.START_DATE = Convert.ToDateTime(aReader[4]);
-                period.END_DATA = Convert.ToDateTime(aReader[5]);
-                period.CLOSED_DATE = Convert.ToDateTime(aReader[6]);
+                period.ID = Convert.ToInt32(aReader["period_id"]);
+                period.CODE = aReader["period_code"].ToString();
+                period.PERIOD_STATUS = (PeriodStatus)Enum.Parse(typeof(PeriodStatus), aReader["period_status"].ToString());
+                period.YEAR = new Year(Convert.ToInt32(aReader["year_id"]));
+                period.START_DATE = Convert.ToDateTime(aReader["period_start"]);
+                period.END_DATA = Convert.ToDateTime(aReader["period_end"]);
+                period.CLOSED_DATE = Convert.ToDateTime(aReader["period_close"]);
                 result.Add(period);
             }
             return result;

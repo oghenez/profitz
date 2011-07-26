@@ -17,7 +17,16 @@ namespace Profit.Server
         }
         public static void Delete(OdbcCommand cmd, StockCardEntry sc)
         {
-
+            cmd.CommandText = StockCardEntry.DeleteSQL(sc.ID);
+            cmd.ExecuteNonQuery();
+        }
+        public static StockCardEntry FindStockCardEntryByEventItem(OdbcCommand cmd, int itemID)
+        {
+            cmd.CommandText = StockCardEntry.FindByEventItem(itemID);
+            OdbcDataReader r = cmd.ExecuteReader();
+            StockCardEntry res = StockCardEntry.TransformReader(r);
+            r.Close();
+            return res;
         }
     }
 }

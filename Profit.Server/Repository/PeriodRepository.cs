@@ -11,10 +11,10 @@ namespace Profit.Server
     {
         public static Period FindPeriodByDate(OdbcCommand cmd, DateTime date)
         {
-            string hql = String.Format("select * from table_period p where p.period_start <= :date and p.period_end >= :date");
-            OdbcParameter st = new OdbcParameter("date", date);
+            string hql = String.Format("select * from table_period p where p.period_start <= '{0}' and p.period_end >= '{0}'", date.ToString(Utils.DATE_FORMAT));
+//            OdbcParameter st = new OdbcParameter(":date", date);
             cmd.CommandText = hql;
-            cmd.Parameters.Add(st);
+         //   cmd.Parameters.Add(st);
             OdbcDataReader r = cmd.ExecuteReader();
             IList result = Period.TransformReaderList(r);
             r.Close();
@@ -24,6 +24,16 @@ namespace Profit.Server
         public static Period FindCurrentPeriod(OdbcCommand cmd)
         {
             string hql = String.Format("select * from table_period p where p.period_status ='{0}'", PeriodStatus.Current.ToString() );
+            cmd.CommandText = hql;
+            OdbcDataReader r = cmd.ExecuteReader();
+            IList result = Period.TransformReaderList(r);
+            r.Close();
+            if (result.Count == 0) return null;
+            return result[0] as Period;
+        }
+        public static Period FindPeriod(OdbcCommand cmd, int id)
+        {
+            string hql = String.Format("select * from table_period p where p.period_id ='{0}'", id);
             cmd.CommandText = hql;
             OdbcDataReader r = cmd.ExecuteReader();
             IList result = Period.TransformReaderList(r);
