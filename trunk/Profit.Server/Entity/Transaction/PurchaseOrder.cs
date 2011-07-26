@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data.Odbc;
+using System.Collections;
 
 namespace Profit.Server
 {
@@ -53,7 +55,8 @@ namespace Profit.Server
                     po_nettotal,
                     po_againsgrnstatus
                 ) 
-                VALUES ('{0}','{1}','{2}',{3},'{4}',{5},'{6}',{7},{8},{9},'{10}')",
+                VALUES ('{0}','{1}','{2}',{3},'{4}',{5},'{6}',{7},{8},'{9}',{10}
+                        {11},{12},{13},{14},{15},{16},{17},{18},{19})",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                 STOCK_CARD_ENTRY_TYPE.ToString(),
@@ -61,36 +64,45 @@ namespace Profit.Server
                 NOTES,
                 POSTED,
                 EVENT_STATUS.ToString(),
-                DIVISION == null?0:DIVISION.ID,
-                TOP == null?0:TOP.ID,
-         DUE_DATE = DateTime.Today;
-         CURRENCY = null;
-         SUB_TOTAL = 0;
-          DISC_PERCENT = 0;
-          DISC_AFTER_AMOUNT = 0;
-          DISC_AMOUNT = 0;
-          TAX = null;
-          TAX_AFTER_AMOUNT = 0;
-          OTHER_EXPENSE = 0;
-          NET_TOTAL = 0;
-          m_againstGRNStatus = AgainstStatus.Open;
+                DIVISION == null ? 0 : DIVISION.ID,
+                TOP == null ? 0 : TOP.ID,
+                DUE_DATE,
+                CURRENCY == null ? 0 : CURRENCY.ID,
+                SUB_TOTAL,
+                DISC_PERCENT,
+                DISC_AFTER_AMOUNT,
+                DISC_AMOUNT,
+                TAX == null ? 0 : TAX.ID,
+                TAX_AFTER_AMOUNT,
+                OTHER_EXPENSE,
+                NET_TOTAL,
+                m_againstGRNStatus.ToString()
                 );
         }
         public override string GetUpdateSQL()
         {
-            return String.Format(@"update table_stocktaking set 
-                    stk_date = '{0}',
-                    stk_noticedate= '{1}',
-                    stk_scentrytype= '{2}',
-                    emp_id= {3},
-                    stk_notes= '{4}',
-                    stk_posted= {5},
-                    stk_eventstatus= '{6}',
-                    warehouse_id= {7},
-                    stk_amount= {8},
-                    ccy_id= {9}
-                    stk_stocktakingtype = '{10}'
-                where stk_id = {11}",
+            return String.Format(@"update table_purchaseorder set 
+                    po_date = {0},
+                    po_noticedate = '{1}',
+                    po_scentrytype = '{2}',
+                    emp_id = {3},
+                    po_notes = '{4}',
+                    po_posted = {5},
+                    po_eventstatus = '{6}',
+                    div_id = {7},
+                    top_id = {8},
+                    po_duedate = '{9}',
+                    ccy_id = {10},
+                    po_subtotal = {11},
+                    po_discpercent = {12},
+                    po_discafteramount = {13},
+                    po_discamount = {14},
+                    tax_id = {15},
+                    po_taxafteramount = {16},
+                    po_otherexpense = {17},
+                    po_nettotal = {18},
+                    po_againsgrnstatus = '{19}'
+                where po_id = {20}",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                 STOCK_CARD_ENTRY_TYPE.ToString(),
@@ -98,30 +110,48 @@ namespace Profit.Server
                 NOTES,
                 POSTED,
                 EVENT_STATUS.ToString(),
-                WAREHOUSE.ID,
-                AMOUNT,
-                CURRENCY.ID,
-                STOCK_TAKING_TYPE.ToString(),
+                DIVISION == null ? 0 : DIVISION.ID,
+                TOP == null ? 0 : TOP.ID,
+                DUE_DATE,
+                CURRENCY == null ? 0 : CURRENCY.ID,
+                SUB_TOTAL,
+                DISC_PERCENT,
+                DISC_AFTER_AMOUNT,
+                DISC_AMOUNT,
+                TAX == null ? 0 : TAX.ID,
+                TAX_AFTER_AMOUNT,
+                OTHER_EXPENSE,
+                NET_TOTAL,
+                m_againstGRNStatus.ToString(),
                 ID);
         }
-        public static StockTaking TransformReader(OdbcDataReader aReader)
+        public static PurchaseOrder TransformReader(OdbcDataReader aReader)
         {
-            StockTaking transaction = null;
+            PurchaseOrder transaction = null;
             while (aReader.Read())
             {
-                transaction = new StockTaking();
-                transaction.ID = Convert.ToInt32(aReader["stk_id"]);
-                transaction.TRANSACTION_DATE = Convert.ToDateTime(aReader["stk_date"]);
+                transaction = new PurchaseOrder();
+                transaction.ID = Convert.ToInt32(aReader["po_id"]);
+                transaction.TRANSACTION_DATE = Convert.ToDateTime(aReader["po_date"]);
                 transaction.NOTICE_DATE = Convert.ToDateTime(aReader["stk_noticedate"]);
-                transaction.STOCK_CARD_ENTRY_TYPE = (StockCardEntryType)Enum.Parse(typeof(StockCardEntryType), aReader["stk_scentrytype"].ToString());
+                transaction.STOCK_CARD_ENTRY_TYPE = (StockCardEntryType)Enum.Parse(typeof(StockCardEntryType), aReader["po_scentrytype "].ToString());
                 transaction.EMPLOYEE = new Employee(Convert.ToInt32(aReader["emp_id"]));
-                transaction.NOTES = aReader["stk_notes"].ToString();
-                transaction.POSTED = Convert.ToBoolean(aReader["stk_posted"]);
-                transaction.EVENT_STATUS = (EventStatus)Enum.Parse(typeof(EventStatus), aReader["stk_eventstatus"].ToString());
-                transaction.WAREHOUSE = new Warehouse(Convert.ToInt32(aReader["warehouse_id"]));
-                transaction.AMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["stk_amount"]));
+                transaction.NOTES = aReader["po_notes"].ToString();
+                transaction.POSTED = Convert.ToBoolean(aReader["po_posted"]);
+                transaction.EVENT_STATUS = (EventStatus)Enum.Parse(typeof(EventStatus), aReader["po_eventstatus"].ToString());
+                transaction.DIVISION = new Division(Convert.ToInt32(aReader["div_id"]));
+                transaction.TOP = new TermOfPayment(Convert.ToInt32(aReader["top_id"]));
+                transaction.DUE_DATE = Convert.ToDateTime(aReader["po_duedate"]);
                 transaction.CURRENCY = new Currency(Convert.ToInt32(aReader["ccy_id"]));
-                transaction.STOCK_TAKING_TYPE = (StockTakingType)Enum.Parse(typeof(StockTakingType), aReader["stk_stocktakingtype"].ToString());
+                transaction.SUB_TOTAL = Convert.ToDouble(aReader["po_subtotal"]);
+                transaction.DISC_PERCENT = Convert.ToDouble(aReader["po_discpercent"]);
+                transaction.DISC_AFTER_AMOUNT = Convert.ToDouble(aReader["po_discafteramount"]);
+                transaction.DISC_AMOUNT = Convert.ToDouble(aReader["po_discamount"]);
+                transaction.TAX = new Tax(Convert.ToInt32(aReader["tax_id"]));
+                transaction.TAX_AFTER_AMOUNT = Convert.ToDouble(aReader["po_taxafteramount"]);
+                transaction.OTHER_EXPENSE = Convert.ToDouble(aReader["po_otherexpense"]);
+                transaction.NET_TOTAL = Convert.ToDouble(aReader["po_nettotal"]);
+                transaction.m_againstGRNStatus = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), aReader["po_againsgrnstatus"].ToString());
             }
             return transaction;
         }
@@ -130,44 +160,53 @@ namespace Profit.Server
             IList result = new ArrayList();
             while (aReader.Read())
             {
-                StockTaking transaction = new StockTaking();
-                transaction.ID = Convert.ToInt32(aReader["stk_id"]);
-                transaction.TRANSACTION_DATE = Convert.ToDateTime(aReader["stk_date"]);
+                PurchaseOrder transaction = new PurchaseOrder();
+                transaction.ID = Convert.ToInt32(aReader["po_id"]);
+                transaction.TRANSACTION_DATE = Convert.ToDateTime(aReader["po_date"]);
                 transaction.NOTICE_DATE = Convert.ToDateTime(aReader["stk_noticedate"]);
-                transaction.STOCK_CARD_ENTRY_TYPE = (StockCardEntryType)Enum.Parse(typeof(StockCardEntryType), aReader["stk_scentrytype"].ToString());
+                transaction.STOCK_CARD_ENTRY_TYPE = (StockCardEntryType)Enum.Parse(typeof(StockCardEntryType), aReader["po_scentrytype "].ToString());
                 transaction.EMPLOYEE = new Employee(Convert.ToInt32(aReader["emp_id"]));
-                transaction.NOTES = aReader["stk_notes"].ToString();
-                transaction.POSTED = Convert.ToBoolean(aReader["stk_posted"]);
-                transaction.EVENT_STATUS = (EventStatus)Enum.Parse(typeof(EventStatus), aReader["stk_eventstatus"].ToString());
-                transaction.WAREHOUSE = new Warehouse(Convert.ToInt32(aReader["warehouse_id"]));
-                transaction.AMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["stk_amount"]));
+                transaction.NOTES = aReader["po_notes"].ToString();
+                transaction.POSTED = Convert.ToBoolean(aReader["po_posted"]);
+                transaction.EVENT_STATUS = (EventStatus)Enum.Parse(typeof(EventStatus), aReader["po_eventstatus"].ToString());
+                transaction.DIVISION = new Division(Convert.ToInt32(aReader["div_id"]));
+                transaction.TOP = new TermOfPayment(Convert.ToInt32(aReader["top_id"]));
+                transaction.DUE_DATE = Convert.ToDateTime(aReader["po_duedate"]);
                 transaction.CURRENCY = new Currency(Convert.ToInt32(aReader["ccy_id"]));
-                transaction.STOCK_TAKING_TYPE = (StockTakingType)Enum.Parse(typeof(StockTakingType), aReader["stk_stocktakingtype"].ToString());
+                transaction.SUB_TOTAL = Convert.ToDouble(aReader["po_subtotal"]);
+                transaction.DISC_PERCENT = Convert.ToDouble(aReader["po_discpercent"]);
+                transaction.DISC_AFTER_AMOUNT = Convert.ToDouble(aReader["po_discafteramount"]);
+                transaction.DISC_AMOUNT = Convert.ToDouble(aReader["po_discamount"]);
+                transaction.TAX = new Tax(Convert.ToInt32(aReader["tax_id"]));
+                transaction.TAX_AFTER_AMOUNT = Convert.ToDouble(aReader["po_taxafteramount"]);
+                transaction.OTHER_EXPENSE = Convert.ToDouble(aReader["po_otherexpense"]);
+                transaction.NET_TOTAL = Convert.ToDouble(aReader["po_nettotal"]);
+                transaction.m_againstGRNStatus = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), aReader["po_againsgrnstatus"].ToString());
                 result.Add(transaction);
             }
             return result;
         }
         public static string SelectMaxIDSQL()
         {
-            return String.Format("SELECT max(stk_id) from table_stocktaking");
+            return String.Format("SELECT max(stk_id) from table_purchaseorder");
         }
         public static string GetByIDSQL(int id)
         {
-            return String.Format("SELECT * from table_stocktaking where stk_id ={0}", id);
+            return String.Format("SELECT * from table_purchaseorder where po_id ={0}", id);
         }
         public static string DeleteSQL(int id)
         {
-            return String.Format("Delete from table_stocktaking where stk_id ={0}", id);
+            return String.Format("Delete from table_purchaseorder where po_id ={0}", id);
         }
         public static string GetEventStatus(int id)
         {
-            return String.Format("SELECT stk_eventstatus from table_stocktaking where stk_id ={0}", id);
+            return String.Format("SELECT po_eventstatus from table_purchaseorder where po_id ={0}", id);
         }
         public static string GetUpdateStatusSQL(int id, bool posted)
         {
-            return String.Format(@"update table_stocktaking set 
-                    stk_posted= {0},
-                    stk_eventstatus= '{1}'
+            return String.Format(@"update table_purchaseorder set 
+                    po_posted= {0},
+                    po_eventstatus= '{1}'
                 where stk_id = {2}",
                 posted,
                 posted ? EventStatus.Confirm: EventStatus.Entry,

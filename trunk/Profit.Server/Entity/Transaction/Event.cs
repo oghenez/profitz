@@ -61,7 +61,7 @@ namespace Profit.Server
             throw new NotImplementedException();
         }
 
-        public virtual string GetByIDSQL(int ID)
+        public string GetByIDSQL(int ID)
         {
             throw new NotImplementedException();
         }
