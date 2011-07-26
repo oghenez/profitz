@@ -52,6 +52,7 @@
     <Compile Include="Entity\Transaction\Event.cs" />
     <Compile Include="Entity\Transaction\EventItem.cs" />
     <Compile Include="Entity\Transaction\PurchaseOrder.cs" />
+    <Compile Include="Entity\Transaction\PurchaseOrderItem.cs" />
     <Compile Include="Entity\Transaction\StockCard.cs" />
     <Compile Include="Entity\Transaction\StockCardEntry.cs" />
     <Compile Include="Entity\Transaction\StockTaking.cs" />
