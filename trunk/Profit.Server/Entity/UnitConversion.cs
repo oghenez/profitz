@@ -14,9 +14,9 @@ namespace Profit.Server
         public string CODE = "-";
         public string NAME = "-";
 
-        public double CONVERSION_QTY;
+        public double CONVERSION_QTY = 1;
         public Unit CONVERSION_UNIT;
-        public double ORIGINAL_QTY;
+        public double ORIGINAL_QTY = 1;
         public double COST_PRICE;
         public double SELL_PRICE;
         public Part PART;

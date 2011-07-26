@@ -37,10 +37,10 @@ namespace Profit.Server
                     ccy_id,
                     stk_stocktakingtype
                 ) 
-                VALUES ('{0}','{1}','{2}',{3},'{4}','{5}','{6}',{7},{8},{9},'{10}')",
+                VALUES ('{0}','{1}','{2}',{3},'{4}',{5},'{6}',{7},{8},{9},'{10}')",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
-                STOCK_CARD_ENTRY_TYPE.ToString(),
+                StockCardEntryType.StockTaking.ToString(),//STOCK_CARD_ENTRY_TYPE.ToString(),
                 EMPLOYEE.ID,
                 NOTES,
                 POSTED,
@@ -59,7 +59,7 @@ namespace Profit.Server
                     stk_scentrytype= '{2}',
                     emp_id= {3},
                     stk_notes= '{4}',
-                    stk_posted= '{5}',
+                    stk_posted= {5},
                     stk_eventstatus= '{6}',
                     warehouse_id= {7},
                     stk_amount= {8},
@@ -68,7 +68,7 @@ namespace Profit.Server
                 where stk_id = {11}",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
-                STOCK_CARD_ENTRY_TYPE.ToString(),
+                 StockCardEntryType.StockTaking.ToString(), //STOCK_CARD_ENTRY_TYPE.ToString(),
                 EMPLOYEE.ID,
                 NOTES,
                 POSTED,
@@ -85,7 +85,7 @@ namespace Profit.Server
             while (aReader.Read())
             {
                 transaction = new StockTaking();
-                transaction.ID = Convert.ToInt32(aReader["sc_id"]);
+                transaction.ID = Convert.ToInt32(aReader["stk_id"]);
                 transaction.TRANSACTION_DATE = Convert.ToDateTime(aReader["stk_date"]);
                 transaction.NOTICE_DATE = Convert.ToDateTime(aReader["stk_noticedate"]);
                 transaction.STOCK_CARD_ENTRY_TYPE = (StockCardEntryType)Enum.Parse(typeof(StockCardEntryType), aReader["stk_scentrytype"].ToString());
@@ -106,7 +106,7 @@ namespace Profit.Server
             while (aReader.Read())
             {
                 StockTaking transaction = new StockTaking();
-                transaction.ID = Convert.ToInt32(aReader["sc_id"]);
+                transaction.ID = Convert.ToInt32(aReader["stk_id"]);
                 transaction.TRANSACTION_DATE = Convert.ToDateTime(aReader["stk_date"]);
                 transaction.NOTICE_DATE = Convert.ToDateTime(aReader["stk_noticedate"]);
                 transaction.STOCK_CARD_ENTRY_TYPE = (StockCardEntryType)Enum.Parse(typeof(StockCardEntryType), aReader["stk_scentrytype"].ToString());
@@ -121,6 +121,32 @@ namespace Profit.Server
                 result.Add(transaction);
             }
             return result;
+        }
+        public static string SelectMaxIDSQL()
+        {
+            return String.Format("SELECT max(stk_id) from table_stocktaking");
+        }
+        public static string GetByIDSQL(int id)
+        {
+            return String.Format("SELECT * from table_stocktaking where stk_id ={0}", id);
+        }
+        public static string DeleteSQL(int id)
+        {
+            return String.Format("Delete from table_stocktaking where stk_id ={0}", id);
+        }
+        public static string GetEventStatus(int id)
+        {
+            return String.Format("SELECT stk_eventstatus from table_stocktaking where stk_id ={0}", id);
+        }
+        public static string GetUpdateStatusSQL(int id, bool posted)
+        {
+            return String.Format(@"update table_stocktaking set 
+                    stk_posted= {0},
+                    stk_eventstatus= '{1}'
+                where stk_id = {2}",
+                posted,
+                posted ? EventStatus.Confirm: EventStatus.Entry,
+                id);
         }
     }
 }

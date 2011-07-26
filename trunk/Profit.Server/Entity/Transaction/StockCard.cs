@@ -10,13 +10,13 @@ namespace Profit.Server
     public class StockCard : IEntity
     {
         public int ID = 0;
-        Part PART;
-        Warehouse WAREHOUSE;
-        Period PERIOD;
+        public Part PART;
+        public Warehouse WAREHOUSE;
+        public Period PERIOD;
         double BALANCE = 0;
         double BOOKED = 0;
         double BACK_ORDER = 0;
-        IList STOCK_CARD_ENTRIES = new ArrayList();
+        public IList STOCK_CARD_ENTRIES = new ArrayList();
         double BALANCE_AVAILABLE = 0;
         double BOOK_AVAILABLE = 0;
         double BACK_ORDER_AVAILABLE = 0;
@@ -211,7 +211,7 @@ namespace Profit.Server
         }
         public string GetDeleteSQL()
         {
-            return "delete from table_stockcard where bank_id = " + ID;
+            return "delete from table_stockcard where sc_id = " + ID;
         }
         public string GetUpdateSQL()
         {
@@ -227,19 +227,19 @@ namespace Profit.Server
         }
         public string GetByIDSQL(int ID)
         {
-            return String.Format("select * from table_stockcard where bank_id = {0}", ID);
+            return String.Format("select * from table_stockcard where sc_id = {0}", ID);
         }
         public string GetByCodeSQL(string code)
         {
-            return String.Format("select * from table_stockcard where bank_code = '{0}'", code);
+            return "";//String.Format("select * from table_stockcard where bank_code = '{0}'", code);
         }
         public string GetByCodeLikeSQL(string text)
         {
-            return String.Format("select * from table_stockcard where bank_code like '%{0}%'", text);
+            return "";// String.Format("select * from table_stockcard where bank_code like '%{0}%'", text);
         }
         public string GetByNameLikeSQL(string text)
         {
-            return String.Format("select * from table_stockcard where bank_name like '%{0}%'", text);
+            return "";// String.Format("select * from table_stockcard where bank_name like '%{0}%'", text);
         }
         public string GetAllSQL()
         {
@@ -281,9 +281,12 @@ namespace Profit.Server
         }
         public string GetMaximumIDSQL()
         {
-            return String.Format("SELECT max(bank_id) from table_stockcard");
+            return String.Format("SELECT max(sc_id) from table_stockcard");
         }
-
+        public static string SelectMaxIDSQL()
+        {
+            return String.Format("SELECT max(sc_id) from table_stockcard");
+        }
         #region IEntity Members
 
 

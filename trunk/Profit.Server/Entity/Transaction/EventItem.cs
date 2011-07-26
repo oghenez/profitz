@@ -19,8 +19,12 @@ namespace Profit.Server
         public StockCard STOCK_CARD;
         public Unit UNIT;
 
+        public bool UPDATED = false; //for update
+
         public EventItem()
         { }
+        public EventItem(int id)
+        { ID = id; }
         public double GetAmountInSmallestUnit()
         {
             if (this.UNIT.ID == PART.UNIT.ID) return AMOUNT;
@@ -105,9 +109,9 @@ namespace Profit.Server
 
         public override bool Equals(object obj)
         {
-            IEntity e = (IEntity)obj;
+            EventItem e = (EventItem)obj;
             if (e == null) return false;
-            return e.GetID() == ID;
+            return e.ID == ID;
         }
 
         public override int GetHashCode()

@@ -9,30 +9,58 @@ namespace Profit.Server
 {
     public abstract class TransactionRepository
     {
-        protected OdbcCommand m_command;
+        protected OdbcConnection m_connection = new OdbcConnection("Driver={MySQL ODBC 5.1 Driver};server=localhost;database=profit_db;uid=root;pwd=1234");
+        protected OdbcCommand m_command = new OdbcCommand();
         abstract protected void doConfirm(Event events, Period p);
         abstract protected void doRevise(Event events, Period p);
-        abstract protected void do();
-        protected EventRepository m_eventRepository;
+        //abstract protected void doInitEventRepository();
+        //protected EventRepository m_eventRepository;
 
+        public TransactionRepository()
+        {
+            m_connection.Open();
+            m_command.Connection = m_connection;
+        }
         public void Confirm(int id)
         {
-            Event events = m_eventRepository.Get(id);
-            Period p = AssertValidPeriod(events.TRANSACTION_DATE);
-            doConfirm(events, p);
-            events.ProcessConfirm();
-            m_eventRepository.Update(events);
-            updateStockCards(events.EVENT_ITEMS);
+            OdbcTransaction trc = m_connection.BeginTransaction();
+            m_command.Transaction = trc;
+            try
+            {
+                Event events = this.Get(id);
+                Period p = AssertValidPeriod(events.TRANSACTION_DATE);
+                doConfirm(events, p);
+                events.ProcessConfirm();
+                this.UpdateStatus(events, true);
+                updateStockCards(events.EVENT_ITEMS);
+                trc.Commit();
+            }
+            catch (Exception x)
+            {
+                trc.Rollback();
+                throw x;
+            }
         }
         public void Revise(int id)
         {
-            Event events = m_eventRepository.Get(id);
-            Period p = AssertValidPeriod(events.TRANSACTION_DATE);
-            doRevise(events, p);
-            events.ProcessRevised();
-            m_eventRepository.Update(events);
-            deleteStockCardEntry(events.DELETED_STOCK_CARD_ENTRY);
-            updateStockCards(events.EVENT_ITEMS);
+            OdbcTransaction trc = m_connection.BeginTransaction();
+            m_command.Transaction = trc;
+            try
+            {
+                Event events = this.Get(id);
+                Period p = AssertValidPeriod(events.TRANSACTION_DATE);
+                doRevise(events, p);
+                events.ProcessRevised();
+                this.UpdateStatus(events, false);
+                deleteStockCardEntry(events.DELETED_STOCK_CARD_ENTRY);
+                updateStockCards(events.EVENT_ITEMS);
+                trc.Commit();
+            }
+            catch (Exception x)
+            {
+                trc.Rollback();
+                throw x;
+            }
         }
         protected Period AssertValidPeriod(DateTime transactionDate)
         {
@@ -71,5 +99,31 @@ namespace Profit.Server
             item.STOCK_CARD = sc;
         }
 
+        abstract protected void doSave(Event e);
+        abstract protected void doUpdate(Event e);
+        abstract protected void doDelete(Event e);
+        abstract protected Event doGet(int ID);
+        abstract protected void doUpdateStatus(Event e, bool p);
+
+        public void Save(Event e)
+        {
+            doSave(e);
+        }
+        public Event Get(int ID)
+        {
+            return doGet(ID);
+        }
+        public void Update(Event e)
+        {
+            doUpdate(e);
+        }
+        public void Delete(Event e)
+        {
+            doDelete(e);
+        }
+        public void UpdateStatus(Event e, bool p)
+        {
+            doUpdateStatus(e, p);
+        }
     }
 }

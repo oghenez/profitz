@@ -43,4 +43,10 @@ namespace Profit.Server
         Conversion,
         Unexpected
     }
+    public enum AgainstStatus
+    {
+        Open,//0
+        Outstanding,//1
+        Close//2
+    }
 }
