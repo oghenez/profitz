@@ -1,7 +1,7 @@
 -- MySQL Administrator dump 1.4
 --
 -- ------------------------------------------------------
--- Server version	5.0.27-community-nt
+-- Server version	5.0.83-community-nt
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -32,7 +32,7 @@ CREATE TABLE `table_bank` (
   `bank_name` varchar(45) NOT NULL,
   PRIMARY KEY  (`bank_id`),
   UNIQUE KEY `Index_2` (`bank_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_bank`
@@ -60,7 +60,7 @@ CREATE TABLE `table_currency` (
   `ccy_name` varchar(45) NOT NULL,
   PRIMARY KEY  (`ccy_id`),
   UNIQUE KEY `Index_2` (`ccy_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_currency`
@@ -114,7 +114,7 @@ CREATE TABLE `table_customer` (
   CONSTRAINT `FK_table_customer_4` FOREIGN KEY (`pricecat_id`) REFERENCES `table_pricecategory` (`pricecat_id`),
   CONSTRAINT `FK_table_customer_5` FOREIGN KEY (`tax_id`) REFERENCES `table_tax` (`tax_id`),
   CONSTRAINT `FK_table_customer_6` FOREIGN KEY (`top_id`) REFERENCES `table_termofpayment` (`top_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_customer`
@@ -139,7 +139,7 @@ CREATE TABLE `table_customercategory` (
   `cuscat_name` varchar(45) NOT NULL,
   PRIMARY KEY  (`cuscat_id`),
   UNIQUE KEY `Index_2` (`cuscat_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_customercategory`
@@ -165,7 +165,7 @@ CREATE TABLE `table_division` (
   `div_name` varchar(45) NOT NULL,
   PRIMARY KEY  (`div_id`),
   UNIQUE KEY `Index_2` (`div_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_division`
@@ -189,7 +189,7 @@ CREATE TABLE `table_documenttype` (
   `doctype_name` varchar(45) NOT NULL,
   PRIMARY KEY  (`doctype_id`),
   UNIQUE KEY `Index_2` (`doctype_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_documenttype`
@@ -216,7 +216,7 @@ CREATE TABLE `table_employee` (
   `emp_purchaser` tinyint(1) NOT NULL,
   PRIMARY KEY  (`emp_id`),
   UNIQUE KEY `Index_2` (`emp_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_employee`
@@ -246,7 +246,7 @@ CREATE TABLE `table_exchangerate` (
   UNIQUE KEY `Index_2` (`excrate_code`),
   KEY `FK_table_exchangerate_1` (`ccy_id`),
   CONSTRAINT `FK_table_exchangerate_1` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_exchangerate`
@@ -292,7 +292,7 @@ CREATE TABLE `table_part` (
   CONSTRAINT `FK_table_part_2` FOREIGN KEY (`prtcat_id`) REFERENCES `table_partcategory` (`prtcat_id`),
   CONSTRAINT `FK_table_part_3` FOREIGN KEY (`prtgroup_id`) REFERENCES `table_partgroup` (`prtgroup_id`),
   CONSTRAINT `FK_table_part_4` FOREIGN KEY (`unit_id`) REFERENCES `table_unit` (`unit_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15531 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_part`
@@ -6788,7 +6788,7 @@ CREATE TABLE `table_partcategory` (
   `prtcat_name` varchar(45) NOT NULL,
   PRIMARY KEY  (`prtcat_id`),
   UNIQUE KEY `Index_2` (`prtcat_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_partcategory`
@@ -6812,7 +6812,7 @@ CREATE TABLE `table_partgroup` (
   `prtgroup_name` varchar(45) NOT NULL,
   PRIMARY KEY  (`prtgroup_id`),
   UNIQUE KEY `Index_2` (`prtgroup_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_partgroup`
@@ -6852,7 +6852,7 @@ CREATE TABLE `table_period` (
   KEY `Index_2` (`period_code`),
   KEY `FK_table_period_1` (`year_id`),
   CONSTRAINT `FK_table_period_1` FOREIGN KEY (`year_id`) REFERENCES `table_year` (`year_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_period`
@@ -6866,7 +6866,7 @@ INSERT INTO `table_period` (`period_id`,`period_code`,`period_status`,`year_id`,
  (16,'201104','Open',9,'2011-04-01 00:00:00','2011-04-30 00:00:00','0001-01-01 00:00:00'),
  (17,'201105','Open',9,'2011-05-01 00:00:00','2011-05-31 00:00:00','0001-01-01 00:00:00'),
  (18,'201106','Open',9,'2011-06-01 00:00:00','2011-06-30 00:00:00','0001-01-01 00:00:00'),
- (19,'201107','Open',9,'2011-07-01 00:00:00','2011-07-31 00:00:00','0001-01-01 00:00:00'),
+ (19,'201107','Current',9,'2011-07-01 00:00:00','2011-07-31 00:00:00','0001-01-01 00:00:00'),
  (20,'201108','Open',9,'2011-08-01 00:00:00','2011-08-31 00:00:00','0001-01-01 00:00:00'),
  (21,'201109','Open',9,'2011-09-01 00:00:00','2011-09-30 00:00:00','0001-01-01 00:00:00'),
  (22,'201110','Open',9,'2011-10-01 00:00:00','2011-10-31 00:00:00','0001-01-01 00:00:00'),
@@ -6910,7 +6910,7 @@ CREATE TABLE `table_pricecategory` (
   `pricecat_name` varchar(45) NOT NULL,
   PRIMARY KEY  (`pricecat_id`),
   UNIQUE KEY `Index_2` (`pricecat_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_pricecategory`
@@ -6922,6 +6922,142 @@ INSERT INTO `table_pricecategory` (`pricecat_id`,`pricecat_code`,`pricecat_name`
  (2,'DISC10','DISCOUNT 10 %'),
  (3,'DISC20','DISCOUNT 20 %');
 /*!40000 ALTER TABLE `table_pricecategory` ENABLE KEYS */;
+
+
+--
+-- Definition of table `table_stockcard`
+--
+
+DROP TABLE IF EXISTS `table_stockcard`;
+CREATE TABLE `table_stockcard` (
+  `sc_id` int(10) unsigned NOT NULL auto_increment,
+  `part_id` int(10) unsigned NOT NULL,
+  `warehouse_id` int(10) unsigned NOT NULL,
+  `period_id` int(10) unsigned NOT NULL,
+  `sc_balance` double NOT NULL,
+  `sc_backorder` double NOT NULL,
+  `sc_booked` double NOT NULL,
+  PRIMARY KEY  (`sc_id`),
+  KEY `FK_table_stockcard_1` (`part_id`),
+  KEY `FK_table_stockcard_2` (`warehouse_id`),
+  KEY `FK_table_stockcard_3` (`period_id`),
+  CONSTRAINT `FK_table_stockcard_1` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`),
+  CONSTRAINT `FK_table_stockcard_2` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
+  CONSTRAINT `FK_table_stockcard_3` FOREIGN KEY (`period_id`) REFERENCES `table_period` (`period_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_stockcard`
+--
+
+/*!40000 ALTER TABLE `table_stockcard` DISABLE KEYS */;
+INSERT INTO `table_stockcard` (`sc_id`,`part_id`,`warehouse_id`,`period_id`,`sc_balance`,`sc_backorder`,`sc_booked`) VALUES 
+ (2,9068,1,19,3,0,0);
+/*!40000 ALTER TABLE `table_stockcard` ENABLE KEYS */;
+
+
+--
+-- Definition of table `table_stockcardentry`
+--
+
+DROP TABLE IF EXISTS `table_stockcardentry`;
+CREATE TABLE `table_stockcardentry` (
+  `sce_id` int(10) unsigned NOT NULL auto_increment,
+  `sc_id` int(10) unsigned NOT NULL,
+  `sce_stockcardentrytype` varchar(45) NOT NULL,
+  `sce_date` datetime NOT NULL,
+  `unit_id` int(10) unsigned NOT NULL,
+  `sce_amount` double NOT NULL,
+  `eventitem_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY  (`sce_id`),
+  KEY `FK_table_stockcardentry_1` (`unit_id`),
+  KEY `FK_table_stockcardentry_2` (`sc_id`),
+  CONSTRAINT `FK_table_stockcardentry_1` FOREIGN KEY (`unit_id`) REFERENCES `table_unit` (`unit_id`),
+  CONSTRAINT `FK_table_stockcardentry_2` FOREIGN KEY (`sc_id`) REFERENCES `table_stockcard` (`sc_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_stockcardentry`
+--
+
+/*!40000 ALTER TABLE `table_stockcardentry` DISABLE KEYS */;
+/*!40000 ALTER TABLE `table_stockcardentry` ENABLE KEYS */;
+
+
+--
+-- Definition of table `table_stocktaking`
+--
+
+DROP TABLE IF EXISTS `table_stocktaking`;
+CREATE TABLE `table_stocktaking` (
+  `stk_id` int(10) unsigned NOT NULL auto_increment,
+  `stk_date` datetime NOT NULL,
+  `stk_noticedate` datetime NOT NULL,
+  `stk_scentrytype` varchar(45) NOT NULL,
+  `emp_id` int(10) unsigned NOT NULL,
+  `stk_notes` text NOT NULL,
+  `stk_posted` tinyint(1) NOT NULL,
+  `stk_eventstatus` varchar(45) NOT NULL,
+  `warehouse_id` int(10) unsigned NOT NULL,
+  `stk_amount` double default NULL,
+  `ccy_id` int(10) unsigned NOT NULL,
+  `stk_stocktakingtype` varchar(45) NOT NULL,
+  PRIMARY KEY  (`stk_id`),
+  KEY `FK_table_stocktaking_1` (`warehouse_id`),
+  KEY `FK_table_stocktaking_2` (`ccy_id`),
+  KEY `FK_table_stocktaking_3` (`emp_id`),
+  CONSTRAINT `FK_table_stocktaking_1` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
+  CONSTRAINT `FK_table_stocktaking_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
+  CONSTRAINT `FK_table_stocktaking_3` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_stocktaking`
+--
+
+/*!40000 ALTER TABLE `table_stocktaking` DISABLE KEYS */;
+INSERT INTO `table_stocktaking` (`stk_id`,`stk_date`,`stk_noticedate`,`stk_scentrytype`,`emp_id`,`stk_notes`,`stk_posted`,`stk_eventstatus`,`warehouse_id`,`stk_amount`,`ccy_id`,`stk_stocktakingtype`) VALUES 
+ (4,'2011-07-26 00:00:00','2011-07-26 00:00:00','StockTaking',1,'test insert',0,'Entry',1,500000,1,'Adjustment');
+/*!40000 ALTER TABLE `table_stocktaking` ENABLE KEYS */;
+
+
+--
+-- Definition of table `table_stocktakingitem`
+--
+
+DROP TABLE IF EXISTS `table_stocktakingitem`;
+CREATE TABLE `table_stocktakingitem` (
+  `stki_id` int(10) unsigned NOT NULL auto_increment,
+  `stk_id` int(10) unsigned NOT NULL,
+  `part_id` int(10) unsigned NOT NULL,
+  `warehouse_id` int(10) unsigned NOT NULL,
+  `stki_amount` double NOT NULL,
+  `sce_id` int(10) unsigned NOT NULL,
+  `stk_scentrytype` varchar(45) NOT NULL,
+  `sc_id` int(10) unsigned NOT NULL,
+  `unit_id` int(10) unsigned NOT NULL,
+  `stki_price` double NOT NULL,
+  `stki_totalamount` double NOT NULL,
+  PRIMARY KEY  (`stki_id`),
+  KEY `FK_table_stocktakingitem_1` (`unit_id`),
+  KEY `FK_table_stocktakingitem_2` (`part_id`),
+  KEY `FK_table_stocktakingitem_3` (`warehouse_id`),
+  KEY `FK_table_stocktakingitem_4` (`stk_id`),
+  CONSTRAINT `FK_table_stocktakingitem_1` FOREIGN KEY (`unit_id`) REFERENCES `table_unit` (`unit_id`),
+  CONSTRAINT `FK_table_stocktakingitem_2` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`),
+  CONSTRAINT `FK_table_stocktakingitem_3` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
+  CONSTRAINT `FK_table_stocktakingitem_4` FOREIGN KEY (`stk_id`) REFERENCES `table_stocktaking` (`stk_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_stocktakingitem`
+--
+
+/*!40000 ALTER TABLE `table_stocktakingitem` DISABLE KEYS */;
+INSERT INTO `table_stocktakingitem` (`stki_id`,`stk_id`,`part_id`,`warehouse_id`,`stki_amount`,`sce_id`,`stk_scentrytype`,`sc_id`,`unit_id`,`stki_price`,`stki_totalamount`) VALUES 
+ (5,4,9068,1,3,0,'StockTaking',0,1,100000,300000),
+ (6,4,9068,1,2,0,'StockTaking',0,1,50000,200000);
+/*!40000 ALTER TABLE `table_stocktakingitem` ENABLE KEYS */;
 
 
 --
@@ -6963,7 +7099,7 @@ CREATE TABLE `table_supplier` (
   CONSTRAINT `FK_table_supplier_4` FOREIGN KEY (`pricecat_id`) REFERENCES `table_pricecategory` (`pricecat_id`),
   CONSTRAINT `FK_table_supplier_5` FOREIGN KEY (`tax_id`) REFERENCES `table_tax` (`tax_id`),
   CONSTRAINT `FK_table_supplier_6` FOREIGN KEY (`top_id`) REFERENCES `table_termofpayment` (`top_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_supplier`
@@ -6987,7 +7123,7 @@ CREATE TABLE `table_suppliercategory` (
   `supcat_name` varchar(45) NOT NULL,
   PRIMARY KEY  (`supcat_id`),
   UNIQUE KEY `Index_2` (`supcat_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_suppliercategory`
@@ -7013,7 +7149,7 @@ CREATE TABLE `table_tax` (
   `tax_rate` double NOT NULL,
   PRIMARY KEY  (`tax_id`),
   UNIQUE KEY `Index_2` (`tax_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_tax`
@@ -7038,7 +7174,7 @@ CREATE TABLE `table_termofpayment` (
   `top_days` int(10) unsigned NOT NULL,
   PRIMARY KEY  (`top_id`),
   KEY `Index_2` (`top_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_termofpayment`
@@ -7063,7 +7199,7 @@ CREATE TABLE `table_unit` (
   `unit_name` varchar(45) NOT NULL,
   PRIMARY KEY  (`unit_id`),
   KEY `Index_2` (`unit_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_unit`
@@ -7099,7 +7235,7 @@ CREATE TABLE `table_unitconversion` (
   KEY `FK_table_unitconversion_2` (`part_id`),
   CONSTRAINT `FK_table_unitconversion_1` FOREIGN KEY (`unitconv_unit`) REFERENCES `table_unit` (`unit_id`),
   CONSTRAINT `FK_table_unitconversion_2` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_unitconversion`
@@ -7124,7 +7260,7 @@ CREATE TABLE `table_warehouse` (
   `warehouse_name` varchar(45) NOT NULL,
   PRIMARY KEY  (`warehouse_id`),
   UNIQUE KEY `Index_2` (`warehouse_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_warehouse`
@@ -7151,7 +7287,7 @@ CREATE TABLE `table_year` (
   `year_end` datetime NOT NULL,
   PRIMARY KEY  (`year_id`),
   UNIQUE KEY `Index_2` (`year_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_year`
