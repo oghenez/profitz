@@ -6925,6 +6925,109 @@ INSERT INTO `table_pricecategory` (`pricecat_id`,`pricecat_code`,`pricecat_name`
 
 
 --
+-- Definition of table `table_purchaseorder`
+--
+
+DROP TABLE IF EXISTS `table_purchaseorder`;
+CREATE TABLE `table_purchaseorder` (
+  `po_id` int(10) unsigned NOT NULL auto_increment,
+  `po_date` datetime NOT NULL,
+  `po_noticedate` datetime NOT NULL,
+  `po_scentrytype` varchar(45) NOT NULL,
+  `emp_id` int(10) unsigned NOT NULL,
+  `po_notes` text NOT NULL,
+  `po_posted` tinyint(1) NOT NULL,
+  `po_eventstatus` varchar(45) NOT NULL,
+  `div_id` int(10) unsigned NOT NULL,
+  `top_id` int(10) unsigned NOT NULL,
+  `po_duedate` datetime NOT NULL,
+  `ccy_id` int(10) unsigned NOT NULL,
+  `po_subtotal` double NOT NULL,
+  `po_discpercent` double NOT NULL,
+  `po_discafteramount` double NOT NULL,
+  `po_discamount` double NOT NULL,
+  `tax_id` int(10) unsigned NOT NULL,
+  `po_taxafteramount` double NOT NULL,
+  `po_otherexpense` double NOT NULL,
+  `po_nettotal` double NOT NULL,
+  `po_againsgrnstatus` varchar(45) NOT NULL,
+  `po_code` varchar(45) NOT NULL,
+  PRIMARY KEY  (`po_id`),
+  UNIQUE KEY `Index_6` (`po_code`),
+  KEY `FK_table_purchaseorder_1` (`emp_id`),
+  KEY `FK_table_purchaseorder_2` (`div_id`),
+  KEY `FK_table_purchaseorder_3` (`top_id`),
+  KEY `FK_table_purchaseorder_4` (`ccy_id`),
+  CONSTRAINT `FK_table_purchaseorder_1` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`),
+  CONSTRAINT `FK_table_purchaseorder_2` FOREIGN KEY (`div_id`) REFERENCES `table_division` (`div_id`),
+  CONSTRAINT `FK_table_purchaseorder_3` FOREIGN KEY (`top_id`) REFERENCES `table_termofpayment` (`top_id`),
+  CONSTRAINT `FK_table_purchaseorder_4` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_purchaseorder`
+--
+
+/*!40000 ALTER TABLE `table_purchaseorder` DISABLE KEYS */;
+INSERT INTO `table_purchaseorder` (`po_id`,`po_date`,`po_noticedate`,`po_scentrytype`,`emp_id`,`po_notes`,`po_posted`,`po_eventstatus`,`div_id`,`top_id`,`po_duedate`,`ccy_id`,`po_subtotal`,`po_discpercent`,`po_discafteramount`,`po_discamount`,`tax_id`,`po_taxafteramount`,`po_otherexpense`,`po_nettotal`,`po_againsgrnstatus`,`po_code`) VALUES 
+ (3,'2011-07-27 00:00:00','2011-07-27 00:00:00','PurchaseOrder',1,'test test PO',1,'Confirm',1,1,'2011-08-26 00:00:00',1,3000,10,10000,1000,1,3200,3000,2000000,'Open',''),
+ (4,'2011-07-27 00:00:00','2011-07-27 00:00:00','PurchaseOrder',1,'test test PO',1,'Confirm',1,1,'2011-08-26 00:00:00',1,3000,10,10000,1000,1,3200,3000,2000000,'Open','PO00001');
+/*!40000 ALTER TABLE `table_purchaseorder` ENABLE KEYS */;
+
+
+--
+-- Definition of table `table_purchaseorderitem`
+--
+
+DROP TABLE IF EXISTS `table_purchaseorderitem`;
+CREATE TABLE `table_purchaseorderitem` (
+  `poi_id` int(10) unsigned NOT NULL auto_increment,
+  `po_id` int(10) unsigned NOT NULL,
+  `part_id` int(10) unsigned NOT NULL,
+  `warehouse_id` int(10) unsigned NOT NULL,
+  `poi_amount` double NOT NULL,
+  `sce_id` int(10) unsigned NOT NULL,
+  `poi_scentrytype` varchar(45) NOT NULL,
+  `sc_id` int(10) unsigned NOT NULL,
+  `unit_id` int(10) unsigned NOT NULL,
+  `poi_price` double NOT NULL,
+  `poi_discpercent` double NOT NULL,
+  `poi_discamount` double NOT NULL,
+  `poi_totaldisc` double NOT NULL,
+  `poi_subtotal` double NOT NULL,
+  `poi_notes` text NOT NULL,
+  `poi_disca` double NOT NULL,
+  `poi_discb` double NOT NULL,
+  `poi_discc` double NOT NULL,
+  `poi_discabc` varchar(45) NOT NULL,
+  `poi_againstgrnstatus` varchar(45) NOT NULL,
+  `poi_outstandingamounttogrn` double NOT NULL,
+  `poi_receivedamount` double NOT NULL,
+  PRIMARY KEY  (`poi_id`),
+  KEY `FK_table_purchaseorderitem_1` (`po_id`),
+  KEY `FK_table_purchaseorderitem_2` (`part_id`),
+  KEY `FK_table_purchaseorderitem_3` (`warehouse_id`),
+  KEY `FK_table_purchaseorderitem_4` (`unit_id`),
+  CONSTRAINT `FK_table_purchaseorderitem_1` FOREIGN KEY (`po_id`) REFERENCES `table_purchaseorder` (`po_id`),
+  CONSTRAINT `FK_table_purchaseorderitem_2` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`),
+  CONSTRAINT `FK_table_purchaseorderitem_3` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
+  CONSTRAINT `FK_table_purchaseorderitem_4` FOREIGN KEY (`unit_id`) REFERENCES `table_unit` (`unit_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_purchaseorderitem`
+--
+
+/*!40000 ALTER TABLE `table_purchaseorderitem` DISABLE KEYS */;
+INSERT INTO `table_purchaseorderitem` (`poi_id`,`po_id`,`part_id`,`warehouse_id`,`poi_amount`,`sce_id`,`poi_scentrytype`,`sc_id`,`unit_id`,`poi_price`,`poi_discpercent`,`poi_discamount`,`poi_totaldisc`,`poi_subtotal`,`poi_notes`,`poi_disca`,`poi_discb`,`poi_discc`,`poi_discabc`,`poi_againstgrnstatus`,`poi_outstandingamounttogrn`,`poi_receivedamount`) VALUES 
+ (1,3,9070,1,13000,0,'PurchaseOrder',0,1,3000,10,200,340,0,'TEST PO ITEM 1',1,2,3,'1+2+3','Open',0,0),
+ (2,3,9071,1,132551,0,'PurchaseOrder',0,1,3412,15,321,331,0,'TEST PO ITEM 1',1,2,3,'1+2+3','Open',0,0),
+ (3,4,9070,1,13000,0,'PurchaseOrder',0,1,3000,10,200,340,0,'TEST PO ITEM 1',1,2,3,'1+2+3','Open',0,0),
+ (4,4,9071,1,132551,0,'PurchaseOrder',0,1,3412,15,321,331,0,'TEST PO ITEM 1',1,2,3,'1+2+3','Open',0,0);
+/*!40000 ALTER TABLE `table_purchaseorderitem` ENABLE KEYS */;
+
+
+--
 -- Definition of table `table_stockcard`
 --
 
@@ -6944,7 +7047,7 @@ CREATE TABLE `table_stockcard` (
   CONSTRAINT `FK_table_stockcard_1` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`),
   CONSTRAINT `FK_table_stockcard_2` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
   CONSTRAINT `FK_table_stockcard_3` FOREIGN KEY (`period_id`) REFERENCES `table_period` (`period_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_stockcard`
@@ -6952,7 +7055,9 @@ CREATE TABLE `table_stockcard` (
 
 /*!40000 ALTER TABLE `table_stockcard` DISABLE KEYS */;
 INSERT INTO `table_stockcard` (`sc_id`,`part_id`,`warehouse_id`,`period_id`,`sc_balance`,`sc_backorder`,`sc_booked`) VALUES 
- (2,9068,1,19,3,0,0);
+ (2,9068,1,19,3,0,0),
+ (4,9070,1,19,0,26000,0),
+ (5,9071,1,19,0,265102,0);
 /*!40000 ALTER TABLE `table_stockcard` ENABLE KEYS */;
 
 
@@ -6974,13 +7079,18 @@ CREATE TABLE `table_stockcardentry` (
   KEY `FK_table_stockcardentry_2` (`sc_id`),
   CONSTRAINT `FK_table_stockcardentry_1` FOREIGN KEY (`unit_id`) REFERENCES `table_unit` (`unit_id`),
   CONSTRAINT `FK_table_stockcardentry_2` FOREIGN KEY (`sc_id`) REFERENCES `table_stockcard` (`sc_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_stockcardentry`
 --
 
 /*!40000 ALTER TABLE `table_stockcardentry` DISABLE KEYS */;
+INSERT INTO `table_stockcardentry` (`sce_id`,`sc_id`,`sce_stockcardentrytype`,`sce_date`,`unit_id`,`sce_amount`,`eventitem_id`) VALUES 
+ (6,4,'PurchaseOrder','2011-07-27 00:00:00',1,13000,1),
+ (7,5,'PurchaseOrder','2011-07-27 00:00:00',1,132551,2),
+ (8,4,'PurchaseOrder','2011-07-27 00:00:00',1,13000,3),
+ (9,5,'PurchaseOrder','2011-07-27 00:00:00',1,132551,4);
 /*!40000 ALTER TABLE `table_stockcardentry` ENABLE KEYS */;
 
 
@@ -7002,7 +7112,9 @@ CREATE TABLE `table_stocktaking` (
   `stk_amount` double default NULL,
   `ccy_id` int(10) unsigned NOT NULL,
   `stk_stocktakingtype` varchar(45) NOT NULL,
+  `stk_code` varchar(45) NOT NULL,
   PRIMARY KEY  (`stk_id`),
+  UNIQUE KEY `Index_5` (`stk_code`),
   KEY `FK_table_stocktaking_1` (`warehouse_id`),
   KEY `FK_table_stocktaking_2` (`ccy_id`),
   KEY `FK_table_stocktaking_3` (`emp_id`),
@@ -7016,8 +7128,8 @@ CREATE TABLE `table_stocktaking` (
 --
 
 /*!40000 ALTER TABLE `table_stocktaking` DISABLE KEYS */;
-INSERT INTO `table_stocktaking` (`stk_id`,`stk_date`,`stk_noticedate`,`stk_scentrytype`,`emp_id`,`stk_notes`,`stk_posted`,`stk_eventstatus`,`warehouse_id`,`stk_amount`,`ccy_id`,`stk_stocktakingtype`) VALUES 
- (4,'2011-07-26 00:00:00','2011-07-26 00:00:00','StockTaking',1,'test insert',0,'Entry',1,500000,1,'Adjustment');
+INSERT INTO `table_stocktaking` (`stk_id`,`stk_date`,`stk_noticedate`,`stk_scentrytype`,`emp_id`,`stk_notes`,`stk_posted`,`stk_eventstatus`,`warehouse_id`,`stk_amount`,`ccy_id`,`stk_stocktakingtype`,`stk_code`) VALUES 
+ (4,'2011-07-26 00:00:00','2011-07-26 00:00:00','StockTaking',1,'test insert',0,'Entry',1,500000,1,'Adjustment','');
 /*!40000 ALTER TABLE `table_stocktaking` ENABLE KEYS */;
 
 

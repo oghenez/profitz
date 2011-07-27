@@ -10,6 +10,7 @@ namespace Profit.Server
     public class Event : IEntity
     {
         public int ID = 0;
+        public string CODE = string.Empty;
         public DateTime TRANSACTION_DATE;
         public DateTime NOTICE_DATE = DateTime.Now;
         public StockCardEntryType STOCK_CARD_ENTRY_TYPE = StockCardEntryType.PurchaseOrder;

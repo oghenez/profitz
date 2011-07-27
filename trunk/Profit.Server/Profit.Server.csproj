@@ -81,6 +81,7 @@
     <Compile Include="Enum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
+    <Compile Include="Repository\PurchaseOrderRepository.cs" />
     <Compile Include="Repository\EmployeeRepository.cs" />
     <Compile Include="Repository\EventRepository.cs" />
     <Compile Include="Repository\StockTakingRepository.cs" />

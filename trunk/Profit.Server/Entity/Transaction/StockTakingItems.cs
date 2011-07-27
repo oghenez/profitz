@@ -32,7 +32,7 @@ namespace Profit.Server
                 EVENT.ID,
                 PART.ID,
                 WAREHOUSE.ID,
-                AMOUNT,
+                QYTAMOUNT,
                 STOCK_CARD_ENTRY == null ? 0 : STOCK_CARD_ENTRY.ID,
                 STOCK_CARD_ENTRY_TYPE.ToString(),
                 STOCK_CARD == null ? 0 : STOCK_CARD.ID,
@@ -58,7 +58,7 @@ namespace Profit.Server
                 EVENT.ID,
                 PART.ID,
                 WAREHOUSE.ID,
-                AMOUNT,
+                QYTAMOUNT,
                 STOCK_CARD_ENTRY == null ? 0 : STOCK_CARD_ENTRY.ID,
                 STOCK_CARD_ENTRY_TYPE.ToString(),
                 STOCK_CARD == null ? 0 : STOCK_CARD.ID,
@@ -77,7 +77,7 @@ namespace Profit.Server
                 transaction.EVENT = new StockTaking(Convert.ToInt32(aReader["stk_id"]));
                 transaction.PART = new Part(Convert.ToInt32(aReader["part_id"]));
                 transaction.WAREHOUSE = new Warehouse(Convert.ToInt32(aReader["warehouse_id"]));
-                transaction.AMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["stki_amount"]));
+                transaction.QYTAMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["stki_amount"]));
                 transaction.STOCK_CARD_ENTRY = new StockCardEntry(Convert.ToInt32(aReader["sce_id"]));
                 transaction.STOCK_CARD_ENTRY_TYPE = (StockCardEntryType)Enum.Parse(typeof(StockCardEntryType), aReader["stk_scentrytype"].ToString());
                 transaction.STOCK_CARD = new StockCard(Convert.ToInt32(aReader["sc_id"]));
@@ -97,7 +97,7 @@ namespace Profit.Server
                 transaction.EVENT = new StockTaking(Convert.ToInt32(aReader["stk_id"]));
                 transaction.PART = new Part(Convert.ToInt32(aReader["part_id"]));
                 transaction.WAREHOUSE = new Warehouse(Convert.ToInt32(aReader["warehouse_id"]));
-                transaction.AMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["stki_amount"]));
+                transaction.QYTAMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["stki_amount"]));
                 transaction.STOCK_CARD_ENTRY = new StockCardEntry(Convert.ToInt32(aReader["sce_id"]));
                 transaction.STOCK_CARD_ENTRY_TYPE = (StockCardEntryType)Enum.Parse(typeof(StockCardEntryType), aReader["stk_scentrytype"].ToString());
                 transaction.STOCK_CARD = new StockCard(Convert.ToInt32(aReader["sc_id"]));
