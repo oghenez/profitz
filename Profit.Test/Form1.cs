@@ -20,7 +20,7 @@ namespace Profit.Test
         {
             try
             {
-                StockTakingTest stTest = new StockTakingTest();
+                PurchaseOrderTest stTest = new PurchaseOrderTest();
             }
             catch (Exception x)
             {

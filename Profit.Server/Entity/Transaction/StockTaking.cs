@@ -35,9 +35,10 @@ namespace Profit.Server
                     warehouse_id,
                     stk_amount,
                     ccy_id,
-                    stk_stocktakingtype
+                    stk_stocktakingtype,
+                    stk_code
                 ) 
-                VALUES ('{0}','{1}','{2}',{3},'{4}',{5},'{6}',{7},{8},{9},'{10}')",
+                VALUES ('{0}','{1}','{2}',{3},'{4}',{5},'{6}',{7},{8},{9},'{10}','{11}')",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                 StockCardEntryType.StockTaking.ToString(),//STOCK_CARD_ENTRY_TYPE.ToString(),
@@ -48,7 +49,8 @@ namespace Profit.Server
                 WAREHOUSE.ID,
                 AMOUNT,
                 CURRENCY.ID,
-                STOCK_TAKING_TYPE.ToString()
+                STOCK_TAKING_TYPE.ToString(),
+                CODE
                 );
         }
         public override string GetUpdateSQL()
@@ -63,9 +65,10 @@ namespace Profit.Server
                     stk_eventstatus= '{6}',
                     warehouse_id= {7},
                     stk_amount= {8},
-                    ccy_id= {9}
-                    stk_stocktakingtype = '{10}'
-                where stk_id = {11}",
+                    ccy_id= {9},
+                    stk_stocktakingtype = '{10}',
+                    stk_code = '{11}'
+                where stk_id = {12}",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                  StockCardEntryType.StockTaking.ToString(), //STOCK_CARD_ENTRY_TYPE.ToString(),
@@ -77,6 +80,7 @@ namespace Profit.Server
                 AMOUNT,
                 CURRENCY.ID,
                 STOCK_TAKING_TYPE.ToString(),
+                CODE,
                 ID);
         }
         public static StockTaking TransformReader(OdbcDataReader aReader)
@@ -97,6 +101,7 @@ namespace Profit.Server
                 transaction.AMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["stk_amount"]));
                 transaction.CURRENCY = new Currency(Convert.ToInt32(aReader["ccy_id"]));
                 transaction.STOCK_TAKING_TYPE = (StockTakingType)Enum.Parse(typeof(StockTakingType), aReader["stk_stocktakingtype"].ToString());
+                transaction.CODE = aReader["stk_code"].ToString();
             }
             return transaction;
         }
@@ -118,6 +123,7 @@ namespace Profit.Server
                 transaction.AMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["stk_amount"]));
                 transaction.CURRENCY = new Currency(Convert.ToInt32(aReader["ccy_id"]));
                 transaction.STOCK_TAKING_TYPE = (StockTakingType)Enum.Parse(typeof(StockTakingType), aReader["stk_stocktakingtype"].ToString());
+                transaction.CODE = aReader["stk_code"].ToString();
                 result.Add(transaction);
             }
             return result;

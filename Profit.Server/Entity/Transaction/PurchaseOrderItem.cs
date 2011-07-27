@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Collections;
+using System.Data.Odbc;
 
 namespace Profit.Server
 {
@@ -26,73 +28,129 @@ namespace Profit.Server
         {
             return String.Format(@"insert into table_purchaseorderitem 
                 (   
-                    stk_id,
+                    po_id,
                     part_id,
                     warehouse_id,
-                    stki_amount,
+                    poi_amount,
                     sce_id,
-                    stk_scentrytype,
+                    poi_scentrytype,
                     sc_id,
                     unit_id,
-                    stki_price,
-                    stki_totalamount
+                    poi_price,
+                    poi_discpercent,
+                    poi_discamount,
+                    poi_totaldisc,
+                    poi_subtotal,
+                    poi_notes,
+                    poi_disca,
+                    poi_discb,
+                    poi_discc,
+                    poi_discabc,
+                    poi_againstgrnstatus,
+                    poi_outstandingamounttogrn,
+                    poi_receivedamount
                 ) 
-                VALUES ({0},{1},{2},{3},{4},'{5}',{6},{7},{8},{9})",
+                VALUES ({0},{1},{2},{3},{4},'{5}',{6},{7},{8},{9},{10},{11},{12},'{13}',{14},
+                    {15},{16},'{17}','{18}',{19},{20})",
                 EVENT.ID,
                 PART.ID,
                 WAREHOUSE.ID,
-                AMOUNT,
+                QYTAMOUNT,
                 STOCK_CARD_ENTRY == null ? 0 : STOCK_CARD_ENTRY.ID,
                 STOCK_CARD_ENTRY_TYPE.ToString(),
                 STOCK_CARD == null ? 0 : STOCK_CARD.ID,
                 UNIT.ID,
                 PRICE,
-                TOTAL_AMOUNT
+                DISC_PERCENT,
+                DISC_AMOUNT,
+                TOTAL_DISCOUNT,
+                SUBTOTAL,
+                NOTES,
+                DISC_A,
+                DISC_B,
+                DISC_C,
+                DISC_ABC,
+                AGAINST_GRN_STATUS.ToString(),
+                OUTSTANDING_AMOUNT_TO_GRN,
+                RECEIVED_AMOUNT
                 );
         }
         public override string GetUpdateSQL()
         {
             return String.Format(@"update table_purchaseorderitem set 
-                    stk_id = {0},
+                    po_id = {0},
                     part_id = {1},
                     warehouse_id = {2},
-                    stki_amount = {3},
+                    poi_amount = {3},
                     sce_id = {4},
-                    stk_scentrytype = '{5}',
+                    poi_scentrytype = {5},
                     sc_id = {6},
                     unit_id = {7},
-                    stki_price = {8},
-                    stki_totalamount = {9}
-                where stki_id = {10}",
+                    poi_price = {8},
+                    poi_discpercent = {9},
+                    poi_discamount = {10},
+                    poi_totaldisc = {11},
+                    poi_subtotal = {12},
+                    poi_notes = {13},
+                    poi_disca = {14},
+                    poi_discb = {15},
+                    poi_discc = {16},
+                    poi_discabc = {17},
+                    poi_againstgrnstatus = {18},
+                    poi_outstandingamounttogrn = {19},
+                    poi_receivedamount = {20}
+                where poi_id = {21}",
                 EVENT.ID,
                 PART.ID,
                 WAREHOUSE.ID,
-                AMOUNT,
+                QYTAMOUNT,
                 STOCK_CARD_ENTRY == null ? 0 : STOCK_CARD_ENTRY.ID,
                 STOCK_CARD_ENTRY_TYPE.ToString(),
                 STOCK_CARD == null ? 0 : STOCK_CARD.ID,
                 UNIT.ID,
                 PRICE,
-                TOTAL_AMOUNT,
+                DISC_PERCENT,
+                DISC_AMOUNT,
+                TOTAL_DISCOUNT,
+                SUBTOTAL,
+                NOTES,
+                DISC_A,
+                DISC_B,
+                DISC_C,
+                DISC_ABC,
+                AGAINST_GRN_STATUS.ToString(),
+                OUTSTANDING_AMOUNT_TO_GRN,
+                RECEIVED_AMOUNT,
                 ID);
         }
-        public static StockTakingItems TransformReader(OdbcDataReader aReader)
+        public static PurchaseOrderItem TransformReader(OdbcDataReader aReader)
         {
-            StockTakingItems transaction = null;
+            PurchaseOrderItem transaction = null;
             while (aReader.Read())
             {
-                transaction = new StockTakingItems();
-                transaction.ID = Convert.ToInt32(aReader["stki_id"]);
-                transaction.EVENT = new StockTaking(Convert.ToInt32(aReader["stk_id"]));
+                transaction = new PurchaseOrderItem();
+                transaction.ID = Convert.ToInt32(aReader["poi_id"]);
+                transaction.EVENT = new StockTaking(Convert.ToInt32(aReader["po_id"]));
                 transaction.PART = new Part(Convert.ToInt32(aReader["part_id"]));
                 transaction.WAREHOUSE = new Warehouse(Convert.ToInt32(aReader["warehouse_id"]));
-                transaction.AMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["stki_amount"]));
+                transaction.QYTAMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["poi_amount"]));
                 transaction.STOCK_CARD_ENTRY = new StockCardEntry(Convert.ToInt32(aReader["sce_id"]));
-                transaction.STOCK_CARD_ENTRY_TYPE = (StockCardEntryType)Enum.Parse(typeof(StockCardEntryType), aReader["stk_scentrytype"].ToString());
+                transaction.STOCK_CARD_ENTRY_TYPE = (StockCardEntryType)Enum.Parse(typeof(StockCardEntryType), aReader["poi_scentrytype"].ToString());
                 transaction.STOCK_CARD = new StockCard(Convert.ToInt32(aReader["sc_id"]));
-                transaction.UNIT = new Unit(Convert.ToInt32(aReader["unit_id"]));//         
-                transaction.PRICE = Convert.ToDouble(Convert.ToInt32(aReader["stki_price"]));
-                transaction.TOTAL_AMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["stki_totalamount"]));
+                transaction.UNIT = new Unit(Convert.ToInt32(aReader["unit_id"]));
+                transaction.PRICE = Convert.ToDouble(Convert.ToInt32(aReader["poi_price"]));
+                transaction.DISC_PERCENT = Convert.ToDouble(Convert.ToInt32(aReader["poi_discpercent"]));
+                transaction.DISC_AMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["poi_discamount"]));
+                transaction.TOTAL_DISCOUNT = Convert.ToDouble(Convert.ToInt32(aReader["poi_totaldisc"]));
+                transaction.SUBTOTAL = Convert.ToDouble(Convert.ToInt32(aReader["poi_subtotal"]));
+                transaction.NOTES = aReader["poi_notes"].ToString();
+                transaction.DISC_A = Convert.ToDouble(Convert.ToInt32(aReader["poi_disca"]));
+                transaction.DISC_B = Convert.ToDouble(Convert.ToInt32(aReader["poi_discb"]));
+                transaction.DISC_C = Convert.ToDouble(Convert.ToInt32(aReader["poi_discc"]));
+                transaction.DISC_ABC = aReader["poi_discabc"].ToString();
+                transaction.AGAINST_GRN_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), aReader["poi_againstgrnstatus"].ToString());
+                transaction.OUTSTANDING_AMOUNT_TO_GRN = Convert.ToDouble(Convert.ToInt32(aReader["poi_outstandingamounttogrn"]));
+                transaction.RECEIVED_AMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["poi_receivedamount"]));
             }
             return transaction;
         }
@@ -101,37 +159,48 @@ namespace Profit.Server
             IList result = new ArrayList();
             while (aReader.Read())
             {
-                StockTakingItems transaction = new StockTakingItems();
-                transaction.ID = Convert.ToInt32(aReader["stki_id"]);
-                transaction.EVENT = new StockTaking(Convert.ToInt32(aReader["stk_id"]));
+                PurchaseOrderItem transaction = new PurchaseOrderItem();
+                transaction.ID = Convert.ToInt32(aReader["poi_id"]);
+                transaction.EVENT = new StockTaking(Convert.ToInt32(aReader["po_id"]));
                 transaction.PART = new Part(Convert.ToInt32(aReader["part_id"]));
                 transaction.WAREHOUSE = new Warehouse(Convert.ToInt32(aReader["warehouse_id"]));
-                transaction.AMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["stki_amount"]));
+                transaction.QYTAMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["poi_amount"]));
                 transaction.STOCK_CARD_ENTRY = new StockCardEntry(Convert.ToInt32(aReader["sce_id"]));
-                transaction.STOCK_CARD_ENTRY_TYPE = (StockCardEntryType)Enum.Parse(typeof(StockCardEntryType), aReader["stk_scentrytype"].ToString());
+                transaction.STOCK_CARD_ENTRY_TYPE = (StockCardEntryType)Enum.Parse(typeof(StockCardEntryType), aReader["poi_scentrytype"].ToString());
                 transaction.STOCK_CARD = new StockCard(Convert.ToInt32(aReader["sc_id"]));
-                transaction.UNIT = new Unit(Convert.ToInt32(aReader["unit_id"]));//         
-                transaction.PRICE = Convert.ToDouble(Convert.ToInt32(aReader["stki_price"]));
-                transaction.TOTAL_AMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["stki_totalamount"]));
+                transaction.UNIT = new Unit(Convert.ToInt32(aReader["unit_id"]));
+                transaction.PRICE = Convert.ToDouble(Convert.ToInt32(aReader["poi_price"]));
+                transaction.DISC_PERCENT = Convert.ToDouble(Convert.ToInt32(aReader["poi_discpercent"]));
+                transaction.DISC_AMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["poi_discamount"]));
+                transaction.TOTAL_DISCOUNT = Convert.ToDouble(Convert.ToInt32(aReader["poi_totaldisc"]));
+                transaction.SUBTOTAL = Convert.ToDouble(Convert.ToInt32(aReader["poi_subtotal"]));
+                transaction.NOTES = aReader["poi_notes"].ToString();
+                transaction.DISC_A = Convert.ToDouble(Convert.ToInt32(aReader["poi_disca"]));
+                transaction.DISC_B = Convert.ToDouble(Convert.ToInt32(aReader["poi_discb"]));
+                transaction.DISC_C = Convert.ToDouble(Convert.ToInt32(aReader["poi_discc"]));
+                transaction.DISC_ABC = aReader["poi_discabc"].ToString();
+                transaction.AGAINST_GRN_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), aReader["poi_againstgrnstatus"].ToString());
+                transaction.OUTSTANDING_AMOUNT_TO_GRN = Convert.ToDouble(Convert.ToInt32(aReader["poi_outstandingamounttogrn"]));
+                transaction.RECEIVED_AMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["poi_receivedamount"]));
                 result.Add(transaction);
             }
             return result;
         }
         public static string SelectMaxIDSQL()
         {
-            return String.Format("SELECT max(stki_id) from table_purchaseorderitem");
+            return String.Format("SELECT max(poi_id) from table_purchaseorderitem");
         }
         public static string GetByEventIDSQL(int id)
         {
-            return String.Format("SELECT * from table_purchaseorderitem where stk_id = {0}", id);
+            return String.Format("SELECT * from table_purchaseorderitem where po_id = {0}", id);
         }
         public static string DeleteSQL(int id)
         {
-            return String.Format("Delete from table_purchaseorderitem where stki_id = {0}", id);
+            return String.Format("Delete from table_purchaseorderitem where poi_id = {0}", id);
         }
         public static string DeleteAllByEventSQL(int id)
         {
-            return String.Format("Delete from table_purchaseorderitem where stk_id = {0}", id);
+            return String.Format("Delete from table_purchaseorderitem where po_id = {0}", id);
         }
     }
 }

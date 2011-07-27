@@ -13,7 +13,7 @@ namespace Profit.Server
         public Event EVENT;
         public Part PART;
         public Warehouse WAREHOUSE;
-        public double AMOUNT;
+        public double QYTAMOUNT;
         public StockCardEntry STOCK_CARD_ENTRY;
         public StockCardEntryType STOCK_CARD_ENTRY_TYPE;
         public StockCard STOCK_CARD;
@@ -27,9 +27,9 @@ namespace Profit.Server
         { ID = id; }
         public double GetAmountInSmallestUnit()
         {
-            if (this.UNIT.ID == PART.UNIT.ID) return AMOUNT;
+            if (this.UNIT.ID == PART.UNIT.ID) return QYTAMOUNT;
             double conversion = PART.GetUnitConversion(UNIT.ID).ORIGINAL_QTY / PART.GetUnitConversion(UNIT.ID).CONVERSION_QTY;
-            return conversion * AMOUNT;
+            return conversion * QYTAMOUNT;
         }
 
         public int GetID()

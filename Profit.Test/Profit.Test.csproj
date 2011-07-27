@@ -78,6 +78,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="PurchaseOrderTest.cs" />
     <Compile Include="StockTakingTest.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -18,6 +18,8 @@ namespace Profit.Server
         public double AMOUNT;
         public EventItem EVENT_ITEM;
 
+        public bool UPDATED = false;
+
         public StockCardEntry()
         { }
         public StockCardEntry(int id)
@@ -116,6 +118,20 @@ namespace Profit.Server
         public static string FindByEventItem(int id)
         {
             return String.Format("Select * from table_stockcardentry where eventitem_id ={0}", id);
+        }
+        public static string FindByStockCard(int id)
+        {
+            return String.Format("Select * from table_stockcardentry where sc_id ={0}", id);
+        }
+        public override bool Equals(object obj)
+        {
+            StockCardEntry sce = (StockCardEntry)obj;
+            if (sce == null) return false;
+            return sce.ID == ID;
+        }
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }

@@ -28,6 +28,8 @@ namespace Profit.Server
             try
             {
                 Event events = this.Get(id);
+                if (events.EVENT_STATUS == EventStatus.Confirm)
+                    throw new Exception("Status is already Posted/Confirm");
                 Period p = AssertValidPeriod(events.TRANSACTION_DATE);
                 doConfirm(events, p);
                 events.ProcessConfirm();
@@ -48,6 +50,8 @@ namespace Profit.Server
             try
             {
                 Event events = this.Get(id);
+                if (events.EVENT_STATUS == EventStatus.Entry)
+                    throw new Exception("Status is already Unposted/Entry");
                 Period p = AssertValidPeriod(events.TRANSACTION_DATE);
                 doRevise(events, p);
                 events.ProcessRevised();

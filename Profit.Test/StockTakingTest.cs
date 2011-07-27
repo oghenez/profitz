@@ -55,7 +55,7 @@ namespace Profit.Test
             m_stockTaking.WAREHOUSE = new Warehouse(1);
 
             StockTakingItems it1 = new StockTakingItems();
-            it1.AMOUNT = 3;
+            it1.QYTAMOUNT = 3;
             it1.EVENT = m_stockTaking;
             it1.PART = new Part(9068);
             it1.PRICE = 100000;
@@ -65,7 +65,7 @@ namespace Profit.Test
             it1.WAREHOUSE = new Warehouse(1);
 
             StockTakingItems it2 = new StockTakingItems();
-            it2.AMOUNT = 2;
+            it2.QYTAMOUNT = 2;
             it2.EVENT = m_stockTaking;
             it2.PART = new Part(9068);
             it2.PRICE = 50000;
