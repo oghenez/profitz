@@ -22,13 +22,14 @@ namespace Profit.Test
 
         private void TestGet()
         {
+            TestCreate();
             //m_po = (PurchaseOrder)m_rep.Get(3);
-            //m_rep.Confirm(m_po.ID);
-            //TestCreate();
-            m_rep.Confirm(4);
-            m_po = (PurchaseOrder)m_rep.Get(4);
+            m_rep.Confirm(m_po.ID);
+            //m_rep.Confirm(4);
+            //m_po = (PurchaseOrder)m_rep.Get(4);
             //m_rep.Revise(m_po.ID);
-            m_rep.Delete(m_po);
+            //m_po = (PurchaseOrder)m_rep.Get(4);
+            //m_rep.Delete(m_po);
         }
 
         private void TestCreate()
@@ -43,7 +44,7 @@ namespace Profit.Test
             m_po.DUE_DATE = DateTime.Today.AddDays(30);
             m_po.EMPLOYEE = new Employee(1);
             m_po.EVENT_STATUS = EventStatus.Entry;
-            m_po.m_againstGRNStatus = AgainstStatus.Open;
+            m_po.AGAINST_GRN_STATUS = AgainstStatus.Open;
             m_po.NET_TOTAL = 2000000;
             m_po.NOTES = "test test PO";
             m_po.NOTICE_DATE = DateTime.Today;
@@ -74,6 +75,7 @@ namespace Profit.Test
             poi1.TOTAL_DISCOUNT = 340;
             poi1.UNIT = new Unit(1);
             poi1.WAREHOUSE = new Warehouse(1);
+            poi1.SUBTOTAL = 34000;
 
             PurchaseOrderItem poi2 = new PurchaseOrderItem();
             poi2.AGAINST_GRN_STATUS = AgainstStatus.Open;
@@ -94,6 +96,7 @@ namespace Profit.Test
             poi2.TOTAL_DISCOUNT = 331;
             poi2.UNIT = new Unit(1);
             poi2.WAREHOUSE = new Warehouse(1);
+            poi2.SUBTOTAL = 18000;
 
             m_po.EVENT_ITEMS.Add(poi1);
             m_po.EVENT_ITEMS.Add(poi2);

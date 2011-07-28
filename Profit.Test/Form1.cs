@@ -20,7 +20,8 @@ namespace Profit.Test
         {
             try
             {
-                PurchaseOrderTest stTest = new PurchaseOrderTest();
+                //PurchaseOrderTest stTest = new PurchaseOrderTest();
+                GoodReceiveNoteTest grntest = new GoodReceiveNoteTest();
             }
             catch (Exception x)
             {

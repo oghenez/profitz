@@ -24,6 +24,40 @@ namespace Profit.Server
         public double RECEIVED_AMOUNT = 0;
 
         public PurchaseOrderItem() : base() { }
+        public PurchaseOrderItem(int ID) : base(ID) { }
+        public void SetOSAgainstGRNItem(GoodReceiveNoteItem grni)
+        {
+            double qtyAmount = grni.QYTAMOUNT;
+            if (qtyAmount <= 0) return;
+            if (AGAINST_GRN_STATUS == AgainstStatus.Close)
+                throw new Exception("PO Item Allready Close :" + this.PART.NAME);
+            if (qtyAmount > OUTSTANDING_AMOUNT_TO_GRN)
+                throw new Exception("GRN Item Amount exceed PO Outstanding Item Amount :" + this.PART.NAME);
+            OUTSTANDING_AMOUNT_TO_GRN = OUTSTANDING_AMOUNT_TO_GRN - qtyAmount;
+            RECEIVED_AMOUNT = RECEIVED_AMOUNT + qtyAmount;
+            if (isValidToClose())
+                AGAINST_GRN_STATUS = AgainstStatus.Close;
+            else
+                AGAINST_GRN_STATUS = AgainstStatus.Outstanding;
+            ((PurchaseOrder)EVENT).UpdateAgainstGRNStatusPO();
+        }
+        public void UnSetOSAgainstGRNItem(GoodReceiveNoteItem grni)
+        {
+            double qtyAmount = grni.QYTAMOUNT;
+            if (qtyAmount > this.QYTAMOUNT || OUTSTANDING_AMOUNT_TO_GRN + qtyAmount > this.QYTAMOUNT)
+                throw new Exception("GRN Item revise Amount exceed PO Item Amount :" + this.PART.NAME);
+            OUTSTANDING_AMOUNT_TO_GRN = OUTSTANDING_AMOUNT_TO_GRN + qtyAmount;
+            RECEIVED_AMOUNT = RECEIVED_AMOUNT - qtyAmount;
+            if (OUTSTANDING_AMOUNT_TO_GRN > 0)
+                AGAINST_GRN_STATUS = AgainstStatus.Outstanding;
+            ((PurchaseOrder)EVENT).UpdateAgainstGRNStatusPO();
+        }
+        private bool isValidToClose()
+        {
+            bool validA = OUTSTANDING_AMOUNT_TO_GRN == 0;
+            bool validB = RECEIVED_AMOUNT == QYTAMOUNT;
+            return validA && validB;
+        }
         public override string GetInsertSQL()
         {
             return String.Format(@"insert into table_purchaseorderitem 
@@ -71,8 +105,8 @@ namespace Profit.Server
                 DISC_C,
                 DISC_ABC,
                 AGAINST_GRN_STATUS.ToString(),
-                OUTSTANDING_AMOUNT_TO_GRN,
-                RECEIVED_AMOUNT
+                QYTAMOUNT,//OUTSTANDING_AMOUNT_TO_GRN,
+                0//RECEIVED_AMOUNT
                 );
         }
         public override string GetUpdateSQL()
@@ -194,6 +228,10 @@ namespace Profit.Server
         {
             return String.Format("SELECT * from table_purchaseorderitem where po_id = {0}", id);
         }
+        public static string GetByIDSQL(int id)
+        {
+            return String.Format("SELECT * from table_purchaseorderitem where poi_id = {0}", id);
+        }
         public static string DeleteSQL(int id)
         {
             return String.Format("Delete from table_purchaseorderitem where poi_id = {0}", id);
@@ -201,6 +239,17 @@ namespace Profit.Server
         public static string DeleteAllByEventSQL(int id)
         {
             return String.Format("Delete from table_purchaseorderitem where po_id = {0}", id);
+        }
+        public string UpdateAgainstStatus()
+        {
+            return String.Format(@"Update table_purchaseorderitem set 
+                    poi_againstgrnstatus = '{0}',
+                    poi_outstandingamounttogrn = {1},
+                    poi_receivedamount = {2}
+                    where poi_id = {3}", AGAINST_GRN_STATUS.ToString(),
+                                       OUTSTANDING_AMOUNT_TO_GRN,
+                                       RECEIVED_AMOUNT,
+                                       ID); 
         }
     }
 }

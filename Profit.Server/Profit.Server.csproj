@@ -51,6 +51,8 @@
     <Compile Include="Entity\PartSellingPriceInformation.cs" />
     <Compile Include="Entity\Transaction\Event.cs" />
     <Compile Include="Entity\Transaction\EventItem.cs" />
+    <Compile Include="Entity\Transaction\GoodReceiveNote.cs" />
+    <Compile Include="Entity\Transaction\GoodReceiveNoteItem.cs" />
     <Compile Include="Entity\Transaction\PurchaseOrder.cs" />
     <Compile Include="Entity\Transaction\PurchaseOrderItem.cs" />
     <Compile Include="Entity\Transaction\StockCard.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="Enum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
+    <Compile Include="Repository\GoodReceiveNoteRepository.cs" />
     <Compile Include="Repository\PurchaseOrderRepository.cs" />
     <Compile Include="Repository\EmployeeRepository.cs" />
     <Compile Include="Repository\EventRepository.cs" />

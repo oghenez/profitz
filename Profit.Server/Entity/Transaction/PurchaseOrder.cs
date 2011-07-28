@@ -21,7 +21,7 @@ namespace Profit.Server
         public double TAX_AFTER_AMOUNT = 0;
         public double OTHER_EXPENSE = 0;
         public double NET_TOTAL = 0;
-        public AgainstStatus m_againstGRNStatus = AgainstStatus.Open;
+        public AgainstStatus AGAINST_GRN_STATUS = AgainstStatus.Open;
 
         public PurchaseOrder()
             : base()
@@ -30,6 +30,18 @@ namespace Profit.Server
             : base()
         {
             ID = id;
+        }
+        public void UpdateAgainstGRNStatusPO()
+        {
+            bool allClosed = true;
+            for (int i = 0; i < EVENT_ITEMS.Count; i++)
+            {
+                PurchaseOrderItem poi = EVENT_ITEMS[i] as PurchaseOrderItem;
+                if (poi.AGAINST_GRN_STATUS == AgainstStatus.Close) continue;
+                allClosed = false;
+                break;
+            }
+            AGAINST_GRN_STATUS = allClosed ? AgainstStatus.Close : AgainstStatus.Outstanding;
         }
         public override string GetInsertSQL()
         {
@@ -60,7 +72,7 @@ namespace Profit.Server
                         {11},{12},{13},{14},{15},{16},{17},{18},'{19}','{20}')",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
-                STOCK_CARD_ENTRY_TYPE.ToString(),
+                StockCardEntryType.PurchaseOrder.ToString(),
                 EMPLOYEE.ID,
                 NOTES,
                 POSTED,
@@ -77,7 +89,7 @@ namespace Profit.Server
                 TAX_AFTER_AMOUNT,
                 OTHER_EXPENSE,
                 NET_TOTAL,
-                m_againstGRNStatus.ToString(),
+                AGAINST_GRN_STATUS.ToString(),
                 CODE
                 );
         }
@@ -108,7 +120,7 @@ namespace Profit.Server
                 where po_id = {21}",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
-                STOCK_CARD_ENTRY_TYPE.ToString(),
+                StockCardEntryType.PurchaseOrder.ToString(),
                 EMPLOYEE.ID,
                 NOTES,
                 POSTED,
@@ -125,7 +137,7 @@ namespace Profit.Server
                 TAX_AFTER_AMOUNT,
                 OTHER_EXPENSE,
                 NET_TOTAL,
-                m_againstGRNStatus.ToString(),
+                AGAINST_GRN_STATUS.ToString(),
                 CODE,
                 ID);
         }
@@ -155,7 +167,7 @@ namespace Profit.Server
                 transaction.TAX_AFTER_AMOUNT = Convert.ToDouble(aReader["po_taxafteramount"]);
                 transaction.OTHER_EXPENSE = Convert.ToDouble(aReader["po_otherexpense"]);
                 transaction.NET_TOTAL = Convert.ToDouble(aReader["po_nettotal"]);
-                transaction.m_againstGRNStatus = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), aReader["po_againsgrnstatus"].ToString());
+                transaction.AGAINST_GRN_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), aReader["po_againsgrnstatus"].ToString());
                 transaction.CODE = aReader["po_code"].ToString();
             }
             return transaction;
@@ -186,7 +198,7 @@ namespace Profit.Server
                 transaction.TAX_AFTER_AMOUNT = Convert.ToDouble(aReader["po_taxafteramount"]);
                 transaction.OTHER_EXPENSE = Convert.ToDouble(aReader["po_otherexpense"]);
                 transaction.NET_TOTAL = Convert.ToDouble(aReader["po_nettotal"]);
-                transaction.m_againstGRNStatus = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), aReader["po_againsgrnstatus"].ToString());
+                transaction.AGAINST_GRN_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), aReader["po_againsgrnstatus"].ToString());
                 transaction.CODE = aReader["po_code"].ToString();
                 result.Add(transaction);
             }
@@ -217,6 +229,14 @@ namespace Profit.Server
                 posted,
                 posted ? EventStatus.Confirm: EventStatus.Entry,
                 id);
+        }
+        public string UpdateAgainstStatus()
+        {
+            return String.Format(@"update table_purchaseorder set 
+                    po_againsgrnstatus = '{0}'
+                where po_id = {1}",
+                          AGAINST_GRN_STATUS.ToString(),
+                           ID);
         }
     }
 }

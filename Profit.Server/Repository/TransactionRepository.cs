@@ -81,9 +81,13 @@ namespace Profit.Server
             {
                 StockCard sc = item.STOCK_CARD;
                 if (sc.ID > 0)
-                    StockCardRepository.Update(m_command, sc);
+                    StockCardRepository.UpdateHeader(m_command, sc);
                 else if (sc.ID == 0)
-                    StockCardRepository.Save(m_command, sc);
+                    StockCardRepository.SaveHeader(m_command, sc);
+                if (item.STOCK_CARD_ENTRY != null)
+                {
+                    StockCardEntryRepository.Save(m_command, item.STOCK_CARD_ENTRY);
+                }
             }
         }
         protected void deleteStockCardEntry(IList sces)
@@ -95,7 +99,7 @@ namespace Profit.Server
         }
         protected void SetStockCard(EventItem item, Period period)
         {
-            StockCard sc = StockCardRepository.FindStockCard(m_command, item.PART.ID, item.WAREHOUSE.ID, period.ID);
+            StockCard sc = StockCardRepository.FindStockCardHeader(m_command, item.PART.ID, item.WAREHOUSE.ID, period.ID);
             if (sc == null)
             {
                 sc = StockCard.CreateStockCard(item, period);
