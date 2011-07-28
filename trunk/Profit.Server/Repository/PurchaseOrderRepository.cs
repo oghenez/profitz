@@ -22,8 +22,15 @@ namespace Profit.Server
         {
             foreach (EventItem item in events.EVENT_ITEMS)
             {
+                assertUsedPOItemByGRNItem(item);
                 SetStockCard(item, p);
             }
+        }
+        private void assertUsedPOItemByGRNItem(EventItem item)
+        {
+            GoodReceiveNoteItem grnItm = (GoodReceiveNoteItem)GoodReceiveNoteRepository.FindPOItem(m_command, item.ID);
+            if (grnItm != null)
+                throw new Exception("PO Item allready used by GRN item, delete GRN first : " + grnItm.EVENT.CODE);
         }
         protected override void doSave(Event e)
         {
@@ -142,7 +149,7 @@ namespace Profit.Server
             {
                 sti.EVENT = st;
                 sti.PART = PartRepository.GetByID(m_command, sti.PART.ID);
-                sti.STOCK_CARD_ENTRY = StockCardEntryRepository.FindStockCardEntryByEventItem(m_command, sti.ID);
+                sti.STOCK_CARD_ENTRY = StockCardEntryRepository.FindStockCardEntryByEventItem(m_command, sti.ID, sti.STOCK_CARD_ENTRY_TYPE);
                 st.EVENT_ITEMS.Add(sti);
             }
             return st;
@@ -151,6 +158,34 @@ namespace Profit.Server
         {
             m_command.CommandText = PurchaseOrder.GetUpdateStatusSQL(e.ID, posted);
             m_command.ExecuteNonQuery();
+        }
+        public static void UpdateAgainstStatus(OdbcCommand cmd, PurchaseOrder po, PurchaseOrderItem poi)
+        {
+            cmd.CommandText = poi.UpdateAgainstStatus();
+            cmd.ExecuteNonQuery();
+            cmd.CommandText = po.UpdateAgainstStatus();
+            cmd.ExecuteNonQuery();
+        }
+        public static PurchaseOrderItem FindPurchaseOrderItem(OdbcCommand cmd, int poiID)
+        {
+            cmd.CommandText = PurchaseOrderItem.GetByIDSQL(poiID);
+            OdbcDataReader r = cmd.ExecuteReader();
+            PurchaseOrderItem result = PurchaseOrderItem.TransformReader(r);
+            r.Close();
+            //cmd.CommandText = PurchaseOrder.GetByIDSQL(result.ID);
+            //r = cmd.ExecuteReader();
+            result.EVENT = PurchaseOrderRepository.GetHeaderOnly(cmd, result.EVENT.ID);
+            result.EVENT.EVENT_ITEMS.Add(result);
+            //r.Close();
+            return result;
+        }
+        public static PurchaseOrder GetHeaderOnly(OdbcCommand cmd , int poID)
+        {
+            cmd.CommandText = PurchaseOrder.GetByIDSQL(poID);
+            OdbcDataReader r = cmd.ExecuteReader();
+            PurchaseOrder st = PurchaseOrder.TransformReader(r);
+            r.Close();
+            return st;
         }
     }
 }

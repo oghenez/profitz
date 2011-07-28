@@ -142,7 +142,7 @@ namespace Profit.Server
             {
                 sti.EVENT = st;
                 sti.PART = PartRepository.GetByID(m_command, sti.PART.ID);
-                sti.STOCK_CARD_ENTRY = StockCardEntryRepository.FindStockCardEntryByEventItem(m_command, sti.ID);
+                sti.STOCK_CARD_ENTRY = StockCardEntryRepository.FindStockCardEntryByEventItem(m_command, sti.ID, sti.STOCK_CARD_ENTRY_TYPE);
                 st.EVENT_ITEMS.Add(sti);
             }
             return st;

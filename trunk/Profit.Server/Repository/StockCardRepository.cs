@@ -45,6 +45,11 @@ namespace Profit.Server
                 }
             }
         }
+        public static void UpdateHeader(OdbcCommand cmd, StockCard sc)
+        {
+            cmd.CommandText = sc.GetUpdateSQL();
+            cmd.ExecuteNonQuery();
+        }
         public static void Save(OdbcCommand cmd, StockCard sc)
         {
             cmd.CommandText = sc.GetInsertSQL();
@@ -59,7 +64,13 @@ namespace Profit.Server
                 sce.ID = Convert.ToInt32(cmd.ExecuteScalar());
             }
         }
-      
+        public static void SaveHeader(OdbcCommand cmd, StockCard sc)
+        {
+            cmd.CommandText = sc.GetInsertSQL();
+            cmd.ExecuteNonQuery();
+            cmd.CommandText = StockCard.SelectMaxIDSQL();
+            sc.ID = Convert.ToInt32(cmd.ExecuteScalar());
+        }
         public static StockCard FindStockCard(OdbcCommand cmd, long partId, long locationId, long periodId)
         {
             cmd.CommandText = String.Format("select * from table_stockcard where part_id = {0} and warehouse_id = {1} and period_id = {2}", partId, locationId, periodId);
@@ -73,6 +84,18 @@ namespace Profit.Server
                 OdbcDataReader rx = cmd.ExecuteReader();
                 sc.STOCK_CARD_ENTRIES = StockCardEntry.TransformReaderList(rx);
                 rx.Close();
+            }
+            return sc;
+        }
+        public static StockCard FindStockCardHeader(OdbcCommand cmd, long partId, long locationId, long periodId)
+        {
+            cmd.CommandText = String.Format("select * from table_stockcard where part_id = {0} and warehouse_id = {1} and period_id = {2}", partId, locationId, periodId);
+            OdbcDataReader r = cmd.ExecuteReader();
+            StockCard sc = StockCard.TransformReader(r);
+            r.Close();
+            if (sc != null)
+            {
+                sc.PERIOD = PeriodRepository.FindPeriod(cmd, sc.PERIOD.ID);
             }
             return sc;
         }

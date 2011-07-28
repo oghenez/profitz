@@ -138,7 +138,7 @@ namespace Profit.Server
             {
                 eventItem.ProcessRevise();
                 DELETED_STOCK_CARD_ENTRY.Add(eventItem.STOCK_CARD_ENTRY);
-                //eventItem.STOCK_CARD_ENTRY = null;//test
+                eventItem.STOCK_CARD_ENTRY = null;
             }
             this.EVENT_STATUS = EventStatus.Entry;
             this.POSTED = false;

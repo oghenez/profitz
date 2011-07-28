@@ -115,9 +115,9 @@ namespace Profit.Server
         {
             return String.Format("Delete from table_stockcardentry where sce_id ={0}", id);
         }
-        public static string FindByEventItem(int id)
+        public static string FindByEventItem(int id, StockCardEntryType type)
         {
-            return String.Format("Select * from table_stockcardentry where eventitem_id ={0}", id);
+            return String.Format("Select * from table_stockcardentry where eventitem_id ={0} and sce_stockcardentrytype = '{1}'", id, type.ToString());
         }
         public static string FindByStockCard(int id)
         {
