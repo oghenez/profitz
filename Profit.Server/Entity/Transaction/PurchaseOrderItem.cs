@@ -48,8 +48,11 @@ namespace Profit.Server
                 throw new Exception("GRN Item revise Amount exceed PO Item Amount :" + this.PART.NAME);
             OUTSTANDING_AMOUNT_TO_GRN = OUTSTANDING_AMOUNT_TO_GRN + qtyAmount;
             RECEIVED_AMOUNT = RECEIVED_AMOUNT - qtyAmount;
-            if (OUTSTANDING_AMOUNT_TO_GRN > 0)
+           // if (OUTSTANDING_AMOUNT_TO_GRN > 0)
+            if (RECEIVED_AMOUNT > 0)
                 AGAINST_GRN_STATUS = AgainstStatus.Outstanding;
+            else
+                AGAINST_GRN_STATUS = AgainstStatus.Open;
             ((PurchaseOrder)EVENT).UpdateAgainstGRNStatusPO();
         }
         private bool isValidToClose()

@@ -27,8 +27,8 @@ namespace Profit.Server
         {
             foreach (GoodReceiveNoteItem item in events.EVENT_ITEMS)
             {
+                assertUsedGRNItemByPRItem(item);
                 PurchaseOrder po = (PurchaseOrder)item.PO_ITEM.EVENT;
-                //assertUsedGRNItemByPRItem(item);
                 SetStockCard(item, p);
                 item.PO_ITEM.UnSetOSAgainstGRNItem(item);
                 PurchaseOrderRepository.UpdateAgainstStatus(m_command, po, item.PO_ITEM);
@@ -46,9 +46,9 @@ namespace Profit.Server
         }
         private void assertUsedGRNItemByPRItem(EventItem item)
         {
-            //PurchaseReturnItem doItm = (PurchaseReturnItem)m_purchaseReturnItemRepository.FindGRNItem(item.Id);
-            //if (doItm != null)
-            //    throw new Exception("GRN Item allready used by PR item, delete PR first :" + doItm.Event.Code);
+            PurchaseReturnItem doItm = PurchaseReturnRepository.FindGRNItem(m_command, item.ID);
+            if (doItm != null)
+                throw new Exception("GRN Item allready used by PR item, delete PR first :" + doItm.EVENT.CODE);
         }
         protected override void doSave(Event e)
         {
@@ -180,11 +180,36 @@ namespace Profit.Server
         }
         public static GoodReceiveNoteItem FindPOItem(OdbcCommand cmd, int PoIID)
         {
-            cmd.CommandText = GoodReceiveNoteItem.GetByEventIDSQL(PoIID);
+            cmd.CommandText = GoodReceiveNoteItem.FindByPOItemIDSQL(PoIID);
             OdbcDataReader r = cmd.ExecuteReader();
             GoodReceiveNoteItem res = GoodReceiveNoteItem.TransformReader(r);
             r.Close();
             return res;
+        }
+        public static void UpdateAgainstStatus(OdbcCommand cmd, GoodReceiveNote grn, GoodReceiveNoteItem grni)
+        {
+            cmd.CommandText = grni.UpdateAgainstStatus();
+            cmd.ExecuteNonQuery();
+            cmd.CommandText = grn.UpdateAgainstStatus();
+            cmd.ExecuteNonQuery();
+        }
+        public static GoodReceiveNoteItem FindGoodReceiveNoteItem(OdbcCommand cmd, int grniID)
+        {
+            cmd.CommandText = GoodReceiveNoteItem.GetByIDSQL(grniID);
+            OdbcDataReader r = cmd.ExecuteReader();
+            GoodReceiveNoteItem result = GoodReceiveNoteItem.TransformReader(r);
+            r.Close();
+            result.EVENT = GoodReceiveNoteRepository.GetHeaderOnly(cmd, result.EVENT.ID);
+            result.EVENT.EVENT_ITEMS.Add(result);
+            return result;
+        }
+        public static GoodReceiveNote GetHeaderOnly(OdbcCommand cmd, int grnID)
+        {
+            cmd.CommandText = GoodReceiveNote.GetByIDSQL(grnID);
+            OdbcDataReader r = cmd.ExecuteReader();
+            GoodReceiveNote st = GoodReceiveNote.TransformReader(r);
+            r.Close();
+            return st;
         }
     }
 }

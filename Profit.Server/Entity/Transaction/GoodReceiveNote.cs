@@ -145,5 +145,13 @@ namespace Profit.Server
                 posted ? EventStatus.Confirm: EventStatus.Entry,
                 id);
         }
+        public string UpdateAgainstStatus()
+        {
+            return String.Format(@"update table_goodreceivenote set 
+                    grn_againstprstatus = '{0}'
+                where po_id = {1}",
+                          AGAINST_PR_STATUS.ToString(),
+                           ID);
+        }
     }
 }
