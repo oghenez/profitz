@@ -16,6 +16,42 @@ namespace Profit.Server
         public double RETURNED_AMOUNT = 0;
 
         public GoodReceiveNoteItem() : base() { }
+        public GoodReceiveNoteItem(int Id) : base(Id) { }
+        public void SetOSAgainstPRItem(PurchaseReturnItem doi)
+        {
+            double qtyAmount = doi.QYTAMOUNT;
+            if (qtyAmount <= 0) return;
+            if (AGAINST_PR_STATUS == AgainstStatus.Close)
+                throw new Exception("GRN Item Allready Close :" + this.PART.NAME);
+            if (qtyAmount > OUTSTANDING_AMOUNT_TO_PR)
+                throw new Exception("PR Item Amount exceed Outstanding GRN Item Amount :" + this.PART.NAME);
+            OUTSTANDING_AMOUNT_TO_PR = OUTSTANDING_AMOUNT_TO_PR - qtyAmount;
+            RETURNED_AMOUNT = RETURNED_AMOUNT + qtyAmount;
+            if (isValidToClose())
+                AGAINST_PR_STATUS = AgainstStatus.Close;
+            else
+                AGAINST_PR_STATUS = AgainstStatus.Outstanding;
+            ((GoodReceiveNote)EVENT).UpdateAgainstPRStatusGRN();
+        }
+        public void UnSetOSAgainstPRItem(PurchaseReturnItem doi)
+        {
+            double qtyAmount = doi.QYTAMOUNT;
+            if (qtyAmount > this.QYTAMOUNT || OUTSTANDING_AMOUNT_TO_PR + qtyAmount > this.QYTAMOUNT)
+                throw new Exception("PR Item revise Amount exceed GRN Item Amount :" + this.PART.NAME);
+            OUTSTANDING_AMOUNT_TO_PR = OUTSTANDING_AMOUNT_TO_PR + qtyAmount;
+            RETURNED_AMOUNT = RETURNED_AMOUNT - qtyAmount;
+            if (RETURNED_AMOUNT > 0)
+                AGAINST_PR_STATUS = AgainstStatus.Outstanding;
+            else
+                AGAINST_PR_STATUS = AgainstStatus.Open;
+            ((GoodReceiveNote)EVENT).UpdateAgainstPRStatusGRN();
+        }
+        private bool isValidToClose()
+        {
+            bool validA = OUTSTANDING_AMOUNT_TO_PR == 0;
+            bool validB = RETURNED_AMOUNT == QYTAMOUNT;
+            return validA && validB;
+        }
         public override string GetInsertSQL()
         {
             return String.Format(@"insert into table_goodreceivenoteitem 
@@ -148,6 +184,21 @@ namespace Profit.Server
         public static string FindByPOItemIDSQL(int id)
         {
             return String.Format("SELECT * from table_goodreceivenoteitem where poi_id = {0}", id);
+        }
+        public string UpdateAgainstStatus()
+        {
+            return String.Format(@"Update table_goodreceivenoteitem set 
+                    grni_againstprstatus = '{0}',
+                    grni_outstandingamtpr = {1},
+                    grni_returnedamount = {2}
+                    where poi_id = {3}", AGAINST_PR_STATUS.ToString(),
+                                       OUTSTANDING_AMOUNT_TO_PR,
+                                       RETURNED_AMOUNT,
+                                       ID);
+        }
+        public static string GetByIDSQL(int id)
+        {
+            return String.Format("SELECT * from table_goodreceivenoteitem where grni_id = {0}", id);
         }
     }
 }

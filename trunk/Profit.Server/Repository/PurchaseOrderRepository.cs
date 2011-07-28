@@ -28,7 +28,7 @@ namespace Profit.Server
         }
         private void assertUsedPOItemByGRNItem(EventItem item)
         {
-            GoodReceiveNoteItem grnItm = (GoodReceiveNoteItem)GoodReceiveNoteRepository.FindPOItem(m_command, item.ID);
+            GoodReceiveNoteItem grnItm = GoodReceiveNoteRepository.FindPOItem(m_command, item.ID);
             if (grnItm != null)
                 throw new Exception("PO Item allready used by GRN item, delete GRN first : " + grnItm.EVENT.CODE);
         }
