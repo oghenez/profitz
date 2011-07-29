@@ -68,6 +68,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\InventoryTransaction\StockTakingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\StockTakingForm.Designer.cs">
+      <DependentUpon>StockTakingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MasterData\BankForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -193,6 +199,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\InventoryTransaction\StockTakingForm.resx">
+      <DependentUpon>StockTakingForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MasterData\BankForm.resx">
       <DependentUpon>BankForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -344,9 +353,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\loadall.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Forms\InventoryTransaction\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

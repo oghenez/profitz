@@ -753,7 +753,7 @@
             this.internalTreeView.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.internalTreeView.Location = new System.Drawing.Point(1, 22);
             this.internalTreeView.Name = "internalTreeView";
-            treeNode37.Name = "Node0";
+            treeNode37.Name = "NodeStockTaking";
             treeNode37.Text = "TRCI001 - Stock Taking";
             treeNode38.Name = "NodePart";
             treeNode38.Text = "TRCI002 - Part Master";
