@@ -16,7 +16,7 @@ namespace Profit.Test
             //TestCreate();
             //GoodReceiveNote grn = (GoodReceiveNote)m_grnRep.Get(3);
             //m_grnRep.Confirm(3);
-            m_grnRep.Revise(3);
+            //m_grnRep.Revise(3);
         }
         private void TestCreate()
         {

@@ -167,7 +167,7 @@ namespace Profit.Server
             {
                 transaction = new PurchaseOrderItem();
                 transaction.ID = Convert.ToInt32(aReader["poi_id"]);
-                transaction.EVENT = new StockTaking(Convert.ToInt32(aReader["po_id"]));
+                transaction.EVENT = new PurchaseOrder(Convert.ToInt32(aReader["po_id"]));
                 transaction.PART = new Part(Convert.ToInt32(aReader["part_id"]));
                 transaction.WAREHOUSE = new Warehouse(Convert.ToInt32(aReader["warehouse_id"]));
                 transaction.QYTAMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["poi_amount"]));
@@ -198,7 +198,7 @@ namespace Profit.Server
             {
                 PurchaseOrderItem transaction = new PurchaseOrderItem();
                 transaction.ID = Convert.ToInt32(aReader["poi_id"]);
-                transaction.EVENT = new StockTaking(Convert.ToInt32(aReader["po_id"]));
+                transaction.EVENT = new PurchaseOrder(Convert.ToInt32(aReader["po_id"]));
                 transaction.PART = new Part(Convert.ToInt32(aReader["part_id"]));
                 transaction.WAREHOUSE = new Warehouse(Convert.ToInt32(aReader["warehouse_id"]));
                 transaction.QYTAMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["poi_amount"]));

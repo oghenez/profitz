@@ -73,7 +73,7 @@ namespace Profit.Server
             {
                 transaction = new PurchaseReturnItem();
                 transaction.ID = Convert.ToInt32(aReader["prni_id"]);
-                transaction.EVENT = new StockTaking(Convert.ToInt32(aReader["prn_id"]));
+                transaction.EVENT = new PurchaseReturn(Convert.ToInt32(aReader["prn_id"]));
                 transaction.PART = new Part(Convert.ToInt32(aReader["part_id"]));
                 transaction.WAREHOUSE = new Warehouse(Convert.ToInt32(aReader["warehouse_id"]));
                 transaction.QYTAMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["prni_amount"]));
@@ -93,7 +93,7 @@ namespace Profit.Server
             {
                 PurchaseReturnItem transaction = new PurchaseReturnItem();
                 transaction.ID = Convert.ToInt32(aReader["prni_id"]);
-                transaction.EVENT = new StockTaking(Convert.ToInt32(aReader["prn_id"]));
+                transaction.EVENT = new PurchaseReturn(Convert.ToInt32(aReader["prn_id"]));
                 transaction.PART = new Part(Convert.ToInt32(aReader["part_id"]));
                 transaction.WAREHOUSE = new Warehouse(Convert.ToInt32(aReader["warehouse_id"]));
                 transaction.QYTAMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["prni_amount"]));
