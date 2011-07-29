@@ -42,11 +42,11 @@ namespace Profit
             toolStripComboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
-        private void buttonSpecHeaderGroup1_Click(object sender, EventArgs e)
-        {
-            kryptonHeaderGroup1.Size = kryptonHeaderGroup1.Collapsed ? new Size(30, 30) : new Size(230, 324);
-            //kryptonHeaderGroup2.Size = kryptonHeaderGroup2.Collapsed ? new Size(30, 30) : new Size(230, 392);
-        }
+        //private void buttonSpecHeaderGroup1_Click(object sender, EventArgs e)
+        //{
+        //    kryptonHeaderGroup1.Size = kryptonHeaderGroup1.Collapsed ? new Size(30, 30) : new Size(230, 324);
+        //    //kryptonHeaderGroup2.Size = kryptonHeaderGroup2.Collapsed ? new Size(30, 30) : new Size(230, 392);
+        //}
         void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
@@ -273,7 +273,7 @@ namespace Profit
         {
             treeView8.Visible = buttonSpecAny1.Type == PaletteButtonSpecStyle.ArrowDown;
             buttonSpecAny1.Type = buttonSpecAny1.Type == PaletteButtonSpecStyle.ArrowUp ? PaletteButtonSpecStyle.ArrowDown : PaletteButtonSpecStyle.ArrowUp;
-            kryptonHeader7.StateCommon.Border.DrawBorders = treeView8.Visible ? PaletteDrawBorders.TopBottom : PaletteDrawBorders.Top;
+            kryptonHeader7.StateCommon.Border.DrawBorders = treeView8.Visible ? PaletteDrawBorders.Bottom : PaletteDrawBorders.None;//PaletteDrawBorders.TopBottom : PaletteDrawBorders.Top;
         }
         private void kryptonHeader7_MouseClick(object sender, MouseEventArgs e)
         {
@@ -291,12 +291,13 @@ namespace Profit
         }
         private void buttonSpecAny3_Click(object sender, EventArgs e)
         {
-            kryptonPanel4.Tag = kryptonHeader8.Orientation == VisualOrientation.Top ? kryptonPanel4.Width : (int)kryptonPanel4.Tag;
-            kryptonHeader8.Orientation = kryptonHeader8.Orientation == VisualOrientation.Top ? VisualOrientation.Left : VisualOrientation.Top;
-            kryptonPanel4.Width = kryptonHeader8.Orientation == VisualOrientation.Left ? 33 : (int)kryptonPanel4.Tag;
-            buttonSpecAny3.Type = kryptonHeader8.Orientation == VisualOrientation.Left ? PaletteButtonSpecStyle.ArrowRight : PaletteButtonSpecStyle.ArrowLeft;
-            kryptonPanel1.Visible = kryptonHeader8.Orientation != VisualOrientation.Left;
-            kryptonHeader8.StateCommon.Border.DrawBorders = kryptonHeader8.Orientation == VisualOrientation.Left ? PaletteDrawBorders.All : PaletteDrawBorders.TopLeftRight;
+            kryptonPanel4.Tag = MainHeaderkryptonHeader8.Orientation == VisualOrientation.Top ? kryptonPanel4.Width : (int)kryptonPanel4.Tag;
+            MainHeaderkryptonHeader8.Orientation = MainHeaderkryptonHeader8.Orientation == VisualOrientation.Top ? VisualOrientation.Left : VisualOrientation.Top;
+            kryptonPanel4.Width = MainHeaderkryptonHeader8.Orientation == VisualOrientation.Left ? 33 : (int)kryptonPanel4.Tag;
+            buttonSpecAny3.Type = MainHeaderkryptonHeader8.Orientation == VisualOrientation.Left ? PaletteButtonSpecStyle.ArrowRight : PaletteButtonSpecStyle.ArrowLeft;
+            MasterDatakryptonPanel1.Visible = MasterDatakryptonCheckButton1.Checked && (MainHeaderkryptonHeader8.Orientation != VisualOrientation.Left);
+            TransactionSkryptonPanel.Visible = TransactionkryptonCheckButton2.Checked && (MainHeaderkryptonHeader8.Orientation != VisualOrientation.Left);
+            MainHeaderkryptonHeader8.StateCommon.Border.DrawBorders = MainHeaderkryptonHeader8.Orientation == VisualOrientation.Left ? PaletteDrawBorders.All : PaletteDrawBorders.TopLeftRight;
         }
 
         private void buttonSpecAny4_Click(object sender, EventArgs e)
@@ -323,16 +324,74 @@ namespace Profit
             buttonSpecAny5_Click(sender, null);
         }
 
-        private void kryptonHeader9_Click(object sender, EventArgs e)
-        {
-            kryptonHeader9.HeaderStyle = kryptonHeader9.HeaderStyle == HeaderStyle.DockActive ? HeaderStyle.DockInactive : HeaderStyle.DockActive;
-            kryptonHeader8.Visible = kryptonHeader9.HeaderStyle == HeaderStyle.DockActive;
-            kryptonPanel1.Visible = kryptonHeader8.Orientation != VisualOrientation.Left ? kryptonHeader9.HeaderStyle == HeaderStyle.DockActive : kryptonHeader8.Orientation != VisualOrientation.Left;
-        }
+        //private void kryptonHeader9_Click(object sender, EventArgs e)
+        //{
+        //    kryptonHeader9.HeaderStyle = kryptonHeader9.HeaderStyle == HeaderStyle.DockActive ? HeaderStyle.DockInactive : HeaderStyle.DockActive;
+        //    kryptonHeader8.Visible = kryptonHeader9.HeaderStyle == HeaderStyle.DockActive;
+        //    kryptonPanel1.Visible = kryptonHeader8.Orientation != VisualOrientation.Left ? kryptonHeader9.HeaderStyle == HeaderStyle.DockActive : kryptonHeader8.Orientation != VisualOrientation.Left;
+        //}
 
         private void treeView8_AfterSelect(object sender, TreeViewEventArgs e)
         {
             treeView1_NodeMouseDoubleClick(sender, new TreeNodeMouseClickEventArgs(e.Node, MouseButtons.Right, 1, 1, 1));
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void kryptonCheckSet1_CheckedButtonChanged(object sender, EventArgs e)
+        {
+            TransactionSkryptonPanel.Visible = TransactionkryptonCheckButton2.Checked && (MainHeaderkryptonHeader8.Orientation != VisualOrientation.Left);
+            MasterDatakryptonPanel1.Visible = MasterDatakryptonCheckButton1.Checked && (MainHeaderkryptonHeader8.Orientation != VisualOrientation.Left);
+            TransactionSkryptonPanel.Dock = DockStyle.Fill;
+            MasterDatakryptonPanel1.Dock = DockStyle.Fill;
+            if (TransactionkryptonCheckButton2.Checked)
+                MainHeaderkryptonHeader8.Text = TransactionkryptonCheckButton2.Text;
+            if (MasterDatakryptonCheckButton1.Checked)
+                MainHeaderkryptonHeader8.Text = MasterDatakryptonCheckButton1.Text;
+        }
+
+        private void buttonSpecAny6_Click(object sender, EventArgs e)
+        {
+            internalTreeView.Visible = buttonSpecAny6.Type == PaletteButtonSpecStyle.ArrowDown;
+            buttonSpecAny6.Type = buttonSpecAny6.Type == PaletteButtonSpecStyle.ArrowUp ? PaletteButtonSpecStyle.ArrowDown : PaletteButtonSpecStyle.ArrowUp;
+            kryptonHeader4.StateCommon.Border.DrawBorders = internalTreeView.Visible ? PaletteDrawBorders.Bottom : PaletteDrawBorders.None;
+        }
+
+        private void buttonSpecAny7_Click(object sender, EventArgs e)
+        {
+            SalesTreeView.Visible = buttonSpecAny7.Type == PaletteButtonSpecStyle.ArrowDown;
+            buttonSpecAny7.Type = buttonSpecAny7.Type == PaletteButtonSpecStyle.ArrowUp ? PaletteButtonSpecStyle.ArrowDown : PaletteButtonSpecStyle.ArrowUp;
+            kryptonHeader9.StateCommon.Border.DrawBorders = SalesTreeView.Visible ? PaletteDrawBorders.TopBottom : PaletteDrawBorders.Top;
+        }
+
+        private void buttonSpecAny8_Click(object sender, EventArgs e)
+        {
+            PurchaseTreeView.Visible = buttonSpecAny8.Type == PaletteButtonSpecStyle.ArrowDown;
+            buttonSpecAny8.Type = buttonSpecAny8.Type == PaletteButtonSpecStyle.ArrowUp ? PaletteButtonSpecStyle.ArrowDown : PaletteButtonSpecStyle.ArrowUp;
+            //kryptonHeader10.StateCommon.Border.DrawBorders = SalesTreeView.Visible ? PaletteDrawBorders.TopBottom : PaletteDrawBorders.Top;
+        }
+
+        private void kryptonHeader4_MouseClick(object sender, MouseEventArgs e)
+        {
+            buttonSpecAny6_Click(null, null);
+        }
+
+        private void kryptonHeader9_MouseClick(object sender, MouseEventArgs e)
+        {
+            buttonSpecAny7_Click(null, null);
+        }
+
+        private void kryptonHeader10_MouseClick(object sender, MouseEventArgs e)
+        {
+            buttonSpecAny8_Click(null, null);
+        }
+
+        private void kryptonHeader7_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

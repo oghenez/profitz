@@ -70,6 +70,12 @@
             this.sellPricekryptonNumericUpDown4 = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dataGridViewUOM = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.ConversionQTy = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.ConvUnit = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
+            this.OrigQty = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.OrigUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CostPrice = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.SellPrice = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
             this.textBoxCode = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.activekryptonCheckBox1 = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
@@ -86,12 +92,6 @@
             this.toolStripButtonLoadAll = new System.Windows.Forms.ToolStripButton();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.buttonSpecAny1 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.ConversionQTy = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
-            this.ConvUnit = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
-            this.OrigQty = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
-            this.OrigUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CostPrice = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
-            this.SellPrice = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
@@ -123,7 +123,7 @@
             this.kryptonHeader1.Size = new System.Drawing.Size(661, 29);
             this.kryptonHeader1.TabIndex = 2;
             this.kryptonHeader1.Values.Description = "";
-            this.kryptonHeader1.Values.Heading = "MSTF001 - Bank";
+            this.kryptonHeader1.Values.Heading = "TRCI002 - Part Master";
             // 
             // toolStrip1
             // 
@@ -517,6 +517,119 @@
             this.dataGridViewUOM.Size = new System.Drawing.Size(601, 258);
             this.dataGridViewUOM.TabIndex = 0;
             // 
+            // ConversionQTy
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.NullValue = "1";
+            this.ConversionQTy.DefaultCellStyle = dataGridViewCellStyle1;
+            this.ConversionQTy.HeaderText = "Conv. Qty";
+            this.ConversionQTy.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.ConversionQTy.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.ConversionQTy.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.ConversionQTy.Name = "ConversionQTy";
+            this.ConversionQTy.ReadOnly = true;
+            this.ConversionQTy.Width = 60;
+            // 
+            // ConvUnit
+            // 
+            this.ConvUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ConvUnit.DropDownWidth = 121;
+            this.ConvUnit.HeaderText = "ConvUnit";
+            this.ConvUnit.Name = "ConvUnit";
+            this.ConvUnit.Width = 100;
+            // 
+            // OrigQty
+            // 
+            dataGridViewCellStyle2.NullValue = "0";
+            this.OrigQty.DefaultCellStyle = dataGridViewCellStyle2;
+            this.OrigQty.HeaderText = "Orig. Qty";
+            this.OrigQty.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.OrigQty.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.OrigQty.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.OrigQty.Name = "OrigQty";
+            this.OrigQty.Width = 100;
+            // 
+            // OrigUnit
+            // 
+            this.OrigUnit.HeaderText = "Orig. Unit";
+            this.OrigUnit.Name = "OrigUnit";
+            // 
+            // CostPrice
+            // 
+            this.CostPrice.DecimalPlaces = 2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.NullValue = "0";
+            this.CostPrice.DefaultCellStyle = dataGridViewCellStyle3;
+            this.CostPrice.HeaderText = "Cost Price";
+            this.CostPrice.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.CostPrice.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.CostPrice.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.CostPrice.Name = "CostPrice";
+            this.CostPrice.ThousandsSeparator = true;
+            this.CostPrice.Width = 100;
+            // 
+            // SellPrice
+            // 
+            this.SellPrice.DecimalPlaces = 2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.NullValue = "0";
+            this.SellPrice.DefaultCellStyle = dataGridViewCellStyle4;
+            this.SellPrice.HeaderText = "Sell Price";
+            this.SellPrice.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.SellPrice.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.SellPrice.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.SellPrice.Name = "SellPrice";
+            this.SellPrice.ThousandsSeparator = true;
+            this.SellPrice.Width = 100;
+            // 
             // textBoxCode
             // 
             this.textBoxCode.Location = new System.Drawing.Point(71, 12);
@@ -661,119 +774,6 @@
             this.buttonSpecAny1.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.ArrowDown;
             this.buttonSpecAny1.UniqueName = "68C5116DCDA34543159FE7C2EE13DD75";
             // 
-            // ConversionQTy
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.NullValue = "1";
-            this.ConversionQTy.DefaultCellStyle = dataGridViewCellStyle1;
-            this.ConversionQTy.HeaderText = "Conv. Qty";
-            this.ConversionQTy.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.ConversionQTy.Maximum = new decimal(new int[] {
-            1000000000,
-            0,
-            0,
-            0});
-            this.ConversionQTy.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.ConversionQTy.Name = "ConversionQTy";
-            this.ConversionQTy.ReadOnly = true;
-            this.ConversionQTy.Width = 60;
-            // 
-            // ConvUnit
-            // 
-            this.ConvUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ConvUnit.DropDownWidth = 121;
-            this.ConvUnit.HeaderText = "ConvUnit";
-            this.ConvUnit.Name = "ConvUnit";
-            this.ConvUnit.Width = 100;
-            // 
-            // OrigQty
-            // 
-            dataGridViewCellStyle2.NullValue = "0";
-            this.OrigQty.DefaultCellStyle = dataGridViewCellStyle2;
-            this.OrigQty.HeaderText = "Orig. Qty";
-            this.OrigQty.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.OrigQty.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.OrigQty.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.OrigQty.Name = "OrigQty";
-            this.OrigQty.Width = 100;
-            // 
-            // OrigUnit
-            // 
-            this.OrigUnit.HeaderText = "Orig. Unit";
-            this.OrigUnit.Name = "OrigUnit";
-            // 
-            // CostPrice
-            // 
-            this.CostPrice.DecimalPlaces = 2;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.NullValue = "0";
-            this.CostPrice.DefaultCellStyle = dataGridViewCellStyle3;
-            this.CostPrice.HeaderText = "Cost Price";
-            this.CostPrice.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.CostPrice.Maximum = new decimal(new int[] {
-            1000000000,
-            0,
-            0,
-            0});
-            this.CostPrice.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.CostPrice.Name = "CostPrice";
-            this.CostPrice.ThousandsSeparator = true;
-            this.CostPrice.Width = 100;
-            // 
-            // SellPrice
-            // 
-            this.SellPrice.DecimalPlaces = 2;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.NullValue = "0";
-            this.SellPrice.DefaultCellStyle = dataGridViewCellStyle4;
-            this.SellPrice.HeaderText = "Sell Price";
-            this.SellPrice.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.SellPrice.Maximum = new decimal(new int[] {
-            1000000000,
-            0,
-            0,
-            0});
-            this.SellPrice.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.SellPrice.Name = "SellPrice";
-            this.SellPrice.ThousandsSeparator = true;
-            this.SellPrice.Width = 100;
-            // 
             // PartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -784,7 +784,7 @@
             this.Controls.Add(this.kryptonHeader1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "PartForm";
-            this.Text = "Bank";
+            this.Text = "Part Master";
             this.Activated += new System.EventHandler(this.BankForm_Activated);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
