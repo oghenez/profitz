@@ -10,6 +10,7 @@ namespace Profit.Server
     public class GoodReceiveNote : Event
     {
         public AgainstStatus AGAINST_PR_STATUS = AgainstStatus.Open;
+        public Supplier SUPPLIER = null;
 
         public GoodReceiveNote()
             : base()
@@ -42,9 +43,10 @@ namespace Profit.Server
                     grn_posted,
                     grn_eventstatus,
                     grn_againstprstatus,
-                    grn_code
+                    grn_code,
+                    sup_id
                 ) 
-                VALUES ('{0}','{1}','{2}',{3},'{4}',{5},'{6}','{7}','{8}')",
+                VALUES ('{0}','{1}','{2}',{3},'{4}',{5},'{6}','{7}','{8}',{9})",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                 StockCardEntryType.GoodReceiveNote.ToString(),
@@ -53,7 +55,8 @@ namespace Profit.Server
                 POSTED,
                 EVENT_STATUS.ToString(),
                 AGAINST_PR_STATUS.ToString(),
-                CODE
+                CODE,
+                SUPPLIER == null ? 0 : SUPPLIER.ID
                 );
         }
         public override string GetUpdateSQL()
@@ -67,8 +70,9 @@ namespace Profit.Server
                     grn_posted= {5},
                     grn_eventstatus= '{6}',
                     grn_againstprstatus= '{7}',
-                    grn_code = '{8}'
-                where grn_id = {9}",
+                    grn_code = '{8}',
+                    sup_id = {9}
+                where grn_id = {10}",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                 StockCardEntryType.GoodReceiveNote.ToString(),
@@ -78,6 +82,7 @@ namespace Profit.Server
                 EVENT_STATUS.ToString(),
                 AGAINST_PR_STATUS.ToString(),
                 CODE,
+                SUPPLIER == null ? 0 : SUPPLIER.ID,
                 ID);
         }
         public static GoodReceiveNote TransformReader(OdbcDataReader aReader)
@@ -96,6 +101,7 @@ namespace Profit.Server
                 transaction.EVENT_STATUS = (EventStatus)Enum.Parse(typeof(EventStatus), aReader["grn_eventstatus"].ToString());
                 transaction.AGAINST_PR_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), aReader["grn_againstprstatus"].ToString());
                 transaction.CODE = aReader["grn_code"].ToString();
+                transaction.SUPPLIER = new Supplier(Convert.ToInt32(aReader["sup_id"]));
             }
             return transaction;
         }
@@ -115,6 +121,7 @@ namespace Profit.Server
                 transaction.EVENT_STATUS = (EventStatus)Enum.Parse(typeof(EventStatus), aReader["grn_eventstatus"].ToString());
                 transaction.AGAINST_PR_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), aReader["grn_againstprstatus"].ToString());
                 transaction.CODE = aReader["grn_code"].ToString();
+                transaction.SUPPLIER = new Supplier(Convert.ToInt32(aReader["sup_id"]));
                 result.Add(transaction);
             }
             return result;

@@ -49,6 +49,12 @@
   <ItemGroup>
     <Compile Include="Entity\Bank.cs" />
     <Compile Include="Entity\PartSellingPriceInformation.cs" />
+    <Compile Include="Entity\Transaction\SalesReturnItem.cs" />
+    <Compile Include="Entity\Transaction\SalesReturn.cs" />
+    <Compile Include="Entity\Transaction\DeliveryOrderItem.cs" />
+    <Compile Include="Entity\Transaction\DeliveryOrder.cs" />
+    <Compile Include="Entity\Transaction\SalesOrderItem.cs" />
+    <Compile Include="Entity\Transaction\SalesOrder.cs" />
     <Compile Include="Entity\Transaction\PurchaseReturnItem.cs" />
     <Compile Include="Entity\Transaction\PurchaseReturn.cs" />
     <Compile Include="Entity\Transaction\Event.cs" />
@@ -85,6 +91,9 @@
     <Compile Include="Enum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
+    <Compile Include="Repository\SalesReturnRepository.cs" />
+    <Compile Include="Repository\DeliveryOrderRepository.cs" />
+    <Compile Include="Repository\SalesOrderRepository.cs" />
     <Compile Include="Repository\PurchaseReturnRepository.cs" />
     <Compile Include="Repository\GoodReceiveNoteRepository.cs" />
     <Compile Include="Repository\PurchaseOrderRepository.cs" />

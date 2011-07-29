@@ -125,7 +125,7 @@ namespace Profit.Server
             {
                 transaction = new GoodReceiveNoteItem();
                 transaction.ID = Convert.ToInt32(aReader["grni_id"]);
-                transaction.EVENT = new StockTaking(Convert.ToInt32(aReader["grn_id"]));
+                transaction.EVENT = new GoodReceiveNote(Convert.ToInt32(aReader["grn_id"]));
                 transaction.PART = new Part(Convert.ToInt32(aReader["part_id"]));
                 transaction.WAREHOUSE = new Warehouse(Convert.ToInt32(aReader["warehouse_id"]));
                 transaction.QYTAMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["grni_amount"]));
@@ -148,7 +148,7 @@ namespace Profit.Server
             {
                 GoodReceiveNoteItem transaction = new GoodReceiveNoteItem();
                 transaction.ID = Convert.ToInt32(aReader["grni_id"]);
-                transaction.EVENT = new StockTaking(Convert.ToInt32(aReader["grn_id"]));
+                transaction.EVENT = new GoodReceiveNote(Convert.ToInt32(aReader["grn_id"]));
                 transaction.PART = new Part(Convert.ToInt32(aReader["part_id"]));
                 transaction.WAREHOUSE = new Warehouse(Convert.ToInt32(aReader["warehouse_id"]));
                 transaction.QYTAMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["grni_amount"]));

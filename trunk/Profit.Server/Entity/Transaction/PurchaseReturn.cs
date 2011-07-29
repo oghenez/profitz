@@ -9,6 +9,7 @@ namespace Profit.Server
 {
     public class PurchaseReturn : Event
     {
+        public Supplier SUPPLIER = null;
         public PurchaseReturn()
             : base()
         { }
@@ -27,9 +28,10 @@ namespace Profit.Server
                     prn_notes,
                     prn_posted,
                     prn_eventstatus,
-                    prn_code
+                    prn_code,
+                    sup_id
                 ) 
-                VALUES ('{0}','{1}','{2}',{3},'{4}',{5},'{6}','{7}')",
+                VALUES ('{0}','{1}','{2}',{3},'{4}',{5},'{6}','{7}',{8})",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                 StockCardEntryType.PurchaseReturn.ToString(),
@@ -37,7 +39,8 @@ namespace Profit.Server
                 NOTES,
                 POSTED,
                 EVENT_STATUS.ToString(),
-                CODE
+                CODE,
+                SUPPLIER == null ? 0 : SUPPLIER.ID
                 );
         }
         public override string GetUpdateSQL()
@@ -50,8 +53,9 @@ namespace Profit.Server
                     prn_notes= '{4}',
                     prn_posted= {5},
                     prn_eventstatus= '{6}',
-                    prn_code = '{7}'
-                where prn_id = {8}",
+                    prn_code = '{7}',
+                    sup_id = {8}
+                where prn_id = {9}",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                 StockCardEntryType.PurchaseReturn.ToString(),
@@ -60,6 +64,7 @@ namespace Profit.Server
                 POSTED,
                 EVENT_STATUS.ToString(),
                 CODE,
+                SUPPLIER == null ? 0 : SUPPLIER.ID,
                 ID);
         }
         public static PurchaseReturn TransformReader(OdbcDataReader aReader)
@@ -77,6 +82,7 @@ namespace Profit.Server
                 transaction.POSTED = Convert.ToBoolean(aReader["prn_posted"]);
                 transaction.EVENT_STATUS = (EventStatus)Enum.Parse(typeof(EventStatus), aReader["prn_eventstatus"].ToString());
                 transaction.CODE = aReader["prn_code"].ToString();
+                transaction.SUPPLIER = new Supplier(Convert.ToInt32(aReader["sup_id"]));
             }
             return transaction;
         }
@@ -95,6 +101,7 @@ namespace Profit.Server
                 transaction.POSTED = Convert.ToBoolean(aReader["prn_posted"]);
                 transaction.EVENT_STATUS = (EventStatus)Enum.Parse(typeof(EventStatus), aReader["prn_eventstatus"].ToString());
                 transaction.CODE = aReader["prn_code"].ToString();
+                transaction.SUPPLIER = new Supplier(Convert.ToInt32(aReader["sup_id"]));
                 result.Add(transaction);
             }
             return result;
