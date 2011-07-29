@@ -31,6 +31,7 @@ namespace Profit
         const string SUPPLIER_FORM = "SupplierForm";
         const string YEAR_FORM = "YearForm";
         const string PART_FORM = "PartForm";
+        const string STOCK_TAKING_FORM = "StockTakingForm";
 
 
         public MainForm()
@@ -179,6 +180,13 @@ namespace Profit
             {
                 if (isChild(PART_FORM)) { this.Cursor = Cursors.Default; return; }
                 PartForm user = new PartForm(this, PART_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            }
+            if (e.Node.Name == "NodeStockTaking")
+            {
+                if (isChild(STOCK_TAKING_FORM)) { this.Cursor = Cursors.Default; return; }
+                StockTakingForm user = new StockTakingForm(this, STOCK_TAKING_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
