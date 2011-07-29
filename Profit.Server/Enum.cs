@@ -41,7 +41,8 @@ namespace Profit.Server
         Adjustment,
         Sample,
         Conversion,
-        Unexpected
+        Unexpected,
+        OpeningStock
     }
     public enum AgainstStatus
     {
