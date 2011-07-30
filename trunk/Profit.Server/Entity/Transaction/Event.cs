@@ -148,5 +148,15 @@ namespace Profit.Server
             if (this.EVENT_STATUS.Equals(EventStatus.Entry))
                 throw new Exception("Event allready Revised");
         }
+
+        #region IEntity Members
+
+
+        public string GetConcatSearch(string find)
+        {
+            return "";
+        }
+
+        #endregion
     }
 }

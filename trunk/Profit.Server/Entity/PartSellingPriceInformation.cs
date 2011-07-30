@@ -85,6 +85,10 @@ namespace Profit.Server
         {
             return String.Format("select * from table_partsellingpriceinformation");
         }
+        public string GetConcatSearch(string find)
+        {
+            return String.Format(@"SELECT * FROM table_partsellingpriceinformation p where concat(p.prtsellprc_code, p.prtsellprc_name) like '%{0}%'", find);
+        }
         public IList GetAll(OdbcDataReader aReader)
         {
             IList result = new ArrayList();

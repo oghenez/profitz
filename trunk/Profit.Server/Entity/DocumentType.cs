@@ -75,6 +75,10 @@ namespace Profit.Server
         {
             return String.Format("select * from table_documenttype");
         }
+        public string GetConcatSearch(string find)
+        {
+            return String.Format(@"SELECT * FROM table_documenttype p where concat(p.doctype_code, p.doctype_name) like '%{0}%'", find);
+        }
         public IList GetAll(OdbcDataReader aReader)
         {
             IList result = new ArrayList();

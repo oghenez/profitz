@@ -211,6 +211,11 @@ namespace Profit.Server
         {
             return String.Format(@"select * from table_part p where concat(p.part_code, p.part_name, p.part_barcode) like '%{0}%'", search);
         }
+
+        public string GetConcatSearch(string find)
+        {
+            return String.Format(@"select * from table_part p where concat(p.part_code, p.part_name, p.part_barcode) like '%{0}%'", find);
+        }
         public IList GetAll(OdbcDataReader r)
         {
             IList result = new ArrayList();
@@ -296,5 +301,6 @@ namespace Profit.Server
             }
             return null;
         }
+
     }
 }

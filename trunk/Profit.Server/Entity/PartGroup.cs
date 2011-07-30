@@ -128,5 +128,9 @@ namespace Profit.Server
         {
             return String.Format("SELECT max(prtgroup_id) from table_partgroup");
         }
+        public string GetConcatSearch(string find)
+        {
+            return String.Format(@"SELECT * FROM table_partgroup p where concat(p.prtgroup_code, p.prtgroup_name) like '%{0}%'", find);
+        }
     }
 }

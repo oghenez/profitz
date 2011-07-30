@@ -71,6 +71,10 @@ namespace Profit.Server
         {
             return String.Format("select * from table_unit where unit_id = {0}", ID);
         }
+        public static string GetByIDSQLstatic(int ID)
+        {
+            return String.Format("select * from table_unit where unit_id = {0}", ID);
+        }
         public string GetByCodeSQL(string code)
         {
             return String.Format("select * from table_unit where unit_code = '{0}'", code);
@@ -90,6 +94,10 @@ namespace Profit.Server
         public string GetAllSQL()
         {
             return String.Format("select * from table_unit");
+        }
+        public string GetConcatSearch(string find)
+        {
+            return String.Format(@"SELECT * FROM table_unit p where concat(p.unit_code, p.unit_name) like '%{0}%'", find);
         }
         public IList GetAll(OdbcDataReader aReader)
         {

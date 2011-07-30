@@ -118,6 +118,10 @@ namespace Profit.Server
         {
             return String.Format("select * from table_unitconversion where part_id = '{0}'",partID);
         }
+        public string GetConcatSearch(string find)
+        {
+            return "";
+        }
         public IList GetAll(OdbcDataReader aReader)
         {
             IList result = new ArrayList();

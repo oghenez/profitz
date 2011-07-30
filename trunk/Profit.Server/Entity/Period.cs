@@ -119,6 +119,10 @@ namespace Profit.Server
         {
             return String.Format("select * from table_period where year_id = {0}", ID);
         }
+        public string GetConcatSearch(string find)
+        {
+            return "";
+        }
         public static IList TransformReaderList(OdbcDataReader aReader)
         {
             IList result = new ArrayList();

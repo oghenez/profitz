@@ -97,6 +97,10 @@ year_end
         {
             return String.Format("select * from table_year");
         }
+        public string GetConcatSearch(string find)
+        {
+            return String.Format(@"SELECT * FROM table_year p where concat(p.year_code, p.year_name) like '%{0}%'", find);
+        }
         public IList GetAll(OdbcDataReader aReader)
         {
             IList result = new ArrayList();

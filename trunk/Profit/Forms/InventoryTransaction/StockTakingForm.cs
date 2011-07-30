@@ -16,21 +16,91 @@ namespace Profit
     {
         StockTaking m_stocktaking = new StockTaking();
         IMainForm m_mainForm;
+        Repository r_warehouse = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.WAREHOUSE_REPOSITORY);
+        Repository r_employee = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.EMPLOYEE_REPOSITORY);
+        PartRepository r_part = (PartRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_REPOSITORY);
+        Repository r_ccy = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY);
+        Repository r_unit = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY);
+        StockTakingRepository r_stocktaking = (StockTakingRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.STOCKTAKING_REPOSITORY);
+        IList m_units;
 
         public StockTakingForm(IMainForm mainForm, string formName)
         {
             InitializeComponent();
             InitializeButtonClick();
             InitializeDataSource();
+            InitializeDataGridValidation();
             this.MdiParent = (Form)mainForm;
             this.Name = formName;
             m_mainForm = mainForm;
-            loadRecords();
         }
 
+        private void InitializeDataGridValidation()
+        {
+            dataItemskryptonDataGridView.CellValidating += new DataGridViewCellValidatingEventHandler(dataItemskryptonDataGridView_CellValidating);
+            dataItemskryptonDataGridView.CellValidated += new DataGridViewCellEventHandler(dataItemskryptonDataGridView_CellValidated);
+        }
+
+        void dataItemskryptonDataGridView_CellValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            if ((e.ColumnIndex == priceColumn.Index) || (e.ColumnIndex == QtyColumn.Index))
+            {
+                decimal qty = Convert.ToDecimal(dataItemskryptonDataGridView[QtyColumn.Index, e.RowIndex].Value);
+                decimal price = Convert.ToDecimal(dataItemskryptonDataGridView[priceColumn.Index, e.RowIndex].Value);
+                dataItemskryptonDataGridView[totalAmountColumn.Index, e.RowIndex].Value = qty * price;
+                updateTotalAmount();
+            }
+        }
+
+        private void updateTotalAmount()
+        {
+            decimal amttotal = 0;
+            for (int i = 0; i < dataItemskryptonDataGridView.Rows.Count; i++)
+            {
+                decimal price = Convert.ToDecimal(dataItemskryptonDataGridView[totalAmountColumn.Index, i].Value);
+                amttotal += price;
+            }
+            totalAmountkryptonNumericUpDown.Value = amttotal;
+        }
+
+        void dataItemskryptonDataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            dataItemskryptonDataGridView.Rows[e.RowIndex].ErrorText = "";
+            if (e.ColumnIndex == scanColumn.Index)
+            {
+                if (e.FormattedValue.ToString() == "")
+                    return;
+                IList result = r_part.Search(e.FormattedValue.ToString());
+                if (result.Count == 1)
+                {
+                    Part p = (Part)result[0];
+                    dataItemskryptonDataGridView[codeColumn.Index, e.RowIndex].Tag = p;
+                    dataItemskryptonDataGridView[codeColumn.Index, e.RowIndex].Value = p.CODE;
+                    dataItemskryptonDataGridView[nameColumn.Index, e.RowIndex].Value = p.NAME;
+                    dataItemskryptonDataGridView[QtyColumn.Index, e.RowIndex].Value = 0;
+                    unitColumn.Items.Clear();
+                    IList units = r_part.GetAllUnit(p.ID, p.UNIT.ID);
+                    Utils.GetListCode(unitColumn.Items, units);
+                    dataItemskryptonDataGridView[unitColumn.Index, e.RowIndex].Value = units[0].ToString(); ;
+                    dataItemskryptonDataGridView[priceColumn.Index, e.RowIndex].Value = 0;
+                    dataItemskryptonDataGridView[totalAmountColumn.Index, e.RowIndex].Value = 0;
+                }
+                if ((result.Count == 0) ||(result.Count > 1))
+                {
+                Point p = dataItemskryptonDataGridView.Parent.PointToScreen(dataItemskryptonDataGridView.Location);
+                Point xy = new Point(p.X, p.Y + (e.RowIndex == 0 ? 21 : (e.RowIndex*21)));
+                    SearchForm fr = new SearchForm(xy ,r_part);
+                    fr.ShowDialog();
+                }
+            }
+        }
         private void InitializeDataSource()
         {
-            employeeKryptonComboBox.DataSource = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.EMPLOYEE_REPOSITORY).GetAll();
+            employeeKryptonComboBox.DataSource = r_employee.GetAll();
+            warehousekryptonComboBox.DataSource = r_warehouse.GetAll();
+            stocktakingTypekryptonComboBox.DataSource = Enum.GetValues(typeof(StockTakingType));
+            currencyKryptonComboBox.DataSource = r_ccy.GetAll();
+            m_units = r_unit.GetAll();
         }
         private void InitializeButtonClick()
         {
@@ -39,29 +109,6 @@ namespace Profit
             toolStripButtonDelete.Click += new EventHandler(Delete);
             toolStripButtonClear.Click += new EventHandler(Clear);
             toolStripButtonRefresh.Click+=new EventHandler(Refresh);
-        }
-        private void loadRecords()
-        {
-            //try
-            //{
-            //    this.Cursor = Cursors.WaitCursor;
-            //    gridData.Rows.Clear();
-            //    IList records = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.BANK_REPOSITORY).GetAll();
-            //    foreach (StockTaking d in records)
-            //    {
-            //        int row = gridData.Rows.Add(d.CODE, d.NAME);
-            //        gridData.Rows[row].Tag = d;
-            //    }
-            //    this.Cursor = Cursors.Default;
-            //}
-            //catch (Exception x)
-            //{
-            //    KryptonMessageBox.Show(x.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
-            //finally
-            //{
-            //    this.Cursor = Cursors.Default;
-            //}
         }
         public void Save(object sender, EventArgs e)
         {
@@ -73,18 +120,13 @@ namespace Profit
                     UpdateEntity();
                     if (m_stocktaking.ID == 0)
                     {
-                        RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.BANK_REPOSITORY).Save(m_stocktaking);
-                        //StockTaking bank = (StockTaking)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.BANK_REPOSITORY).GetByCode(m_stocktaking);
-                       // int r = gridData.Rows.Add(bank.CODE, bank.NAME);
-                        //gridData.Rows[r].Tag = bank;
+                        r_stocktaking.Save(m_stocktaking);
                     }
                     else
                     {
-                        RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.BANK_REPOSITORY).Update(m_stocktaking);
-                        updateRecord();
+                        r_stocktaking.Update(m_stocktaking);
                     }
                     KryptonMessageBox.Show("Record has been saved","Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    gridData.ClearSelection();
                     ClearForm();
                     textBoxCode.Focus();
                     this.Cursor = Cursors.Default;
@@ -99,36 +141,67 @@ namespace Profit
                 this.Cursor = Cursors.Default;
             }
         }
-
-        private void updateRecord()
-        {
-            //foreach (DataGridViewRow item in gridData.Rows)
-            //{
-            //    StockTaking dep = (StockTaking)item.Tag;
-            //    if (dep.ID == m_stocktaking.ID)
-            //    {
-            //        gridData[0, item.Index].Value = m_stocktaking.CODE;
-            //        gridData[1, item.Index].Value = m_stocktaking.NAME;
-            //        break;
-            //    }
-            //}
-        }
         public bool Valid()
         {
             bool a = textBoxCode.Text == "";
+            bool b = employeeKryptonComboBox.SelectedItem == null;
+            bool c = warehousekryptonComboBox.SelectedItem == null;
+            bool d = currencyKryptonComboBox.SelectedItem == null;
+            
             if (a) errorProvider1.SetError(textBoxCode, "Code Can not Empty");
-            return !a ;
+            if (b) errorProvider1.SetError(textBoxCode, "Employee Can not Empty");
+            if (c) errorProvider1.SetError(textBoxCode, "Warehouse Can not Empty");
+            if (d) errorProvider1.SetError(textBoxCode, "Currency Can not Empty");
+            return !a && !b && !c && !d;
         }
         private void UpdateEntity()
         {
             m_stocktaking.CODE = textBoxCode.Text.Trim();
-            //m_stocktaking.NAME = textBoxName.Text.Trim();
+            m_stocktaking.TRANSACTION_DATE = dateKryptonDateTimePicker.Value;
+            m_stocktaking.EMPLOYEE = (Employee)employeeKryptonComboBox.SelectedItem;
+            m_stocktaking.WAREHOUSE = (Warehouse)warehousekryptonComboBox.SelectedItem;
+            m_stocktaking.CURRENCY = (Currency)currencyKryptonComboBox.SelectedItem;
+            m_stocktaking.AMOUNT = Convert.ToDouble(totalAmountkryptonNumericUpDown.Value);
+            m_stocktaking.STOCK_TAKING_TYPE = (StockTakingType)Enum.Parse(typeof(StockTakingType), stocktakingTypekryptonComboBox.SelectedItem.ToString());
+            m_stocktaking.EVENT_ITEMS = getItems();
+        }
+
+        private IList getItems()
+        {
+            
+            IList items = new ArrayList();
+            for (int i = 0; i < dataItemskryptonDataGridView.Rows.Count; i++)
+            {
+                Part p = (Part)dataItemskryptonDataGridView[codeColumn.Index, i].Tag;
+                if (dataItemskryptonDataGridView[unitColumn.Index, i].Value == null)
+                    continue;
+                Unit u = (Unit)Utils.FindEntityInList(dataItemskryptonDataGridView[unitColumn.Index, i].Value.ToString(), m_units);
+                if ((p == null) || (u == null))
+                    continue;
+                StockTakingItems st = new StockTakingItems();
+                st.EVENT = m_stocktaking;
+                st.PART = p;
+                st.WAREHOUSE = m_stocktaking.WAREHOUSE;
+                st.QYTAMOUNT = Convert.ToDouble(dataItemskryptonDataGridView[QtyColumn.Index, i].Value);
+                st.UNIT = u;
+                st.PRICE = Convert.ToDouble(dataItemskryptonDataGridView[priceColumn.Index,i].Value);
+                st.TOTAL_AMOUNT = Convert.ToDouble(dataItemskryptonDataGridView[totalAmountColumn.Index, i].Value);
+                items.Add(st);
+            }
+            return items;
         }
         public void ClearForm()
         {
             try
             {
                 textBoxCode.Text = "";
+                dateKryptonDateTimePicker.Value = DateTime.Today;
+                employeeKryptonComboBox.SelectedIndex = 0;
+                warehousekryptonComboBox.SelectedIndex = 0;
+                currencyKryptonComboBox.SelectedIndex = 0;
+                totalAmountkryptonNumericUpDown.Value = 0;
+                stocktakingTypekryptonComboBox.SelectedIndex = 0;
+                dataItemskryptonDataGridView.Rows.Clear();
                 m_stocktaking = new StockTaking();
                 errorProvider1.Clear();
             }
@@ -146,6 +219,13 @@ namespace Profit
         public void setEnableForm(bool enable)
         {
             textBoxCode.ReadOnly = !enable;
+            dateKryptonDateTimePicker.Enabled = enable;
+            employeeKryptonComboBox.Enabled = enable;
+            warehousekryptonComboBox.Enabled = enable;
+            currencyKryptonComboBox.Enabled = enable;
+            totalAmountkryptonNumericUpDown.Enabled = enable;
+            stocktakingTypekryptonComboBox.Enabled = enable;
+            dataItemskryptonDataGridView.Enabled = enable;
         }
         private void setEditMode(EditMode editmode)
         {
@@ -171,7 +251,6 @@ namespace Profit
                     this.Cursor = Cursors.WaitCursor;
                     if (KryptonMessageBox.Show("Are you sure to delete this record?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.No) { this.Cursor = Cursors.Default; return; }
                     RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.BANK_REPOSITORY).Delete(m_stocktaking);
-                    removeRecord(m_stocktaking.ID);
                     ClearForm();
                     setEnableForm(true);
                     setEditMode(EditMode.New);
@@ -189,69 +268,48 @@ namespace Profit
                 this.Cursor = Cursors.Default;
             }
         }
-        private void removeRecord(int id)
-        {
-            foreach (DataGridViewRow item in gridData.Rows)
-            {
-                StockTaking dep = (StockTaking)item.Tag;
-                if (dep.ID == id)
-                {
-                    gridData.Rows.Remove(item);
-                    break;
-                }
-            }
-            gridData.ClearSelection();
-        }
         public void Clear(object sender, EventArgs e)
         {
-            gridData.ClearSelection();
+            //gridData.ClearSelection();
             ClearForm();
             setEnableForm(true);
             setEditMode(EditMode.New);
             textBoxCode.Focus();
         }
-
-        private void gridData_SelectionChanged(object sender, EventArgs e)
-        {
-            if (gridData.SelectedRows.Count == 0) return;
-            ClearForm();
-            m_stocktaking = (StockTaking)gridData.SelectedRows[0].Tag;
-            if (m_stocktaking == null) return;
-            loadData();
-            setEnableForm(false);
-            setEditMode(EditMode.View);
-        }
         private void loadData()
         {
             textBoxCode.Text = m_stocktaking.CODE;
-            //textBoxName.Text = m_stocktaking.NAME;
         }
-
-        #region IChildForm Members
-
-
         public void Refresh(object sender, EventArgs e)
         {
-            loadRecords(); 
-            gridData.ClearSelection(); 
+            //loadRecords(); 
+            //gridData.ClearSelection(); 
         }
-
         public void Print(object sender, EventArgs e)
         {
             
         }
-
-        #endregion
-
         private void BankForm_Activated(object sender, EventArgs e)
         {
             ReloadMainFormButton();
         }
-
         private void employeeKryptonComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             Employee em = (Employee)employeeKryptonComboBox.SelectedItem;
             EmployeekryptonTextBox.Text = em.NAME;
         }
+        private void warehousekryptonComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Warehouse em = (Warehouse)warehousekryptonComboBox.SelectedItem;
+            warehousekryptonTextBox.Text = em.NAME;
+        }
+        private void warehouseButtonSpecAny_Click(object sender, EventArgs e)
+        {
+            //ButtonSpec sp = (ButtonSpec)sender;
+            //Point p = kryptonTextBox1.Parent.PointToScreen(new Point(kryptonTextBox1.Location.X, kryptonTextBox1.Location.Y + 21));
+            //SearchForm sf = new SearchForm(p, r_warehouse);
+            //sf.ShowDialog();
+        }
+        
     }
 }

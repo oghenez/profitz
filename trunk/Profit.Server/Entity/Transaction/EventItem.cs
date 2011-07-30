@@ -133,5 +133,15 @@ namespace Profit.Server
             asserNotNullStockCard();
             STOCK_CARD.ProcessRevise(this);
         }
+
+        #region IEntity Members
+
+
+        public string GetConcatSearch(string find)
+        {
+            return "";
+        }
+
+        #endregion
     }
 }
