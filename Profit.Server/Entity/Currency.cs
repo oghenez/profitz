@@ -91,6 +91,10 @@ namespace Profit.Server
         {
             return String.Format("select * from table_currency");
         }
+        public string GetConcatSearch(string find)
+        {
+            return String.Format(@"SELECT * FROM table_currency p where concat(p.ccy_code, p.ccy_name) like '%{0}%'", find);
+        }
         public IList GetAll(OdbcDataReader aReader)
         {
             IList result = new ArrayList();

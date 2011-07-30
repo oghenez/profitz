@@ -91,6 +91,10 @@ namespace Profit.Server
         {
             return String.Format("select * from table_partcategory");
         }
+        public string GetConcatSearch(string find)
+        {
+            return String.Format(@"SELECT * FROM table_partcategory p where concat(p.prtcat_code, p.prtcat_name) like '%{0}%'", find);
+        }
         public IList GetAll(OdbcDataReader aReader)
         {
             IList result = new ArrayList();

@@ -237,7 +237,6 @@ namespace Profit.Server
             }
             return u;
         }
-        
         public IList Search(string search)
         {
             try
@@ -257,6 +256,40 @@ namespace Profit.Server
                 m_connection.Close();
             }
 
+        }
+        public IList GetAllUnit(int partID, int unitID)
+        {
+            try
+            {
+                OpenConnection();
+                OdbcCommand aCommand = new OdbcCommand(UnitConversion.GetAllByPartSQL(partID), m_connection);
+                OdbcDataReader aReader = aCommand.ExecuteReader();
+                IList a = UnitConversion.GetAllStatic(aReader);
+                aReader.Close();
+                IList result = new ArrayList();
+                foreach (UnitConversion uc in a)
+                {
+                    aCommand.CommandText = Unit.GetByIDSQLstatic(uc.CONVERSION_UNIT.ID);
+                    aReader = aCommand.ExecuteReader();
+                    Unit u = Unit.GetUnit(aReader);
+                    aReader.Close();
+                    result.Add(u);
+                }
+                aCommand.CommandText = Unit.GetByIDSQLstatic(unitID);
+                aReader = aCommand.ExecuteReader();
+                Unit up = Unit.GetUnit(aReader);
+                aReader.Close();
+                result.Add(up);
+                return result;
+            }
+            catch (Exception x)
+            {
+                throw new Exception(getErrorMessage(x));
+            }
+            finally
+            {
+                m_connection.Close();
+            }
         }
 
         //For transaction

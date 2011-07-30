@@ -24,5 +24,6 @@ namespace Profit.Server
         string GetByNameLikeSQL(string text);
         IEntity Get(OdbcDataReader aReader);
         IList GetAll(OdbcDataReader aReader);
+        string GetConcatSearch(string find);
     }
 }

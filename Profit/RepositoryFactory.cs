@@ -31,6 +31,7 @@ namespace Profit
         public const string SUPPLIER_REPOSITORY = "SupplierRepository";
         public const string YEAR_REPOSITORY = "YearRepository";
         public const string PART_REPOSITORY = "PartRepository";
+        public const string STOCKTAKING_REPOSITORY = "StockTakingRepository";
 
 
         public static RepositoryFactory GetInstance()
@@ -63,6 +64,7 @@ namespace Profit
             Repository supplierRepository = new Repository(new Supplier());
             Repository yearRepository = new YearRepository();
             Repository partRepository = new PartRepository(new Part());
+            StockTakingRepository stocktakingRepository = new StockTakingRepository();
 
 
             m_listService.Add(BANK_REPOSITORY, bankRepository);
@@ -84,10 +86,15 @@ namespace Profit
             m_listService.Add(SUPPLIER_REPOSITORY, supplierRepository);
             m_listService.Add(YEAR_REPOSITORY, yearRepository);
             m_listService.Add(PART_REPOSITORY, partRepository);
+            m_listService.Add(STOCKTAKING_REPOSITORY, stocktakingRepository);
         }
         public Repository GetRepository(string name)
         {
             return (Repository)m_listService[name];
+        }
+        public TransactionRepository GetTransactionRepository(string name)
+        {
+            return (TransactionRepository)m_listService[name];
         }
     }
 }

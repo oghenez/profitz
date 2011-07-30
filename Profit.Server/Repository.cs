@@ -137,7 +137,25 @@ namespace Profit.Server
                 m_connection.Close();
             }
         }
-        
+        public virtual IList GetConcatSearch(string text)
+        {
+            try
+            {
+                OpenConnection();
+                OdbcCommand aCommand = new OdbcCommand(m_entity.GetConcatSearch(text), m_connection);
+                OdbcDataReader aReader = aCommand.ExecuteReader();
+                IList a = m_entity.GetAll(aReader);
+                return a;
+            }
+            catch (Exception x)
+            {
+                throw new Exception(getErrorMessage(x));
+            }
+            finally
+            {
+                m_connection.Close();
+            }
+        }
         public DataSet GetAllDataSet()
         {
             try

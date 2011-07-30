@@ -97,6 +97,10 @@ namespace Profit.Server
         {
             return String.Format("select * from table_exchangerate");
         }
+        public string GetConcatSearch(string find)
+        {
+            return "";
+        }
         public IList GetAll(OdbcDataReader aReader)
         {
             IList result = new ArrayList();
