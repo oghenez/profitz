@@ -151,8 +151,17 @@ namespace Profit.Server
                     stk_eventstatus= '{1}'
                 where stk_id = {2}",
                 posted,
-                posted ? EventStatus.Confirm: EventStatus.Entry,
+                posted ? EventStatus.Confirm : EventStatus.Entry,
                 id);
+        }
+        public static string GetSearch(string find)
+        {
+            return String.Format(@"select * from table_stocktaking p
+                INNER JOIN table_employee e on e.emp_id = p.emp_id
+                INNER JOIN table_warehouse w on w.warehouse_id = p.warehouse_id
+                where concat(p.stk_code, e.emp_code, e.emp_name,
+                w.warehouse_code,w.warehouse_name, p.stk_stocktakingtype)
+                like '%{0}%'", find);
         }
     }
 }

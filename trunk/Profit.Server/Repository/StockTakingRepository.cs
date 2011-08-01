@@ -152,5 +152,20 @@ namespace Profit.Server
             m_command.CommandText = StockTaking.GetUpdateStatusSQL(e.ID, posted);
             m_command.ExecuteNonQuery();
         }
+        protected override IList doSearch(string find)
+        {
+            try
+            {
+                m_command.CommandText = StockTaking.GetSearch(find);
+                OdbcDataReader r = m_command.ExecuteReader();
+                IList rest = StockTaking.TransformReaderList(r);
+                r.Close();
+                return rest;
+            }
+            catch (Exception x)
+            {
+                throw x;
+            }
+        }
     }
 }
