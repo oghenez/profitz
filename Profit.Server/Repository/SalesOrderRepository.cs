@@ -187,5 +187,10 @@ namespace Profit.Server
             r.Close();
             return st;
         }
+
+        protected override IList doSearch(string find)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

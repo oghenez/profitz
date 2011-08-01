@@ -66,6 +66,8 @@ namespace Profit
         void dataItemskryptonDataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
             dataItemskryptonDataGridView.Rows[e.RowIndex].ErrorText = "";
+            if (e.FormattedValue == dataItemskryptonDataGridView[scanColumn.Index, e.RowIndex].Tag) return;
+            dataItemskryptonDataGridView[scanColumn.Index, e.RowIndex].Tag = e.FormattedValue;  
             if (e.ColumnIndex == scanColumn.Index)
             {
                 if (e.FormattedValue.ToString() == "")
@@ -85,12 +87,38 @@ namespace Profit
                     dataItemskryptonDataGridView[priceColumn.Index, e.RowIndex].Value = 0;
                     dataItemskryptonDataGridView[totalAmountColumn.Index, e.RowIndex].Value = 0;
                 }
-                if ((result.Count == 0) ||(result.Count > 1))
+                if ((result.Count == 0) || (result.Count > 1))
                 {
-                Point p = dataItemskryptonDataGridView.Parent.PointToScreen(dataItemskryptonDataGridView.Location);
-                Point xy = new Point(p.X, p.Y + (e.RowIndex == 0 ? 21 : (e.RowIndex*21)));
-                    SearchForm fr = new SearchForm(xy ,r_part);
-                    fr.ShowDialog();
+                    //Point point = dataItemskryptonDataGridView.Parent.PointToScreen(dataItemskryptonDataGridView.Location);
+                    //Point xy = new Point(point.X, point.Y + (e.RowIndex == 0 ? 21 : (e.RowIndex * 21)));
+                    using (SearchPartForm fr = new SearchPartForm(e.FormattedValue.ToString(), result))
+                    {
+                        fr.ShowDialog();
+                        Part p = fr.PART;
+                        if (p == null)
+                        {
+                            p = (Part)dataItemskryptonDataGridView[codeColumn.Index, e.RowIndex].Tag;
+                            if (p == null)
+                            {
+                                dataItemskryptonDataGridView.Rows[e.RowIndex].ErrorText = "Pilih Part";
+                                e.Cancel = true;
+                            }
+                        }
+                        else
+                        {
+                            dataItemskryptonDataGridView[codeColumn.Index, e.RowIndex].Tag = p;
+                            dataItemskryptonDataGridView[codeColumn.Index, e.RowIndex].Value = p.CODE;
+                            dataItemskryptonDataGridView[nameColumn.Index, e.RowIndex].Value = p.NAME;
+                            dataItemskryptonDataGridView[QtyColumn.Index, e.RowIndex].Value = 0;
+                            unitColumn.Items.Clear();
+                            IList units = r_part.GetAllUnit(p.ID, p.UNIT.ID);
+                            Utils.GetListCode(unitColumn.Items, units);
+                            dataItemskryptonDataGridView[unitColumn.Index, e.RowIndex].Value = units[0].ToString(); ;
+                            dataItemskryptonDataGridView[priceColumn.Index, e.RowIndex].Value = 0;
+                            dataItemskryptonDataGridView[totalAmountColumn.Index, e.RowIndex].Value = 0;
+                        }
+                    }
+
                 }
             }
         }
@@ -147,12 +175,29 @@ namespace Profit
             bool b = employeeKryptonComboBox.SelectedItem == null;
             bool c = warehousekryptonComboBox.SelectedItem == null;
             bool d = currencyKryptonComboBox.SelectedItem == null;
+            bool e = false;
             
             if (a) errorProvider1.SetError(textBoxCode, "Code Can not Empty");
-            if (b) errorProvider1.SetError(textBoxCode, "Employee Can not Empty");
-            if (c) errorProvider1.SetError(textBoxCode, "Warehouse Can not Empty");
-            if (d) errorProvider1.SetError(textBoxCode, "Currency Can not Empty");
-            return !a && !b && !c && !d;
+            if (b) errorProvider1.SetError(employeeKryptonComboBox, "Employee Can not Empty");
+            if (c) errorProvider1.SetError(warehousekryptonComboBox, "Warehouse Can not Empty");
+            if (d) errorProvider1.SetError(currencyKryptonComboBox, "Currency Can not Empty");
+
+            for (int i = 0; i < dataItemskryptonDataGridView.Rows.Count; i++)
+            {
+                Part p = (Part)dataItemskryptonDataGridView[codeColumn.Index, i].Tag;
+                if (dataItemskryptonDataGridView[unitColumn.Index, i].Value == null)
+                    continue;
+                Unit u = (Unit)Utils.FindEntityInList(dataItemskryptonDataGridView[unitColumn.Index, i].Value.ToString(), m_units);
+                if ((p == null) || (u == null))
+                    continue;
+                double qty = Convert.ToDouble(dataItemskryptonDataGridView[QtyColumn.Index, i].Value);
+                if (qty == 0)
+                {
+                    dataItemskryptonDataGridView.Rows[i].ErrorText = "Quantity must not 0(zero)";
+                    e = true;
+                }
+            }
+            return !a && !b && !c && !d && !e;
         }
         private void UpdateEntity()
         {
@@ -163,6 +208,7 @@ namespace Profit
             m_stocktaking.CURRENCY = (Currency)currencyKryptonComboBox.SelectedItem;
             m_stocktaking.AMOUNT = Convert.ToDouble(totalAmountkryptonNumericUpDown.Value);
             m_stocktaking.STOCK_TAKING_TYPE = (StockTakingType)Enum.Parse(typeof(StockTakingType), stocktakingTypekryptonComboBox.SelectedItem.ToString());
+            m_stocktaking.NOTES = notesKryptonTextBox.Text;
             m_stocktaking.EVENT_ITEMS = getItems();
         }
 
@@ -178,7 +224,10 @@ namespace Profit
                 Unit u = (Unit)Utils.FindEntityInList(dataItemskryptonDataGridView[unitColumn.Index, i].Value.ToString(), m_units);
                 if ((p == null) || (u == null))
                     continue;
-                StockTakingItems st = new StockTakingItems();
+
+                StockTakingItems st=(StockTakingItems)dataItemskryptonDataGridView.Rows[i].Tag;
+                if(st==null)
+                    st = new StockTakingItems();
                 st.EVENT = m_stocktaking;
                 st.PART = p;
                 st.WAREHOUSE = m_stocktaking.WAREHOUSE;
@@ -186,6 +235,7 @@ namespace Profit
                 st.UNIT = u;
                 st.PRICE = Convert.ToDouble(dataItemskryptonDataGridView[priceColumn.Index,i].Value);
                 st.TOTAL_AMOUNT = Convert.ToDouble(dataItemskryptonDataGridView[totalAmountColumn.Index, i].Value);
+                if (st.QYTAMOUNT == 0) continue;
                 items.Add(st);
             }
             return items;
@@ -201,6 +251,7 @@ namespace Profit
                 currencyKryptonComboBox.SelectedIndex = 0;
                 totalAmountkryptonNumericUpDown.Value = 0;
                 stocktakingTypekryptonComboBox.SelectedIndex = 0;
+                notesKryptonTextBox.Text = "";
                 dataItemskryptonDataGridView.Rows.Clear();
                 m_stocktaking = new StockTaking();
                 errorProvider1.Clear();
@@ -225,6 +276,7 @@ namespace Profit
             currencyKryptonComboBox.Enabled = enable;
             totalAmountkryptonNumericUpDown.Enabled = enable;
             stocktakingTypekryptonComboBox.Enabled = enable;
+            notesKryptonTextBox.Enabled = enable;
             dataItemskryptonDataGridView.Enabled = enable;
         }
         private void setEditMode(EditMode editmode)
@@ -279,6 +331,28 @@ namespace Profit
         private void loadData()
         {
             textBoxCode.Text = m_stocktaking.CODE;
+            dateKryptonDateTimePicker.Value = m_stocktaking.TRANSACTION_DATE;
+            employeeKryptonComboBox.Text = m_stocktaking.EMPLOYEE.ToString();
+            warehousekryptonComboBox.Text = m_stocktaking.WAREHOUSE.ToString();
+            currencyKryptonComboBox.Text = m_stocktaking.CURRENCY.ToString();
+            totalAmountkryptonNumericUpDown.Value = Convert.ToDecimal(m_stocktaking.AMOUNT);
+            stocktakingTypekryptonComboBox.Text = m_stocktaking.STOCK_TAKING_TYPE.ToString();
+            foreach (StockTakingItems item in m_stocktaking.EVENT_ITEMS)
+            {
+                item.UNIT = (Unit)r_unit.GetById(item.UNIT);
+                int i = dataItemskryptonDataGridView.Rows.Add();
+                dataItemskryptonDataGridView.Rows[i].Tag = item;
+                dataItemskryptonDataGridView[codeColumn.Index, i].Tag = item.PART;
+                dataItemskryptonDataGridView[codeColumn.Index, i].Value = item.PART.CODE;
+                dataItemskryptonDataGridView[nameColumn.Index, i].Value = item.PART.NAME;
+                dataItemskryptonDataGridView[QtyColumn.Index, i].Value = item.QYTAMOUNT;
+                unitColumn.Items.Clear();
+                IList units = r_part.GetAllUnit(item.PART.ID, item.PART.UNIT.ID);
+                Utils.GetListCode(unitColumn.Items, units);
+                dataItemskryptonDataGridView[unitColumn.Index, i].Value = item.UNIT.ToString(); ;
+                dataItemskryptonDataGridView[priceColumn.Index, i].Value = item.PRICE;
+                dataItemskryptonDataGridView[totalAmountColumn.Index, i].Value = item.TOTAL_AMOUNT;
+            }
         }
         public void Refresh(object sender, EventArgs e)
         {
@@ -303,13 +377,46 @@ namespace Profit
             Warehouse em = (Warehouse)warehousekryptonComboBox.SelectedItem;
             warehousekryptonTextBox.Text = em.NAME;
         }
-        private void warehouseButtonSpecAny_Click(object sender, EventArgs e)
+
+        private void searchToolStripButton_Click(object sender, EventArgs e)
         {
-            //ButtonSpec sp = (ButtonSpec)sender;
-            //Point p = kryptonTextBox1.Parent.PointToScreen(new Point(kryptonTextBox1.Location.X, kryptonTextBox1.Location.Y + 21));
-            //SearchForm sf = new SearchForm(p, r_warehouse);
-            //sf.ShowDialog();
+            IList result = r_stocktaking.Search(searchToolStripTextBox.Text);
+            if (result.Count == 1)
+            {
+                m_stocktaking = (StockTaking)result[0];
+                m_stocktaking = (StockTaking)r_stocktaking.Get(m_stocktaking.ID);
+                m_stocktaking.EMPLOYEE = (Employee)r_employee.GetById(m_stocktaking.EMPLOYEE);
+                m_stocktaking.WAREHOUSE = (Warehouse)r_warehouse.GetById(m_stocktaking.WAREHOUSE);
+                m_stocktaking.CURRENCY = (Currency)r_ccy.GetById(m_stocktaking.CURRENCY);
+                loadData();
+                setEnableForm(false);
+            }
+            else
+            {
+                using (SearchStockTakingForm frm = new SearchStockTakingForm(searchToolStripTextBox.Text, result))
+                {
+                    frm.ShowDialog();
+                    m_stocktaking = frm.STOCK_TAKING;
+                    if (m_stocktaking == null)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        m_stocktaking = (StockTaking)r_stocktaking.Get(m_stocktaking.ID);
+                        m_stocktaking.EMPLOYEE = (Employee)r_employee.GetById(m_stocktaking.EMPLOYEE);
+                        m_stocktaking.WAREHOUSE = (Warehouse)r_warehouse.GetById(m_stocktaking.WAREHOUSE);
+                        m_stocktaking.CURRENCY = (Currency)r_ccy.GetById(m_stocktaking.CURRENCY);
+                        loadData();
+                        setEnableForm(false);
+                    }
+                }
+            }
         }
-        
+
+        private void kryptonTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }      
     }
 }

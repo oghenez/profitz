@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonHeader1 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
@@ -38,7 +38,14 @@
             this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonClear = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonRefresh = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.searchToolStripTextBox = new System.Windows.Forms.ToolStripTextBox();
+            this.searchToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.notesKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonBorderEdge1 = new ComponentFactory.Krypton.Toolkit.KryptonBorderEdge();
             this.totalAmountkryptonNumericUpDown = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
             this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -101,7 +108,12 @@
             this.toolStripButtonEdit,
             this.toolStripButtonDelete,
             this.toolStripButtonClear,
-            this.toolStripButtonRefresh});
+            this.toolStripButtonRefresh,
+            this.toolStripSeparator1,
+            this.toolStripLabel1,
+            this.searchToolStripTextBox,
+            this.searchToolStripButton,
+            this.toolStripSeparator2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 29);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(856, 25);
@@ -152,9 +164,43 @@
             this.toolStripButtonRefresh.Size = new System.Drawing.Size(66, 22);
             this.toolStripButtonRefresh.Text = "Refresh";
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(39, 22);
+            this.toolStripLabel1.Text = "Find : ";
+            // 
+            // searchToolStripTextBox
+            // 
+            this.searchToolStripTextBox.Name = "searchToolStripTextBox";
+            this.searchToolStripTextBox.Size = new System.Drawing.Size(150, 25);
+            this.searchToolStripTextBox.ToolTipText = "Find Stock Taking by Code, Employee";
+            // 
+            // searchToolStripButton
+            // 
+            this.searchToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.searchToolStripButton.Image = global::Profit.Properties.Resources.printpreview;
+            this.searchToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.searchToolStripButton.Name = "searchToolStripButton";
+            this.searchToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.searchToolStripButton.Text = "toolStripButton1";
+            this.searchToolStripButton.Click += new System.EventHandler(this.searchToolStripButton_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
             // kryptonPanel1
             // 
             this.kryptonPanel1.AutoScroll = true;
+            this.kryptonPanel1.Controls.Add(this.notesKryptonTextBox);
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel7);
             this.kryptonPanel1.Controls.Add(this.kryptonBorderEdge1);
             this.kryptonPanel1.Controls.Add(this.totalAmountkryptonNumericUpDown);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel6);
@@ -177,6 +223,24 @@
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(856, 357);
             this.kryptonPanel1.TabIndex = 4;
+            // 
+            // notesKryptonTextBox
+            // 
+            this.notesKryptonTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.notesKryptonTextBox.Location = new System.Drawing.Point(58, 323);
+            this.notesKryptonTextBox.Name = "notesKryptonTextBox";
+            this.notesKryptonTextBox.Size = new System.Drawing.Size(415, 22);
+            this.notesKryptonTextBox.TabIndex = 21;
+            this.notesKryptonTextBox.TextChanged += new System.EventHandler(this.kryptonTextBox1_TextChanged);
+            // 
+            // kryptonLabel7
+            // 
+            this.kryptonLabel7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.kryptonLabel7.Location = new System.Drawing.Point(10, 323);
+            this.kryptonLabel7.Name = "kryptonLabel7";
+            this.kryptonLabel7.Size = new System.Drawing.Size(45, 19);
+            this.kryptonLabel7.TabIndex = 20;
+            this.kryptonLabel7.Values.Text = "Notes :";
             // 
             // kryptonBorderEdge1
             // 
@@ -394,8 +458,8 @@
             // priceColumn
             // 
             this.priceColumn.DecimalPlaces = 2;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.priceColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.priceColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.priceColumn.HeaderText = "Price";
             this.priceColumn.Increment = new decimal(new int[] {
             100,
@@ -419,8 +483,8 @@
             // totalAmountColumn
             // 
             this.totalAmountColumn.DecimalPlaces = 2;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.totalAmountColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.totalAmountColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.totalAmountColumn.HeaderText = "Amount";
             this.totalAmountColumn.Increment = new decimal(new int[] {
             1,
@@ -562,5 +626,12 @@
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox currencyKryptonComboBox;
         private ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown totalAmountkryptonNumericUpDown;
         private ComponentFactory.Krypton.Toolkit.KryptonBorderEdge kryptonBorderEdge1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripTextBox searchToolStripTextBox;
+        private System.Windows.Forms.ToolStripButton searchToolStripButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox notesKryptonTextBox;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
     }
 }

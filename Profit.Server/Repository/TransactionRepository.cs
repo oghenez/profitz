@@ -13,6 +13,7 @@ namespace Profit.Server
         protected OdbcCommand m_command = new OdbcCommand();
         abstract protected void doConfirm(Event events, Period p);
         abstract protected void doRevise(Event events, Period p);
+        abstract protected IList doSearch(string find);
         //abstract protected void doInitEventRepository();
         //protected EventRepository m_eventRepository;
 
@@ -128,6 +129,10 @@ namespace Profit.Server
         public void Delete(Event e)
         {
             doDelete(e);
+        }
+        public IList Search(string find)
+        {
+            return doSearch(find);
         }
         public void UpdateStatus(Event e, bool p)
         {
