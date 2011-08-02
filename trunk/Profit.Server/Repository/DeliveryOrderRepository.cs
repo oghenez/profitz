@@ -97,7 +97,7 @@ namespace Profit.Server
                     {
                         m_command.CommandText = sti.GetInsertSQL();
                         m_command.ExecuteNonQuery();
-                        m_command.CommandText = sti.GetMaximumIDSQL();
+                        m_command.CommandText = DeliveryOrderItem.SelectMaxIDSQL();
                         sti.ID = Convert.ToInt32(m_command.ExecuteScalar());
                     }
                 }
@@ -213,6 +213,11 @@ namespace Profit.Server
         }
 
         protected override IList doSearch(string find)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override bool doIsCodeExist(string code)
         {
             throw new NotImplementedException();
         }

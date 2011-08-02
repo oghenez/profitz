@@ -14,6 +14,7 @@ namespace Profit.Server
         abstract protected void doConfirm(Event events, Period p);
         abstract protected void doRevise(Event events, Period p);
         abstract protected IList doSearch(string find);
+        abstract protected bool doIsCodeExist(string code);
         //abstract protected void doInitEventRepository();
         //protected EventRepository m_eventRepository;
 
@@ -129,6 +130,10 @@ namespace Profit.Server
         public void Delete(Event e)
         {
             doDelete(e);
+        }
+        public bool IsCodeExist(string code)
+        {
+            return doIsCodeExist(code);
         }
         public IList Search(string find)
         {
