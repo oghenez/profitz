@@ -301,7 +301,7 @@ namespace Profit
         {
             kryptonPanel4.Tag = MainHeaderkryptonHeader8.Orientation == VisualOrientation.Top ? kryptonPanel4.Width : (int)kryptonPanel4.Tag;
             MainHeaderkryptonHeader8.Orientation = MainHeaderkryptonHeader8.Orientation == VisualOrientation.Top ? VisualOrientation.Left : VisualOrientation.Top;
-            kryptonPanel4.Width = MainHeaderkryptonHeader8.Orientation == VisualOrientation.Left ? 33 : (int)kryptonPanel4.Tag;
+            kryptonPanel4.Width = MainHeaderkryptonHeader8.Orientation == VisualOrientation.Left ? 35 : (int)kryptonPanel4.Tag;
             buttonSpecAny3.Type = MainHeaderkryptonHeader8.Orientation == VisualOrientation.Left ? PaletteButtonSpecStyle.ArrowRight : PaletteButtonSpecStyle.ArrowLeft;
             MasterDatakryptonPanel1.Visible = MasterDatakryptonCheckButton1.Checked && (MainHeaderkryptonHeader8.Orientation != VisualOrientation.Left);
             TransactionSkryptonPanel.Visible = TransactionkryptonCheckButton2.Checked && (MainHeaderkryptonHeader8.Orientation != VisualOrientation.Left);

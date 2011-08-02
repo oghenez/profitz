@@ -167,5 +167,19 @@ namespace Profit.Server
                 throw x;
             }
         }
+
+        protected override bool doIsCodeExist(string code)
+        {
+            try
+            {
+                m_command.CommandText = StockTaking.SelectCountByCode(code);
+                int t = Convert.ToInt32(m_command.ExecuteScalar());
+                return t > 0;
+            }
+            catch (Exception x)
+            {
+                throw x;
+            }
+        }
     }
 }

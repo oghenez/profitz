@@ -136,6 +136,10 @@ namespace Profit.Server
         {
             return String.Format("SELECT * from table_stocktaking where stk_id ={0}", id);
         }
+        public static string SelectCountByCode(string code)
+        {
+            return String.Format("SELECT count(*) from table_stocktaking where stk_code ='{0}'", code);
+        }
         public static string DeleteSQL(int id)
         {
             return String.Format("Delete from table_stocktaking where stk_id ={0}", id);

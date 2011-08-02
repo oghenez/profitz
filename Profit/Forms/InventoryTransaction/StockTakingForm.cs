@@ -233,17 +233,21 @@ namespace Profit
         }
         public bool Valid()
         {
+            errorProvider1.Clear();
             bool a = textBoxCode.Text == "";
             bool b = employeeKryptonComboBox.SelectedItem == null;
             bool c = warehousekryptonComboBox.SelectedItem == null;
             bool d = currencyKryptonComboBox.SelectedItem == null;
             bool e = false;
+            bool f = m_stocktaking.ID > 0 ? false : r_stocktaking.IsCodeExist(textBoxCode.Text);
             
             if (a) errorProvider1.SetError(textBoxCode, "Code Can not Empty");
             if (b) errorProvider1.SetError(employeeKryptonComboBox, "Employee Can not Empty");
             if (c) errorProvider1.SetError(warehousekryptonComboBox, "Warehouse Can not Empty");
             if (d) errorProvider1.SetError(currencyKryptonComboBox, "Currency Can not Empty");
+            if (f) errorProvider1.SetError(textBoxCode, a ? "Code Can not Empty & Code already used" : "Code already used");
 
+            int j = 0;
             for (int i = 0; i < dataItemskryptonDataGridView.Rows.Count; i++)
             {
                 Part p = (Part)dataItemskryptonDataGridView[codeColumn.Index, i].Tag;
@@ -263,8 +267,12 @@ namespace Profit
                     dataItemskryptonDataGridView.Rows[i].ErrorText = dataItemskryptonDataGridView.Rows[i].ErrorText+" Quantity must not 0(zero)";
                     e = true;
                 }
+                j++;
             }
-            return !a && !b && !c && !d && !e;
+
+            bool g = j == 0;
+            if (g) errorProvider1.SetError(dataItemskryptonDataGridView,"Items must at least 1(one)");
+            return !a && !b && !c && !d && !e && !f && !g;
         }
         private void UpdateEntity()
         {
@@ -359,6 +367,7 @@ namespace Profit
             toolStripButtonClear.Enabled = true;//m_mainForm.CurrentUser.FORM_CCY_SAVE;
             postToolStripButton.Enabled = (m_stocktaking.ID > 0) && (editmode == EditMode.View);
             postToolStripButton.Text = m_stocktaking.POSTED ? "Unpost" : "Post";
+            statusKryptonLabel.Text = m_stocktaking.POSTED ? "POSTED" : "ENTRY";
             m_editMode = editmode;
             ReloadMainFormButton();
         }
@@ -456,7 +465,7 @@ namespace Profit
 
         private void searchToolStripButton_Click(object sender, EventArgs e)
         {
-            IList result = r_stocktaking.Search(searchToolStripTextBox.Text);
+            IList result = searchToolStripTextBox.Text == string.Empty?new ArrayList() : r_stocktaking.Search(searchToolStripTextBox.Text);
             if (result.Count == 1)
             {
                 m_stocktaking = (StockTaking)result[0];
