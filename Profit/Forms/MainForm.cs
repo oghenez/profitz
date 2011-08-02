@@ -37,9 +37,9 @@ namespace Profit
         public MainForm()
         {
             InitializeComponent();
-            kryptonManager1.GlobalPaletteMode = PaletteModeManager.Office2010Blue;
+            kryptonManager1.GlobalPaletteMode = PaletteModeManager.ProfessionalSystem;
             toolStripComboBox1.Items.AddRange(Enum.GetNames(typeof(PaletteModeManager)));
-            toolStripComboBox1.Text = PaletteModeManager.Office2010Blue.ToString();
+            toolStripComboBox1.Text = PaletteModeManager.ProfessionalSystem.ToString();
             toolStripComboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 

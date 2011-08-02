@@ -72,7 +72,7 @@ namespace Profit.Server
                     {
                         m_command.CommandText = sti.GetInsertSQL();
                         m_command.ExecuteNonQuery();
-                        m_command.CommandText = sti.GetMaximumIDSQL();
+                        m_command.CommandText = StockTakingItems.SelectMaxIDSQL();
                         sti.ID = Convert.ToInt32(m_command.ExecuteScalar());
                     }
                 }
