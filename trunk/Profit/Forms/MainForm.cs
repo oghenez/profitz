@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using ComponentFactory.Krypton.Toolkit;
+using System.Collections;
+using Profit.Server;
 
 namespace Profit
 {
@@ -32,7 +34,9 @@ namespace Profit
         const string YEAR_FORM = "YearForm";
         const string PART_FORM = "PartForm";
         const string STOCK_TAKING_FORM = "StockTakingForm";
-
+        const string USER_FORM = "UserForm";
+        IList m_listForm = new ArrayList();
+        User m_currentUser = null;
 
         public MainForm()
         {
@@ -41,6 +45,9 @@ namespace Profit
             toolStripComboBox1.Items.AddRange(Enum.GetNames(typeof(PaletteModeManager)));
             toolStripComboBox1.Text = PaletteModeManager.ProfessionalSystem.ToString();
             toolStripComboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            InitFormAccessList();
+
+            m_currentUser = (User)((UserRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.USER_REPOSITORY)).getUser("ADMIN", "admin1234");
         }
 
         //private void buttonSpecHeaderGroup1_Click(object sender, EventArgs e)
@@ -400,6 +407,48 @@ namespace Profit
         private void kryptonHeader7_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        public IList GetFormAccessList()
+        {
+            return m_listForm;
+        }
+        public void InitFormAccessList()
+        {
+            m_listForm.Add(new FormAccess(0, MainForm.BANK_FORM.ToString(), "MSTF001 - Bank"));
+            m_listForm.Add(new FormAccess(0, MainForm.DOC_TYPE_FORM.ToString(), "MSTF002 - Document Type"));
+            m_listForm.Add(new FormAccess(0, MainForm.EXCHANGE_RATE_FORM.ToString(), "MSTF003 - Exchange Rate"));
+            m_listForm.Add(new FormAccess(0, MainForm.YEAR_FORM.ToString(), "MSTF004 - Year"));
+            m_listForm.Add(new FormAccess(0, MainForm.CURRENCY_FORM.ToString(), "MSTG001 - Currency"));
+            m_listForm.Add(new FormAccess(0, MainForm.EMPLOYEE_FORM.ToString(), "MSTG002 - Employee"));
+            m_listForm.Add(new FormAccess(0, MainForm.DIVISION_FORM.ToString(), "MSTG003 - Division"));
+            m_listForm.Add(new FormAccess(0, MainForm.PART_GROUP_FORM.ToString(), "MSTI001 - Part Group"));
+            m_listForm.Add(new FormAccess(0, MainForm.PRICE_CATEGORY_FORM.ToString(), "MSTI002 - Part Category"));
+            m_listForm.Add(new FormAccess(0, MainForm.UNIT_FORM.ToString(), "MSTI003 - Unit"));
+            m_listForm.Add(new FormAccess(0, MainForm.WAREHOUSE_FORM.ToString(), "MSTI004 - Warehouse"));
+            m_listForm.Add(new FormAccess(0, MainForm.CUSTOMER_FORM.ToString(), "MSTD001 - Customer"));
+            m_listForm.Add(new FormAccess(0, MainForm.SUPPLIER_FORM.ToString(), "MSTD002 - Supplier"));
+            m_listForm.Add(new FormAccess(0, MainForm.CUSTOMER_CATEGORY_FORM.ToString(), "MSTD003 - Customer Category"));
+            m_listForm.Add(new FormAccess(0, MainForm.SUPPLIER_CATEGORY_FORM.ToString(), "MSTD004 - Supplier Category"));
+            m_listForm.Add(new FormAccess(0, MainForm.PRICE_CATEGORY_FORM.ToString(), "MSTD005 - Price Category"));
+            m_listForm.Add(new FormAccess(0, MainForm.TAX_FORM.ToString(), "MSTD006 - Tax"));
+            m_listForm.Add(new FormAccess(0, MainForm.TOP_FORM.ToString(), "MSTD007 - Term Of Payment"));
+            m_listForm.Add(new FormAccess(0, MainForm.STOCK_TAKING_FORM.ToString(), "TRCI001 - Stock Taking"));
+            m_listForm.Add(new FormAccess(0, MainForm.PART_FORM.ToString(), "TRCI002 - Part Master"));
+        }
+
+        private void userMaintenanceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (isChild(USER_FORM)) { this.Cursor = Cursors.Default; return; }
+            UserForm user = new UserForm(this, USER_FORM);
+            user.WindowState = FormWindowState.Maximized;
+            user.Show();
+        }
+
+        public User CurrentUser
+        {
+            get { return m_currentUser; }
+            set { m_currentUser = value; }
         }
     }
 }

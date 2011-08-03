@@ -129,6 +129,7 @@
             this.MasterDatakryptonCheckButton1 = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.kryptonCheckSet1 = new ComponentFactory.Krypton.Toolkit.KryptonCheckSet(this.components);
+            this.userMaintenanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel4)).BeginInit();
             this.kryptonPanel4.SuspendLayout();
@@ -175,6 +176,7 @@
             this.printToolStripMenuItem,
             this.toolStripSeparator2,
             this.generalSetupToolStripMenuItem,
+            this.userMaintenanceToolStripMenuItem,
             this.toolStripSeparator4,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -184,20 +186,20 @@
             // testToolStripMenuItem
             // 
             this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.testToolStripMenuItem.Text = "Logout";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(152, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(171, 6);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Image = global::Profit.Properties.Resources.save;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -206,7 +208,7 @@
             this.clearToolStripMenuItem.Image = global::Profit.Properties.Resources.Gnome_Edit_Redo_32;
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
             this.clearToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.clearToolStripMenuItem.Text = "Clear";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
             // 
@@ -215,7 +217,7 @@
             this.deleteToolStripMenuItem.Image = global::Profit.Properties.Resources.delete;
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -224,7 +226,7 @@
             this.refreshToolStripMenuItem.Image = global::Profit.Properties.Resources.refresh;
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
             this.refreshToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.refreshToolStripMenuItem.Text = "Refresh";
             // 
             // printToolStripMenuItem
@@ -232,30 +234,30 @@
             this.printToolStripMenuItem.Image = global::Profit.Properties.Resources.print;
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
             this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.printToolStripMenuItem.Text = "Print";
             this.printToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(152, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(171, 6);
             // 
             // generalSetupToolStripMenuItem
             // 
             this.generalSetupToolStripMenuItem.Name = "generalSetupToolStripMenuItem";
-            this.generalSetupToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.generalSetupToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.generalSetupToolStripMenuItem.Text = "General Setup";
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(152, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(171, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // editToolStripMenuItemM
@@ -272,14 +274,14 @@
             this.editToolStripMenuItem.Image = global::Profit.Properties.Resources.edit;
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(137, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
             // 
             // helpToolStripMenuItem
             // 
@@ -877,6 +879,13 @@
             this.kryptonCheckSet1.CheckedButton = this.TransactionkryptonCheckButton2;
             this.kryptonCheckSet1.CheckedButtonChanged += new System.EventHandler(this.kryptonCheckSet1_CheckedButtonChanged);
             // 
+            // userMaintenanceToolStripMenuItem
+            // 
+            this.userMaintenanceToolStripMenuItem.Name = "userMaintenanceToolStripMenuItem";
+            this.userMaintenanceToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.userMaintenanceToolStripMenuItem.Text = "User Maintenance";
+            this.userMaintenanceToolStripMenuItem.Click += new System.EventHandler(this.userMaintenanceToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -972,6 +981,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonBorderEdge kryptonBorderEdge3;
         private ComponentFactory.Krypton.Toolkit.KryptonBorderEdge kryptonBorderEdge6;
         private ComponentFactory.Krypton.Toolkit.KryptonBorderEdge kryptonBorderEdge8;
+        private System.Windows.Forms.ToolStripMenuItem userMaintenanceToolStripMenuItem;
 
 
     }

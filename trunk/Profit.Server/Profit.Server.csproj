@@ -47,7 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Crypto.cs" />
     <Compile Include="Entity\Bank.cs" />
+    <Compile Include="Entity\FormAccess.cs" />
+    <Compile Include="Entity\User.cs" />
     <Compile Include="Entity\PartSellingPriceInformation.cs" />
     <Compile Include="Entity\Transaction\SalesReturnItem.cs" />
     <Compile Include="Entity\Transaction\SalesReturn.cs" />
@@ -105,6 +108,7 @@
     <Compile Include="Repository\PeriodRepository.cs" />
     <Compile Include="Repository\StockCardEntryRepository.cs" />
     <Compile Include="Repository\StockCardRepository.cs" />
+    <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Repository\YearRepository.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>

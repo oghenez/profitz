@@ -74,6 +74,12 @@
     <Compile Include="Forms\InventoryTransaction\SearchStockTakingForm.Designer.cs">
       <DependentUpon>SearchStockTakingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MasterData\UserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MasterData\UserForm.Designer.cs">
+      <DependentUpon>UserForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SearchPartForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -213,6 +219,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\InventoryTransaction\SearchStockTakingForm.resx">
       <DependentUpon>SearchStockTakingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MasterData\UserForm.resx">
+      <DependentUpon>UserForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SearchPartForm.resx">
       <DependentUpon>SearchPartForm.cs</DependentUpon>
