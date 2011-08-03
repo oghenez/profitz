@@ -162,8 +162,8 @@ namespace Profit
             toolStripButtonClear.Click += new EventHandler(Clear);
             toolStripButtonRefresh.Click+=new EventHandler(Refresh);
             postToolStripButton.Click += new EventHandler(Post);
+            toolStripButtonPrint.Click += new EventHandler(Print);
         }
-
         void Post(object sender, EventArgs e)
         {
             try
@@ -365,6 +365,7 @@ namespace Profit
             toolStripButtonEdit.Enabled = (!m_stocktaking.POSTED) && (editmode == EditMode.View);//&& m_mainForm.CurrentUser.FORM_CCY_SAVE;
             toolStripButtonDelete.Enabled = (!m_stocktaking.POSTED) && (editmode == EditMode.View);//&& m_mainForm.CurrentUser.FORM_CCY_DELETE;
             toolStripButtonClear.Enabled = true;//m_mainForm.CurrentUser.FORM_CCY_SAVE;
+            toolStripButtonPrint.Enabled = m_stocktaking.POSTED;
             postToolStripButton.Enabled = (m_stocktaking.ID > 0) && (editmode == EditMode.View);
             postToolStripButton.Text = m_stocktaking.POSTED ? "Unpost" : "Post";
             statusKryptonLabel.Text = m_stocktaking.POSTED ? "POSTED" : "ENTRY";
