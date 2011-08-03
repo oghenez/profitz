@@ -335,6 +335,41 @@ INSERT INTO `table_exchangerate` (`excrate_id`,`excrate_code`,`excrate_start`,`e
 
 
 --
+-- Definition of table `table_formaccess`
+--
+
+DROP TABLE IF EXISTS `table_formaccess`;
+CREATE TABLE `table_formaccess` (
+  `formaccess_id` int(10) unsigned NOT NULL auto_increment,
+  `formaccess_code` varchar(45) NOT NULL,
+  `formaccess_name` varchar(45) NOT NULL,
+  `formaccess_save` tinyint(1) NOT NULL,
+  `formaccess_delete` tinyint(1) NOT NULL,
+  `formaccess_view` tinyint(1) NOT NULL,
+  `formaccess_post` tinyint(1) NOT NULL,
+  `formaccess_print` tinyint(1) NOT NULL,
+  `user_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY  USING BTREE (`formaccess_id`),
+  KEY `FK_table_formaccess_1` (`user_id`),
+  CONSTRAINT `FK_table_formaccess_1` FOREIGN KEY (`user_id`) REFERENCES `table_user` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_formaccess`
+--
+
+/*!40000 ALTER TABLE `table_formaccess` DISABLE KEYS */;
+INSERT INTO `table_formaccess` (`formaccess_id`,`formaccess_code`,`formaccess_name`,`formaccess_save`,`formaccess_delete`,`formaccess_view`,`formaccess_post`,`formaccess_print`,`user_id`) VALUES 
+ (1,'BankForm','MSTF001 - Bank',1,0,1,1,1,10),
+ (3,'DocumentTypeForm','MSTF002 - Document Type',0,0,1,1,1,1),
+ (4,'ExchangeRateForm','MSTF003 - Exchange Rate',1,1,1,1,1,1),
+ (5,'YearForm','MSTF004 - Year',1,1,1,1,1,1),
+ (6,'StockTakingForm','TRCI001 - Stock Taking',1,0,1,1,1,10),
+ (7,'BankForm','MSTF001 - Bank',1,0,0,0,0,1);
+/*!40000 ALTER TABLE `table_formaccess` ENABLE KEYS */;
+
+
+--
 -- Definition of table `table_goodreceivenote`
 --
 
@@ -7441,7 +7476,7 @@ CREATE TABLE `table_stockcard` (
   CONSTRAINT `FK_table_stockcard_1` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`),
   CONSTRAINT `FK_table_stockcard_2` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
   CONSTRAINT `FK_table_stockcard_3` FOREIGN KEY (`period_id`) REFERENCES `table_period` (`period_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_stockcard`
@@ -7458,7 +7493,10 @@ INSERT INTO `table_stockcard` (`sc_id`,`part_id`,`warehouse_id`,`period_id`,`sc_
  (9,15492,1,19,1,0,0),
  (10,14907,1,19,10,0,0),
  (11,11049,1,19,20,0,0),
- (12,10199,1,19,10,0,0);
+ (12,10199,1,19,10,0,0),
+ (13,12096,1,19,20,0,0),
+ (14,12097,1,19,20,0,0),
+ (15,11058,1,19,100,0,0);
 /*!40000 ALTER TABLE `table_stockcard` ENABLE KEYS */;
 
 
@@ -7480,7 +7518,7 @@ CREATE TABLE `table_stockcardentry` (
   KEY `FK_table_stockcardentry_2` (`sc_id`),
   CONSTRAINT `FK_table_stockcardentry_1` FOREIGN KEY (`unit_id`) REFERENCES `table_unit` (`unit_id`),
   CONSTRAINT `FK_table_stockcardentry_2` FOREIGN KEY (`sc_id`) REFERENCES `table_stockcard` (`sc_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_stockcardentry`
@@ -7497,7 +7535,10 @@ INSERT INTO `table_stockcardentry` (`sce_id`,`sc_id`,`sce_stockcardentrytype`,`s
  (26,9,'StockTaking','2011-07-20 00:00:00',1,1,20),
  (27,10,'StockTaking','2011-07-20 00:00:00',1,10,21),
  (28,11,'StockTaking','2011-07-20 00:00:00',1,20,29),
- (29,12,'StockTaking','2011-07-02 00:00:00',1,10,40);
+ (29,12,'StockTaking','2011-07-02 00:00:00',1,10,40),
+ (30,13,'StockTaking','2011-07-02 00:00:00',1,20,41),
+ (31,14,'StockTaking','2011-07-02 00:00:00',1,20,42),
+ (32,15,'StockTaking','2011-07-31 00:00:00',1,100,45);
 /*!40000 ALTER TABLE `table_stockcardentry` ENABLE KEYS */;
 
 
@@ -7528,7 +7569,7 @@ CREATE TABLE `table_stocktaking` (
   CONSTRAINT `FK_table_stocktaking_1` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
   CONSTRAINT `FK_table_stocktaking_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_stocktaking_3` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_stocktaking`
@@ -7546,7 +7587,9 @@ INSERT INTO `table_stocktaking` (`stk_id`,`stk_date`,`stk_noticedate`,`stk_scent
  (13,'2011-07-03 00:00:00','2011-08-02 00:00:00','StockTaking',1,'TES lagi ----',0,'Entry',1,540000,1,'Adjustment','TEst004'),
  (14,'2011-07-02 00:00:00','2011-08-02 00:00:00','StockTaking',1,'',0,'Entry',1,0,1,'Adjustment','TEST005'),
  (15,'2011-08-02 00:00:00','2011-08-02 00:00:00','StockTaking',1,'',0,'Entry',1,0,1,'Adjustment','TEST002'),
- (16,'2011-07-02 00:00:00','2011-08-02 00:00:00','StockTaking',1,'',1,'Confirm',1,50000,1,'Adjustment','TEST0000123');
+ (16,'2011-07-02 00:00:00','2011-08-02 00:00:00','StockTaking',1,'',1,'Confirm',1,50000,1,'Adjustment','TEST0000123'),
+ (17,'2011-07-02 00:00:00','2011-08-02 00:00:00','StockTaking',1,'',1,'Confirm',1,65000,1,'Adjustment','STOKMIE001'),
+ (18,'2011-07-31 00:00:00','2011-08-03 00:00:00','StockTaking',1,'TEST AQUA',1,'Confirm',1,895427,1,'Adjustment','TEST006');
 /*!40000 ALTER TABLE `table_stocktaking` ENABLE KEYS */;
 
 
@@ -7576,7 +7619,7 @@ CREATE TABLE `table_stocktakingitem` (
   CONSTRAINT `FK_table_stocktakingitem_2` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`),
   CONSTRAINT `FK_table_stocktakingitem_3` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
   CONSTRAINT `FK_table_stocktakingitem_4` FOREIGN KEY (`stk_id`) REFERENCES `table_stocktaking` (`stk_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_stocktakingitem`
@@ -7605,7 +7648,10 @@ INSERT INTO `table_stocktakingitem` (`stki_id`,`stk_id`,`part_id`,`warehouse_id`
  (36,14,9433,1,10,0,'StockTaking',0,1,0,0),
  (37,14,9434,1,-10,0,'StockTaking',0,1,0,0),
  (39,15,9475,1,10,0,'StockTaking',0,1,0,0),
- (40,16,10199,1,10,0,'StockTaking',0,1,5000,50000);
+ (40,16,10199,1,10,0,'StockTaking',0,1,5000,50000),
+ (41,17,12096,1,20,0,'StockTaking',0,1,1500,30000),
+ (42,17,12097,1,20,0,'StockTaking',0,1,1750,35000),
+ (45,18,11058,1,100,0,'StockTaking',0,1,8954.27,895427);
 /*!40000 ALTER TABLE `table_stocktakingitem` ENABLE KEYS */;
 
 
@@ -7784,7 +7830,7 @@ CREATE TABLE `table_unitconversion` (
   KEY `FK_table_unitconversion_2` (`part_id`),
   CONSTRAINT `FK_table_unitconversion_1` FOREIGN KEY (`unitconv_unit`) REFERENCES `table_unit` (`unit_id`),
   CONSTRAINT `FK_table_unitconversion_2` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_unitconversion`
@@ -7798,8 +7844,34 @@ INSERT INTO `table_unitconversion` (`unitconv_id`,`unitconv_code`,`unitconv_name
  (13,'-','-',20,4,5000,6500,9109),
  (14,'-','-',10,4,15000,16000,9497),
  (15,'-','-',12,4,0,0,9087),
- (16,'-','-',50,6,0,0,9087);
+ (16,'-','-',50,6,0,0,9087),
+ (17,'-','-',48,4,0,0,12096);
 /*!40000 ALTER TABLE `table_unitconversion` ENABLE KEYS */;
+
+
+--
+-- Definition of table `table_user`
+--
+
+DROP TABLE IF EXISTS `table_user`;
+CREATE TABLE `table_user` (
+  `user_id` int(10) unsigned NOT NULL auto_increment,
+  `user_code` varchar(45) NOT NULL,
+  `user_name` varchar(45) NOT NULL,
+  `user_password` text NOT NULL,
+  PRIMARY KEY  (`user_id`),
+  UNIQUE KEY `Index_2` (`user_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_user`
+--
+
+/*!40000 ALTER TABLE `table_user` DISABLE KEYS */;
+INSERT INTO `table_user` (`user_id`,`user_code`,`user_name`,`user_password`) VALUES 
+ (1,'ADMIN','Administrator','vbFKAnKFzA/jin7UOuO5UA=='),
+ (10,'TEST','test','h8hJDUbluugJhS5FrEL6ZA==');
+/*!40000 ALTER TABLE `table_user` ENABLE KEYS */;
 
 
 --
