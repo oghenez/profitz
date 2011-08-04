@@ -15,6 +15,7 @@ namespace Profit.Server
         public string CODE = "B001";
         public string NAME = "";
         public string PASSWORD = "1234";
+        public bool ACTIVE = true;
         public IDictionary<string, FormAccess> FORM_ACCESS_LIST= new Dictionary<string, FormAccess>();
         public User()
         {
@@ -38,6 +39,7 @@ namespace Profit.Server
                 user.CODE = aReader[1].ToString();
                 user.NAME = aReader[2].ToString();
                 user.PASSWORD = m_crypto.Decrypt(aReader[3].ToString());
+                user.ACTIVE = Convert.ToBoolean(aReader[4]);
             }
             return user;
         }
@@ -52,15 +54,16 @@ namespace Profit.Server
                 user.CODE = aReader[1].ToString();
                 user.NAME = aReader[2].ToString();
                 user.PASSWORD = m_crypto.Decrypt(aReader[3].ToString());
+                user.ACTIVE = Convert.ToBoolean(aReader[4]);
             }
             return user;
         }
         public string GetInsertSQL()
         {
             return String.Format(@"insert into table_user 
-                (user_code,user_name, user_password) 
-                VALUES ('{0}','{1}','{2}')",
-                CODE, NAME, m_crypto.Encrypt(PASSWORD));
+                (user_code,user_name, user_password, user_active) 
+                VALUES ('{0}','{1}','{2}',{3})",
+                CODE, NAME, m_crypto.Encrypt(PASSWORD),ACTIVE);
         }
         public string GetDeleteSQL()
         {
@@ -71,9 +74,10 @@ namespace Profit.Server
             return String.Format(@"update table_user set 
                 user_code = '{0}', 
                 user_name='{1}',
-                user_password='{2}'
-                where user_id = {3}",
-                CODE, NAME,m_crypto.Encrypt(PASSWORD), ID);
+                user_password='{2}',
+                user_active = {3}
+                where user_id = {4}",
+                CODE, NAME,m_crypto.Encrypt(PASSWORD), ACTIVE, ID);
         }
         public string GetByIDSQL(int ID)
         {
@@ -113,6 +117,7 @@ namespace Profit.Server
                 user.CODE = aReader[1].ToString();
                 user.NAME = aReader[2].ToString();
                 user.PASSWORD = m_crypto.Decrypt(aReader[3].ToString());
+                user.ACTIVE = Convert.ToBoolean(aReader[4]);
                 result.Add(user);
             }
             return result;

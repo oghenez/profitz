@@ -74,7 +74,7 @@ namespace Profit
             {
                 if (!((DataGridViewTextBoxCell)dataItemskryptonDataGridView[scanColumn.Index, e.RowIndex]).IsInEditMode)return;
                 if (e.FormattedValue.ToString() == "")return;
-                IList result = r_part.Search(e.FormattedValue.ToString());
+                IList result = r_part.SearchActivePart(e.FormattedValue.ToString());
                 if (result.Count == 1)
                 {
                     Part p = (Part)result[0];
@@ -361,12 +361,12 @@ namespace Profit
         }
         private void setEditMode(EditMode editmode)
         {
-            toolStripButtonSave.Enabled = (!m_stocktaking.POSTED) && (editmode == EditMode.New || editmode == EditMode.Update);// && m_mainForm.CurrentUser.FORM_CCY_SAVE;
-            toolStripButtonEdit.Enabled = (!m_stocktaking.POSTED) && (editmode == EditMode.View);//&& m_mainForm.CurrentUser.FORM_CCY_SAVE;
-            toolStripButtonDelete.Enabled = (!m_stocktaking.POSTED) && (editmode == EditMode.View);//&& m_mainForm.CurrentUser.FORM_CCY_DELETE;
-            toolStripButtonClear.Enabled = true;//m_mainForm.CurrentUser.FORM_CCY_SAVE;
-            toolStripButtonPrint.Enabled = m_stocktaking.POSTED;
-            postToolStripButton.Enabled = (m_stocktaking.ID > 0) && (editmode == EditMode.View);
+            toolStripButtonSave.Enabled = (editmode == EditMode.New || editmode == EditMode.Update) && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].SAVE;
+            toolStripButtonEdit.Enabled = (editmode == EditMode.View) && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].SAVE;
+            toolStripButtonDelete.Enabled = (editmode == EditMode.View) && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].DELETE;
+            toolStripButtonClear.Enabled = m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].SAVE;
+            toolStripButtonPrint.Enabled = m_stocktaking.POSTED && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].PRINT;
+            postToolStripButton.Enabled = (m_stocktaking.ID > 0) && (editmode == EditMode.View) && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].POST;
             postToolStripButton.Text = m_stocktaking.POSTED ? "Unpost" : "Post";
             statusKryptonLabel.Text = m_stocktaking.POSTED ? "POSTED" : "ENTRY";
             m_editMode = editmode;
@@ -483,13 +483,13 @@ namespace Profit
                 using (SearchStockTakingForm frm = new SearchStockTakingForm(searchToolStripTextBox.Text, result))
                 {
                     frm.ShowDialog();
-                    m_stocktaking = frm.STOCK_TAKING;
-                    if (m_stocktaking == null)
+                    if (frm.STOCK_TAKING == null)
                     {
                         return;
                     }
                     else
                     {
+                        m_stocktaking = frm.STOCK_TAKING;
                         m_stocktaking = (StockTaking)r_stocktaking.Get(m_stocktaking.ID);
                         m_stocktaking.EMPLOYEE = (Employee)r_employee.GetById(m_stocktaking.EMPLOYEE);
                         m_stocktaking.WAREHOUSE = (Warehouse)r_warehouse.GetById(m_stocktaking.WAREHOUSE);
