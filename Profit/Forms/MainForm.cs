@@ -47,7 +47,7 @@ namespace Profit
             toolStripComboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             InitFormAccessList();
 
-            m_currentUser = (User)((UserRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.USER_REPOSITORY)).getUser("ADMIN", "admin1234");
+            m_currentUser = (User)((UserRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.USER_REPOSITORY)).getUser("ADMIN");
         }
 
         //private void buttonSpecHeaderGroup1_Click(object sender, EventArgs e)
@@ -286,9 +286,9 @@ namespace Profit
 
         private void buttonSpecAny1_Click(object sender, EventArgs e)
         {
-            treeView8.Visible = buttonSpecAny1.Type == PaletteButtonSpecStyle.ArrowDown;
+            financeTreeView.Visible = buttonSpecAny1.Type == PaletteButtonSpecStyle.ArrowDown;
             buttonSpecAny1.Type = buttonSpecAny1.Type == PaletteButtonSpecStyle.ArrowUp ? PaletteButtonSpecStyle.ArrowDown : PaletteButtonSpecStyle.ArrowUp;
-            kryptonHeader7.StateCommon.Border.DrawBorders = treeView8.Visible ? PaletteDrawBorders.Bottom : PaletteDrawBorders.None;//PaletteDrawBorders.TopBottom : PaletteDrawBorders.Top;
+            financeKryptonHeader.StateCommon.Border.DrawBorders = financeTreeView.Visible ? PaletteDrawBorders.Bottom : PaletteDrawBorders.None;//PaletteDrawBorders.TopBottom : PaletteDrawBorders.Top;
         }
         private void kryptonHeader7_MouseClick(object sender, MouseEventArgs e)
         {
@@ -296,9 +296,9 @@ namespace Profit
         }
         private void buttonSpecAny2_Click(object sender, EventArgs e)
         {
-            treeView2.Visible = buttonSpecAny2.Type == PaletteButtonSpecStyle.ArrowDown;
+            generalMenuTreeView.Visible = buttonSpecAny2.Type == PaletteButtonSpecStyle.ArrowDown;
             buttonSpecAny2.Type = buttonSpecAny2.Type == PaletteButtonSpecStyle.ArrowUp ? PaletteButtonSpecStyle.ArrowDown : PaletteButtonSpecStyle.ArrowUp;
-            kryptonHeader2.StateCommon.Border.DrawBorders = treeView2.Visible ? PaletteDrawBorders.TopBottom : PaletteDrawBorders.Top;
+            generalMenuKryptonHeader.StateCommon.Border.DrawBorders = generalMenuTreeView.Visible ? PaletteDrawBorders.TopBottom : PaletteDrawBorders.Top;
         }
         private void kryptonHeader2_Click(object sender, EventArgs e)
         {
@@ -313,13 +313,14 @@ namespace Profit
             MasterDatakryptonPanel1.Visible = MasterDatakryptonCheckButton1.Checked && (MainHeaderkryptonHeader8.Orientation != VisualOrientation.Left);
             TransactionSkryptonPanel.Visible = TransactionkryptonCheckButton2.Checked && (MainHeaderkryptonHeader8.Orientation != VisualOrientation.Left);
             MainHeaderkryptonHeader8.StateCommon.Border.DrawBorders = MainHeaderkryptonHeader8.Orientation == VisualOrientation.Left ? PaletteDrawBorders.All : PaletteDrawBorders.TopLeftRight;
+            splitter1.Visible = !(MainHeaderkryptonHeader8.Orientation == VisualOrientation.Left);
         }
 
         private void buttonSpecAny4_Click(object sender, EventArgs e)
         {
-            treeView1.Visible = buttonSpecAny4.Type == PaletteButtonSpecStyle.ArrowDown;
+            inventoryTreeView.Visible = buttonSpecAny4.Type == PaletteButtonSpecStyle.ArrowDown;
             buttonSpecAny4.Type = buttonSpecAny4.Type == PaletteButtonSpecStyle.ArrowUp ? PaletteButtonSpecStyle.ArrowDown : PaletteButtonSpecStyle.ArrowUp;
-            kryptonHeader1.StateCommon.Border.DrawBorders = treeView1.Visible ? PaletteDrawBorders.TopBottom : PaletteDrawBorders.Top;
+            inventoryKryptonHeader.StateCommon.Border.DrawBorders = inventoryTreeView.Visible ? PaletteDrawBorders.TopBottom : PaletteDrawBorders.Top;
         }
 
         private void kryptonHeader1_Click(object sender, EventArgs e)
@@ -329,9 +330,9 @@ namespace Profit
 
         private void buttonSpecAny5_Click(object sender, EventArgs e)
         {
-            treeView7.Visible = buttonSpecAny5.Type == PaletteButtonSpecStyle.ArrowDown;
+            distributionTreeView.Visible = buttonSpecAny5.Type == PaletteButtonSpecStyle.ArrowDown;
             buttonSpecAny5.Type = buttonSpecAny5.Type == PaletteButtonSpecStyle.ArrowUp ? PaletteButtonSpecStyle.ArrowDown : PaletteButtonSpecStyle.ArrowUp;
-            kryptonHeader6.StateCommon.Border.DrawBorders = treeView7.Visible ? PaletteDrawBorders.TopBottom : PaletteDrawBorders.Top;
+            distributionKryptonHeader.StateCommon.Border.DrawBorders = distributionTreeView.Visible ? PaletteDrawBorders.TopBottom : PaletteDrawBorders.Top;
         }
 
         private void kryptonHeader6_Click(object sender, EventArgs e)
@@ -353,6 +354,38 @@ namespace Profit
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            SetAuthorityFormAccess();
+        }
+
+        private void SetAuthorityFormAccess()
+        {
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(BANK_FORM)) financeTreeView.Nodes["NodeBank"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(CURRENCY_FORM)) generalMenuTreeView.Nodes["NodeCurrency"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(DIVISION_FORM)) generalMenuTreeView.Nodes["NodeDivision"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(EMPLOYEE_FORM)) generalMenuTreeView.Nodes["NodeEmployee"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(TOP_FORM)) distributionTreeView.Nodes["NodeTOP"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(CUSTOMER_CATEGORY_FORM)) distributionTreeView.Nodes["NodeCustomerCategory"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(SUPPLIER_CATEGORY_FORM)) distributionTreeView.Nodes["NodeSupplierCategory"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PRICE_CATEGORY_FORM)) distributionTreeView.Nodes["NodePriceCategory"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(TAX_FORM)) distributionTreeView.Nodes["NodeTax"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PART_GROUP_FORM)) inventoryTreeView.Nodes["NodePartGroup"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(WAREHOUSE_FORM)) inventoryTreeView.Nodes["NodeWarehouse"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PART_CATEGORY_FORM)) inventoryTreeView.Nodes["NodePartCategory"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(DOC_TYPE_FORM)) financeTreeView.Nodes["NodeDocumentType"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(EXCHANGE_RATE_FORM)) financeTreeView.Nodes["NodeExchangeRate"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(CUSTOMER_FORM)) distributionTreeView.Nodes["NodeCustomer"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(SUPPLIER_FORM)) distributionTreeView.Nodes["NodeSupplier"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(YEAR_FORM)) financeTreeView.Nodes["NodeYear"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PART_FORM)) internalTreeView.Nodes["NodePart"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(STOCK_TAKING_FORM)) internalTreeView.Nodes["NodeStockTaking"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(UNIT_FORM)) inventoryTreeView.Nodes["NodeUnit"].Remove();
+
+            inventoryKryptonHeader.Visible = inventoryTreeView.Visible = inventoryTreeView.Nodes.Count > 0;
+            financeKryptonHeader.Visible = financeTreeView.Visible = financeTreeView.Nodes.Count > 0;
+            generalMenuKryptonHeader.Visible = generalMenuTreeView.Visible = generalMenuTreeView.Nodes.Count > 0;
+            distributionKryptonHeader.Visible = distributionTreeView.Visible = distributionTreeView.Nodes.Count > 0;
+            internalKryptonHeader.Visible = internalTreeView.Visible = internalTreeView.Nodes.Count > 0;
+            userMaintenanceToolStripMenuItem.Visible = m_currentUser.FORM_ACCESS_LIST.ContainsKey(USER_FORM);
 
         }
 
@@ -372,7 +405,7 @@ namespace Profit
         {
             internalTreeView.Visible = buttonSpecAny6.Type == PaletteButtonSpecStyle.ArrowDown;
             buttonSpecAny6.Type = buttonSpecAny6.Type == PaletteButtonSpecStyle.ArrowUp ? PaletteButtonSpecStyle.ArrowDown : PaletteButtonSpecStyle.ArrowUp;
-            kryptonHeader4.StateCommon.Border.DrawBorders = internalTreeView.Visible ? PaletteDrawBorders.Bottom : PaletteDrawBorders.None;
+            internalKryptonHeader.StateCommon.Border.DrawBorders = internalTreeView.Visible ? PaletteDrawBorders.Bottom : PaletteDrawBorders.None;
         }
 
         private void buttonSpecAny7_Click(object sender, EventArgs e)
@@ -423,7 +456,7 @@ namespace Profit
             m_listForm.Add(new FormAccess(0, MainForm.EMPLOYEE_FORM.ToString(), "MSTG002 - Employee"));
             m_listForm.Add(new FormAccess(0, MainForm.DIVISION_FORM.ToString(), "MSTG003 - Division"));
             m_listForm.Add(new FormAccess(0, MainForm.PART_GROUP_FORM.ToString(), "MSTI001 - Part Group"));
-            m_listForm.Add(new FormAccess(0, MainForm.PRICE_CATEGORY_FORM.ToString(), "MSTI002 - Part Category"));
+            m_listForm.Add(new FormAccess(0, MainForm.PART_CATEGORY_FORM.ToString(), "MSTI002 - Part Category"));
             m_listForm.Add(new FormAccess(0, MainForm.UNIT_FORM.ToString(), "MSTI003 - Unit"));
             m_listForm.Add(new FormAccess(0, MainForm.WAREHOUSE_FORM.ToString(), "MSTI004 - Warehouse"));
             m_listForm.Add(new FormAccess(0, MainForm.CUSTOMER_FORM.ToString(), "MSTD001 - Customer"));
@@ -435,6 +468,7 @@ namespace Profit
             m_listForm.Add(new FormAccess(0, MainForm.TOP_FORM.ToString(), "MSTD007 - Term Of Payment"));
             m_listForm.Add(new FormAccess(0, MainForm.STOCK_TAKING_FORM.ToString(), "TRCI001 - Stock Taking"));
             m_listForm.Add(new FormAccess(0, MainForm.PART_FORM.ToString(), "TRCI002 - Part Master"));
+            m_listForm.Add(new FormAccess(0, MainForm.USER_FORM.ToString(), "GSTP001 - User"));
         }
 
         private void userMaintenanceToolStripMenuItem_Click(object sender, EventArgs e)
@@ -449,6 +483,12 @@ namespace Profit
         {
             get { return m_currentUser; }
             set { m_currentUser = value; }
+        }
+
+        private void kryptonPanel4_SizeChanged(object sender, EventArgs e)
+        {
+            //if (kryptonPanel4.Width > 35)
+            //    buttonSpecAny3_Click(sender, e);
         }
     }
 }

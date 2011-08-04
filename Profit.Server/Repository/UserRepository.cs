@@ -167,6 +167,10 @@ namespace Profit.Server
                 r.Close();
                 if(u==null)
                     return null;
+                if (!u.ACTIVE)
+                {
+                    return null;
+                }
                 if (u.PASSWORD == password)
                 {
                     FormAccess p = new FormAccess();
@@ -181,6 +185,37 @@ namespace Profit.Server
                 }
                 else
                     return null;
+            }
+            catch (Exception x)
+            {
+                throw new Exception(getErrorMessage(x));
+            }
+            finally
+            {
+                m_connection.Close();
+            }
+        }
+        public User getUser(string code)
+        {
+            try
+            {
+                OpenConnection();
+                OdbcCommand cmd = new OdbcCommand(User.GetByExactCodeSQL(code));
+                cmd.Connection = m_connection;
+                OdbcDataReader r = cmd.ExecuteReader();
+                User u = User.TransformReader(r);
+                r.Close();
+                if (u == null)
+                    return null;
+                FormAccess p = new FormAccess();
+                OdbcCommand aCommand = new OdbcCommand(FormAccess.GetAllByUserSQL(u.ID), m_connection);
+                OdbcDataReader aReader = aCommand.ExecuteReader();
+                IList a = p.GetAll(aReader);
+                foreach (FormAccess fa in a)
+                {
+                    u.FORM_ACCESS_LIST.Add(fa.CODE, fa);
+                }
+                return u;
             }
             catch (Exception x)
             {

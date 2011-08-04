@@ -209,7 +209,7 @@ namespace Profit.Server
         }
         public static string GetSearchSQL(string search)
         {
-            return String.Format(@"select * from table_part p where concat(p.part_code, p.part_name, p.part_barcode) like '%{0}%'", search);
+            return String.Format(@"select * from table_part p where part_active = {0} and concat(p.part_code, p.part_name, p.part_barcode) like '%{1}%'", true, search);
         }
 
         public string GetConcatSearch(string find)

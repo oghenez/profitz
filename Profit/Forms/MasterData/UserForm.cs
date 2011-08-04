@@ -75,7 +75,7 @@ namespace Profit
                     if (m_user.ID == 0)
                     {
                         r_userRep.Save(m_user);
-                        User bank = (User)r_userRep.getUser(m_user.CODE, m_user.PASSWORD);
+                        User bank = (User)r_userRep.getUser(m_user.CODE);
                         int r = gridData.Rows.Add(bank.CODE, bank.NAME);
                         gridData.Rows[r].Tag = bank;
                     }
@@ -133,6 +133,7 @@ namespace Profit
             m_user.CODE = textBoxCode.Text.Trim();
             m_user.NAME = textBoxName.Text.Trim();
             m_user.PASSWORD = passwordKryptonTextBox.Text.Trim();
+            m_user.ACTIVE = activekryptonCheckBox.Checked;
             m_user.FORM_ACCESS_LIST.Clear();
             for (int i = 0; i < formAccessKryptonDataGridView1.Rows.Count; i++)
             {
@@ -150,7 +151,7 @@ namespace Profit
                 c.POST = Convert.ToBoolean(formAccessKryptonDataGridView1[ViewColumn.Index, i].Value);
                 c.PRINT = Convert.ToBoolean(formAccessKryptonDataGridView1[ViewColumn.Index, i].Value);
                 c.USER = m_user;
-                if(!m_user.FORM_ACCESS_LIST.Contains(new KeyValuePair<string,FormAccess>(c.CODE,c)))
+                if(!m_user.FORM_ACCESS_LIST.ContainsKey(c.CODE))
                     m_user.FORM_ACCESS_LIST.Add(c.CODE, c);
             }
         }
@@ -192,10 +193,10 @@ namespace Profit
         }
         private void setEditMode(EditMode editmode)
         {
-            toolStripButtonSave.Enabled = (editmode == EditMode.New || editmode == EditMode.Update);// && m_mainForm.CurrentUser.FORM_CCY_SAVE;
-            toolStripButtonEdit.Enabled = (editmode == EditMode.View);//&& m_mainForm.CurrentUser.FORM_CCY_SAVE;
-            toolStripButtonDelete.Enabled = (editmode == EditMode.View);//&& m_mainForm.CurrentUser.FORM_CCY_DELETE;
-            toolStripButtonClear.Enabled = true;//m_mainForm.CurrentUser.FORM_CCY_SAVE;
+            toolStripButtonSave.Enabled = (editmode == EditMode.New || editmode == EditMode.Update) && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].SAVE;
+            toolStripButtonEdit.Enabled = (editmode == EditMode.View) && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].SAVE;
+            toolStripButtonDelete.Enabled = (editmode == EditMode.View) && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].DELETE;
+            toolStripButtonClear.Enabled = m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].SAVE;
             ReloadMainFormButton();
         }
         private void ReloadMainFormButton()
@@ -268,10 +269,11 @@ namespace Profit
         {
             try
             {
-                m_user = r_userRep.getUser(m_user.CODE, m_user.PASSWORD);
+                m_user = r_userRep.getUser(m_user.CODE);
                 textBoxCode.Text = m_user.CODE;
                 textBoxName.Text = m_user.NAME;
                 passwordKryptonTextBox.Text = m_user.PASSWORD;
+                activekryptonCheckBox.Checked = m_user.ACTIVE;
                 foreach (string kys in m_user.FORM_ACCESS_LIST.Keys)
                 {
                     FormAccess f = m_user.FORM_ACCESS_LIST[kys];

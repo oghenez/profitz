@@ -237,7 +237,7 @@ namespace Profit.Server
             }
             return u;
         }
-        public IList Search(string search)
+        public IList SearchActivePart(string search)
         {
             try
             {
