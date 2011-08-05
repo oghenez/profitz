@@ -22,6 +22,36 @@ CREATE DATABASE IF NOT EXISTS profit_db;
 USE profit_db;
 
 --
+-- Definition of table `table_autonumbersetup`
+--
+
+DROP TABLE IF EXISTS `table_autonumbersetup`;
+CREATE TABLE `table_autonumbersetup` (
+  `ans_id` int(10) unsigned NOT NULL auto_increment,
+  `ans_entity` varchar(45) NOT NULL,
+  `ans_formcode` varchar(45) NOT NULL,
+  `ans_prefix` varchar(45) NOT NULL,
+  `ans_start` int(10) unsigned NOT NULL,
+  `ans_digit` int(10) unsigned NOT NULL,
+  `ans_initialno` varchar(45) NOT NULL,
+  `ans_type` varchar(45) NOT NULL,
+  `ans_istransaction` tinyint(1) NOT NULL,
+  PRIMARY KEY  (`ans_id`),
+  UNIQUE KEY `Index_2` (`ans_entity`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_autonumbersetup`
+--
+
+/*!40000 ALTER TABLE `table_autonumbersetup` DISABLE KEYS */;
+INSERT INTO `table_autonumbersetup` (`ans_id`,`ans_entity`,`ans_formcode`,`ans_prefix`,`ans_start`,`ans_digit`,`ans_initialno`,`ans_type`,`ans_istransaction`) VALUES 
+ (1,'StockTaking','TRCI001 - Stock Taking','MMM##',1,1,'Monthly','Manual',1),
+ (2,'PurchaseOrder','TRCP001 - Purchase','MMM##',1,1,'Yearly','Manual',1);
+/*!40000 ALTER TABLE `table_autonumbersetup` ENABLE KEYS */;
+
+
+--
 -- Definition of table `table_bank`
 --
 
@@ -352,7 +382,7 @@ CREATE TABLE `table_formaccess` (
   PRIMARY KEY  USING BTREE (`formaccess_id`),
   KEY `FK_table_formaccess_1` (`user_id`),
   CONSTRAINT `FK_table_formaccess_1` FOREIGN KEY (`user_id`) REFERENCES `table_user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_formaccess`
@@ -382,8 +412,37 @@ INSERT INTO `table_formaccess` (`formaccess_id`,`formaccess_code`,`formaccess_na
  (22,'PartForm','TRCI002 - Part Master',1,0,1,1,1,1),
  (23,'PartCategoryForm','MSTI002 - Part Category',1,1,1,1,1,1),
  (24,'PriceCategoryForm','MSTD005 - Price Category',1,1,1,1,1,1),
- (25,'UserForm','GSTP001 - User',1,1,1,1,1,1);
+ (25,'UserForm','GSTP001 - User',1,1,1,1,1,1),
+ (26,'GeneralSetupForm','GSTP002 - General Setup',1,1,1,1,1,1);
 /*!40000 ALTER TABLE `table_formaccess` ENABLE KEYS */;
+
+
+--
+-- Definition of table `table_generalsetup`
+--
+
+DROP TABLE IF EXISTS `table_generalsetup`;
+CREATE TABLE `table_generalsetup` (
+  `gst_id` int(10) unsigned NOT NULL auto_increment,
+  `gst_companyname` text NOT NULL,
+  `gst_address` text NOT NULL,
+  `gst_phone` varchar(45) NOT NULL,
+  `gst_fax` varchar(45) NOT NULL,
+  `gst_taxno` varchar(45) NOT NULL,
+  `gst_regdate` datetime NOT NULL,
+  `gst_email` varchar(45) NOT NULL,
+  `gst_website` varchar(45) NOT NULL,
+  PRIMARY KEY  (`gst_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_generalsetup`
+--
+
+/*!40000 ALTER TABLE `table_generalsetup` DISABLE KEYS */;
+INSERT INTO `table_generalsetup` (`gst_id`,`gst_companyname`,`gst_address`,`gst_phone`,`gst_fax`,`gst_taxno`,`gst_regdate`,`gst_email`,`gst_website`) VALUES 
+ (1,'PROFIT MART SUCCESS','TIBAN MAS F-26 BATAM','0778-321785','0778-321785','000000-000000','2011-01-18 00:00:00','dagado@gmail.com','www.profitmart.com');
+/*!40000 ALTER TABLE `table_generalsetup` ENABLE KEYS */;
 
 
 --
@@ -7598,7 +7657,7 @@ CREATE TABLE `table_stocktaking` (
 INSERT INTO `table_stocktaking` (`stk_id`,`stk_date`,`stk_noticedate`,`stk_scentrytype`,`emp_id`,`stk_notes`,`stk_posted`,`stk_eventstatus`,`warehouse_id`,`stk_amount`,`ccy_id`,`stk_stocktakingtype`,`stk_code`) VALUES 
  (5,'2011-07-01 00:00:00','2011-07-30 00:00:00','StockTaking',2,'',0,'Entry',2,241902,1,'Sample','STOCKTAKING001'),
  (6,'2011-08-01 00:00:00','2011-08-01 00:00:00','StockTaking',1,'',0,'Entry',1,1650000,1,'Adjustment','std00332'),
- (7,'2011-08-01 00:00:00','2011-08-01 00:00:00','StockTaking',1,'',0,'Entry',1,0,1,'Adjustment','TEST0012'),
+ (7,'2011-08-01 00:00:00','2011-08-01 00:00:00','StockTaking',1,'',0,'Entry',1,87210,1,'Adjustment','TEST0012'),
  (8,'2011-08-01 00:00:00','2011-08-01 00:00:00','StockTaking',1,'',0,'Entry',1,0,1,'Adjustment','test'),
  (9,'2011-08-01 00:00:00','2011-08-01 00:00:00','StockTaking',1,'',0,'Entry',1,0,1,'Adjustment','44325gffST))!'),
  (11,'2011-07-20 00:00:00','2011-08-02 00:00:00','StockTaking',1,'',1,'Confirm',1,901000,1,'Adjustment','test555'),
@@ -7654,8 +7713,8 @@ INSERT INTO `table_stocktakingitem` (`stki_id`,`stk_id`,`part_id`,`warehouse_id`
  (11,5,9092,2,45,0,'PurchaseOrder',0,1,1581,71145),
  (12,6,9496,1,10,0,'PurchaseOrder',0,1,15000,150000),
  (13,6,9497,1,10,0,'PurchaseOrder',0,4,150000,1500000),
- (14,7,9505,1,10,0,'PurchaseOrder',0,1,0,0),
- (15,7,9510,1,10,0,'PurchaseOrder',0,1,0,0),
+ (14,7,9505,1,10,0,'StockTaking',0,1,2500,25000),
+ (15,7,9510,1,10,0,'StockTaking',0,1,6221,62210),
  (16,8,9499,1,10,0,'PurchaseOrder',0,1,0,0),
  (17,9,9305,1,45,0,'PurchaseOrder',0,1,0,0),
  (18,9,9306,1,10,0,'PurchaseOrder',0,1,0,0),
@@ -7892,7 +7951,7 @@ CREATE TABLE `table_user` (
 
 /*!40000 ALTER TABLE `table_user` DISABLE KEYS */;
 INSERT INTO `table_user` (`user_id`,`user_code`,`user_name`,`user_password`,`user_active`) VALUES 
- (1,'ADMIN','Administrator','u/GkiNl/1yxjvb9eWACUnW46m0+FjuWEalpmvhY8dps=',0),
+ (1,'ADMIN','Administrator','do3iq5mn8H24yTZyKLvTEV/CgM5y/ly5N9tho6HTKuk=',0),
  (10,'TEST','test','h8hJDUbluugJhS5FrEL6ZA==',0);
 /*!40000 ALTER TABLE `table_user` ENABLE KEYS */;
 
