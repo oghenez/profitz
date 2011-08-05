@@ -50,4 +50,15 @@ namespace Profit.Server
         Outstanding,//1
         Close//2
     }
+    public enum InitialAutoNumberSetup
+    {
+        None,
+        Monthly,
+        Yearly
+    }
+    public enum AutoNumberSetupType
+    {
+        Manual,
+        Auto
+    }
 }

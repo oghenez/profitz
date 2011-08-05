@@ -248,6 +248,7 @@
             this.generalSetupToolStripMenuItem.Name = "generalSetupToolStripMenuItem";
             this.generalSetupToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.generalSetupToolStripMenuItem.Text = "General Setup";
+            this.generalSetupToolStripMenuItem.Click += new System.EventHandler(this.generalSetupToolStripMenuItem_Click);
             // 
             // userMaintenanceToolStripMenuItem
             // 
@@ -281,14 +282,14 @@
             this.editToolStripMenuItem.Image = global::Profit.Properties.Resources.edit;
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(137, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
             // 
             // helpToolStripMenuItem
             // 
