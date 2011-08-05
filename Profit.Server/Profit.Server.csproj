@@ -48,8 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Crypto.cs" />
+    <Compile Include="Entity\AutoNumberSetup.cs" />
     <Compile Include="Entity\Bank.cs" />
     <Compile Include="Entity\FormAccess.cs" />
+    <Compile Include="Entity\GeneralSetup.cs" />
     <Compile Include="Entity\User.cs" />
     <Compile Include="Entity\PartSellingPriceInformation.cs" />
     <Compile Include="Entity\Transaction\SalesReturnItem.cs" />
@@ -94,6 +96,7 @@
     <Compile Include="Enum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
+    <Compile Include="Repository\GeneralSetupRepository.cs" />
     <Compile Include="Repository\SalesReturnRepository.cs" />
     <Compile Include="Repository\DeliveryOrderRepository.cs" />
     <Compile Include="Repository\SalesOrderRepository.cs" />

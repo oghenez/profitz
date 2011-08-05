@@ -1,0 +1,10 @@
+﻿insert into table_autonumbersetup
+                (ans_entity,
+                    ans_formcode, 
+                    ans_prefix, 
+                    ans_start,
+                    ans_digit,
+                    ans_initialno, 
+                    ans_type, 
+                    ans_istransaction) 
+                VALUES ('PurchaseOrder','TRCP001 - Purchase','MMM##',1,1,'Monthly','Auto',True)

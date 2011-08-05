@@ -35,6 +35,7 @@ namespace Profit
         const string PART_FORM = "PartForm";
         const string STOCK_TAKING_FORM = "StockTakingForm";
         const string USER_FORM = "UserForm";
+        const string GENERALSETUP_FORM = "GeneralSetupForm";
         IList m_listForm = new ArrayList();
         User m_currentUser = null;
 
@@ -386,6 +387,7 @@ namespace Profit
             distributionKryptonHeader.Visible = distributionTreeView.Visible = distributionTreeView.Nodes.Count > 0;
             internalKryptonHeader.Visible = internalTreeView.Visible = internalTreeView.Nodes.Count > 0;
             userMaintenanceToolStripMenuItem.Visible = m_currentUser.FORM_ACCESS_LIST.ContainsKey(USER_FORM);
+            generalSetupToolStripMenuItem.Visible = m_currentUser.FORM_ACCESS_LIST.ContainsKey(GENERALSETUP_FORM);
 
         }
 
@@ -469,6 +471,7 @@ namespace Profit
             m_listForm.Add(new FormAccess(0, MainForm.STOCK_TAKING_FORM.ToString(), "TRCI001 - Stock Taking"));
             m_listForm.Add(new FormAccess(0, MainForm.PART_FORM.ToString(), "TRCI002 - Part Master"));
             m_listForm.Add(new FormAccess(0, MainForm.USER_FORM.ToString(), "GSTP001 - User"));
+            m_listForm.Add(new FormAccess(0, MainForm.GENERALSETUP_FORM.ToString(), "GSTP002 - General Setup"));
         }
 
         private void userMaintenanceToolStripMenuItem_Click(object sender, EventArgs e)
@@ -489,6 +492,14 @@ namespace Profit
         {
             //if (kryptonPanel4.Width > 35)
             //    buttonSpecAny3_Click(sender, e);
+        }
+
+        private void generalSetupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (isChild(GENERALSETUP_FORM)) { this.Cursor = Cursors.Default; return; }
+            GeneralSetupForm user = new GeneralSetupForm(this, GENERALSETUP_FORM);
+            user.WindowState = FormWindowState.Maximized;
+            user.Show();
         }
     }
 }
