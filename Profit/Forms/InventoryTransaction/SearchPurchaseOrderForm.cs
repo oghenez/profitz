@@ -14,13 +14,13 @@ namespace Profit
 {
     public partial class SearchPurchaseOrderForm : KryptonForm
     {
-        StockTakingRepository r_stocktaking = (StockTakingRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.STOCKTAKING_REPOSITORY);
+        PurchaseOrderRepository r_po = (PurchaseOrderRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.PURCHASEORDER_REPOSITORY);
         Repository r_warehouse = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.WAREHOUSE_REPOSITORY);
         Repository r_employee = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.EMPLOYEE_REPOSITORY);
         PartRepository r_part = (PartRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_REPOSITORY);
         Repository r_ccy = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY);
         Repository r_unit = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY);
-        public StockTaking STOCK_TAKING = null;
+        public PurchaseOrder PURCHASE_ORDER = null;
         IList m_listLastresult = new ArrayList();
 
         public SearchPurchaseOrderForm(string textfind, IList result)//Point p)
@@ -39,12 +39,12 @@ namespace Profit
 
         private void loadResult(IList records)
         {
-            foreach (StockTaking d in records)
+            foreach (PurchaseOrder d in records)
             {
                 d.EMPLOYEE = (Employee)r_employee.GetById(d.EMPLOYEE);
-                d.WAREHOUSE = (Warehouse)r_warehouse.GetById(d.WAREHOUSE);
+                //d.WAREHOUSE = (Warehouse)r_warehouse.GetById(d.WAREHOUSE);
                 int row = gridData.Rows.Add(d.CODE, d.TRANSACTION_DATE.ToString("dd-MM-yyyy"), d.EMPLOYEE.CODE,
-                    d.WAREHOUSE.CODE, d.STOCK_TAKING_TYPE.ToString(), d.POSTED);
+                    "", "", d.POSTED);
                 gridData.Rows[row].Tag = d;
             }
             gridData.ClearSelection();
@@ -58,7 +58,7 @@ namespace Profit
             {
                 this.Cursor = Cursors.WaitCursor;
                 gridData.Rows.Clear();
-                IList records = r_stocktaking.Search(searchText.Text.Trim());
+                IList records = r_po.Search(searchText.Text.Trim());
                 loadResult(records);
                 this.Cursor = Cursors.Default;
             }
@@ -84,7 +84,7 @@ namespace Profit
         {
             if (gridData.SelectedRows.Count > 0)
             {
-                STOCK_TAKING = (StockTaking)gridData.SelectedRows[0].Tag;
+                PURCHASE_ORDER = (PurchaseOrder)gridData.SelectedRows[0].Tag;
                 this.Close();
             }
         }
@@ -93,14 +93,14 @@ namespace Profit
         {
             if (gridData.SelectedRows.Count > 0)
             {
-                STOCK_TAKING = (StockTaking)gridData.SelectedRows[0].Tag;
+                PURCHASE_ORDER = (PurchaseOrder)gridData.SelectedRows[0].Tag;
                 this.Close();
             }
         }
 
         private void CANCELkryptonButton_Click(object sender, EventArgs e)
         {
-            STOCK_TAKING = null;
+            PURCHASE_ORDER = null;
             this.Close();
         }
     }
