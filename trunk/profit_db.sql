@@ -46,8 +46,8 @@ CREATE TABLE `table_autonumbersetup` (
 
 /*!40000 ALTER TABLE `table_autonumbersetup` DISABLE KEYS */;
 INSERT INTO `table_autonumbersetup` (`ans_id`,`ans_entity`,`ans_formcode`,`ans_prefix`,`ans_start`,`ans_digit`,`ans_initialno`,`ans_type`,`ans_istransaction`) VALUES 
- (1,'StockTaking','TRCI001 - Stock Taking','MMM##',1,1,'Monthly','Manual',1),
- (2,'PurchaseOrder','TRCP001 - Purchase','MMM##',1,1,'Yearly','Manual',1);
+ (1,'StockTaking','TRCI001 - Stock Taking','PMST/#/MM/yyyy',1,3,'Yearly','Auto',1),
+ (2,'PurchaseOrder','TRCP001 - Purchase','PMPO/#/MM/yyyy',1,3,'Yearly','Auto',1);
 /*!40000 ALTER TABLE `table_autonumbersetup` ENABLE KEYS */;
 
 
@@ -382,7 +382,7 @@ CREATE TABLE `table_formaccess` (
   PRIMARY KEY  USING BTREE (`formaccess_id`),
   KEY `FK_table_formaccess_1` (`user_id`),
   CONSTRAINT `FK_table_formaccess_1` FOREIGN KEY (`user_id`) REFERENCES `table_user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_formaccess`
@@ -413,7 +413,8 @@ INSERT INTO `table_formaccess` (`formaccess_id`,`formaccess_code`,`formaccess_na
  (23,'PartCategoryForm','MSTI002 - Part Category',1,1,1,1,1,1),
  (24,'PriceCategoryForm','MSTD005 - Price Category',1,1,1,1,1,1),
  (25,'UserForm','GSTP001 - User',1,1,1,1,1,1),
- (26,'GeneralSetupForm','GSTP002 - General Setup',1,1,1,1,1,1);
+ (26,'GeneralSetupForm','GSTP002 - General Setup',1,1,1,1,1,1),
+ (27,'PurchaseOrderForm','TRCP001 - Purchase Order',1,1,1,1,1,1);
 /*!40000 ALTER TABLE `table_formaccess` ENABLE KEYS */;
 
 
@@ -441,7 +442,7 @@ CREATE TABLE `table_generalsetup` (
 
 /*!40000 ALTER TABLE `table_generalsetup` DISABLE KEYS */;
 INSERT INTO `table_generalsetup` (`gst_id`,`gst_companyname`,`gst_address`,`gst_phone`,`gst_fax`,`gst_taxno`,`gst_regdate`,`gst_email`,`gst_website`) VALUES 
- (1,'PROFIT MART SUCCESS','TIBAN MAS F-26 BATAM','0778-321785','0778-321785','000000-000000','2011-01-18 00:00:00','dagado@gmail.com','www.profitmart.com');
+ (1,'PROFIT MART SUCCESS','TIBAN MAS F-26 BATAM','0778-321785','0778-321785','4489461-16151','2011-01-18 00:00:00','dagado@gmail.com','www.profitmart.com');
 /*!40000 ALTER TABLE `table_generalsetup` ENABLE KEYS */;
 
 
@@ -7124,14 +7125,14 @@ CREATE TABLE `table_period` (
 
 /*!40000 ALTER TABLE `table_period` DISABLE KEYS */;
 INSERT INTO `table_period` (`period_id`,`period_code`,`period_status`,`year_id`,`period_start`,`period_end`,`period_close`) VALUES 
- (13,'201101','Open',9,'2011-01-01 00:00:00','2011-01-31 00:00:00','0001-01-01 00:00:00'),
- (14,'201102','Open',9,'2011-02-01 00:00:00','2011-02-28 00:00:00','0001-01-01 00:00:00'),
- (15,'201103','Open',9,'2011-03-01 00:00:00','2011-03-31 00:00:00','0001-01-01 00:00:00'),
- (16,'201104','Open',9,'2011-04-01 00:00:00','2011-04-30 00:00:00','0001-01-01 00:00:00'),
- (17,'201105','Open',9,'2011-05-01 00:00:00','2011-05-31 00:00:00','0001-01-01 00:00:00'),
- (18,'201106','Open',9,'2011-06-01 00:00:00','2011-06-30 00:00:00','0001-01-01 00:00:00'),
- (19,'201107','Current',9,'2011-07-01 00:00:00','2011-07-31 00:00:00','0001-01-01 00:00:00'),
- (20,'201108','Open',9,'2011-08-01 00:00:00','2011-08-31 00:00:00','0001-01-01 00:00:00'),
+ (13,'201101','Close',9,'2011-01-01 00:00:00','2011-01-31 00:00:00','0001-01-01 00:00:00'),
+ (14,'201102','Close',9,'2011-02-01 00:00:00','2011-02-28 00:00:00','0001-01-01 00:00:00'),
+ (15,'201103','Close',9,'2011-03-01 00:00:00','2011-03-31 00:00:00','0001-01-01 00:00:00'),
+ (16,'201104','Close',9,'2011-04-01 00:00:00','2011-04-30 00:00:00','0001-01-01 00:00:00'),
+ (17,'201105','Close',9,'2011-05-01 00:00:00','2011-05-31 00:00:00','0001-01-01 00:00:00'),
+ (18,'201106','Close',9,'2011-06-01 00:00:00','2011-06-30 00:00:00','0001-01-01 00:00:00'),
+ (19,'201107','Close',9,'2011-07-01 00:00:00','2011-07-31 00:00:00','0001-01-01 00:00:00'),
+ (20,'201108','Current',9,'2011-08-01 00:00:00','2011-08-31 00:00:00','0001-01-01 00:00:00'),
  (21,'201109','Open',9,'2011-09-01 00:00:00','2011-09-30 00:00:00','0001-01-01 00:00:00'),
  (22,'201110','Open',9,'2011-10-01 00:00:00','2011-10-31 00:00:00','0001-01-01 00:00:00'),
  (23,'201111','Open',9,'2011-11-01 00:00:00','2011-11-30 00:00:00','0001-01-01 00:00:00'),
@@ -7194,7 +7195,7 @@ INSERT INTO `table_pricecategory` (`pricecat_id`,`pricecat_code`,`pricecat_name`
 
 DROP TABLE IF EXISTS `table_purchaseorder`;
 CREATE TABLE `table_purchaseorder` (
-  `po_id` int(10) unsigned NOT NULL,
+  `po_id` int(10) unsigned NOT NULL auto_increment,
   `po_date` datetime NOT NULL,
   `po_noticedate` datetime NOT NULL,
   `po_scentrytype` varchar(45) NOT NULL,
@@ -7229,7 +7230,7 @@ CREATE TABLE `table_purchaseorder` (
   CONSTRAINT `FK_table_purchaseorder_3` FOREIGN KEY (`top_id`) REFERENCES `table_termofpayment` (`top_id`),
   CONSTRAINT `FK_table_purchaseorder_4` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_purchaseorder_5` FOREIGN KEY (`sup_id`) REFERENCES `table_supplier` (`sup_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_purchaseorder`
@@ -7237,8 +7238,9 @@ CREATE TABLE `table_purchaseorder` (
 
 /*!40000 ALTER TABLE `table_purchaseorder` DISABLE KEYS */;
 INSERT INTO `table_purchaseorder` (`po_id`,`po_date`,`po_noticedate`,`po_scentrytype`,`emp_id`,`po_notes`,`po_posted`,`po_eventstatus`,`div_id`,`top_id`,`po_duedate`,`ccy_id`,`po_subtotal`,`po_discpercent`,`po_discafteramount`,`po_discamount`,`tax_id`,`po_taxafteramount`,`po_otherexpense`,`po_nettotal`,`po_againsgrnstatus`,`po_code`,`sup_id`) VALUES 
- (3,'2011-07-27 00:00:00','2011-07-27 00:00:00','PurchaseOrder',1,'test test PO',1,'Confirm',1,1,'2011-08-26 00:00:00',1,3000,10,10000,1000,1,3200,3000,2000000,'Open','',1),
- (5,'2011-07-28 00:00:00','2011-07-28 00:00:00','PurchaseOrder',1,'test test PO',1,'Confirm',1,1,'2011-08-27 00:00:00',1,3000,10,10000,1000,1,3200,3000,2000000,'Outstanding','PO00001',1);
+ (3,'2011-07-27 00:00:00','2011-07-27 00:00:00','PurchaseOrder',1,'test test PO',1,'Confirm',1,1,'2011-08-26 00:00:00',1,3000,10,10000,1000,1,3200,3000,2000000,'Open','ttetest',1),
+ (5,'2011-07-28 00:00:00','2011-07-28 00:00:00','PurchaseOrder',1,'test test PO',1,'Confirm',1,1,'2011-08-27 00:00:00',1,3000,10,10000,1000,1,3200,3000,2000000,'Outstanding','PO00001',1),
+ (6,'2011-08-06 00:00:00','2011-08-06 00:00:00','PurchaseOrder',1,'',0,'Entry',1,1,'2011-08-06 00:00:00',1,3081196,0,0,0,1,308119.6,0,3389315.6,'Open','PMPO/002/08/2011',1);
 /*!40000 ALTER TABLE `table_purchaseorder` ENABLE KEYS */;
 
 
@@ -7279,7 +7281,7 @@ CREATE TABLE `table_purchaseorderitem` (
   CONSTRAINT `FK_table_purchaseorderitem_2` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`),
   CONSTRAINT `FK_table_purchaseorderitem_3` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
   CONSTRAINT `FK_table_purchaseorderitem_4` FOREIGN KEY (`unit_id`) REFERENCES `table_unit` (`unit_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_purchaseorderitem`
@@ -7290,7 +7292,8 @@ INSERT INTO `table_purchaseorderitem` (`poi_id`,`po_id`,`part_id`,`warehouse_id`
  (1,3,9070,1,13000,0,'PurchaseOrder',0,1,3000,10,200,340,0,'TEST PO ITEM 1',1,2,3,'1+2+3','Open',13000,0),
  (2,3,9071,1,132551,0,'PurchaseOrder',0,1,3412,15,321,331,0,'TEST PO ITEM 1',1,2,3,'1+2+3','Open',132551,0),
  (5,5,9070,1,13000,0,'PurchaseOrder',0,1,3000,10,200,340,18000,'TEST PO ITEM 1',1,2,3,'1+2+3','Open',13000,0),
- (6,5,9071,1,132551,0,'PurchaseOrder',0,1,3412,15,321,331,0,'TEST PO ITEM 1',1,2,3,'1+2+3','Open',132551,0);
+ (6,5,9071,1,132551,0,'PurchaseOrder',0,1,3412,15,321,331,0,'TEST PO ITEM 1',1,2,3,'1+2+3','Open',132551,0),
+ (7,6,12137,1,20,0,'PurchaseOrder',0,1,200000,10,20000,45940.2,3081196,'',1,2,3,'1+2+3','Open',20,0);
 /*!40000 ALTER TABLE `table_purchaseorderitem` ENABLE KEYS */;
 
 
@@ -7552,7 +7555,7 @@ CREATE TABLE `table_stockcard` (
   CONSTRAINT `FK_table_stockcard_1` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`),
   CONSTRAINT `FK_table_stockcard_2` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
   CONSTRAINT `FK_table_stockcard_3` FOREIGN KEY (`period_id`) REFERENCES `table_period` (`period_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_stockcard`
@@ -7573,7 +7576,11 @@ INSERT INTO `table_stockcard` (`sc_id`,`part_id`,`warehouse_id`,`period_id`,`sc_
  (13,12096,1,19,20,0,0),
  (14,12097,1,19,20,0,0),
  (15,11058,1,19,100,0,0),
- (16,9200,3,19,1.25,0,0);
+ (16,9200,3,19,1.25,0,0),
+ (17,10199,2,19,20,0,0),
+ (18,13668,2,19,20,0,0),
+ (19,10024,2,19,20,0,0),
+ (20,9614,1,20,20,0,0);
 /*!40000 ALTER TABLE `table_stockcard` ENABLE KEYS */;
 
 
@@ -7595,7 +7602,7 @@ CREATE TABLE `table_stockcardentry` (
   KEY `FK_table_stockcardentry_2` (`sc_id`),
   CONSTRAINT `FK_table_stockcardentry_1` FOREIGN KEY (`unit_id`) REFERENCES `table_unit` (`unit_id`),
   CONSTRAINT `FK_table_stockcardentry_2` FOREIGN KEY (`sc_id`) REFERENCES `table_stockcard` (`sc_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_stockcardentry`
@@ -7616,7 +7623,11 @@ INSERT INTO `table_stockcardentry` (`sce_id`,`sc_id`,`sce_stockcardentrytype`,`s
  (30,13,'StockTaking','2011-07-02 00:00:00',1,20,41),
  (31,14,'StockTaking','2011-07-02 00:00:00',1,20,42),
  (32,15,'StockTaking','2011-07-31 00:00:00',1,100,45),
- (33,16,'StockTaking','2011-07-04 00:00:00',1,1.25,46);
+ (33,16,'StockTaking','2011-07-04 00:00:00',1,1.25,46),
+ (34,17,'StockTaking','2011-07-31 00:00:00',1,20,47),
+ (35,18,'StockTaking','2011-07-31 00:00:00',1,20,48),
+ (36,19,'StockTaking','2011-07-31 00:00:00',1,20,49),
+ (37,20,'StockTaking','2011-08-06 00:00:00',1,20,59);
 /*!40000 ALTER TABLE `table_stockcardentry` ENABLE KEYS */;
 
 
@@ -7647,7 +7658,7 @@ CREATE TABLE `table_stocktaking` (
   CONSTRAINT `FK_table_stocktaking_1` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
   CONSTRAINT `FK_table_stocktaking_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_stocktaking_3` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_stocktaking`
@@ -7668,7 +7679,13 @@ INSERT INTO `table_stocktaking` (`stk_id`,`stk_date`,`stk_noticedate`,`stk_scent
  (16,'2011-07-02 00:00:00','2011-08-02 00:00:00','StockTaking',1,'',1,'Confirm',1,50000,1,'Adjustment','TEST0000123'),
  (17,'2011-07-02 00:00:00','2011-08-02 00:00:00','StockTaking',1,'',1,'Confirm',1,65000,1,'Adjustment','STOKMIE001'),
  (18,'2011-07-31 00:00:00','2011-08-03 00:00:00','StockTaking',1,'TEST AQUA',1,'Confirm',1,895427,1,'Adjustment','TEST006'),
- (19,'2011-07-04 00:00:00','2011-08-04 00:00:00','StockTaking',2,'',1,'Confirm',3,7500000,1,'OpeningStock','STK0001');
+ (19,'2011-07-04 00:00:00','2011-08-04 00:00:00','StockTaking',2,'',1,'Confirm',3,7500000,1,'OpeningStock','STK0001'),
+ (20,'2011-07-31 00:00:00','2011-08-05 00:00:00','StockTaking',6,'',1,'Confirm',2,901080,1,'Adjustment','TTESTT'),
+ (21,'2011-08-06 00:00:00','2011-08-06 00:00:00','StockTaking',1,'',0,'Entry',1,100000,1,'Adjustment','testtest'),
+ (22,'2011-08-06 00:00:00','2011-08-06 00:00:00','StockTaking',1,'',0,'Entry',1,30000,1,'Adjustment','ST2-08-2011'),
+ (23,'2011-08-06 00:00:00','2011-08-06 00:00:00','StockTaking',1,'',0,'Entry',1,400000,1,'Adjustment','ST002/08/2011'),
+ (24,'2011-08-06 00:00:00','2011-08-06 00:00:00','StockTaking',1,'',0,'Entry',1,1000000,1,'Adjustment','ST003/08/2011'),
+ (25,'2011-08-06 00:00:00','2011-08-06 00:00:00','StockTaking',1,'',1,'Confirm',1,100000,1,'Adjustment','PMST/002/08/2011');
 /*!40000 ALTER TABLE `table_stocktaking` ENABLE KEYS */;
 
 
@@ -7698,7 +7715,7 @@ CREATE TABLE `table_stocktakingitem` (
   CONSTRAINT `FK_table_stocktakingitem_2` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`),
   CONSTRAINT `FK_table_stocktakingitem_3` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
   CONSTRAINT `FK_table_stocktakingitem_4` FOREIGN KEY (`stk_id`) REFERENCES `table_stocktaking` (`stk_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_stocktakingitem`
@@ -7731,7 +7748,18 @@ INSERT INTO `table_stocktakingitem` (`stki_id`,`stk_id`,`part_id`,`warehouse_id`
  (41,17,12096,1,20,0,'StockTaking',0,1,1500,30000),
  (42,17,12097,1,20,0,'StockTaking',0,1,1750,35000),
  (45,18,11058,1,100,0,'StockTaking',0,1,8954.27,895427),
- (46,19,9200,3,15,0,'StockTaking',0,4,500000,7500000);
+ (46,19,9200,3,15,0,'StockTaking',0,4,500000,7500000),
+ (47,20,10199,2,20,0,'StockTaking',0,1,15000,300000),
+ (48,20,13668,2,20,0,'StockTaking',0,1,16400,328000),
+ (49,20,10024,2,20,0,'StockTaking',0,1,13654,273080),
+ (52,21,12137,1,10,0,'StockTaking',0,1,5000,50000),
+ (53,21,14001,1,10,0,'StockTaking',0,1,5000,50000),
+ (54,22,12137,1,10,0,'StockTaking',0,1,1000,10000),
+ (55,22,14015,1,10,0,'StockTaking',0,1,1000,10000),
+ (56,22,14044,1,10,0,'StockTaking',0,1,1000,10000),
+ (57,23,12137,1,200,0,'StockTaking',0,1,2000,400000),
+ (58,24,14015,1,500,0,'StockTaking',0,1,2000,1000000),
+ (59,25,9614,1,20,0,'StockTaking',0,1,5000,100000);
 /*!40000 ALTER TABLE `table_stocktakingitem` ENABLE KEYS */;
 
 
@@ -7951,7 +7979,7 @@ CREATE TABLE `table_user` (
 
 /*!40000 ALTER TABLE `table_user` DISABLE KEYS */;
 INSERT INTO `table_user` (`user_id`,`user_code`,`user_name`,`user_password`,`user_active`) VALUES 
- (1,'ADMIN','Administrator','do3iq5mn8H24yTZyKLvTEV/CgM5y/ly5N9tho6HTKuk=',0),
+ (1,'ADMIN','Administrator','42TvkbsoKXuqWC1oqXajzsA1M65LgVSfB5EEtz8oeWY=',1),
  (10,'TEST','test','h8hJDUbluugJhS5FrEL6ZA==',0);
 /*!40000 ALTER TABLE `table_user` ENABLE KEYS */;
 
