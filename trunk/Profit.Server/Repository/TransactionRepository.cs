@@ -15,6 +15,7 @@ namespace Profit.Server
         abstract protected void doRevise(Event events, Period p);
         abstract protected IList doSearch(string find);
         abstract protected bool doIsCodeExist(string code);
+
         //abstract protected void doInitEventRepository();
         //protected EventRepository m_eventRepository;
 
@@ -142,6 +143,10 @@ namespace Profit.Server
         public void UpdateStatus(Event e, bool p)
         {
             doUpdateStatus(e, p);
+        }
+        public virtual Event FindLastCodeAndTransactionDate(string codesample)
+        {
+            throw new Exception("FindLastCodeAndTransactionDate is not implemented");
         }
     }
 }

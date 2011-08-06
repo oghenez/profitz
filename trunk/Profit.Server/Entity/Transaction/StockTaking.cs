@@ -167,5 +167,14 @@ namespace Profit.Server
                 w.warehouse_code,w.warehouse_name, p.stk_stocktakingtype)
                 like '%{0}%'", find);
         }
+        public static string FindLastCodeAndTransactionDate(string code)
+        {
+            return String.Format(@"select * from table_stocktaking p where p.stk_code like '%{0}%' ORDER BY p.stk_id DESC", code);
+        }
+
+        public static string RecordCount()
+        {
+            return @"select Count(*) from table_stocktaking p";
+        }
     }
 }

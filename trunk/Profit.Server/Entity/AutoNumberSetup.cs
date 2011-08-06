@@ -43,6 +43,24 @@ namespace Profit.Server
             }
             return autonum;
         }
+        public static AutoNumberSetup GetTransform(OdbcDataReader aReader)
+        {
+            AutoNumberSetup autonum = null;
+            while (aReader.Read())
+            {
+                autonum = new AutoNumberSetup();
+                autonum.ID = Convert.ToInt32(aReader[0]);
+                autonum.ENTITY_NAME = aReader[1].ToString();
+                autonum.FORM_CODE = aReader[2].ToString();
+                autonum.PREFIX = aReader[3].ToString();
+                autonum.START = Convert.ToInt32(aReader[4]);
+                autonum.DIGIT = Convert.ToInt32(aReader[5]);
+                autonum.INITIAL_AUTO_NUMBER = (InitialAutoNumberSetup)Enum.Parse(typeof(InitialAutoNumberSetup), aReader[6].ToString());
+                autonum.AUTONUMBER_SETUP_TYPE = (AutoNumberSetupType)Enum.Parse(typeof(AutoNumberSetupType), aReader[7].ToString());
+                autonum.IS_TRANSACTION = Convert.ToBoolean(aReader[8]);
+            }
+            return autonum;
+        }
         public string GetInsertSQL()
         {
             return String.Format(@"insert into table_autonumbersetup 
@@ -117,6 +135,10 @@ namespace Profit.Server
         public string GetConcatSearch(string find)
         {
             return String.Format(@"SELECT * FROM table_autonumbersetup p where concat(p.bank_code, p.bank_name) like '%{0}%'", find);
+        }
+        public static string FindByDomainName(string domainname)
+        {
+            return String.Format(@"SELECT * FROM table_autonumbersetup p where p.ans_entity='{0}'", domainname);
         }
         public IList GetAll(OdbcDataReader aReader)
         {

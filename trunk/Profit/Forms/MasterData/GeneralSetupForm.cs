@@ -149,12 +149,12 @@ namespace Profit
             taxNokryptonTextBox.ReadOnly = !enable;
             websiteKryptonTextBox.ReadOnly = !enable;
 
-            FormNameColumn.ReadOnly = !enable;
-            PrefixColumn.ReadOnly = !enable;
-            StartColumn.ReadOnly = !enable;
-            DigitColumn.ReadOnly = !enable;
-            InitColumn.ReadOnly = !enable;
-            AutonumberColumn.ReadOnly = !enable;
+            FormNameColumn.ReadOnly = !enable;//186
+            PrefixColumn.ReadOnly = !enable;//100
+            StartColumn.ReadOnly = !enable;//35
+            DigitColumn.ReadOnly = !enable;//38
+            InitColumn.ReadOnly = !enable;//51
+            AutonumberColumn.ReadOnly = !enable;//76
         }
         private void setEditMode(EditMode editmode)
         {

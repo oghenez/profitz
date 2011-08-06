@@ -214,8 +214,9 @@ namespace Profit
                     {
                         r_stocktaking.Update(m_stocktaking);
                     }
-                    KryptonMessageBox.Show("Record has been saved","Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    KryptonMessageBox.Show("Transaction '" + m_stocktaking.CODE + "' Record has been saved", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     //ClearForm();
+                    textBoxCode.Text = m_stocktaking.CODE;
                     setEnableForm(false);
                     setEditMode(EditMode.View);
                     textBoxCode.Focus();
@@ -234,7 +235,7 @@ namespace Profit
         public bool Valid()
         {
             errorProvider1.Clear();
-            bool a = textBoxCode.Text == "";
+            bool a = textBoxCode.Text == "" && !r_stocktaking.IsAutoNumber();
             bool b = employeeKryptonComboBox.SelectedItem == null;
             bool c = warehousekryptonComboBox.SelectedItem == null;
             bool d = currencyKryptonComboBox.SelectedItem == null;
@@ -343,7 +344,7 @@ namespace Profit
         }
         public void setEnableForm(bool enable)
         {
-            textBoxCode.ReadOnly = !enable;
+            textBoxCode.ReadOnly = r_stocktaking.IsAutoNumber()?true:!enable;
             dateKryptonDateTimePicker.Enabled = enable;
             employeeKryptonComboBox.Enabled = enable;
             warehousekryptonComboBox.Enabled = enable;

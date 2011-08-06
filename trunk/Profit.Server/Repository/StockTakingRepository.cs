@@ -30,7 +30,16 @@ namespace Profit.Server
             OdbcTransaction trc = m_connection.BeginTransaction();
             try
             {
-                m_command.Transaction = trc;
+                m_command.Transaction = trc;                
+                DateTime trDate = DateTime.Today;
+                string codesample = AutoNumberSetupRepository.GetCodeSampleByDomainName(m_command, "StockTaking");
+                Event codeDate = FindLastCodeAndTransactionDate(codesample);
+                string lastCode = codeDate == null ? string.Empty : codeDate.CODE;
+                DateTime lastDate = codeDate == null ? trDate : codeDate.TRANSACTION_DATE;
+                int trCount = RecordCount();
+                e.CODE = AutoNumberSetupRepository.GetAutoNumberByDomainName(m_command, "StockTaking", e.CODE, lastCode, lastDate, trDate, trCount == 0);
+
+                
                 StockTaking stk = (StockTaking)e;
                 m_command.CommandText = e.GetInsertSQL();
                 m_command.ExecuteNonQuery();
@@ -167,7 +176,6 @@ namespace Profit.Server
                 throw x;
             }
         }
-
         protected override bool doIsCodeExist(string code)
         {
             try
@@ -181,5 +189,25 @@ namespace Profit.Server
                 throw x;
             }
         }
+        public override Event FindLastCodeAndTransactionDate(string codesample)
+        {
+            m_command.CommandText = StockTaking.FindLastCodeAndTransactionDate(codesample);
+            OdbcDataReader r = m_command.ExecuteReader();
+            Event e = StockTaking.TransformReader(r);
+            r.Close();
+            return e;
+        }
+        public int RecordCount()
+        {
+            m_command.CommandText = StockTaking.RecordCount();
+            int result = Convert.ToInt32(m_command.ExecuteScalar());
+            return result;
+        }
+        public bool IsAutoNumber()
+        {
+            AutoNumberSetup autonumber = AutoNumberSetupRepository.GetAutoNumberSetup(m_command, "StockTaking");
+            return autonumber.AUTONUMBER_SETUP_TYPE == AutoNumberSetupType.Auto;
+        }
+
     }
 }

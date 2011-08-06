@@ -36,6 +36,8 @@ namespace Profit
         const string STOCK_TAKING_FORM = "StockTakingForm";
         const string USER_FORM = "UserForm";
         const string GENERALSETUP_FORM = "GeneralSetupForm";
+        const string PURCHASE_ORDER_FORM = "PurchaseOrderForm";
+
         IList m_listForm = new ArrayList();
         User m_currentUser = null;
 
@@ -195,6 +197,13 @@ namespace Profit
             {
                 if (isChild(STOCK_TAKING_FORM)) { this.Cursor = Cursors.Default; return; }
                 StockTakingForm user = new StockTakingForm(this, STOCK_TAKING_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            }
+            if (e.Node.Name == "NodePurchaseOrder")
+            {
+                if (isChild(PURCHASE_ORDER_FORM)) { this.Cursor = Cursors.Default; return; }
+                PurchaseOrderForm user = new PurchaseOrderForm(this, PURCHASE_ORDER_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
@@ -380,14 +389,20 @@ namespace Profit
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PART_FORM)) internalTreeView.Nodes["NodePart"].Remove();
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(STOCK_TAKING_FORM)) internalTreeView.Nodes["NodeStockTaking"].Remove();
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(UNIT_FORM)) inventoryTreeView.Nodes["NodeUnit"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PURCHASE_ORDER_FORM)) purchaseTreeView.Nodes["NodePurchaseOrder"].Remove();
+
 
             inventoryKryptonHeader.Visible = inventoryTreeView.Visible = inventoryTreeView.Nodes.Count > 0;
             financeKryptonHeader.Visible = financeTreeView.Visible = financeTreeView.Nodes.Count > 0;
             generalMenuKryptonHeader.Visible = generalMenuTreeView.Visible = generalMenuTreeView.Nodes.Count > 0;
             distributionKryptonHeader.Visible = distributionTreeView.Visible = distributionTreeView.Nodes.Count > 0;
             internalKryptonHeader.Visible = internalTreeView.Visible = internalTreeView.Nodes.Count > 0;
+            purchaseKryptonHeader.Visible = purchaseTreeView.Visible = purchaseTreeView.Nodes.Count > 0;
+
+
             userMaintenanceToolStripMenuItem.Visible = m_currentUser.FORM_ACCESS_LIST.ContainsKey(USER_FORM);
             generalSetupToolStripMenuItem.Visible = m_currentUser.FORM_ACCESS_LIST.ContainsKey(GENERALSETUP_FORM);
+
 
         }
 
@@ -419,7 +434,7 @@ namespace Profit
 
         private void buttonSpecAny8_Click(object sender, EventArgs e)
         {
-            PurchaseTreeView.Visible = buttonSpecAny8.Type == PaletteButtonSpecStyle.ArrowDown;
+            purchaseTreeView.Visible = buttonSpecAny8.Type == PaletteButtonSpecStyle.ArrowDown;
             buttonSpecAny8.Type = buttonSpecAny8.Type == PaletteButtonSpecStyle.ArrowUp ? PaletteButtonSpecStyle.ArrowDown : PaletteButtonSpecStyle.ArrowUp;
             //kryptonHeader10.StateCommon.Border.DrawBorders = SalesTreeView.Visible ? PaletteDrawBorders.TopBottom : PaletteDrawBorders.Top;
         }
@@ -472,6 +487,8 @@ namespace Profit
             m_listForm.Add(new FormAccess(0, MainForm.PART_FORM.ToString(), "TRCI002 - Part Master"));
             m_listForm.Add(new FormAccess(0, MainForm.USER_FORM.ToString(), "GSTP001 - User"));
             m_listForm.Add(new FormAccess(0, MainForm.GENERALSETUP_FORM.ToString(), "GSTP002 - General Setup"));
+            m_listForm.Add(new FormAccess(0, MainForm.PURCHASE_ORDER_FORM.ToString(), "TRCP001 - Purchase Order"));
+
         }
 
         private void userMaintenanceToolStripMenuItem_Click(object sender, EventArgs e)
