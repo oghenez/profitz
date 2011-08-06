@@ -195,9 +195,9 @@ namespace Profit.Server
         {
             try
             {
-                m_command.CommandText = StockTaking.GetSearch(find);
+                m_command.CommandText = PurchaseOrder.GetSearch(find);
                 OdbcDataReader r = m_command.ExecuteReader();
-                IList rest = StockTaking.TransformReaderList(r);
+                IList rest = PurchaseOrder.TransformReaderList(r);
                 r.Close();
                 return rest;
             }

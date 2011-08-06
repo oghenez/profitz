@@ -187,7 +187,7 @@ namespace Profit.Server
                 PurchaseOrder transaction = new PurchaseOrder();
                 transaction.ID = Convert.ToInt32(aReader["po_id"]);
                 transaction.TRANSACTION_DATE = Convert.ToDateTime(aReader["po_date"]);
-                transaction.NOTICE_DATE = Convert.ToDateTime(aReader["stk_noticedate"]);
+                transaction.NOTICE_DATE = Convert.ToDateTime(aReader["po_noticedate"]);
                 transaction.STOCK_CARD_ENTRY_TYPE = (StockCardEntryType)Enum.Parse(typeof(StockCardEntryType), aReader["po_scentrytype"].ToString());
                 transaction.EMPLOYEE = new Employee(Convert.ToInt32(aReader["emp_id"]));
                 transaction.NOTES = aReader["po_notes"].ToString();
@@ -262,9 +262,7 @@ namespace Profit.Server
         {
             return String.Format(@"select * from table_purchaseorder p
                 INNER JOIN table_employee e on e.emp_id = p.emp_id
-                INNER JOIN table_warehouse w on w.warehouse_id = p.warehouse_id
-                where concat(p.po_code, e.emp_code, e.emp_name,
-                w.warehouse_code,w.warehouse_name, p.po_stocktakingtype)
+                where concat(p.po_code, e.emp_code, e.emp_name)
                 like '%{0}%'", find);
         }
     }

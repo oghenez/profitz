@@ -26,7 +26,7 @@ namespace Profit
         Repository r_warehouse = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.WAREHOUSE_REPOSITORY);
         Repository r_sup = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.SUPPLIER_REPOSITORY);
 
-        PurchaseOrderRepository r_stocktaking = (PurchaseOrderRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.PURCHASEORDER_REPOSITORY);
+        PurchaseOrderRepository r_po = (PurchaseOrderRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.PURCHASEORDER_REPOSITORY);
         IList m_units;
         IList m_warehouses;
 
@@ -268,17 +268,17 @@ namespace Profit
                 this.Cursor = Cursors.WaitCursor;
                 if (m_po.POSTED)
                 {
-                    r_stocktaking.Revise(m_po.ID);
+                    r_po.Revise(m_po.ID);
                     m_po.POSTED = false;
                     KryptonMessageBox.Show("Transaction has been UNPOSTED", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    r_stocktaking.Confirm(m_po.ID);
+                    r_po.Confirm(m_po.ID);
                     m_po.POSTED = true;
                     KryptonMessageBox.Show("Transaction has been POSTED", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                //m_po = (PurchaseOrder)r_stocktaking.Get(m_po.ID);
+                //m_po = (PurchaseOrder)r_po.Get(m_po.ID);
                 //m_po.EMPLOYEE = (Employee)r_employee.GetById(m_po.EMPLOYEE);
                 //m_po.WAREHOUSE = (Warehouse)r_warehouse.GetById(m_po.WAREHOUSE);
                 //m_po.CURRENCY = (Currency)r_ccy.GetById(m_po.CURRENCY);
@@ -305,11 +305,11 @@ namespace Profit
                     UpdateEntity();
                     if (m_po.ID == 0)
                     {
-                        r_stocktaking.Save(m_po);
+                        r_po.Save(m_po);
                     }
                     else
                     {
-                        r_stocktaking.Update(m_po);
+                        r_po.Update(m_po);
                     }
                     KryptonMessageBox.Show("Transaction '" + m_po.CODE + "' Record has been saved", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     //ClearForm();
@@ -332,14 +332,14 @@ namespace Profit
         public bool Valid()
         {
             errorProvider1.Clear();
-            bool a = textBoxCode.Text == "" && !r_stocktaking.IsAutoNumber();
+            bool a = textBoxCode.Text == "" && !r_po.IsAutoNumber();
             bool b = employeeKryptonComboBox.SelectedItem == null;
             bool c = divisionKryptonComboBox.SelectedItem == null;
             bool d = currencyKryptonComboBox.SelectedItem == null;
             bool h = termofpaymentKryptonComboBox.SelectedItem == null;
             bool k = supplierkryptonComboBox.SelectedItem == null;
             bool e = false;
-            bool f = m_po.ID > 0 ? false : r_stocktaking.IsCodeExist(textBoxCode.Text);
+            bool f = m_po.ID > 0 ? false : r_po.IsCodeExist(textBoxCode.Text);
             
             if (a) errorProvider1.SetError(textBoxCode, "Code Can not Empty");
             if (b) errorProvider1.SetError(employeeKryptonComboBox, "Employee Can not Empty");
@@ -476,7 +476,7 @@ namespace Profit
         }
         public void setEnableForm(bool enable)
         {
-            textBoxCode.ReadOnly = r_stocktaking.IsAutoNumber()?true:!enable;
+            textBoxCode.ReadOnly = r_po.IsAutoNumber()?true:!enable;
             dateKryptonDateTimePicker.Enabled = enable;
             employeeKryptonComboBox.Enabled = enable;
             currencyKryptonComboBox.Enabled = enable;
@@ -536,7 +536,7 @@ namespace Profit
                 {
                     this.Cursor = Cursors.WaitCursor;
                     if (KryptonMessageBox.Show("Are you sure to delete this record?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.No) { this.Cursor = Cursors.Default; return; }
-                    r_stocktaking.Delete(m_po);
+                    r_po.Delete(m_po);
                     ClearForm();
                     setEnableForm(true);
                     setEditMode(EditMode.New);
@@ -633,40 +633,44 @@ namespace Profit
 
         private void searchToolStripButton_Click(object sender, EventArgs e)
         {
-            //IList result = searchToolStripTextBox.Text == string.Empty?new ArrayList() : r_stocktaking.Search(searchToolStripTextBox.Text);
-            //if (result.Count == 1)
-            //{
-            //    m_po = (PurchaseOrder)result[0];
-            //    m_po = (PurchaseOrder)r_stocktaking.Get(m_po.ID);
-            //    m_po.EMPLOYEE = (Employee)r_employee.GetById(m_po.EMPLOYEE);
-            //    m_po.WAREHOUSE = (Warehouse)r_warehouse.GetById(m_po.WAREHOUSE);
-            //    m_po.CURRENCY = (Currency)r_ccy.GetById(m_po.CURRENCY);
-            //    loadData();
-            //    setEnableForm(false);
-            //    setEditMode(EditMode.View);
-            //}
-            //else
-            //{
-            //    using (SearchStockTakingForm frm = new SearchStockTakingForm(searchToolStripTextBox.Text, result))
-            //    {
-            //        frm.ShowDialog();
-            //        if (frm.STOCK_TAKING == null)
-            //        {
-            //            return;
-            //        }
-            //        else
-            //        {
-            //            m_po = frm.STOCK_TAKING;
-            //            m_po = (PurchaseOrder)r_stocktaking.Get(m_po.ID);
-            //            m_po.EMPLOYEE = (Employee)r_employee.GetById(m_po.EMPLOYEE);
-            //            m_po.WAREHOUSE = (Warehouse)r_warehouse.GetById(m_po.WAREHOUSE);
-            //            m_po.CURRENCY = (Currency)r_ccy.GetById(m_po.CURRENCY);
-            //            loadData();
-            //            setEnableForm(false);
-            //            setEditMode(EditMode.View);
-            //        }
-            //    }
-            //}
+            IList result = searchToolStripTextBox.Text == string.Empty ? new ArrayList() : r_po.Search(searchToolStripTextBox.Text);
+            if (result.Count == 1)
+            {
+                m_po = (PurchaseOrder)result[0];
+                m_po = (PurchaseOrder)r_po.Get(m_po.ID);
+                m_po.EMPLOYEE = (Employee)r_employee.GetById(m_po.EMPLOYEE);
+                m_po.CURRENCY = (Currency)r_ccy.GetById(m_po.CURRENCY);
+                m_po.DIVISION = (Division)r_division.GetById(m_po.DIVISION);
+                m_po.TOP = (TermOfPayment)r_top.GetById(m_po.TOP);
+                m_po.TAX = m_po.TAX == null ? null : (Tax)r_tax.GetById(m_po.TAX);
+                loadData();
+                setEnableForm(false);
+                setEditMode(EditMode.View);
+            }
+            else
+            {
+                using (SearchPurchaseOrderForm frm = new SearchPurchaseOrderForm(searchToolStripTextBox.Text, result))
+                {
+                    frm.ShowDialog();
+                    if (frm.PURCHASE_ORDER == null)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        m_po = frm.PURCHASE_ORDER;
+                        m_po = (PurchaseOrder)r_po.Get(m_po.ID);
+                        m_po.EMPLOYEE = (Employee)r_employee.GetById(m_po.EMPLOYEE);
+                        m_po.CURRENCY = (Currency)r_ccy.GetById(m_po.CURRENCY);
+                        m_po.DIVISION = (Division)r_division.GetById(m_po.DIVISION);
+                        m_po.TOP = (TermOfPayment)r_top.GetById(m_po.TOP);
+                        m_po.TAX = m_po.TAX == null ? null : (Tax)r_tax.GetById(m_po.TAX);
+                        loadData();
+                        setEnableForm(false);
+                        setEditMode(EditMode.View);
+                    }
+                }
+            }
         }
 
         private void kryptonPanel1_Paint(object sender, PaintEventArgs e)
