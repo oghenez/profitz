@@ -246,5 +246,26 @@ namespace Profit.Server
                           AGAINST_GRN_STATUS.ToString(),
                            ID);
         }
+        public static string FindLastCodeAndTransactionDate(string code)
+        {
+            return String.Format(@"select * from table_purchaseorder p where p.po_code like '%{0}%' ORDER BY p.po_id DESC", code);
+        }
+        public static string RecordCount()
+        {
+            return @"select Count(*) from table_purchaseorder p";
+        }
+        public static string SelectCountByCode(string code)
+        {
+            return String.Format("SELECT count(*) from table_purchaseorder where po_code ='{0}'", code);
+        }
+        public static string GetSearch(string find)
+        {
+            return String.Format(@"select * from table_purchaseorder p
+                INNER JOIN table_employee e on e.emp_id = p.emp_id
+                INNER JOIN table_warehouse w on w.warehouse_id = p.warehouse_id
+                where concat(p.po_code, e.emp_code, e.emp_name,
+                w.warehouse_code,w.warehouse_name, p.po_stocktakingtype)
+                like '%{0}%'", find);
+        }
     }
 }

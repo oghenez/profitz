@@ -53,7 +53,7 @@
             System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("MSTF002 - Document Type");
             System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("MSTF003 - Exchange Rate");
             System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("MSTF004 - Year");
-            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("TRCP001 - Purchase");
+            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("TRCP001 - Purchase Order");
             System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("TRCP002 - Good Receipt");
             System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("TRCP003 - Supplier Invoice");
             System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("TRCP004 - Payment");
@@ -111,8 +111,8 @@
             this.kryptonBorderEdge1 = new ComponentFactory.Krypton.Toolkit.KryptonBorderEdge();
             this.kryptonSeparator1 = new ComponentFactory.Krypton.Toolkit.KryptonSeparator();
             this.TransactionSkryptonPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.PurchaseTreeView = new System.Windows.Forms.TreeView();
-            this.kryptonHeader10 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
+            this.purchaseTreeView = new System.Windows.Forms.TreeView();
+            this.purchaseKryptonHeader = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.buttonSpecAny8 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.SalesTreeView = new System.Windows.Forms.TreeView();
             this.kryptonHeader9 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
@@ -282,14 +282,14 @@
             this.editToolStripMenuItem.Image = global::Profit.Properties.Resources.edit;
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(137, 6);
             // 
             // helpToolStripMenuItem
             // 
@@ -319,7 +319,6 @@
             this.treeView3.Dock = System.Windows.Forms.DockStyle.Top;
             this.treeView3.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.treeView3.FullRowSelect = true;
-            this.treeView3.LineColor = System.Drawing.Color.Empty;
             this.treeView3.Location = new System.Drawing.Point(0, 76);
             this.treeView3.Name = "treeView3";
             treeNode1.Name = "Node0";
@@ -635,8 +634,8 @@
             // 
             // TransactionSkryptonPanel
             // 
-            this.TransactionSkryptonPanel.Controls.Add(this.PurchaseTreeView);
-            this.TransactionSkryptonPanel.Controls.Add(this.kryptonHeader10);
+            this.TransactionSkryptonPanel.Controls.Add(this.purchaseTreeView);
+            this.TransactionSkryptonPanel.Controls.Add(this.purchaseKryptonHeader);
             this.TransactionSkryptonPanel.Controls.Add(this.SalesTreeView);
             this.TransactionSkryptonPanel.Controls.Add(this.kryptonHeader9);
             this.TransactionSkryptonPanel.Controls.Add(this.internalTreeView);
@@ -651,16 +650,16 @@
             this.TransactionSkryptonPanel.Size = new System.Drawing.Size(192, 323);
             this.TransactionSkryptonPanel.TabIndex = 18;
             // 
-            // PurchaseTreeView
+            // purchaseTreeView
             // 
-            this.PurchaseTreeView.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.PurchaseTreeView.Dock = System.Windows.Forms.DockStyle.Top;
-            this.PurchaseTreeView.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PurchaseTreeView.FullRowSelect = true;
-            this.PurchaseTreeView.Location = new System.Drawing.Point(1, 195);
-            this.PurchaseTreeView.Name = "PurchaseTreeView";
-            treeNode25.Name = "Node0";
-            treeNode25.Text = "TRCP001 - Purchase";
+            this.purchaseTreeView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.purchaseTreeView.Dock = System.Windows.Forms.DockStyle.Top;
+            this.purchaseTreeView.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.purchaseTreeView.FullRowSelect = true;
+            this.purchaseTreeView.Location = new System.Drawing.Point(1, 195);
+            this.purchaseTreeView.Name = "purchaseTreeView";
+            treeNode25.Name = "NodePurchaseOrder";
+            treeNode25.Text = "TRCP001 - Purchase Order";
             treeNode26.Name = "Node1";
             treeNode26.Text = "TRCP002 - Good Receipt";
             treeNode27.Name = "Node2";
@@ -671,32 +670,33 @@
             treeNode29.Text = "TRCP005 - Purchase Return";
             treeNode30.Name = "Node5";
             treeNode30.Text = "TRCP006 - Debit Note";
-            this.PurchaseTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            this.purchaseTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode25,
             treeNode26,
             treeNode27,
             treeNode28,
             treeNode29,
             treeNode30});
-            this.PurchaseTreeView.Size = new System.Drawing.Size(190, 98);
-            this.PurchaseTreeView.TabIndex = 19;
+            this.purchaseTreeView.Size = new System.Drawing.Size(190, 98);
+            this.purchaseTreeView.TabIndex = 19;
+            this.purchaseTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
             // 
-            // kryptonHeader10
+            // purchaseKryptonHeader
             // 
-            this.kryptonHeader10.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
+            this.purchaseKryptonHeader.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.buttonSpecAny8});
-            this.kryptonHeader10.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.kryptonHeader10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.kryptonHeader10.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.Secondary;
-            this.kryptonHeader10.Location = new System.Drawing.Point(1, 174);
-            this.kryptonHeader10.Name = "kryptonHeader10";
-            this.kryptonHeader10.Size = new System.Drawing.Size(190, 21);
-            this.kryptonHeader10.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom)));
-            this.kryptonHeader10.TabIndex = 18;
-            this.kryptonHeader10.Values.Description = "";
-            this.kryptonHeader10.Values.Heading = "Purchase";
-            this.kryptonHeader10.Values.Image = null;
-            this.kryptonHeader10.MouseClick += new System.Windows.Forms.MouseEventHandler(this.kryptonHeader10_MouseClick);
+            this.purchaseKryptonHeader.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.purchaseKryptonHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.purchaseKryptonHeader.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.Secondary;
+            this.purchaseKryptonHeader.Location = new System.Drawing.Point(1, 174);
+            this.purchaseKryptonHeader.Name = "purchaseKryptonHeader";
+            this.purchaseKryptonHeader.Size = new System.Drawing.Size(190, 21);
+            this.purchaseKryptonHeader.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom)));
+            this.purchaseKryptonHeader.TabIndex = 18;
+            this.purchaseKryptonHeader.Values.Description = "";
+            this.purchaseKryptonHeader.Values.Heading = "Purchase";
+            this.purchaseKryptonHeader.Values.Image = null;
+            this.purchaseKryptonHeader.MouseClick += new System.Windows.Forms.MouseEventHandler(this.kryptonHeader10_MouseClick);
             // 
             // buttonSpecAny8
             // 
@@ -975,8 +975,8 @@
         private System.Windows.Forms.TreeView internalTreeView;
         private ComponentFactory.Krypton.Toolkit.KryptonHeader internalKryptonHeader;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny6;
-        private System.Windows.Forms.TreeView PurchaseTreeView;
-        private ComponentFactory.Krypton.Toolkit.KryptonHeader kryptonHeader10;
+        private System.Windows.Forms.TreeView purchaseTreeView;
+        private ComponentFactory.Krypton.Toolkit.KryptonHeader purchaseKryptonHeader;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny8;
         private ComponentFactory.Krypton.Toolkit.KryptonBorderEdge kryptonBorderEdge7;
         private ComponentFactory.Krypton.Toolkit.KryptonBorderEdge kryptonBorderEdge5;

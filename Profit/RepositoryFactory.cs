@@ -34,6 +34,7 @@ namespace Profit
         public const string STOCKTAKING_REPOSITORY = "StockTakingRepository";
         public const string USER_REPOSITORY = "UserRepository";
         public const string GENERAL_SETUP_REPOSITORY = "GeneralSetupRepository";
+        public const string PURCHASEORDER_REPOSITORY = "PurchaseOrderRepository";
 
 
         public static RepositoryFactory GetInstance()
@@ -69,7 +70,7 @@ namespace Profit
             StockTakingRepository stocktakingRepository = new StockTakingRepository();
             UserRepository userRepository = new UserRepository(new User());
             GeneralSetupRepository generalsetupRepository = new GeneralSetupRepository();
-
+            PurchaseOrderRepository poRepository = new PurchaseOrderRepository();
 
             m_listService.Add(BANK_REPOSITORY, bankRepository);
             m_listService.Add(CURRENCY_REPOSITORY, ccyRepository);
@@ -93,6 +94,8 @@ namespace Profit
             m_listService.Add(STOCKTAKING_REPOSITORY, stocktakingRepository);
             m_listService.Add(USER_REPOSITORY, userRepository);
             m_listService.Add(GENERAL_SETUP_REPOSITORY, generalsetupRepository);
+            m_listService.Add(PURCHASEORDER_REPOSITORY, poRepository);
+
         }
         public Repository GetRepository(string name)
         {

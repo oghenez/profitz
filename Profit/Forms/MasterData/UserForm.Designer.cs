@@ -43,8 +43,15 @@
             this.toolStripButtonRefresh = new System.Windows.Forms.ToolStripButton();
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.activekryptonCheckBox = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.formAccessKryptonDataGridView1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.FormAccessCodeColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
+            this.SaveColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
+            this.DeleteColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
+            this.ViewColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
+            this.PostColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
+            this.PrintColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
             this.passwordKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.textBoxCode = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -55,13 +62,6 @@
             this.dgName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgSubject = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.FormAccessCodeColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
-            this.SaveColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
-            this.DeleteColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
-            this.ViewColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
-            this.PostColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
-            this.PrintColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
-            this.activekryptonCheckBox = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
@@ -183,6 +183,16 @@
             this.kryptonPanel1.Size = new System.Drawing.Size(609, 301);
             this.kryptonPanel1.TabIndex = 4;
             // 
+            // activekryptonCheckBox
+            // 
+            this.activekryptonCheckBox.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.NormalControl;
+            this.activekryptonCheckBox.Location = new System.Drawing.Point(135, 9);
+            this.activekryptonCheckBox.Name = "activekryptonCheckBox";
+            this.activekryptonCheckBox.Size = new System.Drawing.Size(54, 19);
+            this.activekryptonCheckBox.TabIndex = 11;
+            this.activekryptonCheckBox.Text = "Active";
+            this.activekryptonCheckBox.Values.Text = "Active";
+            // 
             // kryptonLabel4
             // 
             this.kryptonLabel4.Location = new System.Drawing.Point(11, 68);
@@ -206,11 +216,78 @@
             this.formAccessKryptonDataGridView1.Location = new System.Drawing.Point(11, 93);
             this.formAccessKryptonDataGridView1.Name = "formAccessKryptonDataGridView1";
             this.formAccessKryptonDataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.formAccessKryptonDataGridView1.Size = new System.Drawing.Size(547, 205);
+            this.formAccessKryptonDataGridView1.Size = new System.Drawing.Size(570, 205);
             this.formAccessKryptonDataGridView1.StateCommon.Background.Color1 = System.Drawing.Color.White;
             this.formAccessKryptonDataGridView1.StateCommon.Background.Color2 = System.Drawing.Color.White;
             this.formAccessKryptonDataGridView1.StateCommon.BackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.GridBackgroundList;
             this.formAccessKryptonDataGridView1.TabIndex = 9;
+            // 
+            // FormAccessCodeColumn
+            // 
+            this.FormAccessCodeColumn.DropDownWidth = 121;
+            this.FormAccessCodeColumn.HeaderText = "Form";
+            this.FormAccessCodeColumn.Name = "FormAccessCodeColumn";
+            this.FormAccessCodeColumn.Width = 250;
+            // 
+            // SaveColumn
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.NullValue = false;
+            this.SaveColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            this.SaveColumn.FalseValue = null;
+            this.SaveColumn.HeaderText = "Save";
+            this.SaveColumn.IndeterminateValue = null;
+            this.SaveColumn.Name = "SaveColumn";
+            this.SaveColumn.TrueValue = null;
+            this.SaveColumn.Width = 50;
+            // 
+            // DeleteColumn
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.NullValue = false;
+            this.DeleteColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.DeleteColumn.FalseValue = null;
+            this.DeleteColumn.HeaderText = "Delete";
+            this.DeleteColumn.IndeterminateValue = null;
+            this.DeleteColumn.Name = "DeleteColumn";
+            this.DeleteColumn.TrueValue = null;
+            this.DeleteColumn.Width = 50;
+            // 
+            // ViewColumn
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.NullValue = false;
+            this.ViewColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            this.ViewColumn.FalseValue = null;
+            this.ViewColumn.HeaderText = "View";
+            this.ViewColumn.IndeterminateValue = null;
+            this.ViewColumn.Name = "ViewColumn";
+            this.ViewColumn.TrueValue = null;
+            this.ViewColumn.Width = 50;
+            // 
+            // PostColumn
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.NullValue = false;
+            this.PostColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            this.PostColumn.FalseValue = null;
+            this.PostColumn.HeaderText = "Post";
+            this.PostColumn.IndeterminateValue = null;
+            this.PostColumn.Name = "PostColumn";
+            this.PostColumn.TrueValue = null;
+            this.PostColumn.Width = 50;
+            // 
+            // PrintColumn
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.NullValue = false;
+            this.PrintColumn.DefaultCellStyle = dataGridViewCellStyle5;
+            this.PrintColumn.FalseValue = null;
+            this.PrintColumn.HeaderText = "Print";
+            this.PrintColumn.IndeterminateValue = null;
+            this.PrintColumn.Name = "PrintColumn";
+            this.PrintColumn.TrueValue = null;
+            this.PrintColumn.Width = 50;
             // 
             // passwordKryptonTextBox
             // 
@@ -303,83 +380,6 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // FormAccessCodeColumn
-            // 
-            this.FormAccessCodeColumn.DropDownWidth = 121;
-            this.FormAccessCodeColumn.HeaderText = "Form";
-            this.FormAccessCodeColumn.Name = "FormAccessCodeColumn";
-            this.FormAccessCodeColumn.Width = 250;
-            // 
-            // SaveColumn
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.NullValue = false;
-            this.SaveColumn.DefaultCellStyle = dataGridViewCellStyle1;
-            this.SaveColumn.FalseValue = null;
-            this.SaveColumn.HeaderText = "Save";
-            this.SaveColumn.IndeterminateValue = null;
-            this.SaveColumn.Name = "SaveColumn";
-            this.SaveColumn.TrueValue = null;
-            this.SaveColumn.Width = 50;
-            // 
-            // DeleteColumn
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.NullValue = false;
-            this.DeleteColumn.DefaultCellStyle = dataGridViewCellStyle2;
-            this.DeleteColumn.FalseValue = null;
-            this.DeleteColumn.HeaderText = "Delete";
-            this.DeleteColumn.IndeterminateValue = null;
-            this.DeleteColumn.Name = "DeleteColumn";
-            this.DeleteColumn.TrueValue = null;
-            this.DeleteColumn.Width = 50;
-            // 
-            // ViewColumn
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.NullValue = false;
-            this.ViewColumn.DefaultCellStyle = dataGridViewCellStyle3;
-            this.ViewColumn.FalseValue = null;
-            this.ViewColumn.HeaderText = "View";
-            this.ViewColumn.IndeterminateValue = null;
-            this.ViewColumn.Name = "ViewColumn";
-            this.ViewColumn.TrueValue = null;
-            this.ViewColumn.Width = 50;
-            // 
-            // PostColumn
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.NullValue = false;
-            this.PostColumn.DefaultCellStyle = dataGridViewCellStyle4;
-            this.PostColumn.FalseValue = null;
-            this.PostColumn.HeaderText = "Post";
-            this.PostColumn.IndeterminateValue = null;
-            this.PostColumn.Name = "PostColumn";
-            this.PostColumn.TrueValue = null;
-            this.PostColumn.Width = 50;
-            // 
-            // PrintColumn
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.NullValue = false;
-            this.PrintColumn.DefaultCellStyle = dataGridViewCellStyle5;
-            this.PrintColumn.FalseValue = null;
-            this.PrintColumn.HeaderText = "Print";
-            this.PrintColumn.IndeterminateValue = null;
-            this.PrintColumn.Name = "PrintColumn";
-            this.PrintColumn.TrueValue = null;
-            this.PrintColumn.Width = 50;
-            // 
-            // activekryptonCheckBox
-            // 
-            this.activekryptonCheckBox.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.NormalControl;
-            this.activekryptonCheckBox.Location = new System.Drawing.Point(135, 9);
-            this.activekryptonCheckBox.Name = "activekryptonCheckBox";
-            this.activekryptonCheckBox.Size = new System.Drawing.Size(54, 19);
-            this.activekryptonCheckBox.TabIndex = 11;
-            this.activekryptonCheckBox.Text = "Active";
-            this.activekryptonCheckBox.Values.Text = "Active";
             // 
             // UserForm
             // 

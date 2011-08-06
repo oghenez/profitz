@@ -37,6 +37,17 @@
             this.toolStripButtonClear = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonRefresh = new System.Windows.Forms.ToolStripButton();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.faxKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.websiteKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.emailKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.regDatekryptonDateTimePicker = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
+            this.taxNokryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.phoneKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.gridAutonumber = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.companyNameTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -44,23 +55,12 @@
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.phoneKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.taxNokryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.regDatekryptonDateTimePicker = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
-            this.websiteKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.emailKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.faxKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.FormNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PrefixColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StartColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
             this.DigitColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
             this.InitColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
             this.AutonumberColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
-            this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -163,6 +163,89 @@
             this.kryptonPanel1.Size = new System.Drawing.Size(609, 381);
             this.kryptonPanel1.TabIndex = 4;
             // 
+            // kryptonLabel8
+            // 
+            this.kryptonLabel8.Location = new System.Drawing.Point(361, 149);
+            this.kryptonLabel8.Name = "kryptonLabel8";
+            this.kryptonLabel8.Size = new System.Drawing.Size(62, 19);
+            this.kryptonLabel8.TabIndex = 21;
+            this.kryptonLabel8.Values.Text = "Reg Date :";
+            // 
+            // kryptonLabel7
+            // 
+            this.kryptonLabel7.Location = new System.Drawing.Point(370, 125);
+            this.kryptonLabel7.Name = "kryptonLabel7";
+            this.kryptonLabel7.Size = new System.Drawing.Size(53, 19);
+            this.kryptonLabel7.TabIndex = 20;
+            this.kryptonLabel7.Values.Text = "Fax No. :";
+            // 
+            // kryptonLabel6
+            // 
+            this.kryptonLabel6.Location = new System.Drawing.Point(78, 203);
+            this.kryptonLabel6.Name = "kryptonLabel6";
+            this.kryptonLabel6.Size = new System.Drawing.Size(56, 19);
+            this.kryptonLabel6.TabIndex = 19;
+            this.kryptonLabel6.Values.Text = "Website :";
+            // 
+            // kryptonLabel5
+            // 
+            this.kryptonLabel5.Location = new System.Drawing.Point(92, 178);
+            this.kryptonLabel5.Name = "kryptonLabel5";
+            this.kryptonLabel5.Size = new System.Drawing.Size(42, 19);
+            this.kryptonLabel5.TabIndex = 18;
+            this.kryptonLabel5.Values.Text = "Email :";
+            // 
+            // faxKryptonTextBox
+            // 
+            this.faxKryptonTextBox.Location = new System.Drawing.Point(436, 122);
+            this.faxKryptonTextBox.Name = "faxKryptonTextBox";
+            this.faxKryptonTextBox.Size = new System.Drawing.Size(153, 22);
+            this.faxKryptonTextBox.TabIndex = 17;
+            this.faxKryptonTextBox.TextChanged += new System.EventHandler(this.faxKryptonTextBox_TextChanged);
+            // 
+            // websiteKryptonTextBox
+            // 
+            this.websiteKryptonTextBox.Location = new System.Drawing.Point(140, 203);
+            this.websiteKryptonTextBox.Name = "websiteKryptonTextBox";
+            this.websiteKryptonTextBox.Size = new System.Drawing.Size(192, 22);
+            this.websiteKryptonTextBox.TabIndex = 16;
+            // 
+            // emailKryptonTextBox
+            // 
+            this.emailKryptonTextBox.Location = new System.Drawing.Point(140, 175);
+            this.emailKryptonTextBox.Name = "emailKryptonTextBox";
+            this.emailKryptonTextBox.Size = new System.Drawing.Size(192, 22);
+            this.emailKryptonTextBox.TabIndex = 15;
+            // 
+            // regDatekryptonDateTimePicker
+            // 
+            this.regDatekryptonDateTimePicker.Location = new System.Drawing.Point(436, 149);
+            this.regDatekryptonDateTimePicker.Name = "regDatekryptonDateTimePicker";
+            this.regDatekryptonDateTimePicker.Size = new System.Drawing.Size(139, 20);
+            this.regDatekryptonDateTimePicker.TabIndex = 14;
+            // 
+            // taxNokryptonTextBox
+            // 
+            this.taxNokryptonTextBox.Location = new System.Drawing.Point(140, 150);
+            this.taxNokryptonTextBox.Name = "taxNokryptonTextBox";
+            this.taxNokryptonTextBox.Size = new System.Drawing.Size(192, 22);
+            this.taxNokryptonTextBox.TabIndex = 13;
+            // 
+            // phoneKryptonTextBox
+            // 
+            this.phoneKryptonTextBox.Location = new System.Drawing.Point(140, 122);
+            this.phoneKryptonTextBox.Name = "phoneKryptonTextBox";
+            this.phoneKryptonTextBox.Size = new System.Drawing.Size(192, 22);
+            this.phoneKryptonTextBox.TabIndex = 12;
+            // 
+            // kryptonLabel3
+            // 
+            this.kryptonLabel3.Location = new System.Drawing.Point(87, 125);
+            this.kryptonLabel3.Name = "kryptonLabel3";
+            this.kryptonLabel3.Size = new System.Drawing.Size(47, 19);
+            this.kryptonLabel3.TabIndex = 11;
+            this.kryptonLabel3.Values.Text = "Phone :";
+            // 
             // kryptonLabel4
             // 
             this.kryptonLabel4.Location = new System.Drawing.Point(83, 150);
@@ -229,61 +312,11 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // phoneKryptonTextBox
-            // 
-            this.phoneKryptonTextBox.Location = new System.Drawing.Point(140, 122);
-            this.phoneKryptonTextBox.Name = "phoneKryptonTextBox";
-            this.phoneKryptonTextBox.Size = new System.Drawing.Size(192, 22);
-            this.phoneKryptonTextBox.TabIndex = 12;
-            // 
-            // kryptonLabel3
-            // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(87, 125);
-            this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Size = new System.Drawing.Size(47, 19);
-            this.kryptonLabel3.TabIndex = 11;
-            this.kryptonLabel3.Values.Text = "Phone :";
-            // 
-            // taxNokryptonTextBox
-            // 
-            this.taxNokryptonTextBox.Location = new System.Drawing.Point(140, 150);
-            this.taxNokryptonTextBox.Name = "taxNokryptonTextBox";
-            this.taxNokryptonTextBox.Size = new System.Drawing.Size(192, 22);
-            this.taxNokryptonTextBox.TabIndex = 13;
-            // 
-            // regDatekryptonDateTimePicker
-            // 
-            this.regDatekryptonDateTimePicker.Location = new System.Drawing.Point(436, 149);
-            this.regDatekryptonDateTimePicker.Name = "regDatekryptonDateTimePicker";
-            this.regDatekryptonDateTimePicker.Size = new System.Drawing.Size(139, 20);
-            this.regDatekryptonDateTimePicker.TabIndex = 14;
-            // 
-            // websiteKryptonTextBox
-            // 
-            this.websiteKryptonTextBox.Location = new System.Drawing.Point(140, 203);
-            this.websiteKryptonTextBox.Name = "websiteKryptonTextBox";
-            this.websiteKryptonTextBox.Size = new System.Drawing.Size(192, 22);
-            this.websiteKryptonTextBox.TabIndex = 16;
-            // 
-            // emailKryptonTextBox
-            // 
-            this.emailKryptonTextBox.Location = new System.Drawing.Point(140, 175);
-            this.emailKryptonTextBox.Name = "emailKryptonTextBox";
-            this.emailKryptonTextBox.Size = new System.Drawing.Size(192, 22);
-            this.emailKryptonTextBox.TabIndex = 15;
-            // 
-            // faxKryptonTextBox
-            // 
-            this.faxKryptonTextBox.Location = new System.Drawing.Point(436, 122);
-            this.faxKryptonTextBox.Name = "faxKryptonTextBox";
-            this.faxKryptonTextBox.Size = new System.Drawing.Size(153, 22);
-            this.faxKryptonTextBox.TabIndex = 17;
-            this.faxKryptonTextBox.TextChanged += new System.EventHandler(this.faxKryptonTextBox_TextChanged);
-            // 
             // FormNameColumn
             // 
             this.FormNameColumn.HeaderText = "Form";
             this.FormNameColumn.Name = "FormNameColumn";
+            this.FormNameColumn.Width = 186;
             // 
             // PrefixColumn
             // 
@@ -309,7 +342,7 @@
             0,
             0});
             this.StartColumn.Name = "StartColumn";
-            this.StartColumn.Width = 50;
+            this.StartColumn.Width = 35;
             // 
             // DigitColumn
             // 
@@ -330,53 +363,21 @@
             0,
             0});
             this.DigitColumn.Name = "DigitColumn";
-            this.DigitColumn.Width = 50;
+            this.DigitColumn.Width = 38;
             // 
             // InitColumn
             // 
             this.InitColumn.DropDownWidth = 121;
             this.InitColumn.HeaderText = "Initial";
             this.InitColumn.Name = "InitColumn";
-            this.InitColumn.Width = 80;
+            this.InitColumn.Width = 51;
             // 
             // AutonumberColumn
             // 
             this.AutonumberColumn.DropDownWidth = 121;
             this.AutonumberColumn.HeaderText = "Autonumber";
             this.AutonumberColumn.Name = "AutonumberColumn";
-            this.AutonumberColumn.Width = 100;
-            // 
-            // kryptonLabel5
-            // 
-            this.kryptonLabel5.Location = new System.Drawing.Point(92, 178);
-            this.kryptonLabel5.Name = "kryptonLabel5";
-            this.kryptonLabel5.Size = new System.Drawing.Size(42, 19);
-            this.kryptonLabel5.TabIndex = 18;
-            this.kryptonLabel5.Values.Text = "Email :";
-            // 
-            // kryptonLabel6
-            // 
-            this.kryptonLabel6.Location = new System.Drawing.Point(78, 203);
-            this.kryptonLabel6.Name = "kryptonLabel6";
-            this.kryptonLabel6.Size = new System.Drawing.Size(56, 19);
-            this.kryptonLabel6.TabIndex = 19;
-            this.kryptonLabel6.Values.Text = "Website :";
-            // 
-            // kryptonLabel7
-            // 
-            this.kryptonLabel7.Location = new System.Drawing.Point(370, 125);
-            this.kryptonLabel7.Name = "kryptonLabel7";
-            this.kryptonLabel7.Size = new System.Drawing.Size(53, 19);
-            this.kryptonLabel7.TabIndex = 20;
-            this.kryptonLabel7.Values.Text = "Fax No. :";
-            // 
-            // kryptonLabel8
-            // 
-            this.kryptonLabel8.Location = new System.Drawing.Point(361, 149);
-            this.kryptonLabel8.Name = "kryptonLabel8";
-            this.kryptonLabel8.Size = new System.Drawing.Size(62, 19);
-            this.kryptonLabel8.TabIndex = 21;
-            this.kryptonLabel8.Values.Text = "Reg Date :";
+            this.AutonumberColumn.Width = 76;
             // 
             // GeneralSetupForm
             // 
@@ -426,15 +427,15 @@
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox websiteKryptonTextBox;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox emailKryptonTextBox;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox faxKryptonTextBox;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel8;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel6;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel5;
         private System.Windows.Forms.DataGridViewTextBoxColumn FormNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrefixColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn StartColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn DigitColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn InitColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn AutonumberColumn;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel8;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel6;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel5;
     }
 }

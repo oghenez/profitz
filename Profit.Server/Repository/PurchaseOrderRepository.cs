@@ -38,6 +38,13 @@ namespace Profit.Server
             try
             {
                 m_command.Transaction = trc;
+                DateTime trDate = DateTime.Today;
+                string codesample = AutoNumberSetupRepository.GetCodeSampleByDomainName(m_command, "PurchaseOrder");
+                Event codeDate = FindLastCodeAndTransactionDate(codesample);
+                string lastCode = codeDate == null ? string.Empty : codeDate.CODE;
+                DateTime lastDate = codeDate == null ? trDate : codeDate.TRANSACTION_DATE;
+                int trCount = RecordCount();
+                e.CODE = AutoNumberSetupRepository.GetAutoNumberByDomainName(m_command, "PurchaseOrder", e.CODE, lastCode, lastDate, trDate, trCount == 0);
                 PurchaseOrder stk = (PurchaseOrder)e;
                 m_command.CommandText = e.GetInsertSQL();
                 m_command.ExecuteNonQuery();
@@ -172,11 +179,8 @@ namespace Profit.Server
             OdbcDataReader r = cmd.ExecuteReader();
             PurchaseOrderItem result = PurchaseOrderItem.TransformReader(r);
             r.Close();
-            //cmd.CommandText = PurchaseOrder.GetByIDSQL(result.ID);
-            //r = cmd.ExecuteReader();
             result.EVENT = PurchaseOrderRepository.GetHeaderOnly(cmd, result.EVENT.ID);
             result.EVENT.EVENT_ITEMS.Add(result);
-            //r.Close();
             return result;
         }
         public static PurchaseOrder GetHeaderOnly(OdbcCommand cmd , int poID)
@@ -187,15 +191,52 @@ namespace Profit.Server
             r.Close();
             return st;
         }
-
         protected override IList doSearch(string find)
         {
-            throw new NotImplementedException();
+            try
+            {
+                m_command.CommandText = StockTaking.GetSearch(find);
+                OdbcDataReader r = m_command.ExecuteReader();
+                IList rest = StockTaking.TransformReaderList(r);
+                r.Close();
+                return rest;
+            }
+            catch (Exception x)
+            {
+                throw x;
+            }
         }
-
         protected override bool doIsCodeExist(string code)
         {
-            throw new NotImplementedException();
+            try
+            {
+                m_command.CommandText = PurchaseOrder.SelectCountByCode(code);
+                int t = Convert.ToInt32(m_command.ExecuteScalar());
+                return t > 0;
+            }
+            catch (Exception x)
+            {
+                throw x;
+            }
+        }
+        public override Event FindLastCodeAndTransactionDate(string codesample)
+        {
+            m_command.CommandText = StockTaking.FindLastCodeAndTransactionDate(codesample);
+            OdbcDataReader r = m_command.ExecuteReader();
+            Event e = StockTaking.TransformReader(r);
+            r.Close();
+            return e;
+        }
+        public int RecordCount()
+        {
+            m_command.CommandText = PurchaseOrder.RecordCount();
+            int result = Convert.ToInt32(m_command.ExecuteScalar());
+            return result;
+        }
+        public bool IsAutoNumber()
+        {
+            AutoNumberSetup autonumber = AutoNumberSetupRepository.GetAutoNumberSetup(m_command, "PurchaseOrder");
+            return autonumber.AUTONUMBER_SETUP_TYPE == AutoNumberSetupType.Auto;
         }
     }
 }
