@@ -298,7 +298,7 @@ namespace Profit
         public void Save(object sender, EventArgs e)
         {
             try
-            {
+            {               
                 if (Valid())
                 {
                     this.Cursor = Cursors.WaitCursor;
@@ -383,6 +383,7 @@ namespace Profit
         }
         private void UpdateEntity()
         {
+            itemsDataGrid.RefreshEdit();
             m_po.CODE = textBoxCode.Text.Trim();
             m_po.TRANSACTION_DATE = dateKryptonDateTimePicker.Value;
             m_po.EMPLOYEE = (Employee)employeeKryptonComboBox.SelectedItem;
@@ -510,9 +511,9 @@ namespace Profit
         }
         private void setEditMode(EditMode editmode)
         {
-            toolStripButtonSave.Enabled = (editmode == EditMode.New || editmode == EditMode.Update) && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].SAVE;
-            toolStripButtonEdit.Enabled = (editmode == EditMode.View) && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].SAVE;
-            toolStripButtonDelete.Enabled = (editmode == EditMode.View) && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].DELETE;
+            toolStripButtonSave.Enabled = (editmode == EditMode.New || editmode == EditMode.Update) && !m_po.POSTED && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].SAVE;
+            toolStripButtonEdit.Enabled = (editmode == EditMode.View) && !m_po.POSTED && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].SAVE;
+            toolStripButtonDelete.Enabled = (editmode == EditMode.View) && !m_po.POSTED && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].DELETE;
             toolStripButtonClear.Enabled = m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].SAVE;
             toolStripButtonPrint.Enabled = m_po.POSTED && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].PRINT;
             postToolStripButton.Enabled = (m_po.ID > 0) && (editmode == EditMode.View) && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].POST;
@@ -606,6 +607,7 @@ namespace Profit
                 itemsDataGrid[priceColumn.Index, i].Value = item.PRICE;
                 itemsDataGrid[totalAmountColumn.Index, i].Value = item.SUBTOTAL;
             }
+            //itemsDataGrid.Refresh();
         }
         public void Refresh(object sender, EventArgs e)
         {

@@ -46,6 +46,7 @@ namespace Profit
         void dataItemskryptonDataGridView_CellValidated(object sender, DataGridViewCellEventArgs e)
         {
             if (m_editMode == EditMode.View) return;
+            if (!dataItemskryptonDataGridView[e.ColumnIndex, e.RowIndex].IsInEditMode) return;
             if ((e.ColumnIndex == priceColumn.Index) || (e.ColumnIndex == QtyColumn.Index))
             {
                 decimal qty = Convert.ToDecimal(dataItemskryptonDataGridView[QtyColumn.Index, e.RowIndex].Value);
@@ -70,6 +71,7 @@ namespace Profit
         {
             if (m_editMode == EditMode.View) return;
             dataItemskryptonDataGridView.Rows[e.RowIndex].ErrorText = "";
+            if (!dataItemskryptonDataGridView[e.ColumnIndex, e.RowIndex].IsInEditMode) return;
             if (e.ColumnIndex == scanColumn.Index)
             {
                 if (!((DataGridViewTextBoxCell)dataItemskryptonDataGridView[scanColumn.Index, e.RowIndex]).IsInEditMode)return;
@@ -202,6 +204,7 @@ namespace Profit
         {
             try
             {
+                dataItemskryptonDataGridView.RefreshEdit();
                 if (Valid())
                 {
                     this.Cursor = Cursors.WaitCursor;
@@ -362,9 +365,9 @@ namespace Profit
         }
         private void setEditMode(EditMode editmode)
         {
-            toolStripButtonSave.Enabled = (editmode == EditMode.New || editmode == EditMode.Update) && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].SAVE;
-            toolStripButtonEdit.Enabled = (editmode == EditMode.View) && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].SAVE;
-            toolStripButtonDelete.Enabled = (editmode == EditMode.View) && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].DELETE;
+            toolStripButtonSave.Enabled = (editmode == EditMode.New || editmode == EditMode.Update) && !m_stocktaking.POSTED && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].SAVE;
+            toolStripButtonEdit.Enabled = (editmode == EditMode.View) && !m_stocktaking.POSTED && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].SAVE;
+            toolStripButtonDelete.Enabled = (editmode == EditMode.View) && !m_stocktaking.POSTED && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].DELETE;
             toolStripButtonClear.Enabled = m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].SAVE;
             toolStripButtonPrint.Enabled = m_stocktaking.POSTED && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].PRINT;
             postToolStripButton.Enabled = (m_stocktaking.ID > 0) && (editmode == EditMode.View) && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].POST;
