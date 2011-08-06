@@ -101,7 +101,7 @@
             this.totalDiscColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
             this.totalAmountColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
             this.warehouseColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
-            this.notesColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.notesColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -857,22 +857,9 @@
             // notesColumn
             // 
             this.notesColumn.HeaderText = "Notes";
-            this.notesColumn.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.notesColumn.Maximum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.notesColumn.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
             this.notesColumn.Name = "notesColumn";
+            this.notesColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.notesColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.notesColumn.Width = 50;
             // 
             // PurchaseOrderForm
@@ -972,6 +959,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn totalDiscColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn totalAmountColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn warehouseColumn;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn notesColumn;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn notesColumn;
     }
 }
