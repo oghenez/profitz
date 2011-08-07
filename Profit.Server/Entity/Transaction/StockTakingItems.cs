@@ -70,8 +70,9 @@ namespace Profit.Server
         public static StockTakingItems TransformReader(OdbcDataReader aReader)
         {
             StockTakingItems transaction = null;
-            while (aReader.Read())
+            if (aReader.HasRows)
             {
+                aReader.Read();
                 transaction = new StockTakingItems();
                 transaction.ID = Convert.ToInt32(aReader["stki_id"]);
                 transaction.EVENT = new StockTaking(Convert.ToInt32(aReader["stk_id"]));

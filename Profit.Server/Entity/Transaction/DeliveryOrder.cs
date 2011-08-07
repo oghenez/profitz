@@ -88,8 +88,9 @@ namespace Profit.Server
         public static DeliveryOrder TransformReader(OdbcDataReader aReader)
         {
             DeliveryOrder transaction = null;
-            while (aReader.Read())
+            if (aReader.HasRows)
             {
+                aReader.Read();
                 transaction = new DeliveryOrder();
                 transaction.ID = Convert.ToInt32(aReader["do_id"]);
                 transaction.TRANSACTION_DATE = Convert.ToDateTime(aReader["do_date"]);

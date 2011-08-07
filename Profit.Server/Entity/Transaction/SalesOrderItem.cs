@@ -163,8 +163,9 @@ namespace Profit.Server
         public static SalesOrderItem TransformReader(OdbcDataReader aReader)
         {
             SalesOrderItem transaction = null;
-            while (aReader.Read())
+            if (aReader.HasRows)
             {
+                aReader.Read();
                 transaction = new SalesOrderItem();
                 transaction.ID = Convert.ToInt32(aReader["soi_id"]);
                 transaction.EVENT = new SalesOrder(Convert.ToInt32(aReader["so_id"]));

@@ -48,6 +48,19 @@ namespace Profit
         {
             itemsDataGrid.CellValidating += new DataGridViewCellValidatingEventHandler(dataItemskryptonDataGridView_CellValidating);
             itemsDataGrid.CellValidated += new DataGridViewCellEventHandler(dataItemskryptonDataGridView_CellValidated);
+            itemsDataGrid.CellBeginEdit += new DataGridViewCellCancelEventHandler(itemsDataGrid_CellBeginEdit);
+        }
+
+        void itemsDataGrid_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            if (e.ColumnIndex == unitColumn.Index)
+            {
+                Part p = (Part)itemsDataGrid[codeColumn.Index, e.RowIndex].Tag;
+                if (p == null) return;
+                unitColumn.Items.Clear();
+                IList units = r_part.GetAllUnit(p.ID, p.UNIT.ID);
+                Utils.GetListCode(unitColumn.Items, units);
+            }
         }
 
         void dataItemskryptonDataGridView_CellValidated(object sender, DataGridViewCellEventArgs e)
@@ -131,6 +144,7 @@ namespace Profit
         }
         private double splitDiscString(string abc, int d)
         {
+            if (abc == "") return 0;
             string[] discs = abc.Split('+');
             if ((discs.Length < 3) || (discs.Length > 3))
             {
@@ -429,7 +443,7 @@ namespace Profit
                 st.DISC_AMOUNT = Convert.ToDouble(itemsDataGrid[discAmountColumn.Index, i].Value);
                 st.TOTAL_DISCOUNT = Convert.ToDouble(itemsDataGrid[totalDiscColumn.Index, i].Value);
                 st.NOTES = itemsDataGrid[notesColumn.Index, i].Value == null ? "" : itemsDataGrid[notesColumn.Index, i].Value.ToString();
-                st.DISC_ABC = itemsDataGrid[discabcColumn.Index, i].Value.ToString();
+                st.DISC_ABC = itemsDataGrid[discabcColumn.Index, i].Value == null ? "" : itemsDataGrid[discabcColumn.Index, i].Value.ToString();
                 st.DISC_A = splitDiscString(st.DISC_ABC, 0);
                 st.DISC_B = splitDiscString(st.DISC_ABC, 1);
                 st.DISC_C = splitDiscString(st.DISC_ABC, 2);
@@ -594,7 +608,7 @@ namespace Profit
                 itemsDataGrid[nameColumn.Index, i].Value = item.PART.NAME;
                 itemsDataGrid[QtyColumn.Index, i].Value = item.QYTAMOUNT;
 
-                itemsDataGrid[warehouseColumn.Index, i].Value = item.WAREHOUSE.ToString();
+                itemsDataGrid[warehouseColumn.Index, i].Value = r_warehouse.GetById(item.WAREHOUSE).ToString();
                 itemsDataGrid[discpercentColumn.Index, i].Value = item.DISC_PERCENT;
                 itemsDataGrid[discAmountColumn.Index, i].Value = item.DISC_AMOUNT;
                 itemsDataGrid[totalDiscColumn.Index, i].Value = item.TOTAL_DISCOUNT;

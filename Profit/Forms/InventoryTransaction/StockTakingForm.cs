@@ -41,8 +41,19 @@ namespace Profit
         {
             dataItemskryptonDataGridView.CellValidating += new DataGridViewCellValidatingEventHandler(dataItemskryptonDataGridView_CellValidating);
             dataItemskryptonDataGridView.CellValidated += new DataGridViewCellEventHandler(dataItemskryptonDataGridView_CellValidated);
+            dataItemskryptonDataGridView.CellBeginEdit+=new DataGridViewCellCancelEventHandler(itemsDataGrid_CellBeginEdit);
         }
-
+        void itemsDataGrid_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            if (e.ColumnIndex == unitColumn.Index)
+            {
+                Part p = (Part)dataItemskryptonDataGridView[codeColumn.Index, e.RowIndex].Tag;
+                if (p == null) return;
+                unitColumn.Items.Clear();
+                IList units = r_part.GetAllUnit(p.ID, p.UNIT.ID);
+                Utils.GetListCode(unitColumn.Items, units);
+            }
+        }
         void dataItemskryptonDataGridView_CellValidated(object sender, DataGridViewCellEventArgs e)
         {
             if (m_editMode == EditMode.View) return;

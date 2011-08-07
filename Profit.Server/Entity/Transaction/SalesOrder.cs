@@ -149,8 +149,9 @@ namespace Profit.Server
         public static SalesOrder TransformReader(OdbcDataReader aReader)
         {
             SalesOrder transaction = null;
-            while (aReader.Read())
+            if (aReader.HasRows)
             {
+                aReader.Read();
                 transaction = new SalesOrder();
                 transaction.ID = Convert.ToInt32(aReader["so_id"]);
                 transaction.TRANSACTION_DATE = Convert.ToDateTime(aReader["so_date"]);

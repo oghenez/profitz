@@ -221,9 +221,9 @@ namespace Profit.Server
         }
         public override Event FindLastCodeAndTransactionDate(string codesample)
         {
-            m_command.CommandText = StockTaking.FindLastCodeAndTransactionDate(codesample);
+            m_command.CommandText = PurchaseOrder.FindLastCodeAndTransactionDate(codesample);
             OdbcDataReader r = m_command.ExecuteReader();
-            Event e = StockTaking.TransformReader(r);
+            Event e = PurchaseOrder.TransformReader(r);
             r.Close();
             return e;
         }

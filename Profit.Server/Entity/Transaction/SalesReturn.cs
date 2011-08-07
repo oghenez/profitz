@@ -70,8 +70,9 @@ namespace Profit.Server
         public static SalesReturn TransformReader(OdbcDataReader aReader)
         {
             SalesReturn transaction = null;
-            while (aReader.Read())
+            if (aReader.HasRows)
             {
+                aReader.Read();
                 transaction = new SalesReturn();
                 transaction.ID = Convert.ToInt32(aReader["srn_id"]);
                 transaction.TRANSACTION_DATE = Convert.ToDateTime(aReader["srn_date"]);

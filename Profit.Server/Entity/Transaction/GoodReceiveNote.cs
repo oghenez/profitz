@@ -88,8 +88,9 @@ namespace Profit.Server
         public static GoodReceiveNote TransformReader(OdbcDataReader aReader)
         {
             GoodReceiveNote transaction = null;
-            while (aReader.Read())
+            if (aReader.HasRows)
             {
+                aReader.Read();
                 transaction = new GoodReceiveNote();
                 transaction.ID = Convert.ToInt32(aReader["grn_id"]);
                 transaction.TRANSACTION_DATE = Convert.ToDateTime(aReader["grn_date"]);
