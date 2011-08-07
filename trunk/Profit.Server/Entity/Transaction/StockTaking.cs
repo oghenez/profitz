@@ -86,8 +86,9 @@ namespace Profit.Server
         public static StockTaking TransformReader(OdbcDataReader aReader)
         {
             StockTaking transaction = null;
-            while (aReader.Read())
+            if (aReader.HasRows)
             {
+                aReader.Read();
                 transaction = new StockTaking();
                 transaction.ID = Convert.ToInt32(aReader["stk_id"]);
                 transaction.TRANSACTION_DATE = Convert.ToDateTime(aReader["stk_date"]);

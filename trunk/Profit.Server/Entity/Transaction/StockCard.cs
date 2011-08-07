@@ -189,8 +189,9 @@ namespace Profit.Server
         public static StockCard TransformReader(OdbcDataReader aReader)
         {
             StockCard stockcard = null;
-            while (aReader.Read())
+            if (aReader.HasRows)
             {
+                aReader.Read();
                 stockcard = new StockCard();
                 stockcard.ID = Convert.ToInt32(aReader[0]);
                 stockcard.PART = new Part(Convert.ToInt32(aReader["part_id"]));

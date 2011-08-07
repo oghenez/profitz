@@ -99,7 +99,7 @@ namespace Profit.Server
         public override string GetUpdateSQL()
         {
             return String.Format(@"update table_purchaseorder set 
-                    po_date = {0},
+                    po_date = '{0}',
                     po_noticedate = '{1}',
                     po_scentrytype = '{2}',
                     emp_id = {3},
@@ -149,8 +149,9 @@ namespace Profit.Server
         public static PurchaseOrder TransformReader(OdbcDataReader aReader)
         {
             PurchaseOrder transaction = null;
-            while (aReader.Read())
+            if (aReader.HasRows)
             {
+                aReader.Read();
                 transaction = new PurchaseOrder();
                 transaction.ID = Convert.ToInt32(aReader["po_id"]);
                 transaction.TRANSACTION_DATE = Convert.ToDateTime(aReader["po_date"]);
@@ -175,7 +176,6 @@ namespace Profit.Server
                 transaction.AGAINST_GRN_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), aReader["po_againsgrnstatus"].ToString());
                 transaction.CODE = aReader["po_code"].ToString();
                 transaction.SUPPLIER = new Supplier(Convert.ToInt32(aReader["sup_id"]));
-
             }
             return transaction;
         }

@@ -31,7 +31,7 @@ namespace Profit.Server
             try
             {
                 Event events = this.Get(id);
-                if (events.EVENT_STATUS == EventStatus.Confirm)
+                if (events.POSTED) //.EVENT_STATUS == EventStatus.Confirm)
                     throw new Exception("Status is already Posted/Confirm");
                 Period p = AssertValidPeriod(events.TRANSACTION_DATE);
                 doConfirm(events, p);

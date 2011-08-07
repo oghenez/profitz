@@ -70,8 +70,9 @@ namespace Profit.Server
         public static PurchaseReturn TransformReader(OdbcDataReader aReader)
         {
             PurchaseReturn transaction = null;
-            while (aReader.Read())
+            if (aReader.HasRows)
             {
+                aReader.Read();
                 transaction = new PurchaseReturn();
                 transaction.ID = Convert.ToInt32(aReader["prn_id"]);
                 transaction.TRANSACTION_DATE = Convert.ToDateTime(aReader["prn_date"]);

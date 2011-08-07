@@ -120,7 +120,7 @@ namespace Profit.Server
                     warehouse_id = {2},
                     poi_amount = {3},
                     sce_id = {4},
-                    poi_scentrytype = {5},
+                    poi_scentrytype = '{5}',
                     sc_id = {6},
                     unit_id = {7},
                     poi_price = {8},
@@ -128,12 +128,12 @@ namespace Profit.Server
                     poi_discamount = {10},
                     poi_totaldisc = {11},
                     poi_subtotal = {12},
-                    poi_notes = {13},
+                    poi_notes = '{13}',
                     poi_disca = {14},
                     poi_discb = {15},
                     poi_discc = {16},
-                    poi_discabc = {17},
-                    poi_againstgrnstatus = {18},
+                    poi_discabc = '{17}',
+                    poi_againstgrnstatus = '{18}',
                     poi_outstandingamounttogrn = {19},
                     poi_receivedamount = {20}
                 where poi_id = {21}",
@@ -163,8 +163,9 @@ namespace Profit.Server
         public static PurchaseOrderItem TransformReader(OdbcDataReader aReader)
         {
             PurchaseOrderItem transaction = null;
-            while (aReader.Read())
+            if (aReader.HasRows)
             {
+                aReader.Read();
                 transaction = new PurchaseOrderItem();
                 transaction.ID = Convert.ToInt32(aReader["poi_id"]);
                 transaction.EVENT = new PurchaseOrder(Convert.ToInt32(aReader["po_id"]));

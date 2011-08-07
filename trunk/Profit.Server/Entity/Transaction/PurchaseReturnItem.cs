@@ -69,8 +69,9 @@ namespace Profit.Server
         public static PurchaseReturnItem TransformReader(OdbcDataReader aReader)
         {
             PurchaseReturnItem transaction = null;
-            while (aReader.Read())
+            if (aReader.HasRows)
             {
+                aReader.Read();
                 transaction = new PurchaseReturnItem();
                 transaction.ID = Convert.ToInt32(aReader["prni_id"]);
                 transaction.EVENT = new PurchaseReturn(Convert.ToInt32(aReader["prn_id"]));

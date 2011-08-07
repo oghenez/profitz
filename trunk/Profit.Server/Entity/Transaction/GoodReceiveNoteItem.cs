@@ -121,8 +121,9 @@ namespace Profit.Server
         public static GoodReceiveNoteItem TransformReader(OdbcDataReader aReader)
         {
             GoodReceiveNoteItem transaction = null;
-            while (aReader.Read())
+            if (aReader.HasRows)
             {
+                aReader.Read();
                 transaction = new GoodReceiveNoteItem();
                 transaction.ID = Convert.ToInt32(aReader["grni_id"]);
                 transaction.EVENT = new GoodReceiveNote(Convert.ToInt32(aReader["grn_id"]));

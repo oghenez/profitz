@@ -121,8 +121,9 @@ namespace Profit.Server
         public static DeliveryOrderItem TransformReader(OdbcDataReader aReader)
         {
             DeliveryOrderItem transaction = null;
-            while (aReader.Read())
+            if (aReader.HasRows)
             {
+                aReader.Read();
                 transaction = new DeliveryOrderItem();
                 transaction.ID = Convert.ToInt32(aReader["doi_id"]);
                 transaction.EVENT = new DeliveryOrder(Convert.ToInt32(aReader["do_id"]));
