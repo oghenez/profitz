@@ -40,6 +40,10 @@ namespace Profit
 
         IList m_listForm = new ArrayList();
         User m_currentUser = null;
+        Period m_currentPeriod = null;
+
+        UserRepository r_user = (UserRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.USER_REPOSITORY);
+        PeriodRepository r_period = (PeriodRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PERIOD_REPOSITORY);
 
         public MainForm()
         {
@@ -50,7 +54,8 @@ namespace Profit
             toolStripComboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             InitFormAccessList();
 
-            m_currentUser = (User)((UserRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.USER_REPOSITORY)).getUser("ADMIN");
+            m_currentUser = (User)r_user.getUser("ADMIN");
+            m_currentPeriod = r_period.FindCurrentPeriod();
         }
 
         //private void buttonSpecHeaderGroup1_Click(object sender, EventArgs e)
@@ -504,7 +509,11 @@ namespace Profit
             get { return m_currentUser; }
             set { m_currentUser = value; }
         }
-
+        public Period CurrentPeriod
+        {
+            get { return m_currentPeriod; }
+            set { m_currentPeriod = value; }
+        }
         private void kryptonPanel4_SizeChanged(object sender, EventArgs e)
         {
             //if (kryptonPanel4.Width > 35)
