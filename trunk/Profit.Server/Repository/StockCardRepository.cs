@@ -7,7 +7,7 @@ using System.Collections;
 
 namespace Profit.Server
 {
-    public class StockCardRepository
+    public class StockCardRepository : Repository
     {
         public static void Update(OdbcCommand cmd, StockCard sc)
         {

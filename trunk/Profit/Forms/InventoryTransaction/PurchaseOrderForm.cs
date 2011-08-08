@@ -55,9 +55,9 @@ namespace Profit
         {
             if (e.ColumnIndex == unitColumn.Index)
             {
+                unitColumn.Items.Clear();
                 Part p = (Part)itemsDataGrid[codeColumn.Index, e.RowIndex].Tag;
                 if (p == null) return;
-                unitColumn.Items.Clear();
                 IList units = r_part.GetAllUnit(p.ID, p.UNIT.ID);
                 Utils.GetListCode(unitColumn.Items, units);
             }
@@ -457,25 +457,25 @@ namespace Profit
         {
             try
             {
+                m_po = new PurchaseOrder();
                 textBoxCode.Text = "";
                 dateKryptonDateTimePicker.Value = DateTime.Today;
                 employeeKryptonComboBox.SelectedIndex = 0;
                 currencyKryptonComboBox.SelectedIndex = 0;
-                nettotalAmountkryptonNumericUpDown.Value = 0;
+                nettotalAmountkryptonNumericUpDown.Value = 0m;
                 notesKryptonTextBox.Text = "";
                 divisionKryptonComboBox.SelectedIndex = 0;
                 termofpaymentKryptonComboBox.SelectedIndex = 0;
                 duedateKryptonDateTimePicker.Value = DateTime.Today;
-                subTotalKryptonNumericUpDown.Value = 0;
-                discPercentKryptonNumericUpDown.Value = 0;
-                discAmountkryptonNumericUpDown.Value = 0;
-                discAfterAmountKryptonNumericUpDown.Value = 0;
+                subTotalKryptonNumericUpDown.Value = 0m;
+                discPercentKryptonNumericUpDown.Value = 0m;
+                discAmountkryptonNumericUpDown.Value = 0m;
+                discAfterAmountKryptonNumericUpDown.Value = 0m;
                 taxKryptonComboBox.SelectedIndex = 0;
-                taxAfterAmountkryptonNumericUpDown.Value = 0;
-                otherExpensekryptonNumericUpDown.Value = 0;
+                taxAfterAmountkryptonNumericUpDown.Value = 0m;
+                otherExpensekryptonNumericUpDown.Value = 0m;
                 supplierkryptonComboBox.SelectedIndex = 0;
                 itemsDataGrid.Rows.Clear();
-                m_po = new PurchaseOrder();
                 errorProvider1.Clear();
             }
             catch (Exception x)
@@ -503,9 +503,9 @@ namespace Profit
             subTotalKryptonNumericUpDown.Enabled = enable;
             discPercentKryptonNumericUpDown.Enabled = enable;
             discAmountkryptonNumericUpDown.Enabled = enable;
-            discAfterAmountKryptonNumericUpDown.Enabled = enable;
+            //discAfterAmountKryptonNumericUpDown.Enabled = enable;
             taxKryptonComboBox.Enabled = enable;
-            taxAfterAmountkryptonNumericUpDown.Enabled = enable;
+            //taxAfterAmountkryptonNumericUpDown.Enabled = enable;
             otherExpensekryptonNumericUpDown.Enabled = enable;
             supplierkryptonComboBox.Enabled = enable;
 
@@ -571,9 +571,11 @@ namespace Profit
         public void Clear(object sender, EventArgs e)
         {
             //gridData.ClearSelection();
+            m_po = new PurchaseOrder();
+            setEditMode(EditMode.New);
             ClearForm();
             setEnableForm(true);
-            setEditMode(EditMode.New);
+           // setEditMode(EditMode.New);
             textBoxCode.Focus();
         }
         private void loadData()
@@ -659,9 +661,9 @@ namespace Profit
                 m_po.DIVISION = (Division)r_division.GetById(m_po.DIVISION);
                 m_po.TOP = (TermOfPayment)r_top.GetById(m_po.TOP);
                 m_po.TAX = m_po.TAX == null ? null : (Tax)r_tax.GetById(m_po.TAX);
+                setEditMode(EditMode.View);
                 loadData();
                 setEnableForm(false);
-                setEditMode(EditMode.View);
             }
             else
             {
@@ -681,9 +683,10 @@ namespace Profit
                         m_po.DIVISION = (Division)r_division.GetById(m_po.DIVISION);
                         m_po.TOP = (TermOfPayment)r_top.GetById(m_po.TOP);
                         m_po.TAX = m_po.TAX == null ? null : (Tax)r_tax.GetById(m_po.TAX);
+                        setEditMode(EditMode.View);
                         loadData();
                         setEnableForm(false);
-                        setEditMode(EditMode.View);
+                        //setEditMode(EditMode.View);
                     }
                 }
             }
@@ -692,6 +695,16 @@ namespace Profit
         private void kryptonPanel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void discPercentKryptonNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            if ((m_editMode == EditMode.New) || (m_editMode ==EditMode.Update))
+            {
+                CalculateDiscPercentTotal();
+                CalculateTax();
+                CalculateNetTotal();
+            }
         }
     }
 }

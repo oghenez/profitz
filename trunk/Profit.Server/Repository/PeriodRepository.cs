@@ -7,8 +7,24 @@ using System.Data.Odbc;
 
 namespace Profit.Server
 {
-    public class PeriodRepository
+    public class PeriodRepository :Repository
     {
+        public PeriodRepository()
+            : base(new Period())
+        { }
+        public Period FindCurrentPeriod()
+        {
+            OpenConnection();
+            OdbcCommand cmd = new OdbcCommand();
+            cmd.Connection = m_connection;
+            string hql = String.Format("select * from table_period p where p.period_status ='{0}'", PeriodStatus.Current.ToString());
+            cmd.CommandText = hql;
+            OdbcDataReader r = cmd.ExecuteReader();
+            IList result = Period.TransformReaderList(r);
+            r.Close();
+            if (result.Count == 0) return null;
+            return result[0] as Period;
+        }
         public static Period FindPeriodByDate(OdbcCommand cmd, DateTime date)
         {
             string hql = String.Format("select * from table_period p where p.period_start <= '{0}' and p.period_end >= '{0}'", date.ToString(Utils.DATE_FORMAT));
