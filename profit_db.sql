@@ -7230,7 +7230,7 @@ CREATE TABLE `table_purchaseorder` (
   CONSTRAINT `FK_table_purchaseorder_3` FOREIGN KEY (`top_id`) REFERENCES `table_termofpayment` (`top_id`),
   CONSTRAINT `FK_table_purchaseorder_4` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_purchaseorder_5` FOREIGN KEY (`sup_id`) REFERENCES `table_supplier` (`sup_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_purchaseorder`
@@ -7240,7 +7240,13 @@ CREATE TABLE `table_purchaseorder` (
 INSERT INTO `table_purchaseorder` (`po_id`,`po_date`,`po_noticedate`,`po_scentrytype`,`emp_id`,`po_notes`,`po_posted`,`po_eventstatus`,`div_id`,`top_id`,`po_duedate`,`ccy_id`,`po_subtotal`,`po_discpercent`,`po_discafteramount`,`po_discamount`,`tax_id`,`po_taxafteramount`,`po_otherexpense`,`po_nettotal`,`po_againsgrnstatus`,`po_code`,`sup_id`) VALUES 
  (3,'2011-07-27 00:00:00','2011-07-27 00:00:00','PurchaseOrder',1,'test test PO',1,'Confirm',1,1,'2011-08-26 00:00:00',1,3000,10,10000,1000,1,3200,3000,2000000,'Open','ttetest',1),
  (5,'2011-07-28 00:00:00','2011-07-28 00:00:00','PurchaseOrder',1,'test test PO',1,'Confirm',1,1,'2011-08-27 00:00:00',1,3000,10,10000,1000,1,3200,3000,2000000,'Outstanding','PO00001',1),
- (6,'2011-08-06 00:00:00','2011-08-06 00:00:00','PurchaseOrder',1,'',0,'Entry',1,1,'2011-08-06 00:00:00',1,3081196,0,0,0,1,308119.6,0,3389315.6,'Open','PMPO/002/08/2011',1);
+ (6,'2011-08-06 00:00:00','2011-08-06 00:00:00','PurchaseOrder',1,'',0,'Entry',1,1,'2011-08-06 00:00:00',1,3081196,0,0,0,1,308119.6,0,3389315.6,'Open','PMPO/002/08/2011',1),
+ (7,'2011-08-08 00:00:00','2011-08-08 00:00:00','PurchaseOrder',1,'',1,'Confirm',1,2,'2011-08-09 00:00:00',1,65440,10,6544,600,1,5829.6,0,64125.6,'Open','PMPO/003/08/2011',1),
+ (8,'2011-08-09 00:00:00','2011-08-09 00:00:00','PurchaseOrder',1,'',1,'Confirm',1,1,'2011-08-09 00:00:00',1,400000,0,0,0,1,40000,0,440000,'Open','PMPO/004/08/2011',1),
+ (9,'2011-08-09 00:00:00','2011-08-09 00:00:00','PurchaseOrder',1,'',1,'Confirm',1,1,'2011-08-09 00:00:00',1,107000000,10,10700000,0,1,9630000,0,105930000,'Open','PMPO/005/08/2011',1),
+ (10,'2011-08-09 00:00:00','2011-08-09 00:00:00','PurchaseOrder',1,'',0,'Entry',1,1,'2011-08-09 00:00:00',1,150000,0,0,0,1,15000,0,165000,'Open','PMPO/006/08/2011',1),
+ (11,'2011-08-09 00:00:00','2011-08-09 00:00:00','PurchaseOrder',1,'',0,'Entry',1,1,'2011-08-09 00:00:00',1,332220,10,33222,0,2,45328.1,0,344326.1,'Open','PMPO/007/08/2011',1),
+ (12,'2011-08-09 00:00:00','2011-08-09 00:00:00','PurchaseOrder',1,'',1,'Confirm',1,1,'2011-08-09 00:00:00',1,1400000,0,0,0,1,140000,0,1540000,'Open','PMPO/008/08/2011',1);
 /*!40000 ALTER TABLE `table_purchaseorder` ENABLE KEYS */;
 
 
@@ -7281,7 +7287,7 @@ CREATE TABLE `table_purchaseorderitem` (
   CONSTRAINT `FK_table_purchaseorderitem_2` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`),
   CONSTRAINT `FK_table_purchaseorderitem_3` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
   CONSTRAINT `FK_table_purchaseorderitem_4` FOREIGN KEY (`unit_id`) REFERENCES `table_unit` (`unit_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_purchaseorderitem`
@@ -7293,7 +7299,21 @@ INSERT INTO `table_purchaseorderitem` (`poi_id`,`po_id`,`part_id`,`warehouse_id`
  (2,3,9071,1,132551,0,'PurchaseOrder',0,1,3412,15,321,331,0,'TEST PO ITEM 1',1,2,3,'1+2+3','Open',132551,0),
  (5,5,9070,1,13000,0,'PurchaseOrder',0,1,3000,10,200,340,18000,'TEST PO ITEM 1',1,2,3,'1+2+3','Open',13000,0),
  (6,5,9071,1,132551,0,'PurchaseOrder',0,1,3412,15,321,331,0,'TEST PO ITEM 1',1,2,3,'1+2+3','Open',132551,0),
- (7,6,12137,1,20,0,'PurchaseOrder',0,1,200000,10,20000,45940.2,3081196,'',1,2,3,'1+2+3','Open',20,0);
+ (7,6,12137,1,20,0,'PurchaseOrder',0,1,200000,10,20000,45940.2,3081196,'',1,2,3,'1+2+3','Open',20,0),
+ (8,7,12137,1,10,0,'PurchaseOrder',0,1,2500,0,0,0,25000,'',0,0,0,'','Open',10,0),
+ (9,7,9513,1,10,0,'PurchaseOrder',0,1,2511,0,0,0,25110,'',0,0,0,'','Open',10,0),
+ (10,7,9512,1,10,0,'PurchaseOrder',0,1,1533,0,0,0,15330,'',0,0,0,'','Open',10,0),
+ (11,8,10655,1,20,0,'PurchaseOrder',0,1,20000,0,0,0,400000,'',0,0,0,'','Open',20,0),
+ (12,9,14015,1,5000,0,'PurchaseOrder',0,1,15000,0,0,0,75000000,'',0,0,0,'','Open',5000,0),
+ (13,9,13384,2,2000,0,'PurchaseOrder',0,1,16000,0,0,0,32000000,'',0,0,0,'','Open',2000,0),
+ (14,10,14535,1,10,0,'PurchaseOrder',0,1,10000,0,0,0,100000,'',0,0,0,'','Open',10,0),
+ (15,10,15212,1,10,0,'PurchaseOrder',0,1,5000,0,0,0,50000,'',0,0,0,'','Open',10,0),
+ (16,11,9357,1,20,0,'PurchaseOrder',0,1,5000,10,0,500,90000,'',0,0,0,'','Open',20,0),
+ (17,11,9358,1,20,0,'PurchaseOrder',0,1,6500,0,0,0,130000,'',0,0,0,'','Open',20,0),
+ (18,11,10557,1,20,0,'PurchaseOrder',0,1,5611,0,0,0,112220,'',0,0,0,'','Open',20,0),
+ (19,12,14538,1,10,0,'PurchaseOrder',0,4,120000,0,0,0,1200000,'',0,0,0,'','Open',10,0),
+ (20,12,14540,1,10,0,'PurchaseOrder',0,1,10000,0,0,0,100000,'',0,0,0,'','Open',10,0),
+ (21,12,14539,1,10,0,'PurchaseOrder',0,1,10000,0,0,0,100000,'',0,0,0,'','Open',10,0);
 /*!40000 ALTER TABLE `table_purchaseorderitem` ENABLE KEYS */;
 
 
@@ -7555,7 +7575,7 @@ CREATE TABLE `table_stockcard` (
   CONSTRAINT `FK_table_stockcard_1` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`),
   CONSTRAINT `FK_table_stockcard_2` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
   CONSTRAINT `FK_table_stockcard_3` FOREIGN KEY (`period_id`) REFERENCES `table_period` (`period_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_stockcard`
@@ -7580,7 +7600,16 @@ INSERT INTO `table_stockcard` (`sc_id`,`part_id`,`warehouse_id`,`period_id`,`sc_
  (17,10199,2,19,20,0,0),
  (18,13668,2,19,20,0,0),
  (19,10024,2,19,20,0,0),
- (20,9614,1,20,20,0,0);
+ (20,9614,1,20,20,0,0),
+ (21,12137,1,20,0,10,0),
+ (22,9513,1,20,0,10,0),
+ (23,9512,1,20,0,10,0),
+ (24,10655,1,20,0,20,0),
+ (25,14015,1,20,0,5000,0),
+ (26,13384,2,20,0,2000,0),
+ (27,14538,1,20,200,120,0),
+ (28,14540,1,20,0,10,0),
+ (29,14539,1,20,0,10,0);
 /*!40000 ALTER TABLE `table_stockcard` ENABLE KEYS */;
 
 
@@ -7602,7 +7631,7 @@ CREATE TABLE `table_stockcardentry` (
   KEY `FK_table_stockcardentry_2` (`sc_id`),
   CONSTRAINT `FK_table_stockcardentry_1` FOREIGN KEY (`unit_id`) REFERENCES `table_unit` (`unit_id`),
   CONSTRAINT `FK_table_stockcardentry_2` FOREIGN KEY (`sc_id`) REFERENCES `table_stockcard` (`sc_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_stockcardentry`
@@ -7627,7 +7656,17 @@ INSERT INTO `table_stockcardentry` (`sce_id`,`sc_id`,`sce_stockcardentrytype`,`s
  (34,17,'StockTaking','2011-07-31 00:00:00',1,20,47),
  (35,18,'StockTaking','2011-07-31 00:00:00',1,20,48),
  (36,19,'StockTaking','2011-07-31 00:00:00',1,20,49),
- (37,20,'StockTaking','2011-08-06 00:00:00',1,20,59);
+ (37,20,'StockTaking','2011-08-06 00:00:00',1,20,59),
+ (39,21,'PurchaseOrder','2011-08-08 00:00:00',1,10,8),
+ (40,22,'PurchaseOrder','2011-08-08 00:00:00',1,10,9),
+ (41,23,'PurchaseOrder','2011-08-08 00:00:00',1,10,10),
+ (42,24,'PurchaseOrder','2011-08-09 00:00:00',1,20,11),
+ (43,25,'PurchaseOrder','2011-08-09 00:00:00',1,5000,12),
+ (44,26,'PurchaseOrder','2011-08-09 00:00:00',1,2000,13),
+ (48,27,'StockTaking','2011-08-09 00:00:00',1,200,60),
+ (52,27,'PurchaseOrder','2011-08-09 00:00:00',1,120,19),
+ (53,28,'PurchaseOrder','2011-08-09 00:00:00',1,10,20),
+ (54,29,'PurchaseOrder','2011-08-09 00:00:00',1,10,21);
 /*!40000 ALTER TABLE `table_stockcardentry` ENABLE KEYS */;
 
 
@@ -7658,7 +7697,7 @@ CREATE TABLE `table_stocktaking` (
   CONSTRAINT `FK_table_stocktaking_1` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
   CONSTRAINT `FK_table_stocktaking_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_stocktaking_3` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_stocktaking`
@@ -7685,7 +7724,8 @@ INSERT INTO `table_stocktaking` (`stk_id`,`stk_date`,`stk_noticedate`,`stk_scent
  (22,'2011-08-06 00:00:00','2011-08-06 00:00:00','StockTaking',1,'',0,'Entry',1,30000,1,'Adjustment','ST2-08-2011'),
  (23,'2011-08-06 00:00:00','2011-08-06 00:00:00','StockTaking',1,'',0,'Entry',1,400000,1,'Adjustment','ST002/08/2011'),
  (24,'2011-08-06 00:00:00','2011-08-06 00:00:00','StockTaking',1,'',0,'Entry',1,1000000,1,'Adjustment','ST003/08/2011'),
- (25,'2011-08-06 00:00:00','2011-08-06 00:00:00','StockTaking',1,'',1,'Confirm',1,100000,1,'Adjustment','PMST/002/08/2011');
+ (25,'2011-08-06 00:00:00','2011-08-06 00:00:00','StockTaking',1,'',1,'Confirm',1,100000,1,'Adjustment','PMST/002/08/2011'),
+ (26,'2011-08-09 00:00:00','2011-08-09 00:00:00','StockTaking',1,'',1,'Confirm',1,400000,1,'Adjustment','PMST/003/08/2011');
 /*!40000 ALTER TABLE `table_stocktaking` ENABLE KEYS */;
 
 
@@ -7715,7 +7755,7 @@ CREATE TABLE `table_stocktakingitem` (
   CONSTRAINT `FK_table_stocktakingitem_2` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`),
   CONSTRAINT `FK_table_stocktakingitem_3` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
   CONSTRAINT `FK_table_stocktakingitem_4` FOREIGN KEY (`stk_id`) REFERENCES `table_stocktaking` (`stk_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_stocktakingitem`
@@ -7759,7 +7799,8 @@ INSERT INTO `table_stocktakingitem` (`stki_id`,`stk_id`,`part_id`,`warehouse_id`
  (56,22,14044,1,10,0,'StockTaking',0,1,1000,10000),
  (57,23,12137,1,200,0,'StockTaking',0,1,2000,400000),
  (58,24,14015,1,500,0,'StockTaking',0,1,2000,1000000),
- (59,25,9614,1,20,0,'StockTaking',0,1,5000,100000);
+ (59,25,9614,1,20,0,'StockTaking',0,1,5000,100000),
+ (60,26,14538,1,200,0,'StockTaking',0,1,2000,400000);
 /*!40000 ALTER TABLE `table_stocktakingitem` ENABLE KEYS */;
 
 
@@ -7938,7 +7979,7 @@ CREATE TABLE `table_unitconversion` (
   KEY `FK_table_unitconversion_2` (`part_id`),
   CONSTRAINT `FK_table_unitconversion_1` FOREIGN KEY (`unitconv_unit`) REFERENCES `table_unit` (`unit_id`),
   CONSTRAINT `FK_table_unitconversion_2` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_unitconversion`
@@ -7954,7 +7995,8 @@ INSERT INTO `table_unitconversion` (`unitconv_id`,`unitconv_code`,`unitconv_name
  (15,'-','-',12,4,0,0,9087),
  (16,'-','-',50,6,0,0,9087),
  (17,'-','-',48,4,0,0,12096),
- (18,'-','-',12,4,0,0,9200);
+ (18,'-','-',12,4,0,0,9200),
+ (19,'-','-',12,4,0,0,14538);
 /*!40000 ALTER TABLE `table_unitconversion` ENABLE KEYS */;
 
 
@@ -7982,6 +8024,57 @@ INSERT INTO `table_user` (`user_id`,`user_code`,`user_name`,`user_password`,`use
  (1,'ADMIN','Administrator','42TvkbsoKXuqWC1oqXajzsA1M65LgVSfB5EEtz8oeWY=',1),
  (10,'TEST','test','h8hJDUbluugJhS5FrEL6ZA==',0);
 /*!40000 ALTER TABLE `table_user` ENABLE KEYS */;
+
+
+--
+-- Definition of table `table_usersettings`
+--
+
+DROP TABLE IF EXISTS `table_usersettings`;
+CREATE TABLE `table_usersettings` (
+  `us_id` int(10) unsigned NOT NULL auto_increment,
+  `user_id` int(10) unsigned NOT NULL,
+  `us_name` text NOT NULL,
+  `us_value` text NOT NULL,
+  `us_type` varchar(45) NOT NULL,
+  PRIMARY KEY  (`us_id`),
+  KEY `FK_table_usersettings_1` (`user_id`),
+  CONSTRAINT `FK_table_usersettings_1` FOREIGN KEY (`user_id`) REFERENCES `table_user` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_usersettings`
+--
+
+/*!40000 ALTER TABLE `table_usersettings` DISABLE KEYS */;
+INSERT INTO `table_usersettings` (`us_id`,`user_id`,`us_name`,`us_value`,`us_type`) VALUES 
+ (53,1,'PurchaseOrderFormscanColumnWidth','100','System.Int32'),
+ (54,1,'PurchaseOrderFormscanColumnVisible','True','System.Boolean'),
+ (55,1,'PurchaseOrderFormcodeColumnWidth','47','System.Int32'),
+ (56,1,'PurchaseOrderFormcodeColumnVisible','True','System.Boolean'),
+ (57,1,'PurchaseOrderFormnameColumnWidth','351','System.Int32'),
+ (58,1,'PurchaseOrderFormnameColumnVisible','True','System.Boolean'),
+ (59,1,'PurchaseOrderFormQtyColumnWidth','47','System.Int32'),
+ (60,1,'PurchaseOrderFormQtyColumnVisible','True','System.Boolean'),
+ (61,1,'PurchaseOrderFormunitColumnWidth','64','System.Int32'),
+ (62,1,'PurchaseOrderFormunitColumnVisible','True','System.Boolean'),
+ (63,1,'PurchaseOrderFormpriceColumnWidth','97','System.Int32'),
+ (64,1,'PurchaseOrderFormpriceColumnVisible','True','System.Boolean'),
+ (65,1,'PurchaseOrderFormdiscpercentColumnWidth','50','System.Int32'),
+ (66,1,'PurchaseOrderFormdiscpercentColumnVisible','False','System.Boolean'),
+ (67,1,'PurchaseOrderFormdiscAmountColumnWidth','80','System.Int32'),
+ (68,1,'PurchaseOrderFormdiscAmountColumnVisible','False','System.Boolean'),
+ (69,1,'PurchaseOrderFormdiscabcColumnWidth','50','System.Int32'),
+ (70,1,'PurchaseOrderFormdiscabcColumnVisible','False','System.Boolean'),
+ (71,1,'PurchaseOrderFormtotalDiscColumnWidth','80','System.Int32'),
+ (72,1,'PurchaseOrderFormtotalDiscColumnVisible','False','System.Boolean'),
+ (73,1,'PurchaseOrderFormtotalAmountColumnWidth','89','System.Int32'),
+ (74,1,'PurchaseOrderFormtotalAmountColumnVisible','True','System.Boolean'),
+ (75,1,'PurchaseOrderFormwarehouseColumnWidth','70','System.Int32'),
+ (76,1,'PurchaseOrderFormwarehouseColumnVisible','False','System.Boolean'),
+ (77,1,'PurchaseOrderFormnotesColumnWidth','50','System.Int32'),
+ (78,1,'PurchaseOrderFormnotesColumnVisible','False','System.Boolean');
+/*!40000 ALTER TABLE `table_usersettings` ENABLE KEYS */;
 
 
 --
