@@ -36,6 +36,7 @@ namespace Profit
         public const string GENERAL_SETUP_REPOSITORY = "GeneralSetupRepository";
         public const string PURCHASEORDER_REPOSITORY = "PurchaseOrderRepository";
         public const string PERIOD_REPOSITORY = "PeriodRepository";
+        public const string USER_SETTING_REPOSITORY = "UserSettingRepository";
 
 
 
@@ -74,6 +75,7 @@ namespace Profit
             GeneralSetupRepository generalsetupRepository = new GeneralSetupRepository();
             PurchaseOrderRepository poRepository = new PurchaseOrderRepository();
             PeriodRepository periodRepository = new PeriodRepository();
+            UserSettingsRepository usRepository = new UserSettingsRepository();
 
             m_listService.Add(BANK_REPOSITORY, bankRepository);
             m_listService.Add(CURRENCY_REPOSITORY, ccyRepository);
@@ -99,7 +101,7 @@ namespace Profit
             m_listService.Add(GENERAL_SETUP_REPOSITORY, generalsetupRepository);
             m_listService.Add(PURCHASEORDER_REPOSITORY, poRepository);
             m_listService.Add(PERIOD_REPOSITORY, periodRepository);
-
+            m_listService.Add(USER_SETTING_REPOSITORY, usRepository);
         }
         public Repository GetRepository(string name)
         {
@@ -108,6 +110,10 @@ namespace Profit
         public TransactionRepository GetTransactionRepository(string name)
         {
             return (TransactionRepository)m_listService[name];
+        }
+        public UserSettingsRepository UserSetting()
+        {
+            return (UserSettingsRepository)m_listService[USER_SETTING_REPOSITORY];
         }
     }
 }

@@ -13,9 +13,9 @@ namespace Profit.Server
         public Part PART;
         public Warehouse WAREHOUSE;
         public Period PERIOD;
-        double BALANCE = 0;
-        double BOOKED = 0;
-        double BACK_ORDER = 0;
+        public double BALANCE = 0;
+        public double BOOKED = 0;
+        public double BACK_ORDER = 0;
         public IList STOCK_CARD_ENTRIES = new ArrayList();
         double BALANCE_AVAILABLE = 0;
         double BOOK_AVAILABLE = 0;
@@ -267,6 +267,23 @@ namespace Profit.Server
             }
             return result;
         }
+        public static IList TransforReaderList(OdbcDataReader aReader)
+        {
+            IList result = new ArrayList();
+            while (aReader.Read())
+            {
+                StockCard stockcard = new StockCard();
+                stockcard.ID = Convert.ToInt32(aReader[0]);
+                stockcard.PART = new Part(Convert.ToInt32(aReader["part_id"]));
+                stockcard.WAREHOUSE = new Warehouse(Convert.ToInt32(aReader["warehouse_id"]));
+                stockcard.PERIOD = new Period(Convert.ToInt32(aReader["period_id"]));
+                stockcard.BALANCE = Convert.ToDouble(aReader["sc_balance"]);
+                stockcard.BACK_ORDER = Convert.ToDouble(aReader["sc_backorder"]);
+                stockcard.BOOKED = Convert.ToDouble(aReader["sc_booked"]);
+                result.Add(stockcard);
+            }
+            return result;
+        }
         public int GetID()
         {
             return ID;
@@ -291,6 +308,10 @@ namespace Profit.Server
         public static string SelectMaxIDSQL()
         {
             return String.Format("SELECT max(sc_id) from table_stockcard");
+        }
+        public static string FindByPartPeriod(int part, int period)
+        {
+            return String.Format("SELECT * from table_stockcard where period_id = {0} and part_id = {1}",period,part);
         }
         #region IEntity Members
 

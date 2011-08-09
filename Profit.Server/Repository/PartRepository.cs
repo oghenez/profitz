@@ -310,5 +310,24 @@ namespace Profit.Server
             aReader.Close();
             return a;
         }
+        public StockCardInfo GetStockCardInfo(int partID)
+        {
+            OpenConnection();
+            StockCardInfo result = new StockCardInfo();
+            OdbcCommand cmd = new OdbcCommand();
+            cmd.Connection = m_connection;
+            Period p = PeriodRepository.FindCurrentPeriod(cmd);
+            cmd.CommandText = StockCard.FindByPartPeriod(partID, p.ID);
+            OdbcDataReader r = cmd.ExecuteReader();
+            IList stockcards = StockCard.TransforReaderList(r);
+            r.Close();
+            foreach (StockCard sc in stockcards)
+            {
+                result.BACKORDER += sc.BACK_ORDER;
+                result.BALANCE += sc.BALANCE;
+                result.BOOKED += sc.BOOKED;
+            }
+            return result;
+        }
     }
 }
