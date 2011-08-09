@@ -25,12 +25,14 @@ namespace Profit
         Repository r_unit = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY);
         Repository r_warehouse = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.WAREHOUSE_REPOSITORY);
         Repository r_sup = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.SUPPLIER_REPOSITORY);
+        UserSettingsRepository r_setting = RepositoryFactory.GetInstance().UserSetting();
 
         PurchaseOrderRepository r_po = (PurchaseOrderRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.PURCHASEORDER_REPOSITORY);
         IList m_units;
         IList m_warehouses;
 
         EditMode m_editMode = EditMode.New;
+        bool m_enable = false;
 
         public PurchaseOrderForm(IMainForm mainForm, string formName)
         {
@@ -181,12 +183,15 @@ namespace Profit
                     itemsDataGrid[codeColumn.Index, e.RowIndex].Value = p.CODE;
                     itemsDataGrid[nameColumn.Index, e.RowIndex].Value = p.NAME;
                     //dataItemskryptonDataGridView[QtyColumn.Index, e.RowIndex].Value = 0;
-                    unitColumn.Items.Clear();
-                    IList units = r_part.GetAllUnit(p.ID, p.UNIT.ID);
-                    Utils.GetListCode(unitColumn.Items, units);
-                    itemsDataGrid[unitColumn.Index, e.RowIndex].Value = units[0].ToString(); ;
+                    //unitColumn.Items.Clear();
+                   // IList units = r_part.GetAllUnit(p.ID, p.UNIT.ID);
+                    //Utils.GetListCode(unitColumn.Items, units);
+                    p.UNIT = (Unit)r_unit.GetById(p.UNIT);
+                    itemsDataGrid[unitColumn.Index, e.RowIndex].Value = p.UNIT.ToString(); ;
                     //dataItemskryptonDataGridView[priceColumn.Index, e.RowIndex].Value = 0;
                     //dataItemskryptonDataGridView[totalAmountColumn.Index, e.RowIndex].Value = 0;
+                    itemsDataGrid[warehouseColumn.Index, e.RowIndex].Value = m_warehouses[0].ToString();
+
                 }
                 if ((result.Count == 0) || (result.Count > 1))
                 {
@@ -221,12 +226,14 @@ namespace Profit
                             itemsDataGrid[codeColumn.Index, e.RowIndex].Value = p.CODE;
                             itemsDataGrid[nameColumn.Index, e.RowIndex].Value = p.NAME;
                             //dataItemskryptonDataGridView[QtyColumn.Index, e.RowIndex].Value = 0;
-                            unitColumn.Items.Clear();
-                            IList units = r_part.GetAllUnit(p.ID, p.UNIT.ID);
-                            Utils.GetListCode(unitColumn.Items, units);
-                            itemsDataGrid[unitColumn.Index, e.RowIndex].Value = units[0].ToString(); ;
+                            //unitColumn.Items.Clear();
+                            //IList units = r_part.GetAllUnit(p.ID, p.UNIT.ID);
+                            //Utils.GetListCode(unitColumn.Items, units);
+                            p.UNIT = (Unit)r_unit.GetById(p.UNIT);
+                            itemsDataGrid[unitColumn.Index, e.RowIndex].Value = p.UNIT.ToString();
                             //dataItemskryptonDataGridView[priceColumn.Index, e.RowIndex].Value = 0;
                            // dataItemskryptonDataGridView[totalAmountColumn.Index, e.RowIndex].Value = 0;
+                            itemsDataGrid[warehouseColumn.Index, e.RowIndex].Value = m_warehouses[0].ToString();
                         }
                     }
 
@@ -521,7 +528,8 @@ namespace Profit
             discAmountColumn.ReadOnly = !enable;
             notesColumn.ReadOnly = !enable;
             discabcColumn.ReadOnly = !enable;
-            
+
+            m_enable = enable;
         }
         private void setEditMode(EditMode editmode)
         {
@@ -571,11 +579,11 @@ namespace Profit
         public void Clear(object sender, EventArgs e)
         {
             //gridData.ClearSelection();
-            m_po = new PurchaseOrder();
-            setEditMode(EditMode.New);
+            //m_po = new PurchaseOrder();
+            //setEditMode(EditMode.New);
             ClearForm();
             setEnableForm(true);
-           // setEditMode(EditMode.New);
+            setEditMode(EditMode.New);
             textBoxCode.Focus();
         }
         private void loadData()
@@ -701,10 +709,29 @@ namespace Profit
         {
             if ((m_editMode == EditMode.New) || (m_editMode ==EditMode.Update))
             {
-                CalculateDiscPercentTotal();
-                CalculateTax();
-                CalculateNetTotal();
+                if (m_enable)
+                {
+                    CalculateDiscPercentTotal();
+                    CalculateTax();
+                    CalculateNetTotal();
+                }
             }
+        }
+
+        private void fieldChooserTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FieldChooserForm cm = new FieldChooserForm(m_mainForm.CurrentUser.ID, this.Name,itemsDataGrid);
+            cm.ShowDialog();
+        }
+
+        private void PurchaseOrderForm_Load(object sender, EventArgs e)
+        {
+            UserSetting.LoadSetting(itemsDataGrid, m_mainForm.CurrentUser.ID, this.Name);
+        }
+
+        private void PurchaseOrderForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            UserSetting.SaveSetting(itemsDataGrid, m_mainForm.CurrentUser.ID, this.Name);
         }
     }
 }

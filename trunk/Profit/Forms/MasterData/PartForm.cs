@@ -16,6 +16,7 @@ namespace Profit
     public partial class PartForm : KryptonForm, IChildForm
     {
         Part m_part = new Part();
+        PartRepository r_part = (PartRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_REPOSITORY);
         IMainForm m_mainForm;
         IList m_partGroupList = new ArrayList();
         IList m_unitList = new ArrayList();
@@ -122,7 +123,7 @@ namespace Profit
             {
                 this.Cursor = Cursors.WaitCursor;
                 gridData.Rows.Clear();
-                IList records = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_REPOSITORY).GetAll();
+                IList records = r_part.GetAll();
                 foreach (Part d in records)
                 {
                     int row = gridData.Rows.Add(d.CODE, d.NAME, d.ACTIVE, d.BARCODE);
@@ -155,14 +156,14 @@ namespace Profit
                     UpdateEntity();
                     if (m_part.ID == 0)
                     {
-                        RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_REPOSITORY).Save(m_part);
+                        r_part.Save(m_part);
                         //Part d = (Part)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_REPOSITORY).GetByCode(m_part);
                         //int r = gridData.Rows.Add(d.CODE, d.NAME, d.ACTIVE, d.BARCODE);
                         //gridData.Rows[r].Tag = d;
                     }
                     else
                     {
-                        RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_REPOSITORY).Update(m_part);
+                        r_part.Update(m_part);
                         updateRecord();
                     }
                     KryptonMessageBox.Show("Record has been saved","Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -249,6 +250,9 @@ namespace Profit
                 taxkryptonCheckBox2.Checked = false;
                 unitkryptonComboBox2.SelectedIndex = 0;
                 dataGridViewUOM.Rows.Clear();
+                balanceKryptonTextBox.Text = "0";
+                bookedKryptonTextBox.Text = "0";
+                BackOrderKryptonTextBox.Text = "0";
                 m_part = new Part();
                 errorProvider1.Clear();
             }
@@ -311,7 +315,7 @@ namespace Profit
                 {
                     this.Cursor = Cursors.WaitCursor;
                     if (KryptonMessageBox.Show("Are you sure to delete this record?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.No) { this.Cursor = Cursors.Default; return; }
-                    RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_REPOSITORY).Delete(m_part);
+                    r_part.Delete(m_part);
                     removeRecord(m_part.ID);
                     ClearForm();
                     setEnableForm(true);
@@ -380,9 +384,12 @@ namespace Profit
             sellPricekryptonNumericUpDown4.Value = Convert.ToDecimal(m_part.SELL_PRICE);
             taxkryptonCheckBox2.Checked = m_part.TAXABLE;
             unitkryptonComboBox2.Text = m_part.UNIT.ToString();
-
+            StockCardInfo sci = r_part.GetStockCardInfo(m_part.ID);
+            balanceKryptonTextBox.Text = sci.BALANCE.ToString();
+            BackOrderKryptonTextBox.Text = sci.BACKORDER.ToString();
+            bookedKryptonTextBox.Text = sci.BOOKED.ToString();
             dataGridViewUOM.Rows.Clear();
-            IList l = ((PartRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_REPOSITORY)).GetUnitConversions(m_part.ID);
+            IList l = r_part.GetUnitConversions(m_part.ID);
             foreach (UnitConversion u in l)
                 AddUOM(u);
         }
@@ -471,7 +478,7 @@ namespace Profit
             {
                 this.Cursor = Cursors.WaitCursor;
                 gridData.Rows.Clear();
-                IList records = ((PartRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_REPOSITORY)).SearchActivePart(searchtoolStripTextBox.Text.Trim());
+                IList records = r_part.SearchActivePart(searchtoolStripTextBox.Text.Trim());
                 foreach (Part d in records)
                 {
                     int row = gridData.Rows.Add(d.CODE, d.NAME, d.ACTIVE,d.BARCODE);

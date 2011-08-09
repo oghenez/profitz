@@ -76,6 +76,13 @@
             this.OrigUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CostPrice = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
             this.SellPrice = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.bookedKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.BackOrderKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.balanceKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonLabel16 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel15 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel14 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.textBoxCode = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.activekryptonCheckBox1 = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
@@ -110,6 +117,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.partCategorykryptonComboBox5)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUOM)).BeginInit();
+            this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
             this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -232,6 +240,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(12, 68);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -630,6 +639,85 @@
             this.SellPrice.ThousandsSeparator = true;
             this.SellPrice.Width = 100;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.bookedKryptonTextBox);
+            this.tabPage3.Controls.Add(this.BackOrderKryptonTextBox);
+            this.tabPage3.Controls.Add(this.balanceKryptonTextBox);
+            this.tabPage3.Controls.Add(this.kryptonLabel16);
+            this.tabPage3.Controls.Add(this.kryptonLabel15);
+            this.tabPage3.Controls.Add(this.kryptonLabel14);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(610, 270);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Stock Card Status";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // bookedKryptonTextBox
+            // 
+            this.bookedKryptonTextBox.Location = new System.Drawing.Point(132, 100);
+            this.bookedKryptonTextBox.Name = "bookedKryptonTextBox";
+            this.bookedKryptonTextBox.ReadOnly = true;
+            this.bookedKryptonTextBox.Size = new System.Drawing.Size(100, 40);
+            this.bookedKryptonTextBox.StateCommon.Content.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bookedKryptonTextBox.StateNormal.Content.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bookedKryptonTextBox.TabIndex = 5;
+            this.bookedKryptonTextBox.Text = "0";
+            this.bookedKryptonTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // BackOrderKryptonTextBox
+            // 
+            this.BackOrderKryptonTextBox.Location = new System.Drawing.Point(132, 54);
+            this.BackOrderKryptonTextBox.Name = "BackOrderKryptonTextBox";
+            this.BackOrderKryptonTextBox.ReadOnly = true;
+            this.BackOrderKryptonTextBox.Size = new System.Drawing.Size(100, 40);
+            this.BackOrderKryptonTextBox.StateCommon.Content.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BackOrderKryptonTextBox.StateNormal.Content.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BackOrderKryptonTextBox.TabIndex = 4;
+            this.BackOrderKryptonTextBox.Text = "0";
+            this.BackOrderKryptonTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // balanceKryptonTextBox
+            // 
+            this.balanceKryptonTextBox.Location = new System.Drawing.Point(132, 8);
+            this.balanceKryptonTextBox.Name = "balanceKryptonTextBox";
+            this.balanceKryptonTextBox.ReadOnly = true;
+            this.balanceKryptonTextBox.Size = new System.Drawing.Size(100, 40);
+            this.balanceKryptonTextBox.StateCommon.Content.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.balanceKryptonTextBox.StateNormal.Content.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.balanceKryptonTextBox.TabIndex = 3;
+            this.balanceKryptonTextBox.Text = "0";
+            this.balanceKryptonTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // kryptonLabel16
+            // 
+            this.kryptonLabel16.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.TitlePanel;
+            this.kryptonLabel16.Location = new System.Drawing.Point(33, 107);
+            this.kryptonLabel16.Name = "kryptonLabel16";
+            this.kryptonLabel16.Size = new System.Drawing.Size(93, 27);
+            this.kryptonLabel16.TabIndex = 2;
+            this.kryptonLabel16.Values.Text = "BOOKED :";
+            // 
+            // kryptonLabel15
+            // 
+            this.kryptonLabel15.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.TitlePanel;
+            this.kryptonLabel15.Location = new System.Drawing.Point(24, 64);
+            this.kryptonLabel15.Name = "kryptonLabel15";
+            this.kryptonLabel15.Size = new System.Drawing.Size(102, 27);
+            this.kryptonLabel15.TabIndex = 1;
+            this.kryptonLabel15.Values.Text = "ORDERED :";
+            // 
+            // kryptonLabel14
+            // 
+            this.kryptonLabel14.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.TitlePanel;
+            this.kryptonLabel14.Location = new System.Drawing.Point(25, 21);
+            this.kryptonLabel14.Name = "kryptonLabel14";
+            this.kryptonLabel14.Size = new System.Drawing.Size(101, 27);
+            this.kryptonLabel14.TabIndex = 0;
+            this.kryptonLabel14.Values.Text = "BALANCE :";
+            // 
             // textBoxCode
             // 
             this.textBoxCode.Location = new System.Drawing.Point(71, 12);
@@ -808,6 +896,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.partCategorykryptonComboBox5)).EndInit();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUOM)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).EndInit();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
@@ -878,5 +968,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn OrigUnit;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn CostPrice;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn SellPrice;
+        private System.Windows.Forms.TabPage tabPage3;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel14;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox bookedKryptonTextBox;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox BackOrderKryptonTextBox;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox balanceKryptonTextBox;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel16;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel15;
     }
 }

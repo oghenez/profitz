@@ -9,6 +9,10 @@ namespace Profit.Server
 {
     public class StockCardRepository : Repository
     {
+        public StockCardRepository():base(new StockCard())
+        {
+
+        }
         public static void Update(OdbcCommand cmd, StockCard sc)
         {
             cmd.CommandText = sc.GetUpdateSQL();
