@@ -28,7 +28,7 @@ namespace Profit.Server
         public double GetAmountInSmallestUnit()
         {
             if (this.UNIT.ID == PART.UNIT.ID) return QYTAMOUNT;
-            double conversion = PART.GetUnitConversion(UNIT.ID).ORIGINAL_QTY / PART.GetUnitConversion(UNIT.ID).CONVERSION_QTY;
+            double conversion = PART.GetUnitConversion(UNIT.ID).CONVERSION_QTY / PART.GetUnitConversion(UNIT.ID).ORIGINAL_QTY;
             return conversion * QYTAMOUNT;
         }
 
