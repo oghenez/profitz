@@ -34,11 +34,11 @@
             this.CANCELkryptonButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.OKkryptonButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.gridData = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.dgName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgSubject = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ActiveCol = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.barcodeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -56,9 +56,9 @@
             // 
             this.searchText.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.startSearch});
-            this.searchText.Location = new System.Drawing.Point(46, 12);
+            this.searchText.Location = new System.Drawing.Point(70, 12);
             this.searchText.Name = "searchText";
-            this.searchText.Size = new System.Drawing.Size(367, 22);
+            this.searchText.Size = new System.Drawing.Size(351, 22);
             this.searchText.TabIndex = 1;
             this.searchText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchText_KeyDown);
             // 
@@ -112,19 +112,6 @@
             this.gridData.TabIndex = 5;
             this.gridData.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridData_CellMouseDoubleClick);
             // 
-            // kryptonPanel1
-            // 
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
-            this.kryptonPanel1.Controls.Add(this.gridData);
-            this.kryptonPanel1.Controls.Add(this.searchText);
-            this.kryptonPanel1.Controls.Add(this.OKkryptonButton);
-            this.kryptonPanel1.Controls.Add(this.CANCELkryptonButton);
-            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(433, 341);
-            this.kryptonPanel1.TabIndex = 6;
-            // 
             // dgName
             // 
             this.dgName.DataPropertyName = "Code";
@@ -154,6 +141,19 @@
             this.barcodeCol.HeaderText = "Barcode";
             this.barcodeCol.Name = "barcodeCol";
             this.barcodeCol.ReadOnly = true;
+            // 
+            // kryptonPanel1
+            // 
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
+            this.kryptonPanel1.Controls.Add(this.gridData);
+            this.kryptonPanel1.Controls.Add(this.searchText);
+            this.kryptonPanel1.Controls.Add(this.OKkryptonButton);
+            this.kryptonPanel1.Controls.Add(this.CANCELkryptonButton);
+            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonPanel1.Name = "kryptonPanel1";
+            this.kryptonPanel1.Size = new System.Drawing.Size(433, 341);
+            this.kryptonPanel1.TabIndex = 6;
             // 
             // SearchPartForm
             // 
