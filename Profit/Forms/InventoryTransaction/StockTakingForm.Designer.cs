@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockTakingForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonHeader1 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
@@ -46,11 +46,11 @@
             this.searchToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.postToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonPrint = new System.Windows.Forms.ToolStripButton();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.statusKryptonLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.notesKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonBorderEdge1 = new ComponentFactory.Krypton.Toolkit.KryptonBorderEdge();
             this.totalAmountkryptonNumericUpDown = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
             this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.currencyKryptonComboBox = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
@@ -83,7 +83,6 @@
             this.buttonSpecAny4 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.buttonSpecAny5 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.buttonSpecAny6 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.toolStripButtonPrint = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -211,13 +210,20 @@
             this.postToolStripButton.Size = new System.Drawing.Size(49, 22);
             this.postToolStripButton.Text = "Post";
             // 
+            // toolStripButtonPrint
+            // 
+            this.toolStripButtonPrint.Image = global::Profit.Properties.Resources.print;
+            this.toolStripButtonPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonPrint.Name = "toolStripButtonPrint";
+            this.toolStripButtonPrint.Size = new System.Drawing.Size(51, 22);
+            this.toolStripButtonPrint.Text = "Print";
+            // 
             // kryptonPanel1
             // 
             this.kryptonPanel1.AutoScroll = true;
             this.kryptonPanel1.Controls.Add(this.statusKryptonLabel);
             this.kryptonPanel1.Controls.Add(this.notesKryptonTextBox);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel7);
-            this.kryptonPanel1.Controls.Add(this.kryptonBorderEdge1);
             this.kryptonPanel1.Controls.Add(this.totalAmountkryptonNumericUpDown);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel6);
             this.kryptonPanel1.Controls.Add(this.currencyKryptonComboBox);
@@ -243,7 +249,7 @@
             // statusKryptonLabel
             // 
             this.statusKryptonLabel.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.TitleControl;
-            this.statusKryptonLabel.Location = new System.Drawing.Point(767, 6);
+            this.statusKryptonLabel.Location = new System.Drawing.Point(250, 6);
             this.statusKryptonLabel.Name = "statusKryptonLabel";
             this.statusKryptonLabel.Size = new System.Drawing.Size(68, 27);
             this.statusKryptonLabel.TabIndex = 23;
@@ -254,7 +260,7 @@
             this.notesKryptonTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.notesKryptonTextBox.Location = new System.Drawing.Point(58, 323);
             this.notesKryptonTextBox.Name = "notesKryptonTextBox";
-            this.notesKryptonTextBox.Size = new System.Drawing.Size(415, 22);
+            this.notesKryptonTextBox.Size = new System.Drawing.Size(380, 22);
             this.notesKryptonTextBox.TabIndex = 21;
             // 
             // kryptonLabel7
@@ -265,15 +271,6 @@
             this.kryptonLabel7.Size = new System.Drawing.Size(45, 19);
             this.kryptonLabel7.TabIndex = 20;
             this.kryptonLabel7.Values.Text = "Notes :";
-            // 
-            // kryptonBorderEdge1
-            // 
-            this.kryptonBorderEdge1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.kryptonBorderEdge1.AutoSize = false;
-            this.kryptonBorderEdge1.Location = new System.Drawing.Point(4, 306);
-            this.kryptonBorderEdge1.Name = "kryptonBorderEdge1";
-            this.kryptonBorderEdge1.Size = new System.Drawing.Size(831, 1);
-            this.kryptonBorderEdge1.Text = "kryptonBorderEdge1";
             // 
             // totalAmountkryptonNumericUpDown
             // 
@@ -430,9 +427,9 @@
             this.totalAmountColumn});
             this.dataItemskryptonDataGridView.GridStyles.Style = ComponentFactory.Krypton.Toolkit.DataGridViewStyle.Mixed;
             this.dataItemskryptonDataGridView.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.GridDataCellList;
-            this.dataItemskryptonDataGridView.Location = new System.Drawing.Point(3, 115);
+            this.dataItemskryptonDataGridView.Location = new System.Drawing.Point(19, 115);
             this.dataItemskryptonDataGridView.Name = "dataItemskryptonDataGridView";
-            this.dataItemskryptonDataGridView.Size = new System.Drawing.Size(841, 176);
+            this.dataItemskryptonDataGridView.Size = new System.Drawing.Size(814, 192);
             this.dataItemskryptonDataGridView.TabIndex = 4;
             // 
             // scanColumn
@@ -456,8 +453,8 @@
             // 
             // QtyColumn
             // 
-            dataGridViewCellStyle1.NullValue = "0";
-            this.QtyColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.NullValue = "0";
+            this.QtyColumn.DefaultCellStyle = dataGridViewCellStyle7;
             this.QtyColumn.HeaderText = "Qty";
             this.QtyColumn.Increment = new decimal(new int[] {
             1,
@@ -487,9 +484,9 @@
             // priceColumn
             // 
             this.priceColumn.DecimalPlaces = 2;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.NullValue = "0";
-            this.priceColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.NullValue = "0";
+            this.priceColumn.DefaultCellStyle = dataGridViewCellStyle8;
             this.priceColumn.HeaderText = "Price";
             this.priceColumn.Increment = new decimal(new int[] {
             100,
@@ -513,9 +510,9 @@
             // totalAmountColumn
             // 
             this.totalAmountColumn.DecimalPlaces = 2;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.NullValue = "0";
-            this.totalAmountColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.NullValue = "0";
+            this.totalAmountColumn.DefaultCellStyle = dataGridViewCellStyle9;
             this.totalAmountColumn.HeaderText = "Amount";
             this.totalAmountColumn.Increment = new decimal(new int[] {
             1,
@@ -587,14 +584,6 @@
             this.buttonSpecAny6.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny6.UniqueName = "95BED338EBB14361B2927C3CB003454A";
             // 
-            // toolStripButtonPrint
-            // 
-            this.toolStripButtonPrint.Image = global::Profit.Properties.Resources.print;
-            this.toolStripButtonPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonPrint.Name = "toolStripButtonPrint";
-            this.toolStripButtonPrint.Size = new System.Drawing.Size(51, 22);
-            this.toolStripButtonPrint.Text = "Print";
-            // 
             // StockTakingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -606,7 +595,9 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "StockTakingForm";
             this.Text = "Stock Taking";
+            this.Load += new System.EventHandler(this.StockTakingForm_Load);
             this.Activated += new System.EventHandler(this.BankForm_Activated);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StockTakingForm_FormClosing);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
@@ -658,7 +649,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel6;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox currencyKryptonComboBox;
         private ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown totalAmountkryptonNumericUpDown;
-        private ComponentFactory.Krypton.Toolkit.KryptonBorderEdge kryptonBorderEdge1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripTextBox searchToolStripTextBox;
         private System.Windows.Forms.ToolStripButton searchToolStripButton;
