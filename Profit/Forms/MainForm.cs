@@ -50,10 +50,7 @@ namespace Profit
             InitializeComponent();
             kryptonManager1.GlobalPaletteMode = PaletteModeManager.ProfessionalSystem;
             toolStripComboBox1.Items.AddRange(Enum.GetNames(typeof(PaletteModeManager)));
-            toolStripComboBox1.Text = PaletteModeManager.ProfessionalSystem.ToString();
-            toolStripComboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             InitFormAccessList();
-
             m_currentUser = (User)r_user.getUser("ADMIN");
             m_currentPeriod = r_period.FindCurrentPeriod();
         }
@@ -295,7 +292,6 @@ namespace Profit
 
         private void toolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string c = sender.ToString(); ;
             kryptonManager1.GlobalPaletteMode = (PaletteModeManager)Enum.Parse(typeof(PaletteModeManager), toolStripComboBox1.SelectedItem.ToString());
         }
 
@@ -355,13 +351,6 @@ namespace Profit
             buttonSpecAny5_Click(sender, null);
         }
 
-        //private void kryptonHeader9_Click(object sender, EventArgs e)
-        //{
-        //    kryptonHeader9.HeaderStyle = kryptonHeader9.HeaderStyle == HeaderStyle.DockActive ? HeaderStyle.DockInactive : HeaderStyle.DockActive;
-        //    kryptonHeader8.Visible = kryptonHeader9.HeaderStyle == HeaderStyle.DockActive;
-        //    kryptonPanel1.Visible = kryptonHeader8.Orientation != VisualOrientation.Left ? kryptonHeader9.HeaderStyle == HeaderStyle.DockActive : kryptonHeader8.Orientation != VisualOrientation.Left;
-        //}
-
         private void treeView8_AfterSelect(object sender, TreeViewEventArgs e)
         {
             treeView1_NodeMouseDoubleClick(sender, new TreeNodeMouseClickEventArgs(e.Node, MouseButtons.Right, 1, 1, 1));
@@ -370,6 +359,8 @@ namespace Profit
         private void MainForm_Load(object sender, EventArgs e)
         {
             SetAuthorityFormAccess();
+            toolStripComboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            toolStripComboBox1.Text = UserSetting.GetStringValue("theme", CurrentUser.ID, this.Name, PaletteModeManager.ProfessionalSystem.ToString());
         }
 
         private void SetAuthorityFormAccess()
@@ -459,11 +450,6 @@ namespace Profit
             buttonSpecAny8_Click(null, null);
         }
 
-        private void kryptonHeader7_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         public IList GetFormAccessList()
         {
             return m_listForm;
@@ -514,11 +500,6 @@ namespace Profit
             get { return m_currentPeriod; }
             set { m_currentPeriod = value; }
         }
-        private void kryptonPanel4_SizeChanged(object sender, EventArgs e)
-        {
-            //if (kryptonPanel4.Width > 35)
-            //    buttonSpecAny3_Click(sender, e);
-        }
 
         private void generalSetupToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -526,6 +507,11 @@ namespace Profit
             GeneralSetupForm user = new GeneralSetupForm(this, GENERALSETUP_FORM);
             user.WindowState = FormWindowState.Maximized;
             user.Show();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            UserSetting.SaveSetting("theme", toolStripComboBox1.SelectedItem.ToString(), CurrentUser.ID, this.Name, typeof(string));
         }
     }
 }
