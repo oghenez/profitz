@@ -255,5 +255,20 @@ namespace Profit.Server
                                        RECEIVED_AMOUNT,
                                        ID); 
         }
+        public static string GetSearchByPartAndPONo(string find)
+        {
+            return String.Format(@"SELECT t.*
+                FROM table_purchaseorderitem t
+                INNER JOIN table_purchaseorder p on p.po_id = t.po_id
+                INNER JOIN table_part pt on pt.part_id = t.part_id
+                where t.poi_outstandingamounttogrn > 0
+                and concat(pt.part_code, pt.part_name, p.po_code) like '%{0}%'", find);
+        }
+        public override bool Equals(object obj)
+        {
+            PurchaseOrderItem e = (PurchaseOrderItem)obj;
+            if (e == null) return false;
+            return e.ID == this.ID;
+        }
     }
 }

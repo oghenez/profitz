@@ -39,6 +39,19 @@ namespace Profit.Server
             }
             return top;
         }
+        public static TermOfPayment GetTOP(OdbcDataReader aReader)
+        {
+            TermOfPayment top = null;
+            while (aReader.Read())
+            {
+                top = new TermOfPayment();
+                top.ID = Convert.ToInt32(aReader[0]);
+                top.CODE = aReader[1].ToString();
+                top.NAME = aReader[2].ToString();
+                top.DAYS = Convert.ToInt16(aReader[3]);
+            }
+            return top;
+        }
         public string GetInsertSQL()
         {
             return String.Format(@"insert into table_termofpayment 
@@ -60,6 +73,10 @@ namespace Profit.Server
                 CODE, NAME, DAYS, ID);
         }
         public string GetByIDSQL(int ID)
+        {
+            return String.Format("select * from table_termofpayment where top_id = {0}", ID);
+        }
+        public static string GetByIDSQLStatic(int ID)
         {
             return String.Format("select * from table_termofpayment where top_id = {0}", ID);
         }

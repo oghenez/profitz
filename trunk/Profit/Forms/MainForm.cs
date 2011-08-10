@@ -37,6 +37,7 @@ namespace Profit
         const string USER_FORM = "UserForm";
         const string GENERALSETUP_FORM = "GeneralSetupForm";
         const string PURCHASE_ORDER_FORM = "PurchaseOrderForm";
+        const string GOOD_RECEIVE_NOTE_FORM = "GoodReceiveNoteForm";
 
         IList m_listForm = new ArrayList();
         User m_currentUser = null;
@@ -206,6 +207,13 @@ namespace Profit
             {
                 if (isChild(PURCHASE_ORDER_FORM)) { this.Cursor = Cursors.Default; return; }
                 PurchaseOrderForm user = new PurchaseOrderForm(this, PURCHASE_ORDER_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            }
+            if (e.Node.Name == "NodeGoodReceiveNote")
+            {
+                if (isChild(GOOD_RECEIVE_NOTE_FORM)) { this.Cursor = Cursors.Default; return; }
+                GoodReceiptNoteForm user = new GoodReceiptNoteForm(this, GOOD_RECEIVE_NOTE_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
@@ -386,6 +394,7 @@ namespace Profit
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(STOCK_TAKING_FORM)) internalTreeView.Nodes["NodeStockTaking"].Remove();
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(UNIT_FORM)) inventoryTreeView.Nodes["NodeUnit"].Remove();
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PURCHASE_ORDER_FORM)) purchaseTreeView.Nodes["NodePurchaseOrder"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(GOOD_RECEIVE_NOTE_FORM)) purchaseTreeView.Nodes["NodeGoodReceiveNote"].Remove();
 
 
             inventoryKryptonHeader.Visible = inventoryTreeView.Visible = inventoryTreeView.Nodes.Count > 0;
@@ -479,6 +488,7 @@ namespace Profit
             m_listForm.Add(new FormAccess(0, MainForm.USER_FORM.ToString(), "GSTP001 - User"));
             m_listForm.Add(new FormAccess(0, MainForm.GENERALSETUP_FORM.ToString(), "GSTP002 - General Setup"));
             m_listForm.Add(new FormAccess(0, MainForm.PURCHASE_ORDER_FORM.ToString(), "TRCP001 - Purchase Order"));
+            m_listForm.Add(new FormAccess(0, MainForm.GOOD_RECEIVE_NOTE_FORM.ToString(), "TRCP002 - Good Receive Note"));
 
         }
 

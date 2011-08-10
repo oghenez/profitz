@@ -74,11 +74,23 @@
     <Compile Include="Forms\FieldChooserForm.Designer.cs">
       <DependentUpon>FieldChooserForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\InventoryTransaction\GoodReceiptNoteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\GoodReceiptNoteForm.Designer.cs">
+      <DependentUpon>GoodReceiptNoteForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\InventoryTransaction\PurchaseOrderForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\InventoryTransaction\PurchaseOrderForm.Designer.cs">
       <DependentUpon>PurchaseOrderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SearchPOForGRNForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SearchPOForGRNForm.Designer.cs">
+      <DependentUpon>SearchPOForGRNForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\InventoryTransaction\SearchPurchaseOrderForm.cs">
       <SubType>Form</SubType>
@@ -244,8 +256,14 @@
     <EmbeddedResource Include="Forms\FieldChooserForm.resx">
       <DependentUpon>FieldChooserForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\GoodReceiptNoteForm.resx">
+      <DependentUpon>GoodReceiptNoteForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\PurchaseOrderForm.resx">
       <DependentUpon>PurchaseOrderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\SearchPOForGRNForm.resx">
+      <DependentUpon>SearchPOForGRNForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\SearchPurchaseOrderForm.resx">
       <DependentUpon>SearchPurchaseOrderForm.cs</DependentUpon>

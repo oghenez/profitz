@@ -238,5 +238,32 @@ namespace Profit.Server
             AutoNumberSetup autonumber = AutoNumberSetupRepository.GetAutoNumberSetup(m_command, "PurchaseOrder");
             return autonumber.AUTONUMBER_SETUP_TYPE == AutoNumberSetupType.Auto;
         }
+        public IList FindPObyPartAndPONo(string find)
+        {
+            m_command.CommandText = PurchaseOrderItem.GetSearchByPartAndPONo(find);
+            OdbcDataReader r = m_command.ExecuteReader();
+            IList result = PurchaseOrderItem.TransformReaderList(r);
+            r.Close();
+            foreach (PurchaseOrderItem t in result)
+            {
+                m_command.CommandText = PurchaseOrder.GetByIDSQL(t.EVENT.ID);
+                r = m_command.ExecuteReader();
+                t.EVENT = PurchaseOrder.TransformReader(r);
+                r.Close();
+                m_command.CommandText = Part.GetByIDSQLStatic(t.PART.ID);
+                r = m_command.ExecuteReader();
+                t.PART = Part.GetPart(r);
+                r.Close();
+                m_command.CommandText = Unit.GetByIDSQLstatic(t.UNIT.ID);
+                r = m_command.ExecuteReader();
+                t.UNIT = Unit.GetUnit(r);
+                r.Close();
+                m_command.CommandText = TermOfPayment.GetByIDSQLStatic(((PurchaseOrder)t.EVENT).TOP.ID);
+                r = m_command.ExecuteReader();
+                ((PurchaseOrder)t.EVENT).TOP = TermOfPayment.GetTOP(r);
+                r.Close();
+            }
+            return result;
+        }
     }
 }
