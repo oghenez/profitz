@@ -516,5 +516,15 @@ namespace Profit
                 }
             }
         }
+
+        private void StockTakingForm_Load(object sender, EventArgs e)
+        {
+            UserSetting.LoadSetting(dataItemskryptonDataGridView, m_mainForm.CurrentUser.ID, this.Name);
+        }
+
+        private void StockTakingForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            UserSetting.SaveSetting(dataItemskryptonDataGridView, m_mainForm.CurrentUser.ID, this.Name);
+        }
     }
 }
