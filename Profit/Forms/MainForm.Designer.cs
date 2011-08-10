@@ -54,7 +54,7 @@
             System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("MSTF003 - Exchange Rate");
             System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("MSTF004 - Year");
             System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("TRCP001 - Purchase Order");
-            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("TRCP002 - Good Receipt");
+            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("TRCP002 - Good Receive");
             System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("TRCP003 - Supplier Invoice");
             System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("TRCP004 - Payment");
             System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("TRCP005 - Purchase Return");
@@ -659,8 +659,8 @@
             this.purchaseTreeView.Name = "purchaseTreeView";
             treeNode25.Name = "NodePurchaseOrder";
             treeNode25.Text = "TRCP001 - Purchase Order";
-            treeNode26.Name = "Node1";
-            treeNode26.Text = "TRCP002 - Good Receipt";
+            treeNode26.Name = "NodeGoodReceiveNote";
+            treeNode26.Text = "TRCP002 - Good Receive";
             treeNode27.Name = "Node2";
             treeNode27.Text = "TRCP003 - Supplier Invoice";
             treeNode28.Name = "Node3";

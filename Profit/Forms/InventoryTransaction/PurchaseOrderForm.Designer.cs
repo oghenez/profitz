@@ -313,7 +313,6 @@
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(867, 482);
             this.kryptonPanel1.TabIndex = 4;
-            this.kryptonPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.kryptonPanel1_Paint);
             // 
             // supplierKryptonTextBox
             // 
