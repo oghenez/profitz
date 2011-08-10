@@ -14,7 +14,7 @@ namespace Profit
 {
     public partial class PurchaseOrderForm : KryptonForm, IChildForm
     {
-        PurchaseOrder m_po = new PurchaseOrder();
+        PurchaseOrder m_po = new PurchaseOrder(); 
         IMainForm m_mainForm;
         Repository r_top = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.TOP_REPOSITORY);
         Repository r_division = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.DIVISION_REPOSITORY);

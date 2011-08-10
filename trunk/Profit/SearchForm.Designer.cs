@@ -32,10 +32,10 @@
             this.searchText = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.startSearch = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.resultData = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonButton2 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.CodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonButton2 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.resultData)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,9 +51,9 @@
             // 
             this.searchText.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.startSearch});
-            this.searchText.Location = new System.Drawing.Point(46, 12);
+            this.searchText.Location = new System.Drawing.Point(71, 12);
             this.searchText.Name = "searchText";
-            this.searchText.Size = new System.Drawing.Size(367, 22);
+            this.searchText.Size = new System.Drawing.Size(342, 22);
             this.searchText.TabIndex = 1;
             this.searchText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchText_KeyDown);
             // 
@@ -77,6 +77,19 @@
             this.resultData.Size = new System.Drawing.Size(409, 264);
             this.resultData.TabIndex = 2;
             // 
+            // CodeColumn
+            // 
+            this.CodeColumn.HeaderText = "Code";
+            this.CodeColumn.Name = "CodeColumn";
+            this.CodeColumn.ReadOnly = true;
+            // 
+            // NameColumn
+            // 
+            this.NameColumn.HeaderText = "Name";
+            this.NameColumn.Name = "NameColumn";
+            this.NameColumn.ReadOnly = true;
+            this.NameColumn.Width = 250;
+            // 
             // kryptonButton1
             // 
             this.kryptonButton1.Location = new System.Drawing.Point(358, 310);
@@ -92,19 +105,6 @@
             this.kryptonButton2.Size = new System.Drawing.Size(63, 25);
             this.kryptonButton2.TabIndex = 4;
             this.kryptonButton2.Values.Text = "OK";
-            // 
-            // CodeColumn
-            // 
-            this.CodeColumn.HeaderText = "Code";
-            this.CodeColumn.Name = "CodeColumn";
-            this.CodeColumn.ReadOnly = true;
-            // 
-            // NameColumn
-            // 
-            this.NameColumn.HeaderText = "Name";
-            this.NameColumn.Name = "NameColumn";
-            this.NameColumn.ReadOnly = true;
-            this.NameColumn.Width = 250;
             // 
             // SearchForm
             // 
