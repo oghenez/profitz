@@ -319,6 +319,7 @@
             this.treeView3.Dock = System.Windows.Forms.DockStyle.Top;
             this.treeView3.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.treeView3.FullRowSelect = true;
+            this.treeView3.LineColor = System.Drawing.Color.Empty;
             this.treeView3.Location = new System.Drawing.Point(0, 76);
             this.treeView3.Name = "treeView3";
             treeNode1.Name = "Node0";
@@ -358,7 +359,6 @@
             this.kryptonPanel4.Padding = new System.Windows.Forms.Padding(0, 0, 3, 3);
             this.kryptonPanel4.Size = new System.Drawing.Size(212, 552);
             this.kryptonPanel4.TabIndex = 14;
-            this.kryptonPanel4.SizeChanged += new System.EventHandler(this.kryptonPanel4_SizeChanged);
             // 
             // MasterDatakryptonPanel1
             // 
@@ -590,7 +590,6 @@
             this.financeKryptonHeader.Values.Description = "";
             this.financeKryptonHeader.Values.Heading = "Finance";
             this.financeKryptonHeader.Values.Image = null;
-            this.financeKryptonHeader.Paint += new System.Windows.Forms.PaintEventHandler(this.kryptonHeader7_Paint);
             this.financeKryptonHeader.MouseClick += new System.Windows.Forms.MouseEventHandler(this.kryptonHeader7_MouseClick);
             // 
             // buttonSpecAny1
@@ -902,6 +901,7 @@
             this.Name = "MainForm";
             this.Text = "Profit 2011";
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel4)).EndInit();

@@ -507,7 +507,7 @@ namespace Profit
             divisionKryptonComboBox.Enabled = enable;
             termofpaymentKryptonComboBox.Enabled = enable;
             duedateKryptonDateTimePicker.Enabled = enable;
-            subTotalKryptonNumericUpDown.Enabled = enable;
+            //subTotalKryptonNumericUpDown.Enabled = enable;
             discPercentKryptonNumericUpDown.Enabled = enable;
             discAmountkryptonNumericUpDown.Enabled = enable;
             //discAfterAmountKryptonNumericUpDown.Enabled = enable;
@@ -732,6 +732,25 @@ namespace Profit
         private void PurchaseOrderForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             UserSetting.SaveSetting(itemsDataGrid, m_mainForm.CurrentUser.ID, this.Name);
+        }
+
+        private void supplierkryptonComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Supplier em = (Supplier)supplierkryptonComboBox.SelectedItem;
+            supplierKryptonTextBox.Text = em == null ? "" : em.NAME;
+        }
+
+        private void termofpaymentKryptonComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if ((m_editMode == EditMode.New) || (m_editMode == EditMode.Update))
+            {
+                if (m_enable)
+                {
+                    TermOfPayment top = (TermOfPayment)termofpaymentKryptonComboBox.SelectedItem;
+                    if(top==null)return;
+                    duedateKryptonDateTimePicker.Value = dateKryptonDateTimePicker.Value.AddDays(top.DAYS);
+                }
+            }
         }
     }
 }
