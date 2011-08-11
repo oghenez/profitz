@@ -108,7 +108,7 @@ namespace Profit.Server
                 DISC_C,
                 DISC_ABC,
                 AGAINST_DO_STATUS.ToString(),
-                QYTAMOUNT,//OUTSTANDING_AMOUNT_TO_DO,
+                GetAmountInSmallestUnit(),// QYTAMOUNT,//OUTSTANDING_AMOUNT_TO_DO,
                 0//DELIVERED_AMOUNT
                 );
         }
@@ -156,7 +156,7 @@ namespace Profit.Server
                 DISC_C,
                 DISC_ABC,
                 AGAINST_DO_STATUS.ToString(),
-                OUTSTANDING_AMOUNT_TO_DO,
+                GetAmountInSmallestUnit(),// OUTSTANDING_AMOUNT_TO_DO,
                 DELIVERED_AMOUNT,
                 ID);
         }

@@ -18,29 +18,22 @@ namespace Profit
         PurchaseOrderRepository r_po = (PurchaseOrderRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.PURCHASEORDER_REPOSITORY);
         public IList RESULT = new ArrayList();
         User m_user;
+        int m_supplierID;
 
-        public SearchPOForGRNForm(string textfind, IList added, User user)
+        public SearchPOForGRNForm(string textfind, int supplier, IList added, User user)
         {
             InitializeComponent();
             m_user = user;
             searchText.Text = textfind;
-
+            m_supplierID = supplier;
             m_listAdded = added;
-            
-            if (added.Count > 0)
-            {
-                loadResult(added);
-                gridData.Focus();
-            }
-            else
-                searchText.Focus();
+            searchText.Focus();
         }
 
         private void loadResult(IList records)
         {
             foreach (PurchaseOrderItem d in records)
             {
-                if (m_listAdded.Contains(d)) continue;
                 int row = gridData.Rows.Add();
                 gridData[checkColumn.Index, row].Value = false;
                 gridData[purchaseorderNoColumn.Index, row].Value = d.EVENT.CODE;
@@ -50,7 +43,7 @@ namespace Profit
                 gridData[codeColumn.Index, row].Value = d.PART.CODE;
                 gridData[nameColumn.Index, row].Value = d.PART.NAME;
                 gridData[qtyColumn.Index, row].Value = d.OUTSTANDING_AMOUNT_TO_GRN;
-                gridData[unitColumn.Index, row].Value = d.UNIT.CODE;
+                gridData[unitColumn.Index, row].Value = d.PART.UNIT.CODE;
                 gridData[warehouseColumn.Index, row].Value = d.WAREHOUSE.CODE;
                 gridData.Rows[row].Tag = d;
             }
@@ -65,7 +58,8 @@ namespace Profit
             {
                 this.Cursor = Cursors.WaitCursor;
                 gridData.Rows.Clear();
-                IList records = r_po.FindPObyPartAndPONo(searchText.Text.Trim());
+
+                IList records = r_po.FindPObyPartAndPONo(searchText.Text.Trim(), m_listAdded, m_supplierID);
                 loadResult(records);
                 this.Cursor = Cursors.Default;
             }

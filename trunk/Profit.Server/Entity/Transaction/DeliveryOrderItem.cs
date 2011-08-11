@@ -82,7 +82,7 @@ namespace Profit.Server
                 NOTES,
                 SO_ITEM==null?0:SO_ITEM.ID,
                 AGAINST_SR_STATUS.ToString(),
-                QYTAMOUNT, //OUTSTANDING_AMOUNT_TO_SR,
+                GetAmountInSmallestUnit(),//QYTAMOUNT, //OUTSTANDING_AMOUNT_TO_SR,
                 0//RETURNED_AMOUNT
                 );
         }
@@ -114,7 +114,7 @@ namespace Profit.Server
                 NOTES,
                 SO_ITEM==null?0:SO_ITEM.ID,
                 AGAINST_SR_STATUS.ToString(),
-                OUTSTANDING_AMOUNT_TO_SR,
+                GetAmountInSmallestUnit(),//OUTSTANDING_AMOUNT_TO_SR,
                 RETURNED_AMOUNT,
                 ID);
         }

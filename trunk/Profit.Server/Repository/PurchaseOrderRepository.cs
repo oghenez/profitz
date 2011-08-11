@@ -52,6 +52,7 @@ namespace Profit.Server
                 stk.ID = Convert.ToInt32(m_command.ExecuteScalar());
                 foreach (PurchaseOrderItem item in stk.EVENT_ITEMS)
                 {
+                    item.PART.UNIT_CONVERSION_LIST = PartRepository.GetUnitConversionsStatic(m_command, item.PART.ID);
                     m_command.CommandText = item.GetInsertSQL();
                     m_command.ExecuteNonQuery();
                     m_command.CommandText = PurchaseOrderItem.SelectMaxIDSQL();
@@ -77,6 +78,7 @@ namespace Profit.Server
 
                 foreach (PurchaseOrderItem sti in e.EVENT_ITEMS)
                 {
+                    sti.PART.UNIT_CONVERSION_LIST = PartRepository.GetUnitConversionsStatic(m_command, sti.PART.ID);
                     if (sti.ID > 0)
                     {
                         m_command.CommandText = sti.GetUpdateSQL();
@@ -238,9 +240,18 @@ namespace Profit.Server
             AutoNumberSetup autonumber = AutoNumberSetupRepository.GetAutoNumberSetup(m_command, "PurchaseOrder");
             return autonumber.AUTONUMBER_SETUP_TYPE == AutoNumberSetupType.Auto;
         }
-        public IList FindPObyPartAndPONo(string find)
+        public IList FindPObyPartAndPONo(string find, IList exceptPOI, int supplierID)
         {
-            m_command.CommandText = PurchaseOrderItem.GetSearchByPartAndPONo(find);
+            StringBuilder poisSB = new StringBuilder();
+            foreach(int i in exceptPOI)
+            {
+                poisSB.Append(i.ToString());
+                poisSB.Append(',');
+            }
+            string pois = poisSB.ToString();
+            pois = exceptPOI.Count>0?pois.Substring(0, pois.Length - 1):"";
+
+            m_command.CommandText = PurchaseOrderItem.GetSearchByPartAndPONo(find,supplierID, pois);
             OdbcDataReader r = m_command.ExecuteReader();
             IList result = PurchaseOrderItem.TransformReaderList(r);
             r.Close();
@@ -261,6 +272,14 @@ namespace Profit.Server
                 m_command.CommandText = TermOfPayment.GetByIDSQLStatic(((PurchaseOrder)t.EVENT).TOP.ID);
                 r = m_command.ExecuteReader();
                 ((PurchaseOrder)t.EVENT).TOP = TermOfPayment.GetTOP(r);
+                r.Close();
+                m_command.CommandText = Warehouse.GetByIDSQLStatic(t.WAREHOUSE.ID);
+                r = m_command.ExecuteReader();
+                t.WAREHOUSE = Warehouse.GetWarehouse(r);
+                r.Close();
+                m_command.CommandText = Unit.GetByIDSQLstatic(t.PART.UNIT.ID);
+                r = m_command.ExecuteReader();
+                t.PART.UNIT = Unit.GetUnit(r);
                 r.Close();
             }
             return result;
