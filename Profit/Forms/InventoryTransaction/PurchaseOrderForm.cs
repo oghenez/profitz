@@ -180,6 +180,7 @@ namespace Profit
                         }
                     }
                     itemsDataGrid[codeColumn.Index, e.RowIndex].Tag = p;
+                    itemsDataGrid[scanColumn.Index, e.RowIndex].Value = p.BARCODE;
                     itemsDataGrid[codeColumn.Index, e.RowIndex].Value = p.CODE;
                     itemsDataGrid[nameColumn.Index, e.RowIndex].Value = p.NAME;
                     //dataItemskryptonDataGridView[QtyColumn.Index, e.RowIndex].Value = 0;
@@ -223,6 +224,7 @@ namespace Profit
                                 }
                             }
                             itemsDataGrid[codeColumn.Index, e.RowIndex].Tag = p;
+                            itemsDataGrid[scanColumn.Index, e.RowIndex].Value = p.BARCODE;
                             itemsDataGrid[codeColumn.Index, e.RowIndex].Value = p.CODE;
                             itemsDataGrid[nameColumn.Index, e.RowIndex].Value = p.NAME;
                             //dataItemskryptonDataGridView[QtyColumn.Index, e.RowIndex].Value = 0;

@@ -121,5 +121,16 @@ namespace Profit
         {
             UserSetting.SaveSetting(gridData, m_user.ID, this.Name);
         }
+
+        private void SearchPOForGRNForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+                this.Close();
+        }
+        private void gridData_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                OKkryptonButton_Click(sender, null);
+        }
     }
 }

@@ -130,7 +130,7 @@ namespace Profit.Server
                     prn_eventstatus= '{1}'
                 where prn_id = {2}",
                 posted,
-                posted ? EventStatus.Confirm: EventStatus.Entry,
+                posted ? EventStatus.Confirm.ToString() : EventStatus.Entry.ToString(),
                 id);
         }
     }

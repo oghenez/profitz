@@ -28,15 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.searchText = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.startSearch = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.CANCELkryptonButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.OKkryptonButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.gridData = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.checkColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
             this.purchaseorderNoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.poDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,6 +45,8 @@
             this.qtyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.warehouseColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -113,45 +113,25 @@
             this.gridData.GridStyles.Style = ComponentFactory.Krypton.Toolkit.DataGridViewStyle.Mixed;
             this.gridData.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlClient;
             this.gridData.HideOuterBorders = true;
-            this.gridData.Location = new System.Drawing.Point(12, 65);
+            this.gridData.Location = new System.Drawing.Point(12, 40);
             this.gridData.MultiSelect = false;
             this.gridData.Name = "gridData";
             this.gridData.RowHeadersVisible = false;
             this.gridData.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gridData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridData.Size = new System.Drawing.Size(614, 236);
+            this.gridData.Size = new System.Drawing.Size(614, 261);
             this.gridData.StateCommon.BackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlClient;
             this.gridData.StateCommon.DataCell.Border.DrawBorders = ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom;
             this.gridData.TabIndex = 5;
+            this.gridData.TabStop = false;
             this.gridData.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridData_CellMouseDoubleClick);
-            // 
-            // kryptonPanel1
-            // 
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel2);
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
-            this.kryptonPanel1.Controls.Add(this.gridData);
-            this.kryptonPanel1.Controls.Add(this.searchText);
-            this.kryptonPanel1.Controls.Add(this.OKkryptonButton);
-            this.kryptonPanel1.Controls.Add(this.CANCELkryptonButton);
-            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(638, 341);
-            this.kryptonPanel1.TabIndex = 6;
-            // 
-            // kryptonLabel2
-            // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(280, 40);
-            this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(141, 19);
-            this.kryptonLabel2.TabIndex = 6;
-            this.kryptonLabel2.Values.Text = "* Part of PO No. / Part No.";
+            this.gridData.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gridData_KeyDown);
             // 
             // checkColumn
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.NullValue = false;
-            this.checkColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.NullValue = false;
+            this.checkColumn.DefaultCellStyle = dataGridViewCellStyle4;
             this.checkColumn.FalseValue = null;
             this.checkColumn.HeaderText = "Check";
             this.checkColumn.IndeterminateValue = null;
@@ -213,18 +193,43 @@
             this.warehouseColumn.Name = "warehouseColumn";
             this.warehouseColumn.ReadOnly = true;
             // 
+            // kryptonPanel1
+            // 
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel2);
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
+            this.kryptonPanel1.Controls.Add(this.gridData);
+            this.kryptonPanel1.Controls.Add(this.searchText);
+            this.kryptonPanel1.Controls.Add(this.OKkryptonButton);
+            this.kryptonPanel1.Controls.Add(this.CANCELkryptonButton);
+            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonPanel1.Name = "kryptonPanel1";
+            this.kryptonPanel1.Size = new System.Drawing.Size(638, 341);
+            this.kryptonPanel1.TabIndex = 6;
+            // 
+            // kryptonLabel2
+            // 
+            this.kryptonLabel2.Location = new System.Drawing.Point(427, 15);
+            this.kryptonLabel2.Name = "kryptonLabel2";
+            this.kryptonLabel2.Size = new System.Drawing.Size(141, 19);
+            this.kryptonLabel2.TabIndex = 6;
+            this.kryptonLabel2.Values.Text = "* Part of PO No. / Part No.";
+            // 
             // SearchPOForGRNForm
             // 
+            this.AcceptButton = this.OKkryptonButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(638, 341);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.KeyPreview = true;
             this.Name = "SearchPOForGRNForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Find";
             this.Load += new System.EventHandler(this.SearchPOForGRNForm_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SearchPOForGRNForm_FormClosing);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SearchPOForGRNForm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
