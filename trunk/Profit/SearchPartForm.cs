@@ -21,16 +21,18 @@ namespace Profit
         public SearchPartForm(string textfind, IList result)//Point p)
         {
             InitializeComponent();
-            //this.Location = p;
             m_listLastresult = result;
             searchText.Text = textfind;
             if (result.Count > 0)
             {
                 loadResult(result);
-                gridData.Focus();
+                gridData.Rows[0].Selected = true;
+                SelectNextControl(searchText, true, true, true, true);
             }
             else
+            {
                 searchText.Focus();
+            }
         }
 
         private void loadResult(IList records)
@@ -38,10 +40,6 @@ namespace Profit
             foreach (Part d in records)
             {
                 int row = gridData.Rows.Add(d.CODE, d.NAME, d.ACTIVE, d.BARCODE);
-                // d.PART_GROUP = (PartGroup)Utils.FindEntityInList(d.PART_GROUP.ID, m_partGroupList); 
-                //  d.UNIT = (Unit)Utils.FindEntityInList(d.UNIT.ID, m_unitList);
-                //  d.CURRENCY = (Currency)Utils.FindEntityInList(d.CURRENCY.ID, m_currencyList);
-                //  d.PART_CATEGORY = (PartCategory)Utils.FindEntityInList(d.PART_CATEGORY.ID, m_partCategoryList);
                 gridData.Rows[row].Tag = d;
             }
             gridData.ClearSelection();
@@ -99,6 +97,30 @@ namespace Profit
         {
             PART = null;
             this.Close();
+        }
+
+        private void SearchPartForm_Load(object sender, EventArgs e)
+        {
+            UserSetting.LoadSetting(gridData, 1, this.Name);
+        }
+
+        private void SearchPartForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            UserSetting.SaveSetting(gridData, 1, this.Name);
+        }
+
+        private void SearchPartForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+                this.Close();
+        }
+
+        private void gridData_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                OKkryptonButton_Click(sender, null);
+            }
         }
     }
 }

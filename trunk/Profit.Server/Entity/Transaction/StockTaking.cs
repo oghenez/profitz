@@ -156,7 +156,7 @@ namespace Profit.Server
                     stk_eventstatus= '{1}'
                 where stk_id = {2}",
                 posted,
-                posted ? EventStatus.Confirm : EventStatus.Entry,
+                posted ? EventStatus.Confirm.ToString() : EventStatus.Entry.ToString(),
                 id);
         }
         public static string GetSearch(string find)

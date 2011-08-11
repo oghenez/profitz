@@ -44,8 +44,7 @@ namespace Profit
             {
                 d.EMPLOYEE = (Employee)r_employee.GetById(d.EMPLOYEE);
                 //d.WAREHOUSE = (Warehouse)r_warehouse.GetById(d.WAREHOUSE);
-                int row = gridData.Rows.Add(d.CODE, d.TRANSACTION_DATE.ToString("dd-MM-yyyy"), d.EMPLOYEE.CODE,
-                    "", "", d.POSTED);
+                int row = gridData.Rows.Add(d.CODE, d.TRANSACTION_DATE.ToString("dd-MM-yyyy"), d.EMPLOYEE.CODE,d.POSTED);
                 gridData.Rows[row].Tag = d;
             }
             gridData.ClearSelection();
@@ -103,6 +102,28 @@ namespace Profit
         {
             GOOD_RECEIVE_NOTE = null;
             this.Close();
+        }
+
+        private void SearchGoodReceiveNoteForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+                this.Close();
+        }
+
+        private void gridData_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                OKkryptonButton_Click(sender, null);
+        }
+
+        private void SearchGoodReceiveNoteForm_Load(object sender, EventArgs e)
+        {
+            UserSetting.LoadSetting(gridData, 1, this.Name);
+        }
+
+        private void SearchGoodReceiveNoteForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            UserSetting.SaveSetting(gridData, 1, this.Name);
         }
     }
 }

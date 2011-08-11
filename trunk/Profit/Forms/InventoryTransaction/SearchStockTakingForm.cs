@@ -104,5 +104,27 @@ namespace Profit
             STOCK_TAKING = null;
             this.Close();
         }
+
+        private void SearchStockTakingForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+                this.Close();
+        }
+
+        private void SearchStockTakingForm_Load(object sender, EventArgs e)
+        {
+            UserSetting.LoadSetting(gridData, 1, this.Name);
+        }
+
+        private void SearchStockTakingForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            UserSetting.SaveSetting(gridData, 1, this.Name);
+        }
+
+        private void gridData_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                OKkryptonButton_Click(sender, null);
+        }
     }
 }

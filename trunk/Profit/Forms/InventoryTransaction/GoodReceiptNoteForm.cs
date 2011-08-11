@@ -33,7 +33,7 @@ namespace Profit
 
         IList m_units;
         IList m_warehouses;
-        IList m_poItems;//=new ArrayList();
+        IList m_poItems = new ArrayList();
 
         EditMode m_editMode = EditMode.New;
         bool m_enable = false;
