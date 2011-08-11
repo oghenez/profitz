@@ -27,7 +27,7 @@ namespace Profit.Server
         public PurchaseOrderItem(int ID) : base(ID) { }
         public void SetOSAgainstGRNItem(GoodReceiveNoteItem grni)
         {
-            double qtyAmount = grni.QYTAMOUNT;
+            double qtyAmount = grni.GetAmountInSmallestUnit();//grni.QYTAMOUNT;
             if (qtyAmount <= 0) return;
             if (AGAINST_GRN_STATUS == AgainstStatus.Close)
                 throw new Exception("PO Item Allready Close :" + this.PART.NAME);
@@ -43,8 +43,8 @@ namespace Profit.Server
         }
         public void UnSetOSAgainstGRNItem(GoodReceiveNoteItem grni)
         {
-            double qtyAmount = grni.QYTAMOUNT;
-            if (qtyAmount > this.QYTAMOUNT || OUTSTANDING_AMOUNT_TO_GRN + qtyAmount > this.QYTAMOUNT)
+            double qtyAmount = grni.GetAmountInSmallestUnit();//= grni.QYTAMOUNT;
+            if (qtyAmount > this.GetAmountInSmallestUnit() || OUTSTANDING_AMOUNT_TO_GRN + qtyAmount > this.GetAmountInSmallestUnit())
                 throw new Exception("GRN Item revise Amount exceed PO Item Amount :" + this.PART.NAME);
             OUTSTANDING_AMOUNT_TO_GRN = OUTSTANDING_AMOUNT_TO_GRN + qtyAmount;
             RECEIVED_AMOUNT = RECEIVED_AMOUNT - qtyAmount;
@@ -58,7 +58,7 @@ namespace Profit.Server
         private bool isValidToClose()
         {
             bool validA = OUTSTANDING_AMOUNT_TO_GRN == 0;
-            bool validB = RECEIVED_AMOUNT == QYTAMOUNT;
+            bool validB = RECEIVED_AMOUNT == this.GetAmountInSmallestUnit();//QYTAMOUNT;
             return validA && validB;
         }
         public override string GetInsertSQL()
@@ -108,7 +108,7 @@ namespace Profit.Server
                 DISC_C,
                 DISC_ABC,
                 AGAINST_GRN_STATUS.ToString(),
-                QYTAMOUNT,//OUTSTANDING_AMOUNT_TO_GRN,
+                 GetAmountInSmallestUnit(),//OUTSTANDING_AMOUNT_TO_GRN,
                 0//RECEIVED_AMOUNT
                 );
         }
@@ -156,7 +156,7 @@ namespace Profit.Server
                 DISC_C,
                 DISC_ABC,
                 AGAINST_GRN_STATUS.ToString(),
-                OUTSTANDING_AMOUNT_TO_GRN,
+                GetAmountInSmallestUnit(),
                 RECEIVED_AMOUNT,
                 ID);
         }
@@ -255,14 +255,15 @@ namespace Profit.Server
                                        RECEIVED_AMOUNT,
                                        ID); 
         }
-        public static string GetSearchByPartAndPONo(string find)
+        public static string GetSearchByPartAndPONo(string find, int supplierID ,string poi)
         {
             return String.Format(@"SELECT t.*
                 FROM table_purchaseorderitem t
                 INNER JOIN table_purchaseorder p on p.po_id = t.po_id
                 INNER JOIN table_part pt on pt.part_id = t.part_id
                 where t.poi_outstandingamounttogrn > 0
-                and concat(pt.part_code, pt.part_name, p.po_code) like '%{0}%'", find);
+                and concat(pt.part_code, pt.part_name, p.po_code) like '%{0}%' and p.sup_id = {1} 
+               {2}", find, supplierID, poi!=""?" and t.poi_id not in ("+poi+")":"");
         }
         public override bool Equals(object obj)
         {

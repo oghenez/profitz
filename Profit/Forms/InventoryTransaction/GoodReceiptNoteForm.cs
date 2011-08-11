@@ -28,8 +28,12 @@ namespace Profit
         UserSettingsRepository r_setting = RepositoryFactory.GetInstance().UserSetting();
 
         PurchaseOrderRepository r_po = (PurchaseOrderRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.PURCHASEORDER_REPOSITORY);
+
+        GoodReceiveNoteRepository r_grn = (GoodReceiveNoteRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.GOODRECEIVENOTE_REPOSITORY);
+
         IList m_units;
         IList m_warehouses;
+        IList m_poItems;//=new ArrayList();
 
         EditMode m_editMode = EditMode.New;
         bool m_enable = false;
@@ -51,6 +55,48 @@ namespace Profit
             itemsDataGrid.CellValidating += new DataGridViewCellValidatingEventHandler(dataItemskryptonDataGridView_CellValidating);
             itemsDataGrid.CellValidated += new DataGridViewCellEventHandler(dataItemskryptonDataGridView_CellValidated);
             itemsDataGrid.CellBeginEdit += new DataGridViewCellCancelEventHandler(itemsDataGrid_CellBeginEdit);
+            itemsDataGrid.CellEndEdit += new DataGridViewCellEventHandler(itemsDataGrid_CellEndEdit);
+        }
+
+        void itemsDataGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == scanColumn.Index)
+            {
+                int count = 0;
+                foreach (PurchaseOrderItem itm in m_poItems)
+                {
+                    if (count == 0)
+                    {
+                        itemsDataGrid[scanColumn.Index, e.RowIndex].Value = itm.EVENT.CODE;
+                        itemsDataGrid[codeColumn.Index, e.RowIndex].Value = itm.PART.CODE;
+                        itemsDataGrid[nameColumn.Index, e.RowIndex].Value = itm.PART.NAME;
+                        itemsDataGrid[OutstandingPOColumn.Index, e.RowIndex].Value = itm.OUTSTANDING_AMOUNT_TO_GRN;
+                        itemsDataGrid[OutstandingunitColumn.Index, e.RowIndex].Value = itm.PART.UNIT.CODE;
+                        itemsDataGrid[QtyColumn.Index, e.RowIndex].Value = 0;
+                        itemsDataGrid[unitColumn.Index, e.RowIndex].Value = itm.UNIT.CODE;
+                        itemsDataGrid[warehouseColumn.Index, e.RowIndex].Value = itm.WAREHOUSE.CODE;
+                        itemsDataGrid[notesColumn.Index, e.RowIndex].Value = itm.NOTES;
+                        itemsDataGrid[scanColumn.Index, e.RowIndex].Tag = itm;
+                        itemsDataGrid[codeColumn.Index, e.RowIndex].Tag = itm.PART;
+                    }
+                    else
+                    {
+                        int row = itemsDataGrid.Rows.Add();
+                        itemsDataGrid[scanColumn.Index, row].Value = itm.EVENT.CODE;
+                        itemsDataGrid[codeColumn.Index, row].Value = itm.PART.CODE;
+                        itemsDataGrid[nameColumn.Index, row].Value = itm.PART.NAME;
+                        itemsDataGrid[OutstandingPOColumn.Index, row].Value = itm.OUTSTANDING_AMOUNT_TO_GRN;
+                        itemsDataGrid[OutstandingunitColumn.Index, row].Value = itm.PART.UNIT.CODE;
+                        itemsDataGrid[QtyColumn.Index, row].Value = 0;
+                        itemsDataGrid[unitColumn.Index, row].Value = itm.UNIT.CODE;
+                        itemsDataGrid[warehouseColumn.Index, row].Value = itm.WAREHOUSE.CODE;
+                        itemsDataGrid[notesColumn.Index, row].Value = itm.NOTES;
+                        itemsDataGrid[scanColumn.Index, row].Tag = itm;
+                        itemsDataGrid[codeColumn.Index, row].Tag = itm.PART;
+                    }
+                    count++;
+                }
+            }
         }
 
         void itemsDataGrid_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
@@ -92,40 +138,23 @@ namespace Profit
                 for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
                 {
                     if (i == e.RowIndex) continue;
-                    PurchaseOrderItem pi = (PurchaseOrderItem)itemsDataGrid[codeColumn.Index, e.RowIndex].Tag;
+                    PurchaseOrderItem pi = (PurchaseOrderItem)itemsDataGrid[scanColumn.Index, i].Tag;
                     if (pi == null) continue;
-                    addedPI.Add(pi);
+                    addedPI.Add(pi.ID);
                 }
-                using (SearchPOForGRNForm fr = new SearchPOForGRNForm(e.FormattedValue.ToString(), new ArrayList(), m_mainForm.CurrentUser))
+                IList res = r_po.FindPObyPartAndPONo(e.FormattedValue.ToString(), addedPI, ((Supplier)supplierkryptonComboBox.SelectedItem).ID);
+                if (res.Count == 0)
                 {
-                    fr.ShowDialog();
-                    IList result = fr.RESULT;
-                    int count = 0;
-                    foreach (PurchaseOrderItem itm in result)
+                    using (SearchPOForGRNForm fr = new SearchPOForGRNForm(e.FormattedValue.ToString(), ((Supplier)supplierkryptonComboBox.SelectedItem).ID, addedPI, m_mainForm.CurrentUser))
                     {
-                        if (count == 0)
-                        {
-                            itemsDataGrid[codeColumn.Index, e.RowIndex].Value = itm.PART.CODE;
-                            itemsDataGrid[nameColumn.Index, e.RowIndex].Value = itm.PART.NAME;
-                            itemsDataGrid[QtyColumn.Index, e.RowIndex].Value = itm.OUTSTANDING_AMOUNT_TO_GRN;
-                            itemsDataGrid[unitColumn.Index, e.RowIndex].Value = itm.UNIT.CODE;
-                            itemsDataGrid[warehouseColumn.Index, e.RowIndex].Value = itm.WAREHOUSE.CODE;
-                            itemsDataGrid[notesColumn.Index, e.RowIndex].Value = itm.NOTES;
-                            itemsDataGrid[codeColumn.Index, e.RowIndex].Tag = itm;
-                        }
-                        else
-                        {
-                            int row = itemsDataGrid.Rows.Add();
-                            itemsDataGrid[codeColumn.Index, row].Value = itm.PART.CODE;
-                            itemsDataGrid[nameColumn.Index, row].Value = itm.PART.NAME;
-                            itemsDataGrid[QtyColumn.Index, row].Value = itm.OUTSTANDING_AMOUNT_TO_GRN;
-                            itemsDataGrid[unitColumn.Index, row].Value = itm.UNIT.CODE;
-                            itemsDataGrid[warehouseColumn.Index, row].Value = itm.WAREHOUSE.CODE;
-                            itemsDataGrid[notesColumn.Index, row].Value = itm.NOTES;
-                            itemsDataGrid[codeColumn.Index, row].Tag = itm;
-                        }
-                        count++;
+                        fr.ShowDialog();
+                        IList result = fr.RESULT;
+                        m_poItems = result;
                     }
+                }
+                else
+                {
+                    m_poItems = res;
                 }
                 //IList result = r_part.SearchActivePart(e.FormattedValue.ToString());
                 //if (result.Count == 1)
@@ -217,17 +246,17 @@ namespace Profit
                 this.Cursor = Cursors.WaitCursor;
                 if (m_po.POSTED)
                 {
-                    r_po.Revise(m_po.ID);
+                    r_grn.Revise(m_po.ID);
                     m_po.POSTED = false;
                     KryptonMessageBox.Show("Transaction has been UNPOSTED", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    r_po.Confirm(m_po.ID);
+                    r_grn.Confirm(m_po.ID);
                     m_po.POSTED = true;
                     KryptonMessageBox.Show("Transaction has been POSTED", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                //m_po = (GoodReceiveNote)r_po.Get(m_po.ID);
+                //m_po = (GoodReceiveNote)r_grn.Get(m_po.ID);
                 //m_po.EMPLOYEE = (Employee)r_employee.GetById(m_po.EMPLOYEE);
                 //m_po.WAREHOUSE = (Warehouse)r_warehouse.GetById(m_po.WAREHOUSE);
                 //m_po.CURRENCY = (Currency)r_ccy.GetById(m_po.CURRENCY);
@@ -254,11 +283,11 @@ namespace Profit
                     UpdateEntity();
                     if (m_po.ID == 0)
                     {
-                        r_po.Save(m_po);
+                        r_grn.Save(m_po);
                     }
                     else
                     {
-                        r_po.Update(m_po);
+                        r_grn.Update(m_po);
                     }
                     KryptonMessageBox.Show("Transaction '" + m_po.CODE + "' Record has been saved", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     //ClearForm();
@@ -281,11 +310,11 @@ namespace Profit
         public bool Valid()
         {
             errorProvider1.Clear();
-            bool a = textBoxCode.Text == "" && !r_po.IsAutoNumber();
+            bool a = textBoxCode.Text == "" && !r_grn.IsAutoNumber();
             bool b = employeeKryptonComboBox.SelectedItem == null;
             bool k = supplierkryptonComboBox.SelectedItem == null;
             bool e = false;
-            bool f = m_po.ID > 0 ? false : r_po.IsCodeExist(textBoxCode.Text);
+            bool f = m_po.ID > 0 ? false : r_grn.IsCodeExist(textBoxCode.Text);
             
             if (a) errorProvider1.SetError(textBoxCode, "Code Can not Empty");
             if (b) errorProvider1.SetError(employeeKryptonComboBox, "Employee Can not Empty");
@@ -340,6 +369,9 @@ namespace Profit
             IList items = new ArrayList();
             for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
             {
+                PurchaseOrderItem poi = (PurchaseOrderItem)itemsDataGrid[scanColumn.Index, i].Tag;
+                if (poi == null)
+                    continue;
                 Part p = (Part)itemsDataGrid[codeColumn.Index, i].Tag;
                 if (itemsDataGrid[unitColumn.Index, i].Value == null)
                     continue;
@@ -354,11 +386,12 @@ namespace Profit
                 st.WAREHOUSE = (Warehouse)Utils.FindEntityInList(itemsDataGrid[warehouseColumn.Index, i].Value.ToString(), m_warehouses);
                 st.QYTAMOUNT = Convert.ToDouble(itemsDataGrid[QtyColumn.Index, i].Value);
                 st.UNIT = u;
+                st.PO_ITEM = poi;
                 //st.PRICE = Convert.ToDouble(itemsDataGrid[priceColumn.Index,i].Value);
                 //st.DISC_PERCENT = Convert.ToDouble(itemsDataGrid[discpercentColumn.Index, i].Value);
                 //st.DISC_AMOUNT = Convert.ToDouble(itemsDataGrid[discAmountColumn.Index, i].Value);
                 //st.TOTAL_DISCOUNT = Convert.ToDouble(itemsDataGrid[totalDiscColumn.Index, i].Value);
-                //st.NOTES = itemsDataGrid[notesColumn.Index, i].Value == null ? "" : itemsDataGrid[notesColumn.Index, i].Value.ToString();
+                st.NOTES = itemsDataGrid[notesColumn.Index, i].Value == null ? "" : itemsDataGrid[notesColumn.Index, i].Value.ToString();
                 //st.DISC_ABC = itemsDataGrid[discabcColumn.Index, i].Value == null ? "" : itemsDataGrid[discabcColumn.Index, i].Value.ToString();
                 //st.SUBTOTAL = Convert.ToDouble(itemsDataGrid[totalAmountColumn.Index, i].Value);
                 if (st.QYTAMOUNT == 0) continue;
@@ -392,7 +425,7 @@ namespace Profit
         }
         public void setEnableForm(bool enable)
         {
-            textBoxCode.ReadOnly = r_po.IsAutoNumber()?true:!enable;
+            textBoxCode.ReadOnly = r_grn.IsAutoNumber()?true:!enable;
             dateKryptonDateTimePicker.Enabled = enable;
             employeeKryptonComboBox.Enabled = enable;
             notesKryptonTextBox.ReadOnly = !enable;
@@ -439,7 +472,7 @@ namespace Profit
                 {
                     this.Cursor = Cursors.WaitCursor;
                     if (KryptonMessageBox.Show("Are you sure to delete this record?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.No) { this.Cursor = Cursors.Default; return; }
-                    r_po.Delete(m_po);
+                    r_grn.Delete(m_po);
                     ClearForm();
                     setEnableForm(true);
                     setEditMode(EditMode.New);
@@ -474,26 +507,23 @@ namespace Profit
             foreach (GoodReceiveNoteItem item in m_po.EVENT_ITEMS)
             {
                 item.UNIT = (Unit)r_unit.GetById(item.UNIT);
+                item.PO_ITEM.UNIT = (Unit)r_unit.GetById(item.PO_ITEM.UNIT);
+                item.PO_ITEM.PART.UNIT = (Unit)r_unit.GetById(item.PO_ITEM.PART.UNIT);
                 int i = itemsDataGrid.Rows.Add();
                 itemsDataGrid.Rows[i].Tag = item;
-                itemsDataGrid[scanColumn.Index, i].Value = item.PART.BARCODE;
                 itemsDataGrid[codeColumn.Index, i].Tag = item.PART;
+                itemsDataGrid[scanColumn.Index, i].Tag = item.PO_ITEM;
+
+                itemsDataGrid[scanColumn.Index, i].Value = item.PO_ITEM.EVENT.CODE;
                 itemsDataGrid[codeColumn.Index, i].Value = item.PART.CODE;
                 itemsDataGrid[nameColumn.Index, i].Value = item.PART.NAME;
                 itemsDataGrid[QtyColumn.Index, i].Value = item.QYTAMOUNT;
-
                 itemsDataGrid[warehouseColumn.Index, i].Value = r_warehouse.GetById(item.WAREHOUSE).ToString();
-               // itemsDataGrid[discpercentColumn.Index, i].Value = item.DISC_PERCENT;
-               // itemsDataGrid[discAmountColumn.Index, i].Value = item.DISC_AMOUNT;
-               // itemsDataGrid[totalDiscColumn.Index, i].Value = item.TOTAL_DISCOUNT;
                 itemsDataGrid[notesColumn.Index, i].Value = item.NOTES;
-              //  itemsDataGrid[discabcColumn.Index, i].Value = item.DISC_ABC;
-                unitColumn.Items.Clear();
-                IList units = r_part.GetAllUnit(item.PART.ID, item.PART.UNIT.ID);
-                Utils.GetListCode(unitColumn.Items, units);
                 itemsDataGrid[unitColumn.Index, i].Value = item.UNIT.ToString(); ;
-               // itemsDataGrid[priceColumn.Index, i].Value = item.PRICE;
-               // itemsDataGrid[totalAmountColumn.Index, i].Value = item.SUBTOTAL;
+                itemsDataGrid[OutstandingPOColumn.Index, i].Value = item.PO_ITEM.OUTSTANDING_AMOUNT_TO_GRN;
+                itemsDataGrid[OutstandingunitColumn.Index, i].Value = item.PO_ITEM.PART.UNIT.CODE;
+
             }
         }
         public void Refresh(object sender, EventArgs e)
@@ -517,41 +547,37 @@ namespace Profit
 
         private void searchToolStripButton_Click(object sender, EventArgs e)
         {
-            //IList result = searchToolStripTextBox.Text == string.Empty ? new ArrayList() : r_po.Search(searchToolStripTextBox.Text);
-            //if (result.Count == 1)
-            //{
-            //    m_po = (GoodReceiveNote)result[0];
-            //    m_po = (GoodReceiveNote)r_po.Get(m_po.ID);
-            //    m_po.EMPLOYEE = (Employee)r_employee.GetById(m_po.EMPLOYEE);
-            //    setEditMode(EditMode.View);
-            //    loadData();
-            //    setEnableForm(false);
-            //}
-            //else
-            //{
-            //    using (SearchPurchaseOrderForm frm = new SearchPurchaseOrderForm(searchToolStripTextBox.Text, result))
-            //    {
-            //        frm.ShowDialog();
-            //        if (frm.PURCHASE_ORDER == null)
-            //        {
-            //            return;
-            //        }
-            //        else
-            //        {
-            //            m_po = frm.PURCHASE_ORDER;
-            //            m_po = (GoodReceiveNote)r_po.Get(m_po.ID);
-            //            m_po.EMPLOYEE = (Employee)r_employee.GetById(m_po.EMPLOYEE);
-            //            m_po.CURRENCY = (Currency)r_ccy.GetById(m_po.CURRENCY);
-            //            m_po.DIVISION = (Division)r_division.GetById(m_po.DIVISION);
-            //            m_po.TOP = (TermOfPayment)r_top.GetById(m_po.TOP);
-            //            m_po.TAX = m_po.TAX == null ? null : (Tax)r_tax.GetById(m_po.TAX);
-            //            setEditMode(EditMode.View);
-            //            loadData();
-            //            setEnableForm(false);
-            //            //setEditMode(EditMode.View);
-            //        }
-            //    }
-            //}
+            IList result = searchToolStripTextBox.Text == string.Empty ? new ArrayList() : r_grn.Search(searchToolStripTextBox.Text);
+            if (result.Count == 1)
+            {
+                m_po = (GoodReceiveNote)result[0];
+                m_po = (GoodReceiveNote)r_grn.Get(m_po.ID);
+                m_po.EMPLOYEE = (Employee)r_employee.GetById(m_po.EMPLOYEE);
+                setEditMode(EditMode.View);
+                loadData();
+                setEnableForm(false);
+            }
+            else
+            {
+                using (SearchGoodReceiveNoteForm frm = new SearchGoodReceiveNoteForm(searchToolStripTextBox.Text, result))
+                {
+                    frm.ShowDialog();
+                    if (frm.GOOD_RECEIVE_NOTE == null)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        m_po = frm.GOOD_RECEIVE_NOTE;
+                        m_po = (GoodReceiveNote)r_grn.Get(m_po.ID);
+                        m_po.EMPLOYEE = (Employee)r_employee.GetById(m_po.EMPLOYEE);
+                        setEditMode(EditMode.View);
+                        loadData();
+                        setEnableForm(false);
+                        //setEditMode(EditMode.View);
+                    }
+                }
+            }
         }
 
         private void discPercentKryptonNumericUpDown_ValueChanged(object sender, EventArgs e)
@@ -587,6 +613,7 @@ namespace Profit
         {
             Supplier em = (Supplier)supplierkryptonComboBox.SelectedItem;
             supplierKryptonTextBox.Text = em == null ? "" : em.NAME;
+            itemsDataGrid.Rows.Clear();
         }
 
         private void termofpaymentKryptonComboBox_SelectedIndexChanged(object sender, EventArgs e)

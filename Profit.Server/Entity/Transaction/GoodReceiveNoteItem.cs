@@ -19,7 +19,7 @@ namespace Profit.Server
         public GoodReceiveNoteItem(int Id) : base(Id) { }
         public void SetOSAgainstPRItem(PurchaseReturnItem doi)
         {
-            double qtyAmount = doi.QYTAMOUNT;
+            double qtyAmount = doi.GetAmountInSmallestUnit();// QYTAMOUNT;
             if (qtyAmount <= 0) return;
             if (AGAINST_PR_STATUS == AgainstStatus.Close)
                 throw new Exception("GRN Item Allready Close :" + this.PART.NAME);
@@ -35,8 +35,8 @@ namespace Profit.Server
         }
         public void UnSetOSAgainstPRItem(PurchaseReturnItem doi)
         {
-            double qtyAmount = doi.QYTAMOUNT;
-            if (qtyAmount > this.QYTAMOUNT || OUTSTANDING_AMOUNT_TO_PR + qtyAmount > this.QYTAMOUNT)
+            double qtyAmount = doi.GetAmountInSmallestUnit();  //QYTAMOUNT;
+            if (qtyAmount > this.GetAmountInSmallestUnit() || OUTSTANDING_AMOUNT_TO_PR + qtyAmount > this.GetAmountInSmallestUnit())
                 throw new Exception("PR Item revise Amount exceed GRN Item Amount :" + this.PART.NAME);
             OUTSTANDING_AMOUNT_TO_PR = OUTSTANDING_AMOUNT_TO_PR + qtyAmount;
             RETURNED_AMOUNT = RETURNED_AMOUNT - qtyAmount;
@@ -49,7 +49,7 @@ namespace Profit.Server
         private bool isValidToClose()
         {
             bool validA = OUTSTANDING_AMOUNT_TO_PR == 0;
-            bool validB = RETURNED_AMOUNT == QYTAMOUNT;
+            bool validB = RETURNED_AMOUNT == GetAmountInSmallestUnit();
             return validA && validB;
         }
         public override string GetInsertSQL()
@@ -82,7 +82,7 @@ namespace Profit.Server
                 NOTES,
                 PO_ITEM==null?0:PO_ITEM.ID,
                 AGAINST_PR_STATUS.ToString(),
-                QYTAMOUNT, //OUTSTANDING_AMOUNT_TO_PR,
+                GetAmountInSmallestUnit(), //OUTSTANDING_AMOUNT_TO_PR,
                 0//RETURNED_AMOUNT
                 );
         }
@@ -114,7 +114,7 @@ namespace Profit.Server
                 NOTES,
                 PO_ITEM==null?0:PO_ITEM.ID,
                 AGAINST_PR_STATUS.ToString(),
-                OUTSTANDING_AMOUNT_TO_PR,
+                GetAmountInSmallestUnit(),//OUTSTANDING_AMOUNT_TO_PR,
                 RETURNED_AMOUNT,
                 ID);
         }

@@ -45,6 +45,7 @@ namespace Profit.Server
                 stk.ID = Convert.ToInt32(m_command.ExecuteScalar());
                 foreach (SalesOrderItem item in stk.EVENT_ITEMS)
                 {
+                    item.PART.UNIT_CONVERSION_LIST = PartRepository.GetUnitConversionsStatic(m_command, item.PART.ID);
                     m_command.CommandText = item.GetInsertSQL();
                     m_command.ExecuteNonQuery();
                     m_command.CommandText = SalesOrderItem.SelectMaxIDSQL();
@@ -70,6 +71,7 @@ namespace Profit.Server
 
                 foreach (SalesOrderItem sti in e.EVENT_ITEMS)
                 {
+                    sti.PART.UNIT_CONVERSION_LIST = PartRepository.GetUnitConversionsStatic(m_command, sti.PART.ID);
                     if (sti.ID > 0)
                     {
                         m_command.CommandText = sti.GetUpdateSQL();

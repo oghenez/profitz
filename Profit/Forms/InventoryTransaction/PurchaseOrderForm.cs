@@ -723,6 +723,7 @@ namespace Profit
         {
             Supplier em = (Supplier)supplierkryptonComboBox.SelectedItem;
             supplierKryptonTextBox.Text = em == null ? "" : em.NAME;
+            contactPersonKryptonTextBox.Text = em == null ? "" : em.CONTACT;
         }
 
         private void termofpaymentKryptonComboBox_SelectedIndexChanged(object sender, EventArgs e)

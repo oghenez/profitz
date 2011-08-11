@@ -56,6 +56,15 @@ namespace Profit.Server
             try
             {
                 m_command.Transaction = trc;
+
+                DateTime trDate = DateTime.Today;
+                string codesample = AutoNumberSetupRepository.GetCodeSampleByDomainName(m_command, "GoodReceiveNote");
+                Event codeDate = FindLastCodeAndTransactionDate(codesample);
+                string lastCode = codeDate == null ? string.Empty : codeDate.CODE;
+                DateTime lastDate = codeDate == null ? trDate : codeDate.TRANSACTION_DATE;
+                int trCount = RecordCount();
+                e.CODE = AutoNumberSetupRepository.GetAutoNumberByDomainName(m_command, "GoodReceiveNote", e.CODE, lastCode, lastDate, trDate, trCount == 0);
+
                 GoodReceiveNote stk = (GoodReceiveNote)e;
                 m_command.CommandText = e.GetInsertSQL();
                 m_command.ExecuteNonQuery();
@@ -63,6 +72,7 @@ namespace Profit.Server
                 stk.ID = Convert.ToInt32(m_command.ExecuteScalar());
                 foreach (GoodReceiveNoteItem item in stk.EVENT_ITEMS)
                 {
+                    item.PART.UNIT_CONVERSION_LIST = PartRepository.GetUnitConversionsStatic(m_command, item.PART.ID);
                     m_command.CommandText = item.GetInsertSQL();
                     m_command.ExecuteNonQuery();
                     m_command.CommandText = GoodReceiveNoteItem.SelectMaxIDSQL();
@@ -88,6 +98,7 @@ namespace Profit.Server
 
                 foreach (GoodReceiveNoteItem sti in e.EVENT_ITEMS)
                 {
+                    sti.PART.UNIT_CONVERSION_LIST = PartRepository.GetUnitConversionsStatic(m_command, sti.PART.ID);
                     if (sti.ID > 0)
                     {
                         m_command.CommandText = sti.GetUpdateSQL();
@@ -169,6 +180,7 @@ namespace Profit.Server
                 sti.PART = PartRepository.GetByID(m_command, sti.PART.ID);
                 sti.STOCK_CARD_ENTRY = StockCardEntryRepository.FindStockCardEntryByEventItem(m_command, sti.ID, sti.STOCK_CARD_ENTRY_TYPE);
                 sti.PO_ITEM = PurchaseOrderRepository.FindPurchaseOrderItem(m_command, sti.PO_ITEM.ID);
+                sti.PO_ITEM.PART = PartRepository.GetByID(m_command, sti.PO_ITEM.PART.ID);
                 st.EVENT_ITEMS.Add(sti);
             }
             return st;
@@ -214,12 +226,51 @@ namespace Profit.Server
 
         protected override IList doSearch(string find)
         {
-            throw new NotImplementedException();
+            try
+            {
+                m_command.CommandText = GoodReceiveNote.GetSearch(find);
+                OdbcDataReader r = m_command.ExecuteReader();
+                IList rest = GoodReceiveNote.TransformReaderList(r);
+                r.Close();
+                return rest;
+            }
+            catch (Exception x)
+            {
+                throw x;
+            }
         }
 
         protected override bool doIsCodeExist(string code)
         {
-            throw new NotImplementedException();
+            try
+            {
+                m_command.CommandText = GoodReceiveNote.SelectCountByCode(code);
+                int t = Convert.ToInt32(m_command.ExecuteScalar());
+                return t > 0;
+            }
+            catch (Exception x)
+            {
+                throw x;
+            }
+        }
+        public override Event FindLastCodeAndTransactionDate(string codesample)
+        {
+            m_command.CommandText = GoodReceiveNote.FindLastCodeAndTransactionDate(codesample);
+            OdbcDataReader r = m_command.ExecuteReader();
+            Event e = GoodReceiveNote.TransformReader(r);
+            r.Close();
+            return e;
+        }
+        public int RecordCount()
+        {
+            m_command.CommandText = GoodReceiveNote.RecordCount();
+            int result = Convert.ToInt32(m_command.ExecuteScalar());
+            return result;
+        }
+        public bool IsAutoNumber()
+        {
+            AutoNumberSetup autonumber = AutoNumberSetupRepository.GetAutoNumberSetup(m_command, "GoodReceiveNote");
+            return autonumber.AUTONUMBER_SETUP_TYPE == AutoNumberSetupType.Auto;
         }
     }
 }

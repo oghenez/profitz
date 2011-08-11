@@ -161,5 +161,24 @@ namespace Profit.Server
                           AGAINST_PR_STATUS.ToString(),
                            ID);
         }
+        public static string GetSearch(string find)
+        {
+            return String.Format(@"select * from table_goodreceivenote p
+                INNER JOIN table_employee e on e.emp_id = p.emp_id
+                where concat(p.grn_code, e.emp_code, e.emp_name)
+                like '%{0}%'", find);
+        }
+        public static string FindLastCodeAndTransactionDate(string code)
+        {
+            return String.Format(@"select * from table_goodreceivenote p where p.grn_code like '%{0}%' ORDER BY p.grn_id DESC", code);
+        }
+        public static string RecordCount()
+        {
+            return @"select Count(*) from table_goodreceivenote p";
+        }
+        public static string SelectCountByCode(string code)
+        {
+            return String.Format("SELECT count(*) from table_goodreceivenote where grn_code ='{0}'", code);
+        }
     }
 }

@@ -36,6 +36,18 @@ namespace Profit.Server
             }
             return warehouse;
         }
+        public static Warehouse GetWarehouse(OdbcDataReader aReader)
+        {
+            Warehouse warehouse = null;
+            while (aReader.Read())
+            {
+                warehouse = new Warehouse();
+                warehouse.ID = Convert.ToInt32(aReader[0]);
+                warehouse.CODE = aReader[1].ToString();
+                warehouse.NAME = aReader[2].ToString();
+            }
+            return warehouse;
+        }
         public string GetInsertSQL()
         {
             return String.Format(@"insert into table_warehouse 
@@ -56,6 +68,10 @@ namespace Profit.Server
                 CODE, NAME, ID);
         }
         public string GetByIDSQL(int ID)
+        {
+            return String.Format("select * from table_warehouse where warehouse_id = {0}", ID);
+        }
+        public static string GetByIDSQLStatic(int ID)
         {
             return String.Format("select * from table_warehouse where warehouse_id = {0}", ID);
         }
