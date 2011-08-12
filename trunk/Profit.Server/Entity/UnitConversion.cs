@@ -118,6 +118,20 @@ namespace Profit.Server
         {
             return String.Format("select * from table_unitconversion where part_id = '{0}'",partID);
         }
+        public static string DeleteUpdatePart(int partID, IList notIN)
+        {
+            StringBuilder poisSB = new StringBuilder();
+            foreach (UnitConversion i in notIN)
+            {
+                poisSB.Append(i.ID.ToString());
+                poisSB.Append(',');
+            }
+            string pois = poisSB.ToString();
+            pois = notIN.Count > 0 ? pois.Substring(0, pois.Length - 1) : "";
+            return String.Format("Delete from table_unitconversion where part_id = {0} and srni_id not in ({1})", partID, pois);
+
+            //return String.Format("select * from table_unitconversion where part_id = '{0}'", partID);
+        }
         public string GetConcatSearch(string find)
         {
             return "";

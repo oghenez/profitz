@@ -317,6 +317,7 @@ namespace Profit
                 StockTakingItems st=(StockTakingItems)dataItemskryptonDataGridView.Rows[i].Tag;
                 if(st==null)
                     st = new StockTakingItems();
+                dataItemskryptonDataGridView.Rows[i].Tag = st;
                 st.EVENT = m_stocktaking;
                 st.PART = p;
                 st.WAREHOUSE = m_stocktaking.WAREHOUSE;
@@ -324,6 +325,7 @@ namespace Profit
                 st.UNIT = u;
                 st.PRICE = Convert.ToDouble(dataItemskryptonDataGridView[priceColumn.Index,i].Value);
                 st.TOTAL_AMOUNT = Convert.ToDouble(dataItemskryptonDataGridView[totalAmountColumn.Index, i].Value);
+                
                 if (st.QYTAMOUNT == 0) continue;
                 items.Add(st);
             }

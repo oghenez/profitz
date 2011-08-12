@@ -245,6 +245,7 @@ namespace Profit.Server
                 OdbcCommand aCommand = new OdbcCommand(Part.GetSearchSQL(search), m_connection);
                 OdbcDataReader aReader = aCommand.ExecuteReader();
                 IList a = Part.GetAllStatic(aReader);
+                aReader.Close();
                 return a;
             }
             catch (Exception x)

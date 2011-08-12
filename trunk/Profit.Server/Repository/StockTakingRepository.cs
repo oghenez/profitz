@@ -87,23 +87,7 @@ namespace Profit.Server
                 }
                 m_command.CommandText = StockTakingItems.DeleteUpdate(e.ID, e.EVENT_ITEMS);
                 m_command.ExecuteNonQuery();
-                //m_command.CommandText = StockTakingItems.GetByEventIDSQL(e.ID);
-                //OdbcDataReader r = m_command.ExecuteReader();
-                //IList luc = StockTakingItems.TransformReaderList(r);
-                //r.Close();
-                //foreach (StockTakingItems chk in luc)
-                //{
-                //    chk.UPDATED = e.EVENT_ITEMS.Contains(chk);
-                //}
-                //foreach (StockTakingItems chk in luc)
-                //{
-                //    if (!chk.UPDATED)
-                //    {
-                //        m_command.CommandText = StockTakingItems.DeleteSQL(chk.ID);
-                //        m_command.ExecuteNonQuery();
-                //    }
-                //}
-                //trc.Commit();
+                trc.Commit();
             }
             catch (Exception x)
             {

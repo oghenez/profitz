@@ -85,22 +85,24 @@ namespace Profit.Server
                         sti.ID = Convert.ToInt32(m_command.ExecuteScalar());
                     }
                 }
-                m_command.CommandText = SalesOrderItem.GetByEventIDSQL(e.ID);
-                OdbcDataReader r = m_command.ExecuteReader();
-                IList luc = SalesOrderItem.TransformReaderList(r);
-                r.Close();
-                foreach (SalesOrderItem chk in luc)
-                {
-                    chk.UPDATED = e.EVENT_ITEMS.Contains(chk);
-                }
-                foreach (SalesOrderItem chk in luc)
-                {
-                    if (!chk.UPDATED)
-                    {
-                        m_command.CommandText = SalesOrderItem.DeleteSQL(chk.ID);
-                        m_command.ExecuteNonQuery();
-                    }
-                }
+                m_command.CommandText = SalesOrderItem.DeleteUpdate(e.ID, e.EVENT_ITEMS);
+                m_command.ExecuteNonQuery();
+                //m_command.CommandText = SalesOrderItem.GetByEventIDSQL(e.ID);
+                //OdbcDataReader r = m_command.ExecuteReader();
+                //IList luc = SalesOrderItem.TransformReaderList(r);
+                //r.Close();
+                //foreach (SalesOrderItem chk in luc)
+                //{
+                //    chk.UPDATED = e.EVENT_ITEMS.Contains(chk);
+                //}
+                //foreach (SalesOrderItem chk in luc)
+                //{
+                //    if (!chk.UPDATED)
+                //    {
+                //        m_command.CommandText = SalesOrderItem.DeleteSQL(chk.ID);
+                //        m_command.ExecuteNonQuery();
+                //    }
+                //}
                 trc.Commit();
             }
             catch (Exception x)
