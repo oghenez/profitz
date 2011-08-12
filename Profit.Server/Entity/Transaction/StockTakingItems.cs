@@ -127,7 +127,7 @@ namespace Profit.Server
             }
             string pois = poisSB.ToString();
             pois = notIN.Count > 0 ? pois.Substring(0, pois.Length - 1) : "";
-            return String.Format("SELECT * from table_stocktakingitem where stk_id = {0} and stki_id not in ({1})", id, pois);
+            return String.Format("Delete from table_stocktakingitem where stk_id = {0} and stki_id not in ({1})", id, pois);
         }
         public static string DeleteSQL(int id)
         {

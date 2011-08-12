@@ -174,6 +174,18 @@ namespace Profit.Server
         {
             return String.Format("SELECT * from table_goodreceivenoteitem where grn_id = {0}", id);
         }
+        public static string DeleteUpdate(int id, IList notIN)
+        {
+            StringBuilder poisSB = new StringBuilder();
+            foreach (GoodReceiveNoteItem i in notIN)
+            {
+                poisSB.Append(i.ID.ToString());
+                poisSB.Append(',');
+            }
+            string pois = poisSB.ToString();
+            pois = notIN.Count > 0 ? pois.Substring(0, pois.Length - 1) : "";
+            return String.Format("Delete from table_goodreceivenoteitem where grn_id = {0} and grni_id not in ({1})", id, pois);
+        }
         public static string DeleteSQL(int id)
         {
             return String.Format("Delete from table_goodreceivenoteitem where grni_id = {0}", id);

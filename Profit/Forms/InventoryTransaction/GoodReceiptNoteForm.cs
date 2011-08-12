@@ -302,6 +302,7 @@ namespace Profit
                 GoodReceiveNoteItem st=(GoodReceiveNoteItem)itemsDataGrid.Rows[i].Tag;
                 if(st==null)
                     st = new GoodReceiveNoteItem();
+                itemsDataGrid.Rows[i].Tag = st;
                 st.EVENT = m_po;
                 st.PART = p;
                 st.WAREHOUSE = (Warehouse)Utils.FindEntityInList(itemsDataGrid[warehouseColumn.Index, i].Value.ToString(), m_warehouses);
