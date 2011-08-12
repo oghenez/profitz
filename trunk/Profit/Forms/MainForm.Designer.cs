@@ -144,10 +144,10 @@
             // statusStrip1
             // 
             this.statusStrip1.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.statusStrip1.Location = new System.Drawing.Point(0, 576);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 544);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
-            this.statusStrip1.Size = new System.Drawing.Size(803, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1016, 22);
             this.statusStrip1.TabIndex = 8;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -160,7 +160,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(803, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1016, 24);
             this.menuStrip1.TabIndex = 9;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -357,7 +357,7 @@
             this.kryptonPanel4.Location = new System.Drawing.Point(0, 24);
             this.kryptonPanel4.Name = "kryptonPanel4";
             this.kryptonPanel4.Padding = new System.Windows.Forms.Padding(0, 0, 3, 3);
-            this.kryptonPanel4.Size = new System.Drawing.Size(212, 552);
+            this.kryptonPanel4.Size = new System.Drawing.Size(212, 520);
             this.kryptonPanel4.TabIndex = 14;
             // 
             // MasterDatakryptonPanel1
@@ -857,7 +857,10 @@
             this.TransactionkryptonCheckButton2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.TransactionkryptonCheckButton2.Location = new System.Drawing.Point(0, 761);
             this.TransactionkryptonCheckButton2.Name = "TransactionkryptonCheckButton2";
+            this.TransactionkryptonCheckButton2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.TransactionkryptonCheckButton2.Size = new System.Drawing.Size(192, 30);
+            this.TransactionkryptonCheckButton2.StateCommon.Content.Image.ImageH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Near;
+            this.TransactionkryptonCheckButton2.StateCommon.Content.ShortText.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Near;
             this.TransactionkryptonCheckButton2.TabIndex = 20;
             this.TransactionkryptonCheckButton2.Values.Image = ((System.Drawing.Image)(resources.GetObject("TransactionkryptonCheckButton2.Values.Image")));
             this.TransactionkryptonCheckButton2.Values.Text = "Transaction";
@@ -868,6 +871,8 @@
             this.MasterDatakryptonCheckButton1.Location = new System.Drawing.Point(0, 791);
             this.MasterDatakryptonCheckButton1.Name = "MasterDatakryptonCheckButton1";
             this.MasterDatakryptonCheckButton1.Size = new System.Drawing.Size(192, 30);
+            this.MasterDatakryptonCheckButton1.StateCommon.Content.Image.ImageH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Near;
+            this.MasterDatakryptonCheckButton1.StateCommon.Content.ShortText.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Near;
             this.MasterDatakryptonCheckButton1.TabIndex = 19;
             this.MasterDatakryptonCheckButton1.Values.Image = ((System.Drawing.Image)(resources.GetObject("MasterDatakryptonCheckButton1.Values.Image")));
             this.MasterDatakryptonCheckButton1.Values.Text = "Data Master";
@@ -876,7 +881,7 @@
             // 
             this.splitter1.Location = new System.Drawing.Point(212, 24);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(2, 552);
+            this.splitter1.Size = new System.Drawing.Size(2, 520);
             this.splitter1.TabIndex = 15;
             this.splitter1.TabStop = false;
             // 
@@ -891,7 +896,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(803, 598);
+            this.ClientSize = new System.Drawing.Size(1016, 566);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.kryptonPanel4);
             this.Controls.Add(this.statusStrip1);

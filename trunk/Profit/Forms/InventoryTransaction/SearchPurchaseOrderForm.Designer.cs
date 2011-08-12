@@ -34,11 +34,11 @@
             this.CANCELkryptonButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.OKkryptonButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.gridData = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.dgName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgSubject = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EmpCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PostedCol = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -70,6 +70,7 @@
             // 
             // CANCELkryptonButton
             // 
+            this.CANCELkryptonButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.CANCELkryptonButton.Location = new System.Drawing.Point(358, 310);
             this.CANCELkryptonButton.Name = "CANCELkryptonButton";
             this.CANCELkryptonButton.Size = new System.Drawing.Size(63, 25);
@@ -113,19 +114,6 @@
             this.gridData.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridData_CellMouseDoubleClick);
             this.gridData.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gridData_KeyDown);
             // 
-            // kryptonPanel1
-            // 
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
-            this.kryptonPanel1.Controls.Add(this.gridData);
-            this.kryptonPanel1.Controls.Add(this.searchText);
-            this.kryptonPanel1.Controls.Add(this.OKkryptonButton);
-            this.kryptonPanel1.Controls.Add(this.CANCELkryptonButton);
-            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(430, 341);
-            this.kryptonPanel1.TabIndex = 6;
-            // 
             // dgName
             // 
             this.dgName.DataPropertyName = "Code";
@@ -156,11 +144,24 @@
             this.PostedCol.ReadOnly = true;
             this.PostedCol.Width = 50;
             // 
+            // kryptonPanel1
+            // 
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
+            this.kryptonPanel1.Controls.Add(this.gridData);
+            this.kryptonPanel1.Controls.Add(this.searchText);
+            this.kryptonPanel1.Controls.Add(this.OKkryptonButton);
+            this.kryptonPanel1.Controls.Add(this.CANCELkryptonButton);
+            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonPanel1.Name = "kryptonPanel1";
+            this.kryptonPanel1.Size = new System.Drawing.Size(430, 341);
+            this.kryptonPanel1.TabIndex = 6;
+            // 
             // SearchPurchaseOrderForm
             // 
-            this.AcceptButton = this.OKkryptonButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.CANCELkryptonButton;
             this.ClientSize = new System.Drawing.Size(430, 341);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -170,7 +171,6 @@
             this.Text = "Find";
             this.Load += new System.EventHandler(this.SearchPurchaseOrderForm_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SearchPurchaseOrderForm_FormClosing);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SearchPurchaseOrderForm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);

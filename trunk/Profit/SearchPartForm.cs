@@ -26,8 +26,8 @@ namespace Profit
             if (result.Count > 0)
             {
                 loadResult(result);
-                gridData.Rows[0].Selected = true;
-                SelectNextControl(searchText, true, true, true, true);
+                if (gridData.Rows.Count > 0) gridData.Rows[0].Selected = true;
+                gridData.Focus();
             }
             else
             {

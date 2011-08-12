@@ -48,8 +48,12 @@ namespace Profit
                 gridData.Rows[row].Tag = d;
             }
             gridData.ClearSelection();
-            if (gridData.Rows.Count > 0) gridData.Rows[0].Selected = true; ;
-            gridData.Focus();
+            searchText.SelectAll();
+            if (gridData.Rows.Count > 0)
+            {
+                gridData.Rows[0].Selected = true; ;
+                gridData.Focus();
+            }
         }
 
         private void buttonSpecAny1_Click(object sender, EventArgs e)
@@ -83,11 +87,7 @@ namespace Profit
 
         private void gridData_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            //if (gridData.SelectedRows.Count > 0)
-            //{
-            //    PART = (Part)gridData.SelectedRows[0].Tag;
-            //    this.Close();
-            //}
+            OKkryptonButton_Click(sender, null);
         }
 
         private void OKkryptonButton_Click(object sender, EventArgs e)
@@ -124,13 +124,17 @@ namespace Profit
 
         private void SearchPOForGRNForm_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Escape)
-                this.Close();
+
         }
         private void gridData_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
                 OKkryptonButton_Click(sender, null);
+            if (e.KeyCode == Keys.Space)
+            {
+                bool t = Convert.ToBoolean(gridData[checkColumn.Index, gridData.SelectedRows[0].Index].Value);
+                gridData[checkColumn.Index, gridData.SelectedRows[0].Index].Value = !t; 
+            }
         }
     }
 }

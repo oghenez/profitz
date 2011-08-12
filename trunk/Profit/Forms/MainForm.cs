@@ -522,6 +522,7 @@ namespace Profit
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             UserSetting.SaveSetting("theme", toolStripComboBox1.SelectedItem.ToString(), CurrentUser.ID, this.Name, typeof(string));
+            UserSetting.SaveSetting("theme", toolStripComboBox1.SelectedItem.ToString(), CurrentUser.ID, this.Name, typeof(string));
         }
     }
 }

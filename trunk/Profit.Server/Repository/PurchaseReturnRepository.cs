@@ -49,6 +49,15 @@ namespace Profit.Server
             try
             {
                 m_command.Transaction = trc;
+
+                DateTime trDate = DateTime.Today;
+                string codesample = AutoNumberSetupRepository.GetCodeSampleByDomainName(m_command, "PurchaseReturn");
+                Event codeDate = FindLastCodeAndTransactionDate(codesample);
+                string lastCode = codeDate == null ? string.Empty : codeDate.CODE;
+                DateTime lastDate = codeDate == null ? trDate : codeDate.TRANSACTION_DATE;
+                int trCount = RecordCount();
+                e.CODE = AutoNumberSetupRepository.GetAutoNumberByDomainName(m_command, "PurchaseReturn", e.CODE, lastCode, lastDate, trDate, trCount == 0);
+
                 GoodReceiveNote stk = (GoodReceiveNote)e;
                 m_command.CommandText = e.GetInsertSQL();
                 m_command.ExecuteNonQuery();
@@ -182,12 +191,51 @@ namespace Profit.Server
 
         protected override IList doSearch(string find)
         {
-            throw new NotImplementedException();
+            try
+            {
+                m_command.CommandText = PurchaseReturn.GetSearch(find);
+                OdbcDataReader r = m_command.ExecuteReader();
+                IList rest = PurchaseReturn.TransformReaderList(r);
+                r.Close();
+                return rest;
+            }
+            catch (Exception x)
+            {
+                throw x;
+            }
         }
 
         protected override bool doIsCodeExist(string code)
         {
-            throw new NotImplementedException();
+            try
+            {
+                m_command.CommandText = PurchaseReturn.SelectCountByCode(code);
+                int t = Convert.ToInt32(m_command.ExecuteScalar());
+                return t > 0;
+            }
+            catch (Exception x)
+            {
+                throw x;
+            }
+        }
+        public override Event FindLastCodeAndTransactionDate(string codesample)
+        {
+            m_command.CommandText = PurchaseReturn.FindLastCodeAndTransactionDate(codesample);
+            OdbcDataReader r = m_command.ExecuteReader();
+            Event e = PurchaseReturn.TransformReader(r);
+            r.Close();
+            return e;
+        }
+        public int RecordCount()
+        {
+            m_command.CommandText = PurchaseReturn.RecordCount();
+            int result = Convert.ToInt32(m_command.ExecuteScalar());
+            return result;
+        }
+        public bool IsAutoNumber()
+        {
+            AutoNumberSetup autonumber = AutoNumberSetupRepository.GetAutoNumberSetup(m_command, "PurchaseReturn");
+            return autonumber.AUTONUMBER_SETUP_TYPE == AutoNumberSetupType.Auto;
         }
     }
 }

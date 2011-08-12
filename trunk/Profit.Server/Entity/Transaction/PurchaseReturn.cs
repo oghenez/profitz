@@ -133,5 +133,24 @@ namespace Profit.Server
                 posted ? EventStatus.Confirm.ToString() : EventStatus.Entry.ToString(),
                 id);
         }
+        public static string GetSearch(string find)
+        {
+            return String.Format(@"select * from table_purchasereturn p
+                INNER JOIN table_employee e on e.emp_id = p.emp_id
+                where concat(p.prn_code, e.prn_code, e.emp_name)
+                like '%{0}%'", find);
+        }
+        public static string SelectCountByCode(string code)
+        {
+            return String.Format("SELECT count(*) from table_purchasereturn where prn_code ='{0}'", code);
+        }
+        public static string FindLastCodeAndTransactionDate(string code)
+        {
+            return String.Format(@"select * from table_purchasereturn p where p.prn_code like '%{0}%' ORDER BY p.prn_id DESC", code);
+        }
+        public static string RecordCount()
+        {
+            return @"select Count(*) from table_purchasereturn p";
+        }
     }
 }

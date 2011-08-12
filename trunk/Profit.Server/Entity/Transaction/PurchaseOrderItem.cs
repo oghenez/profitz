@@ -262,7 +262,8 @@ namespace Profit.Server
                 INNER JOIN table_purchaseorder p on p.po_id = t.po_id
                 INNER JOIN table_part pt on pt.part_id = t.part_id
                 where t.poi_outstandingamounttogrn > 0
-                and concat(pt.part_code, pt.part_name, p.po_code) like '%{0}%' and p.sup_id = {1} 
+                and concat(pt.part_code, pt.part_name, p.po_code) like '%{0}%' and p.sup_id = {1}  
+                and p.po_posted = true
                {2}", find, supplierID, poi!=""?" and t.poi_id not in ("+poi+")":"");
         }
         public override bool Equals(object obj)
