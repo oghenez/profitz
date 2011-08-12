@@ -34,11 +34,11 @@
             this.CANCELkryptonButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.OKkryptonButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.gridData = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.dgName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgSubject = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ActiveCol = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.barcodeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -70,6 +70,7 @@
             // 
             // CANCELkryptonButton
             // 
+            this.CANCELkryptonButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.CANCELkryptonButton.Location = new System.Drawing.Point(358, 310);
             this.CANCELkryptonButton.Name = "CANCELkryptonButton";
             this.CANCELkryptonButton.Size = new System.Drawing.Size(63, 25);
@@ -114,19 +115,6 @@
             this.gridData.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridData_CellMouseDoubleClick);
             this.gridData.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gridData_KeyDown);
             // 
-            // kryptonPanel1
-            // 
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
-            this.kryptonPanel1.Controls.Add(this.gridData);
-            this.kryptonPanel1.Controls.Add(this.searchText);
-            this.kryptonPanel1.Controls.Add(this.OKkryptonButton);
-            this.kryptonPanel1.Controls.Add(this.CANCELkryptonButton);
-            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(433, 341);
-            this.kryptonPanel1.TabIndex = 6;
-            // 
             // dgName
             // 
             this.dgName.DataPropertyName = "Code";
@@ -156,18 +144,30 @@
             this.barcodeCol.Name = "barcodeCol";
             this.barcodeCol.ReadOnly = true;
             // 
+            // kryptonPanel1
+            // 
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
+            this.kryptonPanel1.Controls.Add(this.gridData);
+            this.kryptonPanel1.Controls.Add(this.searchText);
+            this.kryptonPanel1.Controls.Add(this.OKkryptonButton);
+            this.kryptonPanel1.Controls.Add(this.CANCELkryptonButton);
+            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonPanel1.Name = "kryptonPanel1";
+            this.kryptonPanel1.Size = new System.Drawing.Size(433, 341);
+            this.kryptonPanel1.TabIndex = 6;
+            // 
             // SearchPartForm
             // 
-            this.AcceptButton = this.OKkryptonButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.CANCELkryptonButton;
             this.ClientSize = new System.Drawing.Size(433, 341);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.KeyPreview = true;
             this.Name = "SearchPartForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Find";
+            this.Text = "Find Part";
             this.Load += new System.EventHandler(this.SearchPartForm_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SearchPartForm_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SearchPartForm_KeyDown);

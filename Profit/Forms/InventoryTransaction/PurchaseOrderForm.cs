@@ -634,6 +634,13 @@ namespace Profit
         {
             //loadRecords(); 
             //gridData.ClearSelection(); 
+            if ((m_editMode == EditMode.New) || (m_editMode == EditMode.Update))
+            {
+                if (m_enable)
+                {
+                    InitializeDataSource();
+                }
+            }
         }
         public void Print(object sender, EventArgs e)
         {

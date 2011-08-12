@@ -272,5 +272,49 @@ namespace Profit.Server
             AutoNumberSetup autonumber = AutoNumberSetupRepository.GetAutoNumberSetup(m_command, "GoodReceiveNote");
             return autonumber.AUTONUMBER_SETUP_TYPE == AutoNumberSetupType.Auto;
         }
+        public IList FindPObyPartAndGRNNo(string find, IList exceptGRNI, int supplierID)
+        {
+            StringBuilder poisSB = new StringBuilder();
+            foreach (int i in exceptGRNI)
+            {
+                poisSB.Append(i.ToString());
+                poisSB.Append(',');
+            }
+            string pois = poisSB.ToString();
+            pois = exceptGRNI.Count > 0 ? pois.Substring(0, pois.Length - 1) : "";
+
+            m_command.CommandText = GoodReceiveNoteItem.GetSearchByPartAndGRNNo(find, supplierID, pois);
+            OdbcDataReader r = m_command.ExecuteReader();
+            IList result = GoodReceiveNoteItem.TransformReaderList(r);
+            r.Close();
+            foreach (GoodReceiveNoteItem t in result)
+            {
+                m_command.CommandText = GoodReceiveNote.GetByIDSQL(t.EVENT.ID);
+                r = m_command.ExecuteReader();
+                t.EVENT = GoodReceiveNote.TransformReader(r);
+                r.Close();
+
+                m_command.CommandText = Part.GetByIDSQLStatic(t.PART.ID);
+                r = m_command.ExecuteReader();
+                t.PART = Part.GetPart(r);
+                r.Close();
+
+                m_command.CommandText = Unit.GetByIDSQLstatic(t.UNIT.ID);
+                r = m_command.ExecuteReader();
+                t.UNIT = Unit.GetUnit(r);
+                r.Close();
+
+                m_command.CommandText = Warehouse.GetByIDSQLStatic(t.WAREHOUSE.ID);
+                r = m_command.ExecuteReader();
+                t.WAREHOUSE = Warehouse.GetWarehouse(r);
+                r.Close();
+
+                m_command.CommandText = Unit.GetByIDSQLstatic(t.PART.UNIT.ID);
+                r = m_command.ExecuteReader();
+                t.PART.UNIT = Unit.GetUnit(r);
+                r.Close();
+            }
+            return result;
+        }
     }
 }

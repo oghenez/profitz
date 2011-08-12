@@ -78,6 +78,7 @@
             // 
             // CANCELkryptonButton
             // 
+            this.CANCELkryptonButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.CANCELkryptonButton.Location = new System.Drawing.Point(563, 307);
             this.CANCELkryptonButton.Name = "CANCELkryptonButton";
             this.CANCELkryptonButton.Size = new System.Drawing.Size(63, 25);
@@ -209,7 +210,7 @@
             // 
             // kryptonLabel2
             // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(427, 15);
+            this.kryptonLabel2.Location = new System.Drawing.Point(485, 15);
             this.kryptonLabel2.Name = "kryptonLabel2";
             this.kryptonLabel2.Size = new System.Drawing.Size(141, 19);
             this.kryptonLabel2.TabIndex = 6;
@@ -217,9 +218,9 @@
             // 
             // SearchPOForGRNForm
             // 
-            this.AcceptButton = this.OKkryptonButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.CANCELkryptonButton;
             this.ClientSize = new System.Drawing.Size(638, 341);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -229,7 +230,6 @@
             this.Text = "Find";
             this.Load += new System.EventHandler(this.SearchPOForGRNForm_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SearchPOForGRNForm_FormClosing);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SearchPOForGRNForm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);

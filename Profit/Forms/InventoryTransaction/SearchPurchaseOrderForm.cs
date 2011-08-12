@@ -47,8 +47,12 @@ namespace Profit
                 gridData.Rows[row].Tag = d;
             }
             gridData.ClearSelection();
-            if (gridData.Rows.Count > 0) gridData.Rows[0].Selected = true; ;
-            gridData.Focus();
+            searchText.SelectAll();
+            if (gridData.Rows.Count > 0)
+            {
+                gridData.Rows[0].Selected = true;
+                gridData.Focus();
+            }
         }
 
         private void buttonSpecAny1_Click(object sender, EventArgs e)
@@ -115,8 +119,7 @@ namespace Profit
 
         private void SearchPurchaseOrderForm_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Escape)
-                this.Close();
+
         }
 
         private void gridData_KeyDown(object sender, KeyEventArgs e)

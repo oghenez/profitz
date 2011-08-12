@@ -201,5 +201,22 @@ namespace Profit.Server
         {
             return String.Format("SELECT * from table_goodreceivenoteitem where grni_id = {0}", id);
         }
+        public static string GetSearchByPartAndGRNNo(string find, int supplierID, string poi)
+        {
+            return String.Format(@"SELECT t.*
+                FROM table_goodreceivenoteitem t
+                INNER JOIN table_goodreceivenote p on p.grn_id = t.grn_id
+                INNER JOIN table_part pt on pt.part_id = t.part_id
+                where t.grni_outstandingamtpr > 0
+                and concat(pt.part_code, pt.part_name, p.grn_code) like '%{0}%' and p.sup_id = {1}  
+                and p.grn_posted = true
+               {2}", find, supplierID, poi != "" ? " and t.poi_id not in (" + poi + ")" : "");
+        }
+        public override bool Equals(object obj)
+        {
+            GoodReceiveNoteItem e = (GoodReceiveNoteItem)obj;
+            if (e == null) return false;
+            return e.ID == this.ID;
+        }
     }
 }
