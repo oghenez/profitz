@@ -215,7 +215,7 @@ namespace Profit
             m_part.COST_METHOD = (CostMethod)Enum.Parse(typeof(CostMethod), costMethodekryptonComboBox4.SelectedItem.ToString());
             m_part.COST_PRICE = Convert.ToDouble(costPricekryptonNumericUpDown3.Value);
             m_part.CURRENCY = (Currency)currencykryptonComboBox3.SelectedItem;
-            m_part.CURRENT_STOCK = Convert.ToDouble(currentStockkryptonNumericUpDown5.Value);
+            //m_part.CURRENT_STOCK = Convert.ToDouble(currentStockkryptonNumericUpDown5.Value);
             m_part.MAXIMUM_STOCK = Convert.ToDouble(maximumStockkryptonNumericUpDown2.Value);
             m_part.MINIMUM_STOCK = Convert.ToDouble(minimumStockkryptonNumericUpDown1.Value);
             m_part.PART_CATEGORY = (PartCategory)partCategorykryptonComboBox5.SelectedItem;
@@ -241,7 +241,7 @@ namespace Profit
                 costMethodekryptonComboBox4.SelectedIndex = 0;
                 costPricekryptonNumericUpDown3.Value = 0;
                 currencykryptonComboBox3.SelectedIndex = 0;
-                currentStockkryptonNumericUpDown5.Value  = 0;
+                //currentStockkryptonNumericUpDown5.Value  = 0;
                 maximumStockkryptonNumericUpDown2.Value  = 0;
                 minimumStockkryptonNumericUpDown1.Value  = 0;
                 partCategorykryptonComboBox5.SelectedIndex = 0;
@@ -276,7 +276,7 @@ namespace Profit
             costMethodekryptonComboBox4.Enabled = enable;
             costPricekryptonNumericUpDown3.Enabled = enable;
             currencykryptonComboBox3.Enabled = enable;
-            currentStockkryptonNumericUpDown5.Enabled = enable;
+            //currentStockkryptonNumericUpDown5.Enabled = enable;
             maximumStockkryptonNumericUpDown2.Enabled = enable;
             minimumStockkryptonNumericUpDown1.Enabled = enable;
             partCategorykryptonComboBox5.Enabled = enable;
@@ -376,7 +376,7 @@ namespace Profit
             costMethodekryptonComboBox4.Text = m_part.COST_METHOD.ToString();
             costPricekryptonNumericUpDown3.Value = Convert.ToDecimal(m_part.COST_PRICE);
             currencykryptonComboBox3.Text = m_part.CURRENCY.ToString();
-            currentStockkryptonNumericUpDown5.Value = Convert.ToDecimal(m_part.CURRENT_STOCK);
+            //currentStockkryptonNumericUpDown5.Value = Convert.ToDecimal(m_part.CURRENT_STOCK);
             maximumStockkryptonNumericUpDown2.Value = Convert.ToDecimal(m_part.MAXIMUM_STOCK);
             minimumStockkryptonNumericUpDown1.Value = Convert.ToDecimal(m_part.MINIMUM_STOCK);
             partCategorykryptonComboBox5.Text = m_part.PART_CATEGORY.ToString();
@@ -419,7 +419,8 @@ namespace Profit
 
         private void kryptonComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            PartGroup p = (PartGroup)partGroupkryptonComboBox1.SelectedItem;
+            partGroupkryptonTextBox.Text = p == null ? "" : p.NAME;
         }
         public IList GetListUom()
         {
@@ -508,6 +509,12 @@ namespace Profit
             {
                 toolStripButtonSearch_Click(sender, null);
             }
+        }
+
+        private void unitkryptonComboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Unit p = (Unit)unitkryptonComboBox2.SelectedItem;
+            unitKryptonTextBox.Text = p == null ? "" : p.NAME;
         }
 
         //private void toolStripButtonMigrate_Click(object sender, EventArgs e)
