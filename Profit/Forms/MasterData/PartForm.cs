@@ -10,6 +10,7 @@ using ComponentFactory.Krypton.Toolkit;
 using Profit.Server;
 using System.Collections;
 using System.IO;
+using System.Drawing.Drawing2D;
 
 namespace Profit
 {
@@ -224,11 +225,25 @@ namespace Profit
             m_part.TAXABLE = taxkryptonCheckBox2.Checked;
             m_part.UNIT = (Unit)unitkryptonComboBox2.SelectedItem;
             m_part.UNIT_CONVERSION_LIST.Clear();
+            m_part.PICTURE = pictureBox.Image == null ? null : imageToByteArray(pictureBox.Image);
             IList unitConversionlist = GetListUom();
             foreach (UnitConversion uc in unitConversionlist)
             {
                 m_part.UNIT_CONVERSION_LIST.Add(uc);
             }
+        }
+        public byte[] imageToByteArray(Image imageIn)
+        {
+            MemoryStream ms = new MemoryStream();
+            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+            return ms.ToArray();
+        }
+        public Image byteArrayToImage(byte[] byteArrayIn)
+        {
+            if (byteArrayIn.Length == 0) return null;
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            Image returnImage = Image.FromStream(ms);
+            return returnImage;
         }
         public void ClearForm()
         {
@@ -253,6 +268,7 @@ namespace Profit
                 balanceKryptonTextBox.Text = "0";
                 bookedKryptonTextBox.Text = "0";
                 BackOrderKryptonTextBox.Text = "0";
+                pictureBox.Image = null;
                 m_part = new Part();
                 errorProvider1.Clear();
             }
@@ -388,6 +404,7 @@ namespace Profit
             balanceKryptonTextBox.Text = sci.BALANCE.ToString();
             BackOrderKryptonTextBox.Text = sci.BACKORDER.ToString();
             bookedKryptonTextBox.Text = sci.BOOKED.ToString();
+            pictureBox.Image = m_part.PICTURE == null ? null : byteArrayToImage(m_part.PICTURE);
             dataGridViewUOM.Rows.Clear();
             IList l = r_part.GetUnitConversions(m_part.ID);
             foreach (UnitConversion u in l)
@@ -529,6 +546,43 @@ namespace Profit
             partCategorykryptonTextBox.Text = p == null ? "" : p.NAME;
         }
 
+        private void kryptonPanel1_DoubleClick(object sender, EventArgs e)
+        {
+           
+            
+        }
+        private Image resizeImage(Image imgToResize, Size size)
+        {
+            int sourceWidth = imgToResize.Width;
+            int sourceHeight = imgToResize.Height;
+            float nPercent = 0;
+            float nPercentW = 0;
+            float nPercentH = 0;
+            nPercentW = ((float)size.Width / (float)sourceWidth);
+            nPercentH = ((float)size.Height / (float)sourceHeight);
+            if (nPercentH < nPercentW)
+                nPercent = nPercentH;
+            else
+                nPercent = nPercentW;
+            int destWidth = (int)(sourceWidth * nPercent);
+            int destHeight = (int)(sourceHeight * nPercent);
+            Bitmap b = new Bitmap(destWidth, destHeight);
+            Graphics g = Graphics.FromImage((Image)b);
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            g.DrawImage(imgToResize, 0, 0, destWidth, destHeight);
+            g.Dispose();
+            return (Image)b;
+        }
+
+        private void pictureBox_DoubleClick(object sender, EventArgs e)
+        {
+            openFileDialog1.Multiselect = false;
+            openFileDialog1.Filter = "Images (*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF|All files (*.*)|*.*";
+            openFileDialog1.ShowDialog();
+            Image image = Image.FromFile(openFileDialog1.FileName);
+            image = resizeImage(image, new Size(225, 225));
+            pictureBox.Image = image;
+        }
         //private void toolStripButtonMigrate_Click(object sender, EventArgs e)
         //{
         //    StreamReader p = new StreamReader(@"part.csv");

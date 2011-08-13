@@ -55,6 +55,9 @@ namespace Profit.Server
             {
                 Part e = (Part)en;
                 aCommand.CommandText = e.GetUpdateSQL();
+                aCommand.Parameters.AddWithValue("@pp", e.PICTURE);
+                
+
                 aCommand.ExecuteNonQuery();
 
                 foreach (UnitConversion ucp in e.UNIT_CONVERSION_LIST)

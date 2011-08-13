@@ -27,6 +27,7 @@ namespace Profit.Server
         public bool ACTIVE = true;
         public IList UNIT_CONVERSION_LIST = new ArrayList();
         public IDictionary SELLING_PRICE_INFO_LIST = new Hashtable();
+        public byte[] PICTURE;
 
         public Part()
         {
@@ -62,7 +63,8 @@ namespace Profit.Server
                 part.SELL_PRICE = Convert.ToDouble(r["part_sellprice"]);
                 part.TAXABLE = Convert.ToBoolean(r["part_taxable"]);
                 part.UNIT = new Unit(Convert.ToInt32(r["unit_id"]));
-            }
+                part.PICTURE = r["part_picture"] == null ? null : (byte[])r["part_picture"];
+             }
             return part;
         }
         public static Part GetPart(OdbcDataReader r)
@@ -87,6 +89,7 @@ namespace Profit.Server
                 part.SELL_PRICE = Convert.ToDouble(r["part_sellprice"]);
                 part.TAXABLE = Convert.ToBoolean(r["part_taxable"]);
                 part.UNIT = new Unit(Convert.ToInt32(r["unit_id"]));
+                part.PICTURE = r["part_picture"] == null ? null : (byte[])r["part_picture"];
             }
             return part;
         }
@@ -107,7 +110,8 @@ namespace Profit.Server
                     prtgroup_id,
                     part_sellprice,
                     part_taxable,
-                    unit_id) 
+                    unit_id,
+                    part_picture) 
                 VALUES (
                     '{0}',
                     '{1}',
@@ -123,7 +127,8 @@ namespace Profit.Server
                     '{11}',
                     '{12}',
                     {13},
-                    '{14}'
+                    '{14}',
+                    '{15}'
                     )",
                 CODE, 
                 NAME,
@@ -139,7 +144,8 @@ namespace Profit.Server
                 PART_GROUP.ID,
                 SELL_PRICE,
                 TAXABLE,
-                UNIT.ID
+                UNIT.ID,
+                PICTURE == null ? "" : PICTURE.ToString()
                 );
         }
         public string GetDeleteSQL()
@@ -163,7 +169,8 @@ namespace Profit.Server
                 prtgroup_id='{11}',
                 part_sellprice='{12}',
                 part_taxable={13},
-                unit_id='{14}'
+                unit_id='{14}',
+                part_picture = @pp
                 where part_id = {15}",
                 CODE, NAME, ACTIVE,
                 BARCODE,
@@ -177,7 +184,8 @@ namespace Profit.Server
                 PART_GROUP.ID,
                 SELL_PRICE,
                 TAXABLE,
-                UNIT.ID,ID);
+                UNIT.ID,
+                ID);
         }
         public string GetByIDSQL(int ID)
         {
@@ -238,6 +246,7 @@ namespace Profit.Server
                 part.SELL_PRICE = Convert.ToDouble(r["part_sellprice"]);
                 part.TAXABLE = Convert.ToBoolean(r["part_taxable"]);
                 part.UNIT = new Unit(Convert.ToInt32(r["unit_id"]));
+                part.PICTURE = r["part_picture"] == null ? null : (byte[])r["part_picture"];
                 result.Add(part);
             }
             return result;
@@ -264,6 +273,7 @@ namespace Profit.Server
                 part.SELL_PRICE = Convert.ToDouble(r["part_sellprice"]);
                 part.TAXABLE = Convert.ToBoolean(r["part_taxable"]);
                 part.UNIT = new Unit(Convert.ToInt32(r["unit_id"]));
+                part.PICTURE = r["part_picture"] == null ? null : (byte[])r["part_picture"];
                 result.Add(part);
             }
             return result;
