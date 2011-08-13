@@ -204,7 +204,7 @@ namespace Profit.Server
                     grni_againstprstatus = '{0}',
                     grni_outstandingamtpr = {1},
                     grni_returnedamount = {2}
-                    where poi_id = {3}", AGAINST_PR_STATUS.ToString(),
+                    where grni_id = {3}", AGAINST_PR_STATUS.ToString(),
                                        OUTSTANDING_AMOUNT_TO_PR,
                                        RETURNED_AMOUNT,
                                        ID);
@@ -213,7 +213,7 @@ namespace Profit.Server
         {
             return String.Format("SELECT * from table_goodreceivenoteitem where grni_id = {0}", id);
         }
-        public static string GetSearchByPartAndGRNNo(string find, int supplierID, string poi)
+        public static string GetSearchByPartAndGRNNo(string find, int supplierID, string poi, DateTime trdate)
         {
             return String.Format(@"SELECT t.*
                 FROM table_goodreceivenoteitem t
@@ -222,7 +222,8 @@ namespace Profit.Server
                 where t.grni_outstandingamtpr > 0
                 and concat(pt.part_code, pt.part_name, p.grn_code) like '%{0}%' and p.sup_id = {1}  
                 and p.grn_posted = true
-               {2}", find, supplierID, poi != "" ? " and t.poi_id not in (" + poi + ")" : "");
+                and p.grn_date <= '{2}'
+               {3}", find, supplierID, trdate.ToString(Utils.DATE_FORMAT), poi != "" ? " and t.poi_id not in (" + poi + ")" : "");
         }
         public override bool Equals(object obj)
         {

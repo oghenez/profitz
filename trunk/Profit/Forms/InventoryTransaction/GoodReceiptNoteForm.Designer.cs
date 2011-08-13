@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GoodReceiptNoteForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonHeader1 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
@@ -100,7 +100,7 @@
             this.kryptonHeader1.Size = new System.Drawing.Size(867, 29);
             this.kryptonHeader1.TabIndex = 2;
             this.kryptonHeader1.Values.Description = "";
-            this.kryptonHeader1.Values.Heading = "TRCP001 - Purchase Order";
+            this.kryptonHeader1.Values.Heading = "TRCP002 - Good Receive Note";
             // 
             // toolStrip1
             // 
@@ -407,9 +407,9 @@
             // 
             // OutstandingPOColumn
             // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.NullValue = "0";
-            this.OutstandingPOColumn.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.NullValue = "0";
+            this.OutstandingPOColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.OutstandingPOColumn.HeaderText = "O/S Qty";
             this.OutstandingPOColumn.Increment = new decimal(new int[] {
             1,
@@ -441,8 +441,8 @@
             // 
             // QtyColumn
             // 
-            dataGridViewCellStyle10.NullValue = "0";
-            this.QtyColumn.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle2.NullValue = "0";
+            this.QtyColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.QtyColumn.HeaderText = "Qty";
             this.QtyColumn.Increment = new decimal(new int[] {
             1,
@@ -559,7 +559,7 @@
             this.Controls.Add(this.kryptonHeader1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "GoodReceiptNoteForm";
-            this.Text = "Purchase Order";
+            this.Text = "Good Receive Note";
             this.Load += new System.EventHandler(this.PurchaseOrderForm_Load);
             this.Activated += new System.EventHandler(this.BankForm_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PurchaseOrderForm_FormClosing);

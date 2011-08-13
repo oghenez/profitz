@@ -19,11 +19,13 @@ namespace Profit
         public IList RESULT = new ArrayList();
         User m_user;
         int m_supplierID;
+        DateTime m_trdate;
 
-        public SearchPOForGRNForm(string textfind, int supplier, IList added, User user)
+        public SearchPOForGRNForm(string textfind, int supplier, IList added, User user, DateTime trDate)
         {
             InitializeComponent();
             m_user = user;
+            m_trdate = trDate;
             searchText.Text = textfind;
             m_supplierID = supplier;
             m_listAdded = added;
@@ -63,7 +65,7 @@ namespace Profit
                 this.Cursor = Cursors.WaitCursor;
                 gridData.Rows.Clear();
 
-                IList records = r_po.FindPObyPartAndPONo(searchText.Text.Trim(), m_listAdded, m_supplierID);
+                IList records = r_po.FindPObyPartAndPONo(searchText.Text.Trim(), m_listAdded, m_supplierID, m_trdate);
                 loadResult(records);
                 this.Cursor = Cursors.Default;
             }

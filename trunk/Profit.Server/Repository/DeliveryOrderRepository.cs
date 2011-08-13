@@ -73,6 +73,11 @@ namespace Profit.Server
             }
             catch (Exception x)
             {
+                e.ID = 0;
+                foreach (EventItem item in e.EVENT_ITEMS)
+                {
+                    item.ID = 0;
+                }
                 trc.Rollback();
                 throw x;
             }
@@ -179,7 +184,7 @@ namespace Profit.Server
         }
         protected override void doUpdateStatus(Event e, bool posted)
         {
-            m_command.CommandText = DeliveryOrder.GetUpdateStatusSQL(e.ID, posted);
+            m_command.CommandText = DeliveryOrder.GetUpdateStatusSQL(e);
             m_command.ExecuteNonQuery();
         }
         public static DeliveryOrderItem FindDOItem(OdbcCommand cmd, int PoIID)

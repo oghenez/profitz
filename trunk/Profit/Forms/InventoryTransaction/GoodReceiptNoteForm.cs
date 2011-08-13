@@ -132,10 +132,10 @@ namespace Profit
                     if (pi == null) continue;
                     addedPI.Add(pi.ID);
                 }
-                IList res = r_po.FindPObyPartAndPONo(e.FormattedValue.ToString(), addedPI, ((Supplier)supplierkryptonComboBox.SelectedItem).ID);
+                IList res = r_po.FindPObyPartAndPONo(e.FormattedValue.ToString(), addedPI, ((Supplier)supplierkryptonComboBox.SelectedItem).ID, dateKryptonDateTimePicker.Value);
                 if (res.Count == 0)
                 {
-                    using (SearchPOForGRNForm fr = new SearchPOForGRNForm(e.FormattedValue.ToString(), ((Supplier)supplierkryptonComboBox.SelectedItem).ID, addedPI, m_mainForm.CurrentUser))
+                    using (SearchPOForGRNForm fr = new SearchPOForGRNForm(e.FormattedValue.ToString(), ((Supplier)supplierkryptonComboBox.SelectedItem).ID, addedPI, m_mainForm.CurrentUser, dateKryptonDateTimePicker.Value))
                     {
                         fr.ShowDialog();
                         IList result = fr.RESULT;

@@ -123,21 +123,21 @@ namespace Profit.Server
         {
             return String.Format("SELECT prn_eventstatus from table_purchasereturn where prn_id ={0}", id);
         }
-        public static string GetUpdateStatusSQL(int id, bool posted)
+        public static string GetUpdateStatusSQL(Event e)
         {
             return String.Format(@"update table_purchasereturn set 
                     prn_posted= {0},
                     prn_eventstatus= '{1}'
                 where prn_id = {2}",
-                posted,
-                posted ? EventStatus.Confirm.ToString() : EventStatus.Entry.ToString(),
-                id);
+                e.POSTED,
+                e.EVENT_STATUS.ToString(),
+                e.ID);
         }
         public static string GetSearch(string find)
         {
             return String.Format(@"select * from table_purchasereturn p
                 INNER JOIN table_employee e on e.emp_id = p.emp_id
-                where concat(p.prn_code, e.prn_code, e.emp_name)
+                where concat(p.prn_code, e.emp_code, e.emp_name)
                 like '%{0}%'", find);
         }
         public static string SelectCountByCode(string code)

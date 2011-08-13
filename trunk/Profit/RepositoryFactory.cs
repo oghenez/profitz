@@ -38,6 +38,7 @@ namespace Profit
         public const string PERIOD_REPOSITORY = "PeriodRepository";
         public const string USER_SETTING_REPOSITORY = "UserSettingRepository";
         public const string GOODRECEIVENOTE_REPOSITORY = "GoodReceiveNoteRepository";
+        public const string PURCHASE_RETURN_REPOSITORY = "PurchaseReturnRepository";
 
 
 
@@ -78,7 +79,7 @@ namespace Profit
             PeriodRepository periodRepository = new PeriodRepository();
             UserSettingsRepository usRepository = new UserSettingsRepository();
             GoodReceiveNoteRepository grnRepository = new GoodReceiveNoteRepository();
-
+            PurchaseReturnRepository prRepository = new PurchaseReturnRepository();
 
             m_listService.Add(BANK_REPOSITORY, bankRepository);
             m_listService.Add(CURRENCY_REPOSITORY, ccyRepository);
@@ -106,6 +107,7 @@ namespace Profit
             m_listService.Add(PERIOD_REPOSITORY, periodRepository);
             m_listService.Add(USER_SETTING_REPOSITORY, usRepository);
             m_listService.Add(GOODRECEIVENOTE_REPOSITORY, grnRepository);
+            m_listService.Add(PURCHASE_RETURN_REPOSITORY, prRepository);
 
         }
         public Repository GetRepository(string name)
