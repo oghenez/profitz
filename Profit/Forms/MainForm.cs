@@ -38,6 +38,7 @@ namespace Profit
         const string GENERALSETUP_FORM = "GeneralSetupForm";
         const string PURCHASE_ORDER_FORM = "PurchaseOrderForm";
         const string GOOD_RECEIVE_NOTE_FORM = "GoodReceiveNoteForm";
+        const string PURCHASE_RETURN_FORM = "PurchaseReturnForm";
 
         IList m_listForm = new ArrayList();
         User m_currentUser = null;
@@ -214,6 +215,13 @@ namespace Profit
             {
                 if (isChild(GOOD_RECEIVE_NOTE_FORM)) { this.Cursor = Cursors.Default; return; }
                 GoodReceiptNoteForm user = new GoodReceiptNoteForm(this, GOOD_RECEIVE_NOTE_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            }
+            if (e.Node.Name == "NodePurchaseReturn")
+            {
+                if (isChild(PURCHASE_RETURN_FORM)) { this.Cursor = Cursors.Default; return; }
+                PurchaseReturnForm user = new PurchaseReturnForm(this, PURCHASE_RETURN_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
@@ -395,6 +403,7 @@ namespace Profit
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(UNIT_FORM)) inventoryTreeView.Nodes["NodeUnit"].Remove();
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PURCHASE_ORDER_FORM)) purchaseTreeView.Nodes["NodePurchaseOrder"].Remove();
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(GOOD_RECEIVE_NOTE_FORM)) purchaseTreeView.Nodes["NodeGoodReceiveNote"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PURCHASE_RETURN_FORM)) purchaseTreeView.Nodes["NodePurchaseReturn"].Remove();
 
 
             inventoryKryptonHeader.Visible = inventoryTreeView.Visible = inventoryTreeView.Nodes.Count > 0;
@@ -489,6 +498,7 @@ namespace Profit
             m_listForm.Add(new FormAccess(0, MainForm.GENERALSETUP_FORM.ToString(), "GSTP002 - General Setup"));
             m_listForm.Add(new FormAccess(0, MainForm.PURCHASE_ORDER_FORM.ToString(), "TRCP001 - Purchase Order"));
             m_listForm.Add(new FormAccess(0, MainForm.GOOD_RECEIVE_NOTE_FORM.ToString(), "TRCP002 - Good Receive Note"));
+            m_listForm.Add(new FormAccess(0, MainForm.PURCHASE_RETURN_FORM.ToString(), "TRCP005 - Purchase Return"));
 
         }
 
@@ -521,7 +531,6 @@ namespace Profit
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            UserSetting.SaveSetting("theme", toolStripComboBox1.SelectedItem.ToString(), CurrentUser.ID, this.Name, typeof(string));
             UserSetting.SaveSetting("theme", toolStripComboBox1.SelectedItem.ToString(), CurrentUser.ID, this.Name, typeof(string));
         }
     }

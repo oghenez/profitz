@@ -76,6 +76,24 @@
     <Compile Include="Forms\FieldChooserForm.Designer.cs">
       <DependentUpon>FieldChooserForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\InventoryTransaction\SearchPurchaseReturnForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SearchPurchaseReturnForm.Designer.cs">
+      <DependentUpon>SearchPurchaseReturnForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SearchGRNForPRForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SearchGRNForPRForm.Designer.cs">
+      <DependentUpon>SearchGRNForPRForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\PurchaseReturnForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\PurchaseReturnForm.Designer.cs">
+      <DependentUpon>PurchaseReturnForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\InventoryTransaction\SearchGoodReceiveNoteForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -263,6 +281,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\FieldChooserForm.resx">
       <DependentUpon>FieldChooserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\SearchPurchaseReturnForm.resx">
+      <DependentUpon>SearchPurchaseReturnForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\SearchGRNForPRForm.resx">
+      <DependentUpon>SearchGRNForPRForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\PurchaseReturnForm.resx">
+      <DependentUpon>PurchaseReturnForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\SearchGoodReceiveNoteForm.resx">
       <DependentUpon>SearchGoodReceiveNoteForm.cs</DependentUpon>

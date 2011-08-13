@@ -65,6 +65,11 @@ namespace Profit.Server
             }
             catch (Exception x)
             {
+                e.ID = 0;
+                foreach (EventItem item in e.EVENT_ITEMS)
+                {
+                    item.ID = 0;
+                }
                 trc.Rollback();
                 throw x;
             }
@@ -170,7 +175,7 @@ namespace Profit.Server
         }
         protected override void doUpdateStatus(Event e, bool posted)
         {
-            m_command.CommandText = SalesReturn.GetUpdateStatusSQL(e.ID, posted);
+            m_command.CommandText = SalesReturn.GetUpdateStatusSQL(e);
             m_command.ExecuteNonQuery();
         }
         public static SalesReturnItem FindGRNItem(OdbcCommand cmd, int grnIID)

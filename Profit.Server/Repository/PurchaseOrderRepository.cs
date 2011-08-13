@@ -62,6 +62,11 @@ namespace Profit.Server
             }
             catch (Exception x)
             {
+                e.ID = 0;
+                foreach (EventItem item in e.EVENT_ITEMS)
+                {
+                    item.ID = 0;
+                }
                 trc.Rollback();
                 throw x;
             }
@@ -167,7 +172,7 @@ namespace Profit.Server
         }
         protected override void doUpdateStatus(Event e, bool posted)
         {
-            m_command.CommandText = PurchaseOrder.GetUpdateStatusSQL(e.ID, posted);
+            m_command.CommandText = PurchaseOrder.GetUpdateStatusSQL(e);
             m_command.ExecuteNonQuery();
         }
         public static void UpdateAgainstStatus(OdbcCommand cmd, PurchaseOrder po, PurchaseOrderItem poi)
@@ -242,7 +247,7 @@ namespace Profit.Server
             AutoNumberSetup autonumber = AutoNumberSetupRepository.GetAutoNumberSetup(m_command, "PurchaseOrder");
             return autonumber.AUTONUMBER_SETUP_TYPE == AutoNumberSetupType.Auto;
         }
-        public IList FindPObyPartAndPONo(string find, IList exceptPOI, int supplierID)
+        public IList FindPObyPartAndPONo(string find, IList exceptPOI, int supplierID, DateTime trDate)
         {
             StringBuilder poisSB = new StringBuilder();
             foreach(int i in exceptPOI)
@@ -253,7 +258,7 @@ namespace Profit.Server
             string pois = poisSB.ToString();
             pois = exceptPOI.Count>0?pois.Substring(0, pois.Length - 1):"";
 
-            m_command.CommandText = PurchaseOrderItem.GetSearchByPartAndPONo(find,supplierID, pois);
+            m_command.CommandText = PurchaseOrderItem.GetSearchByPartAndPONo(find,supplierID, pois, trDate);
             OdbcDataReader r = m_command.ExecuteReader();
             IList result = PurchaseOrderItem.TransformReaderList(r);
             r.Close();
@@ -284,6 +289,14 @@ namespace Profit.Server
                 t.PART.UNIT = Unit.GetUnit(r);
                 r.Close();
             }
+            return result;
+        }
+        public double GetTheLatestPOPrice(int supID, int partID, int unitID)
+        {
+            m_command.CommandText = PurchaseOrderItem.GetTheLatestPOPrice(supID, partID, unitID);
+            object r = m_command.ExecuteScalar();
+            if (r == null) return 0d;
+            double result = Convert.ToDouble(r);
             return result;
         }
     }

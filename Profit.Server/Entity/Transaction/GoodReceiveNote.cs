@@ -143,21 +143,21 @@ namespace Profit.Server
         {
             return String.Format("SELECT grn_eventstatus from table_goodreceivenote where grn_id ={0}", id);
         }
-        public static string GetUpdateStatusSQL(int id, bool posted)
+        public static string GetUpdateStatusSQL(Event e)
         {
             return String.Format(@"update table_goodreceivenote set 
                     grn_posted= {0},
                     grn_eventstatus= '{1}'
                 where grn_id = {2}",
-                posted,
-                posted ? EventStatus.Confirm.ToString() : EventStatus.Entry.ToString(),
-                id);
+                e.POSTED,
+                e.EVENT_STATUS.ToString(),
+                e.ID);
         }
         public string UpdateAgainstStatus()
         {
             return String.Format(@"update table_goodreceivenote set 
                     grn_againstprstatus = '{0}'
-                where po_id = {1}",
+                where grn_id = {1}",
                           AGAINST_PR_STATUS.ToString(),
                            ID);
         }

@@ -58,10 +58,10 @@ namespace Profit.Server
                 int trCount = RecordCount();
                 e.CODE = AutoNumberSetupRepository.GetAutoNumberByDomainName(m_command, "PurchaseReturn", e.CODE, lastCode, lastDate, trDate, trCount == 0);
 
-                GoodReceiveNote stk = (GoodReceiveNote)e;
+                PurchaseReturn stk = (PurchaseReturn)e;
                 m_command.CommandText = e.GetInsertSQL();
                 m_command.ExecuteNonQuery();
-                m_command.CommandText = GoodReceiveNote.SelectMaxIDSQL();
+                m_command.CommandText = PurchaseReturn.SelectMaxIDSQL();
                 stk.ID = Convert.ToInt32(m_command.ExecuteScalar());
                 foreach (PurchaseReturnItem item in stk.EVENT_ITEMS)
                 {
@@ -74,6 +74,11 @@ namespace Profit.Server
             }
             catch (Exception x)
             {
+                e.ID = 0;
+                foreach (EventItem item in e.EVENT_ITEMS)
+                {
+                    item.ID = 0;
+                }
                 trc.Rollback();
                 throw x;
             }
@@ -84,7 +89,7 @@ namespace Profit.Server
             m_command.Transaction = trc;
             try
             {
-                GoodReceiveNote e = (GoodReceiveNote)en;
+                PurchaseReturn e = (PurchaseReturn)en;
                 m_command.CommandText = e.GetUpdateSQL();
                 m_command.ExecuteNonQuery();
 
@@ -131,7 +136,7 @@ namespace Profit.Server
         }
         protected override void doDelete(Event e)
         {
-            GoodReceiveNote st = (GoodReceiveNote)e;//this.Get(e.ID);
+            PurchaseReturn st = (PurchaseReturn)e;//this.Get(e.ID);
             OdbcTransaction trc = m_connection.BeginTransaction();
             m_command.Transaction = trc;
             try
@@ -140,7 +145,7 @@ namespace Profit.Server
                     throw new Exception("Revise before delete");
                 m_command.CommandText = PurchaseReturnItem.DeleteAllByEventSQL(st.ID);
                 m_command.ExecuteNonQuery();
-                m_command.CommandText = GoodReceiveNote.DeleteSQL(st.ID);
+                m_command.CommandText = PurchaseReturn.DeleteSQL(st.ID);
                 m_command.ExecuteNonQuery();
                 trc.Commit();
             }
@@ -152,16 +157,16 @@ namespace Profit.Server
         }
         private EventStatus getEventStatus(int id)
         {
-            m_command.CommandText = GoodReceiveNote.GetEventStatus(id);
+            m_command.CommandText = PurchaseReturn.GetEventStatus(id);
             object b = m_command.ExecuteScalar();
             EventStatus m = (EventStatus)Enum.Parse(typeof(EventStatus), b.ToString());
             return m;
         }
         protected override Event doGet(int ID)
         {
-            m_command.CommandText = GoodReceiveNote.GetByIDSQL(ID);
+            m_command.CommandText = PurchaseReturn.GetByIDSQL(ID);
             OdbcDataReader r = m_command.ExecuteReader();
-            GoodReceiveNote st = GoodReceiveNote.TransformReader(r);
+            PurchaseReturn st = PurchaseReturn.TransformReader(r);
             r.Close();
             m_command.CommandText = PurchaseReturnItem.GetByEventIDSQL(ID);
             r = m_command.ExecuteReader();
@@ -173,13 +178,14 @@ namespace Profit.Server
                 sti.PART = PartRepository.GetByID(m_command, sti.PART.ID);
                 sti.STOCK_CARD_ENTRY = StockCardEntryRepository.FindStockCardEntryByEventItem(m_command, sti.ID, sti.STOCK_CARD_ENTRY_TYPE);
                 sti.GRN_ITEM = GoodReceiveNoteRepository.FindGoodReceiveNoteItem(m_command, sti.GRN_ITEM.ID);
+                sti.GRN_ITEM.PART = PartRepository.GetByID(m_command, sti.GRN_ITEM.PART.ID);
                 st.EVENT_ITEMS.Add(sti);
             }
             return st;
         }
         protected override void doUpdateStatus(Event e, bool posted)
         {
-            m_command.CommandText = GoodReceiveNote.GetUpdateStatusSQL(e.ID, posted);
+            m_command.CommandText = PurchaseReturn.GetUpdateStatusSQL(e);
             m_command.ExecuteNonQuery();
         }
         public static PurchaseReturnItem FindGRNItem(OdbcCommand cmd, int grnIID)
@@ -187,6 +193,10 @@ namespace Profit.Server
             cmd.CommandText = PurchaseReturnItem.FindByGrnItemIDSQL(grnIID);
             OdbcDataReader r = cmd.ExecuteReader();
             PurchaseReturnItem res = PurchaseReturnItem.TransformReader(r);
+            r.Close();
+            cmd.CommandText = PurchaseReturn.GetByIDSQL(res.EVENT.ID);
+            r = cmd.ExecuteReader();
+            res.EVENT = PurchaseReturn.TransformReader(r);
             r.Close();
             return res;
         }

@@ -267,7 +267,7 @@ namespace Profit.Server
                                        RECEIVED_AMOUNT,
                                        ID); 
         }
-        public static string GetSearchByPartAndPONo(string find, int supplierID ,string poi)
+        public static string GetSearchByPartAndPONo(string find, int supplierID, string poi, DateTime trdate)
         {
             return String.Format(@"SELECT t.*
                 FROM table_purchaseorderitem t
@@ -276,13 +276,24 @@ namespace Profit.Server
                 where t.poi_outstandingamounttogrn > 0
                 and concat(pt.part_code, pt.part_name, p.po_code) like '%{0}%' and p.sup_id = {1}  
                 and p.po_posted = true
-               {2}", find, supplierID, poi!=""?" and t.poi_id not in ("+poi+")":"");
+                and p.po_date <= '{2}'
+               {3}", find, supplierID, trdate.ToString(Utils.DATE_FORMAT), poi!=""?" and t.poi_id not in ("+poi+")":"");
         }
         public override bool Equals(object obj)
         {
             PurchaseOrderItem e = (PurchaseOrderItem)obj;
             if (e == null) return false;
             return e.ID == this.ID;
+        }
+
+        internal static string GetTheLatestPOPrice(int supID, int partID, int unitID)
+        {
+            return String.Format(@"SELECT t.poi_price
+                FROM table_purchaseorderitem t
+                INNER JOIN table_purchaseorder p on p.po_id = t.po_id
+                where p.sup_id = {0} and t.part_id = {1} and t.unit_id = {2}
+                order by p.po_date desc
+                ", supID, partID, unitID);
         }
     }
 }

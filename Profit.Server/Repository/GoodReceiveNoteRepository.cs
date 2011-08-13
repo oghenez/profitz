@@ -82,6 +82,11 @@ namespace Profit.Server
             }
             catch (Exception x)
             {
+                e.ID = 0;
+                foreach (EventItem item in e.EVENT_ITEMS)
+                {
+                    item.ID = 0;
+                }
                 trc.Rollback();
                 throw x;
             }
@@ -189,7 +194,7 @@ namespace Profit.Server
         }
         protected override void doUpdateStatus(Event e, bool posted)
         {
-            m_command.CommandText = GoodReceiveNote.GetUpdateStatusSQL(e.ID, posted);
+            m_command.CommandText = GoodReceiveNote.GetUpdateStatusSQL(e);
             m_command.ExecuteNonQuery();
         }
         public static GoodReceiveNoteItem FindPOItem(OdbcCommand cmd, int PoIID)
@@ -197,6 +202,10 @@ namespace Profit.Server
             cmd.CommandText = GoodReceiveNoteItem.FindByPOItemIDSQL(PoIID);
             OdbcDataReader r = cmd.ExecuteReader();
             GoodReceiveNoteItem res = GoodReceiveNoteItem.TransformReader(r);
+            r.Close();
+            cmd.CommandText = GoodReceiveNote.GetByIDSQL(res.EVENT.ID);
+            r = cmd.ExecuteReader();
+            res.EVENT = GoodReceiveNote.TransformReader(r);
             r.Close();
             return res;
         }
@@ -274,7 +283,7 @@ namespace Profit.Server
             AutoNumberSetup autonumber = AutoNumberSetupRepository.GetAutoNumberSetup(m_command, "GoodReceiveNote");
             return autonumber.AUTONUMBER_SETUP_TYPE == AutoNumberSetupType.Auto;
         }
-        public IList FindPObyPartAndGRNNo(string find, IList exceptGRNI, int supplierID)
+        public IList FindPObyPartAndGRNNo(string find, IList exceptGRNI, int supplierID, DateTime trDate)
         {
             StringBuilder poisSB = new StringBuilder();
             foreach (int i in exceptGRNI)
@@ -285,7 +294,7 @@ namespace Profit.Server
             string pois = poisSB.ToString();
             pois = exceptGRNI.Count > 0 ? pois.Substring(0, pois.Length - 1) : "";
 
-            m_command.CommandText = GoodReceiveNoteItem.GetSearchByPartAndGRNNo(find, supplierID, pois);
+            m_command.CommandText = GoodReceiveNoteItem.GetSearchByPartAndGRNNo(find, supplierID, pois, trDate);
             OdbcDataReader r = m_command.ExecuteReader();
             IList result = GoodReceiveNoteItem.TransformReaderList(r);
             r.Close();

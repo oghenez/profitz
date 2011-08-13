@@ -229,15 +229,15 @@ namespace Profit.Server
         {
             return String.Format("SELECT so_eventstatus from table_salesorder where so_id ={0}", id);
         }
-        public static string GetUpdateStatusSQL(int id, bool posted)
+        public static string GetUpdateStatusSQL(Event e)
         {
             return String.Format(@"update table_salesorder set 
                     so_posted= {0},
                     so_eventstatus= '{1}'
                 where so_id = {2}",
-                posted,
-                posted ? EventStatus.Confirm.ToString() : EventStatus.Entry.ToString(),
-                id);
+                 e.POSTED,
+                e.EVENT_STATUS.ToString(),
+                e.ID);
         }
         public string UpdateAgainstStatus()
         {

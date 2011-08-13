@@ -25,7 +25,7 @@ namespace Profit.Server
                     sc_id,
                     unit_id,
                     prni_notes,
-                    grni_id,
+                    grni_id
                 ) 
                 VALUES ({0},{1},{2},{3},{4},'{5}',{6},{7},'{8}',{9})",
                 EVENT.ID,

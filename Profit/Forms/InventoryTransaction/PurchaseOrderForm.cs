@@ -76,6 +76,16 @@ namespace Profit
             {
                 updateSubtotal(e.RowIndex);
             }
+            if (e.ColumnIndex == unitColumn.Index)
+            {
+                Part p = (Part)itemsDataGrid[codeColumn.Index, e.RowIndex].Tag;
+                object ou = itemsDataGrid[unitColumn.Index, e.RowIndex].Value;
+                if ((p == null) || (ou == null)) return;
+                Unit u = (Unit)Utils.FindEntityInList(ou.ToString(), m_units);
+                itemsDataGrid[priceColumn.Index, e.RowIndex].Value = r_po.GetTheLatestPOPrice(((Supplier)supplierkryptonComboBox.SelectedItem).ID, p.ID, u.ID);
+                updateSubtotal(e.RowIndex);
+            }
+             
         }
 
         private void updateSubtotal(int row)
@@ -188,8 +198,8 @@ namespace Profit
                    // IList units = r_part.GetAllUnit(p.ID, p.UNIT.ID);
                     //Utils.GetListCode(unitColumn.Items, units);
                     p.UNIT = (Unit)r_unit.GetById(p.UNIT);
-                    itemsDataGrid[unitColumn.Index, e.RowIndex].Value = p.UNIT.ToString(); ;
-                    //dataItemskryptonDataGridView[priceColumn.Index, e.RowIndex].Value = 0;
+                    itemsDataGrid[unitColumn.Index, e.RowIndex].Value = p.UNIT.ToString();
+                    itemsDataGrid[priceColumn.Index, e.RowIndex].Value = r_po.GetTheLatestPOPrice(((Supplier)supplierkryptonComboBox.SelectedItem).ID, p.ID, p.UNIT.ID);
                     //dataItemskryptonDataGridView[totalAmountColumn.Index, e.RowIndex].Value = 0;
                     itemsDataGrid[warehouseColumn.Index, e.RowIndex].Value = m_warehouses[0].ToString();
 
@@ -233,7 +243,7 @@ namespace Profit
                             //Utils.GetListCode(unitColumn.Items, units);
                             p.UNIT = (Unit)r_unit.GetById(p.UNIT);
                             itemsDataGrid[unitColumn.Index, e.RowIndex].Value = p.UNIT.ToString();
-                            //dataItemskryptonDataGridView[priceColumn.Index, e.RowIndex].Value = 0;
+                            itemsDataGrid[priceColumn.Index, e.RowIndex].Value = r_po.GetTheLatestPOPrice(((Supplier)supplierkryptonComboBox.SelectedItem).ID, p.ID, p.UNIT.ID);
                            // dataItemskryptonDataGridView[totalAmountColumn.Index, e.RowIndex].Value = 0;
                             itemsDataGrid[warehouseColumn.Index, e.RowIndex].Value = m_warehouses[0].ToString();
                         }
