@@ -517,6 +517,18 @@ namespace Profit
             unitKryptonTextBox.Text = p == null ? "" : p.NAME;
         }
 
+        private void currencykryptonComboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Currency p = (Currency)currencykryptonComboBox3.SelectedItem;
+            currencyKryptonTextBox.Text = p == null ? "" : p.NAME;
+        }
+
+        private void partCategorykryptonComboBox5_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PartCategory p = (PartCategory)partCategorykryptonComboBox5.SelectedItem;
+            partCategorykryptonTextBox.Text = p == null ? "" : p.NAME;
+        }
+
         //private void toolStripButtonMigrate_Click(object sender, EventArgs e)
         //{
         //    StreamReader p = new StreamReader(@"part.csv");
