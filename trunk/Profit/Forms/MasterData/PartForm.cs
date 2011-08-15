@@ -225,7 +225,9 @@ namespace Profit
             m_part.TAXABLE = taxkryptonCheckBox2.Checked;
             m_part.UNIT = (Unit)unitkryptonComboBox2.SelectedItem;
             m_part.UNIT_CONVERSION_LIST.Clear();
-            m_part.PICTURE = pictureBox.Image == null ? null : imageToByteArray(pictureBox.Image);
+            //if (m_part.PICTURE != null) m_part.PICTURE.Dispose();
+            //m_part.PICTURE = null; 
+            m_part.PICTURE = pictureBox.Image;//pictureBox.Image == null ? null : imageToByteArray(pictureBox.Image);
             IList unitConversionlist = GetListUom();
             foreach (UnitConversion uc in unitConversionlist)
             {
@@ -404,7 +406,7 @@ namespace Profit
             balanceKryptonTextBox.Text = sci.BALANCE.ToString();
             BackOrderKryptonTextBox.Text = sci.BACKORDER.ToString();
             bookedKryptonTextBox.Text = sci.BOOKED.ToString();
-            pictureBox.Image = m_part.PICTURE == null ? null : byteArrayToImage(m_part.PICTURE);
+            pictureBox.Image = r_part.GetImage(m_part.CODE);//m_part.PICTURE;// m_part.PICTURE == null ? null : byteArrayToImage(m_part.PICTURE);
             dataGridViewUOM.Rows.Clear();
             IList l = r_part.GetUnitConversions(m_part.ID);
             foreach (UnitConversion u in l)
@@ -577,8 +579,9 @@ namespace Profit
         private void pictureBox_DoubleClick(object sender, EventArgs e)
         {
             openFileDialog1.Multiselect = false;
-            openFileDialog1.Filter = "Images (*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF|All files (*.*)|*.*";
+            openFileDialog1.Filter = "Images (*.JPG;*.GIF)|*.JPG;*.GIF|All files (*.*)|*.*";
             openFileDialog1.ShowDialog();
+            if (!File.Exists(openFileDialog1.FileName)) return;
             Image image = Image.FromFile(openFileDialog1.FileName);
             image = resizeImage(image, new Size(225, 225));
             pictureBox.Image = image;
