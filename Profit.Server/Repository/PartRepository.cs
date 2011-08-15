@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Data.Odbc;
 using System.Collections;
+using System.IO;
+using System.Drawing;
 
 namespace Profit.Server
 {
     public class PartRepository : Repository
     {
+        string m_pictureFolder = System.Windows.Forms.Application.StartupPath + @"\picture\";
         public PartRepository(IEntity e)
             : base(e)
         { }
@@ -23,6 +26,7 @@ namespace Profit.Server
             {
                 Part e = (Part)en;
                 aCommand.CommandText = e.GetInsertSQL();
+                this.SavePicture(e.PICTURE, e.CODE);
                 aCommand.ExecuteNonQuery();
                 aCommand.CommandText = e.GetMaximumIDSQL();
                 e.ID = Convert.ToInt32(aCommand.ExecuteScalar());
@@ -55,9 +59,7 @@ namespace Profit.Server
             {
                 Part e = (Part)en;
                 aCommand.CommandText = e.GetUpdateSQL();
-                aCommand.Parameters.AddWithValue("@pp", e.PICTURE);
-                
-
+                this.SavePicture(e.PICTURE, e.CODE);
                 aCommand.ExecuteNonQuery();
 
                 foreach (UnitConversion ucp in e.UNIT_CONVERSION_LIST)
@@ -332,6 +334,39 @@ namespace Profit.Server
                 result.BOOKED += sc.BOOKED;
             }
             return result;
+        }
+        public void SavePicture(Image image, string name)
+        {
+            try
+            {
+                if (!Directory.Exists(m_pictureFolder))
+                    Directory.CreateDirectory(m_pictureFolder);
+                if (File.Exists(m_pictureFolder + name + ".JPEG"))
+                {
+                    File.Delete(m_pictureFolder + name + ".JPEG");
+                }
+                image.Save(m_pictureFolder + name + ".JPEG", System.Drawing.Imaging.ImageFormat.Jpeg);
+            }
+            catch(Exception x)
+            {}
+        }
+        public Image GetImage(string name)
+        {
+            Image m = null;
+            try
+            {
+                if (File.Exists(m_pictureFolder + name + ".JPEG"))
+                {
+                    FileStream r = new FileStream(m_pictureFolder + name + ".JPEG", FileMode.Open, FileAccess.Read);
+                    m = Image.FromStream(r);
+                    r.Close();
+                }
+                return m;// Image.FromFile(m_pictureFolder + name + ".JPEG");
+            }
+            catch (Exception x)
+            {
+                return m;
+            }
         }
     }
 }
