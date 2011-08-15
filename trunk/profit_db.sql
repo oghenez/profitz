@@ -595,7 +595,7 @@ CREATE TABLE `table_part` (
   CONSTRAINT `FK_table_part_2` FOREIGN KEY (`prtcat_id`) REFERENCES `table_partcategory` (`prtcat_id`),
   CONSTRAINT `FK_table_part_3` FOREIGN KEY (`prtgroup_id`) REFERENCES `table_partgroup` (`prtgroup_id`),
   CONSTRAINT `FK_table_part_4` FOREIGN KEY (`unit_id`) REFERENCES `table_unit` (`unit_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15531 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15533 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_part`
@@ -1735,7 +1735,7 @@ INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_
  (10196,'299','AULIA PARFUM BODY LOTION 125ML LOVELY',1,'8994037800073','MovingAverage','0',7,'0','0','0',2,8,'0',0,1,''),
  (10197,'300','AULIA PEFUMED BODY LOTION 125ML*96 MILK',1,'8994037701042','MovingAverage','0',7,'0','0','0',2,8,'0',0,1,''),
  (10198,'301','AULIA PEFUMED BODY LOTION 125ML*96 MUSK',1,'8994037701035','MovingAverage','0',7,'0','0','0',2,8,'0',0,1,''),
- (10199,'302','AXE  BODY PERFUME 150ML*12 GRAVITY',1,'4800888116529','MovingAverage','15000',7,'0','200','10',2,8,'15505',0,1,''),
+ (10199,'302','AXE  BODY PERFUME 150ML*12 GRAVITY',1,'4800888116529','MovingAverage','15000',7,'0','200','10',2,8,'15505',0,1,'302'),
  (10200,'303','AXE  BODY PERFUME 150ML*12 PULSE',1,'4800888116550','MovingAverage','0',7,'0','0','0',2,8,'0',0,1,''),
  (10201,'304','AXE  BODY PERFUME 150ML*12 VICE',1,'4800888131249','MovingAverage','0',7,'0','0','0',2,8,'0',0,1,''),
  (10202,'305','AXE BODY PERFUME 150 ML*12 SCORE',1,'4800888137319','MovingAverage','0',7,'0','0','0',2,8,'0',0,1,''),
@@ -7038,9 +7038,9 @@ INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_
  (15489,'4045','PANASONIC BATTERY AAA',1,'-','MovingAverage','0',7,'0','0','0',2,4,'0',0,1,''),
  (15490,'126','KINO CANDY 125G*24 HARD ASS  FRUIT',1,'-','MovingAverage','0',7,'0','0','0',2,6,'0',0,1,''),
  (15491,'195','SILVER Q 33G*30*12 CASHEW',1,'8991001111289','MovingAverage','0',7,'0','0','0',2,6,'0',0,1,''),
- (15492,'5169','TESTONI JOY FULL 50ML',1,'8993068333758','MovingAverage','0',7,'0','0','0',2,5,'0',0,1,''),
- (15493,'6332','CUSSONS BABY COLOGNE 100ML SOFTEST PINK',1,'8888103003119','MovingAverage','0',7,'0','0','0',2,8,'0',0,1,''),
- (15494,'5170','TESTONI MODIS PARFUM 50ML',1,'8993068333741','MovingAverage','0',7,'0','0','0',2,5,'0',0,1,''),
+ (15492,'5169','TESTONI JOY FULL 50ML',1,'8993068333758','MovingAverage','0',7,'0','0','0',2,5,'0',0,1,'5169'),
+ (15493,'6332','CUSSONS BABY COLOGNE 100ML SOFTEST PINK',1,'8888103003119','MovingAverage','0',7,'0','0','0',2,8,'0',0,1,'6332'),
+ (15494,'5170','TESTONI MODIS PARFUM 50ML',1,'8993068333741','MovingAverage','0',7,'0','0','0',2,5,'0',0,1,'5170'),
  (15495,'qweasd','REFILL INK',1,'qweasd','MovingAverage','0',3,'0','0','0',2,5,'0',0,1,''),
  (15496,'132','KINO CANDY 440G KOPI',1,'8992942119396','MovingAverage','0',7,'0','0','0',2,6,'0',0,1,''),
  (15497,'1165','ANMUM INFACARE 1 400G',1,'9415007025504','MovingAverage','0',7,'0','0','0',2,2,'0',0,1,''),
@@ -7076,7 +7076,9 @@ INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_
  (15527,'1339','DANCOW 400G*24 FULL CREAM',1,'8992696405486','MovingAverage','0',7,'0','0','0',2,2,'0',0,1,''),
  (15528,'1365','DIABETASOL 600G*12 COKLAT',1,'8992802660013','MovingAverage','0',7,'0','0','0',2,2,'0',0,1,''),
  (15529,'1367','DIABETASOL VITA D 180G*24CAPPUCINO',1,'8992802618014','MovingAverage','0',7,'0','0','0',2,2,'0',0,1,''),
- (15530,'1368','DIABETASOL VITA D 180G*24COKLAT',1,'8992802618700','MovingAverage','0',7,'0','0','0',2,2,'0',0,1,'');
+ (15530,'1368','DIABETASOL VITA D 180G*24COKLAT',1,'8992802618700','MovingAverage','0',7,'0','0','0',2,2,'0',0,1,''),
+ (15531,'001test1','test',1,'12345','MovingAverage','0',1,'0','0','0',1,1,'0',0,1,'001test1'),
+ (15532,'test02','TEST LAGI TEST LAGI',1,'test01','MovingAverage','0',3,'0','0','0',1,1,'0',0,1,'test02');
 /*!40000 ALTER TABLE `table_part` ENABLE KEYS */;
 
 
@@ -7268,7 +7270,7 @@ CREATE TABLE `table_purchaseorder` (
   CONSTRAINT `FK_table_purchaseorder_3` FOREIGN KEY (`top_id`) REFERENCES `table_termofpayment` (`top_id`),
   CONSTRAINT `FK_table_purchaseorder_4` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_purchaseorder_5` FOREIGN KEY (`sup_id`) REFERENCES `table_supplier` (`sup_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_purchaseorder`
@@ -7289,7 +7291,8 @@ INSERT INTO `table_purchaseorder` (`po_id`,`po_date`,`po_noticedate`,`po_scentry
  (14,'2011-08-11 00:00:00','2011-08-11 00:00:00','PurchaseOrder',1,'',1,'Confirm',1,2,'2011-09-10 00:00:00',1,77550,10,7755,0,1,6979.5,0,76774.5,'Outstanding','PMPO/010/08/2011',2),
  (15,'2011-08-12 00:00:00','2011-08-12 00:00:00','PurchaseOrder',1,'',1,'Confirm',1,2,'2011-09-11 00:00:00',1,15000000,0,0,0,1,1500000,0,16500000,'Close','PMPO/011/08/2011',1),
  (16,'2011-08-13 00:00:00','2011-08-13 00:00:00','PurchaseOrder',1,'',0,'Entry',1,1,'2011-08-13 00:00:00',1,4500000,0,0,0,1,450000,0,4950000,'Open','PMPO/012/08/2011',1),
- (17,'2011-08-14 00:00:00','2011-08-13 00:00:00','PurchaseOrder',1,'',0,'Entry',1,1,'2011-08-13 00:00:00',1,1495000,0,0,0,1,149500,0,1644500,'Open','PMPO/013/08/2011',1);
+ (17,'2011-08-14 00:00:00','2011-08-13 00:00:00','PurchaseOrder',1,'',0,'Entry',1,1,'2011-08-13 00:00:00',1,1495000,0,0,0,1,149500,0,1644500,'Open','PMPO/013/08/2011',1),
+ (18,'2011-08-15 00:00:00','2011-08-15 00:00:00','PurchaseOrder',1,'',1,'Confirm',1,2,'2011-09-14 00:00:00',1,500000,0,0,0,1,50000,0,550000,'Open','PMPO/014/08/2011',2);
 /*!40000 ALTER TABLE `table_purchaseorder` ENABLE KEYS */;
 
 
@@ -7330,7 +7333,7 @@ CREATE TABLE `table_purchaseorderitem` (
   CONSTRAINT `FK_table_purchaseorderitem_2` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`),
   CONSTRAINT `FK_table_purchaseorderitem_3` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
   CONSTRAINT `FK_table_purchaseorderitem_4` FOREIGN KEY (`unit_id`) REFERENCES `table_unit` (`unit_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_purchaseorderitem`
@@ -7365,7 +7368,9 @@ INSERT INTO `table_purchaseorderitem` (`poi_id`,`po_id`,`part_id`,`warehouse_id`
  (27,14,14255,1,5,0,'PurchaseOrder',0,1,6510,0,0,0,32550,'',0,0,0,'','Outstanding',4,1),
  (28,15,15112,1,100,0,'PurchaseOrder',0,1,150000,0,0,0,15000000,'',0,0,0,'','Close',0,100),
  (29,16,15112,1,3,0,'PurchaseOrder',0,4,1500000,0,0,0,4500000,'',0,0,0,'','Open',36,0),
- (30,17,15112,1,1,0,'PurchaseOrder',0,4,1495000,0,0,0,1495000,'',0,0,0,'','Open',12,0);
+ (30,17,15112,1,1,0,'PurchaseOrder',0,4,1495000,0,0,0,1495000,'',0,0,0,'','Open',12,0),
+ (31,18,15492,1,10,0,'PurchaseOrder',0,1,25000,0,0,0,250000,'',0,0,0,'','Open',10,0),
+ (32,18,15493,1,10,0,'PurchaseOrder',0,1,25000,0,0,0,250000,'',0,0,0,'','Open',10,0);
 /*!40000 ALTER TABLE `table_purchaseorderitem` ENABLE KEYS */;
 
 
@@ -7636,7 +7641,7 @@ CREATE TABLE `table_stockcard` (
   CONSTRAINT `FK_table_stockcard_1` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`),
   CONSTRAINT `FK_table_stockcard_2` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
   CONSTRAINT `FK_table_stockcard_3` FOREIGN KEY (`period_id`) REFERENCES `table_period` (`period_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_stockcard`
@@ -7687,7 +7692,9 @@ INSERT INTO `table_stockcard` (`sc_id`,`part_id`,`warehouse_id`,`period_id`,`sc_
  (43,15453,2,20,12,0,0),
  (44,15112,1,20,100,0,0),
  (45,9442,2,20,1,0,0),
- (46,9403,2,20,10,0,0);
+ (46,9403,2,20,10,0,0),
+ (47,15492,1,20,0,10,0),
+ (48,15493,1,20,0,10,0);
 /*!40000 ALTER TABLE `table_stockcard` ENABLE KEYS */;
 
 
@@ -7709,7 +7716,7 @@ CREATE TABLE `table_stockcardentry` (
   KEY `FK_table_stockcardentry_2` (`sc_id`),
   CONSTRAINT `FK_table_stockcardentry_1` FOREIGN KEY (`unit_id`) REFERENCES `table_unit` (`unit_id`),
   CONSTRAINT `FK_table_stockcardentry_2` FOREIGN KEY (`sc_id`) REFERENCES `table_stockcard` (`sc_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_stockcardentry`
@@ -7782,7 +7789,9 @@ INSERT INTO `table_stockcardentry` (`sce_id`,`sc_id`,`sce_stockcardentrytype`,`s
  (106,28,'PurchaseReturn','2011-08-13 00:00:00',1,2,13),
  (107,29,'PurchaseReturn','2011-08-13 00:00:00',1,9,14),
  (108,27,'PurchaseReturn','2011-08-13 00:00:00',1,115,15),
- (109,28,'PurchaseReturn','2011-08-13 00:00:00',1,4,16);
+ (109,28,'PurchaseReturn','2011-08-13 00:00:00',1,4,16),
+ (110,47,'PurchaseOrder','2011-08-15 00:00:00',1,10,31),
+ (111,48,'PurchaseOrder','2011-08-15 00:00:00',1,10,32);
 /*!40000 ALTER TABLE `table_stockcardentry` ENABLE KEYS */;
 
 
@@ -8113,7 +8122,7 @@ CREATE TABLE `table_unitconversion` (
   KEY `FK_table_unitconversion_2` (`part_id`),
   CONSTRAINT `FK_table_unitconversion_1` FOREIGN KEY (`unitconv_unit`) REFERENCES `table_unit` (`unit_id`),
   CONSTRAINT `FK_table_unitconversion_2` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_unitconversion`
