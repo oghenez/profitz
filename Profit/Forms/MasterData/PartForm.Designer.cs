@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonHeader1 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
@@ -104,6 +104,7 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.buttonSpecAny1 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.kryptonGroupBox4 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
@@ -135,6 +136,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
             this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox4.Panel)).BeginInit();
+            this.kryptonGroupBox4.Panel.SuspendLayout();
+            this.kryptonGroupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonHeader1
@@ -142,7 +147,7 @@
             this.kryptonHeader1.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonHeader1.Location = new System.Drawing.Point(0, 0);
             this.kryptonHeader1.Name = "kryptonHeader1";
-            this.kryptonHeader1.Size = new System.Drawing.Size(844, 29);
+            this.kryptonHeader1.Size = new System.Drawing.Size(1072, 29);
             this.kryptonHeader1.TabIndex = 2;
             this.kryptonHeader1.Values.Description = "";
             this.kryptonHeader1.Values.Heading = "TRCI002 - Part Master";
@@ -158,7 +163,7 @@
             this.toolStripButtonRefresh});
             this.toolStrip1.Location = new System.Drawing.Point(0, 29);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(844, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1072, 25);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -223,25 +228,19 @@
             // 
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.gridData);
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.toolStrip2);
-            this.kryptonSplitContainer1.Size = new System.Drawing.Size(844, 547);
+            this.kryptonSplitContainer1.Size = new System.Drawing.Size(1072, 547);
             this.kryptonSplitContainer1.SplitterDistance = 410;
             this.kryptonSplitContainer1.TabIndex = 4;
             // 
             // kryptonPanel1
             // 
             this.kryptonPanel1.AutoScroll = true;
-            this.kryptonPanel1.Controls.Add(this.kryptonButton1);
+            this.kryptonPanel1.Controls.Add(this.kryptonGroupBox4);
             this.kryptonPanel1.Controls.Add(this.kryptonGroupBox3);
             this.kryptonPanel1.Controls.Add(this.kryptonGroupBox2);
-            this.kryptonPanel1.Controls.Add(this.bookedKryptonTextBox);
-            this.kryptonPanel1.Controls.Add(this.BackOrderKryptonTextBox);
             this.kryptonPanel1.Controls.Add(this.barcodekryptonTextBox1);
-            this.kryptonPanel1.Controls.Add(this.balanceKryptonTextBox);
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel16);
             this.kryptonPanel1.Controls.Add(this.kryptonGroupBox1);
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel15);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel14);
             this.kryptonPanel1.Controls.Add(this.textBoxCode);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel2);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel3);
@@ -250,21 +249,21 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(844, 410);
+            this.kryptonPanel1.Size = new System.Drawing.Size(1072, 410);
             this.kryptonPanel1.TabIndex = 4;
             this.kryptonPanel1.DoubleClick += new System.EventHandler(this.kryptonPanel1_DoubleClick);
             // 
             // kryptonButton1
             // 
-            this.kryptonButton1.Location = new System.Drawing.Point(720, 176);
+            this.kryptonButton1.Location = new System.Drawing.Point(109, 123);
             this.kryptonButton1.Name = "kryptonButton1";
             this.kryptonButton1.Size = new System.Drawing.Size(100, 25);
             this.kryptonButton1.TabIndex = 32;
-            this.kryptonButton1.Values.Text = "Movement";
+            this.kryptonButton1.Values.Text = "View Movement";
             // 
             // kryptonGroupBox3
             // 
-            this.kryptonGroupBox3.Location = new System.Drawing.Point(360, 52);
+            this.kryptonGroupBox3.Location = new System.Drawing.Point(359, 52);
             this.kryptonGroupBox3.Name = "kryptonGroupBox3";
             // 
             // kryptonGroupBox3.Panel
@@ -289,13 +288,13 @@
             // 
             // kryptonGroupBox2
             // 
-            this.kryptonGroupBox2.Location = new System.Drawing.Point(12, 300);
+            this.kryptonGroupBox2.Location = new System.Drawing.Point(12, 304);
             this.kryptonGroupBox2.Name = "kryptonGroupBox2";
             // 
             // kryptonGroupBox2.Panel
             // 
             this.kryptonGroupBox2.Panel.Controls.Add(this.dataGridViewUOM);
-            this.kryptonGroupBox2.Size = new System.Drawing.Size(597, 100);
+            this.kryptonGroupBox2.Size = new System.Drawing.Size(503, 100);
             this.kryptonGroupBox2.TabIndex = 30;
             this.kryptonGroupBox2.Text = "Multi Unit";
             this.kryptonGroupBox2.Values.Heading = "Multi Unit";
@@ -312,14 +311,14 @@
             this.dataGridViewUOM.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewUOM.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewUOM.Name = "dataGridViewUOM";
-            this.dataGridViewUOM.Size = new System.Drawing.Size(593, 77);
+            this.dataGridViewUOM.Size = new System.Drawing.Size(499, 77);
             this.dataGridViewUOM.TabIndex = 0;
             // 
             // ConversionQTy
             // 
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle11.NullValue = "1";
-            this.ConversionQTy.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle21.NullValue = "1";
+            this.ConversionQTy.DefaultCellStyle = dataGridViewCellStyle21;
             this.ConversionQTy.HeaderText = "Conv. Qty";
             this.ConversionQTy.Increment = new decimal(new int[] {
             1,
@@ -350,8 +349,8 @@
             // 
             // OrigQty
             // 
-            dataGridViewCellStyle12.NullValue = "0";
-            this.OrigQty.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle22.NullValue = "0";
+            this.OrigQty.DefaultCellStyle = dataGridViewCellStyle22;
             this.OrigQty.HeaderText = "Orig. Qty";
             this.OrigQty.Increment = new decimal(new int[] {
             1,
@@ -380,9 +379,9 @@
             // CostPrice
             // 
             this.CostPrice.DecimalPlaces = 2;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle13.NullValue = "0";
-            this.CostPrice.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle23.NullValue = "0";
+            this.CostPrice.DefaultCellStyle = dataGridViewCellStyle23;
             this.CostPrice.HeaderText = "Cost Price";
             this.CostPrice.Increment = new decimal(new int[] {
             1,
@@ -406,9 +405,9 @@
             // SellPrice
             // 
             this.SellPrice.DecimalPlaces = 2;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle14.NullValue = "0";
-            this.SellPrice.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle24.NullValue = "0";
+            this.SellPrice.DefaultCellStyle = dataGridViewCellStyle24;
             this.SellPrice.HeaderText = "Sell Price";
             this.SellPrice.Increment = new decimal(new int[] {
             1,
@@ -431,7 +430,7 @@
             // 
             // bookedKryptonTextBox
             // 
-            this.bookedKryptonTextBox.Location = new System.Drawing.Point(720, 139);
+            this.bookedKryptonTextBox.Location = new System.Drawing.Point(109, 86);
             this.bookedKryptonTextBox.Name = "bookedKryptonTextBox";
             this.bookedKryptonTextBox.ReadOnly = true;
             this.bookedKryptonTextBox.Size = new System.Drawing.Size(100, 31);
@@ -443,7 +442,7 @@
             // 
             // BackOrderKryptonTextBox
             // 
-            this.BackOrderKryptonTextBox.Location = new System.Drawing.Point(720, 105);
+            this.BackOrderKryptonTextBox.Location = new System.Drawing.Point(109, 52);
             this.BackOrderKryptonTextBox.Name = "BackOrderKryptonTextBox";
             this.BackOrderKryptonTextBox.ReadOnly = true;
             this.BackOrderKryptonTextBox.Size = new System.Drawing.Size(100, 31);
@@ -462,7 +461,7 @@
             // 
             // balanceKryptonTextBox
             // 
-            this.balanceKryptonTextBox.Location = new System.Drawing.Point(720, 71);
+            this.balanceKryptonTextBox.Location = new System.Drawing.Point(109, 18);
             this.balanceKryptonTextBox.Name = "balanceKryptonTextBox";
             this.balanceKryptonTextBox.ReadOnly = true;
             this.balanceKryptonTextBox.Size = new System.Drawing.Size(100, 31);
@@ -475,7 +474,7 @@
             // kryptonLabel16
             // 
             this.kryptonLabel16.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.TitlePanel;
-            this.kryptonLabel16.Location = new System.Drawing.Point(621, 139);
+            this.kryptonLabel16.Location = new System.Drawing.Point(10, 86);
             this.kryptonLabel16.Name = "kryptonLabel16";
             this.kryptonLabel16.Size = new System.Drawing.Size(93, 27);
             this.kryptonLabel16.TabIndex = 2;
@@ -753,7 +752,7 @@
             // kryptonLabel15
             // 
             this.kryptonLabel15.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.TitlePanel;
-            this.kryptonLabel15.Location = new System.Drawing.Point(613, 107);
+            this.kryptonLabel15.Location = new System.Drawing.Point(2, 54);
             this.kryptonLabel15.Name = "kryptonLabel15";
             this.kryptonLabel15.Size = new System.Drawing.Size(102, 27);
             this.kryptonLabel15.TabIndex = 1;
@@ -770,7 +769,7 @@
             // kryptonLabel14
             // 
             this.kryptonLabel14.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.TitlePanel;
-            this.kryptonLabel14.Location = new System.Drawing.Point(615, 71);
+            this.kryptonLabel14.Location = new System.Drawing.Point(4, 18);
             this.kryptonLabel14.Name = "kryptonLabel14";
             this.kryptonLabel14.Size = new System.Drawing.Size(101, 27);
             this.kryptonLabel14.TabIndex = 0;
@@ -837,7 +836,7 @@
             this.gridData.RowHeadersVisible = false;
             this.gridData.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gridData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridData.Size = new System.Drawing.Size(844, 107);
+            this.gridData.Size = new System.Drawing.Size(1072, 107);
             this.gridData.StateCommon.BackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlClient;
             this.gridData.StateCommon.DataCell.Border.DrawBorders = ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom;
             this.gridData.TabIndex = 1;
@@ -867,9 +866,9 @@
             // 
             // ActiveCol
             // 
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle15.NullValue = false;
-            this.ActiveCol.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle25.NullValue = false;
+            this.ActiveCol.DefaultCellStyle = dataGridViewCellStyle25;
             this.ActiveCol.FalseValue = null;
             this.ActiveCol.HeaderText = "Active";
             this.ActiveCol.IndeterminateValue = null;
@@ -897,7 +896,7 @@
             this.toolStripButtonLoadAll});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(844, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(1072, 25);
             this.toolStrip2.TabIndex = 2;
             this.toolStrip2.Text = "toolStripSearch";
             // 
@@ -946,11 +945,30 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // kryptonGroupBox4
+            // 
+            this.kryptonGroupBox4.Location = new System.Drawing.Point(593, 51);
+            this.kryptonGroupBox4.Name = "kryptonGroupBox4";
+            // 
+            // kryptonGroupBox4.Panel
+            // 
+            this.kryptonGroupBox4.Panel.Controls.Add(this.bookedKryptonTextBox);
+            this.kryptonGroupBox4.Panel.Controls.Add(this.kryptonButton1);
+            this.kryptonGroupBox4.Panel.Controls.Add(this.kryptonLabel14);
+            this.kryptonGroupBox4.Panel.Controls.Add(this.kryptonLabel15);
+            this.kryptonGroupBox4.Panel.Controls.Add(this.kryptonLabel16);
+            this.kryptonGroupBox4.Panel.Controls.Add(this.balanceKryptonTextBox);
+            this.kryptonGroupBox4.Panel.Controls.Add(this.BackOrderKryptonTextBox);
+            this.kryptonGroupBox4.Size = new System.Drawing.Size(223, 250);
+            this.kryptonGroupBox4.TabIndex = 33;
+            this.kryptonGroupBox4.Text = "Stock Card Status";
+            this.kryptonGroupBox4.Values.Heading = "Stock Card Status";
+            // 
             // PartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(844, 601);
+            this.ClientSize = new System.Drawing.Size(1072, 601);
             this.Controls.Add(this.kryptonSplitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.kryptonHeader1);
@@ -994,6 +1012,11 @@
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox4.Panel)).EndInit();
+            this.kryptonGroupBox4.Panel.ResumeLayout(false);
+            this.kryptonGroupBox4.Panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox4)).EndInit();
+            this.kryptonGroupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1071,5 +1094,6 @@
         private System.Windows.Forms.PictureBox pictureBox;
         private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBox4;
     }
 }

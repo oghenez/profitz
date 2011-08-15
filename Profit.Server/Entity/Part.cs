@@ -27,7 +27,7 @@ namespace Profit.Server
         public bool ACTIVE = true;
         public IList UNIT_CONVERSION_LIST = new ArrayList();
         public IDictionary SELLING_PRICE_INFO_LIST = new Hashtable();
-        public System.Drawing.Image PICTURE;
+        public byte[] PICTURE;
         public string PICTURE_NAME = "";
 
         public Part()
@@ -146,7 +146,7 @@ namespace Profit.Server
                 SELL_PRICE,
                 TAXABLE,
                 UNIT.ID,
-                PICTURE_NAME
+                CODE
                 );
         }
         public string GetDeleteSQL()
