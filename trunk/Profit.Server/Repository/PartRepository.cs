@@ -335,30 +335,50 @@ namespace Profit.Server
             }
             return result;
         }
-        public void SavePicture(Image image, string name)
+        public void SavePicture(byte[] image, string name)
         {
             try
             {
                 if (!Directory.Exists(m_pictureFolder))
                     Directory.CreateDirectory(m_pictureFolder);
-                if (File.Exists(m_pictureFolder + name + ".JPEG"))
-                {
-                    File.Delete(m_pictureFolder + name + ".JPEG");
-                }
-                image.Save(m_pictureFolder + name + ".JPEG", System.Drawing.Imaging.ImageFormat.Jpeg);
+                ////if (File.Exists(m_pictureFolder + name + ".JPEG"))
+                ////{
+                ////    File.Delete(m_pictureFolder + name + ".JPEG");
+                ////}
+                //StreamWriter w = new StreamWriter(
+                //image.Save(m_pictureFolder + name + ".JPEG", System.Drawing.Imaging.ImageFormat.Jpeg);
+                //byte[] fileBArray = new byte[(int)file.length()];
+                //StreamWriter fis = new StreamWriter(m_pictureFolder + name + ".JPEG");
+                //fis.Write(image);
+                File.WriteAllBytes(m_pictureFolder + name + ".JPEG", image);
+
+                //FileOutputStream fos = new FileOutputStream("C:\\abc.jpg");
+                //fos.write(fileBArray);
+                //fis.Close();
             }
             catch(Exception x)
             {}
         }
-        public Image GetImage(string name)
+        public byte[] GetImage(string name)
         {
-            Image m = null;
+            byte[] m = null;
             try
             {
                 if (File.Exists(m_pictureFolder + name + ".JPEG"))
                 {
+                   // FileStream r = new FileStream(m_pictureFolder + name + ".JPEG", FileMode.Open, FileAccess.Read);
+                   // m = r.Read(
+                   // r.Close();
+                    
                     FileStream r = new FileStream(m_pictureFolder + name + ".JPEG", FileMode.Open, FileAccess.Read);
-                    m = Image.FromStream(r);
+                    int length = (int)r.Length;         // get file length
+                    m = new byte[length];               // create buffer
+                    int count;                            // actual number of bytes read
+                    int sum = 0;                          // total number of bytes read
+
+                    // read until Read method returns 0 (end of the stream has been reached)
+                    while ((count = r.Read(m, sum, length - sum)) > 0)
+                        sum += count;  // sum is a buffer offset for next reading
                     r.Close();
                 }
                 return m;// Image.FromFile(m_pictureFolder + name + ".JPEG");
