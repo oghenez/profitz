@@ -76,6 +76,18 @@
     <Compile Include="Forms\FieldChooserForm.Designer.cs">
       <DependentUpon>FieldChooserForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\InventoryTransaction\SearchSupplierInvoiceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SearchSupplierInvoiceForm.Designer.cs">
+      <DependentUpon>SearchSupplierInvoiceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SupplierInvoiceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SupplierInvoiceForm.Designer.cs">
+      <DependentUpon>SupplierInvoiceForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\InventoryTransaction\SearchPurchaseReturnForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -281,6 +293,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\FieldChooserForm.resx">
       <DependentUpon>FieldChooserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\SearchSupplierInvoiceForm.resx">
+      <DependentUpon>SearchSupplierInvoiceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\SupplierInvoiceForm.resx">
+      <DependentUpon>SupplierInvoiceForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\SearchPurchaseReturnForm.resx">
       <DependentUpon>SearchPurchaseReturnForm.cs</DependentUpon>

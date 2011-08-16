@@ -8025,6 +8025,100 @@ INSERT INTO `table_suppliercategory` (`supcat_id`,`supcat_code`,`supcat_name`) V
 
 
 --
+-- Definition of table `table_supplierinvoice`
+--
+
+DROP TABLE IF EXISTS `table_supplierinvoice`;
+CREATE TABLE `table_supplierinvoice` (
+  `si_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `si_date` datetime NOT NULL,
+  `si_noticedate` datetime NOT NULL,
+  `si_scentrytype` varchar(45) NOT NULL,
+  `emp_id` int(10) unsigned NOT NULL,
+  `si_notes` text NOT NULL,
+  `si_posted` tinyint(1) NOT NULL,
+  `si_eventstatus` varchar(45) NOT NULL,
+  `div_id` int(10) unsigned NOT NULL,
+  `top_id` int(10) unsigned NOT NULL,
+  `si_duedate` datetime NOT NULL,
+  `ccy_id` int(10) unsigned NOT NULL,
+  `si_subtotal` double NOT NULL,
+  `si_discpercent` double NOT NULL,
+  `si_discafteramount` double NOT NULL,
+  `si_discamount` double NOT NULL,
+  `tax_id` int(10) unsigned NOT NULL,
+  `si_taxafteramount` double NOT NULL,
+  `si_otherexpense` double NOT NULL,
+  `si_nettotal` double NOT NULL,
+  `si_code` varchar(45) NOT NULL,
+  `sup_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`si_id`),
+  UNIQUE KEY `Index_2` (`sup_id`),
+  KEY `FK_table_supplierinvoice_1` (`emp_id`),
+  KEY `FK_table_supplierinvoice_2` (`div_id`),
+  KEY `FK_table_supplierinvoice_3` (`top_id`),
+  KEY `FK_table_supplierinvoice_4` (`ccy_id`),
+  KEY `FK_table_supplierinvoice_5` (`tax_id`),
+  CONSTRAINT `FK_table_supplierinvoice_1` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`),
+  CONSTRAINT `FK_table_supplierinvoice_2` FOREIGN KEY (`div_id`) REFERENCES `table_division` (`div_id`),
+  CONSTRAINT `FK_table_supplierinvoice_3` FOREIGN KEY (`top_id`) REFERENCES `table_termofpayment` (`top_id`),
+  CONSTRAINT `FK_table_supplierinvoice_4` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
+  CONSTRAINT `FK_table_supplierinvoice_6` FOREIGN KEY (`sup_id`) REFERENCES `table_supplier` (`sup_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_supplierinvoice`
+--
+
+/*!40000 ALTER TABLE `table_supplierinvoice` DISABLE KEYS */;
+/*!40000 ALTER TABLE `table_supplierinvoice` ENABLE KEYS */;
+
+
+--
+-- Definition of table `table_supplierinvoiceitem`
+--
+
+DROP TABLE IF EXISTS `table_supplierinvoiceitem`;
+CREATE TABLE `table_supplierinvoiceitem` (
+  `sii_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `si_id` int(10) unsigned NOT NULL,
+  `part_id` int(10) unsigned NOT NULL,
+  `warehouse_id` int(10) unsigned NOT NULL,
+  `sii_amount` double NOT NULL,
+  `sce_id` int(10) unsigned NOT NULL,
+  `sii_scentrytype` varchar(45) NOT NULL,
+  `sc_id` int(10) unsigned NOT NULL,
+  `unit_id` int(10) unsigned NOT NULL,
+  `sii_price` double NOT NULL,
+  `sii_discpercent` double NOT NULL,
+  `sii_discamount` double NOT NULL,
+  `sii_totaldisc` double NOT NULL,
+  `sii_subtotal` double NOT NULL,
+  `sii_notes` text NOT NULL,
+  `sii_disca` double NOT NULL,
+  `sii_discb` double NOT NULL,
+  `sii_discc` double NOT NULL,
+  `sii_discabc` varchar(45) NOT NULL,
+  PRIMARY KEY (`sii_id`),
+  KEY `FK_table_supplierinvoiceitem_1` (`si_id`),
+  KEY `FK_table_supplierinvoiceitem_2` (`part_id`),
+  KEY `FK_table_supplierinvoiceitem_3` (`warehouse_id`),
+  KEY `FK_table_supplierinvoiceitem_4` (`unit_id`),
+  CONSTRAINT `FK_table_supplierinvoiceitem_1` FOREIGN KEY (`si_id`) REFERENCES `table_supplierinvoice` (`si_id`),
+  CONSTRAINT `FK_table_supplierinvoiceitem_2` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`),
+  CONSTRAINT `FK_table_supplierinvoiceitem_3` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
+  CONSTRAINT `FK_table_supplierinvoiceitem_4` FOREIGN KEY (`unit_id`) REFERENCES `table_unit` (`unit_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_supplierinvoiceitem`
+--
+
+/*!40000 ALTER TABLE `table_supplierinvoiceitem` DISABLE KEYS */;
+/*!40000 ALTER TABLE `table_supplierinvoiceitem` ENABLE KEYS */;
+
+
+--
 -- Definition of table `table_tax`
 --
 

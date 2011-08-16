@@ -39,7 +39,7 @@ namespace Profit
         public const string USER_SETTING_REPOSITORY = "UserSettingRepository";
         public const string GOODRECEIVENOTE_REPOSITORY = "GoodReceiveNoteRepository";
         public const string PURCHASE_RETURN_REPOSITORY = "PurchaseReturnRepository";
-
+        public const string SUPPLIERINVOICE_REPOSITORY = "SupplierInvoiceRepository";
 
 
         public static RepositoryFactory GetInstance()
@@ -80,6 +80,7 @@ namespace Profit
             UserSettingsRepository usRepository = new UserSettingsRepository();
             GoodReceiveNoteRepository grnRepository = new GoodReceiveNoteRepository();
             PurchaseReturnRepository prRepository = new PurchaseReturnRepository();
+            SupplierInvoiceRepository siRepository = new SupplierInvoiceRepository();
 
             m_listService.Add(BANK_REPOSITORY, bankRepository);
             m_listService.Add(CURRENCY_REPOSITORY, ccyRepository);
@@ -108,6 +109,7 @@ namespace Profit
             m_listService.Add(USER_SETTING_REPOSITORY, usRepository);
             m_listService.Add(GOODRECEIVENOTE_REPOSITORY, grnRepository);
             m_listService.Add(PURCHASE_RETURN_REPOSITORY, prRepository);
+            m_listService.Add(SUPPLIERINVOICE_REPOSITORY, siRepository);
 
         }
         public Repository GetRepository(string name)
