@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PurchaseReturnForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonHeader1 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
@@ -61,15 +61,6 @@
             this.employeeKryptonComboBox = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.dateKryptonDateTimePicker = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
             this.itemsDataGrid = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.scanColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OutstandingPOColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
-            this.OutstandingunitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QtyColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
-            this.unitColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
-            this.warehouseColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
-            this.notesColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.dataGridContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.fieldChooserTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBoxCode = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -82,6 +73,15 @@
             this.buttonSpecAny5 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.buttonSpecAny6 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.kryptonContextMenuItems1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
+            this.scanColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OutstandingPOColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.OutstandingunitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QtyColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.unitColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
+            this.warehouseColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
+            this.notesColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -299,17 +299,15 @@
             // 
             // notesKryptonTextBox
             // 
-            this.notesKryptonTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.notesKryptonTextBox.Location = new System.Drawing.Point(61, 292);
+            this.notesKryptonTextBox.Location = new System.Drawing.Point(410, 32);
             this.notesKryptonTextBox.Multiline = true;
             this.notesKryptonTextBox.Name = "notesKryptonTextBox";
-            this.notesKryptonTextBox.Size = new System.Drawing.Size(794, 19);
+            this.notesKryptonTextBox.Size = new System.Drawing.Size(338, 64);
             this.notesKryptonTextBox.TabIndex = 5;
             // 
             // kryptonLabel7
             // 
-            this.kryptonLabel7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.kryptonLabel7.Location = new System.Drawing.Point(10, 292);
+            this.kryptonLabel7.Location = new System.Drawing.Point(359, 29);
             this.kryptonLabel7.Name = "kryptonLabel7";
             this.kryptonLabel7.Size = new System.Drawing.Size(45, 19);
             this.kryptonLabel7.TabIndex = 20;
@@ -381,108 +379,10 @@
             this.itemsDataGrid.ContextMenuStrip = this.dataGridContextMenuStrip;
             this.itemsDataGrid.GridStyles.Style = ComponentFactory.Krypton.Toolkit.DataGridViewStyle.Mixed;
             this.itemsDataGrid.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.GridDataCellList;
-            this.itemsDataGrid.Location = new System.Drawing.Point(12, 102);
+            this.itemsDataGrid.Location = new System.Drawing.Point(7, 102);
             this.itemsDataGrid.Name = "itemsDataGrid";
-            this.itemsDataGrid.Size = new System.Drawing.Size(843, 184);
+            this.itemsDataGrid.Size = new System.Drawing.Size(852, 215);
             this.itemsDataGrid.TabIndex = 4;
-            // 
-            // scanColumn
-            // 
-            this.scanColumn.HeaderText = "PO No. / Cari";
-            this.scanColumn.Name = "scanColumn";
-            // 
-            // codeColumn
-            // 
-            this.codeColumn.HeaderText = "Code";
-            this.codeColumn.Name = "codeColumn";
-            this.codeColumn.ReadOnly = true;
-            this.codeColumn.Width = 80;
-            // 
-            // nameColumn
-            // 
-            this.nameColumn.HeaderText = "Name";
-            this.nameColumn.Name = "nameColumn";
-            this.nameColumn.ReadOnly = true;
-            this.nameColumn.Width = 300;
-            // 
-            // OutstandingPOColumn
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.NullValue = "0";
-            this.OutstandingPOColumn.DefaultCellStyle = dataGridViewCellStyle3;
-            this.OutstandingPOColumn.HeaderText = "O/S Qty";
-            this.OutstandingPOColumn.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.OutstandingPOColumn.Maximum = new decimal(new int[] {
-            10000000,
-            0,
-            0,
-            0});
-            this.OutstandingPOColumn.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.OutstandingPOColumn.Name = "OutstandingPOColumn";
-            this.OutstandingPOColumn.ReadOnly = true;
-            this.OutstandingPOColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.OutstandingPOColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.OutstandingPOColumn.Width = 50;
-            // 
-            // OutstandingunitColumn
-            // 
-            this.OutstandingunitColumn.HeaderText = "O/S Unit";
-            this.OutstandingunitColumn.Name = "OutstandingunitColumn";
-            this.OutstandingunitColumn.ReadOnly = true;
-            this.OutstandingunitColumn.Width = 60;
-            // 
-            // QtyColumn
-            // 
-            dataGridViewCellStyle4.NullValue = "0";
-            this.QtyColumn.DefaultCellStyle = dataGridViewCellStyle4;
-            this.QtyColumn.HeaderText = "Qty";
-            this.QtyColumn.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.QtyColumn.Maximum = new decimal(new int[] {
-            10000000,
-            0,
-            0,
-            0});
-            this.QtyColumn.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.QtyColumn.Name = "QtyColumn";
-            this.QtyColumn.Width = 50;
-            // 
-            // unitColumn
-            // 
-            this.unitColumn.DropDownWidth = 121;
-            this.unitColumn.HeaderText = "Unit";
-            this.unitColumn.Name = "unitColumn";
-            this.unitColumn.Width = 50;
-            // 
-            // warehouseColumn
-            // 
-            this.warehouseColumn.DropDownWidth = 121;
-            this.warehouseColumn.HeaderText = "Warehouse";
-            this.warehouseColumn.Name = "warehouseColumn";
-            this.warehouseColumn.Width = 70;
-            // 
-            // notesColumn
-            // 
-            this.notesColumn.HeaderText = "Notes";
-            this.notesColumn.Name = "notesColumn";
-            this.notesColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.notesColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.notesColumn.Width = 100;
             // 
             // dataGridContextMenuStrip
             // 
@@ -549,6 +449,104 @@
             this.buttonSpecAny6.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny6.UniqueName = "95BED338EBB14361B2927C3CB003454A";
             // 
+            // scanColumn
+            // 
+            this.scanColumn.HeaderText = "GRN No. / Cari";
+            this.scanColumn.Name = "scanColumn";
+            // 
+            // codeColumn
+            // 
+            this.codeColumn.HeaderText = "Code";
+            this.codeColumn.Name = "codeColumn";
+            this.codeColumn.ReadOnly = true;
+            this.codeColumn.Width = 80;
+            // 
+            // nameColumn
+            // 
+            this.nameColumn.HeaderText = "Name";
+            this.nameColumn.Name = "nameColumn";
+            this.nameColumn.ReadOnly = true;
+            this.nameColumn.Width = 300;
+            // 
+            // OutstandingPOColumn
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.NullValue = "0";
+            this.OutstandingPOColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            this.OutstandingPOColumn.HeaderText = "O/S Qty";
+            this.OutstandingPOColumn.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.OutstandingPOColumn.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.OutstandingPOColumn.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.OutstandingPOColumn.Name = "OutstandingPOColumn";
+            this.OutstandingPOColumn.ReadOnly = true;
+            this.OutstandingPOColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.OutstandingPOColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.OutstandingPOColumn.Width = 50;
+            // 
+            // OutstandingunitColumn
+            // 
+            this.OutstandingunitColumn.HeaderText = "O/S Unit";
+            this.OutstandingunitColumn.Name = "OutstandingunitColumn";
+            this.OutstandingunitColumn.ReadOnly = true;
+            this.OutstandingunitColumn.Width = 60;
+            // 
+            // QtyColumn
+            // 
+            dataGridViewCellStyle2.NullValue = "0";
+            this.QtyColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.QtyColumn.HeaderText = "Qty";
+            this.QtyColumn.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.QtyColumn.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.QtyColumn.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.QtyColumn.Name = "QtyColumn";
+            this.QtyColumn.Width = 50;
+            // 
+            // unitColumn
+            // 
+            this.unitColumn.DropDownWidth = 121;
+            this.unitColumn.HeaderText = "Unit";
+            this.unitColumn.Name = "unitColumn";
+            this.unitColumn.Width = 50;
+            // 
+            // warehouseColumn
+            // 
+            this.warehouseColumn.DropDownWidth = 121;
+            this.warehouseColumn.HeaderText = "Warehouse";
+            this.warehouseColumn.Name = "warehouseColumn";
+            this.warehouseColumn.Width = 70;
+            // 
+            // notesColumn
+            // 
+            this.notesColumn.HeaderText = "Notes";
+            this.notesColumn.Name = "notesColumn";
+            this.notesColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.notesColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.notesColumn.Width = 100;
+            // 
             // PurchaseReturnForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -560,9 +558,9 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "PurchaseReturnForm";
             this.Text = "Purchase Return";
-            this.Load += new System.EventHandler(this.PurchaseOrderForm_Load);
+            this.Load += new System.EventHandler(this.PurchaseReturnForm_Load);
             this.Activated += new System.EventHandler(this.BankForm_Activated);
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PurchaseOrderForm_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PurchaseReturnrForm_FormClosing);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
