@@ -61,4 +61,22 @@ namespace Profit.Server
         Manual,
         Auto
     }
+    public enum VendorBalanceEntryType
+    {
+        SupplierOutStandingInvoice,
+        CustomerOutStandingInvoice,
+        SupplierInvoice,
+        CustomerInvoice,
+        Payment,
+        Receipt,
+        APCreditNote,
+        APDebitNote,
+        ARCreditNote,
+        ARDebitNote
+    }
+    public enum VendorBalanceType
+    {
+        Supplier,
+        Customer,
+    }
 }

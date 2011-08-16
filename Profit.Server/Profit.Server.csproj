@@ -52,7 +52,10 @@
     <Compile Include="Entity\Bank.cs" />
     <Compile Include="Entity\FormAccess.cs" />
     <Compile Include="Entity\GeneralSetup.cs" />
+    <Compile Include="Entity\InvoiceTransaction\EventJournal.cs" />
+    <Compile Include="Entity\InvoiceTransaction\EventJournalItem.cs" />
     <Compile Include="Entity\InvoiceTransaction\VendorBalance.cs" />
+    <Compile Include="Entity\InvoiceTransaction\VendorBalanceEntry.cs" />
     <Compile Include="Entity\StockCardInfo.cs" />
     <Compile Include="Entity\Transaction\SupplierInvoiceItem.cs" />
     <Compile Include="Entity\Transaction\SupplierInvoice.cs" />
