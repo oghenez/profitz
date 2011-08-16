@@ -39,6 +39,7 @@ namespace Profit
         const string PURCHASE_ORDER_FORM = "PurchaseOrderForm";
         const string GOOD_RECEIVE_NOTE_FORM = "GoodReceiveNoteForm";
         const string PURCHASE_RETURN_FORM = "PurchaseReturnForm";
+        const string SUPPLIER_INVOICE_FORM = "SupplierInvoiceForm";
 
         IList m_listForm = new ArrayList();
         User m_currentUser = null;
@@ -225,6 +226,13 @@ namespace Profit
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
+            if (e.Node.Name == "NodeSupplierInvoice")
+            {
+                if (isChild(SUPPLIER_INVOICE_FORM)) { this.Cursor = Cursors.Default; return; }
+                SupplierInvoiceForm user = new SupplierInvoiceForm(this, SUPPLIER_INVOICE_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            }
             this.Cursor = Cursors.Default;
         }
         bool isChild(string name)
@@ -404,6 +412,7 @@ namespace Profit
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PURCHASE_ORDER_FORM)) purchaseTreeView.Nodes["NodePurchaseOrder"].Remove();
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(GOOD_RECEIVE_NOTE_FORM)) purchaseTreeView.Nodes["NodeGoodReceiveNote"].Remove();
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PURCHASE_RETURN_FORM)) purchaseTreeView.Nodes["NodePurchaseReturn"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(SUPPLIER_INVOICE_FORM)) purchaseTreeView.Nodes["NodeSupplierInvoice"].Remove();
 
 
             inventoryKryptonHeader.Visible = inventoryTreeView.Visible = inventoryTreeView.Nodes.Count > 0;
@@ -498,8 +507,8 @@ namespace Profit
             m_listForm.Add(new FormAccess(0, MainForm.GENERALSETUP_FORM.ToString(), "GSTP002 - General Setup"));
             m_listForm.Add(new FormAccess(0, MainForm.PURCHASE_ORDER_FORM.ToString(), "TRCP001 - Purchase Order"));
             m_listForm.Add(new FormAccess(0, MainForm.GOOD_RECEIVE_NOTE_FORM.ToString(), "TRCP002 - Good Receive Note"));
+            m_listForm.Add(new FormAccess(0, MainForm.SUPPLIER_INVOICE_FORM.ToString(), "TRCP003 - Supplier Invoice"));
             m_listForm.Add(new FormAccess(0, MainForm.PURCHASE_RETURN_FORM.ToString(), "TRCP005 - Purchase Return"));
-
         }
 
         private void userMaintenanceToolStripMenuItem_Click(object sender, EventArgs e)

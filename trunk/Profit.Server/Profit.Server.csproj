@@ -52,7 +52,11 @@
     <Compile Include="Entity\Bank.cs" />
     <Compile Include="Entity\FormAccess.cs" />
     <Compile Include="Entity\GeneralSetup.cs" />
+    <Compile Include="Entity\InvoiceTransaction\VendorBalance.cs" />
     <Compile Include="Entity\StockCardInfo.cs" />
+    <Compile Include="Entity\Transaction\SupplierInvoiceItem.cs" />
+    <Compile Include="Entity\Transaction\SupplierInvoice.cs" />
+    <Compile Include="Entity\Vendor.cs" />
     <Compile Include="Entity\User.cs" />
     <Compile Include="Entity\PartSellingPriceInformation.cs" />
     <Compile Include="Entity\Transaction\SalesReturnItem.cs" />
@@ -98,6 +102,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Repository\AutoNumberSetupRepository.cs" />
+    <Compile Include="Repository\SupplierInvoiceRepository.cs" />
     <Compile Include="Repository\GeneralSetupRepository.cs" />
     <Compile Include="Repository\SalesReturnRepository.cs" />
     <Compile Include="Repository\DeliveryOrderRepository.cs" />
