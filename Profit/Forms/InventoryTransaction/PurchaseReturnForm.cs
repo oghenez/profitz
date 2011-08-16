@@ -148,6 +148,28 @@ namespace Profit
                     m_poItems = res;
                 }
             }
+            if (QtyColumn.Index == e.ColumnIndex)
+            {
+                GoodReceiveNoteItem pi = (GoodReceiveNoteItem)itemsDataGrid[scanColumn.Index, e.RowIndex].Tag;
+                if (pi == null) return;
+                Part p = (Part)itemsDataGrid[codeColumn.Index, e.RowIndex].Tag;
+                if (p == null) return;
+                Unit u = (Unit)Utils.FindEntityInList(itemsDataGrid[unitColumn.Index, e.RowIndex].Value.ToString(), m_units);
+                if (u == null) return;
+                p.UNIT_CONVERSION_LIST = r_part.GetAllUnit(p.ID, p.UNIT.ID);
+                PurchaseReturnItem sample = new PurchaseReturnItem();
+                sample.PART = p;
+                sample.UNIT = u;
+                sample.QYTAMOUNT = Convert.ToDouble(e.FormattedValue);
+                double qty = sample.GetAmountInSmallestUnit();
+                double rest = pi.OUTSTANDING_AMOUNT_TO_PR - qty;
+                if (rest < 0)
+                {
+                    e.Cancel = true;
+                    itemsDataGrid.Rows[e.RowIndex].ErrorText = "Quantity exceed outstanding quantity";
+                }
+                itemsDataGrid[OutstandingPOColumn.Index, e.RowIndex].Value = rest;
+            }
         }
         private void InitializeDataSource()
         {
@@ -246,12 +268,10 @@ namespace Profit
             int j = 0;
             for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
             {
+                GoodReceiveNoteItem pi = (GoodReceiveNoteItem)itemsDataGrid[scanColumn.Index, i].Tag;
+                if (pi == null) continue;
                 Part p = (Part)itemsDataGrid[codeColumn.Index, i].Tag;
-              //  if (dataItemskryptonDataGridView[unitColumn.Index, i].Value == null)
-              //      continue;
-               // Unit u = (Unit)Utils.FindEntityInList(dataItemskryptonDataGridView[unitColumn.Index, i].Value.ToString(), m_units);
-                if (p == null)
-                    continue;
+                if (p == null) continue;
                 if (itemsDataGrid[unitColumn.Index, i].Value == null)
                 {
                     itemsDataGrid.Rows[i].ErrorText = "Please choose unit.";
@@ -292,17 +312,13 @@ namespace Profit
             for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
             {
                 GoodReceiveNoteItem poi = (GoodReceiveNoteItem)itemsDataGrid[scanColumn.Index, i].Tag;
-                if (poi == null)
-                    continue;
+                if (poi == null) continue;
                 Part p = (Part)itemsDataGrid[codeColumn.Index, i].Tag;
-                if (itemsDataGrid[unitColumn.Index, i].Value == null)
-                    continue;
+                if (itemsDataGrid[unitColumn.Index, i].Value == null) continue;
                 Unit u = (Unit)Utils.FindEntityInList(itemsDataGrid[unitColumn.Index, i].Value.ToString(), m_units);
-                if ((p == null) || (u == null))
-                    continue;
+                if ((p == null) || (u == null)) continue;
                 PurchaseReturnItem st=(PurchaseReturnItem)itemsDataGrid.Rows[i].Tag;
-                if(st==null)
-                    st = new PurchaseReturnItem();
+                if(st==null) st = new PurchaseReturnItem();
                 itemsDataGrid.Rows[i].Tag = st;
                 st.EVENT = m_prn;
                 st.PART = p;
@@ -503,12 +519,12 @@ namespace Profit
             cm.ShowDialog();
         }
 
-        private void PurchaseOrderForm_Load(object sender, EventArgs e)
+        private void PurchaseReturnForm_Load(object sender, EventArgs e)
         {
             UserSetting.LoadSetting(itemsDataGrid, m_mainForm.CurrentUser.ID, this.Name);
         }
 
-        private void PurchaseOrderForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void PurchaseReturnrForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             UserSetting.SaveSetting(itemsDataGrid, m_mainForm.CurrentUser.ID, this.Name);
         }
