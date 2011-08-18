@@ -38,7 +38,7 @@ CREATE TABLE `table_autonumbersetup` (
   `ans_istransaction` tinyint(1) NOT NULL,
   PRIMARY KEY (`ans_id`),
   UNIQUE KEY `Index_2` (`ans_entity`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_autonumbersetup`
@@ -49,7 +49,8 @@ INSERT INTO `table_autonumbersetup` (`ans_id`,`ans_entity`,`ans_formcode`,`ans_p
  (1,'StockTaking','TRCI001 - Stock Taking','PMST/#/MM/yyyy',1,3,'Yearly','Auto',1),
  (2,'PurchaseOrder','TRCP001 - Purchase','PMPO/#/MM/yyyy',1,3,'Yearly','Auto',1),
  (3,'GoodReceiveNote','TRCP002 - Good Receive Note','GRN#/MM/yyyy',1,3,'Yearly','Auto',1),
- (4,'PurchaseReturn','TRCP003 - Purchase Return','PR#/MM/yyyy',1,3,'Monthly','Auto',1);
+ (4,'PurchaseReturn','TRCP003 - Purchase Return','PR#/MM/yyyy',1,3,'Monthly','Auto',1),
+ (5,'SupplierInvoice','TRCP003 - Supplier Invoice','SP#/MM/yyyy',1,3,'Yearly','Auto',1);
 /*!40000 ALTER TABLE `table_autonumbersetup` ENABLE KEYS */;
 
 
@@ -384,7 +385,7 @@ CREATE TABLE `table_formaccess` (
   PRIMARY KEY (`formaccess_id`) USING BTREE,
   KEY `FK_table_formaccess_1` (`user_id`),
   CONSTRAINT `FK_table_formaccess_1` FOREIGN KEY (`user_id`) REFERENCES `table_user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_formaccess`
@@ -418,7 +419,8 @@ INSERT INTO `table_formaccess` (`formaccess_id`,`formaccess_code`,`formaccess_na
  (26,'GeneralSetupForm','GSTP002 - General Setup',1,1,1,1,1,1),
  (27,'PurchaseOrderForm','TRCP001 - Purchase Order',1,1,1,1,1,1),
  (28,'GoodReceiveNoteForm','TRCP002 - Good Receive Note',1,1,1,1,1,1),
- (29,'PurchaseReturnForm','TRCP005 - Purchase Return',1,1,1,1,1,1);
+ (29,'PurchaseReturnForm','TRCP005 - Purchase Return',1,1,1,1,1,1),
+ (30,'SupplierInvoiceForm','TRCP003 - Supplier Invoice',1,1,1,1,1,1);
 /*!40000 ALTER TABLE `table_formaccess` ENABLE KEYS */;
 
 
@@ -1633,7 +1635,7 @@ INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_
  (10094,'196','SILVER Q 33G*30*12 F NUT',1,'8991001111319','MovingAverage','0',7,'0','0','0',2,6,'0',0,1,''),
  (10095,'197','SILVER Q 35G*8*24 CRUNCH',1,'8991001111784','MovingAverage','0',7,'0','0','0',2,6,'0',0,1,''),
  (10096,'198','SILVER Q 39G*24*12 CHUNKY CASHEWS',1,'8991001111586','MovingAverage','0',7,'0','0','0',2,6,'0',0,1,''),
- (10097,'199','SILVER Q 39G*24*12 CHUNKY FRUIT&NUT',1,'8991001111593','MovingAverage','0',7,'0','0','0',2,6,'0',0,1,''),
+ (10097,'199','SILVER Q 39G*24*12 CHUNKY FRUIT&NUT',1,'8991001111593','MovingAverage','0',7,'0','0','0',2,6,'0',0,1,'199'),
  (10098,'200','SILVER Q 54G*24*4 CARAMEL',1,'8991001260079','MovingAverage','0',7,'0','0','0',2,6,'0',0,1,''),
  (10099,'201','SILVER Q 60G*50*4 CRISPY',1,'8991001111692','MovingAverage','0',7,'0','0','0',2,6,'0',0,1,''),
  (10100,'202','SILVER Q 68G*24*8 ALMOND',1,'8991001121400','MovingAverage','0',7,'0','0','0',2,6,'0',0,1,''),
@@ -7641,7 +7643,7 @@ CREATE TABLE `table_stockcard` (
   CONSTRAINT `FK_table_stockcard_1` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`),
   CONSTRAINT `FK_table_stockcard_2` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
   CONSTRAINT `FK_table_stockcard_3` FOREIGN KEY (`period_id`) REFERENCES `table_period` (`period_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_stockcard`
@@ -7694,7 +7696,11 @@ INSERT INTO `table_stockcard` (`sc_id`,`part_id`,`warehouse_id`,`period_id`,`sc_
  (45,9442,2,20,1,0,0),
  (46,9403,2,20,10,0,0),
  (47,15492,1,20,0,10,0),
- (48,15493,1,20,0,10,0);
+ (48,15493,1,20,0,10,0),
+ (49,10097,1,20,0,0,0),
+ (50,11035,1,20,10,0,0),
+ (51,10199,1,20,10,0,0),
+ (52,10097,2,20,10,0,0);
 /*!40000 ALTER TABLE `table_stockcard` ENABLE KEYS */;
 
 
@@ -7716,7 +7722,7 @@ CREATE TABLE `table_stockcardentry` (
   KEY `FK_table_stockcardentry_2` (`sc_id`),
   CONSTRAINT `FK_table_stockcardentry_1` FOREIGN KEY (`unit_id`) REFERENCES `table_unit` (`unit_id`),
   CONSTRAINT `FK_table_stockcardentry_2` FOREIGN KEY (`sc_id`) REFERENCES `table_stockcard` (`sc_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_stockcardentry`
@@ -7791,7 +7797,10 @@ INSERT INTO `table_stockcardentry` (`sce_id`,`sc_id`,`sce_stockcardentrytype`,`s
  (108,27,'PurchaseReturn','2011-08-13 00:00:00',1,115,15),
  (109,28,'PurchaseReturn','2011-08-13 00:00:00',1,4,16),
  (110,47,'PurchaseOrder','2011-08-15 00:00:00',1,10,31),
- (111,48,'PurchaseOrder','2011-08-15 00:00:00',1,10,32);
+ (111,48,'PurchaseOrder','2011-08-15 00:00:00',1,10,32),
+ (115,52,'SupplierInvoice','2011-08-16 00:00:00',1,10,1),
+ (116,50,'SupplierInvoice','2011-08-16 00:00:00',1,10,2),
+ (117,51,'SupplierInvoice','2011-08-16 00:00:00',1,10,3);
 /*!40000 ALTER TABLE `table_stockcardentry` ENABLE KEYS */;
 
 
@@ -8064,13 +8073,15 @@ CREATE TABLE `table_supplierinvoice` (
   CONSTRAINT `FK_table_supplierinvoice_3` FOREIGN KEY (`top_id`) REFERENCES `table_termofpayment` (`top_id`),
   CONSTRAINT `FK_table_supplierinvoice_4` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_supplierinvoice_6` FOREIGN KEY (`sup_id`) REFERENCES `table_supplier` (`sup_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_supplierinvoice`
 --
 
 /*!40000 ALTER TABLE `table_supplierinvoice` DISABLE KEYS */;
+INSERT INTO `table_supplierinvoice` (`si_id`,`si_date`,`si_noticedate`,`si_scentrytype`,`emp_id`,`si_notes`,`si_posted`,`si_eventstatus`,`div_id`,`top_id`,`si_duedate`,`ccy_id`,`si_subtotal`,`si_discpercent`,`si_discafteramount`,`si_discamount`,`tax_id`,`si_taxafteramount`,`si_otherexpense`,`si_nettotal`,`si_code`,`sup_id`) VALUES 
+ (1,'2011-08-16 00:00:00','2011-08-16 00:00:00','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-08-16 00:00:00',1,369941.5,10,36994.15,0,2,50474.82,-0.17,383422,'SP001/08/2011',1);
 /*!40000 ALTER TABLE `table_supplierinvoice` ENABLE KEYS */;
 
 
@@ -8108,13 +8119,17 @@ CREATE TABLE `table_supplierinvoiceitem` (
   CONSTRAINT `FK_table_supplierinvoiceitem_2` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`),
   CONSTRAINT `FK_table_supplierinvoiceitem_3` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
   CONSTRAINT `FK_table_supplierinvoiceitem_4` FOREIGN KEY (`unit_id`) REFERENCES `table_unit` (`unit_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_supplierinvoiceitem`
 --
 
 /*!40000 ALTER TABLE `table_supplierinvoiceitem` DISABLE KEYS */;
+INSERT INTO `table_supplierinvoiceitem` (`sii_id`,`si_id`,`part_id`,`warehouse_id`,`sii_amount`,`sce_id`,`sii_scentrytype`,`sc_id`,`unit_id`,`sii_price`,`sii_discpercent`,`sii_discamount`,`sii_totaldisc`,`sii_subtotal`,`sii_notes`,`sii_disca`,`sii_discb`,`sii_discc`,`sii_discabc`) VALUES 
+ (1,1,10097,2,10,0,'SupplierInvoice',0,1,15000,10,1000,2946,120545,'',1,2,3,'1+2+3'),
+ (2,1,11035,1,10,0,'SupplierInvoice',0,1,12570,10,1000,2630,99397,'',1,2,3,'1+2+3'),
+ (3,1,10199,1,10,0,'SupplierInvoice',0,1,15000,0,0,0,150000,'',0,0,0,'');
 /*!40000 ALTER TABLE `table_supplierinvoiceitem` ENABLE KEYS */;
 
 
@@ -8216,7 +8231,7 @@ CREATE TABLE `table_unitconversion` (
   KEY `FK_table_unitconversion_2` (`part_id`),
   CONSTRAINT `FK_table_unitconversion_1` FOREIGN KEY (`unitconv_unit`) REFERENCES `table_unit` (`unit_id`),
   CONSTRAINT `FK_table_unitconversion_2` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_unitconversion`
@@ -8263,7 +8278,7 @@ CREATE TABLE `table_user` (
 
 /*!40000 ALTER TABLE `table_user` DISABLE KEYS */;
 INSERT INTO `table_user` (`user_id`,`user_code`,`user_name`,`user_password`,`user_active`) VALUES 
- (1,'ADMIN','Administrator','ZNv5bdqJpAO2th1ufkkUIA==',1),
+ (1,'ADMIN','Administrator','9Fs/gE6FeMlsjXp7s1qaCg==',1),
  (10,'TEST','test','h8hJDUbluugJhS5FrEL6ZA==',0);
 /*!40000 ALTER TABLE `table_user` ENABLE KEYS */;
 
@@ -8282,7 +8297,7 @@ CREATE TABLE `table_usersettings` (
   PRIMARY KEY (`us_id`),
   KEY `FK_table_usersettings_1` (`user_id`),
   CONSTRAINT `FK_table_usersettings_1` FOREIGN KEY (`user_id`) REFERENCES `table_user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=202 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=228 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_usersettings`
@@ -8438,8 +8453,89 @@ INSERT INTO `table_usersettings` (`us_id`,`user_id`,`us_name`,`us_value`,`us_typ
  (198,1,'SearchGRNForPRFormunitColumnWidth','100','System.Int32'),
  (199,1,'SearchGRNForPRFormunitColumnVisible','True','System.Boolean'),
  (200,1,'SearchGRNForPRFormwarehouseColumnWidth','100','System.Int32'),
- (201,1,'SearchGRNForPRFormwarehouseColumnVisible','True','System.Boolean');
+ (201,1,'SearchGRNForPRFormwarehouseColumnVisible','True','System.Boolean'),
+ (202,1,'SupplierInvoiceFormscanColumnWidth','100','System.Int32'),
+ (203,1,'SupplierInvoiceFormscanColumnVisible','True','System.Boolean'),
+ (204,1,'SupplierInvoiceFormcodeColumnWidth','80','System.Int32'),
+ (205,1,'SupplierInvoiceFormcodeColumnVisible','True','System.Boolean'),
+ (206,1,'SupplierInvoiceFormnameColumnWidth','230','System.Int32'),
+ (207,1,'SupplierInvoiceFormnameColumnVisible','True','System.Boolean'),
+ (208,1,'SupplierInvoiceFormQtyColumnWidth','32','System.Int32'),
+ (209,1,'SupplierInvoiceFormQtyColumnVisible','True','System.Boolean'),
+ (210,1,'SupplierInvoiceFormunitColumnWidth','34','System.Int32'),
+ (211,1,'SupplierInvoiceFormunitColumnVisible','True','System.Boolean'),
+ (212,1,'SupplierInvoiceFormpriceColumnWidth','65','System.Int32'),
+ (213,1,'SupplierInvoiceFormpriceColumnVisible','True','System.Boolean'),
+ (214,1,'SupplierInvoiceFormdiscpercentColumnWidth','50','System.Int32'),
+ (215,1,'SupplierInvoiceFormdiscpercentColumnVisible','True','System.Boolean'),
+ (216,1,'SupplierInvoiceFormdiscAmountColumnWidth','68','System.Int32'),
+ (217,1,'SupplierInvoiceFormdiscAmountColumnVisible','False','System.Boolean'),
+ (218,1,'SupplierInvoiceFormdiscabcColumnWidth','56','System.Int32'),
+ (219,1,'SupplierInvoiceFormdiscabcColumnVisible','False','System.Boolean'),
+ (220,1,'SupplierInvoiceFormtotalDiscColumnWidth','64','System.Int32'),
+ (221,1,'SupplierInvoiceFormtotalDiscColumnVisible','True','System.Boolean'),
+ (222,1,'SupplierInvoiceFormtotalAmountColumnWidth','86','System.Int32'),
+ (223,1,'SupplierInvoiceFormtotalAmountColumnVisible','True','System.Boolean'),
+ (224,1,'SupplierInvoiceFormwarehouseColumnWidth','39','System.Int32'),
+ (225,1,'SupplierInvoiceFormwarehouseColumnVisible','True','System.Boolean'),
+ (226,1,'SupplierInvoiceFormnotesColumnWidth','50','System.Int32'),
+ (227,1,'SupplierInvoiceFormnotesColumnVisible','True','System.Boolean');
 /*!40000 ALTER TABLE `table_usersettings` ENABLE KEYS */;
+
+
+--
+-- Definition of table `table_vendorbalance`
+--
+
+DROP TABLE IF EXISTS `table_vendorbalance`;
+CREATE TABLE `table_vendorbalance` (
+  `vb_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `vb_vendorbalancetype` varchar(45) NOT NULL,
+  `period_id` int(10) unsigned NOT NULL,
+  `vendor_id` int(10) unsigned NOT NULL,
+  `ccy_id` int(10) unsigned NOT NULL,
+  `vb_balance` double NOT NULL,
+  PRIMARY KEY (`vb_id`),
+  KEY `FK_table_vendorbalance_1` (`period_id`),
+  KEY `FK_table_vendorbalance_2` (`ccy_id`),
+  CONSTRAINT `FK_table_vendorbalance_1` FOREIGN KEY (`period_id`) REFERENCES `table_period` (`period_id`),
+  CONSTRAINT `FK_table_vendorbalance_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_vendorbalance`
+--
+
+/*!40000 ALTER TABLE `table_vendorbalance` DISABLE KEYS */;
+/*!40000 ALTER TABLE `table_vendorbalance` ENABLE KEYS */;
+
+
+--
+-- Definition of table `table_vendorbalanceentry`
+--
+
+DROP TABLE IF EXISTS `table_vendorbalanceentry`;
+CREATE TABLE `table_vendorbalanceentry` (
+  `vbe_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `vb_id` int(10) unsigned NOT NULL,
+  `vbe_vendorbalanceentrytype` varchar(45) NOT NULL,
+  `vbe_date` datetime NOT NULL,
+  `ccy_id` int(10) unsigned NOT NULL,
+  `vbe_amount` double NOT NULL,
+  `eventjournalitem_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`vbe_id`),
+  KEY `FK_table_vendorbalanceentry_1` (`vb_id`),
+  KEY `FK_table_vendorbalanceentry_2` (`ccy_id`),
+  CONSTRAINT `FK_table_vendorbalanceentry_1` FOREIGN KEY (`vb_id`) REFERENCES `table_vendorbalance` (`vb_id`),
+  CONSTRAINT `FK_table_vendorbalanceentry_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_vendorbalanceentry`
+--
+
+/*!40000 ALTER TABLE `table_vendorbalanceentry` DISABLE KEYS */;
+/*!40000 ALTER TABLE `table_vendorbalanceentry` ENABLE KEYS */;
 
 
 --
