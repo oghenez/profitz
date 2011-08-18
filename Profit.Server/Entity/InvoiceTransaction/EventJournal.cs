@@ -51,7 +51,7 @@ namespace Profit.Server
             CODE = code;
         }
 
-        public string GetInsertSQL()
+        public virtual string GetInsertSQL()
         {
             throw new NotImplementedException();
         }
@@ -61,7 +61,7 @@ namespace Profit.Server
             throw new NotImplementedException();
         }
 
-        public string GetUpdateSQL()
+        public virtual string GetUpdateSQL()
         {
             throw new NotImplementedException();
         }
