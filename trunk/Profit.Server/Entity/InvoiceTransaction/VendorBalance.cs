@@ -7,7 +7,7 @@ using System.Data.Odbc;
 
 namespace Profit.Server
 {
-    public class VendorBalance //: IEntity
+    public class VendorBalance : IEntity
     {
         public int ID = 0;
         public VendorBalanceType VENDOR_BALANCE_TYPE = VendorBalanceType.Supplier;
@@ -156,11 +156,11 @@ namespace Profit.Server
                 BALANCE, 
                 ID);
         }
-        public static string GetByIDSQL(int ID)
+        public static string GetByIDSQLStatic(int ID)
         {
             return String.Format("select * from table_vendorbalance where vb_id = {0}", ID);
         }
-        public static string GetAllSQL()
+        public static string GetAllSQLStatic()
         {
             return String.Format("select * from table_vendorbalance");
         }
@@ -207,5 +207,84 @@ namespace Profit.Server
             return String.Format("SELECT * from table_vendorbalance where period_id = {0} and vendor_id = {1} and vb_vendorbalancetype ='{2}'", 
                 period, vendor,t.ToString());
         }
+
+        #region IEntity Members
+
+        public int GetID()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetID(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetCode()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetCode(string code)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetByCodeSQL(string code)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetMaximumIDSQL()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetByCodeLikeSQL(string text)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetByNameLikeSQL(string text)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEntity Get(OdbcDataReader aReader)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IList GetAll(OdbcDataReader aReader)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetConcatSearch(string find)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region IEntity Members
+
+
+        public string GetAllSQL()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region IEntity Members
+
+
+        public string GetByIDSQL(int ID)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

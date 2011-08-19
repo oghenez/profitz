@@ -9,7 +9,10 @@ namespace Profit.Server
 {
     public class SupplierOutStandingInvoiceItem : EventJournalItem
     {
-        public SupplierOutStandingInvoiceItem() : base() { }
+        public SupplierOutStandingInvoiceItem() : base()
+        {
+            VENDOR_BALANCE_TYPE = VendorBalanceType.Supplier;
+        }
         public override string GetInsertSQL()
         {
             return String.Format(@"insert into table_supplieroutstandinginvoiceitem 
