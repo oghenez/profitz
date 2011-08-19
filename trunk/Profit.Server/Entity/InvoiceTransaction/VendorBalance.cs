@@ -19,11 +19,12 @@ namespace Profit.Server
 
         public VendorBalance() : base() { }
         public VendorBalance(int id) { ID = id; }
-        public VendorBalance(Period period, Vendor vendor, Currency currency)
+        public VendorBalance(Period period, Vendor vendor, Currency currency, VendorBalanceType type)
         {
             PERIOD = period;
             VENDOR = vendor;
             CURRENCY = currency;
+            VENDOR_BALANCE_TYPE = type;
         }
         public void ProcessPosting(EventJournalItem eventItem)
         {
@@ -115,8 +116,8 @@ namespace Profit.Server
                 throw new Exception(" Vendor Balance : not same Currency ");
         }
         public static VendorBalance CreateVendorBalance(EventJournalItem item, Period period)
-        {
-            return new VendorBalance(period, item.VENDOR, item.CURRENCY);
+        {//
+            return new VendorBalance(period, item.VENDOR, item.CURRENCY, item.VENDOR_BALANCE_TYPE);
         }
         public string GetInsertSQL()
         {
@@ -147,12 +148,12 @@ namespace Profit.Server
                 period_id = {1},
                 vendor_id = {2},
                 ccy_id = {3},
-                vb_balance = {4},
+                vb_balance = {4}
                 where vb_id = {5}",
                 VENDOR_BALANCE_TYPE.ToString(), 
                 PERIOD.ID, 
                 VENDOR.ID, 
-                CURRENCY, 
+                CURRENCY.ID, 
                 BALANCE, 
                 ID);
         }

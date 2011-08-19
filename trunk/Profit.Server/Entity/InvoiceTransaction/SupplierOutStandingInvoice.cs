@@ -188,7 +188,7 @@ namespace Profit.Server
         }
         public static string FindLastCodeAndTransactionDate(string code)
         {
-            return String.Format(@"select * from table_supplieroutstandinginvoice p where p.sosti_code like '%{0}%' ORDER BY p.prn_id DESC", code);
+            return String.Format(@"select * from table_supplieroutstandinginvoice p where p.sosti_code like '%{0}%' ORDER BY p.sosti_id DESC", code);
         }
         public static string RecordCount()
         {
