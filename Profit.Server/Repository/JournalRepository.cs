@@ -59,7 +59,7 @@ namespace Profit.Server
                 doRevise(events, p);
                 events.ProcessUnPosted();
                 this.UpdateStatus(events, false);
-                deleteStockCardEntry(events.DELETED_VENDORBALANCEENTRY);
+                deleteVendorBalanceEntry(events.DELETED_VENDORBALANCEENTRY);
                 updateVendorBalances(events.EVENT_JOURNAL_ITEMS);
                 trc.Commit();
             }
@@ -93,14 +93,14 @@ namespace Profit.Server
                 }
             }
         }
-        protected void deleteStockCardEntry(IList sces)
+        protected void deleteVendorBalanceEntry(IList sces)
         {
             foreach (VendorBalanceEntry sce in sces)
             {
                 VendorBalanceEntryRepository.Delete(m_command, sce);
             }
         }
-        protected void SetStockCard(EventJournalItem item, Period period)
+        protected void SetVendorBalance(EventJournalItem item, Period period)
         {
             VendorBalance sc = VendorBalanceRepository.FindVendorBalanceHeader(m_command, item.VENDOR.ID, item.CURRENCY.ID, period.ID, item.VENDOR_BALANCE_TYPE);
             if (sc == null)
