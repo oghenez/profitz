@@ -79,7 +79,7 @@ namespace Profit.Server
                 tr.VENDOR_BALANCE_ENTRY_TYPE = (VendorBalanceEntryType)Enum.Parse(typeof(VendorBalanceEntryType), aReader["vbe_vendorbalanceentrytype"].ToString());
                 tr.TRANSACTION_DATE = Convert.ToDateTime(aReader["vbe_date"]);
                 tr.CURRENCY = new Currency(Convert.ToInt32(aReader["ccy_id"]));
-                tr.AMOUNT = Convert.ToDouble(aReader["sce_amount"]);
+                tr.AMOUNT = Convert.ToDouble(aReader["vbe_amount"]);
                 tr.EVENT_JOURNAL_ITEM = new EventJournalItem(Convert.ToInt32(aReader["eventjournalitem_id"]));
             }
             return tr;
@@ -95,7 +95,7 @@ namespace Profit.Server
                 tr.VENDOR_BALANCE_ENTRY_TYPE = (VendorBalanceEntryType)Enum.Parse(typeof(VendorBalanceEntryType), aReader["vbe_vendorbalanceentrytype"].ToString());
                 tr.TRANSACTION_DATE = Convert.ToDateTime(aReader["vbe_date"]);
                 tr.CURRENCY = new Currency(Convert.ToInt32(aReader["ccy_id"]));
-                tr.AMOUNT = Convert.ToDouble(aReader["sce_amount"]);
+                tr.AMOUNT = Convert.ToDouble(aReader["vbe_amount"]);
                 tr.EVENT_JOURNAL_ITEM = new EventJournalItem(Convert.ToInt32(aReader["eventjournalitem_id"]));
                 result.Add(tr);
             }
