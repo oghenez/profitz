@@ -20,7 +20,7 @@ namespace Profit.Server
             cmd.CommandText = VendorBalanceEntry.DeleteSQL(sc.ID);
             cmd.ExecuteNonQuery();
         }
-        public static VendorBalanceEntry FindStockCardEntryByEventItem(OdbcCommand cmd, int itemID, VendorBalanceEntryType scetype)
+        public static VendorBalanceEntry FindVendorBalanceEntryByEventItem(OdbcCommand cmd, int itemID, VendorBalanceEntryType scetype)
         {
             cmd.CommandText = VendorBalanceEntry.FindByEventJournalItem(itemID, scetype);
             OdbcDataReader r = cmd.ExecuteReader();
