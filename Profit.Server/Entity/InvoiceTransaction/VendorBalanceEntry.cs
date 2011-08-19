@@ -103,7 +103,7 @@ namespace Profit.Server
         }
         public static string SelectMaxIDSQL()
         {
-            return String.Format("SELECT max(sce_id) from table_vendorbalanceentry");
+            return String.Format("SELECT max(vbe_id) from table_vendorbalanceentry");
         }
         public static string DeleteSQL(int id)
         {

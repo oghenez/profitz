@@ -152,7 +152,7 @@ namespace Profit.Server
         }
         public static string GetByEventIDSQL(int id)
         {
-            return String.Format("SELECT * from table_supplieroutstandinginvoiceitem where sostii_id = {0}", id);
+            return String.Format("SELECT * from table_supplieroutstandinginvoiceitem where sosti_id = {0}", id);
         }
         public static string DeleteUpdate(int id, IList notIN)
         {

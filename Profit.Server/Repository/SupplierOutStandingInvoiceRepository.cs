@@ -51,7 +51,7 @@ namespace Profit.Server
                 e.CODE = AutoNumberSetupRepository.GetAutoNumberByDomainName(m_command, "SupplierOutStandingInvoice", e.CODE, lastCode, lastDate, trDate, trCount == 0);
 
                 SupplierOutStandingInvoice stk = (SupplierOutStandingInvoice)e;
-                m_command.CommandText = e.GetInsertSQL();
+                m_command.CommandText = stk.GetInsertSQL();
                 m_command.ExecuteNonQuery();
                 m_command.CommandText = SupplierOutStandingInvoice.SelectMaxIDSQL();
                 stk.ID = Convert.ToInt32(m_command.ExecuteScalar());
@@ -67,7 +67,7 @@ namespace Profit.Server
             catch (Exception x)
             {
                 e.ID = 0;
-                foreach (EventItem item in e.EVENT_JOURNAL_ITEMS)
+                foreach (EventJournalItem item in e.EVENT_JOURNAL_ITEMS)
                 {
                     item.ID = 0;
                 }

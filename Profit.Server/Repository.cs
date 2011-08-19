@@ -137,6 +137,28 @@ namespace Profit.Server
                 m_connection.Close();
             }
         }
+        public virtual Hashtable GetAllHashtable()
+        {
+            try
+            {
+                OpenConnection();
+                OdbcCommand aCommand = new OdbcCommand(m_entity.GetAllSQL(), m_connection);
+                OdbcDataReader aReader = aCommand.ExecuteReader();
+                IList a = m_entity.GetAll(aReader);
+                Hashtable hs = new Hashtable();
+                foreach(IEntity e in a)
+                    hs.Add(e.ToString(), e);
+                return hs;
+            }
+            catch (Exception x)
+            {
+                throw new Exception(getErrorMessage(x));
+            }
+            finally
+            {
+                m_connection.Close();
+            }
+        }
         public virtual IList GetConcatSearch(string text)
         {
             try
