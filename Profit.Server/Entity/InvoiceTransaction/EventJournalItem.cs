@@ -24,6 +24,7 @@ namespace Profit.Server
         public TermOfPayment TOP = null;
         public string DESCRIPTION = string.Empty;
         public string NOTES = string.Empty;
+        public VendorBalanceType VENDOR_BALANCE_TYPE = VendorBalanceType.Customer;
 
         public EventJournalItem()
         {

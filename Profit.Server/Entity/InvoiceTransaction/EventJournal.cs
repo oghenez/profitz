@@ -26,8 +26,8 @@ namespace Profit.Server
         public double OTHER_EXPENSE = 0;
         public double NET_AMOUNT = 0;
         public Employee EMPLOYEE = null;
-        IList m_deletedVendorBalanceEntry = new ArrayList();
-        public IList m_eventJournalItems = new ArrayList();
+        public IList DELETED_VENDORBALANCEENTRY = new ArrayList();
+        public IList EVENT_JOURNAL_ITEMS = new ArrayList();
 
         #region IEntity Members
 
@@ -116,7 +116,7 @@ namespace Profit.Server
         public void ProcessPosting()
         {
             assertNotPosted();
-            foreach (EventJournalItem eventItem in m_eventJournalItems)
+            foreach (EventJournalItem eventItem in EVENT_JOURNAL_ITEMS)
             {
                 eventItem.ProcessPosted();
             }
@@ -126,10 +126,10 @@ namespace Profit.Server
         public void ProcessUnPosted()
         {
             assertNotUnPosted();
-            foreach (EventJournalItem eventItem in m_eventJournalItems)
+            foreach (EventJournalItem eventItem in EVENT_JOURNAL_ITEMS)
             {
                 eventItem.ProcessUnPosted();
-                m_deletedVendorBalanceEntry.Add(eventItem.VENDOR_BALANCE_ENTRY);//test
+                DELETED_VENDORBALANCEENTRY.Add(eventItem.VENDOR_BALANCE_ENTRY);//test
                 eventItem.VENDOR_BALANCE_ENTRY = null;//test
             }
             this.EVENT_STATUS = EventStatus.Entry;
@@ -137,7 +137,7 @@ namespace Profit.Server
         }
         public IList GetDeletedVendorBalanceEntry()
         {
-            return m_deletedVendorBalanceEntry;
+            return DELETED_VENDORBALANCEENTRY;
         }
         private void assertNotPosted()
         {

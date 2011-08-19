@@ -16,6 +16,7 @@ namespace Profit.Server
         public Currency CURRENCY;
         public double AMOUNT;
         public EventJournalItem EVENT_JOURNAL_ITEM;
+        public bool UPDATED = false;
         public VendorBalanceEntry()
         { }
         public VendorBalanceEntry(VendorBalance vendorBalance, EventJournalItem item)
@@ -112,7 +113,7 @@ namespace Profit.Server
         {
             return String.Format("Select * from table_vendorbalanceentry where eventjournalitem_id ={0} and vbe_vendorbalanceentrytype = '{1}'", id, type.ToString());
         }
-        public static string FindByStockCard(int id)
+        public static string FindByVendorBalance(int id)
         {
             return String.Format("Select * from table_vendorbalanceentry where vb_id ={0}", id);
         }
