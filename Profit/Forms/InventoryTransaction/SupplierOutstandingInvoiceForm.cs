@@ -113,8 +113,8 @@ namespace Profit
 
         void dataItemskryptonDataGridView_CellValidated(object sender, DataGridViewCellEventArgs e)
         {
-            //if (m_editMode == EditMode.View) return;
-            //if (!itemsDataGrid[e.ColumnIndex, e.RowIndex].IsInEditMode) return;
+            if (m_editMode == EditMode.View) return;
+            if (!itemsDataGrid[e.ColumnIndex, e.RowIndex].IsInEditMode) return;
             if (e.ColumnIndex == amountColumn.Index)
             { 
                 ReCalculateNetTotal(); 
@@ -178,7 +178,11 @@ namespace Profit
             //}
              if (e.ColumnIndex == invoiceNoColumn.Index)
             {
- 
+                if (itemsDataGrid[invoiceDateColumn.Index, e.RowIndex].Value == null)
+                {
+                    itemsDataGrid[invoiceDateColumn.Index, e.RowIndex].Value = DateTime.Today;
+                    itemsDataGrid[dueDateColumn.Index, e.RowIndex].Value = DateTime.Today;
+                }
             }
             if (e.ColumnIndex == topColumn.Index)
             {

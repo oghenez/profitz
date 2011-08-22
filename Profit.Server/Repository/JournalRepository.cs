@@ -46,6 +46,24 @@ namespace Profit.Server
                 throw x;
             }
         }
+        public void ConfirmNoTransaction(int id)
+        {
+            try
+            {
+                EventJournal events = this.Get(id);
+                if (events.POSTED)
+                    throw new Exception("Status is already Posted/Confirm");
+                Period p = AssertValidPeriod(events.TRANSACTION_DATE);
+                doConfirm(events, p);
+                events.ProcessPosting();
+                this.UpdateStatus(events, true);
+                updateVendorBalances(events.EVENT_JOURNAL_ITEMS);
+            }
+            catch (Exception x)
+            {
+                throw x;
+            }
+        }
         public void Revise(int id)
         {
             OdbcTransaction trc = m_connection.BeginTransaction();
@@ -66,6 +84,25 @@ namespace Profit.Server
             catch (Exception x)
             {
                 trc.Rollback();
+                throw x;
+            }
+        }
+        public void ReviseNoTransaction(int id)
+        {
+            try
+            {
+                EventJournal events = this.Get(id);
+                if (events.EVENT_STATUS == EventStatus.Entry)
+                    throw new Exception("Status is already Unposted/Entry");
+                Period p = AssertValidPeriod(events.TRANSACTION_DATE);
+                doRevise(events, p);
+                events.ProcessUnPosted();
+                this.UpdateStatus(events, false);
+                deleteVendorBalanceEntry(events.DELETED_VENDORBALANCEENTRY);
+                updateVendorBalances(events.EVENT_JOURNAL_ITEMS);
+            }
+            catch (Exception x)
+            {
                 throw x;
             }
         }
@@ -111,12 +148,19 @@ namespace Profit.Server
         }
 
         abstract protected void doSave(EventJournal e);
+        abstract protected void doSaveNoTransaction(EventJournal e);
         abstract protected void doUpdate(EventJournal e);
+        abstract protected void doUpdateNoTransaction(EventJournal e);
+        abstract protected void doDeleteNoTransaction(EventJournal e);
         abstract protected void doDelete(EventJournal e);
         abstract protected EventJournal doGet(int ID);
         abstract protected void doUpdateStatus(EventJournal e, bool p);
 
         public void Save(EventJournal e)
+        {
+            doSave(e);
+        }
+        public void SaveNoTransaction(EventJournal e)
         {
             doSave(e);
         }
@@ -127,6 +171,10 @@ namespace Profit.Server
         public void Update(EventJournal e)
         {
             doUpdate(e);
+        }
+        public void UpdateNoTransaction(EventJournal e)
+        {
+            doUpdateNoTransaction(e);
         }
         public void Delete(EventJournal e)
         {

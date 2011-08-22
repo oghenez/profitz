@@ -225,5 +225,91 @@ namespace Profit.Server
             AutoNumberSetup autonumber = AutoNumberSetupRepository.GetAutoNumberSetup(m_command, "SupplierOutStandingInvoice");
             return autonumber.AUTONUMBER_SETUP_TYPE == AutoNumberSetupType.Auto;
         }
+
+        protected override void doSaveNoTransaction(EventJournal e)
+        {
+            try
+            {
+                DateTime trDate = DateTime.Today;
+                string codesample = AutoNumberSetupRepository.GetCodeSampleByDomainName(m_command, "SupplierOutStandingInvoice");
+                EventJournal codeDate = FindLastCodeAndTransactionDate(codesample);
+                string lastCode = codeDate == null ? string.Empty : codeDate.CODE;
+                DateTime lastDate = codeDate == null ? trDate : codeDate.TRANSACTION_DATE;
+                int trCount = RecordCount();
+                e.CODE = AutoNumberSetupRepository.GetAutoNumberByDomainName(m_command, "SupplierOutStandingInvoice", e.CODE, lastCode, lastDate, trDate, trCount == 0);
+
+                SupplierOutStandingInvoice stk = (SupplierOutStandingInvoice)e;
+                m_command.CommandText = stk.GetInsertSQL();
+                m_command.ExecuteNonQuery();
+                m_command.CommandText = SupplierOutStandingInvoice.SelectMaxIDSQL();
+                stk.ID = Convert.ToInt32(m_command.ExecuteScalar());
+                foreach (SupplierOutStandingInvoiceItem item in stk.EVENT_JOURNAL_ITEMS)
+                {
+                    m_command.CommandText = item.GetInsertSQL();
+                    m_command.ExecuteNonQuery();
+                    m_command.CommandText = SupplierOutStandingInvoiceItem.SelectMaxIDSQL();
+                    item.ID = Convert.ToInt32(m_command.ExecuteScalar());
+                }
+            }
+            catch (Exception x)
+            {
+                e.ID = 0;
+                foreach (EventJournalItem item in e.EVENT_JOURNAL_ITEMS)
+                {
+                    item.ID = 0;
+                }
+                throw x;
+            }
+        }
+
+        protected override void doUpdateNoTransaction(EventJournal en)
+        {
+            try
+            {
+                SupplierOutStandingInvoice e = (SupplierOutStandingInvoice)en;
+                m_command.CommandText = e.GetUpdateSQL();
+                m_command.ExecuteNonQuery();
+
+                foreach (SupplierOutStandingInvoiceItem sti in e.EVENT_JOURNAL_ITEMS)
+                {
+                    if (sti.ID > 0)
+                    {
+                        m_command.CommandText = sti.GetUpdateSQL();
+                        m_command.ExecuteNonQuery();
+                    }
+                    else
+                    {
+                        m_command.CommandText = sti.GetInsertSQL();
+                        m_command.ExecuteNonQuery();
+                        m_command.CommandText = SupplierOutStandingInvoiceItem.SelectMaxIDSQL();
+                        sti.ID = Convert.ToInt32(m_command.ExecuteScalar());
+                    }
+                }
+                m_command.CommandText = SupplierOutStandingInvoiceItem.DeleteUpdate(e.ID, e.EVENT_JOURNAL_ITEMS);
+                m_command.ExecuteNonQuery();
+            }
+            catch (Exception x)
+            {
+                throw x;
+            }
+        }
+
+        protected override void doDeleteNoTransaction(EventJournal e)
+        {
+            SupplierOutStandingInvoice st = (SupplierOutStandingInvoice)e;
+            try
+            {
+                if (getEventStatus(st.ID) == EventStatus.Confirm)
+                    throw new Exception("Revise before delete");
+                m_command.CommandText = SupplierOutStandingInvoiceItem.DeleteAllByEventSQL(st.ID);
+                m_command.ExecuteNonQuery();
+                m_command.CommandText = SupplierOutStandingInvoice.DeleteSQL(st.ID);
+                m_command.ExecuteNonQuery();
+            }
+            catch (Exception x)
+            {
+                throw x;
+            }
+        }
     }
 }
