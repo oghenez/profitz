@@ -393,6 +393,9 @@ namespace Profit
             SetAuthorityFormAccess();
             toolStripComboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             toolStripComboBox1.Text = UserSetting.GetStringValue("theme", CurrentUser.ID, this.Name, PaletteModeManager.ProfessionalSystem.ToString());
+            kryptonPanel4.Width = UserSetting.GetIntValue("menuwidth", CurrentUser.ID, this.Name, 240);
+            if (kryptonPanel4.Width == 35)
+                buttonSpecAny3_Click(null, null);
         }
 
         private void SetAuthorityFormAccess()
@@ -551,6 +554,7 @@ namespace Profit
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             UserSetting.SaveSetting("theme", toolStripComboBox1.SelectedItem.ToString(), CurrentUser.ID, this.Name, typeof(string));
+            UserSetting.SaveSetting("menuwidth", kryptonPanel4.Width.ToString(), CurrentUser.ID, this.Name, typeof(int));
         }
     }
 }

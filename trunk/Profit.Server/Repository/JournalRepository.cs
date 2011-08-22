@@ -162,7 +162,7 @@ namespace Profit.Server
         }
         public void SaveNoTransaction(EventJournal e)
         {
-            doSave(e);
+            doSaveNoTransaction(e);
         }
         public EventJournal Get(int ID)
         {
@@ -175,6 +175,10 @@ namespace Profit.Server
         public void UpdateNoTransaction(EventJournal e)
         {
             doUpdateNoTransaction(e);
+        }
+        public void DeleteNoTransaction(EventJournal e)
+        {
+            doDeleteNoTransaction(e);
         }
         public void Delete(EventJournal e)
         {

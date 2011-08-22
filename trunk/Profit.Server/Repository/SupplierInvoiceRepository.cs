@@ -36,6 +36,7 @@ namespace Profit.Server
             sij.VENDOR = si.SUPPLIER;
             sij.SUPPLIER_INVOICE = si;
             sij.NET_AMOUNT = si.NET_TOTAL;
+            sij.EMPLOYEE = si.EMPLOYEE;
 
             SupplierInvoiceJournalItem siji = new SupplierInvoiceJournalItem();
             siji.AMOUNT = si.NET_TOTAL;
@@ -59,10 +60,10 @@ namespace Profit.Server
             {
                 SetStockCard(item, p);
             }
-            //SupplierInvoiceJournal sij = (SupplierInvoiceJournal)r_sij.FindPeriodSIJId(events.ID);
-            //if (sij == null) throw new Exception("Supplier Invoice Journal is missing");
-            //r_sij.ReviseNoTransaction(sij.ID);
-            //r_sij.Delete(sij);
+            SupplierInvoiceJournal sij = (SupplierInvoiceJournal)r_sij.FindPeriodSIJId(events.ID);
+            if (sij == null) throw new Exception("Supplier Invoice Journal is missing");
+            r_sij.ReviseNoTransaction(sij.ID);
+            r_sij.DeleteNoTransaction(sij);
         }
 
         protected override void doSave(Event e)
