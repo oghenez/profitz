@@ -75,7 +75,7 @@ namespace Profit.Server
                     sosti_otherexpense= {13},
                     sosti_netamount= {14},
                     emp_id= {15}
-                where sosti_id = {9}",
+                where sosti_id = {16}",
                 CODE,
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 VENDOR.ID,

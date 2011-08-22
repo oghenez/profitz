@@ -9,7 +9,11 @@ namespace Profit.Server
 {
     public class SupplierInvoiceRepository : TransactionRepository
     {
-        public SupplierInvoiceRepository() : base() { }
+        SupplierInvoiceJournalRepository r_sij;
+        public SupplierInvoiceRepository() : base() 
+        {
+            r_sij = new SupplierInvoiceJournalRepository(m_command);
+        }
 
         protected override void doConfirm(Event events, Period p)
         {
@@ -17,6 +21,37 @@ namespace Profit.Server
             {
                 SetStockCard(item, p);
             }
+            SupplierInvoice si = (SupplierInvoice)events;
+            SupplierInvoiceJournal sij = new SupplierInvoiceJournal();
+           // sij.LastUpdate = DateTime.Now;
+           // sij.ByTransaction = true;
+            sij.CODE = si.CODE;
+            //sij.ComputerName = si.ComputerName;
+            sij.CURRENCY = si.CURRENCY;
+            sij.EVENT_STATUS = EventStatus.Entry;
+            sij.NOTES = si.NOTES;
+            sij.NOTICE_DATE = si.NOTICE_DATE;
+            sij.TRANSACTION_DATE = si.TRANSACTION_DATE;
+           // sij.UserName = si.UserName;
+            sij.VENDOR = si.SUPPLIER;
+            sij.SUPPLIER_INVOICE = si;
+            sij.NET_AMOUNT = si.NET_TOTAL;
+
+            SupplierInvoiceJournalItem siji = new SupplierInvoiceJournalItem();
+            siji.AMOUNT = si.NET_TOTAL;
+            siji.CURRENCY = si.CURRENCY;
+            siji.EVENT_JOURNAL = sij;
+            siji.VENDOR = si.SUPPLIER;
+            siji.INVOICE_NO = si.CODE;
+            siji.INVOICE_DATE = si.TRANSACTION_DATE;
+            siji.TOP = si.TOP;
+            siji.EMPLOYEE = si.EMPLOYEE;
+            siji.DUE_DATE = si.DUE_DATE;
+            siji.OUTSTANDING_AMOUNT = si.NET_TOTAL;
+
+            sij.EVENT_JOURNAL_ITEMS.Add(siji);
+            r_sij.SaveNoTransaction(sij);
+            r_sij.ConfirmNoTransaction(sij.ID);
         }
         protected override void doRevise(Event events, Period p)
         {
@@ -24,6 +59,10 @@ namespace Profit.Server
             {
                 SetStockCard(item, p);
             }
+            //SupplierInvoiceJournal sij = (SupplierInvoiceJournal)r_sij.FindPeriodSIJId(events.ID);
+            //if (sij == null) throw new Exception("Supplier Invoice Journal is missing");
+            //r_sij.ReviseNoTransaction(sij.ID);
+            //r_sij.Delete(sij);
         }
 
         protected override void doSave(Event e)
