@@ -320,6 +320,7 @@
             this.treeView3.Dock = System.Windows.Forms.DockStyle.Top;
             this.treeView3.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.treeView3.FullRowSelect = true;
+            this.treeView3.LineColor = System.Drawing.Color.Empty;
             this.treeView3.Location = new System.Drawing.Point(0, 76);
             this.treeView3.Name = "treeView3";
             treeNode1.Name = "Node0";
@@ -357,7 +358,7 @@
             this.kryptonPanel4.Location = new System.Drawing.Point(0, 24);
             this.kryptonPanel4.Name = "kryptonPanel4";
             this.kryptonPanel4.Padding = new System.Windows.Forms.Padding(0, 0, 3, 3);
-            this.kryptonPanel4.Size = new System.Drawing.Size(212, 520);
+            this.kryptonPanel4.Size = new System.Drawing.Size(240, 520);
             this.kryptonPanel4.TabIndex = 14;
             // 
             // MasterDatakryptonPanel1
@@ -378,7 +379,7 @@
             this.MasterDatakryptonPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.MasterDatakryptonPanel1.Location = new System.Drawing.Point(0, 509);
             this.MasterDatakryptonPanel1.Name = "MasterDatakryptonPanel1";
-            this.MasterDatakryptonPanel1.Size = new System.Drawing.Size(192, 408);
+            this.MasterDatakryptonPanel1.Size = new System.Drawing.Size(220, 408);
             this.MasterDatakryptonPanel1.TabIndex = 16;
             // 
             // kryptonBorderEdge8
@@ -386,7 +387,7 @@
             this.kryptonBorderEdge8.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.kryptonBorderEdge8.Location = new System.Drawing.Point(1, 407);
             this.kryptonBorderEdge8.Name = "kryptonBorderEdge8";
-            this.kryptonBorderEdge8.Size = new System.Drawing.Size(190, 1);
+            this.kryptonBorderEdge8.Size = new System.Drawing.Size(218, 1);
             this.kryptonBorderEdge8.Text = "kryptonBorderEdge8";
             // 
             // distributionTreeView
@@ -420,7 +421,7 @@
             treeNode11,
             treeNode12,
             treeNode13});
-            this.distributionTreeView.Size = new System.Drawing.Size(190, 117);
+            this.distributionTreeView.Size = new System.Drawing.Size(218, 117);
             this.distributionTreeView.TabIndex = 20;
             this.distributionTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
             this.distributionTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView8_AfterSelect);
@@ -435,7 +436,7 @@
             this.distributionKryptonHeader.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.Secondary;
             this.distributionKryptonHeader.Location = new System.Drawing.Point(1, 246);
             this.distributionKryptonHeader.Name = "distributionKryptonHeader";
-            this.distributionKryptonHeader.Size = new System.Drawing.Size(190, 21);
+            this.distributionKryptonHeader.Size = new System.Drawing.Size(218, 21);
             this.distributionKryptonHeader.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom)));
             this.distributionKryptonHeader.TabIndex = 19;
             this.distributionKryptonHeader.Values.Description = "";
@@ -470,7 +471,7 @@
             treeNode15,
             treeNode16,
             treeNode17});
-            this.inventoryTreeView.Size = new System.Drawing.Size(190, 67);
+            this.inventoryTreeView.Size = new System.Drawing.Size(218, 67);
             this.inventoryTreeView.TabIndex = 18;
             this.inventoryTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
             this.inventoryTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView8_AfterSelect);
@@ -485,7 +486,7 @@
             this.inventoryKryptonHeader.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.Secondary;
             this.inventoryKryptonHeader.Location = new System.Drawing.Point(1, 158);
             this.inventoryKryptonHeader.Name = "inventoryKryptonHeader";
-            this.inventoryKryptonHeader.Size = new System.Drawing.Size(190, 21);
+            this.inventoryKryptonHeader.Size = new System.Drawing.Size(218, 21);
             this.inventoryKryptonHeader.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom)));
             this.inventoryKryptonHeader.TabIndex = 17;
             this.inventoryKryptonHeader.Values.Description = "";
@@ -518,7 +519,7 @@
             treeNode18,
             treeNode19,
             treeNode20});
-            this.generalMenuTreeView.Size = new System.Drawing.Size(190, 51);
+            this.generalMenuTreeView.Size = new System.Drawing.Size(218, 51);
             this.generalMenuTreeView.TabIndex = 16;
             this.generalMenuTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
             this.generalMenuTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView8_AfterSelect);
@@ -533,7 +534,7 @@
             this.generalMenuKryptonHeader.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.Secondary;
             this.generalMenuKryptonHeader.Location = new System.Drawing.Point(1, 86);
             this.generalMenuKryptonHeader.Name = "generalMenuKryptonHeader";
-            this.generalMenuKryptonHeader.Size = new System.Drawing.Size(190, 21);
+            this.generalMenuKryptonHeader.Size = new System.Drawing.Size(218, 21);
             this.generalMenuKryptonHeader.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom)));
             this.generalMenuKryptonHeader.TabIndex = 15;
             this.generalMenuKryptonHeader.Values.Description = "";
@@ -569,7 +570,7 @@
             treeNode22,
             treeNode23,
             treeNode24});
-            this.financeTreeView.Size = new System.Drawing.Size(190, 64);
+            this.financeTreeView.Size = new System.Drawing.Size(218, 64);
             this.financeTreeView.TabIndex = 14;
             this.financeTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
             this.financeTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView8_AfterSelect);
@@ -584,7 +585,7 @@
             this.financeKryptonHeader.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.Secondary;
             this.financeKryptonHeader.Location = new System.Drawing.Point(1, 1);
             this.financeKryptonHeader.Name = "financeKryptonHeader";
-            this.financeKryptonHeader.Size = new System.Drawing.Size(190, 21);
+            this.financeKryptonHeader.Size = new System.Drawing.Size(218, 21);
             this.financeKryptonHeader.StateCommon.Border.DrawBorders = ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom;
             this.financeKryptonHeader.TabIndex = 13;
             this.financeKryptonHeader.Values.Description = "";
@@ -603,7 +604,7 @@
             this.kryptonBorderEdge4.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonBorderEdge4.Location = new System.Drawing.Point(1, 0);
             this.kryptonBorderEdge4.Name = "kryptonBorderEdge4";
-            this.kryptonBorderEdge4.Size = new System.Drawing.Size(190, 1);
+            this.kryptonBorderEdge4.Size = new System.Drawing.Size(218, 1);
             this.kryptonBorderEdge4.Text = "kryptonBorderEdge4";
             // 
             // kryptonBorderEdge2
@@ -617,7 +618,7 @@
             // kryptonBorderEdge1
             // 
             this.kryptonBorderEdge1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.kryptonBorderEdge1.Location = new System.Drawing.Point(191, 0);
+            this.kryptonBorderEdge1.Location = new System.Drawing.Point(219, 0);
             this.kryptonBorderEdge1.Name = "kryptonBorderEdge1";
             this.kryptonBorderEdge1.Size = new System.Drawing.Size(1, 408);
             this.kryptonBorderEdge1.Text = "kryptonBorderEdge1";
@@ -625,10 +626,10 @@
             // kryptonSeparator1
             // 
             this.kryptonSeparator1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.kryptonSeparator1.Location = new System.Drawing.Point(0, 917);
+            this.kryptonSeparator1.Location = new System.Drawing.Point(0, 914);
             this.kryptonSeparator1.Name = "kryptonSeparator1";
             this.kryptonSeparator1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.kryptonSeparator1.Size = new System.Drawing.Size(192, 5);
+            this.kryptonSeparator1.Size = new System.Drawing.Size(220, 5);
             this.kryptonSeparator1.TabIndex = 21;
             // 
             // TransactionSkryptonPanel
@@ -646,7 +647,7 @@
             this.TransactionSkryptonPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.TransactionSkryptonPanel.Location = new System.Drawing.Point(0, 28);
             this.TransactionSkryptonPanel.Name = "TransactionSkryptonPanel";
-            this.TransactionSkryptonPanel.Size = new System.Drawing.Size(192, 481);
+            this.TransactionSkryptonPanel.Size = new System.Drawing.Size(220, 481);
             this.TransactionSkryptonPanel.TabIndex = 18;
             // 
             // purchaseTreeView
@@ -679,7 +680,7 @@
             treeNode29,
             treeNode30,
             treeNode31});
-            this.purchaseTreeView.Size = new System.Drawing.Size(190, 129);
+            this.purchaseTreeView.Size = new System.Drawing.Size(218, 129);
             this.purchaseTreeView.TabIndex = 19;
             this.purchaseTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
             // 
@@ -692,7 +693,7 @@
             this.purchaseKryptonHeader.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.Secondary;
             this.purchaseKryptonHeader.Location = new System.Drawing.Point(1, 174);
             this.purchaseKryptonHeader.Name = "purchaseKryptonHeader";
-            this.purchaseKryptonHeader.Size = new System.Drawing.Size(190, 21);
+            this.purchaseKryptonHeader.Size = new System.Drawing.Size(218, 21);
             this.purchaseKryptonHeader.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom)));
             this.purchaseKryptonHeader.TabIndex = 18;
             this.purchaseKryptonHeader.Values.Description = "";
@@ -733,7 +734,7 @@
             treeNode35,
             treeNode36,
             treeNode37});
-            this.SalesTreeView.Size = new System.Drawing.Size(190, 98);
+            this.SalesTreeView.Size = new System.Drawing.Size(218, 98);
             this.SalesTreeView.TabIndex = 17;
             // 
             // kryptonHeader9
@@ -745,7 +746,7 @@
             this.kryptonHeader9.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.Secondary;
             this.kryptonHeader9.Location = new System.Drawing.Point(1, 55);
             this.kryptonHeader9.Name = "kryptonHeader9";
-            this.kryptonHeader9.Size = new System.Drawing.Size(190, 21);
+            this.kryptonHeader9.Size = new System.Drawing.Size(218, 21);
             this.kryptonHeader9.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom)));
             this.kryptonHeader9.TabIndex = 16;
             this.kryptonHeader9.Values.Description = "";
@@ -773,7 +774,7 @@
             this.internalTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode38,
             treeNode39});
-            this.internalTreeView.Size = new System.Drawing.Size(190, 33);
+            this.internalTreeView.Size = new System.Drawing.Size(218, 33);
             this.internalTreeView.TabIndex = 15;
             this.internalTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
             this.internalTreeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
@@ -787,7 +788,7 @@
             this.internalKryptonHeader.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.Secondary;
             this.internalKryptonHeader.Location = new System.Drawing.Point(1, 1);
             this.internalKryptonHeader.Name = "internalKryptonHeader";
-            this.internalKryptonHeader.Size = new System.Drawing.Size(190, 21);
+            this.internalKryptonHeader.Size = new System.Drawing.Size(218, 21);
             this.internalKryptonHeader.StateCommon.Border.DrawBorders = ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom;
             this.internalKryptonHeader.TabIndex = 14;
             this.internalKryptonHeader.Values.Description = "";
@@ -804,7 +805,7 @@
             // kryptonBorderEdge3
             // 
             this.kryptonBorderEdge3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.kryptonBorderEdge3.Location = new System.Drawing.Point(191, 1);
+            this.kryptonBorderEdge3.Location = new System.Drawing.Point(219, 1);
             this.kryptonBorderEdge3.Name = "kryptonBorderEdge3";
             this.kryptonBorderEdge3.Size = new System.Drawing.Size(1, 479);
             this.kryptonBorderEdge3.Text = "kryptonBorderEdge3";
@@ -822,7 +823,7 @@
             this.kryptonBorderEdge6.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonBorderEdge6.Location = new System.Drawing.Point(0, 0);
             this.kryptonBorderEdge6.Name = "kryptonBorderEdge6";
-            this.kryptonBorderEdge6.Size = new System.Drawing.Size(192, 1);
+            this.kryptonBorderEdge6.Size = new System.Drawing.Size(220, 1);
             this.kryptonBorderEdge6.Text = "kryptonBorderEdge6";
             // 
             // kryptonBorderEdge7
@@ -830,7 +831,7 @@
             this.kryptonBorderEdge7.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.kryptonBorderEdge7.Location = new System.Drawing.Point(0, 480);
             this.kryptonBorderEdge7.Name = "kryptonBorderEdge7";
-            this.kryptonBorderEdge7.Size = new System.Drawing.Size(192, 1);
+            this.kryptonBorderEdge7.Size = new System.Drawing.Size(220, 1);
             this.kryptonBorderEdge7.Text = "kryptonBorderEdge7";
             // 
             // MainHeaderkryptonHeader8
@@ -840,7 +841,7 @@
             this.MainHeaderkryptonHeader8.Dock = System.Windows.Forms.DockStyle.Top;
             this.MainHeaderkryptonHeader8.Location = new System.Drawing.Point(0, 0);
             this.MainHeaderkryptonHeader8.Name = "MainHeaderkryptonHeader8";
-            this.MainHeaderkryptonHeader8.Size = new System.Drawing.Size(192, 28);
+            this.MainHeaderkryptonHeader8.Size = new System.Drawing.Size(220, 28);
             this.MainHeaderkryptonHeader8.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)(((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left)
                         | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.MainHeaderkryptonHeader8.TabIndex = 15;
@@ -858,10 +859,10 @@
             // 
             this.TransactionkryptonCheckButton2.Checked = true;
             this.TransactionkryptonCheckButton2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.TransactionkryptonCheckButton2.Location = new System.Drawing.Point(0, 922);
+            this.TransactionkryptonCheckButton2.Location = new System.Drawing.Point(0, 919);
             this.TransactionkryptonCheckButton2.Name = "TransactionkryptonCheckButton2";
             this.TransactionkryptonCheckButton2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.TransactionkryptonCheckButton2.Size = new System.Drawing.Size(192, 30);
+            this.TransactionkryptonCheckButton2.Size = new System.Drawing.Size(220, 30);
             this.TransactionkryptonCheckButton2.StateCommon.Content.Image.ImageH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Near;
             this.TransactionkryptonCheckButton2.StateCommon.Content.ShortText.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Near;
             this.TransactionkryptonCheckButton2.TabIndex = 20;
@@ -871,9 +872,9 @@
             // MasterDatakryptonCheckButton1
             // 
             this.MasterDatakryptonCheckButton1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.MasterDatakryptonCheckButton1.Location = new System.Drawing.Point(0, 952);
+            this.MasterDatakryptonCheckButton1.Location = new System.Drawing.Point(0, 949);
             this.MasterDatakryptonCheckButton1.Name = "MasterDatakryptonCheckButton1";
-            this.MasterDatakryptonCheckButton1.Size = new System.Drawing.Size(192, 30);
+            this.MasterDatakryptonCheckButton1.Size = new System.Drawing.Size(220, 30);
             this.MasterDatakryptonCheckButton1.StateCommon.Content.Image.ImageH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Near;
             this.MasterDatakryptonCheckButton1.StateCommon.Content.ShortText.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Near;
             this.MasterDatakryptonCheckButton1.TabIndex = 19;
@@ -882,7 +883,7 @@
             // 
             // splitter1
             // 
-            this.splitter1.Location = new System.Drawing.Point(212, 24);
+            this.splitter1.Location = new System.Drawing.Point(240, 24);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(2, 520);
             this.splitter1.TabIndex = 15;

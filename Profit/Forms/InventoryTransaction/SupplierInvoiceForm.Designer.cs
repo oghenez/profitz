@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PurchaseOrderForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SupplierInvoiceForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -136,7 +136,7 @@
             this.kryptonHeader1.Size = new System.Drawing.Size(838, 29);
             this.kryptonHeader1.TabIndex = 2;
             this.kryptonHeader1.Values.Description = "";
-            this.kryptonHeader1.Values.Heading = "TRCP001 - Purchase Order";
+            this.kryptonHeader1.Values.Heading = "TRCP003 - Supplier Invoice";
             // 
             // toolStrip1
             // 
@@ -1033,7 +1033,7 @@
             this.buttonSpecAny6.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny6.UniqueName = "95BED338EBB14361B2927C3CB003454A";
             // 
-            // PurchaseOrderForm
+            // SupplierInvoiceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -1042,8 +1042,8 @@
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.kryptonHeader1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "PurchaseOrderForm";
-            this.Text = "Purchase Order";
+            this.Name = "SupplierInvoiceForm";
+            this.Text = "Supplier Invoice";
             this.Load += new System.EventHandler(this.PurchaseOrderForm_Load);
             this.Activated += new System.EventHandler(this.BankForm_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PurchaseOrderForm_FormClosing);

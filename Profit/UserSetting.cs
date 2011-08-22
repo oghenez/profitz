@@ -37,5 +37,10 @@ namespace Profit
             UserSettingsRepository r_setting = RepositoryFactory.GetInstance().UserSetting();
             return r_setting.GetStringValue(userid, formname + uniqname, defaultVal);
         }
+        public static int GetIntValue(string uniqname, int userid, string formname, int defaultVal)
+        {
+            UserSettingsRepository r_setting = RepositoryFactory.GetInstance().UserSetting();
+            return r_setting.GetIntValue(userid, formname + uniqname, defaultVal);
+        }
     }
 }
