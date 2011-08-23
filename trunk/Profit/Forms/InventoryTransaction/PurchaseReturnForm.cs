@@ -495,6 +495,7 @@ namespace Profit
                 m_prn = (PurchaseReturn)result[0];
                 m_prn = (PurchaseReturn)r_prn.Get(m_prn.ID);
                 m_prn.EMPLOYEE = (Employee)r_employee.GetById(m_prn.EMPLOYEE);
+                m_prn.SUPPLIER = (Supplier)r_sup.GetById(m_prn.SUPPLIER);
                 setEditMode(EditMode.View);
                 loadData();
                 setEnableForm(false);
@@ -513,6 +514,7 @@ namespace Profit
                         m_prn = frm.PURCHASE_RETURN;
                         m_prn = (PurchaseReturn)r_prn.Get(m_prn.ID);
                         m_prn.EMPLOYEE = (Employee)r_employee.GetById(m_prn.EMPLOYEE);
+                        m_prn.SUPPLIER = (Supplier)r_sup.GetById(m_prn.SUPPLIER);
                         setEditMode(EditMode.View);
                         loadData();
                         setEnableForm(false);

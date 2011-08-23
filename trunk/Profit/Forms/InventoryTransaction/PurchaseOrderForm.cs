@@ -687,6 +687,7 @@ namespace Profit
                 m_po.DIVISION = (Division)r_division.GetById(m_po.DIVISION);
                 m_po.TOP = (TermOfPayment)r_top.GetById(m_po.TOP);
                 m_po.TAX = m_po.TAX == null ? null : (Tax)r_tax.GetById(m_po.TAX);
+                m_po.SUPPLIER = (Supplier)r_sup.GetById(m_po.SUPPLIER);
                 setEditMode(EditMode.View);
                 loadData();
                 setEnableForm(false);
@@ -709,6 +710,7 @@ namespace Profit
                         m_po.DIVISION = (Division)r_division.GetById(m_po.DIVISION);
                         m_po.TOP = (TermOfPayment)r_top.GetById(m_po.TOP);
                         m_po.TAX = m_po.TAX == null ? null : (Tax)r_tax.GetById(m_po.TAX);
+                        m_po.SUPPLIER = (Supplier)r_sup.GetById(m_po.SUPPLIER);
                         setEditMode(EditMode.View);
                         loadData();
                         setEnableForm(false);
@@ -752,8 +754,14 @@ namespace Profit
             Supplier em = (Supplier)supplierkryptonComboBox.SelectedItem;
             supplierKryptonTextBox.Text = em == null ? "" : em.NAME;
             contactPersonKryptonTextBox.Text = em == null ? "" : em.CONTACT;
-            em.TERM_OF_PAYMENT = (TermOfPayment)r_top.GetById(em.TERM_OF_PAYMENT);
-            termofpaymentKryptonComboBox.Text = em.TERM_OF_PAYMENT.ToString();
+            if ((m_editMode == EditMode.New) || (m_editMode == EditMode.Update))
+            {
+                if (m_enable)
+                {
+                    em.TERM_OF_PAYMENT = (TermOfPayment)r_top.GetById(em.TERM_OF_PAYMENT);
+                    termofpaymentKryptonComboBox.Text = em.TERM_OF_PAYMENT.ToString();
+                }
+            }
             addressKryptonTextBox.Text = em == null ? "" : em.ADDRESS;
         }
 

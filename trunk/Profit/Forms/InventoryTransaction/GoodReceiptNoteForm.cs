@@ -495,6 +495,7 @@ namespace Profit
                 m_po = (GoodReceiveNote)result[0];
                 m_po = (GoodReceiveNote)r_grn.Get(m_po.ID);
                 m_po.EMPLOYEE = (Employee)r_employee.GetById(m_po.EMPLOYEE);
+                m_po.SUPPLIER = (Supplier)r_sup.GetById(m_po.SUPPLIER);
                 setEditMode(EditMode.View);
                 loadData();
                 setEnableForm(false);

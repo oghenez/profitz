@@ -553,6 +553,7 @@ namespace Profit
                 m_prn = (SupplierOutStandingInvoice)result[0];
                 m_prn = (SupplierOutStandingInvoice)r_soinv.Get(m_prn.ID);
                 m_prn.EMPLOYEE = (Employee)r_employee.GetById(m_prn.EMPLOYEE);
+                // m_prn.VENDOR = (Supplier)r_sup.GetById(m_prn.VENDOR);
                 setEditMode(EditMode.View);
                 loadData();
                 setEnableForm(false);
@@ -571,6 +572,7 @@ namespace Profit
                         m_prn = frm.SUPPLIER_OS_INVOICE;
                         m_prn = (SupplierOutStandingInvoice)r_soinv.Get(m_prn.ID);
                         m_prn.EMPLOYEE = (Employee)r_employee.GetById(m_prn.EMPLOYEE);
+                       // m_prn.VENDOR = (Supplier)r_sup.GetById(m_prn.VENDOR);
                         setEditMode(EditMode.View);
                         loadData();
                         setEnableForm(false);
