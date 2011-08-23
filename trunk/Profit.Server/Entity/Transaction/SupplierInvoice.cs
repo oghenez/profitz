@@ -55,10 +55,12 @@ namespace Profit.Server
                     si_otherexpense,
                     si_nettotal,
                     si_code,
-                    sup_id
+                    sup_id,
+                    si_docno,
+                    si_docdate
                 ) 
                 VALUES ('{0}','{1}','{2}',{3},'{4}',{5},'{6}',{7},{8},'{9}',{10},
-                        {11},{12},{13},{14},{15},{16},{17},{18},'{19}',{20})",
+                        {11},{12},{13},{14},{15},{16},{17},{18},'{19}',{20},'{21}','{22}')",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                 StockCardEntryType.SupplierInvoice.ToString(),
@@ -79,7 +81,9 @@ namespace Profit.Server
                 OTHER_EXPENSE,
                 NET_TOTAL,
                 CODE,
-                SUPPLIER == null ? 0 : SUPPLIER.ID
+                SUPPLIER == null ? 0 : SUPPLIER.ID,
+                DOCUMENT_NO,
+                DOCUMENT_DATE.ToString(Utils.DATE_FORMAT)
                 );
         }
         public override string GetUpdateSQL()
@@ -105,8 +109,10 @@ namespace Profit.Server
                     si_otherexpense = {17},
                     si_nettotal = {18},
                     si_code = '{19}',
-                    sup_id = {20}
-                where si_id = {21}",
+                    sup_id = {20},
+                    si_docno= '{21}',
+                    si_docdate= '{22}'
+                where si_id = {23}",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                 StockCardEntryType.SupplierInvoice.ToString(),
@@ -128,6 +134,8 @@ namespace Profit.Server
                 NET_TOTAL,
                 CODE,
                 SUPPLIER == null ? 0 : SUPPLIER.ID,
+                DOCUMENT_NO,
+                DOCUMENT_DATE.ToString(Utils.DATE_FORMAT),
                 ID);
         }
         public static SupplierInvoice TransformReader(OdbcDataReader aReader)
@@ -159,6 +167,8 @@ namespace Profit.Server
                 transaction.NET_TOTAL = Convert.ToDouble(aReader["si_nettotal"]);
                 transaction.CODE = aReader["si_code"].ToString();
                 transaction.SUPPLIER = new Supplier(Convert.ToInt32(aReader["sup_id"]));
+                transaction.DOCUMENT_NO = aReader["si_docno"].ToString();
+                transaction.DOCUMENT_DATE = Convert.ToDateTime(aReader["si_docdate"]);
             }
             return transaction;
         }
@@ -190,6 +200,8 @@ namespace Profit.Server
                 transaction.NET_TOTAL = Convert.ToDouble(aReader["si_nettotal"]);
                 transaction.CODE = aReader["si_code"].ToString();
                 transaction.SUPPLIER = new Supplier(Convert.ToInt32(aReader["sup_id"]));
+                transaction.DOCUMENT_NO = aReader["si_docno"].ToString();
+                transaction.DOCUMENT_DATE = Convert.ToDateTime(aReader["si_docdate"]);
                 result.Add(transaction);
             }
             return result;
