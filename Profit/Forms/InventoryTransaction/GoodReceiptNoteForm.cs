@@ -344,6 +344,8 @@ namespace Profit
                 employeeKryptonComboBox.SelectedIndex = 0;
                 notesKryptonTextBox.Text = "";
                 supplierkryptonComboBox.SelectedIndex = 0;
+                docdatekryptonDateTimePicker.Value = DateTime.Today;
+                docnokryptonTextBox.Text = "";
                 itemsDataGrid.Rows.Clear();
                 errorProvider1.Clear();
             }
@@ -372,6 +374,8 @@ namespace Profit
             unitColumn.ReadOnly = !enable;
             warehouseColumn.ReadOnly = !enable;
             notesColumn.ReadOnly = !enable;
+            docdatekryptonDateTimePicker.Enabled = enable;
+            docnokryptonTextBox.ReadOnly = !enable;
             m_enable = enable;
         }
         private void setEditMode(EditMode editmode)
