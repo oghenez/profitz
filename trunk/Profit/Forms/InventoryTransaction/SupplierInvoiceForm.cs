@@ -692,6 +692,7 @@ namespace Profit
                 m_si.DIVISION = (Division)r_division.GetById(m_si.DIVISION);
                 m_si.TOP = (TermOfPayment)r_top.GetById(m_si.TOP);
                 m_si.TAX = m_si.TAX == null ? null : (Tax)r_tax.GetById(m_si.TAX);
+                m_si.SUPPLIER = (Supplier)r_sup.GetById(m_si.SUPPLIER);
                 setEditMode(EditMode.View);
                 loadData();
                 setEnableForm(false);
@@ -714,6 +715,7 @@ namespace Profit
                         m_si.DIVISION = (Division)r_division.GetById(m_si.DIVISION);
                         m_si.TOP = (TermOfPayment)r_top.GetById(m_si.TOP);
                         m_si.TAX = m_si.TAX == null ? null : (Tax)r_tax.GetById(m_si.TAX);
+                        m_si.SUPPLIER = (Supplier)r_sup.GetById(m_si.SUPPLIER);
                         setEditMode(EditMode.View);
                         loadData();
                         setEnableForm(false);
