@@ -184,6 +184,8 @@ namespace Profit.Server
                 sti.EVENT = st;
                 sti.PART = PartRepository.GetByID(m_command, sti.PART.ID);
                 sti.STOCK_CARD_ENTRY = StockCardEntryRepository.FindStockCardEntryByEventItem(m_command, sti.ID, sti.STOCK_CARD_ENTRY_TYPE);
+                if(sti.GRN_ITEM.ID>0)
+                    sti.GRN_ITEM = GoodReceiveNoteRepository.FindGoodReceiveNoteItem(m_command, sti.GRN_ITEM.ID);
                 st.EVENT_ITEMS.Add(sti);
             }
             return st;

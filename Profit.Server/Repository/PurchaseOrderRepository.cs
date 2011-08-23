@@ -299,5 +299,15 @@ namespace Profit.Server
             double result = Convert.ToDouble(r);
             return result;
         }
+        public PurchaseOrderItem FindPurchaseOrderItem(int poiID)
+        {
+            m_command.CommandText = PurchaseOrderItem.GetByIDSQL(poiID);
+            OdbcDataReader r = m_command.ExecuteReader();
+            PurchaseOrderItem result = PurchaseOrderItem.TransformReader(r);
+            r.Close();
+            result.EVENT = PurchaseOrderRepository.GetHeaderOnly(m_command, result.EVENT.ID);
+            result.EVENT.EVENT_ITEMS.Add(result);
+            return result;
+        }
     }
 }

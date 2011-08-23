@@ -601,5 +601,14 @@ namespace Profit
             supplierKryptonTextBox.Text = em == null ? "" : em.NAME;
             itemsDataGrid.Rows.Clear();
         }
+
+        private void itemsDataGrid_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            for (int count = 0; (count <= (itemsDataGrid.Rows.Count - 2)); count++)
+            {
+                itemsDataGrid.Rows[count].HeaderCell.Value = string.Format((count + 1).ToString(), "0");
+                itemsDataGrid.Rows[count].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
+        }
     }
 }

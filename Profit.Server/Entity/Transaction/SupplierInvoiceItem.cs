@@ -19,6 +19,7 @@ namespace Profit.Server
         public double DISC_B = 0;
         public double DISC_C = 0;
         public string DISC_ABC = string.Empty;
+        public GoodReceiveNoteItem GRN_ITEM = null;
 
         public SupplierInvoiceItem() : base() { }
         public SupplierInvoiceItem(int ID) : base(ID) { }
@@ -43,10 +44,11 @@ namespace Profit.Server
                     sii_disca,
                     sii_discb,
                     sii_discc,
-                    sii_discabc
+                    sii_discabc,
+                    grni_id
                 ) 
                 VALUES ({0},{1},{2},{3},{4},'{5}',{6},{7},{8},{9},{10},{11},{12},'{13}',{14},
-                    {15},{16},'{17}')",
+                    {15},{16},'{17}',{18})",
                 EVENT.ID,
                 PART.ID,
                 WAREHOUSE.ID,
@@ -64,7 +66,8 @@ namespace Profit.Server
                 DISC_A,
                 DISC_B,
                 DISC_C,
-                DISC_ABC
+                DISC_ABC,
+                GRN_ITEM==null?0:GRN_ITEM.ID
                 );
         }
         public override string GetUpdateSQL()
@@ -87,8 +90,9 @@ namespace Profit.Server
                     sii_disca = {14},
                     sii_discb = {15},
                     sii_discc = {16},
-                    sii_discabc = '{17}'
-                where sii_id = {18}",
+                    sii_discabc = '{17}',
+                    grni_id = {18}
+                where sii_id = {19}",
                 EVENT.ID,
                 PART.ID,
                 WAREHOUSE.ID,
@@ -107,6 +111,7 @@ namespace Profit.Server
                 DISC_B,
                 DISC_C,
                 DISC_ABC,
+                GRN_ITEM==null?0:GRN_ITEM.ID,
                 ID);
         }
         public static SupplierInvoiceItem TransformReader(OdbcDataReader aReader)
@@ -135,6 +140,7 @@ namespace Profit.Server
                 transaction.DISC_B = Convert.ToDouble(Convert.ToInt32(aReader["sii_discb"]));
                 transaction.DISC_C = Convert.ToDouble(Convert.ToInt32(aReader["sii_discc"]));
                 transaction.DISC_ABC = aReader["sii_discabc"].ToString();
+                transaction.GRN_ITEM = new GoodReceiveNoteItem(Convert.ToInt32(aReader["grni_id"]));
             }
             return transaction;
         }
@@ -163,6 +169,7 @@ namespace Profit.Server
                 transaction.DISC_B = Convert.ToDouble(Convert.ToInt32(aReader["sii_discb"]));
                 transaction.DISC_C = Convert.ToDouble(Convert.ToInt32(aReader["sii_discc"]));
                 transaction.DISC_ABC = aReader["sii_discabc"].ToString();
+                transaction.GRN_ITEM = new GoodReceiveNoteItem(Convert.ToInt32(aReader["grni_id"]));
                 result.Add(transaction);
             }
             return result;
@@ -230,6 +237,10 @@ namespace Profit.Server
                 where p.sup_id = {0} and t.part_id = {1} and t.unit_id = {2}
                 order by p.si_date desc
                 ", supID, partID, unitID);
+        }
+        internal static string GetGRNUseBySupplierInvoice()
+        {
+            return "select distinct(t.grni_id) FROM table_supplierinvoiceitem t where t.grni_id != 0";
         }
     }
 }

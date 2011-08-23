@@ -395,7 +395,10 @@ namespace Profit
             toolStripComboBox1.Text = UserSetting.GetStringValue("theme", CurrentUser.ID, this.Name, PaletteModeManager.ProfessionalSystem.ToString());
             kryptonPanel4.Width = UserSetting.GetIntValue("menuwidth", CurrentUser.ID, this.Name, 240);
             if (kryptonPanel4.Width == 35)
+            {
+                kryptonPanel4.Width = 217;
                 buttonSpecAny3_Click(null, null);
+            }
         }
 
         private void SetAuthorityFormAccess()

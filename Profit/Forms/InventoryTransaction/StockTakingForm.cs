@@ -528,5 +528,14 @@ namespace Profit
         {
             UserSetting.SaveSetting(dataItemskryptonDataGridView, m_mainForm.CurrentUser.ID, this.Name);
         }
+
+        private void dataItemskryptonDataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            for (int count = 0; (count <= (dataItemskryptonDataGridView.Rows.Count - 2)); count++)
+            {
+                dataItemskryptonDataGridView.Rows[count].HeaderCell.Value = string.Format((count + 1).ToString(), "0");
+                dataItemskryptonDataGridView.Rows[count].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
+        }
     }
 }

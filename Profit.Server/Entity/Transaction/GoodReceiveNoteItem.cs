@@ -223,7 +223,22 @@ namespace Profit.Server
                 and concat(pt.part_code, pt.part_name, p.grn_code) like '%{0}%' and p.sup_id = {1}  
                 and p.grn_posted = true
                 and p.grn_date <= '{2}'
-               {3}", find, supplierID, trdate.ToString(Utils.DATE_FORMAT), poi != "" ? " and t.poi_id not in (" + poi + ")" : "");
+               {3}", find, supplierID, trdate.ToString(Utils.DATE_FORMAT), poi != "" ? " and t.grni_id not in (" + poi + ")" : "");
+        }
+        public static string GetGRNItemBySuppDate(int supID, DateTime date, string notInGRNItem)
+        {
+            return String.Format(@"SELECT t.*
+                FROM table_goodreceivenoteitem t
+                INNER JOIN table_goodreceivenote p on p.grn_id = t.grn_id
+                INNER JOIN table_part pt on pt.part_id = t.part_id
+                where t.grni_outstandingamtpr > 0
+                and p.sup_id = {0}  
+                and p.grn_posted = true
+                and p.grn_date <= '{1}'
+                {2}", 
+                    supID, 
+                    date.ToString(Utils.DATE_FORMAT),
+                    notInGRNItem != "" ? " and t.grni_id not in (" + notInGRNItem + ")" : "");
         }
         public override bool Equals(object obj)
         {
