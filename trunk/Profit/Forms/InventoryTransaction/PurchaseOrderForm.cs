@@ -434,6 +434,8 @@ namespace Profit
             m_po.OTHER_EXPENSE = Convert.ToDouble(otherExpensekryptonNumericUpDown.Value);
             m_po.NET_TOTAL = Convert.ToDouble(nettotalAmountkryptonNumericUpDown.Value);
             m_po.SUPPLIER = (Supplier)supplierkryptonComboBox.SelectedItem;
+            m_po.DOCUMENT_DATE = docdatekryptonDateTimePicker.Value;
+            m_po.DOCUMENT_NO = docnokryptonTextBox.Text;
             m_po.EVENT_ITEMS = getItems();
         }
 
@@ -494,6 +496,8 @@ namespace Profit
                 taxAfterAmountkryptonNumericUpDown.Value = 0m;
                 otherExpensekryptonNumericUpDown.Value = 0m;
                 supplierkryptonComboBox.SelectedIndex = 0;
+                docdatekryptonDateTimePicker.Value = DateTime.Today;
+                docnokryptonTextBox.Text = "";
                 itemsDataGrid.Rows.Clear();
                 errorProvider1.Clear();
             }
@@ -527,6 +531,8 @@ namespace Profit
             //taxAfterAmountkryptonNumericUpDown.Enabled = enable;
             otherExpensekryptonNumericUpDown.Enabled = enable;
             supplierkryptonComboBox.Enabled = enable;
+            docnokryptonTextBox.ReadOnly = !enable;
+            docdatekryptonDateTimePicker.Enabled = enable;
 
             itemsDataGrid.AllowUserToDeleteRows = enable;
             itemsDataGrid.AllowUserToAddRows = enable;
@@ -614,6 +620,8 @@ namespace Profit
             taxAfterAmountkryptonNumericUpDown.Value = Convert.ToDecimal(m_po.TAX_AFTER_AMOUNT);
             otherExpensekryptonNumericUpDown.Value = Convert.ToDecimal(m_po.OTHER_EXPENSE);
             supplierkryptonComboBox.Text = m_po.SUPPLIER.ToString();
+            docdatekryptonDateTimePicker.Value = m_po.DOCUMENT_DATE;
+            docnokryptonTextBox.Text = m_po.DOCUMENT_NO;
 
             itemsDataGrid.Rows.Clear();
             foreach (PurchaseOrderItem item in m_po.EVENT_ITEMS)

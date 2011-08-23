@@ -68,10 +68,12 @@ namespace Profit.Server
                     po_nettotal,
                     po_againsgrnstatus,
                     po_code,
-                    sup_id
+                    sup_id,
+                    po_docno,
+                    po_docdate
                 ) 
                 VALUES ('{0}','{1}','{2}',{3},'{4}',{5},'{6}',{7},{8},'{9}',{10},
-                        {11},{12},{13},{14},{15},{16},{17},{18},'{19}','{20}',{21})",
+                        {11},{12},{13},{14},{15},{16},{17},{18},'{19}','{20}',{21},'{22}','{23}')",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                 StockCardEntryType.PurchaseOrder.ToString(),
@@ -93,7 +95,9 @@ namespace Profit.Server
                 NET_TOTAL,
                 AGAINST_GRN_STATUS.ToString(),
                 CODE,
-                SUPPLIER == null ? 0 : SUPPLIER.ID
+                SUPPLIER == null ? 0 : SUPPLIER.ID,
+                DOCUMENT_NO,
+                DOCUMENT_DATE.ToString(Utils.DATE_FORMAT)
                 );
         }
         public override string GetUpdateSQL()
@@ -120,8 +124,10 @@ namespace Profit.Server
                     po_nettotal = {18},
                     po_againsgrnstatus = '{19}',
                     po_code = '{20}',
-                    sup_id = {21}
-                where po_id = {22}",
+                    sup_id = {21},
+                     po_docno = '{22}',
+                    po_docdate ='{23}'
+                where po_id = {24}",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                 StockCardEntryType.PurchaseOrder.ToString(),
@@ -144,6 +150,8 @@ namespace Profit.Server
                 AGAINST_GRN_STATUS.ToString(),
                 CODE,
                 SUPPLIER == null ? 0 : SUPPLIER.ID,
+                DOCUMENT_NO,
+                DOCUMENT_DATE.ToString(Utils.DATE_FORMAT),
                 ID);
         }
         public static PurchaseOrder TransformReader(OdbcDataReader aReader)
@@ -176,6 +184,8 @@ namespace Profit.Server
                 transaction.AGAINST_GRN_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), aReader["po_againsgrnstatus"].ToString());
                 transaction.CODE = aReader["po_code"].ToString();
                 transaction.SUPPLIER = new Supplier(Convert.ToInt32(aReader["sup_id"]));
+                transaction.DOCUMENT_NO = aReader["po_docno"].ToString();
+                transaction.DOCUMENT_DATE = Convert.ToDateTime(aReader["po_docdate"]);
             }
             return transaction;
         }
@@ -208,6 +218,8 @@ namespace Profit.Server
                 transaction.AGAINST_GRN_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), aReader["po_againsgrnstatus"].ToString());
                 transaction.CODE = aReader["po_code"].ToString();
                 transaction.SUPPLIER = new Supplier(Convert.ToInt32(aReader["sup_id"]));
+                transaction.DOCUMENT_NO = aReader["po_docno"].ToString();
+                transaction.DOCUMENT_DATE = Convert.ToDateTime(aReader["po_docdate"]);
                 result.Add(transaction);
             }
             return result;
