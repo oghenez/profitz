@@ -616,10 +616,10 @@ namespace Profit
             discPercentKryptonNumericUpDown.Value = Convert.ToDecimal(m_po.DISC_PERCENT);
             discAfterAmountKryptonNumericUpDown.Value = Convert.ToDecimal(m_po.DISC_AFTER_AMOUNT);
             discAmountkryptonNumericUpDown.Value = Convert.ToDecimal(m_po.DISC_AMOUNT);
+            supplierkryptonComboBox.Text = m_po.SUPPLIER.ToString();
             taxKryptonComboBox.Text = m_po.TAX == null ? "" : m_po.TAX.ToString();
             taxAfterAmountkryptonNumericUpDown.Value = Convert.ToDecimal(m_po.TAX_AFTER_AMOUNT);
             otherExpensekryptonNumericUpDown.Value = Convert.ToDecimal(m_po.OTHER_EXPENSE);
-            supplierkryptonComboBox.Text = m_po.SUPPLIER.ToString();
             docdatekryptonDateTimePicker.Value = m_po.DOCUMENT_DATE;
             docnokryptonTextBox.Text = m_po.DOCUMENT_NO;
 

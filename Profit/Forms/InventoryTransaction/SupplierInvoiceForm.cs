@@ -434,6 +434,8 @@ namespace Profit
             m_si.OTHER_EXPENSE = Convert.ToDouble(otherExpensekryptonNumericUpDown.Value);
             m_si.NET_TOTAL = Convert.ToDouble(nettotalAmountkryptonNumericUpDown.Value);
             m_si.SUPPLIER = (Supplier)supplierkryptonComboBox.SelectedItem;
+            m_si.DOCUMENT_NO = docnokryptonTextBox.Text;
+            m_si.DOCUMENT_DATE = docdatekryptonDateTimePicker.Value;
             m_si.EVENT_ITEMS = getItems();
         }
 
@@ -496,6 +498,8 @@ namespace Profit
                 taxAfterAmountkryptonNumericUpDown.Value = 0m;
                 otherExpensekryptonNumericUpDown.Value = 0m;
                 supplierkryptonComboBox.SelectedIndex = 0;
+                docnokryptonTextBox.Text = "";
+                docdatekryptonDateTimePicker.Value = DateTime.Today;
                 itemsDataGrid.Rows.Clear();
                 errorProvider1.Clear();
             }
@@ -517,6 +521,8 @@ namespace Profit
             employeeKryptonComboBox.Enabled = enable;
             currencyKryptonComboBox.Enabled = enable;
             notesKryptonTextBox.ReadOnly = !enable;
+            docdatekryptonDateTimePicker.Enabled = enable;
+            docnokryptonTextBox.ReadOnly = !enable;
 
             divisionKryptonComboBox.Enabled = enable;
             termofpaymentKryptonComboBox.Enabled = enable;
@@ -542,7 +548,7 @@ namespace Profit
             discAmountColumn.ReadOnly = !enable;
             notesColumn.ReadOnly = !enable;
             discabcColumn.ReadOnly = !enable;
-
+            wizardFromGRNToolStripButton.Enabled = enable;
             m_enable = enable;
         }
         private void setEditMode(EditMode editmode)
@@ -612,10 +618,13 @@ namespace Profit
             discPercentKryptonNumericUpDown.Value = Convert.ToDecimal(m_si.DISC_PERCENT);
             discAfterAmountKryptonNumericUpDown.Value = Convert.ToDecimal(m_si.DISC_AFTER_AMOUNT);
             discAmountkryptonNumericUpDown.Value = Convert.ToDecimal(m_si.DISC_AMOUNT);
+            supplierkryptonComboBox.Text = m_si.SUPPLIER.ToString();
             taxKryptonComboBox.Text = m_si.TAX == null ? "" : m_si.TAX.ToString();
             taxAfterAmountkryptonNumericUpDown.Value = Convert.ToDecimal(m_si.TAX_AFTER_AMOUNT);
             otherExpensekryptonNumericUpDown.Value = Convert.ToDecimal(m_si.OTHER_EXPENSE);
-            supplierkryptonComboBox.Text = m_si.SUPPLIER.ToString();
+            docdatekryptonDateTimePicker.Value = m_si.DOCUMENT_DATE;
+            docnokryptonTextBox.Text = m_si.DOCUMENT_NO;
+            
 
             itemsDataGrid.Rows.Clear();
             foreach (SupplierInvoiceItem item in m_si.EVENT_ITEMS)
@@ -748,6 +757,10 @@ namespace Profit
             Supplier em = (Supplier)supplierkryptonComboBox.SelectedItem;
             supplierKryptonTextBox.Text = em == null ? "" : em.NAME;
             contactPersonKryptonTextBox.Text = em == null ? "" : em.CONTACT;
+
+            em.TERM_OF_PAYMENT = (TermOfPayment)r_top.GetById(em.TERM_OF_PAYMENT);
+            termofpaymentKryptonComboBox.Text = em.TERM_OF_PAYMENT.ToString();
+            addressKryptonTextBox.Text = em == null ? "" : em.ADDRESS;
         }
 
         private void termofpaymentKryptonComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -772,7 +785,7 @@ namespace Profit
             }
         }
 
-        private void wizardFromGRNkryptonButton_Click(object sender, EventArgs e)
+        private void wizardFromGRNToolStripButton_Click(object sender, EventArgs e)
         {
             IList addedPI = new ArrayList();
             for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
@@ -803,12 +816,12 @@ namespace Profit
                     itemsDataGrid[QtyColumn.Index, row].Value = item.OUTSTANDING_AMOUNT_TO_PR;
                     p.UNIT = (Unit)r_unit.GetById(item.UNIT);
                     itemsDataGrid[unitColumn.Index, row].Value = p.UNIT.ToString();
-                    itemsDataGrid[priceColumn.Index, row].Value = item.PO_ITEM!=null?item.PO_ITEM.PRICE:0d;
-                    itemsDataGrid[discpercentColumn.Index, row].Value = item.PO_ITEM!=null?item.PO_ITEM.DISC_PERCENT:0;
-                    itemsDataGrid[discAmountColumn.Index, row].Value = item.PO_ITEM!=null?item.PO_ITEM.DISC_AMOUNT:0d;
-                    itemsDataGrid[totalDiscColumn.Index, row].Value = item.PO_ITEM!=null?item.PO_ITEM.TOTAL_DISCOUNT:0d;
-                    itemsDataGrid[notesColumn.Index, row].Value = item.PO_ITEM!=null?item.PO_ITEM.NOTES:"";
-                    itemsDataGrid[discabcColumn.Index, row].Value = item.PO_ITEM!=null?item.PO_ITEM.DISC_ABC:"";
+                    itemsDataGrid[priceColumn.Index, row].Value = item.PO_ITEM != null ? item.PO_ITEM.PRICE : 0d;
+                    itemsDataGrid[discpercentColumn.Index, row].Value = item.PO_ITEM != null ? item.PO_ITEM.DISC_PERCENT : 0;
+                    itemsDataGrid[discAmountColumn.Index, row].Value = item.PO_ITEM != null ? item.PO_ITEM.DISC_AMOUNT : 0d;
+                    itemsDataGrid[totalDiscColumn.Index, row].Value = item.PO_ITEM != null ? item.PO_ITEM.TOTAL_DISCOUNT : 0d;
+                    itemsDataGrid[notesColumn.Index, row].Value = item.PO_ITEM != null ? item.PO_ITEM.NOTES : "";
+                    itemsDataGrid[discabcColumn.Index, row].Value = item.PO_ITEM != null ? item.PO_ITEM.DISC_ABC : "";
                     itemsDataGrid[totalAmountColumn.Index, row].Value = item.PO_ITEM != null ? item.PO_ITEM.SUBTOTAL : 0d;
                     itemsDataGrid[warehouseColumn.Index, row].Value = r_warehouse.GetById(item.WAREHOUSE).ToString();
                     updateSubtotal(row);
