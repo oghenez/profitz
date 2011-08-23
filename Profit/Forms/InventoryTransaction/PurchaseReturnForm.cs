@@ -303,6 +303,8 @@ namespace Profit
             m_prn.EMPLOYEE = (Employee)employeeKryptonComboBox.SelectedItem;
             m_prn.NOTES = notesKryptonTextBox.Text;
             m_prn.SUPPLIER = (Supplier)supplierkryptonComboBox.SelectedItem;
+            m_prn.DOCUMENT_DATE = docdatekryptonDateTimePicker.Value;
+            m_prn.DOCUMENT_NO = docnokryptonTextBox.Text;
             m_prn.EVENT_ITEMS = getItems();
         }
 
@@ -342,6 +344,8 @@ namespace Profit
                 employeeKryptonComboBox.SelectedIndex = 0;
                 notesKryptonTextBox.Text = "";
                 supplierkryptonComboBox.SelectedIndex = 0;
+                docdatekryptonDateTimePicker.Value = DateTime.Today;
+                docnokryptonTextBox.Text = "";
                 itemsDataGrid.Rows.Clear();
                 errorProvider1.Clear();
             }
@@ -370,6 +374,8 @@ namespace Profit
             unitColumn.ReadOnly = !enable;
             warehouseColumn.ReadOnly = !enable;
             notesColumn.ReadOnly = !enable;
+            docnokryptonTextBox.ReadOnly = !enable;
+            docdatekryptonDateTimePicker.Enabled = enable;
             m_enable = enable;
         }
         private void setEditMode(EditMode editmode)
@@ -431,6 +437,8 @@ namespace Profit
             employeeKryptonComboBox.Text = m_prn.EMPLOYEE.ToString();
             notesKryptonTextBox.Text = m_prn.NOTES;
             supplierkryptonComboBox.Text = m_prn.SUPPLIER.ToString();
+            docnokryptonTextBox.Text = m_prn.DOCUMENT_NO;
+            docdatekryptonDateTimePicker.Value = m_prn.DOCUMENT_DATE;
             itemsDataGrid.Rows.Clear();
             foreach (PurchaseReturnItem item in m_prn.EVENT_ITEMS)
             {
@@ -533,6 +541,8 @@ namespace Profit
         {
             Supplier em = (Supplier)supplierkryptonComboBox.SelectedItem;
             supplierKryptonTextBox.Text = em == null ? "" : em.NAME;
+            addressKryptonTextBox.Text = em == null ? "" : em.ADDRESS;
+            contactPersonKryptonTextBox.Text = em == null ? "" : em.CONTACT;
             itemsDataGrid.Rows.Clear();
         }
 
