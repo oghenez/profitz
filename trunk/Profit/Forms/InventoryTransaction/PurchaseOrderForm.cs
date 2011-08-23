@@ -744,6 +744,9 @@ namespace Profit
             Supplier em = (Supplier)supplierkryptonComboBox.SelectedItem;
             supplierKryptonTextBox.Text = em == null ? "" : em.NAME;
             contactPersonKryptonTextBox.Text = em == null ? "" : em.CONTACT;
+            em.TERM_OF_PAYMENT = (TermOfPayment)r_top.GetById(em.TERM_OF_PAYMENT);
+            termofpaymentKryptonComboBox.Text = em.TERM_OF_PAYMENT.ToString();
+            addressKryptonTextBox.Text = em == null ? "" : em.ADDRESS;
         }
 
         private void termofpaymentKryptonComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -757,6 +760,28 @@ namespace Profit
                     duedateKryptonDateTimePicker.Value = dateKryptonDateTimePicker.Value.AddDays(top.DAYS);
                 }
             }
+            TermOfPayment tp = (TermOfPayment)termofpaymentKryptonComboBox.SelectedItem;
+            topkryptonTextBox.Text = tp == null ? "" : tp.NAME;
+        }
+
+        private void itemsDataGrid_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            for (int count = 0; (count <= (itemsDataGrid.Rows.Count - 2)); count++)
+            {
+                itemsDataGrid.Rows[count].HeaderCell.Value = string.Format((count + 1).ToString(), "0");
+                itemsDataGrid.Rows[count].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
+        }
+
+        private void kryptonPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void divisionKryptonComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Division d = (Division)divisionKryptonComboBox.SelectedItem;
+            divisionKryptonTextBox.Text = d == null ? "" : d.NAME;
         }
     }
 }

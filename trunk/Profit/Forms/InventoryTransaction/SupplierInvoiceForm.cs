@@ -467,6 +467,8 @@ namespace Profit
                 st.DISC_B = splitDiscString(st.DISC_ABC, 1);
                 st.DISC_C = splitDiscString(st.DISC_ABC, 2);
                 st.SUBTOTAL = Convert.ToDouble(itemsDataGrid[totalAmountColumn.Index, i].Value);
+                GoodReceiveNoteItem grn = (GoodReceiveNoteItem)itemsDataGrid[GRNNoColumn.Index, i].Tag;
+                st.GRN_ITEM = grn;
                 if (st.QYTAMOUNT == 0) continue;
                 items.Add(st);
             }
@@ -626,7 +628,9 @@ namespace Profit
                 itemsDataGrid[codeColumn.Index, i].Value = item.PART.CODE;
                 itemsDataGrid[nameColumn.Index, i].Value = item.PART.NAME;
                 itemsDataGrid[QtyColumn.Index, i].Value = item.QYTAMOUNT;
+                itemsDataGrid[GRNNoColumn.Index, i].Tag = item.GRN_ITEM;
 
+                itemsDataGrid[GRNNoColumn.Index, i].Value = item.GRN_ITEM.ID == 0 ? "" : item.GRN_ITEM.EVENT.CODE;
                 itemsDataGrid[warehouseColumn.Index, i].Value = r_warehouse.GetById(item.WAREHOUSE).ToString();
                 itemsDataGrid[discpercentColumn.Index, i].Value = item.DISC_PERCENT;
                 itemsDataGrid[discAmountColumn.Index, i].Value = item.DISC_AMOUNT;
@@ -755,6 +759,59 @@ namespace Profit
                     TermOfPayment top = (TermOfPayment)termofpaymentKryptonComboBox.SelectedItem;
                     if(top==null)return;
                     duedateKryptonDateTimePicker.Value = dateKryptonDateTimePicker.Value.AddDays(top.DAYS);
+                }
+            }
+        }
+
+        private void itemsDataGrid_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            for (int count = 0; (count <= (itemsDataGrid.Rows.Count - 2)); count++)
+            {
+                itemsDataGrid.Rows[count].HeaderCell.Value = string.Format((count + 1).ToString(), "0");
+                itemsDataGrid.Rows[count].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
+        }
+
+        private void wizardFromGRNkryptonButton_Click(object sender, EventArgs e)
+        {
+            IList addedPI = new ArrayList();
+            for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
+            {
+                GoodReceiveNoteItem pi = (GoodReceiveNoteItem)itemsDataGrid[GRNNoColumn.Index, i].Tag;
+                if (pi == null) continue;
+                addedPI.Add(pi.ID);
+            }
+            using (SearchGRNForSuppInvoiceForm frm = new SearchGRNForSuppInvoiceForm(
+                 ((Supplier)supplierkryptonComboBox.SelectedItem).ID, addedPI, m_mainForm.CurrentUser, dateKryptonDateTimePicker.Value))
+            {
+                frm.ShowDialog();
+                IList result = frm.RESULT;
+                foreach (GoodReceiveNoteItem item in result)
+                {
+                    if (item.PO_ITEM.ID > 0)
+                    {
+                        item.PO_ITEM = r_po.FindPurchaseOrderItem(item.PO_ITEM.ID);
+                    }
+                    Part p = item.PART;
+                    int row = itemsDataGrid.Rows.Add();
+                    itemsDataGrid[codeColumn.Index, row].Tag = p;
+                    itemsDataGrid[GRNNoColumn.Index, row].Tag = item;
+                    itemsDataGrid[scanColumn.Index, row].Value = p.BARCODE;
+                    itemsDataGrid[GRNNoColumn.Index, row].Value = item.EVENT.CODE;
+                    itemsDataGrid[codeColumn.Index, row].Value = p.CODE;
+                    itemsDataGrid[nameColumn.Index, row].Value = p.NAME;
+                    itemsDataGrid[QtyColumn.Index, row].Value = item.OUTSTANDING_AMOUNT_TO_PR;
+                    p.UNIT = (Unit)r_unit.GetById(item.UNIT);
+                    itemsDataGrid[unitColumn.Index, row].Value = p.UNIT.ToString();
+                    itemsDataGrid[priceColumn.Index, row].Value = item.PO_ITEM!=null?item.PO_ITEM.PRICE:0d;
+                    itemsDataGrid[discpercentColumn.Index, row].Value = item.PO_ITEM!=null?item.PO_ITEM.DISC_PERCENT:0;
+                    itemsDataGrid[discAmountColumn.Index, row].Value = item.PO_ITEM!=null?item.PO_ITEM.DISC_AMOUNT:0d;
+                    itemsDataGrid[totalDiscColumn.Index, row].Value = item.PO_ITEM!=null?item.PO_ITEM.TOTAL_DISCOUNT:0d;
+                    itemsDataGrid[notesColumn.Index, row].Value = item.PO_ITEM!=null?item.PO_ITEM.NOTES:"";
+                    itemsDataGrid[discabcColumn.Index, row].Value = item.PO_ITEM!=null?item.PO_ITEM.DISC_ABC:"";
+                    itemsDataGrid[totalAmountColumn.Index, row].Value = item.PO_ITEM != null ? item.PO_ITEM.SUBTOTAL : 0d;
+                    itemsDataGrid[warehouseColumn.Index, row].Value = r_warehouse.GetById(item.WAREHOUSE).ToString();
+                    updateSubtotal(row);
                 }
             }
         }

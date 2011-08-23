@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockTakingForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonHeader1 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
@@ -442,6 +442,7 @@
             this.dataItemskryptonDataGridView.Name = "dataItemskryptonDataGridView";
             this.dataItemskryptonDataGridView.Size = new System.Drawing.Size(840, 234);
             this.dataItemskryptonDataGridView.TabIndex = 5;
+            this.dataItemskryptonDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataItemskryptonDataGridView_RowsAdded);
             // 
             // scanColumn
             // 
@@ -464,8 +465,8 @@
             // 
             // QtyColumn
             // 
-            dataGridViewCellStyle7.NullValue = "0";
-            this.QtyColumn.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.NullValue = "0";
+            this.QtyColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.QtyColumn.HeaderText = "Qty";
             this.QtyColumn.Increment = new decimal(new int[] {
             1,
@@ -495,9 +496,9 @@
             // priceColumn
             // 
             this.priceColumn.DecimalPlaces = 2;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.NullValue = "0";
-            this.priceColumn.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.NullValue = "0";
+            this.priceColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.priceColumn.HeaderText = "Price";
             this.priceColumn.Increment = new decimal(new int[] {
             100,
@@ -521,9 +522,9 @@
             // totalAmountColumn
             // 
             this.totalAmountColumn.DecimalPlaces = 2;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.NullValue = "0";
-            this.totalAmountColumn.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.NullValue = "0";
+            this.totalAmountColumn.DefaultCellStyle = dataGridViewCellStyle3;
             this.totalAmountColumn.HeaderText = "Amount";
             this.totalAmountColumn.Increment = new decimal(new int[] {
             1,

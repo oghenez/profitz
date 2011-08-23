@@ -61,6 +61,15 @@
             this.employeeKryptonComboBox = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.dateKryptonDateTimePicker = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
             this.itemsDataGrid = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.scanColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OutstandingPOColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.OutstandingunitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QtyColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.unitColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
+            this.warehouseColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
+            this.notesColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.dataGridContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.fieldChooserTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBoxCode = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -73,15 +82,6 @@
             this.buttonSpecAny5 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.buttonSpecAny6 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.kryptonContextMenuItems1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
-            this.scanColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OutstandingPOColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
-            this.OutstandingunitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QtyColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
-            this.unitColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
-            this.warehouseColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
-            this.notesColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -383,71 +383,7 @@
             this.itemsDataGrid.Name = "itemsDataGrid";
             this.itemsDataGrid.Size = new System.Drawing.Size(852, 215);
             this.itemsDataGrid.TabIndex = 4;
-            // 
-            // dataGridContextMenuStrip
-            // 
-            this.dataGridContextMenuStrip.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.dataGridContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fieldChooserTestToolStripMenuItem});
-            this.dataGridContextMenuStrip.Name = "dataGridContextMenuStrip";
-            this.dataGridContextMenuStrip.Size = new System.Drawing.Size(153, 26);
-            // 
-            // fieldChooserTestToolStripMenuItem
-            // 
-            this.fieldChooserTestToolStripMenuItem.Name = "fieldChooserTestToolStripMenuItem";
-            this.fieldChooserTestToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.fieldChooserTestToolStripMenuItem.Text = "Field Chooser";
-            this.fieldChooserTestToolStripMenuItem.Click += new System.EventHandler(this.fieldChooserTestToolStripMenuItem_Click);
-            // 
-            // textBoxCode
-            // 
-            this.textBoxCode.Location = new System.Drawing.Point(79, 5);
-            this.textBoxCode.Name = "textBoxCode";
-            this.textBoxCode.Size = new System.Drawing.Size(154, 20);
-            this.textBoxCode.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxCode.TabIndex = 0;
-            // 
-            // kryptonLabel1
-            // 
-            this.kryptonLabel1.Location = new System.Drawing.Point(35, 5);
-            this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(42, 19);
-            this.kryptonLabel1.TabIndex = 0;
-            this.kryptonLabel1.Values.Text = "Code :";
-            // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
-            // buttonSpecAny1
-            // 
-            this.buttonSpecAny1.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Context;
-            this.buttonSpecAny1.UniqueName = "3ED14974C39D424AF483B15489413085";
-            // 
-            // buttonSpecAny2
-            // 
-            this.buttonSpecAny2.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Context;
-            this.buttonSpecAny2.UniqueName = "F6D098FF97AB48FB2A99BBB2D3AE16BB";
-            // 
-            // buttonSpecAny3
-            // 
-            this.buttonSpecAny3.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Previous;
-            this.buttonSpecAny3.UniqueName = "5FF9C97ECDF840FFA4AD11EAEA81925E";
-            // 
-            // buttonSpecAny4
-            // 
-            this.buttonSpecAny4.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Next;
-            this.buttonSpecAny4.UniqueName = "B56143FA8A234E7613B74670410D55F5";
-            // 
-            // buttonSpecAny5
-            // 
-            this.buttonSpecAny5.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Context;
-            this.buttonSpecAny5.UniqueName = "A78BD21009064A446EB0B46846D279AF";
-            // 
-            // buttonSpecAny6
-            // 
-            this.buttonSpecAny6.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
-            this.buttonSpecAny6.UniqueName = "95BED338EBB14361B2927C3CB003454A";
+            this.itemsDataGrid.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.itemsDataGrid_RowsAdded);
             // 
             // scanColumn
             // 
@@ -546,6 +482,71 @@
             this.notesColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.notesColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.notesColumn.Width = 100;
+            // 
+            // dataGridContextMenuStrip
+            // 
+            this.dataGridContextMenuStrip.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.dataGridContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fieldChooserTestToolStripMenuItem});
+            this.dataGridContextMenuStrip.Name = "dataGridContextMenuStrip";
+            this.dataGridContextMenuStrip.Size = new System.Drawing.Size(153, 26);
+            // 
+            // fieldChooserTestToolStripMenuItem
+            // 
+            this.fieldChooserTestToolStripMenuItem.Name = "fieldChooserTestToolStripMenuItem";
+            this.fieldChooserTestToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.fieldChooserTestToolStripMenuItem.Text = "Field Chooser";
+            this.fieldChooserTestToolStripMenuItem.Click += new System.EventHandler(this.fieldChooserTestToolStripMenuItem_Click);
+            // 
+            // textBoxCode
+            // 
+            this.textBoxCode.Location = new System.Drawing.Point(79, 5);
+            this.textBoxCode.Name = "textBoxCode";
+            this.textBoxCode.Size = new System.Drawing.Size(154, 20);
+            this.textBoxCode.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxCode.TabIndex = 0;
+            // 
+            // kryptonLabel1
+            // 
+            this.kryptonLabel1.Location = new System.Drawing.Point(35, 5);
+            this.kryptonLabel1.Name = "kryptonLabel1";
+            this.kryptonLabel1.Size = new System.Drawing.Size(42, 19);
+            this.kryptonLabel1.TabIndex = 0;
+            this.kryptonLabel1.Values.Text = "Code :";
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // buttonSpecAny1
+            // 
+            this.buttonSpecAny1.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Context;
+            this.buttonSpecAny1.UniqueName = "3ED14974C39D424AF483B15489413085";
+            // 
+            // buttonSpecAny2
+            // 
+            this.buttonSpecAny2.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Context;
+            this.buttonSpecAny2.UniqueName = "F6D098FF97AB48FB2A99BBB2D3AE16BB";
+            // 
+            // buttonSpecAny3
+            // 
+            this.buttonSpecAny3.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Previous;
+            this.buttonSpecAny3.UniqueName = "5FF9C97ECDF840FFA4AD11EAEA81925E";
+            // 
+            // buttonSpecAny4
+            // 
+            this.buttonSpecAny4.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Next;
+            this.buttonSpecAny4.UniqueName = "B56143FA8A234E7613B74670410D55F5";
+            // 
+            // buttonSpecAny5
+            // 
+            this.buttonSpecAny5.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Context;
+            this.buttonSpecAny5.UniqueName = "A78BD21009064A446EB0B46846D279AF";
+            // 
+            // buttonSpecAny6
+            // 
+            this.buttonSpecAny6.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
+            this.buttonSpecAny6.UniqueName = "95BED338EBB14361B2927C3CB003454A";
             // 
             // PurchaseReturnForm
             // 

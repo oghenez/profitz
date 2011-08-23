@@ -303,6 +303,8 @@ namespace Profit
             m_po.EMPLOYEE = (Employee)employeeKryptonComboBox.SelectedItem;
             m_po.NOTES = notesKryptonTextBox.Text;
             m_po.SUPPLIER = (Supplier)supplierkryptonComboBox.SelectedItem;
+            m_po.DOCUMENT_DATE = docdatekryptonDateTimePicker.Value;
+            m_po.DOCUMENT_NO = docnokryptonTextBox.Text;
             m_po.EVENT_ITEMS = getItems();
         }
 
@@ -431,6 +433,8 @@ namespace Profit
             employeeKryptonComboBox.Text = m_po.EMPLOYEE.ToString();
             notesKryptonTextBox.Text = m_po.NOTES;
             supplierkryptonComboBox.Text = m_po.SUPPLIER.ToString();
+            docdatekryptonDateTimePicker.Value = m_po.DOCUMENT_DATE;
+            docnokryptonTextBox.Text = m_po.DOCUMENT_NO;
             itemsDataGrid.Rows.Clear();
             foreach (GoodReceiveNoteItem item in m_po.EVENT_ITEMS)
             {
@@ -533,7 +537,18 @@ namespace Profit
         {
             Supplier em = (Supplier)supplierkryptonComboBox.SelectedItem;
             supplierKryptonTextBox.Text = em == null ? "" : em.NAME;
+            addressKryptonTextBox.Text = em == null ? "" : em.ADDRESS;
+            contactPersonKryptonTextBox.Text = em == null ? "" : em.CONTACT;
             itemsDataGrid.Rows.Clear();
+        }
+
+        private void itemsDataGrid_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            for (int count = 0; (count <= (itemsDataGrid.Rows.Count - 2)); count++)
+            {
+                itemsDataGrid.Rows[count].HeaderCell.Value = string.Format((count + 1).ToString(), "0");
+                itemsDataGrid.Rows[count].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
         }
     }
 }

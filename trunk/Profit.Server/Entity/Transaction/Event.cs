@@ -18,6 +18,8 @@ namespace Profit.Server
         public Employee EMPLOYEE;
         public string NOTES = string.Empty;
         public bool POSTED;
+        public string DOCUMENT_NO = string.Empty;
+        public DateTime DOCUMENT_DATE = DateTime.Today;
         //bool m_byTransaction = true;
 
         public EventStatus EVENT_STATUS = EventStatus.Entry;

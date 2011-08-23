@@ -76,6 +76,12 @@
     <Compile Include="Forms\FieldChooserForm.Designer.cs">
       <DependentUpon>FieldChooserForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\InventoryTransaction\SearchGRNForSuppInvoiceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SearchGRNForSuppInvoiceForm.Designer.cs">
+      <DependentUpon>SearchGRNForSuppInvoiceForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\InventoryTransaction\SearchSupplierOSInvoiceForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -305,6 +311,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\FieldChooserForm.resx">
       <DependentUpon>FieldChooserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\SearchGRNForSuppInvoiceForm.resx">
+      <DependentUpon>SearchGRNForSuppInvoiceForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\SearchSupplierOSInvoiceForm.resx">
       <DependentUpon>SearchSupplierOSInvoiceForm.cs</DependentUpon>

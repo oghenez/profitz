@@ -222,6 +222,7 @@ namespace Profit.Server
             OdbcDataReader r = cmd.ExecuteReader();
             GoodReceiveNoteItem result = GoodReceiveNoteItem.TransformReader(r);
             r.Close();
+            if (result == null) return null;
             result.EVENT = GoodReceiveNoteRepository.GetHeaderOnly(cmd, result.EVENT.ID);
             result.EVENT.EVENT_ITEMS.Add(result);
             return result;
@@ -234,6 +235,7 @@ namespace Profit.Server
             r.Close();
             return st;
         }
+        
 
         protected override IList doSearch(string find)
         {
@@ -296,6 +298,64 @@ namespace Profit.Server
 
             m_command.CommandText = GoodReceiveNoteItem.GetSearchByPartAndGRNNo(find, supplierID, pois, trDate);
             OdbcDataReader r = m_command.ExecuteReader();
+            IList result = GoodReceiveNoteItem.TransformReaderList(r);
+            r.Close();
+            foreach (GoodReceiveNoteItem t in result)
+            {
+                m_command.CommandText = GoodReceiveNote.GetByIDSQL(t.EVENT.ID);
+                r = m_command.ExecuteReader();
+                t.EVENT = GoodReceiveNote.TransformReader(r);
+                r.Close();
+
+                m_command.CommandText = Part.GetByIDSQLStatic(t.PART.ID);
+                r = m_command.ExecuteReader();
+                t.PART = Part.GetPart(r);
+                r.Close();
+
+                m_command.CommandText = Unit.GetByIDSQLstatic(t.UNIT.ID);
+                r = m_command.ExecuteReader();
+                t.UNIT = Unit.GetUnit(r);
+                r.Close();
+
+                m_command.CommandText = Warehouse.GetByIDSQLStatic(t.WAREHOUSE.ID);
+                r = m_command.ExecuteReader();
+                t.WAREHOUSE = Warehouse.GetWarehouse(r);
+                r.Close();
+
+                m_command.CommandText = Unit.GetByIDSQLstatic(t.PART.UNIT.ID);
+                r = m_command.ExecuteReader();
+                t.PART.UNIT = Unit.GetUnit(r);
+                r.Close();
+            }
+            return result;
+        }
+        public IList FindGRNItemlistBySupplierDate(string find, int supID, DateTime trdate, IList grnIDS)
+        {
+            m_command.CommandText = SupplierInvoiceItem.GetGRNUseBySupplierInvoice();
+            OdbcDataReader r = m_command.ExecuteReader();
+            if (r.HasRows)
+            {
+                while (r.Read())
+                {
+                    int id = Convert.ToInt32(r[0]);
+                    if(!grnIDS.Contains(id))
+                     grnIDS.Add(id);
+                }
+            }
+            r.Close();
+            StringBuilder poisSB = new StringBuilder();
+            foreach (int i in grnIDS)
+            {
+                poisSB.Append(i.ToString());
+                poisSB.Append(',');
+            }
+            string pois = poisSB.ToString();
+            pois = grnIDS.Count > 0 ? pois.Substring(0, pois.Length - 1) : "";
+            if(find=="")
+                m_command.CommandText = GoodReceiveNoteItem.GetGRNItemBySuppDate(supID, trdate, pois);
+            else
+                m_command.CommandText = GoodReceiveNoteItem.GetSearchByPartAndGRNNo(find, supID, pois, trdate);
+            r = m_command.ExecuteReader();
             IList result = GoodReceiveNoteItem.TransformReaderList(r);
             r.Close();
             foreach (GoodReceiveNoteItem t in result)
