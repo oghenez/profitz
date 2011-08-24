@@ -156,11 +156,33 @@ namespace Profit
                 if (p == null) return;
                 Unit u = (Unit)Utils.FindEntityInList(itemsDataGrid[unitColumn.Index, e.RowIndex].Value.ToString(), m_units);
                 if (u == null) return;
-                p.UNIT_CONVERSION_LIST = r_part.GetAllUnit(p.ID, p.UNIT.ID);
+                p.UNIT_CONVERSION_LIST = r_part.GetUnitConversions(p.ID);
                 GoodReceiveNoteItem sample = new GoodReceiveNoteItem();
                 sample.PART = p;
                 sample.UNIT = u;
                 sample.QYTAMOUNT = Convert.ToDouble(e.FormattedValue);
+                double qty = sample.GetAmountInSmallestUnit();
+                double rest = pi.OUTSTANDING_AMOUNT_TO_GRN - qty;
+                if (rest < 0)
+                {
+                    e.Cancel = true;
+                    itemsDataGrid.Rows[e.RowIndex].ErrorText = "Quantity exceed outstanding quantity";
+                }
+                itemsDataGrid[OutstandingPOColumn.Index, e.RowIndex].Value = rest;
+            }
+            if (unitColumn.Index == e.ColumnIndex)
+            {
+                PurchaseOrderItem pi = (PurchaseOrderItem)itemsDataGrid[scanColumn.Index, e.RowIndex].Tag;
+                if (pi == null) return;
+                Part p = (Part)itemsDataGrid[codeColumn.Index, e.RowIndex].Tag;
+                if (p == null) return;
+                Unit u = (Unit)Utils.FindEntityInList(e.FormattedValue.ToString(), m_units);
+                if (u == null) return;
+                p.UNIT_CONVERSION_LIST = r_part.GetUnitConversions(p.ID);
+                GoodReceiveNoteItem sample = new GoodReceiveNoteItem();
+                sample.PART = p;
+                sample.UNIT = u;
+                sample.QYTAMOUNT = Convert.ToDouble(itemsDataGrid[QtyColumn.Index, e.RowIndex].Value);
                 double qty = sample.GetAmountInSmallestUnit();
                 double rest = pi.OUTSTANDING_AMOUNT_TO_GRN - qty;
                 if (rest < 0)

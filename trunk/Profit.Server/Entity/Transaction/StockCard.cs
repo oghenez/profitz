@@ -74,7 +74,12 @@ namespace Profit.Server
                     BALANCE += qty;
                     break;
                 case StockCardEntryType.SupplierInvoice:
-                    BALANCE += qty;
+                    SupplierInvoiceItem sit = (SupplierInvoiceItem)item;
+                    if (sit.GRN_ITEM != null)
+                    {
+                        if (sit.GRN_ITEM.ID == 0)
+                            BALANCE += qty;
+                    }
                     break;
                 case StockCardEntryType.CustomerInvoice:
                     BALANCE -= qty;
