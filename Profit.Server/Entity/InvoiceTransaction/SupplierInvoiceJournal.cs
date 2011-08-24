@@ -19,6 +19,18 @@ namespace Profit.Server
         {
             ID = id;
         }
+        public void UpdateAgainstPaymentStatusSIJ()
+        {
+            bool allClosed = true;
+            for (int i = 0; i < EVENT_JOURNAL_ITEMS.Count; i++)
+            {
+                SupplierInvoiceJournalItem poi = EVENT_JOURNAL_ITEMS[i] as SupplierInvoiceJournalItem;
+                if (poi.AGAINST_PAYMENT_STATUS == AgainstStatus.Close) continue;
+                allClosed = false;
+                break;
+            }
+            AGAINST_PAYMENT_STATUS = allClosed ? AgainstStatus.Close : AgainstStatus.Outstanding;
+        }
         public override string GetInsertSQL()
         {
             return String.Format(@"insert into table_supplierinvoicejournal 
