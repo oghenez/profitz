@@ -35,6 +35,7 @@ namespace Profit
             this.Name = formName;
             m_mainForm = mainForm;
             Clear(null, null);
+           // r_part.UpdatePart();
             //loadRecords();
         }
 
@@ -203,9 +204,34 @@ namespace Profit
         {
             bool a = textBoxCode.Text == "";
             bool b = textBoxName.Text == "";
+            bool c = false;
+            foreach (DataGridViewRow rw in dataGridViewUOM.Rows)
+            {
+                if (dataGridViewUOM[ConvUnit.Index, rw.Index].Value == null) continue;
+                if (dataGridViewUOM[barcodeColumn.Index, rw.Index].Value == null)
+                {
+                    c = true;
+                    rw.ErrorText = "Please fill Barcode";
+                }
+                if (Convert.ToDouble(dataGridViewUOM[OrigQty.Index, rw.Index].Value) < 1)
+                {
+                    c = true;
+                    rw.ErrorText += " Please fill Conversion Qty";
+                }
+                if (Convert.ToDouble(dataGridViewUOM[CostPrice.Index, rw.Index].Value) == 0)
+                {
+                    c = true;
+                    rw.ErrorText += " Please fill CostPrice";
+                }
+                if(Convert.ToDouble(dataGridViewUOM[SellPrice.Index, rw.Index].Value) == 0)
+                {
+                    c = true;
+                    rw.ErrorText += " Please fill Sell Price";
+                }
+            }
             if (a) errorProvider1.SetError(textBoxCode, "Code Can not Empty");
             if (b) errorProvider1.SetError(textBoxName, "Name Can not Empty");
-            return !a && !b;
+            return !a && !b && !c;
         }
         private void UpdateEntity()
         {
@@ -309,7 +335,8 @@ namespace Profit
             ConvUnit.ReadOnly = !enable;
             CostPrice.ReadOnly = !enable;
             SellPrice.ReadOnly = !enable;
-            OrigQty.ReadOnly = !enable;
+            //OrigQty.ReadOnly = !enable;
+            barcodeColumn.ReadOnly = !enable;
         }
         private void setEditMode(EditMode editmode)
         {
@@ -411,7 +438,10 @@ namespace Profit
             dataGridViewUOM.Rows.Clear();
             IList l = r_part.GetUnitConversions(m_part.ID);
             foreach (UnitConversion u in l)
+            {
+                if (u.CONVERSION_UNIT.ID == m_part.UNIT.ID) continue;
                 AddUOM(u);
+            }
         }
 
         #region IChildForm Members
@@ -456,6 +486,7 @@ namespace Profit
                     rw.Tag = unit;
                 }
                 unit.PART = m_part;
+                unit.BARCODE = dataGridViewUOM[barcodeColumn.Index, rw.Index].Value.ToString();
                 unit.CONVERSION_QTY = Convert.ToDouble(dataGridViewUOM[OrigQty.Index, rw.Index].Value);
                 unit.CONVERSION_UNIT = (Unit)Utils.FindEntityInList(dataGridViewUOM[ConvUnit.Index, rw.Index].Value.ToString(), (IList)unitkryptonComboBox2.DataSource);
                 unit.ORIGINAL_QTY = Convert.ToDouble(dataGridViewUOM[OrigQty.Index, rw.Index].Value);
@@ -469,7 +500,7 @@ namespace Profit
         public void AddUOM(UnitConversion u)
         {
             u.CONVERSION_UNIT = (Unit)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY).GetById(u.CONVERSION_UNIT);
-            int index = dataGridViewUOM.Rows.Add(1, u.CONVERSION_UNIT.CODE, u.CONVERSION_QTY,
+            int index = dataGridViewUOM.Rows.Add(u.BARCODE, 1, u.CONVERSION_UNIT.CODE, u.CONVERSION_QTY,
                 m_part.UNIT.CODE, u.COST_PRICE, u.SELL_PRICE);
             dataGridViewUOM.Rows[index].Tag = u;
         }
@@ -535,6 +566,7 @@ namespace Profit
         {
             Unit p = (Unit)unitkryptonComboBox2.SelectedItem;
             unitKryptonTextBox.Text = p == null ? "" : p.NAME;
+            unitKryptonTextBox.Text = p == null ? "" : p.CODE;
         }
 
         private void currencykryptonComboBox3_SelectedIndexChanged(object sender, EventArgs e)
@@ -587,6 +619,11 @@ namespace Profit
             Image image = Image.FromFile(openFileDialog1.FileName);
             image = resizeImage(image, new Size(225, 225));
             pictureBox.Image = image;
+        }
+
+        private void kryptonLabel16_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
         //private void toolStripButtonMigrate_Click(object sender, EventArgs e)

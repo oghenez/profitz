@@ -19,6 +19,7 @@ namespace Profit.Server
         public double ORIGINAL_QTY = 1;
         public double COST_PRICE;
         public double SELL_PRICE;
+        public string BARCODE = "";
         public Part PART;
 
         public UnitConversion()
@@ -47,6 +48,28 @@ namespace Profit.Server
                 unitConv.COST_PRICE = Convert.ToDouble(aReader[5]);
                 unitConv.SELL_PRICE = Convert.ToDouble(aReader[6]);
                 unitConv.PART = new Part(Convert.ToInt32(aReader[7]));
+                unitConv.BARCODE = aReader["unitconv_barcode"].ToString();
+            }
+            return unitConv;
+        }
+        public static UnitConversion GetUnitConversion(OdbcDataReader aReader)
+        {
+            UnitConversion unitConv = null;
+            if (aReader.HasRows)
+            {
+                while (aReader.Read())
+                {
+                    unitConv = new UnitConversion();
+                    unitConv.ID = Convert.ToInt32(aReader[0]);
+                    unitConv.CODE = aReader[1].ToString();
+                    unitConv.NAME = aReader[2].ToString();
+                    unitConv.CONVERSION_QTY = Convert.ToDouble(aReader[3]);
+                    unitConv.CONVERSION_UNIT = new Unit(Convert.ToInt32(aReader[4]));
+                    unitConv.COST_PRICE = Convert.ToDouble(aReader[5]);
+                    unitConv.SELL_PRICE = Convert.ToDouble(aReader[6]);
+                    unitConv.PART = new Part(Convert.ToInt32(aReader[7]));
+                    unitConv.BARCODE = aReader["unitconv_barcode"].ToString();
+                }
             }
             return unitConv;
         }
@@ -60,15 +83,17 @@ namespace Profit.Server
                 unitconv_unit,
                 unitconv_costprice,
                 unitconv_sellprice,
-                part_id) 
-                VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}')",
+                part_id,
+                unitconv_barcode) 
+                VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}')",
                 CODE, 
                 NAME,
                 CONVERSION_QTY,
                 CONVERSION_UNIT.ID,
                 COST_PRICE,
                 SELL_PRICE,
-                PART.ID);
+                PART.ID,
+                BARCODE);
         }
         public string GetDeleteSQL()
         {
@@ -83,8 +108,9 @@ namespace Profit.Server
                 unitconv_unit ='{3}',
                 unitconv_costprice ='{4}',
                 unitconv_sellprice ='{5}',
-                part_id ='{6}'
-                where unitconv_id = {7}",
+                part_id ='{6}',
+                unitconv_barcode ='{7}'
+                where unitconv_id = {8}",
                 CODE, 
                 NAME, 
                 CONVERSION_QTY,
@@ -92,6 +118,7 @@ namespace Profit.Server
                 COST_PRICE,
                 SELL_PRICE,
                 PART.ID,
+                BARCODE,
                 ID);
         }
         public string GetByIDSQL(int ID)
@@ -114,11 +141,7 @@ namespace Profit.Server
         {
             return String.Format("select * from table_unitconversion");
         }
-        public static string GetAllByPartSQL(int partID)
-        {
-            return String.Format("select * from table_unitconversion where part_id = '{0}'",partID);
-        }
-        public static string DeleteUpdatePart(int partID, IList notIN)
+        public static string DeleteUpdate(int id, IList notIN)
         {
             StringBuilder poisSB = new StringBuilder();
             foreach (UnitConversion i in notIN)
@@ -128,8 +151,15 @@ namespace Profit.Server
             }
             string pois = poisSB.ToString();
             pois = notIN.Count > 0 ? pois.Substring(0, pois.Length - 1) : "";
-            return String.Format("Delete from table_unitconversion where part_id = {0} and unitconv_id not in ({1})", partID, pois);
-            //return String.Format("select * from table_unitconversion where part_id = '{0}'", partID);
+            return String.Format("Delete from table_unitconversion where part_id = {0} and unitconv_id not in ({1})", id, pois);
+        }
+        public static string GetAllByPartSQL(int partID)
+        {
+            return String.Format("select * from table_unitconversion where part_id = '{0}'",partID);
+        }
+        public static string GetByPartAndUnitConIDSQL(int partID, int unitConvID)
+        {
+            return String.Format("select * from table_unitconversion where part_id = {0} and unitconv_unit = {1}", partID, unitConvID);
         }
         public string GetConcatSearch(string find)
         {
@@ -149,6 +179,7 @@ namespace Profit.Server
                 unitConv.COST_PRICE = Convert.ToDouble(aReader[5]);
                 unitConv.SELL_PRICE = Convert.ToDouble(aReader[6]);
                 unitConv.PART = new Part(Convert.ToInt32(aReader[7]));
+                unitConv.BARCODE = aReader["unitconv_barcode"].ToString();
                 result.Add(unitConv);
             }
             return result;
@@ -167,6 +198,7 @@ namespace Profit.Server
                 unitConv.COST_PRICE = Convert.ToDouble(aReader[5]);
                 unitConv.SELL_PRICE = Convert.ToDouble(aReader[6]);
                 unitConv.PART = new Part(Convert.ToInt32(aReader[7]));
+                unitConv.BARCODE = aReader["unitconv_barcode"].ToString();
                 result.Add(unitConv);
             }
             return result;

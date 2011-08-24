@@ -6,6 +6,7 @@ using System.Data.Odbc;
 using System.Collections;
 using System.IO;
 using System.Drawing;
+using System.Data;
 
 namespace Profit.Server
 {
@@ -22,18 +23,31 @@ namespace Profit.Server
             OdbcCommand aCommand = new OdbcCommand();
             aCommand.Connection = m_connection;
             aCommand.Transaction = trans;
+            Part e = (Part)en;
             try
             {
-                Part e = (Part)en;
                 aCommand.CommandText = e.GetInsertSQL();
                 this.SavePicture(e.PICTURE, e.CODE);
                 aCommand.ExecuteNonQuery();
                 aCommand.CommandText = e.GetMaximumIDSQL();
                 e.ID = Convert.ToInt32(aCommand.ExecuteScalar());
+                //add Base Conversion--------------------
+                UnitConversion unit = new UnitConversion();
+                unit.BARCODE = e.BARCODE;
+                unit.CONVERSION_QTY = 1;
+                unit.CONVERSION_UNIT = e.UNIT;
+                unit.COST_PRICE = e.COST_PRICE;
+                unit.ORIGINAL_QTY = 1;
+                unit.PART = e;
+                unit.SELL_PRICE = e.SELL_PRICE;
+                e.UNIT_CONVERSION_LIST.Add(unit);
+                //---------------------------------------
                 foreach (UnitConversion uc in e.UNIT_CONVERSION_LIST)
                 {
                     aCommand.CommandText = uc.GetInsertSQL();
                     aCommand.ExecuteNonQuery();
+                    aCommand.CommandText = uc.GetMaximumIDSQL();
+                    uc.ID = Convert.ToInt32(aCommand.ExecuteScalar());
                 }
                 trans.Commit();
             }
@@ -41,6 +55,10 @@ namespace Profit.Server
             {
                 trans.Rollback();
                 en.SetID(0);
+                foreach (UnitConversion uc in e.UNIT_CONVERSION_LIST)
+                {
+                    uc.ID = 0;
+                }
                 throw new Exception(getErrorMessage(x));
             }
             finally
@@ -61,7 +79,22 @@ namespace Profit.Server
                 aCommand.CommandText = e.GetUpdateSQL();
                 this.SavePicture(e.PICTURE, e.CODE);
                 aCommand.ExecuteNonQuery();
-
+                //Update base unit---------------------------
+                aCommand.CommandText = UnitConversion.GetByPartAndUnitConIDSQL(e.ID, e.UNIT.ID);
+                OdbcDataReader r = aCommand.ExecuteReader();
+                UnitConversion uc = UnitConversion.GetUnitConversion(r);
+                r.Close();
+                if (uc == null)
+                    uc = new UnitConversion();
+                uc.BARCODE = e.BARCODE;
+                uc.CONVERSION_QTY = 1;
+                uc.CONVERSION_UNIT = e.UNIT;
+                uc.COST_PRICE = e.COST_PRICE;
+                uc.ORIGINAL_QTY = 1;
+                uc.PART = e;
+                uc.SELL_PRICE = e.SELL_PRICE;
+                e.UNIT_CONVERSION_LIST.Add(uc);
+                //------------------------------
                 foreach (UnitConversion ucp in e.UNIT_CONVERSION_LIST)
                 {
                     if (ucp.ID > 0)
@@ -77,22 +110,24 @@ namespace Profit.Server
                         ucp.ID = Convert.ToInt32(aCommand.ExecuteScalar());
                     }
                 }
-                aCommand.CommandText = UnitConversion.GetAllByPartSQL(e.ID);
-                OdbcDataReader r = aCommand.ExecuteReader();
-                IList luc = UnitConversion.GetAllStatic(r);
-                r.Close();
-                foreach (UnitConversion chk in luc)
-                {
-                    chk.UPDATED = e.UNIT_CONVERSION_LIST.Contains(chk);
-                }
-                foreach (UnitConversion chk in luc)
-                {
-                    if (!chk.UPDATED)
-                    {
-                        aCommand.CommandText = chk.GetDeleteSQL();
-                        aCommand.ExecuteNonQuery();
-                    }
-                }
+                aCommand.CommandText = UnitConversion.DeleteUpdate(e.ID, e.UNIT_CONVERSION_LIST);
+                aCommand.ExecuteNonQuery();
+
+                //IList luc = UnitConversion.GetAllStatic(r);
+                //r.Close();
+                //foreach (UnitConversion chk in luc)
+                //{
+                //    chk.UPDATED = e.UNIT_CONVERSION_LIST.Contains(chk);
+                //}
+                //foreach (UnitConversion chk in luc)
+                //{
+                //    if (!chk.UPDATED)
+                //    {
+                //        aCommand.CommandText = chk.GetDeleteSQL();
+                //        aCommand.ExecuteNonQuery();
+                //    }
+                //}
+
                 trans.Commit();
             }
             catch (Exception x)
@@ -113,6 +148,7 @@ namespace Profit.Server
                 OdbcCommand aCommand = new OdbcCommand(UnitConversion.GetAllByPartSQL(partID), m_connection);
                 OdbcDataReader aReader = aCommand.ExecuteReader();
                 IList a = UnitConversion.GetAllStatic(aReader);
+                //if(a.Contains(
                 return a;
             }
             catch (Exception x)
@@ -249,6 +285,9 @@ namespace Profit.Server
                 OpenConnection();
                 OdbcCommand aCommand = new OdbcCommand(Part.GetSearchSQL(search), m_connection);
                 OdbcDataReader aReader = aCommand.ExecuteReader();
+                //DataSet ds = new DataSet();
+                //OdbcDataAdapter dc = new OdbcDataAdapter(Part.GetSearchSQL(search), m_connection);
+                //dc.Fill(ds);
                 IList a = Part.GetAllStatic(aReader);
                 aReader.Close();
                 return a;
@@ -281,11 +320,14 @@ namespace Profit.Server
                     aReader.Close();
                     result.Add(u);
                 }
-                aCommand.CommandText = Unit.GetByIDSQLstatic(unitID);
-                aReader = aCommand.ExecuteReader();
-                Unit up = Unit.GetUnit(aReader);
-                aReader.Close();
-                result.Add(up);
+                if (!result.Contains(new Unit(unitID)))
+                {
+                    aCommand.CommandText = Unit.GetByIDSQLstatic(unitID);
+                    aReader = aCommand.ExecuteReader();
+                    Unit up = Unit.GetUnit(aReader);
+                    aReader.Close();
+                    result.Add(up);
+                }
                 return result;
             }
             catch (Exception x)
@@ -388,5 +430,49 @@ namespace Profit.Server
                 return m;
             }
         }
+        //-------------
+        //public void UpdatePart()
+        //{
+        //    OdbcCommand cmd = new OdbcCommand();
+        //    cmd.Connection = m_connection;
+        //    m_connection.Open();
+        //    cmd.CommandText = m_entity.GetAllSQL();
+            
+        //    OdbcDataReader r = cmd.ExecuteReader();
+        //    IList result = new ArrayList();
+        //    while (r.Read())
+        //    {
+        //        PartUnit pu = new PartUnit();
+        //        pu.PART = Convert.ToInt32(r["part_id"]);
+        //        pu.UNIT = Convert.ToInt32(r["unit_id"]);
+        //        result.Add(pu);
+        //    }
+        //    r.Close();
+        //    foreach (PartUnit e in result)
+        //    {
+        //        cmd.CommandText = UnitConversion.GetByPartAndUnitConIDSQL(e.PART, e.UNIT);
+        //        r = cmd.ExecuteReader();
+        //        UnitConversion uc = UnitConversion.GetUnitConversion(r);
+        //        r.Close();
+        //        if (uc == null)
+        //        {
+        //            uc = new UnitConversion();
+        //            uc.BARCODE = e.BARCODE;
+        //            uc.CONVERSION_QTY = 1;
+        //            uc.CONVERSION_UNIT = e.UNIT;
+        //            uc.COST_PRICE = e.COST_PRICE;
+        //            uc.ORIGINAL_QTY = 1;
+        //            uc.PART = e;
+        //            uc.SELL_PRICE = e.SELL_PRICE;
+        //            cmd.CommandText = uc.GetInsertSQL();
+        //            cmd.ExecuteNonQuery();
+        //        }
+        //    }
+        //}
+        //private class PartUnit
+        //{
+        //    public int PART, UNIT;
+            
+        //}
     }
 }

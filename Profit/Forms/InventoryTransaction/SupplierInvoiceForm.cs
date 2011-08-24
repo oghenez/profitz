@@ -190,6 +190,8 @@ namespace Profit
                         }
                     }
                     itemsDataGrid[codeColumn.Index, e.RowIndex].Tag = p;
+                    itemsDataGrid[GRNNoColumn.Index, e.RowIndex].Tag = null;
+                    itemsDataGrid[GRNNoColumn.Index, e.RowIndex].Value = "";
                     itemsDataGrid[scanColumn.Index, e.RowIndex].Value = p.BARCODE;
                     itemsDataGrid[codeColumn.Index, e.RowIndex].Value = p.CODE;
                     itemsDataGrid[nameColumn.Index, e.RowIndex].Value = p.NAME;
@@ -234,6 +236,8 @@ namespace Profit
                                 }
                             }
                             itemsDataGrid[codeColumn.Index, e.RowIndex].Tag = p;
+                            itemsDataGrid[GRNNoColumn.Index, e.RowIndex].Tag = null;
+                            itemsDataGrid[GRNNoColumn.Index, e.RowIndex].Value = "";
                             itemsDataGrid[scanColumn.Index, e.RowIndex].Value = p.BARCODE;
                             itemsDataGrid[codeColumn.Index, e.RowIndex].Value = p.CODE;
                             itemsDataGrid[nameColumn.Index, e.RowIndex].Value = p.NAME;
@@ -248,8 +252,9 @@ namespace Profit
                             itemsDataGrid[warehouseColumn.Index, e.RowIndex].Value = m_warehouses[0].ToString();
                         }
                     }
-
+                    
                 }
+                
             }
             if (e.ColumnIndex == discabcColumn.Index)
             {
@@ -269,6 +274,15 @@ namespace Profit
                         e.Cancel = true;
                         return;
                     }
+                }
+            }
+            if (e.ColumnIndex == QtyColumn.Index || e.ColumnIndex == unitColumn.Index)
+            {
+                GoodReceiveNoteItem item = (GoodReceiveNoteItem)itemsDataGrid[GRNNoColumn.Index, e.RowIndex].Tag;
+                if (item != null)
+                {
+                    e.Cancel = true;
+                    itemsDataGrid.Rows[e.RowIndex].ErrorText = "GRN Qty / Unit  can not change";
                 }
             }
         }
