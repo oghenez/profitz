@@ -54,6 +54,7 @@
     <Compile Include="Entity\GeneralSetup.cs" />
     <Compile Include="Entity\InvoiceTransaction\EventJournal.cs" />
     <Compile Include="Entity\InvoiceTransaction\EventJournalItem.cs" />
+    <Compile Include="Entity\InvoiceTransaction\IPayment.cs" />
     <Compile Include="Entity\InvoiceTransaction\SupplierInvoiceJournal.cs" />
     <Compile Include="Entity\InvoiceTransaction\SupplierInvoiceJournalItem.cs" />
     <Compile Include="Entity\InvoiceTransaction\SupplierOutStandingInvoice.cs" />

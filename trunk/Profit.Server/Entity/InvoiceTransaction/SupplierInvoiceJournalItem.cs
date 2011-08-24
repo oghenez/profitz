@@ -17,6 +17,39 @@ namespace Profit.Server
         {
             VENDOR_BALANCE_TYPE = VendorBalanceType.Supplier;
         }
+        public void SetOSAgainstPaymentItem(IPayment pyi)
+        {
+            double qtyAmount = pyi.AMOUNT;
+            if (qtyAmount <= 0) return;
+            if (AGAINST_PAYMENT_STATUS == AgainstStatus.Close)
+                throw new Exception("Invoice Item Allready Close :" + this.INVOICE_NO);
+            if (qtyAmount > OUTSTANDING_AMOUNT)
+                throw new Exception("Payment Item Amount exceed SIJ Outstanding Item Amount :" + this.INVOICE_NO);
+            OUTSTANDING_AMOUNT = OUTSTANDING_AMOUNT - qtyAmount;
+            PAID_AMOUNT = PAID_AMOUNT + qtyAmount;
+            if (isValidToClose())
+                AGAINST_PAYMENT_STATUS = AgainstStatus.Close;
+            else
+                AGAINST_PAYMENT_STATUS = AgainstStatus.Outstanding;
+            ((SupplierInvoiceJournal)EVENT_JOURNAL).UpdateAgainstPaymentStatusSIJ();
+        }
+        public void UnSetOSAgainstPaymentItem(IPayment grni)
+        {
+            double qtyAmount = grni.AMOUNT;
+            if (qtyAmount > this.AMOUNT || OUTSTANDING_AMOUNT + qtyAmount > this.AMOUNT)
+                throw new Exception("Payment Item revise Amount exceed SIJ Item Amount :" + this.INVOICE_NO);
+            OUTSTANDING_AMOUNT = OUTSTANDING_AMOUNT + qtyAmount;
+            PAID_AMOUNT = PAID_AMOUNT - qtyAmount;
+            if (OUTSTANDING_AMOUNT > 0)
+                AGAINST_PAYMENT_STATUS = AgainstStatus.Outstanding;
+            ((SupplierInvoiceJournal)EVENT_JOURNAL).UpdateAgainstPaymentStatusSIJ();
+        }
+        private bool isValidToClose()
+        {
+            bool validA = OUTSTANDING_AMOUNT == 0;
+            bool validB = PAID_AMOUNT == AMOUNT;
+            return validA && validB;
+        }
         public override string GetInsertSQL()
         {
             return String.Format(@"insert into table_supplierinvoicejournalitem 

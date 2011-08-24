@@ -211,6 +211,7 @@ namespace Profit.Server
                 OdbcCommand aCommand = new OdbcCommand(FormAccess.GetAllByUserSQL(u.ID), m_connection);
                 OdbcDataReader aReader = aCommand.ExecuteReader();
                 IList a = p.GetAll(aReader);
+                aReader.Close();
                 foreach (FormAccess fa in a)
                 {
                     u.FORM_ACCESS_LIST.Add(fa.CODE, fa);
