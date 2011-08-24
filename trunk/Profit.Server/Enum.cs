@@ -79,4 +79,10 @@ namespace Profit.Server
         Supplier,
         Customer,
     }
+    public enum PaymentType
+    {
+        Cash,
+        Bank,
+        APDebitNote
+    }
 }

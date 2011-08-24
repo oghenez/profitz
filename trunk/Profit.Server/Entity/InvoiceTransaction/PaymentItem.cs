@@ -9,6 +9,9 @@ namespace Profit.Server
 {
     public class PaymentItem : EventJournalItem
     {
+        public PaymentType PAYMENT_TYPE = PaymentType.Cash;
+        public ISupplierInvoice 
+
         public PaymentItem() : base()
         {
             VENDOR_BALANCE_TYPE = VendorBalanceType.Supplier;

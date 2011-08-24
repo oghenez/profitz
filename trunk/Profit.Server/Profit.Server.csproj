@@ -52,6 +52,8 @@
     <Compile Include="Entity\Bank.cs" />
     <Compile Include="Entity\FormAccess.cs" />
     <Compile Include="Entity\GeneralSetup.cs" />
+    <Compile Include="Entity\InvoiceTransaction\PaymentItem.cs" />
+    <Compile Include="Entity\InvoiceTransaction\Payment.cs" />
     <Compile Include="Entity\InvoiceTransaction\EventJournal.cs" />
     <Compile Include="Entity\InvoiceTransaction\EventJournalItem.cs" />
     <Compile Include="Entity\InvoiceTransaction\IPayment.cs" />
