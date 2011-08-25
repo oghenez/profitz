@@ -324,5 +324,57 @@ namespace Profit.Server
             r.Close();
             return rest;
         }
+        public static void UpdateAgainstStatus(OdbcCommand cmd, EventJournal e, ISupplierInvoiceJournalItem ei)
+        {
+            SupplierInvoiceJournal po = (SupplierInvoiceJournal)e;
+            SupplierInvoiceJournalItem poi = (SupplierInvoiceJournalItem)ei;
+            cmd.CommandText = poi.UpdateAgainstStatus();
+            cmd.ExecuteNonQuery();
+            cmd.CommandText = po.UpdateAgainstStatus();
+            cmd.ExecuteNonQuery();
+        }
+        public IList FindSIJournalItemlistForPayment(string find, int supplier, DateTime trdate, IList notIn)
+        {
+            StringBuilder poisSB = new StringBuilder();
+            foreach (int i in notIn)
+            {
+                poisSB.Append(i.ToString());
+                poisSB.Append(',');
+            }
+            string pois = poisSB.ToString();
+            pois = notIn.Count > 0 ? pois.Substring(0, pois.Length - 1) : "";
+            m_command.CommandText = SupplierInvoiceJournalItem.GetSearchForPayment(find, supplier, pois, trdate);
+            OdbcDataReader r = m_command.ExecuteReader();
+            IList result = SupplierInvoiceJournalItem.TransformReaderList(r);
+            r.Close();
+            foreach (SupplierInvoiceJournalItem t in result)
+            {
+                m_command.CommandText = SupplierInvoiceJournal.GetByIDSQL(t.EVENT_JOURNAL.ID);
+                r = m_command.ExecuteReader();
+                t.EVENT_JOURNAL = SupplierInvoiceJournal.TransformReader(r);
+                r.Close();
+
+                m_command.CommandText = Currency.GetByIDSQLStatic(t.CURRENCY.ID);
+                r = m_command.ExecuteReader();
+                t.CURRENCY = Currency.GetCurrency(r);
+                r.Close();
+
+                //m_command.CommandText = Unit.GetByIDSQLstatic(t.VENDOR.ID);
+                //r = m_command.ExecuteReader();
+                //t.UNIT = Unit.GetUnit(r);
+                //r.Close();
+
+                //m_command.CommandText = Warehouse.GetByIDSQLStatic(t.WAREHOUSE.ID);
+                //r = m_command.ExecuteReader();
+                //t.WAREHOUSE = Warehouse.GetWarehouse(r);
+                //r.Close();
+
+                //m_command.CommandText = Unit.GetByIDSQLstatic(t.PART.UNIT.ID);
+                //r = m_command.ExecuteReader();
+                //t.PART.UNIT = Unit.GetUnit(r);
+                //r.Close();
+            }
+            return result;
+        }
     }
 }

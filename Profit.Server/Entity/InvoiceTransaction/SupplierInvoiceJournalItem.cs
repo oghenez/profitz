@@ -7,19 +7,25 @@ using System.Data.Odbc;
 
 namespace Profit.Server
 {
-    public class SupplierInvoiceJournalItem : EventJournalItem
+    public class SupplierInvoiceJournalItem : EventJournalItem, ISupplierInvoiceJournalItem
     {
         public AgainstStatus AGAINST_PAYMENT_STATUS = AgainstStatus.Open;
         public double OUTSTANDING_AMOUNT = 0;
         public double PAID_AMOUNT = 0;
 
-        public SupplierInvoiceJournalItem() : base()
+        public SupplierInvoiceJournalItem()
+            : base()
         {
             VENDOR_BALANCE_TYPE = VendorBalanceType.Supplier;
         }
+        public SupplierInvoiceJournalItem(int id)
+            : this()
+        {
+            ID = id;
+        }
         public void SetOSAgainstPaymentItem(IPayment pyi)
         {
-            double qtyAmount = pyi.AMOUNT;
+            double qtyAmount = pyi.GET_AMOUNT;
             if (qtyAmount <= 0) return;
             if (AGAINST_PAYMENT_STATUS == AgainstStatus.Close)
                 throw new Exception("Invoice Item Allready Close :" + this.INVOICE_NO);
@@ -35,7 +41,7 @@ namespace Profit.Server
         }
         public void UnSetOSAgainstPaymentItem(IPayment grni)
         {
-            double qtyAmount = grni.AMOUNT;
+            double qtyAmount = grni.GET_AMOUNT;
             if (qtyAmount > this.AMOUNT || OUTSTANDING_AMOUNT + qtyAmount > this.AMOUNT)
                 throw new Exception("Payment Item revise Amount exceed SIJ Item Amount :" + this.INVOICE_NO);
             OUTSTANDING_AMOUNT = OUTSTANDING_AMOUNT + qtyAmount;
@@ -79,9 +85,9 @@ namespace Profit.Server
                VENDOR.ID,
                CURRENCY.ID,
                AMOUNT,
-               VENDOR_BALANCE_ENTRY==null?0:VENDOR_BALANCE_ENTRY.ID,
-               VENDOR_BALANCE==null?0:VENDOR_BALANCE.ID,
-               VendorBalanceEntryType.SupplierOutStandingInvoice.ToString(),
+               VENDOR_BALANCE_ENTRY == null ? 0 : VENDOR_BALANCE_ENTRY.ID,
+               VENDOR_BALANCE == null ? 0 : VENDOR_BALANCE.ID,
+               VendorBalanceEntryType.SupplierInvoice.ToString(),
                INVOICE_DATE.ToString(Utils.DATE_FORMAT),
                INVOICE_NO,
                DUE_DATE.ToString(Utils.DATE_FORMAT),
@@ -125,7 +131,7 @@ namespace Profit.Server
                AMOUNT,
                VENDOR_BALANCE_ENTRY == null ? 0 : VENDOR_BALANCE_ENTRY.ID,
                VENDOR_BALANCE == null ? 0 : VENDOR_BALANCE.ID,
-               VendorBalanceEntryType.SupplierOutStandingInvoice.ToString(),
+               VendorBalanceEntryType.SupplierInvoice.ToString(),
                INVOICE_DATE.ToString(Utils.DATE_FORMAT),
                INVOICE_NO,
                DUE_DATE.ToString(Utils.DATE_FORMAT),
@@ -148,13 +154,13 @@ namespace Profit.Server
                 aReader.Read();
                 transaction = new SupplierInvoiceJournalItem();
                 transaction.ID = Convert.ToInt32(aReader["siji_id"]);
-                transaction.EVENT_JOURNAL = new SupplierOutStandingInvoice(Convert.ToInt32(aReader["sij_id"]));
+                transaction.EVENT_JOURNAL = new SupplierInvoiceJournal(Convert.ToInt32(aReader["sij_id"]));
                 transaction.VENDOR = new Supplier(Convert.ToInt32(aReader["sup_id"]));
                 transaction.CURRENCY = new Currency(Convert.ToInt32(aReader["ccy_id"]));
                 transaction.AMOUNT = Convert.ToDouble(aReader["siji_amount"]);
                 //transaction.VENDOR_BALANCE_ENTRY = new VendorBalanceEntry(
-               //VENDOR_BALANCE == null ? 0 : VENDOR_BALANCE.ID,
-                transaction.VENDOR_BALANCE_ENTRY_TYPE = VendorBalanceEntryType.SupplierOutStandingInvoice;
+                //VENDOR_BALANCE == null ? 0 : VENDOR_BALANCE.ID,
+                transaction.VENDOR_BALANCE_ENTRY_TYPE = VendorBalanceEntryType.SupplierInvoice;
                 transaction.INVOICE_DATE = Convert.ToDateTime(aReader["siji_invoicedate"]);
                 transaction.INVOICE_NO = aReader["siji_invoiceno"].ToString();
                 transaction.DUE_DATE = Convert.ToDateTime(aReader["siji_duedate"]);
@@ -178,7 +184,7 @@ namespace Profit.Server
             {
                 SupplierInvoiceJournalItem transaction = new SupplierInvoiceJournalItem();
                 transaction.ID = Convert.ToInt32(aReader["siji_id"]);
-                transaction.EVENT_JOURNAL = new SupplierOutStandingInvoice(Convert.ToInt32(aReader["sij_id"]));
+                transaction.EVENT_JOURNAL = new SupplierInvoiceJournal(Convert.ToInt32(aReader["sij_id"]));
                 transaction.VENDOR = new Supplier(Convert.ToInt32(aReader["sup_id"]));
                 transaction.CURRENCY = new Currency(Convert.ToInt32(aReader["ccy_id"]));
                 transaction.AMOUNT = Convert.ToDouble(aReader["siji_amount"]);
@@ -233,5 +239,42 @@ namespace Profit.Server
         //{
         //    return String.Format("SELECT * from table_supplierinvoicejournalitem where grni_id = {0}", id);
         //}
+        public string UpdateAgainstStatus()
+        {
+            return String.Format(@"Update table_supplierinvoicejournalitem set 
+                    siji_againstpaymentstatus = '{0}',
+                    siji_outstandingamount = {1},
+                    siji_paidamount = {2}
+                    where siji_id = {3}", AGAINST_PAYMENT_STATUS.ToString(),
+                                       OUTSTANDING_AMOUNT,
+                                       PAID_AMOUNT,
+                                       ID);
+        }
+        public static string GetSearchForPayment(string find, int supplierID, string poi, DateTime trdate)
+        {
+            return String.Format(@"SELECT t.*
+                FROM table_supplierinvoicejournalitem t
+                INNER JOIN table_supplierinvoicejournal p on p.sij_id = t.sij_id
+                where t.siji_outstandingamount > 0
+                and p.sij_code like '%{0}%' and p.sup_id = {1}  
+                and p.sij_posted = true
+                and p.sij_date <= '{2}'
+               {3}", find, supplierID, trdate.ToString(Utils.DATE_FORMAT), poi != "" ? " and t.siji_id not in (" + poi + ")" : "");
+        }
+        #region ISupplierInvoiceJournalItem Members
+
+        public EventJournal GET_EVENT_JOURNAL
+        {
+            get
+            {
+                return EVENT_JOURNAL;
+            }
+            set
+            {
+                EVENT_JOURNAL = value;
+            }
+        }
+
+        #endregion
     }
 }

@@ -664,7 +664,7 @@
             treeNode26.Text = "TRCP002 - Good Receive";
             treeNode27.Name = "NodeSupplierInvoice";
             treeNode27.Text = "TRCP003 - Supplier Invoice";
-            treeNode28.Name = "Node3";
+            treeNode28.Name = "NodePayment";
             treeNode28.Text = "TRCP004 - Payment";
             treeNode29.Name = "NodePurchaseReturn";
             treeNode29.Text = "TRCP005 - Purchase Return";

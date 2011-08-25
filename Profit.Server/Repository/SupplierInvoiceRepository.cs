@@ -313,5 +313,6 @@ namespace Profit.Server
             double result = Convert.ToDouble(r);
             return result;
         }
+
     }
 }

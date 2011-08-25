@@ -7,11 +7,53 @@ using System.Collections;
 
 namespace Profit.Server
 {
-    public class SupplierOutStandingInvoiceItem : EventJournalItem
+    public class SupplierOutStandingInvoiceItem : EventJournalItem, ISupplierInvoiceJournalItem
     {
+        public AgainstStatus AGAINST_PAYMENT_STATUS = AgainstStatus.Open;
+        public double OUTSTANDING_AMOUNT = 0;
+        public double PAID_AMOUNT = 0;
+
         public SupplierOutStandingInvoiceItem() : base()
         {
             VENDOR_BALANCE_TYPE = VendorBalanceType.Supplier;
+        }
+        public SupplierOutStandingInvoiceItem(int id)
+            : this()
+        {
+            ID = id;
+        }
+        public void SetOSAgainstPaymentItem(IPayment pyi)
+        {
+            double qtyAmount = pyi.GET_AMOUNT;
+            if (qtyAmount <= 0) return;
+            if (AGAINST_PAYMENT_STATUS == AgainstStatus.Close)
+                throw new Exception("Invoice Item Allready Close :" + this.INVOICE_NO);
+            if (qtyAmount > OUTSTANDING_AMOUNT)
+                throw new Exception("Payment Item Amount exceed SIJ Outstanding Item Amount :" + this.INVOICE_NO);
+            OUTSTANDING_AMOUNT = OUTSTANDING_AMOUNT - qtyAmount;
+            PAID_AMOUNT = PAID_AMOUNT + qtyAmount;
+            if (isValidToClose())
+                AGAINST_PAYMENT_STATUS = AgainstStatus.Close;
+            else
+                AGAINST_PAYMENT_STATUS = AgainstStatus.Outstanding;
+            ((SupplierOutStandingInvoice)EVENT_JOURNAL).UpdateAgainstPaymentStatusSIJ();
+        }
+        public void UnSetOSAgainstPaymentItem(IPayment grni)
+        {
+            double qtyAmount = grni.GET_AMOUNT;
+            if (qtyAmount > this.AMOUNT || OUTSTANDING_AMOUNT + qtyAmount > this.AMOUNT)
+                throw new Exception("Payment Item revise Amount exceed SIJ Item Amount :" + this.INVOICE_NO);
+            OUTSTANDING_AMOUNT = OUTSTANDING_AMOUNT + qtyAmount;
+            PAID_AMOUNT = PAID_AMOUNT - qtyAmount;
+            if (OUTSTANDING_AMOUNT > 0)
+                AGAINST_PAYMENT_STATUS = AgainstStatus.Outstanding;
+            ((SupplierOutStandingInvoice)EVENT_JOURNAL).UpdateAgainstPaymentStatusSIJ();
+        }
+        private bool isValidToClose()
+        {
+            bool validA = OUTSTANDING_AMOUNT == 0;
+            bool validB = PAID_AMOUNT == AMOUNT;
+            return validA && validB;
         }
         public override string GetInsertSQL()
         {
@@ -32,9 +74,13 @@ namespace Profit.Server
                     sostii_amountbeforediscount,
                     top_id,
                     sostii_description,
-                    sostii_notes 
+                    sostii_notes,
+                    sostii_againstpaymentstatus,
+                    sostii_outstandingamount,
+                    sostii_paidamount  
                 ) 
-                VALUES ({0},{1},{2},{3},{4},{5},'{6}','{7}','{8}','{9}',{10},{11},{12},{13},'{14}','{15}')",
+                VALUES ({0},{1},{2},{3},{4},{5},'{6}','{7}','{8}','{9}',{10},{11},{12},{13},'{14}','{15}'
+                        ,'{16}',{17},{18})",
                EVENT_JOURNAL.ID,
                VENDOR.ID,
                CURRENCY.ID,
@@ -50,7 +96,10 @@ namespace Profit.Server
                AMOUNT_BEFORE_DISCOUNT,
                TOP.ID,
                DESCRIPTION,
-               NOTES
+               NOTES,
+                AGAINST_PAYMENT_STATUS.ToString(),
+               AMOUNT,
+               0
                 );
         }
         public override string GetUpdateSQL()
@@ -71,8 +120,11 @@ namespace Profit.Server
                     sostii_amountbeforediscount = {12},
                     top_id = {13},
                     sostii_description = '{14}',
-                    sostii_notes  = '{15}'
-                    where sostii_id = {16}",
+                    sostii_notes  = '{15}',
+                    sostii_againstpaymentstatus = '{16}',
+                    sostii_outstandingamount = {17},
+                    sostii_paidamount  = {18}
+                    where sostii_id = {19}",
                  EVENT_JOURNAL.ID,
                VENDOR.ID,
                CURRENCY.ID,
@@ -89,6 +141,9 @@ namespace Profit.Server
                TOP.ID,
                DESCRIPTION,
                NOTES,
+                AGAINST_PAYMENT_STATUS.ToString(),
+               OUTSTANDING_AMOUNT,
+               PAID_AMOUNT,
                 ID);
         }
         public static SupplierOutStandingInvoiceItem TransformReader(OdbcDataReader aReader)
@@ -115,7 +170,9 @@ namespace Profit.Server
                 transaction.TOP = new TermOfPayment(Convert.ToInt32(aReader["top_id"]));
                 transaction.DESCRIPTION = aReader["sostii_description"].ToString();
                 transaction.NOTES = aReader["sostii_notes"].ToString();
-
+                transaction.AGAINST_PAYMENT_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), aReader["sostii_againstpaymentstatus"].ToString());
+                transaction.OUTSTANDING_AMOUNT = Convert.ToDouble(aReader["sostii_outstandingamount"]);
+                transaction.PAID_AMOUNT = Convert.ToDouble(aReader["sostii_paidamount"]);
             }
             return transaction;
         }
@@ -142,6 +199,9 @@ namespace Profit.Server
                 transaction.TOP = new TermOfPayment(Convert.ToInt32(aReader["top_id"]));
                 transaction.DESCRIPTION = aReader["sostii_description"].ToString();
                 transaction.NOTES = aReader["sostii_notes"].ToString();
+                transaction.AGAINST_PAYMENT_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), aReader["sostii_againstpaymentstatus"].ToString());
+                transaction.OUTSTANDING_AMOUNT = Convert.ToDouble(aReader["sostii_outstandingamount"]);
+                transaction.PAID_AMOUNT = Convert.ToDouble(aReader["sostii_paidamount"]);
                 result.Add(transaction);
             }
             return result;
@@ -178,5 +238,22 @@ namespace Profit.Server
         //{
         //    return String.Format("SELECT * from table_supplieroutstandinginvoiceitem where grni_id = {0}", id);
         //}
+
+
+        #region ISupplierInvoiceJournalItem Members
+
+        public EventJournal GET_EVENT_JOURNAL
+        {
+            get
+            {
+                return EVENT_JOURNAL;
+            }
+            set
+            {
+                EVENT_JOURNAL = value;
+            }
+        }
+
+        #endregion
     }
 }

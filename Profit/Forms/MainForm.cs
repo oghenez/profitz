@@ -41,6 +41,7 @@ namespace Profit
         const string PURCHASE_RETURN_FORM = "PurchaseReturnForm";
         const string SUPPLIER_INVOICE_FORM = "SupplierInvoiceForm";
         const string SUPPLIER_OUTSTANDING_INVOICE_FORM = "SupplierOutstandingInvoiceForm";
+        const string PAYMENT_FORM = "PaymentForm";
 
         IList m_listForm = new ArrayList();
         User m_currentUser = null;
@@ -241,6 +242,13 @@ namespace Profit
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
+            if (e.Node.Name == "NodePayment")
+            {
+                if (isChild(PAYMENT_FORM)) { this.Cursor = Cursors.Default; return; }
+                PaymentForm user = new PaymentForm(this, PAYMENT_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            }
             this.Cursor = Cursors.Default;
         }
         bool isChild(string name)
@@ -428,6 +436,7 @@ namespace Profit
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PURCHASE_RETURN_FORM)) purchaseTreeView.Nodes["NodePurchaseReturn"].Remove();
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(SUPPLIER_INVOICE_FORM)) purchaseTreeView.Nodes["NodeSupplierInvoice"].Remove();
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(SUPPLIER_OUTSTANDING_INVOICE_FORM)) purchaseTreeView.Nodes["NodeSupplierOutstandingInvoice"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PAYMENT_FORM)) purchaseTreeView.Nodes["NodePayment"].Remove();
 
 
             inventoryKryptonHeader.Visible = inventoryTreeView.Visible = inventoryTreeView.Nodes.Count > 0;
@@ -525,6 +534,7 @@ namespace Profit
             m_listForm.Add(new FormAccess(0, MainForm.SUPPLIER_INVOICE_FORM.ToString(), "TRCP003 - Supplier Invoice"));
             m_listForm.Add(new FormAccess(0, MainForm.SUPPLIER_OUTSTANDING_INVOICE_FORM.ToString(), "TRCP007 - Supplier Outstanding Invoice"));
             m_listForm.Add(new FormAccess(0, MainForm.PURCHASE_RETURN_FORM.ToString(), "TRCP005 - Purchase Return"));
+            m_listForm.Add(new FormAccess(0, MainForm.PAYMENT_FORM.ToString(), "TRCP004 - Payment"));
         }
 
         private void userMaintenanceToolStripMenuItem_Click(object sender, EventArgs e)
