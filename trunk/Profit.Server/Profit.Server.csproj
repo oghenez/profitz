@@ -52,6 +52,9 @@
     <Compile Include="Entity\Bank.cs" />
     <Compile Include="Entity\FormAccess.cs" />
     <Compile Include="Entity\GeneralSetup.cs" />
+    <Compile Include="Entity\InvoiceTransaction\APDebitNote.cs" />
+    <Compile Include="Entity\InvoiceTransaction\APDebitNoteItem.cs" />
+    <Compile Include="Entity\InvoiceTransaction\ISupplierInvoice.cs" />
     <Compile Include="Entity\InvoiceTransaction\PaymentItem.cs" />
     <Compile Include="Entity\InvoiceTransaction\Payment.cs" />
     <Compile Include="Entity\InvoiceTransaction\EventJournal.cs" />
@@ -112,6 +115,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Repository\AutoNumberSetupRepository.cs" />
+    <Compile Include="Repository\PaymentRepository.cs" />
     <Compile Include="Repository\SupplierInvoiceJournalRepository.cs" />
     <Compile Include="Repository\SupplierOutStandingInvoiceRepository.cs" />
     <Compile Include="Repository\VendorBalanceEntryRepository.cs" />

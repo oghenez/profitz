@@ -9,12 +9,26 @@ namespace Profit.Server
 {
     public class SupplierOutStandingInvoice : EventJournal
     {
+        public AgainstStatus AGAINST_PAYMENT_STATUS = AgainstStatus.Open;
+
         public SupplierOutStandingInvoice()
         { }
         public SupplierOutStandingInvoice(int id)
             : base()
         {
             ID = id;
+        }
+        public void UpdateAgainstPaymentStatusSIJ()
+        {
+            bool allClosed = true;
+            for (int i = 0; i < EVENT_JOURNAL_ITEMS.Count; i++)
+            {
+                SupplierInvoiceJournalItem poi = EVENT_JOURNAL_ITEMS[i] as SupplierInvoiceJournalItem;
+                if (poi.AGAINST_PAYMENT_STATUS == AgainstStatus.Close) continue;
+                allClosed = false;
+                break;
+            }
+            AGAINST_PAYMENT_STATUS = allClosed ? AgainstStatus.Close : AgainstStatus.Outstanding;
         }
         public override string GetInsertSQL()
         {
@@ -35,9 +49,10 @@ namespace Profit.Server
                     sosti_amountafterdiscamount,
                     sosti_otherexpense,
                     sosti_netamount,
-                    emp_id
+                    emp_id,
+                    sosti_againstpaymentstatus
                 ) 
-                VALUES ('{0}','{1}',{2},{3},'{4}','{5}',{6},'{7}',{8},{9},{10},{11},{12},{13},{14},{15})",
+                VALUES ('{0}','{1}',{2},{3},'{4}','{5}',{6},'{7}',{8},{9},{10},{11},{12},{13},{14},{15},'{16}')",
                 CODE,
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 VENDOR.ID,
@@ -53,7 +68,8 @@ namespace Profit.Server
                 AMOUNT_AFTER_DISC_AMOUNT,
                 OTHER_EXPENSE,
                 NET_AMOUNT,
-                EMPLOYEE.ID
+                EMPLOYEE.ID,
+                AGAINST_PAYMENT_STATUS.ToString()
                 );
         }
         public override string GetUpdateSQL()
@@ -74,8 +90,9 @@ namespace Profit.Server
                     sosti_amountafterdiscamount= {12},
                     sosti_otherexpense= {13},
                     sosti_netamount= {14},
-                    emp_id= {15}
-                where sosti_id = {16}",
+                    emp_id= {15},
+                    sosti_againstpaymentstatus = '{16}'
+                where sosti_id = {17}",
                 CODE,
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 VENDOR.ID,
@@ -92,6 +109,7 @@ namespace Profit.Server
                 OTHER_EXPENSE,
                 NET_AMOUNT,
                 EMPLOYEE.ID,
+                AGAINST_PAYMENT_STATUS.ToString(),
                 ID);
         }
         public static SupplierOutStandingInvoice TransformReader(OdbcDataReader r)
@@ -118,7 +136,7 @@ namespace Profit.Server
                 tr.OTHER_EXPENSE = Convert.ToDouble(r["sosti_otherexpense"]);
                 tr.NET_AMOUNT = Convert.ToDouble(r["sosti_netamount"]);
                 tr.EMPLOYEE = new Employee(Convert.ToInt32(r["emp_id"]));
-                
+                tr.AGAINST_PAYMENT_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), r["sosti_againstpaymentstatus"].ToString());
             }
             return tr;
         }
@@ -145,6 +163,7 @@ namespace Profit.Server
                 tr.OTHER_EXPENSE = Convert.ToDouble(r["sosti_otherexpense"]);
                 tr.NET_AMOUNT = Convert.ToDouble(r["sosti_netamount"]);
                 tr.EMPLOYEE = new Employee(Convert.ToInt32(r["emp_id"]));
+                tr.AGAINST_PAYMENT_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), r["sosti_againstpaymentstatus"].ToString());
                 result.Add(tr);
             }
             return result;

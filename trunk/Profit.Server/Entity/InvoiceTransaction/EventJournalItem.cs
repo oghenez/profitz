@@ -53,12 +53,12 @@ namespace Profit.Server
 
         public int GetID()
         {
-            throw new NotImplementedException();
+            return ID;
         }
 
         public void SetID(int id)
         {
-            throw new NotImplementedException();
+            ID = id;
         }
 
         public string GetCode()

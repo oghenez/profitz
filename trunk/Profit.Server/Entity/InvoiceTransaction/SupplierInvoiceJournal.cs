@@ -113,6 +113,8 @@ namespace Profit.Server
                 OTHER_EXPENSE,
                 NET_AMOUNT,
                 EMPLOYEE.ID,
+                SUPPLIER_INVOICE == null ? 0 : SUPPLIER_INVOICE.ID,
+                AGAINST_PAYMENT_STATUS.ToString(),
                 ID);
         }
         public static SupplierInvoiceJournal TransformReader(OdbcDataReader r)
@@ -221,6 +223,14 @@ namespace Profit.Server
         public static string RecordCount()
         {
             return @"select Count(*) from table_supplierinvoicejournal p";
+        }
+        public string UpdateAgainstStatus()
+        {
+            return String.Format(@"update table_supplierinvoicejournal set 
+                    sij_againstpaymentstatus = '{0}'
+                where si_id = {1}",
+                          AGAINST_PAYMENT_STATUS.ToString(),
+                           ID);
         }
     }
 }

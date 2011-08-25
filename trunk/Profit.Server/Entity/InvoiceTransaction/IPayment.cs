@@ -7,6 +7,6 @@ namespace Profit.Server
 {
     public interface IPayment
     {
-        double AMOUNT{get;set;}
+        double GET_AMOUNT { get; }
     }
 }

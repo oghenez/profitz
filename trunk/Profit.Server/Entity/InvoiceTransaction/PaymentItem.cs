@@ -7,10 +7,12 @@ using System.Collections;
 
 namespace Profit.Server
 {
-    public class PaymentItem : EventJournalItem
+    public class PaymentItem : EventJournalItem, IPayment
     {
         public PaymentType PAYMENT_TYPE = PaymentType.Cash;
-        public ISupplierInvoice 
+        public VendorBalanceEntryType VENDOR_BALANCE_SUPPLIER_INVOICE_TYPE = VendorBalanceEntryType.SupplierInvoice;
+        public ISupplierInvoiceJournalItem SUPPLIER_INVOICE_JOURNAL_ITEM;
+        //public 
 
         public PaymentItem() : base()
         {
@@ -35,16 +37,18 @@ namespace Profit.Server
                     payi_amountbeforediscount,
                     top_id,
                     payi_description,
-                    payi_notes 
+                    payi_notes,
+                    inv_id,
+                    inv_type
                 ) 
-                VALUES ({0},{1},{2},{3},{4},{5},'{6}','{7}','{8}','{9}',{10},{11},{12},{13},'{14}','{15}')",
+                VALUES ({0},{1},{2},{3},{4},{5},'{6}','{7}','{8}','{9}',{10},{11},{12},{13},'{14}','{15}',{16},'{17}')",
                EVENT_JOURNAL.ID,
                VENDOR.ID,
                CURRENCY.ID,
                AMOUNT,
                VENDOR_BALANCE_ENTRY==null?0:VENDOR_BALANCE_ENTRY.ID,
                VENDOR_BALANCE==null?0:VENDOR_BALANCE.ID,
-               VendorBalanceEntryType.SupplierOutStandingInvoice.ToString(),
+               VendorBalanceEntryType.Payment.ToString(),
                INVOICE_DATE.ToString(Utils.DATE_FORMAT),
                INVOICE_NO,
                DUE_DATE.ToString(Utils.DATE_FORMAT),
@@ -53,7 +57,9 @@ namespace Profit.Server
                AMOUNT_BEFORE_DISCOUNT,
                TOP.ID,
                DESCRIPTION,
-               NOTES
+               NOTES,
+               SUPPLIER_INVOICE_JOURNAL_ITEM.GetID(),
+               VENDOR_BALANCE_SUPPLIER_INVOICE_TYPE.ToString()
                 );
         }
         public override string GetUpdateSQL()
@@ -74,15 +80,17 @@ namespace Profit.Server
                     payi_amountbeforediscount = {12},
                     top_id = {13},
                     payi_description = '{14}',
-                    payi_notes  = '{15}'
-                    where payi_id = {16}",
+                    payi_notes  = '{15}',
+                    inv_id = {16},
+                    inv_type = '{17}'
+                    where payi_id = {18}",
                  EVENT_JOURNAL.ID,
                VENDOR.ID,
                CURRENCY.ID,
                AMOUNT,
                VENDOR_BALANCE_ENTRY == null ? 0 : VENDOR_BALANCE_ENTRY.ID,
                VENDOR_BALANCE == null ? 0 : VENDOR_BALANCE.ID,
-               VendorBalanceEntryType.SupplierOutStandingInvoice.ToString(),
+               VendorBalanceEntryType.Payment.ToString(),
                INVOICE_DATE.ToString(Utils.DATE_FORMAT),
                INVOICE_NO,
                DUE_DATE.ToString(Utils.DATE_FORMAT),
@@ -91,7 +99,8 @@ namespace Profit.Server
                AMOUNT_BEFORE_DISCOUNT,
                TOP.ID,
                DESCRIPTION,
-               NOTES,
+               NOTES,SUPPLIER_INVOICE_JOURNAL_ITEM.GetID(),
+               VENDOR_BALANCE_SUPPLIER_INVOICE_TYPE.ToString(),
                 ID);
         }
         public static PaymentItem TransformReader(OdbcDataReader aReader)
@@ -102,13 +111,13 @@ namespace Profit.Server
                 aReader.Read();
                 transaction = new PaymentItem();
                 transaction.ID = Convert.ToInt32(aReader["payi_id"]);
-                transaction.EVENT_JOURNAL = new SupplierOutStandingInvoice(Convert.ToInt32(aReader["pay_id"]));
+                transaction.EVENT_JOURNAL = new Payment(Convert.ToInt32(aReader["pay_id"]));
                 transaction.VENDOR = new Supplier(Convert.ToInt32(aReader["sup_id"]));
                 transaction.CURRENCY = new Currency(Convert.ToInt32(aReader["ccy_id"]));
                 transaction.AMOUNT = Convert.ToDouble(aReader["payi_amount"]);
                 //transaction.VENDOR_BALANCE_ENTRY = new VendorBalanceEntry(
                //VENDOR_BALANCE == null ? 0 : VENDOR_BALANCE.ID,
-                transaction.VENDOR_BALANCE_ENTRY_TYPE = VendorBalanceEntryType.SupplierOutStandingInvoice;
+                transaction.VENDOR_BALANCE_ENTRY_TYPE = VendorBalanceEntryType.Payment;
                 transaction.INVOICE_DATE = Convert.ToDateTime(aReader["payi_invoicedate"]);
                 transaction.INVOICE_NO = aReader["payi_invoiceno"].ToString();
                 transaction.DUE_DATE = Convert.ToDateTime(aReader["payi_duedate"]);
@@ -118,6 +127,11 @@ namespace Profit.Server
                 transaction.TOP = new TermOfPayment(Convert.ToInt32(aReader["top_id"]));
                 transaction.DESCRIPTION = aReader["payi_description"].ToString();
                 transaction.NOTES = aReader["payi_notes"].ToString();
+                transaction.VENDOR_BALANCE_SUPPLIER_INVOICE_TYPE = (VendorBalanceEntryType)Enum.Parse(typeof(VendorBalanceEntryType), aReader["inv_type"].ToString());
+                if (transaction.VENDOR_BALANCE_SUPPLIER_INVOICE_TYPE == VendorBalanceEntryType.SupplierInvoice)
+                    transaction.SUPPLIER_INVOICE_JOURNAL_ITEM = new SupplierInvoiceJournalItem(Convert.ToInt32(aReader["inv_id"]));
+                else
+                    transaction.SUPPLIER_INVOICE_JOURNAL_ITEM = new SupplierOutStandingInvoiceItem(Convert.ToInt32(aReader["inv_id"]));
 
             }
             return transaction;
@@ -129,13 +143,13 @@ namespace Profit.Server
             {
                 PaymentItem transaction = new PaymentItem();
                 transaction.ID = Convert.ToInt32(aReader["payi_id"]);
-                transaction.EVENT_JOURNAL = new SupplierOutStandingInvoice(Convert.ToInt32(aReader["pay_id"]));
+                transaction.EVENT_JOURNAL = new Payment(Convert.ToInt32(aReader["pay_id"]));
                 transaction.VENDOR = new Supplier(Convert.ToInt32(aReader["sup_id"]));
                 transaction.CURRENCY = new Currency(Convert.ToInt32(aReader["ccy_id"]));
                 transaction.AMOUNT = Convert.ToDouble(aReader["payi_amount"]);
                 //transaction.VENDOR_BALANCE_ENTRY = new VendorBalanceEntry(
                 //VENDOR_BALANCE == null ? 0 : VENDOR_BALANCE.ID,
-                transaction.VENDOR_BALANCE_ENTRY_TYPE = VendorBalanceEntryType.SupplierOutStandingInvoice;
+                transaction.VENDOR_BALANCE_ENTRY_TYPE = VendorBalanceEntryType.Payment;
                 transaction.INVOICE_DATE = Convert.ToDateTime(aReader["payi_invoicedate"]);
                 transaction.INVOICE_NO = aReader["payi_invoiceno"].ToString();
                 transaction.DUE_DATE = Convert.ToDateTime(aReader["payi_duedate"]);
@@ -145,6 +159,12 @@ namespace Profit.Server
                 transaction.TOP = new TermOfPayment(Convert.ToInt32(aReader["top_id"]));
                 transaction.DESCRIPTION = aReader["payi_description"].ToString();
                 transaction.NOTES = aReader["payi_notes"].ToString();
+                transaction.VENDOR_BALANCE_SUPPLIER_INVOICE_TYPE = (VendorBalanceEntryType)Enum.Parse(typeof(VendorBalanceEntryType), aReader["inv_type"].ToString());
+                if (transaction.VENDOR_BALANCE_SUPPLIER_INVOICE_TYPE == VendorBalanceEntryType.SupplierInvoice)
+                    transaction.SUPPLIER_INVOICE_JOURNAL_ITEM = new SupplierInvoiceJournalItem(Convert.ToInt32(aReader["inv_id"]));
+                else
+                    transaction.SUPPLIER_INVOICE_JOURNAL_ITEM = new SupplierOutStandingInvoiceItem(Convert.ToInt32(aReader["inv_id"]));
+
                 result.Add(transaction);
             }
             return result;
@@ -181,5 +201,17 @@ namespace Profit.Server
         //{
         //    return String.Format("SELECT * from table_paymentitem where grni_id = {0}", id);
         //}
+
+        #region IPayment Members
+
+        public double GET_AMOUNT
+        {
+            get
+            {
+                return AMOUNT;
+            }
+        }
+
+        #endregion
     }
 }

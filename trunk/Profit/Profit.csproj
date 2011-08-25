@@ -76,6 +76,18 @@
     <Compile Include="Forms\FieldChooserForm.Designer.cs">
       <DependentUpon>FieldChooserForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\InventoryTransaction\SearchSuppInvJForPaymentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SearchSuppInvJForPaymentForm.Designer.cs">
+      <DependentUpon>SearchSuppInvJForPaymentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\PaymentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\PaymentForm.Designer.cs">
+      <DependentUpon>PaymentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\InventoryTransaction\SearchGRNForSuppInvoiceForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -311,6 +323,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\FieldChooserForm.resx">
       <DependentUpon>FieldChooserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\SearchSuppInvJForPaymentForm.resx">
+      <DependentUpon>SearchSuppInvJForPaymentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\PaymentForm.resx">
+      <DependentUpon>PaymentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\SearchGRNForSuppInvoiceForm.resx">
       <DependentUpon>SearchGRNForSuppInvoiceForm.cs</DependentUpon>
