@@ -199,6 +199,7 @@ namespace Profit
             {
                 double py = Convert.ToDouble(e.FormattedValue);
                 SupplierInvoiceJournalItem si = (SupplierInvoiceJournalItem)itemsDataGrid[invoiceNoColumn.Index, e.RowIndex].Tag;
+                si.OUTSTANDING_AMOUNT = r_sij.GetOutstanding(si.ID);
                 if(si==null)
                 {
                     e.Cancel = true;
@@ -266,6 +267,7 @@ namespace Profit
                     KryptonMessageBox.Show("Transaction has been POSTED", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 setEnableForm(false);
+                loadData();
                 setEditMode(EditMode.View);
             }
             catch (Exception x)
@@ -444,12 +446,14 @@ namespace Profit
             supplierkryptonComboBox.Enabled = enable;
             itemsDataGrid.AllowUserToDeleteRows = enable;
             itemsDataGrid.AllowUserToAddRows = enable;
-            invoiceNoColumn.ReadOnly = !enable;
-            invoiceDateColumn.ReadOnly = !enable;
-            topColumn.ReadOnly = !enable;
-            dueDateColumn.ReadOnly = !enable;
-            invoicerColumn.ReadOnly = !enable;
-            amountColumn.ReadOnly = !enable;
+
+            paymentTypeColumn.ReadOnly = !enable;
+            paymentAmountColumn.ReadOnly = !enable;
+            docdateColumn.ReadOnly = !enable;
+            docnoColumn.ReadOnly = !enable;
+            noteColumn.ReadOnly = !enable;
+            bankColumn.ReadOnly = !enable;
+
             m_enable = enable;
         }
         private void setEditMode(EditMode editmode)
@@ -517,13 +521,31 @@ namespace Profit
             foreach (PaymentItem item in m_prn.EVENT_JOURNAL_ITEMS)
             {
                 int i = itemsDataGrid.Rows.Add();
+
+                SupplierInvoiceJournalItem siji = (SupplierInvoiceJournalItem)item.SUPPLIER_INVOICE_JOURNAL_ITEM;
+                itemsDataGrid[invoiceNoColumn.Index, i].Tag = siji;
+                itemsDataGrid[invoiceNoColumn.Index, i].Value = siji.EVENT_JOURNAL.CODE;
+                itemsDataGrid[invoiceDateColumn.Index, i].Value = siji.EVENT_JOURNAL.TRANSACTION_DATE;
+                itemsDataGrid[topColumn.Index, i].Value = siji.TOP.ToString();
+                itemsDataGrid[dueDateColumn.Index, i].Value = siji.DUE_DATE;
+                itemsDataGrid[invoicerColumn.Index, i].Value = siji.EMPLOYEE.ToString();
+                itemsDataGrid[OutstandingAmountColumn.Index, i].Value = r_sij.GetOutstanding(siji.ID);
+                itemsDataGrid[paidAmountColumn.Index, i].Value = r_sij.GetPaid(siji.ID);
+
+
                 itemsDataGrid.Rows[i].Tag = item;
-                itemsDataGrid[invoiceNoColumn.Index, i].Value = item.INVOICE_NO;
-                itemsDataGrid[invoiceDateColumn.Index, i].Value = item.INVOICE_DATE;
-                itemsDataGrid[topColumn.Index, i].Value = (TermOfPayment)r_top.GetById(item.TOP);
-                itemsDataGrid[dueDateColumn.Index, i].Value = item.DUE_DATE;
-                itemsDataGrid[invoicerColumn.Index, i].Value = (Employee)r_employee.GetById(item.EMPLOYEE);  
-                itemsDataGrid[amountColumn.Index, i].Value = item.AMOUNT;
+                itemsDataGrid[paymentAmountColumn.Index, i].Value = item.AMOUNT;
+                itemsDataGrid[paymentTypeColumn.Index, i].Value = item.PAYMENT_TYPE.ToString();
+                itemsDataGrid[docnoColumn.Index, i].Value = item.INVOICE_NO;
+                itemsDataGrid[docdateColumn.Index, i].Value = item.INVOICE_DATE;
+                itemsDataGrid[noteColumn.Index, i].Value = item.NOTES;
+                itemsDataGrid[bankColumn.Index, i].Value = item.BANK.ToString();
+
+
+
+                //itemsDataGrid[dueDateColumn.Index, i].Value = item.DUE_DATE;
+                //itemsDataGrid[invoicerColumn.Index, i].Value = (Employee)r_employee.GetById(item.EMPLOYEE);  
+                //itemsDataGrid[amountColumn.Index, i].Value = item.AMOUNT;
 
                 //item.UNIT = (Unit)r_unit.GetById(item.UNIT);
                 //item.GRN_ITEM.UNIT = (Unit)r_unit.GetById(item.GRN_ITEM.UNIT);
@@ -572,38 +594,38 @@ namespace Profit
 
         private void searchToolStripButton_Click(object sender, EventArgs e)
         {
-            //IList result = searchToolStripTextBox.Text == string.Empty ? new ArrayList() : r_soinv.Search(searchToolStripTextBox.Text);
-            //if (result.Count == 1)
-            //{
-            //    m_prn = (Payment)result[0];
-            //    m_prn = (Payment)r_soinv.Get(m_prn.ID);
-            //    m_prn.EMPLOYEE = (Employee)r_employee.GetById(m_prn.EMPLOYEE);
-            //    // m_prn.VENDOR = (Supplier)r_sup.GetById(m_prn.VENDOR);
-            //    setEditMode(EditMode.View);
-            //    loadData();
-            //    setEnableForm(false);
-            //}
-            //else
-            //{
-            //    using (SearchSupplierOSInvoiceForm frm = new SearchSupplierOSInvoiceForm(searchToolStripTextBox.Text, result,m_mainForm.CurrentUser))
-            //    {
-            //        frm.ShowDialog();
-            //        if (frm.SUPPLIER_OS_INVOICE == null)
-            //        {
-            //            return;
-            //        }
-            //        else
-            //        {
-            //            m_prn = frm.SUPPLIER_OS_INVOICE;
-            //            m_prn = (Payment)r_soinv.Get(m_prn.ID);
-            //            m_prn.EMPLOYEE = (Employee)r_employee.GetById(m_prn.EMPLOYEE);
-            //           // m_prn.VENDOR = (Supplier)r_sup.GetById(m_prn.VENDOR);
-            //            setEditMode(EditMode.View);
-            //            loadData();
-            //            setEnableForm(false);
-            //        }
-            //    }
-            //}
+            IList result = searchToolStripTextBox.Text == string.Empty ? new ArrayList() : r_soinv.Search(searchToolStripTextBox.Text);
+            if (result.Count == 1)
+            {
+                m_prn = (Payment)result[0];
+                m_prn = (Payment)r_soinv.Get(m_prn.ID);
+                m_prn.EMPLOYEE = (Employee)r_employee.GetById(m_prn.EMPLOYEE);
+                m_prn.VENDOR = (Supplier)r_sup.GetById((Supplier)m_prn.VENDOR);
+                setEditMode(EditMode.View);
+                loadData();
+                setEnableForm(false);
+            }
+            else
+            {
+                using (SearchPaymentForm frm = new SearchPaymentForm(searchToolStripTextBox.Text, result, m_mainForm.CurrentUser))
+                {
+                    frm.ShowDialog();
+                    if (frm.PAYMENT == null)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        m_prn = frm.PAYMENT ;
+                        m_prn = (Payment)r_soinv.Get(m_prn.ID);
+                        m_prn.EMPLOYEE = (Employee)r_employee.GetById(m_prn.EMPLOYEE);
+                        // m_prn.VENDOR = (Supplier)r_sup.GetById(m_prn.VENDOR);
+                        setEditMode(EditMode.View);
+                        loadData();
+                        setEnableForm(false);
+                    }
+                }
+            }
         }
 
         private void fieldChooserTestToolStripMenuItem_Click(object sender, EventArgs e)
