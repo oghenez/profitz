@@ -36,6 +36,18 @@ namespace Profit.Server
             }
             return bank;
         }
+        public static Bank GetBank(OdbcDataReader aReader)
+        {
+            Bank bank = null;
+            while (aReader.Read())
+            {
+                bank = new Bank();
+                bank.ID = Convert.ToInt32(aReader[0]);
+                bank.CODE = aReader[1].ToString();
+                bank.NAME = aReader[2].ToString();
+            }
+            return bank;
+        }
         public string GetInsertSQL()
         {
             return String.Format(@"insert into table_bank 
@@ -56,6 +68,10 @@ namespace Profit.Server
                 CODE, NAME, ID);
         }
         public string GetByIDSQL(int ID)
+        {
+            return String.Format("select * from table_bank where bank_id = {0}", ID);
+        }
+        public static string GetByIDSQLStatic(int ID)
         {
             return String.Format("select * from table_bank where bank_id = {0}", ID);
         }

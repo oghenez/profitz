@@ -515,6 +515,7 @@
             this.invoiceNoColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.invoiceNoColumn.HeaderText = "Invoice No.";
             this.invoiceNoColumn.Name = "invoiceNoColumn";
+            this.invoiceNoColumn.ReadOnly = true;
             this.invoiceNoColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.invoiceNoColumn.Width = 50;
             // 
@@ -528,6 +529,7 @@
             this.invoiceDateColumn.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.invoiceDateColumn.HeaderText = "Invoice Date";
             this.invoiceDateColumn.Name = "invoiceDateColumn";
+            this.invoiceDateColumn.ReadOnly = true;
             this.invoiceDateColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.invoiceDateColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.invoiceDateColumn.Width = 50;
@@ -539,6 +541,7 @@
             this.topColumn.DropDownWidth = 121;
             this.topColumn.HeaderText = "TOP";
             this.topColumn.Name = "topColumn";
+            this.topColumn.ReadOnly = true;
             this.topColumn.Width = 50;
             // 
             // dueDateColumn
@@ -551,6 +554,7 @@
             this.dueDateColumn.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dueDateColumn.HeaderText = "Due Date";
             this.dueDateColumn.Name = "dueDateColumn";
+            this.dueDateColumn.ReadOnly = true;
             this.dueDateColumn.Width = 50;
             // 
             // invoicerColumn
@@ -560,6 +564,7 @@
             this.invoicerColumn.DropDownWidth = 121;
             this.invoicerColumn.HeaderText = "Invoicer";
             this.invoicerColumn.Name = "invoicerColumn";
+            this.invoicerColumn.ReadOnly = true;
             this.invoicerColumn.Width = 50;
             // 
             // amountColumn
@@ -586,6 +591,7 @@
             0,
             0});
             this.amountColumn.Name = "amountColumn";
+            this.amountColumn.ReadOnly = true;
             this.amountColumn.ThousandsSeparator = true;
             this.amountColumn.Width = 50;
             // 
@@ -613,6 +619,7 @@
             0,
             0});
             this.OutstandingAmountColumn.Name = "OutstandingAmountColumn";
+            this.OutstandingAmountColumn.ReadOnly = true;
             this.OutstandingAmountColumn.ThousandsSeparator = true;
             this.OutstandingAmountColumn.Width = 50;
             // 
@@ -640,6 +647,7 @@
             0,
             0});
             this.paidAmountColumn.Name = "paidAmountColumn";
+            this.paidAmountColumn.ReadOnly = true;
             this.paidAmountColumn.ThousandsSeparator = true;
             this.paidAmountColumn.Width = 50;
             // 

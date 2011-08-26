@@ -211,6 +211,11 @@ namespace Profit.Server
         {
             return String.Format("SELECT max(siji_id) from table_supplierinvoicejournalitem");
         }
+        public static string GetByIDSQL(int id)
+        {
+            return String.Format("SELECT * from table_supplierinvoicejournalitem where siji_id = {0}", id);
+        }
+
         public static string GetByEventIDSQL(int id)
         {
             return String.Format("SELECT * from table_supplierinvoicejournalitem where sij_id = {0}", id);
@@ -276,5 +281,13 @@ namespace Profit.Server
         }
 
         #endregion
+        public static string GetByOutstandingSQL(int id)
+        {
+            return String.Format("SELECT siji_outstandingamount from table_supplierinvoicejournalitem where siji_id = {0}", id);
+        }
+        public static string GetByPaidSQL(int id)
+        {
+            return String.Format("SELECT siji_paidamount from table_supplierinvoicejournalitem where siji_id = {0}", id);
+        }
     }
 }

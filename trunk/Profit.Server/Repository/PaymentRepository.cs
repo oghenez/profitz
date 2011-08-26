@@ -170,6 +170,13 @@ namespace Profit.Server
                 sti.VENDOR_BALANCE_ENTRY = VendorBalanceEntryRepository.FindVendorBalanceEntryByEventItem(m_command, sti.ID, sti.VENDOR_BALANCE_ENTRY_TYPE);
                 //sti.GRN_ITEM = GoodReceiveNoteRepository.FindGoodReceiveNoteItem(m_command, sti.GRN_ITEM.ID);
                 //sti.GRN_ITEM.PART = PartRepository.GetByID(m_command, sti.GRN_ITEM.PART.ID);
+                if (sti.VENDOR_BALANCE_SUPPLIER_INVOICE_TYPE == VendorBalanceEntryType.SupplierInvoice)
+                {
+                    if(sti.SUPPLIER_INVOICE_JOURNAL_ITEM!=null)
+                        sti.SUPPLIER_INVOICE_JOURNAL_ITEM = SupplierInvoiceJournalRepository.FindSIJournalItemlistForPayment(m_command, sti.SUPPLIER_INVOICE_JOURNAL_ITEM.GetID());
+                }
+                if (sti.PAYMENT_TYPE == PaymentType.Bank)
+                    sti.BANK = getBank(sti.BANK.ID);
                 st.EVENT_JOURNAL_ITEMS.Add(sti);
             }
             return st;
@@ -325,6 +332,14 @@ namespace Profit.Server
             {
                 throw x;
             }
+        }
+        private Bank getBank(int ID)
+        {
+            m_command.CommandText = Bank.GetByIDSQLStatic(ID);
+            OdbcDataReader r = m_command.ExecuteReader();
+            Bank b = Bank.GetBank(r);
+            r.Close();
+            return b;
         }
     }
 }

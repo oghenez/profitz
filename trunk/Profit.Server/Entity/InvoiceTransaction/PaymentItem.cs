@@ -41,9 +41,10 @@ namespace Profit.Server
                     payi_notes,
                     inv_id,
                     inv_type,
-                    bank_id
+                    bank_id,
+                    payi_paymenttype
                 ) 
-                VALUES ({0},{1},{2},{3},{4},{5},'{6}','{7}','{8}','{9}',{10},{11},{12},{13},'{14}','{15}',{16},'{17}',{18})",
+                VALUES ({0},{1},{2},{3},{4},{5},'{6}','{7}','{8}','{9}',{10},{11},{12},{13},'{14}','{15}',{16},'{17}',{18},'{19}')",
                EVENT_JOURNAL.ID,
                VENDOR.ID,
                CURRENCY.ID,
@@ -62,7 +63,8 @@ namespace Profit.Server
                NOTES,
                SUPPLIER_INVOICE_JOURNAL_ITEM.GetID(),
                VENDOR_BALANCE_SUPPLIER_INVOICE_TYPE.ToString(),
-               BANK==null?0:BANK.ID
+               BANK==null?0:BANK.ID,
+               PAYMENT_TYPE.ToString()
                 );
         }
         public override string GetUpdateSQL()
@@ -86,8 +88,9 @@ namespace Profit.Server
                     payi_notes  = '{15}',
                     inv_id = {16},
                     inv_type = '{17}',
-                    bank_id = {18}
-                    where payi_id = {19}",
+                    bank_id = {18},
+                    payi_paymenttype = '{19}'
+                    where payi_id = {20}",
                  EVENT_JOURNAL.ID,
                VENDOR.ID,
                CURRENCY.ID,
@@ -106,6 +109,7 @@ namespace Profit.Server
                NOTES,SUPPLIER_INVOICE_JOURNAL_ITEM.GetID(),
                VENDOR_BALANCE_SUPPLIER_INVOICE_TYPE.ToString(),
                BANK==null?0:BANK.ID,
+               PAYMENT_TYPE.ToString(),
                 ID);
         }
         public static PaymentItem TransformReader(OdbcDataReader aReader)
@@ -138,6 +142,7 @@ namespace Profit.Server
                 else
                     transaction.SUPPLIER_INVOICE_JOURNAL_ITEM = new SupplierOutStandingInvoiceItem(Convert.ToInt32(aReader["inv_id"]));
                 transaction.BANK = new Bank(Convert.ToInt32(aReader["bank_id"]));
+                transaction.PAYMENT_TYPE = (PaymentType)Enum.Parse(typeof(PaymentType), aReader["payi_paymenttype"].ToString());
             }
             return transaction;
         }
@@ -170,6 +175,7 @@ namespace Profit.Server
                 else
                     transaction.SUPPLIER_INVOICE_JOURNAL_ITEM = new SupplierOutStandingInvoiceItem(Convert.ToInt32(aReader["inv_id"]));
                 transaction.BANK = new Bank(Convert.ToInt32(aReader["bank_id"]));
+                transaction.PAYMENT_TYPE = (PaymentType)Enum.Parse(typeof(PaymentType), aReader["payi_paymenttype"].ToString());
                 result.Add(transaction);
             }
             return result;

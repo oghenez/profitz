@@ -333,6 +333,35 @@ namespace Profit.Server
             cmd.CommandText = po.UpdateAgainstStatus();
             cmd.ExecuteNonQuery();
         }
+        internal static SupplierInvoiceJournalItem FindSIJournalItemlistForPayment(OdbcCommand cmd, int supinvItemID)
+        {
+            cmd.CommandText = SupplierInvoiceJournalItem.GetByIDSQL(supinvItemID);
+            OdbcDataReader r = cmd.ExecuteReader();
+            SupplierInvoiceJournalItem result = SupplierInvoiceJournalItem.TransformReader(r);
+            r.Close();
+            cmd.CommandText = SupplierInvoiceJournal.GetByIDSQL(result.EVENT_JOURNAL.ID);
+            r = cmd.ExecuteReader();
+            result.EVENT_JOURNAL = SupplierInvoiceJournal.TransformReader(r);
+            r.Close();
+
+            cmd.CommandText = Currency.GetByIDSQLStatic(result.CURRENCY.ID);
+            r = cmd.ExecuteReader();
+            result.CURRENCY = Currency.GetCurrency(r);
+            r.Close();
+
+            cmd.CommandText = TermOfPayment.GetByIDSQLStatic(result.TOP.ID);
+            r = cmd.ExecuteReader();
+            result.TOP = TermOfPayment.GetTOP(r);
+            r.Close();
+
+            cmd.CommandText = Employee.GetByIDSQLStatic(result.EMPLOYEE.ID);
+            r = cmd.ExecuteReader();
+            result.EMPLOYEE = Employee.GetEmployee(r);
+            r.Close();
+
+
+            return result;
+        }
         public IList FindSIJournalItemlistForPayment(string find, int supplier, DateTime trdate, IList notIn)
         {
             StringBuilder poisSB = new StringBuilder();
@@ -370,6 +399,18 @@ namespace Profit.Server
                 r.Close();
             }
             return result;
+        }
+        public double GetOutstanding(int sijiID)
+        {
+            m_command.CommandText = SupplierInvoiceJournalItem.GetByOutstandingSQL(sijiID);
+            double d = Convert.ToDouble(m_command.ExecuteScalar());
+            return d;
+        }
+        public double GetPaid(int sijiID)
+        {
+            m_command.CommandText = SupplierInvoiceJournalItem.GetByPaidSQL(sijiID);
+            double d = Convert.ToDouble(m_command.ExecuteScalar());
+            return d;
         }
     }
 }
