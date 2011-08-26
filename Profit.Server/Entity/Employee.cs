@@ -43,6 +43,21 @@ namespace Profit.Server
             }
             return employee;
         }
+        public static Employee GetEmployee(OdbcDataReader aReader)
+        {
+            Employee employee = null;
+            while (aReader.Read())
+            {
+                employee = new Employee();
+                employee.ID = Convert.ToInt32(aReader[0]);
+                employee.CODE = aReader[1].ToString();
+                employee.NAME = aReader[2].ToString();
+                employee.IS_SALESMAN = Convert.ToBoolean(aReader[3]);
+                employee.IS_STOREMAN = Convert.ToBoolean(aReader[4]);
+                employee.IS_PURCHASER = Convert.ToBoolean(aReader[5]);
+            }
+            return employee;
+        }
         public string GetInsertSQL()
         {
             return String.Format(@"insert into table_employee 
@@ -66,6 +81,10 @@ namespace Profit.Server
                 CODE, NAME, IS_SALESMAN, IS_STOREMAN, IS_PURCHASER, ID);
         }
         public string GetByIDSQL(int ID)
+        {
+            return String.Format("select * from table_employee where emp_id = {0}", ID);
+        }
+        public static string GetByIDSQLStatic(int ID)
         {
             return String.Format("select * from table_employee where emp_id = {0}", ID);
         }

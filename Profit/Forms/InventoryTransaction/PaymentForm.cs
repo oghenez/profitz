@@ -17,6 +17,7 @@ namespace Profit
         Payment m_prn = new Payment(); 
         IMainForm m_mainForm;
         Repository r_top = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.TOP_REPOSITORY);
+        Repository r_bank = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.BANK_REPOSITORY);
         EmployeeRepository r_employee = (EmployeeRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.EMPLOYEE_REPOSITORY);
         Repository r_ccy = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY);
         Repository r_unit = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY);
@@ -27,11 +28,13 @@ namespace Profit
         GoodReceiveNoteRepository r_grn = (GoodReceiveNoteRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.GOODRECEIVENOTE_REPOSITORY);
         PurchaseReturnRepository r_prn = (PurchaseReturnRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.PURCHASE_RETURN_REPOSITORY);
         PaymentRepository r_soinv = (PaymentRepository)RepositoryFactory.GetInstance().GetJournalRepository(RepositoryFactory.PAYMENT_REPOSITORY);
+        SupplierInvoiceJournalRepository r_sij = (SupplierInvoiceJournalRepository)RepositoryFactory.GetInstance().GetJournalRepository(RepositoryFactory.SUPPLIERINVOICE_JOURNAL_REPOSITORY);
         
         IList m_units;
         IList m_warehouses;
         IList m_tops;
         IList m_employee;
+        IList m_bank;
         IList m_poItems = new ArrayList();
 
         EditMode m_editMode = EditMode.New;
@@ -115,7 +118,7 @@ namespace Profit
         {
             if (m_editMode == EditMode.View) return;
             if (!itemsDataGrid[e.ColumnIndex, e.RowIndex].IsInEditMode) return;
-            if (e.ColumnIndex == amountColumn.Index)
+            if (e.ColumnIndex == paymentAmountColumn.Index)
             { 
                 ReCalculateNetTotal(); 
             }
@@ -191,6 +194,24 @@ namespace Profit
             //    DateTime trdate = Convert.ToDateTime( itemsDataGrid[invoiceDateColumn.Index, e.RowIndex].Value);
             //    itemsDataGrid[dueDateColumn.Index, e.RowIndex].Value = trdate.AddDays(top.DAYS);
             //}
+
+            if (e.ColumnIndex == paymentAmountColumn.Index)
+            {
+                double py = Convert.ToDouble(e.FormattedValue);
+                SupplierInvoiceJournalItem si = (SupplierInvoiceJournalItem)itemsDataGrid[invoiceNoColumn.Index, e.RowIndex].Tag;
+                if(si==null)
+                {
+                    e.Cancel = true;
+                    itemsDataGrid.Rows[e.RowIndex].ErrorText = "Please Fill Invoice";
+                    return;
+                }
+                if (py > si.OUTSTANDING_AMOUNT)
+                {
+                    e.Cancel = true;
+                    itemsDataGrid.Rows[e.RowIndex].ErrorText = "Payment exceed outstanding amount";
+                    return;
+                }
+            }
         }
         private void ReCalculateNetTotal()
         {
@@ -210,8 +231,12 @@ namespace Profit
             currencyKryptonComboBox.DataSource = r_ccy.GetAll();
             m_tops = r_top.GetAll();
             m_employee = r_employee.GetAllPurchaser();
+            m_bank = r_bank.GetAll();
+
             Utils.GetListCode(topColumn.Items, m_tops);
             Utils.GetListCode(invoicerColumn.Items, m_employee);
+            Utils.GetListCode(bankColumn.Items, m_bank);
+            paymentTypeColumn.Items.AddRange(Enum.GetNames(typeof(PaymentType)));
         }
         private void InitializeButtonClick()
         {
@@ -302,42 +327,30 @@ namespace Profit
             int j = 0;
             for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
             {
-                if (itemsDataGrid[invoiceNoColumn.Index, i].Value == null) continue;
-                if (itemsDataGrid[invoiceNoColumn.Index, i].Value.ToString() == "") continue;
-                double qty = Convert.ToDouble(itemsDataGrid[amountColumn.Index, i].Value);
+                itemsDataGrid.Rows[i].ErrorText = "";
+                if (itemsDataGrid[invoiceNoColumn.Index, i].Tag == null) continue;
+                double qty = Convert.ToDouble(itemsDataGrid[paymentAmountColumn.Index, i].Value);
                 if (qty == 0)
                 {
-                    itemsDataGrid.Rows[i].ErrorText = itemsDataGrid.Rows[i].ErrorText + " Quantity must not 0(zero)";
+                    itemsDataGrid.Rows[i].ErrorText = " Payment amount must not 0(zero)";
                     e = true;
                 }
-                if (itemsDataGrid[invoicerColumn.Index, i].Value == null)
+                if (itemsDataGrid[paymentTypeColumn.Index, i].Value == null)
                 {
-                    itemsDataGrid.Rows[i].ErrorText = itemsDataGrid.Rows[i].ErrorText + " Please choose Invoicer unit.";
+                    itemsDataGrid.Rows[i].ErrorText = " Payment type can not blank";
                     e = true;
                 }
-                if (itemsDataGrid[topColumn.Index, i].Value == null)
+                else
                 {
-                    itemsDataGrid.Rows[i].ErrorText = itemsDataGrid.Rows[i].ErrorText + " Please choose TOP unit.";
-                    e = true;
-                }
-                if(itemsDataGrid[invoiceDateColumn.Index, i].Value==null)
-                {
-                    itemsDataGrid.Rows[i].ErrorText = itemsDataGrid.Rows[i].ErrorText + " Please choose Invoice Date.";
-                    e = true;
-                }
-                if(itemsDataGrid[dueDateColumn.Index, i].Value==null)
-                {
-                    itemsDataGrid.Rows[i].ErrorText = itemsDataGrid.Rows[i].ErrorText + " Please choose Due Date.";
-                    e = true;
-                }
-                if (itemsDataGrid[invoiceDateColumn.Index, i].Value != null && itemsDataGrid[dueDateColumn.Index, i].Value != null)
-                {
-                    DateTime invdate = Convert.ToDateTime(itemsDataGrid[invoiceDateColumn.Index, i].Value);
-                    DateTime duedate = Convert.ToDateTime(itemsDataGrid[dueDateColumn.Index, i].Value);
-                    if (duedate< invdate)
+                    PaymentType pytype = (PaymentType)Enum.Parse(typeof(PaymentType), itemsDataGrid[paymentTypeColumn.Index, i].Value.ToString());
+                    if (pytype == PaymentType.Bank)
                     {
-                        itemsDataGrid.Rows[i].ErrorText = itemsDataGrid.Rows[i].ErrorText + "Due Date exceed Invoice date.";
-                        e = true;
+                        if (itemsDataGrid[bankColumn.Index, i].Value == null)
+                        {
+                            itemsDataGrid.Rows[i].ErrorText = itemsDataGrid.Rows[i].ErrorText + " Please fill Bank";
+                            e = true;
+                        }
+
                     }
                 }
                 j++;
@@ -365,20 +378,32 @@ namespace Profit
             IList items = new ArrayList();
             for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
             {
-                if (itemsDataGrid[invoiceNoColumn.Index, i].Value == null) continue;
-                if (itemsDataGrid[invoiceNoColumn.Index, i].Value.ToString() == "") continue;
+                if (itemsDataGrid[invoiceNoColumn.Index, i].Tag == null) continue;
                 PaymentItem st = (PaymentItem)itemsDataGrid.Rows[i].Tag;
                 if (st == null) st = new PaymentItem();
                 itemsDataGrid.Rows[i].Tag = st;
+                SupplierInvoiceJournalItem pi = (SupplierInvoiceJournalItem)itemsDataGrid[invoiceNoColumn.Index, i].Tag;
+                st.SUPPLIER_INVOICE_JOURNAL_ITEM = pi;
                 st.EVENT_JOURNAL = m_prn;
-                st.AMOUNT = Convert.ToDouble(itemsDataGrid[amountColumn.Index, i].Value);
-                st.INVOICE_NO = itemsDataGrid[invoiceNoColumn.Index, i].Value.ToString();
-                st.INVOICE_DATE = Convert.ToDateTime(itemsDataGrid[invoiceDateColumn.Index, i].Value);
-                st.TOP = (TermOfPayment)Utils.FindEntityInList(itemsDataGrid[topColumn.Index, i].Value.ToString(), m_tops);
-                st.DUE_DATE = Convert.ToDateTime(itemsDataGrid[dueDateColumn.Index, i].Value);
-                st.EMPLOYEE = (Employee)Utils.FindEntityInList(itemsDataGrid[invoicerColumn.Index, i].Value.ToString(), m_employee);
+
+                st.AMOUNT = Convert.ToDouble(itemsDataGrid[paymentAmountColumn.Index, i].Value);
+                st.PAYMENT_TYPE = (PaymentType)Enum.Parse(typeof(PaymentType), itemsDataGrid[paymentTypeColumn.Index, i].Value.ToString());
+                st.INVOICE_NO = itemsDataGrid[docnoColumn.Index, i].Value == null ? "" : itemsDataGrid[docnoColumn.Index, i].Value.ToString();
+                st.INVOICE_DATE = Convert.ToDateTime(itemsDataGrid[docdateColumn.Index, i].Value);
+                st.NOTES = itemsDataGrid[noteColumn.Index, i].Value == null ? "" : itemsDataGrid[noteColumn.Index, i].Value.ToString();
+                if(st.PAYMENT_TYPE== PaymentType.Bank)
+                    st.BANK = (Bank)Utils.FindEntityInList(itemsDataGrid[bankColumn.Index, i].Value.ToString(), m_bank);
                 st.VENDOR = m_prn.VENDOR;
                 st.CURRENCY = m_prn.CURRENCY;
+                st.EMPLOYEE = m_prn.EMPLOYEE;
+
+                //st.INVOICE_NO = itemsDataGrid[invoiceNoColumn.Index, i].Value.ToString();
+                //st.INVOICE_DATE = Convert.ToDateTime(itemsDataGrid[invoiceDateColumn.Index, i].Value);
+                //st.TOP = (TermOfPayment)Utils.FindEntityInList(itemsDataGrid[topColumn.Index, i].Value.ToString(), m_tops);
+                //st.DUE_DATE = Convert.ToDateTime(itemsDataGrid[dueDateColumn.Index, i].Value);
+                //st.EMPLOYEE = (Employee)Utils.FindEntityInList(itemsDataGrid[invoicerColumn.Index, i].Value.ToString(), m_employee);
+                //st.VENDOR = m_prn.VENDOR;
+                //st.CURRENCY = m_prn.CURRENCY;
                 items.Add(st);
             }
             return items;
@@ -610,6 +635,42 @@ namespace Profit
             {
                 itemsDataGrid.Rows[count].HeaderCell.Value = string.Format((count + 1).ToString(), "0");
                 itemsDataGrid.Rows[count].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
+        }
+
+        private void toolStripButtonSearchSI_Click(object sender, EventArgs e)
+        {
+            Supplier sp = (Supplier)supplierkryptonComboBox.SelectedItem;
+            if(sp==null)return;
+            IList addedPI = new ArrayList();
+            for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
+            {
+                SupplierInvoiceJournalItem pi = (SupplierInvoiceJournalItem)itemsDataGrid[invoiceNoColumn.Index, i].Tag;
+                if (pi == null) continue;
+                addedPI.Add(pi.ID);
+            }
+            using (SearchSuppInvJForPaymentForm frm = new SearchSuppInvJForPaymentForm(sp.ID, addedPI, m_mainForm.CurrentUser,
+                dateKryptonDateTimePicker.Value))
+            {
+                frm.ShowDialog();
+                IList result = frm.RESULT;
+                foreach (SupplierInvoiceJournalItem item in result)
+                {
+                    int i = itemsDataGrid.Rows.Add();
+                    itemsDataGrid[invoiceNoColumn.Index, i].Tag = item;
+                    itemsDataGrid[invoiceNoColumn.Index, i].Value = item.EVENT_JOURNAL.CODE;
+                    itemsDataGrid[invoiceDateColumn.Index, i].Value = item.EVENT_JOURNAL.TRANSACTION_DATE;
+                    itemsDataGrid[topColumn.Index, i].Value = item.TOP.ToString();
+                    itemsDataGrid[dueDateColumn.Index, i].Value = item.DUE_DATE;
+                    itemsDataGrid[invoicerColumn.Index, i].Value = item.EMPLOYEE.ToString();
+                    itemsDataGrid[OutstandingAmountColumn.Index, i].Value = item.OUTSTANDING_AMOUNT;
+                    itemsDataGrid[paidAmountColumn.Index, i].Value = item.PAID_AMOUNT;
+
+                    //Init---
+                    itemsDataGrid[paymentTypeColumn.Index, i].Value = PaymentType.Bank;
+                    itemsDataGrid[docdateColumn.Index, i].Value = DateTime.Today;
+                    //---
+                }
             }
         }
     }

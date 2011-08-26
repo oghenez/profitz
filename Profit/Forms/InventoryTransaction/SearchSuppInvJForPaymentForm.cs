@@ -34,19 +34,19 @@ namespace Profit
 
         private void loadResult(IList records)
         {
-            foreach (GoodReceiveNoteItem d in records)
+            foreach (SupplierInvoiceJournalItem d in records)
             {
                 int row = gridData.Rows.Add();
                 gridData[checkColumn.Index, row].Value = false;
-                gridData[purchaseorderNoColumn.Index, row].Value = d.EVENT.CODE;
-                gridData[poDateColumn.Index, row].Value = d.EVENT.TRANSACTION_DATE.ToString("dd-MM-yyyy");
+                gridData[purchaseorderNoColumn.Index, row].Value = d.EVENT_JOURNAL.CODE;
+                gridData[poDateColumn.Index, row].Value = d.EVENT_JOURNAL.TRANSACTION_DATE.ToString("dd-MM-yyyy");
                 //gridData[topColumn.Index, row].Value = ((GoodReceiveNote)d.EVENT).TOP.CODE;
                 //gridData[dueDateColumn.Index, row].Value = ((GoodReceiveNote)d.EVENT).DUE_DATE.ToString("dd-MM-yyyy");
-                gridData[codeColumn.Index, row].Value = d.PART.CODE;
-                gridData[nameColumn.Index, row].Value = d.PART.NAME;
-                gridData[qtyColumn.Index, row].Value = d.OUTSTANDING_AMOUNT_TO_PR;
-                gridData[unitColumn.Index, row].Value = d.PART.UNIT.CODE;
-                gridData[warehouseColumn.Index, row].Value = d.WAREHOUSE.CODE;
+               // gridData[codeColumn.Index, row].Value = d.PART.CODE;
+                //gridData[nameColumn.Index, row].Value = d.PART.NAME;
+                gridData[qtyColumn.Index, row].Value = d.OUTSTANDING_AMOUNT;
+                //gridData[unitColumn.Index, row].Value = d.PART.UNIT.CODE;
+                //gridData[warehouseColumn.Index, row].Value = d.WAREHOUSE.CODE;
                 gridData.Rows[row].Tag = d;
             }
             gridData.ClearSelection();
@@ -103,7 +103,7 @@ namespace Profit
             {
                 bool check = Convert.ToBoolean(gridData[checkColumn.Index, i].Value);
                 if (!check) continue;
-                GoodReceiveNoteItem pi = (GoodReceiveNoteItem)gridData.Rows[i].Tag;
+                SupplierInvoiceJournalItem pi = (SupplierInvoiceJournalItem)gridData.Rows[i].Tag;
                 RESULT.Add(pi);
             }
         }

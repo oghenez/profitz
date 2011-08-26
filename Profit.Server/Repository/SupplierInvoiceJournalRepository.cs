@@ -359,20 +359,15 @@ namespace Profit.Server
                 t.CURRENCY = Currency.GetCurrency(r);
                 r.Close();
 
-                //m_command.CommandText = Unit.GetByIDSQLstatic(t.VENDOR.ID);
-                //r = m_command.ExecuteReader();
-                //t.UNIT = Unit.GetUnit(r);
-                //r.Close();
+                m_command.CommandText = TermOfPayment.GetByIDSQLStatic(t.TOP.ID);
+                r = m_command.ExecuteReader();
+                t.TOP = TermOfPayment.GetTOP(r);
+                r.Close();
 
-                //m_command.CommandText = Warehouse.GetByIDSQLStatic(t.WAREHOUSE.ID);
-                //r = m_command.ExecuteReader();
-                //t.WAREHOUSE = Warehouse.GetWarehouse(r);
-                //r.Close();
-
-                //m_command.CommandText = Unit.GetByIDSQLstatic(t.PART.UNIT.ID);
-                //r = m_command.ExecuteReader();
-                //t.PART.UNIT = Unit.GetUnit(r);
-                //r.Close();
+                m_command.CommandText = Employee.GetByIDSQLStatic(t.EMPLOYEE.ID);
+                r = m_command.ExecuteReader();
+                t.EMPLOYEE = Employee.GetEmployee(r);
+                r.Close();
             }
             return result;
         }
