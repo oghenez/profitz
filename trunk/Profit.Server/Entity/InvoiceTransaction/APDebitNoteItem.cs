@@ -55,7 +55,7 @@ namespace Profit.Server
                EMPLOYEE.ID,
                DISCOUNT,
                AMOUNT_BEFORE_DISCOUNT,
-               TOP.ID,
+               TOP==null?0:TOP.ID,
                DESCRIPTION,
                NOTES,
                PURCHASE_RETURN==null?0:PURCHASE_RETURN.ID
@@ -95,7 +95,7 @@ namespace Profit.Server
                EMPLOYEE.ID,
                DISCOUNT,
                AMOUNT_BEFORE_DISCOUNT,
-               TOP.ID,
+               TOP == null ? 0 : TOP.ID,
                DESCRIPTION,
                NOTES,
                PURCHASE_RETURN==null?0:PURCHASE_RETURN.ID,

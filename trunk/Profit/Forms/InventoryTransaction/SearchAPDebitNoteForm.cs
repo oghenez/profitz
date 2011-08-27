@@ -14,7 +14,7 @@ namespace Profit
 {
     public partial class SearchAPDebitNoteForm : KryptonForm
     {
-        APDebitNoteRepository r_soinv = (APDebitNoteRepository)RepositoryFactory.GetInstance().GetJournalRepository(RepositoryFactory.SUPPLIER_OUTSTANDING_INVOICE_REPOSITORY);
+        APDebitNoteRepository r_soinv = (APDebitNoteRepository)RepositoryFactory.GetInstance().GetJournalRepository(RepositoryFactory.APDEBITNOTE_REPOSITORY);
 
         Repository r_warehouse = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.WAREHOUSE_REPOSITORY);
         Repository r_employee = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.EMPLOYEE_REPOSITORY);
