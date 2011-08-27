@@ -52,13 +52,15 @@ CREATE TABLE `table_apdebitnote` (
   CONSTRAINT `FK_table_apdebitnote_1` FOREIGN KEY (`sup_id`) REFERENCES `table_supplier` (`sup_id`),
   CONSTRAINT `FK_table_apdebitnote_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_apdebitnote_3` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_apdebitnote`
 --
 
 /*!40000 ALTER TABLE `table_apdebitnote` DISABLE KEYS */;
+INSERT INTO `table_apdebitnote` (`apdn_id`,`apdn_code`,`apdn_date`,`sup_id`,`ccy_id`,`entry_type`,`apdn_notes`,`apdn_posted`,`apdn_eventstatus`,`apdn_subtotalamount`,`apdn_discpercent`,`apdn_amountafterdiscpercent`,`apdn_discamount`,`apdn_amountafterdiscamount`,`apdn_otherexpense`,`apdn_netamount`,`emp_id`) VALUES 
+ (2,'APDN001/08/2011','2011-08-27 00:00:00',2,1,'APDebitNote','',0,'Entry',0,0,0,0,0,0,1522000,2);
 /*!40000 ALTER TABLE `table_apdebitnote` ENABLE KEYS */;
 
 
@@ -95,13 +97,16 @@ CREATE TABLE `table_apdebitnoteitem` (
   CONSTRAINT `FK_table_apdebitnoteitem_2` FOREIGN KEY (`sup_id`) REFERENCES `table_supplier` (`sup_id`),
   CONSTRAINT `FK_table_apdebitnoteitem_3` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_apdebitnoteitem_4` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_apdebitnoteitem`
 --
 
 /*!40000 ALTER TABLE `table_apdebitnoteitem` DISABLE KEYS */;
+INSERT INTO `table_apdebitnoteitem` (`apdni_id`,`apdn_id`,`sup_id`,`ccy_id`,`apdni_amount`,`vbe_id`,`vb_id`,`apdni_entrytype`,`apdni_invoicedate`,`apdni_invoiceno`,`apdni_duedate`,`emp_id`,`apdni_discount`,`apdni_amountbeforediscount`,`top_id`,`apdni_description`,`apdni_notes`,`prn_id`) VALUES 
+ (1,2,2,1,22000,0,0,'APDebitNote','2011-08-23 00:00:00','PR002/08/2011','2011-08-27 00:00:00',2,0,0,0,'','Wizard from PR# PR002/08/2011',8),
+ (2,2,2,1,1500000,0,0,'APDebitNote','2011-08-27 00:00:00','fwefwe/rwer/6654','2011-08-27 00:00:00',2,0,0,0,'','Correction Price',0);
 /*!40000 ALTER TABLE `table_apdebitnoteitem` ENABLE KEYS */;
 
 
@@ -658,8 +663,8 @@ INSERT INTO `table_goodreceivenoteitem` (`grni_id`,`grn_id`,`part_id`,`warehouse
  (36,12,9475,1,1,0,'GoodReceiveNote',0,1,'',26,'Open',1,0),
  (37,12,14255,1,1,0,'GoodReceiveNote',0,1,'',27,'Open',1,0),
  (38,13,15112,1,100,0,'GoodReceiveNote',0,1,'',28,'Open',100,0),
- (39,14,9357,1,12,0,'GoodReceiveNote',0,1,'',16,'Outstanding',10,2),
- (40,14,9358,1,10,0,'GoodReceiveNote',0,1,'',17,'Outstanding',8,2),
+ (39,14,9357,1,12,0,'GoodReceiveNote',0,1,'',16,'Open',12,0),
+ (40,14,9358,1,10,0,'GoodReceiveNote',0,1,'',17,'Open',10,0),
  (41,14,10557,1,10,0,'GoodReceiveNote',0,1,'',18,'Open',10,0),
  (42,14,10386,1,5,0,'GoodReceiveNote',0,1,'',24,'Open',5,0),
  (43,14,9816,1,2,0,'GoodReceiveNote',0,1,'',25,'Open',2,0),
@@ -7623,7 +7628,7 @@ CREATE TABLE `table_purchasereturn` (
 /*!40000 ALTER TABLE `table_purchasereturn` DISABLE KEYS */;
 INSERT INTO `table_purchasereturn` (`prn_id`,`prn_date`,`prn_noticedate`,`prn_scentrytype`,`emp_id`,`prn_notes`,`prn_posted`,`prn_eventstatus`,`prn_code`,`sup_id`,`prn_docno`,`prn_docdate`) VALUES 
  (6,'2011-08-13 00:00:00','2011-08-13 00:00:00','PurchaseReturn',2,'',1,'Confirm','PR001/08/2011',1,'','2011-08-01 00:00:00'),
- (8,'2011-08-23 00:00:00','2011-08-23 00:00:00','PurchaseReturn',2,'',1,'Confirm','PR002/08/2011',2,'XXX//31234','2011-08-23 00:00:00');
+ (8,'2011-08-23 00:00:00','2011-08-23 00:00:00','PurchaseReturn',2,'',0,'Entry','PR002/08/2011',2,'XXX//31234','2011-08-23 00:00:00');
 /*!40000 ALTER TABLE `table_purchasereturn` ENABLE KEYS */;
 
 
@@ -7902,8 +7907,8 @@ INSERT INTO `table_stockcard` (`sc_id`,`part_id`,`warehouse_id`,`period_id`,`sc_
  (32,14044,1,20,10,0,0),
  (33,14628,1,20,0,10,0),
  (34,11067,1,20,0,20,0),
- (35,9357,1,20,11,7,0),
- (36,9358,1,20,9,9,0),
+ (35,9357,1,20,13,7,0),
+ (36,9358,1,20,11,9,0),
  (37,10557,1,20,11,9,0),
  (38,10386,1,20,6,6,0),
  (39,9816,1,20,3,13,0),
@@ -8032,8 +8037,6 @@ INSERT INTO `table_stockcardentry` (`sce_id`,`sc_id`,`sce_stockcardentrytype`,`s
  (128,41,'GoodReceiveNote','2011-08-23 00:00:00',1,4,45),
  (129,47,'GoodReceiveNote','2011-08-23 00:00:00',1,10,46),
  (130,48,'GoodReceiveNote','2011-08-23 00:00:00',1,5,47),
- (131,35,'PurchaseReturn','2011-08-23 00:00:00',1,2,17),
- (132,36,'PurchaseReturn','2011-08-23 00:00:00',1,2,18),
  (133,54,'PurchaseOrder','2011-08-24 00:00:00',1,150,34),
  (134,54,'GoodReceiveNote','2011-08-24 00:00:00',1,5,48),
  (135,53,'SupplierInvoice','2011-08-23 00:00:00',1,10,5),
@@ -8768,7 +8771,7 @@ CREATE TABLE `table_usersettings` (
   PRIMARY KEY (`us_id`),
   KEY `FK_table_usersettings_1` (`user_id`),
   CONSTRAINT `FK_table_usersettings_1` FOREIGN KEY (`user_id`) REFERENCES `table_user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=296 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=304 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_usersettings`
@@ -8963,7 +8966,7 @@ INSERT INTO `table_usersettings` (`us_id`,`user_id`,`us_name`,`us_value`,`us_typ
  (237,1,'SupplierOutstandingInvoiceForminvoicerColumnVisible','True','System.Boolean'),
  (238,1,'SupplierOutstandingInvoiceFormamountColumnWidth','83','System.Int32'),
  (239,1,'SupplierOutstandingInvoiceFormamountColumnVisible','True','System.Boolean'),
- (240,1,'MainFormmenuwidth','217','System.Int32'),
+ (240,1,'MainFormmenuwidth','35','System.Int32'),
  (241,1,'SearchGRNForSuppInvoiceFormcheckColumnWidth','41','System.Int32'),
  (242,1,'SearchGRNForSuppInvoiceFormcheckColumnVisible','True','System.Boolean'),
  (243,1,'SearchGRNForSuppInvoiceFormpurchaseorderNoColumnWidth','100','System.Int32'),
@@ -9018,7 +9021,15 @@ INSERT INTO `table_usersettings` (`us_id`,`user_id`,`us_name`,`us_value`,`us_typ
  (292,1,'SearchPRForAPDebitNoteFormprDateColumnWidth','100','System.Int32'),
  (293,1,'SearchPRForAPDebitNoteFormprDateColumnVisible','True','System.Boolean'),
  (294,1,'SearchPRForAPDebitNoteFormamountColumnWidth','100','System.Int32'),
- (295,1,'SearchPRForAPDebitNoteFormamountColumnVisible','True','System.Boolean');
+ (295,1,'SearchPRForAPDebitNoteFormamountColumnVisible','True','System.Boolean'),
+ (296,1,'APDebitNoteForminvoiceNoColumnWidth','100','System.Int32'),
+ (297,1,'APDebitNoteForminvoiceNoColumnVisible','True','System.Boolean'),
+ (298,1,'APDebitNoteForminvoiceDateColumnWidth','100','System.Int32'),
+ (299,1,'APDebitNoteForminvoiceDateColumnVisible','True','System.Boolean'),
+ (300,1,'APDebitNoteFormamountColumnWidth','100','System.Int32'),
+ (301,1,'APDebitNoteFormamountColumnVisible','True','System.Boolean'),
+ (302,1,'APDebitNoteFormnotesColumnWidth','250','System.Int32'),
+ (303,1,'APDebitNoteFormnotesColumnVisible','True','System.Boolean');
 /*!40000 ALTER TABLE `table_usersettings` ENABLE KEYS */;
 
 
@@ -9070,7 +9081,7 @@ CREATE TABLE `table_vendorbalanceentry` (
   KEY `FK_table_vendorbalanceentry_2` (`ccy_id`),
   CONSTRAINT `FK_table_vendorbalanceentry_1` FOREIGN KEY (`vb_id`) REFERENCES `table_vendorbalance` (`vb_id`),
   CONSTRAINT `FK_table_vendorbalanceentry_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_vendorbalanceentry`
