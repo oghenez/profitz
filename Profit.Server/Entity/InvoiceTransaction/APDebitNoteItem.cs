@@ -193,5 +193,9 @@ namespace Profit.Server
         {
             return "select distinct(t.prn_id) FROM table_apdebitnoteitem t where t.prn_id != 0";
         }
+        internal static string GetPRUsedByAPDN(int purchaseReturn)
+        {
+            return string.Format("Select Count(*) from table_apdebitnoteitem where prn_id = ({0})", purchaseReturn);
+        }
     }
 }

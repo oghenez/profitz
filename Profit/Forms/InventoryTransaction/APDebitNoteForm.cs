@@ -431,6 +431,7 @@ namespace Profit
             itemsDataGrid.AllowUserToDeleteRows = enable;
             itemsDataGrid.AllowUserToAddRows = enable;
             invoiceNoColumn.ReadOnly = !enable;
+            notesColumn.ReadOnly = !enable;
             invoiceDateColumn.ReadOnly = !enable;
             //topColumn.ReadOnly = !enable;
             //dueDateColumn.ReadOnly = !enable;

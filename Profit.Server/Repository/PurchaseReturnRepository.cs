@@ -143,6 +143,12 @@ namespace Profit.Server
             {
                 if (getEventStatus(st.ID)== EventStatus.Confirm)
                     throw new Exception("Revise before delete");
+
+                m_command.CommandText = APDebitNoteItem.GetPRUsedByAPDN(st.ID);
+                int count = Convert.ToInt32(m_command.ExecuteScalar());
+                if (count > 0)
+                    throw new Exception("Can not delete this Purchase Return, this Purchase Return used by APDN");
+
                 m_command.CommandText = PurchaseReturnItem.DeleteAllByEventSQL(st.ID);
                 m_command.ExecuteNonQuery();
                 m_command.CommandText = PurchaseReturn.DeleteSQL(st.ID);
