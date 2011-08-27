@@ -242,5 +242,17 @@ namespace Profit.Server
         {
             return "select distinct(t.grni_id) FROM table_supplierinvoiceitem t where t.grni_id != 0";
         }
+        internal static string GetGRNUseBySupplierInvoice(IList grnids)
+        {
+            StringBuilder poisSB = new StringBuilder();
+            foreach (GoodReceiveNoteItem i in grnids)
+            {
+                poisSB.Append(i.ID.ToString());
+                poisSB.Append(',');
+            }
+            string pois = poisSB.ToString();
+            pois = grnids.Count > 0 ? pois.Substring(0, pois.Length - 1) : "";
+            return string.Format("Select Count(*) from table_supplierinvoiceitem where grni_id in ({0})", pois);
+        }
     }
 }

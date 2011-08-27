@@ -152,6 +152,12 @@ namespace Profit.Server
             {
                 if (getEventStatus(st.ID)== EventStatus.Confirm)
                     throw new Exception("Revise before delete");
+                
+                m_command.CommandText = SupplierInvoiceItem.GetGRNUseBySupplierInvoice(st.EVENT_ITEMS);
+                int count = Convert.ToInt32(m_command.ExecuteScalar());
+                if (count > 0)
+                    throw new Exception("Can not delete this GRN, this GRN used by Supplier Invoice");
+
                 m_command.CommandText = GoodReceiveNoteItem.DeleteAllByEventSQL(st.ID);
                 m_command.ExecuteNonQuery();
                 m_command.CommandText = GoodReceiveNote.DeleteSQL(st.ID);
