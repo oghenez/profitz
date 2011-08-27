@@ -96,7 +96,13 @@ namespace Profit
             //        count++;
             //    }
             //}
-           
+            if (e.ColumnIndex == invoiceNoColumn.Index)
+            {
+                if (itemsDataGrid[invoiceDateColumn.Index, e.RowIndex].Value == null)
+                {
+                    itemsDataGrid[invoiceDateColumn.Index, e.RowIndex].Value = DateTime.Today;
+                }
+            }
         }
 
         void itemsDataGrid_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
@@ -291,25 +297,27 @@ namespace Profit
             bool a = textBoxCode.Text == "" && !r_apdn.IsAutoNumber();
             bool b = employeeKryptonComboBox.SelectedItem == null;
             bool k = supplierkryptonComboBox.SelectedItem == null;
+            bool c = currencyKryptonComboBox.SelectedItem == null;
             bool e = false;
             bool f = m_prn.ID > 0 ? false : r_apdn.IsCodeExist(textBoxCode.Text);
             
             if (a) errorProvider1.SetError(textBoxCode, "Code Can not Empty");
             if (b) errorProvider1.SetError(employeeKryptonComboBox, "Employee Can not Empty");
             if (k) errorProvider1.SetError(supplierkryptonComboBox, "Supplier Can not Empty");
+            if (c) errorProvider1.SetError(currencyKryptonComboBox, "Currency Can not Empty");
             if (f) errorProvider1.SetError(textBoxCode, a ? "Code Can not Empty & Code already used" : "Code already used");
 
             int j = 0;
             for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
             {
-                //if (itemsDataGrid[invoiceNoColumn.Index, i].Value == null) continue;
-                //if (itemsDataGrid[invoiceNoColumn.Index, i].Value.ToString() == "") continue;
-                //double qty = Convert.ToDouble(itemsDataGrid[amountColumn.Index, i].Value);
-                //if (qty == 0)
-                //{
-                //    itemsDataGrid.Rows[i].ErrorText = itemsDataGrid.Rows[i].ErrorText + " Quantity must not 0(zero)";
-                //    e = true;
-                //}
+                if (itemsDataGrid[invoiceNoColumn.Index, i].Value == null) continue;
+                if (itemsDataGrid[invoiceNoColumn.Index, i].Value.ToString() == "") continue;
+                double qty = Convert.ToDouble(itemsDataGrid[amountColumn.Index, i].Value);
+                if (qty == 0)
+                {
+                    itemsDataGrid.Rows[i].ErrorText = itemsDataGrid.Rows[i].ErrorText + " Amount must not 0(zero)";
+                    e = true;
+                }
                 //if (itemsDataGrid[invoicerColumn.Index, i].Value == null)
                 //{
                 //    itemsDataGrid.Rows[i].ErrorText = itemsDataGrid.Rows[i].ErrorText + " Please choose Invoicer unit.";
@@ -345,7 +353,7 @@ namespace Profit
 
             bool g = j == 0;
             if (g) errorProvider1.SetError(itemsDataGrid,"Items must at least 1(one)");
-            return !a && !b && !e && !f && !g;
+            return !a && !b && !k && !e && !f && !g;
         }
         private void UpdateEntity()
         {
@@ -379,6 +387,9 @@ namespace Profit
                // st.EMPLOYEE = (Employee)Utils.FindEntityInList(itemsDataGrid[invoicerColumn.Index, i].Value.ToString(), m_employee);
                 st.VENDOR = m_prn.VENDOR;
                 st.CURRENCY = m_prn.CURRENCY;
+                st.PURCHASE_RETURN = (PurchaseReturn)itemsDataGrid[invoiceNoColumn.Index, i].Tag;
+                st.NOTES = itemsDataGrid[notesColumn.Index, i].Value == null ? "" : itemsDataGrid[notesColumn.Index, i].Value.ToString();
+                st.EMPLOYEE = m_prn.EMPLOYEE;
                 items.Add(st);
             }
             return items;
@@ -493,12 +504,14 @@ namespace Profit
             {
                 int i = itemsDataGrid.Rows.Add();
                 itemsDataGrid.Rows[i].Tag = item;
+                itemsDataGrid[invoiceNoColumn.Index, i].Tag = item.PURCHASE_RETURN;
                 itemsDataGrid[invoiceNoColumn.Index, i].Value = item.INVOICE_NO;
                 itemsDataGrid[invoiceDateColumn.Index, i].Value = item.INVOICE_DATE;
                 //itemsDataGrid[topColumn.Index, i].Value = (TermOfPayment)r_top.GetById(item.TOP);
                 //itemsDataGrid[dueDateColumn.Index, i].Value = item.DUE_DATE;
                 //itemsDataGrid[invoicerColumn.Index, i].Value = (Employee)r_employee.GetById(item.EMPLOYEE);  
                 itemsDataGrid[amountColumn.Index, i].Value = item.AMOUNT;
+                itemsDataGrid[notesColumn.Index, i].Value = item.NOTES;
 
                 //item.UNIT = (Unit)r_unit.GetById(item.UNIT);
                 //item.GRN_ITEM.UNIT = (Unit)r_unit.GetById(item.GRN_ITEM.UNIT);
@@ -552,7 +565,7 @@ namespace Profit
             {
                 m_prn = (APDebitNote)result[0];
                 m_prn = (APDebitNote)r_apdn.Get(m_prn.ID);
-                m_prn.EMPLOYEE = (Employee)r_employee.GetById(m_prn.EMPLOYEE);
+                //m_prn.EMPLOYEE = (Employee)r_employee.GetById(m_prn.EMPLOYEE);
                 // m_prn.VENDOR = (Supplier)r_sup.GetById(m_prn.VENDOR);
                 setEditMode(EditMode.View);
                 loadData();
@@ -631,9 +644,10 @@ namespace Profit
                 {
                     int row = itemsDataGrid.Rows.Add();
                     itemsDataGrid[invoiceNoColumn.Index, row].Tag = item;
-                    itemsDataGrid[invoiceNoColumn.Index, row].Value = item;
+                    itemsDataGrid[invoiceNoColumn.Index, row].Value = item.CODE;
                     itemsDataGrid[invoiceDateColumn.Index, row].Value = item.TRANSACTION_DATE;
                     itemsDataGrid[amountColumn.Index, row].Value = item.TOTAL_AMOUNT_FROM_PO;
+                    itemsDataGrid[notesColumn.Index, row].Value = "Wizard from PR# " + item.CODE;
                     ReCalculateNetTotal();
                 }
             }

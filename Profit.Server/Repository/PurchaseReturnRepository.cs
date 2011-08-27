@@ -307,5 +307,36 @@ namespace Profit.Server
             }
             return result;
         }
+
+        public static PurchaseReturn GetPurchaseReturnForDebitNote(OdbcCommand cmd, PurchaseReturn p)
+        {
+            cmd.CommandText = PurchaseReturnItem.GetByEventIDSQL(p.ID);
+            OdbcDataReader r = cmd.ExecuteReader();
+            p.EVENT_ITEMS = PurchaseReturnItem.TransformReaderList(r);
+            r.Close();
+
+            foreach (PurchaseReturnItem t in p.EVENT_ITEMS)
+            {
+
+                if ((t.GRN_ITEM == null) && (t.GRN_ITEM.ID == 0)) continue;
+
+
+                cmd.CommandText = GoodReceiveNoteItem.GetByIDSQL(t.GRN_ITEM.ID);
+                r = cmd.ExecuteReader();
+                t.GRN_ITEM = GoodReceiveNoteItem.TransformReader(r);
+                r.Close();
+
+                if ((t.GRN_ITEM.PO_ITEM == null)) continue;
+                if (t.GRN_ITEM.PO_ITEM.ID == 0) continue;
+
+                cmd.CommandText = PurchaseOrderItem.GetByIDSQL(t.GRN_ITEM.PO_ITEM.ID);
+                r = cmd.ExecuteReader();
+                t.GRN_ITEM.PO_ITEM = PurchaseOrderItem.TransformReader(r);
+                r.Close();
+                double subamount = (t.GRN_ITEM.PO_ITEM.SUBTOTAL / t.GRN_ITEM.PO_ITEM.QYTAMOUNT) * t.QYTAMOUNT;
+                p.TOTAL_AMOUNT_FROM_PO += subamount;
+            }
+            return p;
+        }
     }
 }

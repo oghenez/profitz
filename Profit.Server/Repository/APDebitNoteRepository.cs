@@ -155,6 +155,13 @@ namespace Profit.Server
                 sti.VENDOR_BALANCE_ENTRY = VendorBalanceEntryRepository.FindVendorBalanceEntryByEventItem(m_command, sti.ID, sti.VENDOR_BALANCE_ENTRY_TYPE);
                 //sti.GRN_ITEM = GoodReceiveNoteRepository.FindGoodReceiveNoteItem(m_command, sti.GRN_ITEM.ID);
                 //sti.GRN_ITEM.PART = PartRepository.GetByID(m_command, sti.GRN_ITEM.PART.ID);
+                if (sti.PURCHASE_RETURN != null)
+                {
+                    if (sti.PURCHASE_RETURN.ID > 0)
+                    {
+                        sti.PURCHASE_RETURN = PurchaseReturnRepository.GetPurchaseReturnForDebitNote(m_command, sti.PURCHASE_RETURN);
+                    }
+                }
                 st.EVENT_JOURNAL_ITEMS.Add(sti);
             }
             return st;
