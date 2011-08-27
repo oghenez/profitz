@@ -97,7 +97,7 @@
             this.kryptonHeader1.Size = new System.Drawing.Size(867, 29);
             this.kryptonHeader1.TabIndex = 2;
             this.kryptonHeader1.Values.Description = "";
-            this.kryptonHeader1.Values.Heading = "TRCP007 - Supplier Outstanding Invoice";
+            this.kryptonHeader1.Values.Heading = "TRCP006 - AP Debit Note";
             // 
             // toolStrip1
             // 
@@ -542,7 +542,7 @@
             this.Controls.Add(this.kryptonHeader1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "APDebitNoteForm";
-            this.Text = "Supplier Outstanding Invoice";
+            this.Text = "AP Debit Note";
             this.Load += new System.EventHandler(this.PurchaseReturnForm_Load);
             this.Activated += new System.EventHandler(this.BankForm_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PurchaseReturnrForm_FormClosing);
