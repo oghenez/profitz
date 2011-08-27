@@ -200,6 +200,7 @@ namespace Profit.Server
             OdbcDataReader r = cmd.ExecuteReader();
             PurchaseReturnItem res = PurchaseReturnItem.TransformReader(r);
             r.Close();
+            if (res == null) return null;
             cmd.CommandText = PurchaseReturn.GetByIDSQL(res.EVENT.ID);
             r = cmd.ExecuteReader();
             res.EVENT = PurchaseReturn.TransformReader(r);
