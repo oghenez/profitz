@@ -115,6 +115,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Repository\AutoNumberSetupRepository.cs" />
+    <Compile Include="Repository\APDebitNoteRepository.cs" />
     <Compile Include="Repository\PaymentRepository.cs" />
     <Compile Include="Repository\SupplierInvoiceJournalRepository.cs" />
     <Compile Include="Repository\SupplierOutStandingInvoiceRepository.cs" />

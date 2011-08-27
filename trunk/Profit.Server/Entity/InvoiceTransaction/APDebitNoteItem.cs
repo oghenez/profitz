@@ -9,6 +9,7 @@ namespace Profit.Server
 {
     public class APDebitNoteItem : EventJournalItem
     {
+        public PurchaseReturn PURCHASE_RETURN = null;
         public APDebitNoteItem() : base()
         {
             VENDOR_BALANCE_TYPE = VendorBalanceType.Supplier;
@@ -37,9 +38,10 @@ namespace Profit.Server
                     apdni_amountbeforediscount,
                     top_id,
                     apdni_description,
-                    apdni_notes 
+                    apdni_notes,
+                    prn_id
                 ) 
-                VALUES ({0},{1},{2},{3},{4},{5},'{6}','{7}','{8}','{9}',{10},{11},{12},{13},'{14}','{15}')",
+                VALUES ({0},{1},{2},{3},{4},{5},'{6}','{7}','{8}','{9}',{10},{11},{12},{13},'{14}','{15}',{16})",
                EVENT_JOURNAL.ID,
                VENDOR.ID,
                CURRENCY.ID,
@@ -55,7 +57,8 @@ namespace Profit.Server
                AMOUNT_BEFORE_DISCOUNT,
                TOP.ID,
                DESCRIPTION,
-               NOTES
+               NOTES,
+               PURCHASE_RETURN==null?0:PURCHASE_RETURN.ID
                 );
         }
         public override string GetUpdateSQL()
@@ -76,8 +79,9 @@ namespace Profit.Server
                     apdni_amountbeforediscount = {12},
                     top_id = {13},
                     apdni_description = '{14}',
-                    apdni_notes  = '{15}'
-                    where apdni_id = {16}",
+                    apdni_notes  = '{15}',
+                    prn_id = {16}
+                    where apdni_id = {17}",
                  EVENT_JOURNAL.ID,
                VENDOR.ID,
                CURRENCY.ID,
@@ -94,6 +98,7 @@ namespace Profit.Server
                TOP.ID,
                DESCRIPTION,
                NOTES,
+               PURCHASE_RETURN==null?0:PURCHASE_RETURN.ID,
                 ID);
         }
         public static APDebitNoteItem TransformReader(OdbcDataReader aReader)
@@ -120,6 +125,7 @@ namespace Profit.Server
                 transaction.TOP = new TermOfPayment(Convert.ToInt32(aReader["top_id"]));
                 transaction.DESCRIPTION = aReader["apdni_description"].ToString();
                 transaction.NOTES = aReader["apdni_notes"].ToString();
+                transaction.PURCHASE_RETURN = new  PurchaseReturn(Convert.ToInt32(aReader["prn_id"]));
             }
             return transaction;
         }
@@ -146,6 +152,7 @@ namespace Profit.Server
                 transaction.TOP = new TermOfPayment(Convert.ToInt32(aReader["top_id"]));
                 transaction.DESCRIPTION = aReader["apdni_description"].ToString();
                 transaction.NOTES = aReader["apdni_notes"].ToString();
+                transaction.PURCHASE_RETURN = new PurchaseReturn(Convert.ToInt32(aReader["prn_id"]));
                 result.Add(transaction);
             }
             return result;
@@ -182,6 +189,9 @@ namespace Profit.Server
         //{
         //    return String.Format("SELECT * from table_apdebitnoteitem where grni_id = {0}", id);
         //}
-
+        internal static string GetPRUsedByAPDN()
+        {
+            return "select distinct(t.prn_id) FROM table_apdebitnoteitem t where t.prn_id != 0";
+        }
     }
 }

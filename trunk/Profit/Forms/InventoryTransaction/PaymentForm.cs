@@ -539,14 +539,11 @@ namespace Profit
                 itemsDataGrid[docnoColumn.Index, i].Value = item.INVOICE_NO;
                 itemsDataGrid[docdateColumn.Index, i].Value = item.INVOICE_DATE;
                 itemsDataGrid[noteColumn.Index, i].Value = item.NOTES;
-                itemsDataGrid[bankColumn.Index, i].Value = item.BANK.ToString();
-
-
+                itemsDataGrid[bankColumn.Index, i].Value = item.PAYMENT_TYPE == PaymentType.Bank ? item.BANK.ToString() : "";
 
                 //itemsDataGrid[dueDateColumn.Index, i].Value = item.DUE_DATE;
                 //itemsDataGrid[invoicerColumn.Index, i].Value = (Employee)r_employee.GetById(item.EMPLOYEE);  
                 //itemsDataGrid[amountColumn.Index, i].Value = item.AMOUNT;
-
                 //item.UNIT = (Unit)r_unit.GetById(item.UNIT);
                 //item.GRN_ITEM.UNIT = (Unit)r_unit.GetById(item.GRN_ITEM.UNIT);
                 //item.GRN_ITEM.PART.UNIT = (Unit)r_unit.GetById(item.GRN_ITEM.PART.UNIT);
