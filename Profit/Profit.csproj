@@ -76,6 +76,24 @@
     <Compile Include="Forms\FieldChooserForm.Designer.cs">
       <DependentUpon>FieldChooserForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\InventoryTransaction\APDebitNoteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\APDebitNoteForm.Designer.cs">
+      <DependentUpon>APDebitNoteForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SearchPRForAPDebitNoteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SearchPRForAPDebitNoteForm.Designer.cs">
+      <DependentUpon>SearchPRForAPDebitNoteForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SearchAPDebitNoteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SearchAPDebitNoteForm.Designer.cs">
+      <DependentUpon>SearchAPDebitNoteForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\InventoryTransaction\SearchPaymentForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -329,6 +347,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\FieldChooserForm.resx">
       <DependentUpon>FieldChooserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\APDebitNoteForm.resx">
+      <DependentUpon>APDebitNoteForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\SearchPRForAPDebitNoteForm.resx">
+      <DependentUpon>SearchPRForAPDebitNoteForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\SearchAPDebitNoteForm.resx">
+      <DependentUpon>SearchAPDebitNoteForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\SearchPaymentForm.resx">
       <DependentUpon>SearchPaymentForm.cs</DependentUpon>

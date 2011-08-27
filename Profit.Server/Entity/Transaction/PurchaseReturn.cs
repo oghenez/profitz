@@ -10,6 +10,7 @@ namespace Profit.Server
     public class PurchaseReturn : Event
     {
         public Supplier SUPPLIER = null;
+        public double TOTAL_AMOUNT_FROM_PO = 0;
         public PurchaseReturn()
             : base()
         { }
@@ -163,6 +164,16 @@ namespace Profit.Server
         public static string RecordCount()
         {
             return @"select Count(*) from table_purchasereturn p";
+        }
+        public static string GetSearchPRNoForAPDN(string find, int supplierID, string poi, DateTime trdate)
+        {
+            return String.Format(@"SELECT p.*
+                FROM table_purchasereturn p
+                where p.prn_posted = true
+                and p.prn_code like '%{0}%'
+                and p.sup_id = {1}
+                and p.prn_date <= '{2}'
+               {3}", find, supplierID, trdate.ToString(Utils.DATE_FORMAT), poi != "" ? " and t.prn_id not in (" + poi + ")" : "");
         }
     }
 }

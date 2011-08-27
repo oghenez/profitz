@@ -249,5 +249,63 @@ namespace Profit.Server
             AutoNumberSetup autonumber = AutoNumberSetupRepository.GetAutoNumberSetup(m_command, "PurchaseReturn");
             return autonumber.AUTONUMBER_SETUP_TYPE == AutoNumberSetupType.Auto;
         }
+        public IList FindPRForAPDebitNote(string find, int supID,DateTime trdate,IList added)
+        {
+            m_command.CommandText = APDebitNoteItem.GetPRUsedByAPDN();
+            OdbcDataReader r = m_command.ExecuteReader();
+            if (r.HasRows)
+            {
+                while (r.Read())
+                {
+                    int id = Convert.ToInt32(r[0]);
+                    if (!added.Contains(id))
+                        added.Add(id);
+                }
+            }
+            r.Close();
+            StringBuilder poisSB = new StringBuilder();
+            foreach (int i in added)
+            {
+                poisSB.Append(i.ToString());
+                poisSB.Append(',');
+            }
+            string pois = poisSB.ToString();
+            pois = added.Count > 0 ? pois.Substring(0, pois.Length - 1) : "";
+
+            m_command.CommandText = PurchaseReturn.GetSearchPRNoForAPDN(find, supID, pois, trdate);
+            r = m_command.ExecuteReader();
+            IList result = PurchaseReturn.TransformReaderList(r);
+            r.Close();
+            foreach (PurchaseReturn p in result)
+            {
+                m_command.CommandText = PurchaseReturnItem.GetByEventIDSQL(p.ID);
+                r = m_command.ExecuteReader();
+                p.EVENT_ITEMS = PurchaseReturnItem.TransformReaderList(r);
+                r.Close();
+
+                foreach (PurchaseReturnItem t in p.EVENT_ITEMS)
+                {
+
+                    if ((t.GRN_ITEM == null) && (t.GRN_ITEM.ID == 0)) continue;
+
+
+                    m_command.CommandText = GoodReceiveNoteItem.GetByIDSQL(t.GRN_ITEM.ID);
+                    r = m_command.ExecuteReader();
+                    t.GRN_ITEM = GoodReceiveNoteItem.TransformReader(r);
+                    r.Close();
+
+                    if ((t.GRN_ITEM.PO_ITEM == null)) continue;
+                    if (t.GRN_ITEM.PO_ITEM.ID == 0) continue;
+
+                    m_command.CommandText = PurchaseOrderItem.GetByIDSQL(t.GRN_ITEM.PO_ITEM.ID);
+                    r = m_command.ExecuteReader();
+                    t.GRN_ITEM.PO_ITEM = PurchaseOrderItem.TransformReader(r);
+                    r.Close();
+                    double subamount = (t.GRN_ITEM.PO_ITEM.SUBTOTAL / t.GRN_ITEM.PO_ITEM.QYTAMOUNT) * t.QYTAMOUNT;
+                    p.TOTAL_AMOUNT_FROM_PO += subamount;
+                }
+            }
+            return result;
+        }
     }
 }

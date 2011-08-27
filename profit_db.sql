@@ -85,6 +85,7 @@ CREATE TABLE `table_apdebitnoteitem` (
   `top_id` int(10) unsigned NOT NULL,
   `apdni_description` text NOT NULL,
   `apdni_notes` text NOT NULL,
+  `prn_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`apdni_id`),
   KEY `FK_table_apdebitnoteitem_1` (`apdn_id`),
   KEY `FK_table_apdebitnoteitem_2` (`sup_id`),
@@ -121,7 +122,7 @@ CREATE TABLE `table_autonumbersetup` (
   `ans_istransaction` tinyint(1) NOT NULL,
   PRIMARY KEY (`ans_id`),
   UNIQUE KEY `Index_2` (`ans_entity`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_autonumbersetup`
@@ -136,7 +137,8 @@ INSERT INTO `table_autonumbersetup` (`ans_id`,`ans_entity`,`ans_formcode`,`ans_p
  (5,'SupplierInvoice','TRCP003 - Supplier Invoice','SP#/MM/yyyy',1,3,'Yearly','Auto',1),
  (6,'SupplierOutStandingInvoice','TRCP007 - Supplier Outstanding Invoice','SPOI#/MM/yyyy',1,3,'Yearly','Auto',1),
  (7,'SupplierInvoiceJournal','TRCP008 - Supplier Invoice Journal','SIJ#/MM/yyyy',1,3,'Yearly','Auto',1),
- (8,'Payment','TRCP004 - Payment','PYMN#/MM/yyyy',1,3,'Yearly','Auto',1);
+ (8,'Payment','TRCP004 - Payment','PYMN#/MM/yyyy',1,3,'Yearly','Auto',1),
+ (9,'APDebitNote','TRCP006 - AP Debit Note','APDN#/MM/yyyy',1,3,'Yearly','Auto',1);
 /*!40000 ALTER TABLE `table_autonumbersetup` ENABLE KEYS */;
 
 
@@ -471,7 +473,7 @@ CREATE TABLE `table_formaccess` (
   PRIMARY KEY (`formaccess_id`) USING BTREE,
   KEY `FK_table_formaccess_1` (`user_id`),
   CONSTRAINT `FK_table_formaccess_1` FOREIGN KEY (`user_id`) REFERENCES `table_user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_formaccess`
@@ -508,7 +510,8 @@ INSERT INTO `table_formaccess` (`formaccess_id`,`formaccess_code`,`formaccess_na
  (29,'PurchaseReturnForm','TRCP005 - Purchase Return',1,1,1,1,1,1),
  (30,'SupplierInvoiceForm','TRCP003 - Supplier Invoice',1,1,1,1,1,1),
  (31,'SupplierOutstandingInvoiceForm','TRCP007 - Supplier Outstanding Invoice',1,1,1,1,1,1),
- (32,'PaymentForm','TRCP004 - Payment',1,1,1,1,1,1);
+ (32,'PaymentForm','TRCP004 - Payment',1,1,1,1,1,1),
+ (33,'APDebitNoteForm','TRCP006 - APDebitNote',1,1,1,1,1,1);
 /*!40000 ALTER TABLE `table_formaccess` ENABLE KEYS */;
 
 
@@ -7282,7 +7285,7 @@ CREATE TABLE `table_payment` (
   CONSTRAINT `FK_table_payment_1` FOREIGN KEY (`sup_id`) REFERENCES `table_supplier` (`sup_id`),
   CONSTRAINT `FK_table_payment_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_payment_3` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_payment`
@@ -7290,7 +7293,8 @@ CREATE TABLE `table_payment` (
 
 /*!40000 ALTER TABLE `table_payment` DISABLE KEYS */;
 INSERT INTO `table_payment` (`pay_id`,`pay_code`,`pay_date`,`sup_id`,`ccy_id`,`entry_type`,`pay_notes`,`pay_posted`,`pay_eventstatus`,`pay_subtotalamount`,`pay_discpercent`,`pay_amountafterdiscpercent`,`pay_discamount`,`pay_amountafterdiscamount`,`pay_otherexpense`,`pay_netamount`,`emp_id`) VALUES 
- (5,'PYMN001/08/2011','2011-08-26 00:00:00',1,1,'Payment','',1,'Confirm',0,0,0,0,0,0,474870,2);
+ (5,'PYMN001/08/2011','2011-08-26 00:00:00',1,1,'Payment','',1,'Confirm',0,0,0,0,0,0,300000,2),
+ (6,'PYMN002/08/2011','2011-08-27 00:00:00',1,1,'Payment','',1,'Confirm',0,0,0,0,0,0,150000,2);
 /*!40000 ALTER TABLE `table_payment` ENABLE KEYS */;
 
 
@@ -7328,7 +7332,7 @@ CREATE TABLE `table_paymentitem` (
   CONSTRAINT `FK_table_paymentitem_1` FOREIGN KEY (`pay_id`) REFERENCES `table_payment` (`pay_id`),
   CONSTRAINT `FK_table_paymentitem_2` FOREIGN KEY (`sup_id`) REFERENCES `table_supplier` (`sup_id`),
   CONSTRAINT `FK_table_paymentitem_3` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_paymentitem`
@@ -7336,8 +7340,10 @@ CREATE TABLE `table_paymentitem` (
 
 /*!40000 ALTER TABLE `table_paymentitem` DISABLE KEYS */;
 INSERT INTO `table_paymentitem` (`payi_id`,`pay_id`,`sup_id`,`ccy_id`,`payi_amount`,`vbe_id`,`vb_id`,`payi_entrytype`,`payi_invoicedate`,`payi_invoiceno`,`payi_duedate`,`emp_id`,`payi_discount`,`payi_amountbeforediscount`,`top_id`,`payi_description`,`payi_notes`,`inv_id`,`inv_type`,`bank_id`,`payi_paymenttype`) VALUES 
- (1,5,1,1,165000,0,0,'Payment','2011-08-26 00:00:00','2222','2011-08-26 00:00:00',2,0,0,0,'','test 1',3,'SupplierInvoice',2,'Bank'),
- (2,5,1,1,309870,0,0,'Payment','2011-08-26 00:00:00','3333','2011-08-26 00:00:00',2,0,0,0,'','test 3',5,'SupplierInvoice',3,'Bank');
+ (1,5,1,1,100000,0,0,'Payment','2011-08-26 00:00:00','2222','2011-08-26 00:00:00',2,0,0,0,'','test 1',3,'SupplierInvoice',2,'Bank'),
+ (2,5,1,1,200000,0,0,'Payment','2011-08-26 00:00:00','3333','2011-08-26 00:00:00',2,0,0,0,'','test 3',5,'SupplierInvoice',3,'Bank'),
+ (3,6,1,1,50000,0,0,'Payment','2011-08-27 00:00:00','','2011-08-27 00:00:00',2,0,0,0,'','',3,'SupplierInvoice',8,'Bank'),
+ (4,6,1,1,100000,0,0,'Payment','2011-08-27 00:00:00','','2011-08-27 00:00:00',2,0,0,0,'','',5,'SupplierInvoice',0,'Cash');
 /*!40000 ALTER TABLE `table_paymentitem` ENABLE KEYS */;
 
 
@@ -8486,9 +8492,9 @@ CREATE TABLE `table_supplierinvoicejournalitem` (
 
 /*!40000 ALTER TABLE `table_supplierinvoicejournalitem` DISABLE KEYS */;
 INSERT INTO `table_supplierinvoicejournalitem` (`siji_id`,`sij_id`,`sup_id`,`ccy_id`,`siji_amount`,`vbe_id`,`vb_id`,`siji_entrytype`,`siji_invoicedate`,`siji_invoiceno`,`siji_duedate`,`emp_id`,`siji_discount`,`siji_amountbeforediscount`,`top_id`,`siji_description`,`siji_notes`,`siji_againstpaymentstatus`,`siji_outstandingamount`,`siji_paidamount`) VALUES 
- (3,3,1,1,165000,0,0,'SupplierOutStandingInvoice','2011-08-23 00:00:00','SP002/08/2011','2011-08-23 00:00:00',1,0,0,1,'','','Close',0,165000),
+ (3,3,1,1,165000,0,0,'SupplierOutStandingInvoice','2011-08-23 00:00:00','SP002/08/2011','2011-08-23 00:00:00',1,0,0,1,'','','Outstanding',15000,150000),
  (4,4,2,1,971532.1,0,0,'SupplierOutStandingInvoice','2011-08-23 00:00:00','SP004/08/2011','2011-10-22 00:00:00',1,0,0,3,'','','Open',971532.1,0),
- (5,5,1,1,309870,0,0,'SupplierOutStandingInvoice','2011-08-24 00:00:00','SP005/08/2011','2011-08-24 00:00:00',1,0,0,1,'','','Close',0,309870);
+ (5,5,1,1,309870,0,0,'SupplierOutStandingInvoice','2011-08-24 00:00:00','SP005/08/2011','2011-08-24 00:00:00',1,0,0,1,'','','Outstanding',9870,300000);
 /*!40000 ALTER TABLE `table_supplierinvoicejournalitem` ENABLE KEYS */;
 
 
@@ -8743,7 +8749,7 @@ CREATE TABLE `table_user` (
 
 /*!40000 ALTER TABLE `table_user` DISABLE KEYS */;
 INSERT INTO `table_user` (`user_id`,`user_code`,`user_name`,`user_password`,`user_active`) VALUES 
- (1,'ADMIN','Administrator','ufuM1dWNxksUPBOf9MVAcg==',1),
+ (1,'ADMIN','Administrator','/n6NEGXtw6SUD4I797QKsw==',1),
  (10,'TEST','test','h8hJDUbluugJhS5FrEL6ZA==',0);
 /*!40000 ALTER TABLE `table_user` ENABLE KEYS */;
 
@@ -8762,7 +8768,7 @@ CREATE TABLE `table_usersettings` (
   PRIMARY KEY (`us_id`),
   KEY `FK_table_usersettings_1` (`user_id`),
   CONSTRAINT `FK_table_usersettings_1` FOREIGN KEY (`user_id`) REFERENCES `table_user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=288 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=296 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_usersettings`
@@ -8810,7 +8816,7 @@ INSERT INTO `table_usersettings` (`us_id`,`user_id`,`us_name`,`us_value`,`us_typ
  (90,1,'StockTakingFormpriceColumnVisible','True','System.Boolean'),
  (91,1,'StockTakingFormtotalAmountColumnWidth','81','System.Int32'),
  (92,1,'StockTakingFormtotalAmountColumnVisible','True','System.Boolean'),
- (93,1,'MainFormtheme','ProfessionalOffice2003','System.String'),
+ (93,1,'MainFormtheme','ProfessionalSystem','System.String'),
  (94,1,'SearchPOForGRNFormcheckColumnWidth','50','System.Int32'),
  (95,1,'SearchPOForGRNFormcheckColumnVisible','True','System.Boolean'),
  (96,1,'SearchPOForGRNFormpurchaseorderNoColumnWidth','111','System.Int32'),
@@ -8895,7 +8901,7 @@ INSERT INTO `table_usersettings` (`us_id`,`user_id`,`us_name`,`us_value`,`us_typ
  (175,1,'PurchaseReturnFormwarehouseColumnVisible','False','System.Boolean'),
  (176,1,'PurchaseReturnFormnotesColumnWidth','100','System.Int32'),
  (177,1,'PurchaseReturnFormnotesColumnVisible','False','System.Boolean'),
- (178,1,'SearchGoodReceiveNoteFormdgNameWidth','100','System.Int32'),
+ (178,1,'SearchGoodReceiveNoteFormdgNameWidth','119','System.Int32'),
  (179,1,'SearchGoodReceiveNoteFormdgNameVisible','True','System.Boolean'),
  (180,1,'SearchGoodReceiveNoteFormdgSubjectWidth','80','System.Int32'),
  (181,1,'SearchGoodReceiveNoteFormdgSubjectVisible','True','System.Boolean'),
@@ -8957,7 +8963,7 @@ INSERT INTO `table_usersettings` (`us_id`,`user_id`,`us_name`,`us_value`,`us_typ
  (237,1,'SupplierOutstandingInvoiceForminvoicerColumnVisible','True','System.Boolean'),
  (238,1,'SupplierOutstandingInvoiceFormamountColumnWidth','83','System.Int32'),
  (239,1,'SupplierOutstandingInvoiceFormamountColumnVisible','True','System.Boolean'),
- (240,1,'MainFormmenuwidth','35','System.Int32'),
+ (240,1,'MainFormmenuwidth','217','System.Int32'),
  (241,1,'SearchGRNForSuppInvoiceFormcheckColumnWidth','41','System.Int32'),
  (242,1,'SearchGRNForSuppInvoiceFormcheckColumnVisible','True','System.Boolean'),
  (243,1,'SearchGRNForSuppInvoiceFormpurchaseorderNoColumnWidth','100','System.Int32'),
@@ -9004,7 +9010,15 @@ INSERT INTO `table_usersettings` (`us_id`,`user_id`,`us_name`,`us_value`,`us_typ
  (284,1,'PaymentFormnoteColumnWidth','50','System.Int32'),
  (285,1,'PaymentFormnoteColumnVisible','True','System.Boolean'),
  (286,1,'PaymentFormbankColumnWidth','50','System.Int32'),
- (287,1,'PaymentFormbankColumnVisible','True','System.Boolean');
+ (287,1,'PaymentFormbankColumnVisible','True','System.Boolean'),
+ (288,1,'SearchPRForAPDebitNoteFormcheckColumnWidth','50','System.Int32'),
+ (289,1,'SearchPRForAPDebitNoteFormcheckColumnVisible','True','System.Boolean'),
+ (290,1,'SearchPRForAPDebitNoteFormprNoColumnWidth','100','System.Int32'),
+ (291,1,'SearchPRForAPDebitNoteFormprNoColumnVisible','True','System.Boolean'),
+ (292,1,'SearchPRForAPDebitNoteFormprDateColumnWidth','100','System.Int32'),
+ (293,1,'SearchPRForAPDebitNoteFormprDateColumnVisible','True','System.Boolean'),
+ (294,1,'SearchPRForAPDebitNoteFormamountColumnWidth','100','System.Int32'),
+ (295,1,'SearchPRForAPDebitNoteFormamountColumnVisible','True','System.Boolean');
 /*!40000 ALTER TABLE `table_usersettings` ENABLE KEYS */;
 
 
@@ -9033,7 +9047,7 @@ CREATE TABLE `table_vendorbalance` (
 
 /*!40000 ALTER TABLE `table_vendorbalance` DISABLE KEYS */;
 INSERT INTO `table_vendorbalance` (`vb_id`,`vb_vendorbalancetype`,`period_id`,`vendor_id`,`ccy_id`,`vb_balance`) VALUES 
- (2,'Supplier',20,1,1,681444),
+ (2,'Supplier',20,1,1,691314),
  (3,'Supplier',20,2,1,1571532.1);
 /*!40000 ALTER TABLE `table_vendorbalance` ENABLE KEYS */;
 
@@ -9056,7 +9070,7 @@ CREATE TABLE `table_vendorbalanceentry` (
   KEY `FK_table_vendorbalanceentry_2` (`ccy_id`),
   CONSTRAINT `FK_table_vendorbalanceentry_1` FOREIGN KEY (`vb_id`) REFERENCES `table_vendorbalance` (`vb_id`),
   CONSTRAINT `FK_table_vendorbalanceentry_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_vendorbalanceentry`
@@ -9072,8 +9086,10 @@ INSERT INTO `table_vendorbalanceentry` (`vbe_id`,`vb_id`,`vbe_vendorbalanceentry
  (11,2,'SupplierOutStandingInvoice','2011-08-23 00:00:00',1,165000,3),
  (12,3,'SupplierOutStandingInvoice','2011-08-23 00:00:00',1,971532.1,4),
  (13,2,'SupplierOutStandingInvoice','2011-08-24 00:00:00',1,309870,5),
- (18,2,'Payment','2011-08-26 00:00:00',1,165000,1),
- (19,2,'Payment','2011-08-26 00:00:00',1,309870,2);
+ (20,2,'Payment','2011-08-26 00:00:00',1,100000,1),
+ (21,2,'Payment','2011-08-26 00:00:00',1,200000,2),
+ (22,2,'Payment','2011-08-27 00:00:00',1,50000,3),
+ (23,2,'Payment','2011-08-27 00:00:00',1,100000,4);
 /*!40000 ALTER TABLE `table_vendorbalanceentry` ENABLE KEYS */;
 
 

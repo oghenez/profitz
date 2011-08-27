@@ -108,7 +108,7 @@ namespace Profit.Server
 
         public override bool Equals(object obj)
         {
-            IEntity e = (IEntity)obj;
+            IEntity e = (IEntity)obj ;
             if (e == null) return false;
             return e.GetID() == ID;
         }

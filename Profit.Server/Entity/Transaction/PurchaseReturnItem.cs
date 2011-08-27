@@ -12,6 +12,7 @@ namespace Profit.Server
         public string NOTES = string.Empty;
         public GoodReceiveNoteItem GRN_ITEM;
         public PurchaseReturnItem() : base() { }
+        public PurchaseReturnItem(int id) : base() { ID = id; }
         public override string GetInsertSQL()
         {
             return String.Format(@"insert into table_purchasereturnitem 
@@ -140,5 +141,17 @@ namespace Profit.Server
         {
             return String.Format("SELECT * from table_purchasereturnitem where grni_id = {0}", id);
         }
+//        public static string GetSearchByPartAndPRNo(string find, int supplierID, string poi, DateTime trdate)
+//        {
+//            return String.Format(@"SELECT t.*
+//                FROM table_purchasereturnitem t
+//                INNER JOIN table_purchasereturn p on p.prn_id = t.prn_id
+//                INNER JOIN table_part pt on pt.part_id = t.part_id
+//                where t.prni_amount > 0
+//                and concat(pt.part_code, pt.part_name, p.prn_code) like '%{0}%' and p.sup_id = {1}  
+//                and p.prn_posted = true
+//                and p.prn_date <= '{2}'
+//               {3}", find, supplierID, trdate.ToString(Utils.DATE_FORMAT), poi != "" ? " and t.prni_id not in (" + poi + ")" : "");
+//        }
     }
 }
