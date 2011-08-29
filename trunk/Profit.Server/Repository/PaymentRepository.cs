@@ -21,8 +21,16 @@ namespace Profit.Server
                 item.VENDOR = events.VENDOR;
                 SetVendorBalance(item, p);
                 item.SUPPLIER_INVOICE_JOURNAL_ITEM.SetOSAgainstPaymentItem(item);
-                SupplierInvoiceJournalRepository.UpdateAgainstStatus(m_command, item.SUPPLIER_INVOICE_JOURNAL_ITEM.GET_EVENT_JOURNAL,
-                    item.SUPPLIER_INVOICE_JOURNAL_ITEM);
+                if (item.SUPPLIER_INVOICE_JOURNAL_ITEM is SupplierInvoiceJournalItem)
+                {
+                    SupplierInvoiceJournalRepository.UpdateAgainstStatus(m_command, item.SUPPLIER_INVOICE_JOURNAL_ITEM.GET_EVENT_JOURNAL,
+                        item.SUPPLIER_INVOICE_JOURNAL_ITEM);
+                }
+                if (item.SUPPLIER_INVOICE_JOURNAL_ITEM is SupplierOutStandingInvoiceItem)
+                {
+                    SupplierOutStandingInvoiceRepository.UpdateAgainstStatus(m_command, item.SUPPLIER_INVOICE_JOURNAL_ITEM.GET_EVENT_JOURNAL,
+                        item.SUPPLIER_INVOICE_JOURNAL_ITEM);
+                }
             }
         }
         protected override void doRevise(EventJournal events, Period p)
@@ -174,6 +182,11 @@ namespace Profit.Server
                 {
                     if(sti.SUPPLIER_INVOICE_JOURNAL_ITEM!=null)
                         sti.SUPPLIER_INVOICE_JOURNAL_ITEM = SupplierInvoiceJournalRepository.FindSIJournalItemlistForPayment(m_command, sti.SUPPLIER_INVOICE_JOURNAL_ITEM.GetID());
+                }
+                if (sti.VENDOR_BALANCE_SUPPLIER_INVOICE_TYPE == VendorBalanceEntryType.SupplierOutStandingInvoice)
+                {
+                    if (sti.SUPPLIER_INVOICE_JOURNAL_ITEM != null)
+                        sti.SUPPLIER_INVOICE_JOURNAL_ITEM = SupplierOutStandingInvoiceRepository.FindSOIItemlistForPayment(m_command, sti.SUPPLIER_INVOICE_JOURNAL_ITEM.GetID());
                 }
                 if (sti.PAYMENT_TYPE == PaymentType.Bank)
                     sti.BANK = getBank(sti.BANK.ID);

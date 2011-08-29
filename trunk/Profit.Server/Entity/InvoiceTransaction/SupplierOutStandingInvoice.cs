@@ -213,5 +213,13 @@ namespace Profit.Server
         {
             return @"select Count(*) from table_supplieroutstandinginvoice p";
         }
+        public string UpdateAgainstStatus()
+        {
+            return String.Format(@"update table_supplieroutstandinginvoice set 
+                    sosti_againstpaymentstatus = '{0}'
+                where sosti_id = {1}",
+                          AGAINST_PAYMENT_STATUS.ToString(),
+                           ID);
+        }
     }
 }
