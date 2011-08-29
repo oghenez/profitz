@@ -300,11 +300,11 @@ namespace Profit
                     itemsDataGrid.Rows[i].ErrorText = "Please choose unit.";
                     e = true;
                 }
-                if (itemsDataGrid[warehouseColumn.Index, i].Value == null)
-                {
-                    itemsDataGrid.Rows[i].ErrorText = "Please choose warehouse.";
-                    e = true;
-                }
+                //if (itemsDataGrid[warehouseColumn.Index, i].Value == null)
+                //{
+                //    itemsDataGrid.Rows[i].ErrorText = "Please choose warehouse.";
+                //    e = true;
+                //}
                 double qty = Convert.ToDouble(itemsDataGrid[QtyColumn.Index, i].Value);
                 if (qty == 0)
                 {
@@ -395,7 +395,7 @@ namespace Profit
             scanColumn.ReadOnly = !enable;
             QtyColumn.ReadOnly = !enable;
             unitColumn.ReadOnly = !enable;
-            warehouseColumn.ReadOnly = !enable;
+            //warehouseColumn.ReadOnly = !enable;
             notesColumn.ReadOnly = !enable;
             docdatekryptonDateTimePicker.Enabled = enable;
             docnokryptonTextBox.ReadOnly = !enable;
