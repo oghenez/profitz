@@ -37,6 +37,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonHeader1 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
@@ -641,9 +642,12 @@
             // 
             // warehouseColumn
             // 
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.warehouseColumn.DefaultCellStyle = dataGridViewCellStyle6;
             this.warehouseColumn.DropDownWidth = 121;
             this.warehouseColumn.HeaderText = "Warehouse";
             this.warehouseColumn.Name = "warehouseColumn";
+            this.warehouseColumn.ReadOnly = true;
             this.warehouseColumn.Width = 70;
             // 
             // notesColumn
@@ -656,10 +660,10 @@
             // 
             // returnedColumn
             // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            dataGridViewCellStyle6.NullValue = "0";
-            this.returnedColumn.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle7.NullValue = "0";
+            this.returnedColumn.DefaultCellStyle = dataGridViewCellStyle7;
             this.returnedColumn.HeaderText = "Return Qty";
             this.returnedColumn.Increment = new decimal(new int[] {
             1,
@@ -682,8 +686,8 @@
             // 
             // returnedunitColumn
             // 
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.returnedunitColumn.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.returnedunitColumn.DefaultCellStyle = dataGridViewCellStyle8;
             this.returnedunitColumn.HeaderText = "Returned Unit";
             this.returnedunitColumn.Name = "returnedunitColumn";
             this.returnedunitColumn.ReadOnly = true;
