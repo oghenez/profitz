@@ -29,6 +29,7 @@ namespace Profit
         PurchaseReturnRepository r_prn = (PurchaseReturnRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.PURCHASE_RETURN_REPOSITORY);
         PaymentRepository r_soinv = (PaymentRepository)RepositoryFactory.GetInstance().GetJournalRepository(RepositoryFactory.PAYMENT_REPOSITORY);
         SupplierInvoiceJournalRepository r_sij = (SupplierInvoiceJournalRepository)RepositoryFactory.GetInstance().GetJournalRepository(RepositoryFactory.SUPPLIERINVOICE_JOURNAL_REPOSITORY);
+        SupplierOutStandingInvoiceRepository r_soij = (SupplierOutStandingInvoiceRepository)RepositoryFactory.GetInstance().GetJournalRepository(RepositoryFactory.SUPPLIER_OUTSTANDING_INVOICE_REPOSITORY);
         
         IList m_units;
         IList m_warehouses;
@@ -198,19 +199,40 @@ namespace Profit
             if (e.ColumnIndex == paymentAmountColumn.Index)
             {
                 double py = Convert.ToDouble(e.FormattedValue);
-                SupplierInvoiceJournalItem si = (SupplierInvoiceJournalItem)itemsDataGrid[invoiceNoColumn.Index, e.RowIndex].Tag;
-                si.OUTSTANDING_AMOUNT = r_sij.GetOutstanding(si.ID);
-                if(si==null)
+                if (itemsDataGrid[invoiceNoColumn.Index, e.RowIndex].Tag == null) return;
+                if (itemsDataGrid[invoiceNoColumn.Index, e.RowIndex].Tag is SupplierInvoiceJournalItem)
                 {
-                    e.Cancel = true;
-                    itemsDataGrid.Rows[e.RowIndex].ErrorText = "Please Fill Invoice";
-                    return;
+                    SupplierInvoiceJournalItem si = (SupplierInvoiceJournalItem)itemsDataGrid[invoiceNoColumn.Index, e.RowIndex].Tag;
+                    si.OUTSTANDING_AMOUNT = r_sij.GetOutstanding(si.ID);
+                    if (si == null)
+                    {
+                        e.Cancel = true;
+                        itemsDataGrid.Rows[e.RowIndex].ErrorText = "Please Fill Invoice";
+                        return;
+                    }
+                    if (py > si.OUTSTANDING_AMOUNT)
+                    {
+                        e.Cancel = true;
+                        itemsDataGrid.Rows[e.RowIndex].ErrorText = "Payment exceed outstanding amount";
+                        return;
+                    }
                 }
-                if (py > si.OUTSTANDING_AMOUNT)
+                if (itemsDataGrid[invoiceNoColumn.Index, e.RowIndex].Tag is SupplierOutStandingInvoiceItem)
                 {
-                    e.Cancel = true;
-                    itemsDataGrid.Rows[e.RowIndex].ErrorText = "Payment exceed outstanding amount";
-                    return;
+                    SupplierOutStandingInvoiceItem si = (SupplierOutStandingInvoiceItem)itemsDataGrid[invoiceNoColumn.Index, e.RowIndex].Tag;
+                    si.OUTSTANDING_AMOUNT = r_soij.GetOutstanding(si.ID);
+                    if (si == null)
+                    {
+                        e.Cancel = true;
+                        itemsDataGrid.Rows[e.RowIndex].ErrorText = "Please Fill Invoice";
+                        return;
+                    }
+                    if (py > si.OUTSTANDING_AMOUNT)
+                    {
+                        e.Cancel = true;
+                        itemsDataGrid.Rows[e.RowIndex].ErrorText = "Payment exceed outstanding amount";
+                        return;
+                    }
                 }
             }
         }
@@ -384,8 +406,8 @@ namespace Profit
                 PaymentItem st = (PaymentItem)itemsDataGrid.Rows[i].Tag;
                 if (st == null) st = new PaymentItem();
                 itemsDataGrid.Rows[i].Tag = st;
-                SupplierInvoiceJournalItem pi = (SupplierInvoiceJournalItem)itemsDataGrid[invoiceNoColumn.Index, i].Tag;
-                st.SUPPLIER_INVOICE_JOURNAL_ITEM = pi;
+                //SupplierInvoiceJournalItem pi = (SupplierInvoiceJournalItem)itemsDataGrid[invoiceNoColumn.Index, i].Tag;
+                st.SUPPLIER_INVOICE_JOURNAL_ITEM = (ISupplierInvoiceJournalItem)itemsDataGrid[invoiceNoColumn.Index, i].Tag;
                 st.EVENT_JOURNAL = m_prn;
 
                 st.AMOUNT = Convert.ToDouble(itemsDataGrid[paymentAmountColumn.Index, i].Value);
@@ -524,17 +546,30 @@ namespace Profit
             {
                 int i = itemsDataGrid.Rows.Add();
 
-                SupplierInvoiceJournalItem siji = (SupplierInvoiceJournalItem)item.SUPPLIER_INVOICE_JOURNAL_ITEM;
-                itemsDataGrid[invoiceNoColumn.Index, i].Tag = siji;
-                itemsDataGrid[invoiceNoColumn.Index, i].Value = siji.EVENT_JOURNAL.CODE;
-                itemsDataGrid[invoiceDateColumn.Index, i].Value = siji.EVENT_JOURNAL.TRANSACTION_DATE;
-                itemsDataGrid[topColumn.Index, i].Value = siji.TOP.ToString();
-                itemsDataGrid[dueDateColumn.Index, i].Value = siji.DUE_DATE;
-                itemsDataGrid[invoicerColumn.Index, i].Value = siji.EMPLOYEE.ToString();
-                itemsDataGrid[OutstandingAmountColumn.Index, i].Value = r_sij.GetOutstanding(siji.ID);
-                itemsDataGrid[paidAmountColumn.Index, i].Value = r_sij.GetPaid(siji.ID);
-
-
+                if (item.SUPPLIER_INVOICE_JOURNAL_ITEM is SupplierInvoiceJournalItem)
+                {
+                    SupplierInvoiceJournalItem siji = (SupplierInvoiceJournalItem)item.SUPPLIER_INVOICE_JOURNAL_ITEM;
+                    itemsDataGrid[invoiceNoColumn.Index, i].Tag = siji;
+                    itemsDataGrid[invoiceNoColumn.Index, i].Value = siji.EVENT_JOURNAL.CODE;
+                    itemsDataGrid[invoiceDateColumn.Index, i].Value = siji.EVENT_JOURNAL.TRANSACTION_DATE;
+                    itemsDataGrid[topColumn.Index, i].Value = siji.TOP.ToString();
+                    itemsDataGrid[dueDateColumn.Index, i].Value = siji.DUE_DATE;
+                    itemsDataGrid[invoicerColumn.Index, i].Value = siji.EMPLOYEE.ToString();
+                    itemsDataGrid[OutstandingAmountColumn.Index, i].Value = r_sij.GetOutstanding(siji.ID);
+                    itemsDataGrid[paidAmountColumn.Index, i].Value = r_sij.GetPaid(siji.ID);
+                }
+                if (item.SUPPLIER_INVOICE_JOURNAL_ITEM is SupplierOutStandingInvoiceItem)
+                {
+                    SupplierOutStandingInvoiceItem siji = (SupplierOutStandingInvoiceItem)item.SUPPLIER_INVOICE_JOURNAL_ITEM;
+                    itemsDataGrid[invoiceNoColumn.Index, i].Tag = siji;
+                    itemsDataGrid[invoiceNoColumn.Index, i].Value = siji.EVENT_JOURNAL.CODE;
+                    itemsDataGrid[invoiceDateColumn.Index, i].Value = siji.EVENT_JOURNAL.TRANSACTION_DATE;
+                    itemsDataGrid[topColumn.Index, i].Value = siji.TOP.ToString();
+                    itemsDataGrid[dueDateColumn.Index, i].Value = siji.DUE_DATE;
+                    itemsDataGrid[invoicerColumn.Index, i].Value = siji.EMPLOYEE.ToString();
+                    itemsDataGrid[OutstandingAmountColumn.Index, i].Value = r_soij.GetOutstanding(siji.ID);
+                    itemsDataGrid[paidAmountColumn.Index, i].Value = r_soij.GetPaid(siji.ID);
+                }
                 itemsDataGrid.Rows[i].Tag = item;
                 itemsDataGrid[paymentAmountColumn.Index, i].Value = item.AMOUNT;
                 itemsDataGrid[paymentTypeColumn.Index, i].Value = item.PAYMENT_TYPE.ToString();
@@ -542,7 +577,6 @@ namespace Profit
                 itemsDataGrid[docdateColumn.Index, i].Value = item.INVOICE_DATE;
                 itemsDataGrid[noteColumn.Index, i].Value = item.NOTES;
                 itemsDataGrid[bankColumn.Index, i].Value = item.PAYMENT_TYPE == PaymentType.Bank ? item.BANK.ToString() : "";
-
                 //itemsDataGrid[dueDateColumn.Index, i].Value = item.DUE_DATE;
                 //itemsDataGrid[invoicerColumn.Index, i].Value = (Employee)r_employee.GetById(item.EMPLOYEE);  
                 //itemsDataGrid[amountColumn.Index, i].Value = item.AMOUNT;
@@ -666,9 +700,12 @@ namespace Profit
             IList addedPI = new ArrayList();
             for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
             {
-                SupplierInvoiceJournalItem pi = (SupplierInvoiceJournalItem)itemsDataGrid[invoiceNoColumn.Index, i].Tag;
-                if (pi == null) continue;
-                addedPI.Add(pi.ID);
+                if (itemsDataGrid[invoiceNoColumn.Index, i].Tag is SupplierInvoiceJournalItem)
+                {
+                    SupplierInvoiceJournalItem pi = (SupplierInvoiceJournalItem)itemsDataGrid[invoiceNoColumn.Index, i].Tag;
+                    if (pi == null) continue;
+                    addedPI.Add(pi.ID);
+                }
             }
             using (SearchSuppInvJForPaymentForm frm = new SearchSuppInvJForPaymentForm(sp.ID, addedPI, m_mainForm.CurrentUser,
                 dateKryptonDateTimePicker.Value))
@@ -702,16 +739,19 @@ namespace Profit
             IList addedPI = new ArrayList();
             for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
             {
-                SupplierInvoiceJournalItem pi = (SupplierInvoiceJournalItem)itemsDataGrid[invoiceNoColumn.Index, i].Tag;
-                if (pi == null) continue;
-                addedPI.Add(pi.ID);
+                if (itemsDataGrid[invoiceNoColumn.Index, i].Tag is SupplierOutStandingInvoiceItem)
+                {
+                    SupplierOutStandingInvoiceItem pi = (SupplierOutStandingInvoiceItem)itemsDataGrid[invoiceNoColumn.Index, i].Tag;
+                    if (pi == null) continue;
+                    addedPI.Add(pi.ID);
+                }
             }
-            using (SearchSuppInvJForPaymentForm frm = new SearchSuppInvJForPaymentForm(sp.ID, addedPI, m_mainForm.CurrentUser,
+            using (SearchOstSuppInvForPaymentForm frm = new SearchOstSuppInvForPaymentForm(sp.ID, addedPI, m_mainForm.CurrentUser,
                 dateKryptonDateTimePicker.Value))
             {
                 frm.ShowDialog();
                 IList result = frm.RESULT;
-                foreach (SupplierInvoiceJournalItem item in result)
+                foreach (SupplierOutStandingInvoiceItem item in result)
                 {
                     int i = itemsDataGrid.Rows.Add();
                     itemsDataGrid[invoiceNoColumn.Index, i].Tag = item;

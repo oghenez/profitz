@@ -143,7 +143,7 @@ namespace Profit.Server
                NOTES,
                 AGAINST_PAYMENT_STATUS.ToString(),
                OUTSTANDING_AMOUNT,
-               PAID_AMOUNT,
+               AMOUNT,
                 ID);
         }
         public static SupplierOutStandingInvoiceItem TransformReader(OdbcDataReader aReader)
@@ -206,6 +206,10 @@ namespace Profit.Server
             }
             return result;
         }
+        public static string GetByIDSQL(int id)
+        {
+            return String.Format("SELECT * from table_supplieroutstandinginvoiceitem where sostii_id = {0}", id);
+        }
         public static string SelectMaxIDSQL()
         {
             return String.Format("SELECT max(sostii_id) from table_supplieroutstandinginvoiceitem");
@@ -238,8 +242,38 @@ namespace Profit.Server
         //{
         //    return String.Format("SELECT * from table_supplieroutstandinginvoiceitem where grni_id = {0}", id);
         //}
+        public static string GetSearchForPayment(string find, int supplierID, string poi, DateTime trdate)
+        {
+            return String.Format(@"SELECT t.*
+                FROM table_supplieroutstandinginvoiceitem t
+                INNER JOIN table_supplieroutstandinginvoice p on p.sosti_id = t.sosti_id
+                where t.sostii_outstandingamount > 0
+                and p.sosti_code like '%{0}%' and p.sup_id = {1}  
+                and p.sosti_posted = true
+                and p.sosti_date <= '{2}'
+               {3}", find, supplierID, trdate.ToString(Utils.DATE_FORMAT), poi != "" ? " and t.sostii_id not in (" + poi + ")" : "");
+        }
 
+        public static string GetByOutstandingSQL(int id)
+        {
+            return String.Format("SELECT sostii_outstandingamount from table_supplieroutstandinginvoiceitem where sostii_id = {0}", id);
+        }
+        public static string GetByPaidSQL(int id)
+        {
+            return String.Format("SELECT sostii_paidamount from table_supplieroutstandinginvoiceitem where sostii_id = {0}", id);
+        }
 
+        public string UpdateAgainstStatus()
+        {
+            return String.Format(@"Update table_supplieroutstandinginvoiceitem set 
+                    sostii_againstpaymentstatus = '{0}',
+                    sostii_outstandingamount = {1},
+                    sostii_paidamount = {2}
+                    where siji_id = {3}", AGAINST_PAYMENT_STATUS.ToString(),
+                                       OUTSTANDING_AMOUNT,
+                                       PAID_AMOUNT,
+                                       ID);
+        }
         #region ISupplierInvoiceJournalItem Members
 
         public EventJournal GET_EVENT_JOURNAL

@@ -311,5 +311,94 @@ namespace Profit.Server
                 throw x;
             }
         }
+
+        public IList FindSOIJournalItemlistForPayment(string find, int supplier, DateTime trdate, IList notIn)
+        {
+            StringBuilder poisSB = new StringBuilder();
+            foreach (int i in notIn)
+            {
+                poisSB.Append(i.ToString());
+                poisSB.Append(',');
+            }
+            string pois = poisSB.ToString();
+            pois = notIn.Count > 0 ? pois.Substring(0, pois.Length - 1) : "";
+            m_command.CommandText = SupplierOutStandingInvoiceItem.GetSearchForPayment(find, supplier, pois, trdate);
+            OdbcDataReader r = m_command.ExecuteReader();
+            IList result = SupplierOutStandingInvoiceItem.TransformReaderList(r);
+            r.Close();
+            foreach (SupplierOutStandingInvoiceItem t in result)
+            {
+                m_command.CommandText = SupplierOutStandingInvoice.GetByIDSQL(t.EVENT_JOURNAL.ID);
+                r = m_command.ExecuteReader();
+                t.EVENT_JOURNAL = SupplierOutStandingInvoice.TransformReader(r);
+                r.Close();
+
+                m_command.CommandText = Currency.GetByIDSQLStatic(t.CURRENCY.ID);
+                r = m_command.ExecuteReader();
+                t.CURRENCY = Currency.GetCurrency(r);
+                r.Close();
+
+                m_command.CommandText = TermOfPayment.GetByIDSQLStatic(t.TOP.ID);
+                r = m_command.ExecuteReader();
+                t.TOP = TermOfPayment.GetTOP(r);
+                r.Close();
+
+                m_command.CommandText = Employee.GetByIDSQLStatic(t.EMPLOYEE.ID);
+                r = m_command.ExecuteReader();
+                t.EMPLOYEE = Employee.GetEmployee(r);
+                r.Close();
+            }
+            return result;
+        }
+        internal static SupplierOutStandingInvoiceItem FindSOIItemlistForPayment(OdbcCommand cmd, int supinvItemID)
+        {
+            cmd.CommandText = SupplierOutStandingInvoiceItem.GetByIDSQL(supinvItemID);
+            OdbcDataReader r = cmd.ExecuteReader();
+            SupplierOutStandingInvoiceItem result = SupplierOutStandingInvoiceItem.TransformReader(r);
+            r.Close();
+            cmd.CommandText = SupplierOutStandingInvoice.GetByIDSQL(result.EVENT_JOURNAL.ID);
+            r = cmd.ExecuteReader();
+            result.EVENT_JOURNAL = SupplierOutStandingInvoice.TransformReader(r);
+            r.Close();
+
+            cmd.CommandText = Currency.GetByIDSQLStatic(result.CURRENCY.ID);
+            r = cmd.ExecuteReader();
+            result.CURRENCY = Currency.GetCurrency(r);
+            r.Close();
+
+            cmd.CommandText = TermOfPayment.GetByIDSQLStatic(result.TOP.ID);
+            r = cmd.ExecuteReader();
+            result.TOP = TermOfPayment.GetTOP(r);
+            r.Close();
+
+            cmd.CommandText = Employee.GetByIDSQLStatic(result.EMPLOYEE.ID);
+            r = cmd.ExecuteReader();
+            result.EMPLOYEE = Employee.GetEmployee(r);
+            r.Close();
+
+
+            return result;
+        }
+        public double GetOutstanding(int sijiID)
+        {
+            m_command.CommandText = SupplierOutStandingInvoiceItem.GetByOutstandingSQL(sijiID);
+            double d = Convert.ToDouble(m_command.ExecuteScalar());
+            return d;
+        }
+        public double GetPaid(int sijiID)
+        {
+            m_command.CommandText = SupplierOutStandingInvoiceItem.GetByPaidSQL(sijiID);
+            double d = Convert.ToDouble(m_command.ExecuteScalar());
+            return d;
+        }
+        public static void UpdateAgainstStatus(OdbcCommand cmd, EventJournal e, ISupplierInvoiceJournalItem ei)
+        {
+            SupplierOutStandingInvoice po = (SupplierOutStandingInvoice)e;
+            SupplierOutStandingInvoiceItem poi = (SupplierOutStandingInvoiceItem)ei;
+            cmd.CommandText = poi.UpdateAgainstStatus();
+            cmd.ExecuteNonQuery();
+            cmd.CommandText = po.UpdateAgainstStatus();
+            cmd.ExecuteNonQuery();
+        }
     }
 }
