@@ -35,6 +35,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonHeader1 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
@@ -93,6 +95,8 @@
             this.unitColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
             this.warehouseColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
             this.notesColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.returnedColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.returnedunitColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -468,7 +472,9 @@
             this.QtyColumn,
             this.unitColumn,
             this.warehouseColumn,
-            this.notesColumn});
+            this.notesColumn,
+            this.returnedColumn,
+            this.returnedunitColumn});
             this.itemsDataGrid.ContextMenuStrip = this.dataGridContextMenuStrip;
             this.itemsDataGrid.GridStyles.Style = ComponentFactory.Krypton.Toolkit.DataGridViewStyle.Mixed;
             this.itemsDataGrid.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.GridDataCellList;
@@ -648,6 +654,41 @@
             this.notesColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.notesColumn.Width = 100;
             // 
+            // returnedColumn
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle6.NullValue = "0";
+            this.returnedColumn.DefaultCellStyle = dataGridViewCellStyle6;
+            this.returnedColumn.HeaderText = "Return Qty";
+            this.returnedColumn.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.returnedColumn.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.returnedColumn.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.returnedColumn.Name = "returnedColumn";
+            this.returnedColumn.ReadOnly = true;
+            this.returnedColumn.Width = 50;
+            // 
+            // returnedunitColumn
+            // 
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.returnedunitColumn.DefaultCellStyle = dataGridViewCellStyle7;
+            this.returnedunitColumn.HeaderText = "Returned Unit";
+            this.returnedunitColumn.Name = "returnedunitColumn";
+            this.returnedunitColumn.ReadOnly = true;
+            this.returnedunitColumn.Width = 50;
+            // 
             // GoodReceiptNoteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -737,5 +778,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn unitColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn warehouseColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn notesColumn;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn returnedColumn;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn returnedunitColumn;
     }
 }

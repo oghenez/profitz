@@ -482,6 +482,7 @@ namespace Profit
                 itemsDataGrid[OutstandingPOColumn.Index, i].Value = item.PO_ITEM.OUTSTANDING_AMOUNT_TO_GRN;
                 itemsDataGrid[OutstandingunitColumn.Index, i].Value = item.PO_ITEM.PART.UNIT.CODE;
             }
+            updateReturned();
         }
         public void Refresh(object sender, EventArgs e)
         {
@@ -585,6 +586,19 @@ namespace Profit
                 PurchaseOrderItem pi = (PurchaseOrderItem)itemsDataGrid[scanColumn.Index, i].Tag;
                 if (pi == null) continue;
                 itemsDataGrid[OutstandingPOColumn.Index, i].Value = r_po.GetOutstandingReceived(pi.ID);
+            }
+        }
+        private void updateReturned()
+        {
+            for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
+            {
+                GoodReceiveNoteItem st = (GoodReceiveNoteItem)itemsDataGrid.Rows[i].Tag;
+                if (st == null) continue;
+                Part p = (Part)itemsDataGrid[codeColumn.Index, i].Tag;
+                if (itemsDataGrid[unitColumn.Index, i].Value == null) continue;
+                p.UNIT = (Unit)r_unit.GetById(p.UNIT);
+                itemsDataGrid[returnedColumn.Index, i].Value = r_grn.GetReturned(st.ID);
+                itemsDataGrid[returnedunitColumn.Index, i].Value = p.UNIT.ToString();
             }
         }
     }
