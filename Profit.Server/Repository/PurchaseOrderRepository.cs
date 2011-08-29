@@ -309,5 +309,17 @@ namespace Profit.Server
             result.EVENT.EVENT_ITEMS.Add(result);
             return result;
         }
+        public double GetOutstandingReceived(int poItem)
+        {
+            m_command.CommandText = PurchaseOrderItem.GetOutstandingReceivedSQL(poItem);
+            double result = Convert.ToDouble(m_command.ExecuteScalar());
+            return result;
+        }
+        public double GetReceived(int poItem)
+        {
+            m_command.CommandText = PurchaseOrderItem.GetReceivedSQL(poItem);
+            double result = Convert.ToDouble(m_command.ExecuteScalar());
+            return result;
+        }
     }
 }

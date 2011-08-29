@@ -295,5 +295,13 @@ namespace Profit.Server
                 order by p.po_date desc
                 ", supID, partID, unitID);
         }
+        public static string GetOutstandingReceivedSQL(int id)
+        {
+            return String.Format("SELECT poi_outstandingamounttogrn from table_purchaseorderitem where poi_id = {0}", id);
+        }
+        public static string GetReceivedSQL(int id)
+        {
+            return String.Format("SELECT poi_receivedamount from table_purchaseorderitem where poi_id = {0}", id);
+        }
     }
 }

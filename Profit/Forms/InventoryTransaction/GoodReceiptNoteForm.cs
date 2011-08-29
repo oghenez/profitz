@@ -162,13 +162,13 @@ namespace Profit
                 sample.UNIT = u;
                 sample.QYTAMOUNT = Convert.ToDouble(e.FormattedValue);
                 double qty = sample.GetAmountInSmallestUnit();
-                double rest = pi.OUTSTANDING_AMOUNT_TO_GRN - qty;
+                double rest = r_po.GetOutstandingReceived(pi.ID) - qty;
                 if (rest < 0)
                 {
                     e.Cancel = true;
                     itemsDataGrid.Rows[e.RowIndex].ErrorText = "Quantity exceed outstanding quantity";
                 }
-                itemsDataGrid[OutstandingPOColumn.Index, e.RowIndex].Value = rest;
+                //itemsDataGrid[OutstandingPOColumn.Index, e.RowIndex].Value = rest;
             }
             if (unitColumn.Index == e.ColumnIndex)
             {
@@ -184,13 +184,13 @@ namespace Profit
                 sample.UNIT = u;
                 sample.QYTAMOUNT = Convert.ToDouble(itemsDataGrid[QtyColumn.Index, e.RowIndex].Value);
                 double qty = sample.GetAmountInSmallestUnit();
-                double rest = pi.OUTSTANDING_AMOUNT_TO_GRN - qty;
+                double rest = r_po.GetOutstandingReceived(pi.ID) - qty;
                 if (rest < 0)
                 {
                     e.Cancel = true;
                     itemsDataGrid.Rows[e.RowIndex].ErrorText = "Quantity exceed outstanding quantity";
                 }
-                itemsDataGrid[OutstandingPOColumn.Index, e.RowIndex].Value = rest;
+                //itemsDataGrid[OutstandingPOColumn.Index, e.RowIndex].Value = rest;
             }
         }
         private void InitializeDataSource()
@@ -228,6 +228,7 @@ namespace Profit
                     m_po.POSTED = true;
                     KryptonMessageBox.Show("Transaction has been POSTED", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+                updateOutstanding();
                 setEnableForm(false);
                 setEditMode(EditMode.View);
             }
@@ -480,7 +481,6 @@ namespace Profit
                 itemsDataGrid[unitColumn.Index, i].Value = item.UNIT.ToString(); ;
                 itemsDataGrid[OutstandingPOColumn.Index, i].Value = item.PO_ITEM.OUTSTANDING_AMOUNT_TO_GRN;
                 itemsDataGrid[OutstandingunitColumn.Index, i].Value = item.PO_ITEM.PART.UNIT.CODE;
-
             }
         }
         public void Refresh(object sender, EventArgs e)
@@ -575,6 +575,16 @@ namespace Profit
             {
                 itemsDataGrid.Rows[count].HeaderCell.Value = string.Format((count + 1).ToString(), "0");
                 itemsDataGrid.Rows[count].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
+        }
+
+        private void updateOutstanding()
+        {
+            for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
+            {
+                PurchaseOrderItem pi = (PurchaseOrderItem)itemsDataGrid[scanColumn.Index, i].Tag;
+                if (pi == null) continue;
+                itemsDataGrid[OutstandingPOColumn.Index, i].Value = r_po.GetOutstandingReceived(pi.ID);
             }
         }
     }

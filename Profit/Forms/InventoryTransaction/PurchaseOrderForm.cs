@@ -648,6 +648,7 @@ namespace Profit
                 itemsDataGrid[priceColumn.Index, i].Value = item.PRICE;
                 itemsDataGrid[totalAmountColumn.Index, i].Value = item.SUBTOTAL;
             }
+            updateOutstandingReceived();
         }
         public void Refresh(object sender, EventArgs e)
         {
@@ -798,6 +799,21 @@ namespace Profit
         {
             Division d = (Division)divisionKryptonComboBox.SelectedItem;
             divisionKryptonTextBox.Text = d == null ? "" : d.NAME;
+        }
+
+        private void updateOutstandingReceived()
+        {
+            for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
+            {
+                PurchaseOrderItem st = (PurchaseOrderItem)itemsDataGrid.Rows[i].Tag;
+                if (st == null) continue;
+                Part p = (Part)itemsDataGrid[codeColumn.Index, i].Tag;
+                if (itemsDataGrid[unitColumn.Index, i].Value == null) continue;
+                p.UNIT = (Unit)r_unit.GetById(p.UNIT);
+                itemsDataGrid[receivedColumn.Index, i].Value = r_po.GetReceived(st.ID);
+                itemsDataGrid[outstandingColumn.Index, i].Value = r_po.GetOutstandingReceived(st.ID);
+                itemsDataGrid[receivedunitColumn.Index, i].Value = p.UNIT.ToString();
+            }
         }
     }
 }
