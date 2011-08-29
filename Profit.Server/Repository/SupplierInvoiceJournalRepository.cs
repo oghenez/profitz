@@ -20,6 +20,8 @@ namespace Profit.Server
             {
                 SetVendorBalance(item, p);
                 item.ProcessPosted();
+                updateVendorBalances(item.VENDOR_BALANCE);
+                saveVendorBalanceEntry(item.VENDOR_BALANCE_ENTRY);
             }
         }
         protected override void doRevise(EventJournal events, Period p)
@@ -28,6 +30,7 @@ namespace Profit.Server
             {
                 SetVendorBalance(item, p);
                 item.ProcessUnPosted();
+                updateVendorBalances(item.VENDOR_BALANCE);
                 deleteVendorBalanceEntry(item.VENDOR_BALANCE_ENTRY);
             }
         }
