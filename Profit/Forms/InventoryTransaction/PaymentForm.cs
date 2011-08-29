@@ -466,6 +466,8 @@ namespace Profit
             postToolStripButton.Enabled = (m_prn.ID > 0) && (editmode == EditMode.View) && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].POST;
             postToolStripButton.Text = m_prn.POSTED ? "Unpost" : "Post";
             statusKryptonLabel.Text = m_prn.POSTED ? "POSTED" : "ENTRY";
+            toolStripButtonSearchSI.Enabled = toolStripButtonSave.Enabled;
+            toolStripButtonOutstandingInvoice.Enabled = toolStripButtonSave.Enabled;
             m_editMode = editmode;
             ReloadMainFormButton();
         }
@@ -661,6 +663,42 @@ namespace Profit
         {
             Supplier sp = (Supplier)supplierkryptonComboBox.SelectedItem;
             if(sp==null)return;
+            IList addedPI = new ArrayList();
+            for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
+            {
+                SupplierInvoiceJournalItem pi = (SupplierInvoiceJournalItem)itemsDataGrid[invoiceNoColumn.Index, i].Tag;
+                if (pi == null) continue;
+                addedPI.Add(pi.ID);
+            }
+            using (SearchSuppInvJForPaymentForm frm = new SearchSuppInvJForPaymentForm(sp.ID, addedPI, m_mainForm.CurrentUser,
+                dateKryptonDateTimePicker.Value))
+            {
+                frm.ShowDialog();
+                IList result = frm.RESULT;
+                foreach (SupplierInvoiceJournalItem item in result)
+                {
+                    int i = itemsDataGrid.Rows.Add();
+                    itemsDataGrid[invoiceNoColumn.Index, i].Tag = item;
+                    itemsDataGrid[invoiceNoColumn.Index, i].Value = item.EVENT_JOURNAL.CODE;
+                    itemsDataGrid[invoiceDateColumn.Index, i].Value = item.EVENT_JOURNAL.TRANSACTION_DATE;
+                    itemsDataGrid[topColumn.Index, i].Value = item.TOP.ToString();
+                    itemsDataGrid[dueDateColumn.Index, i].Value = item.DUE_DATE;
+                    itemsDataGrid[invoicerColumn.Index, i].Value = item.EMPLOYEE.ToString();
+                    itemsDataGrid[OutstandingAmountColumn.Index, i].Value = item.OUTSTANDING_AMOUNT;
+                    itemsDataGrid[paidAmountColumn.Index, i].Value = item.PAID_AMOUNT;
+
+                    //Init---
+                    itemsDataGrid[paymentTypeColumn.Index, i].Value = PaymentType.Bank;
+                    itemsDataGrid[docdateColumn.Index, i].Value = DateTime.Today;
+                    //---
+                }
+            }
+        }
+
+        private void toolStripButtonOutstandingInvoice_Click(object sender, EventArgs e)
+        {
+            Supplier sp = (Supplier)supplierkryptonComboBox.SelectedItem;
+            if (sp == null) return;
             IList addedPI = new ArrayList();
             for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
             {
