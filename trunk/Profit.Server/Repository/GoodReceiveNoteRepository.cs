@@ -392,5 +392,17 @@ namespace Profit.Server
             }
             return result;
         }
+        public double GetOutstandingReturned(int grnItem)
+        {
+            m_command.CommandText = GoodReceiveNoteItem.GetOutstandingReturnSQL(grnItem);
+            double result = Convert.ToDouble(m_command.ExecuteScalar());
+            return result;
+        }
+        public double GetReturned(int grnItem)
+        {
+            m_command.CommandText = GoodReceiveNoteItem.GetReturnSQL(grnItem);
+            double result = Convert.ToDouble(m_command.ExecuteScalar());
+            return result;
+        }
     }
 }

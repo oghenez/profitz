@@ -246,5 +246,13 @@ namespace Profit.Server
             if (e == null) return false;
             return e.ID == this.ID;
         }
+        public static string GetOutstandingReturnSQL(int id)
+        {
+            return String.Format("SELECT grni_againstprstatus from table_goodreceivenoteitem where grni_id = {0}", id);
+        }
+        public static string GetReturnSQL(int id)
+        {
+            return String.Format("SELECT grni_returnedamount from table_goodreceivenoteitem where grni_id = {0}", id);
+        }
     }
 }
