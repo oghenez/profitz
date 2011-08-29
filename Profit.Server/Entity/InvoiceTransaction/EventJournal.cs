@@ -116,10 +116,10 @@ namespace Profit.Server
         public void ProcessPosting()
         {
             assertNotPosted();
-            foreach (EventJournalItem eventItem in EVENT_JOURNAL_ITEMS)
-            {
-                eventItem.ProcessPosted();
-            }
+            //foreach (EventJournalItem eventItem in EVENT_JOURNAL_ITEMS)
+            //{
+            //    eventItem.ProcessPosted();
+            //}
             this.EVENT_STATUS = EventStatus.Confirm;
             this.POSTED = true;
         }
@@ -128,7 +128,7 @@ namespace Profit.Server
             assertNotUnPosted();
             foreach (EventJournalItem eventItem in EVENT_JOURNAL_ITEMS)
             {
-                eventItem.ProcessUnPosted();
+                //eventItem.ProcessUnPosted();
                 DELETED_VENDORBALANCEENTRY.Add(eventItem.VENDOR_BALANCE_ENTRY);//test
                 eventItem.VENDOR_BALANCE_ENTRY = null;//test
             }
@@ -139,7 +139,7 @@ namespace Profit.Server
         {
             return DELETED_VENDORBALANCEENTRY;
         }
-        private void assertNotPosted()
+        public void assertNotPosted()
         {
             if (this.EVENT_STATUS.Equals(EventStatus.Confirm))
                 throw new Exception("Event allready Confirmed");

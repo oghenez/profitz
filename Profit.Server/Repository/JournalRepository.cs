@@ -34,10 +34,10 @@ namespace Profit.Server
                 if (events.POSTED) 
                     throw new Exception("Status is already Posted/Confirm");
                 Period p = AssertValidPeriod(events.TRANSACTION_DATE);
-                doConfirm(events, p);
                 events.ProcessPosting();
+                doConfirm(events, p);
                 this.UpdateStatus(events, true);
-                updateVendorBalances(events.EVENT_JOURNAL_ITEMS);
+                //updateVendorBalances(events.EVENT_JOURNAL_ITEMS);
                 trc.Commit();
             }
             catch (Exception x)
@@ -54,10 +54,10 @@ namespace Profit.Server
                 if (events.POSTED)
                     throw new Exception("Status is already Posted/Confirm");
                 Period p = AssertValidPeriod(events.TRANSACTION_DATE);
-                doConfirm(events, p);
                 events.ProcessPosting();
+                doConfirm(events, p);
                 this.UpdateStatus(events, true);
-                updateVendorBalances(events.EVENT_JOURNAL_ITEMS);
+                //updateVendorBalances(events.EVENT_JOURNAL_ITEMS);
             }
             catch (Exception x)
             {
@@ -77,8 +77,8 @@ namespace Profit.Server
                 doRevise(events, p);
                 events.ProcessUnPosted();
                 this.UpdateStatus(events, false);
-                deleteVendorBalanceEntry(events.DELETED_VENDORBALANCEENTRY);
-                updateVendorBalances(events.EVENT_JOURNAL_ITEMS);
+                //deleteVendorBalanceEntry(events.DELETED_VENDORBALANCEENTRY);
+                //updateVendorBalances(events.EVENT_JOURNAL_ITEMS);
                 trc.Commit();
             }
             catch (Exception x)
@@ -98,8 +98,8 @@ namespace Profit.Server
                 doRevise(events, p);
                 events.ProcessUnPosted();
                 this.UpdateStatus(events, false);
-                deleteVendorBalanceEntry(events.DELETED_VENDORBALANCEENTRY);
-                updateVendorBalances(events.EVENT_JOURNAL_ITEMS);
+                //deleteVendorBalanceEntry(events.DELETED_VENDORBALANCEENTRY);
+               // updateVendorBalances(events.EVENT_JOURNAL_ITEMS);
             }
             catch (Exception x)
             {
@@ -129,6 +129,21 @@ namespace Profit.Server
                     VendorBalanceEntryRepository.Save(m_command, item.VENDOR_BALANCE_ENTRY);
                 }
             }
+        }
+        protected void updateVendorBalances(VendorBalance vb, VendorBalanceEntry vbe)
+        {
+            if (vb.ID > 0)
+                VendorBalanceRepository.UpdateHeader(m_command, vb);
+            else if (vb.ID == 0)
+                VendorBalanceRepository.SaveHeader(m_command, vb);
+            if (vbe != null)
+            {
+                VendorBalanceEntryRepository.Save(m_command, vbe);
+            }
+        }
+        protected void deleteVendorBalanceEntry(VendorBalanceEntry vbe)
+        {
+            VendorBalanceEntryRepository.Delete(m_command, vbe);
         }
         protected void deleteVendorBalanceEntry(IList sces)
         {

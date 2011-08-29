@@ -269,7 +269,7 @@ namespace Profit.Server
                     sostii_againstpaymentstatus = '{0}',
                     sostii_outstandingamount = {1},
                     sostii_paidamount = {2}
-                    where siji_id = {3}", AGAINST_PAYMENT_STATUS.ToString(),
+                    where sostii_id = {3}", AGAINST_PAYMENT_STATUS.ToString(),
                                        OUTSTANDING_AMOUNT,
                                        PAID_AMOUNT,
                                        ID);
