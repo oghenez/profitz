@@ -555,6 +555,7 @@ namespace Profit
                     itemsDataGrid[topColumn.Index, i].Value = siji.TOP.ToString();
                     itemsDataGrid[dueDateColumn.Index, i].Value = siji.DUE_DATE;
                     itemsDataGrid[invoicerColumn.Index, i].Value = siji.EMPLOYEE.ToString();
+                    itemsDataGrid[amountColumn.Index, i].Value = siji.AMOUNT;
                     itemsDataGrid[OutstandingAmountColumn.Index, i].Value = r_sij.GetOutstanding(siji.ID);
                     itemsDataGrid[paidAmountColumn.Index, i].Value = r_sij.GetPaid(siji.ID);
                 }
@@ -567,6 +568,7 @@ namespace Profit
                     itemsDataGrid[topColumn.Index, i].Value = siji.TOP.ToString();
                     itemsDataGrid[dueDateColumn.Index, i].Value = siji.DUE_DATE;
                     itemsDataGrid[invoicerColumn.Index, i].Value = siji.EMPLOYEE.ToString();
+                    itemsDataGrid[amountColumn.Index, i].Value = siji.AMOUNT;
                     itemsDataGrid[OutstandingAmountColumn.Index, i].Value = r_soij.GetOutstanding(siji.ID);
                     itemsDataGrid[paidAmountColumn.Index, i].Value = r_soij.GetPaid(siji.ID);
                 }
@@ -719,6 +721,7 @@ namespace Profit
                     itemsDataGrid[invoiceNoColumn.Index, i].Value = item.EVENT_JOURNAL.CODE;
                     itemsDataGrid[invoiceDateColumn.Index, i].Value = item.EVENT_JOURNAL.TRANSACTION_DATE;
                     itemsDataGrid[topColumn.Index, i].Value = item.TOP.ToString();
+                    itemsDataGrid[amountColumn.Index, i].Value = item.AMOUNT;
                     itemsDataGrid[dueDateColumn.Index, i].Value = item.DUE_DATE;
                     itemsDataGrid[invoicerColumn.Index, i].Value = item.EMPLOYEE.ToString();
                     itemsDataGrid[OutstandingAmountColumn.Index, i].Value = item.OUTSTANDING_AMOUNT;
@@ -760,6 +763,7 @@ namespace Profit
                     itemsDataGrid[topColumn.Index, i].Value = item.TOP.ToString();
                     itemsDataGrid[dueDateColumn.Index, i].Value = item.DUE_DATE;
                     itemsDataGrid[invoicerColumn.Index, i].Value = item.EMPLOYEE.ToString();
+                    itemsDataGrid[amountColumn.Index, i].Value = item.AMOUNT;
                     itemsDataGrid[OutstandingAmountColumn.Index, i].Value = item.OUTSTANDING_AMOUNT;
                     itemsDataGrid[paidAmountColumn.Index, i].Value = item.PAID_AMOUNT;
 

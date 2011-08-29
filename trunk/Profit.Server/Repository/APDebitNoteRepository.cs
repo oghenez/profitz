@@ -16,6 +16,8 @@ namespace Profit.Server
             foreach (APDebitNoteItem item in events.EVENT_JOURNAL_ITEMS)
             {
                 SetVendorBalance(item, p);
+                item.ProcessPosted();
+                updateVendorBalances(item.VENDOR_BALANCE, item.VENDOR_BALANCE_ENTRY);
             }
         }
         protected override void doRevise(EventJournal events, Period p)
@@ -23,6 +25,8 @@ namespace Profit.Server
             foreach (APDebitNoteItem item in events.EVENT_JOURNAL_ITEMS)
             {
                 SetVendorBalance(item, p);
+                item.ProcessUnPosted();
+                deleteVendorBalanceEntry(item.VENDOR_BALANCE_ENTRY);
             }
         }
         //private void assertConfirmedPO(EventJournal p)

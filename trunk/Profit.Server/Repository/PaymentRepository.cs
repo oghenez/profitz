@@ -20,6 +20,8 @@ namespace Profit.Server
                 item.CURRENCY = events.CURRENCY;
                 item.VENDOR = events.VENDOR;
                 SetVendorBalance(item, p);
+                item.ProcessPosted();
+                updateVendorBalances(item.VENDOR_BALANCE, item.VENDOR_BALANCE_ENTRY);
                 item.SUPPLIER_INVOICE_JOURNAL_ITEM.SetOSAgainstPaymentItem(item);
                 if (item.SUPPLIER_INVOICE_JOURNAL_ITEM is SupplierInvoiceJournalItem)
                 {
@@ -40,9 +42,19 @@ namespace Profit.Server
                 item.CURRENCY = events.CURRENCY;
                 item.VENDOR = events.VENDOR;
                 SetVendorBalance(item, p);
+                item.ProcessUnPosted();
+                deleteVendorBalanceEntry(item.VENDOR_BALANCE_ENTRY);
                 item.SUPPLIER_INVOICE_JOURNAL_ITEM.UnSetOSAgainstPaymentItem(item);
-                SupplierInvoiceJournalRepository.UpdateAgainstStatus(m_command, item.SUPPLIER_INVOICE_JOURNAL_ITEM.GET_EVENT_JOURNAL,
-                    item.SUPPLIER_INVOICE_JOURNAL_ITEM);
+                if (item.SUPPLIER_INVOICE_JOURNAL_ITEM is SupplierInvoiceJournalItem)
+                {
+                    SupplierInvoiceJournalRepository.UpdateAgainstStatus(m_command, item.SUPPLIER_INVOICE_JOURNAL_ITEM.GET_EVENT_JOURNAL,
+                        item.SUPPLIER_INVOICE_JOURNAL_ITEM);
+                }
+                if (item.SUPPLIER_INVOICE_JOURNAL_ITEM is SupplierOutStandingInvoiceItem)
+                {
+                    SupplierOutStandingInvoiceRepository.UpdateAgainstStatus(m_command, item.SUPPLIER_INVOICE_JOURNAL_ITEM.GET_EVENT_JOURNAL,
+                        item.SUPPLIER_INVOICE_JOURNAL_ITEM);
+                }
             }
         }
         private void assertConfirmedSIJ(EventJournal p)
