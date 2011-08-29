@@ -130,12 +130,15 @@ namespace Profit.Server
                 }
             }
         }
-        protected void updateVendorBalances(VendorBalance vb, VendorBalanceEntry vbe)
+        protected void updateVendorBalances(VendorBalance vb)
         {
             if (vb.ID > 0)
                 VendorBalanceRepository.UpdateHeader(m_command, vb);
             else if (vb.ID == 0)
                 VendorBalanceRepository.SaveHeader(m_command, vb);
+        }
+        protected void saveVendorBalanceEntry(VendorBalanceEntry vbe)
+        {
             if (vbe != null)
             {
                 VendorBalanceEntryRepository.Save(m_command, vbe);

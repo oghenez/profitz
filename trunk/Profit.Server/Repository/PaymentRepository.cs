@@ -21,7 +21,8 @@ namespace Profit.Server
                 item.VENDOR = events.VENDOR;
                 SetVendorBalance(item, p);
                 item.ProcessPosted();
-                updateVendorBalances(item.VENDOR_BALANCE, item.VENDOR_BALANCE_ENTRY);
+                updateVendorBalances(item.VENDOR_BALANCE);
+                saveVendorBalanceEntry(item.VENDOR_BALANCE_ENTRY);
                 item.SUPPLIER_INVOICE_JOURNAL_ITEM.SetOSAgainstPaymentItem(item);
                 if (item.SUPPLIER_INVOICE_JOURNAL_ITEM is SupplierInvoiceJournalItem)
                 {
@@ -43,6 +44,7 @@ namespace Profit.Server
                 item.VENDOR = events.VENDOR;
                 SetVendorBalance(item, p);
                 item.ProcessUnPosted();
+                updateVendorBalances(item.VENDOR_BALANCE);
                 deleteVendorBalanceEntry(item.VENDOR_BALANCE_ENTRY);
                 item.SUPPLIER_INVOICE_JOURNAL_ITEM.UnSetOSAgainstPaymentItem(item);
                 if (item.SUPPLIER_INVOICE_JOURNAL_ITEM is SupplierInvoiceJournalItem)
