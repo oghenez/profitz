@@ -21,6 +21,7 @@ namespace Profit
         PartRepository r_part = (PartRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_REPOSITORY);
         Repository r_ccy = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY);
         Repository r_unit = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY);
+        Repository r_sup = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.SUPPLIER_REPOSITORY);
         public SupplierOutStandingInvoice SUPPLIER_OS_INVOICE = null;
         User m_user;
         IList m_listLastresult = new ArrayList();
@@ -45,8 +46,11 @@ namespace Profit
             foreach (SupplierOutStandingInvoice d in records)
             {
                 d.EMPLOYEE = (Employee)r_employee.GetById(d.EMPLOYEE);
+                d.VENDOR = (Supplier)r_sup.GetById((Supplier)d.VENDOR);
+                d.CURRENCY = (Currency)r_ccy.GetById(d.CURRENCY);
                 //d.WAREHOUSE = (Warehouse)r_warehouse.GetById(d.WAREHOUSE);
-                int row = gridData.Rows.Add(d.CODE, d.TRANSACTION_DATE.ToString("dd-MM-yyyy"), d.EMPLOYEE.CODE,d.POSTED);
+                int row = gridData.Rows.Add(d.CODE, d.TRANSACTION_DATE.ToString("dd-MM-yyyy"), 
+                    d.VENDOR.NAME, d.EMPLOYEE.CODE, d.CURRENCY.CODE, d.NET_AMOUNT, d.POSTED);
                 gridData.Rows[row].Tag = d;
             }
             gridData.ClearSelection();

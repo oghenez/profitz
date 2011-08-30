@@ -28,17 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.searchText = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.startSearch = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.CANCELkryptonButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.OKkryptonButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.gridData = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.dgName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgSubject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.supplierColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.EmpCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ccyColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.amountColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
             this.PostedCol = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -48,7 +52,7 @@
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(12, 12);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(37, 19);
+            this.kryptonLabel1.Size = new System.Drawing.Size(40, 20);
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.Values.Text = "Find :";
             // 
@@ -58,7 +62,7 @@
             this.startSearch});
             this.searchText.Location = new System.Drawing.Point(67, 12);
             this.searchText.Name = "searchText";
-            this.searchText.Size = new System.Drawing.Size(346, 22);
+            this.searchText.Size = new System.Drawing.Size(346, 20);
             this.searchText.TabIndex = 1;
             this.searchText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchText_KeyDown);
             // 
@@ -95,7 +99,10 @@
             this.gridData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgName,
             this.dgSubject,
+            this.supplierColumn,
             this.EmpCol,
+            this.ccyColumn,
+            this.amountColumn,
             this.PostedCol});
             this.gridData.GridStyles.Style = ComponentFactory.Krypton.Toolkit.DataGridViewStyle.Mixed;
             this.gridData.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.GridDataCellCustom1;
@@ -114,6 +121,19 @@
             this.gridData.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridData_CellMouseDoubleClick);
             this.gridData.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gridData_KeyDown);
             // 
+            // kryptonPanel1
+            // 
+            this.kryptonPanel1.Controls.Add(this.gridData);
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
+            this.kryptonPanel1.Controls.Add(this.searchText);
+            this.kryptonPanel1.Controls.Add(this.OKkryptonButton);
+            this.kryptonPanel1.Controls.Add(this.CANCELkryptonButton);
+            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonPanel1.Name = "kryptonPanel1";
+            this.kryptonPanel1.Size = new System.Drawing.Size(430, 341);
+            this.kryptonPanel1.TabIndex = 6;
+            // 
             // dgName
             // 
             this.dgName.DataPropertyName = "Code";
@@ -131,11 +151,42 @@
             this.dgSubject.ReadOnly = true;
             this.dgSubject.Width = 80;
             // 
+            // supplierColumn
+            // 
+            this.supplierColumn.HeaderText = "Supplier";
+            this.supplierColumn.Name = "supplierColumn";
+            this.supplierColumn.ReadOnly = true;
+            this.supplierColumn.Width = 100;
+            // 
             // EmpCol
             // 
             this.EmpCol.HeaderText = "Employee";
             this.EmpCol.Name = "EmpCol";
             this.EmpCol.ReadOnly = true;
+            // 
+            // ccyColumn
+            // 
+            this.ccyColumn.HeaderText = "Ccy";
+            this.ccyColumn.Name = "ccyColumn";
+            this.ccyColumn.ReadOnly = true;
+            this.ccyColumn.Width = 100;
+            // 
+            // amountColumn
+            // 
+            this.amountColumn.DecimalPlaces = 2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.NullValue = "0";
+            this.amountColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            this.amountColumn.HeaderText = "Amount";
+            this.amountColumn.Maximum = new decimal(new int[] {
+            1410065408,
+            2,
+            0,
+            0});
+            this.amountColumn.Name = "amountColumn";
+            this.amountColumn.ReadOnly = true;
+            this.amountColumn.ThousandsSeparator = true;
+            this.amountColumn.Width = 100;
             // 
             // PostedCol
             // 
@@ -144,20 +195,7 @@
             this.PostedCol.ReadOnly = true;
             this.PostedCol.Width = 50;
             // 
-            // kryptonPanel1
-            // 
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
-            this.kryptonPanel1.Controls.Add(this.gridData);
-            this.kryptonPanel1.Controls.Add(this.searchText);
-            this.kryptonPanel1.Controls.Add(this.OKkryptonButton);
-            this.kryptonPanel1.Controls.Add(this.CANCELkryptonButton);
-            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(430, 341);
-            this.kryptonPanel1.TabIndex = 6;
-            // 
-            // SearchGoodReceiveNoteForm
+            // SearchSupplierOSInvoiceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -166,7 +204,7 @@
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
-            this.Name = "SearchGoodReceiveNoteForm";
+            this.Name = "SearchSupplierOSInvoiceForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Find";
             this.Load += new System.EventHandler(this.SearchPurchaseReturnForm_Load);
@@ -190,7 +228,10 @@
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgName;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgSubject;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn supplierColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn EmpCol;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn ccyColumn;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn amountColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn PostedCol;
     }
 }

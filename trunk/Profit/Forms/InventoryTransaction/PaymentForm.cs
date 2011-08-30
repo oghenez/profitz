@@ -28,6 +28,7 @@ namespace Profit
         GoodReceiveNoteRepository r_grn = (GoodReceiveNoteRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.GOODRECEIVENOTE_REPOSITORY);
         PurchaseReturnRepository r_prn = (PurchaseReturnRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.PURCHASE_RETURN_REPOSITORY);
         PaymentRepository r_soinv = (PaymentRepository)RepositoryFactory.GetInstance().GetJournalRepository(RepositoryFactory.PAYMENT_REPOSITORY);
+        APDebitNoteRepository r_apdn = (APDebitNoteRepository)RepositoryFactory.GetInstance().GetJournalRepository(RepositoryFactory.APDEBITNOTE_REPOSITORY);
         SupplierInvoiceJournalRepository r_sij = (SupplierInvoiceJournalRepository)RepositoryFactory.GetInstance().GetJournalRepository(RepositoryFactory.SUPPLIERINVOICE_JOURNAL_REPOSITORY);
         SupplierOutStandingInvoiceRepository r_soij = (SupplierOutStandingInvoiceRepository)RepositoryFactory.GetInstance().GetJournalRepository(RepositoryFactory.SUPPLIER_OUTSTANDING_INVOICE_REPOSITORY);
         
@@ -119,7 +120,7 @@ namespace Profit
         {
             if (m_editMode == EditMode.View) return;
             if (!itemsDataGrid[e.ColumnIndex, e.RowIndex].IsInEditMode) return;
-            if (e.ColumnIndex == paymentAmountColumn.Index)
+            if (e.ColumnIndex == paymentAmountColumn.Index || e.ColumnIndex == docnoColumn.Index)
             { 
                 ReCalculateNetTotal(); 
             }
@@ -130,72 +131,6 @@ namespace Profit
             if (m_editMode == EditMode.View) return;
             itemsDataGrid.Rows[e.RowIndex].ErrorText = "";
             if (!itemsDataGrid[e.ColumnIndex, e.RowIndex].IsInEditMode) return;
-
-            //if (e.ColumnIndex == scanColumn.Index)
-            //{
-            //    if (e.FormattedValue.ToString() == "")return;
-
-            //    IList addedPI = new ArrayList();
-            //    for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
-            //    {
-            //        if (i == e.RowIndex) continue;
-            //        GoodReceiveNoteItem pi = (GoodReceiveNoteItem)itemsDataGrid[scanColumn.Index, i].Tag;
-            //        if (pi == null) continue;
-            //        addedPI.Add(pi.ID);
-            //    }
-            //    IList res = r_grn.FindPObyPartAndGRNNo(e.FormattedValue.ToString(), addedPI, ((Supplier)supplierkryptonComboBox.SelectedItem).ID, dateKryptonDateTimePicker.Value);
-            //    if (res.Count == 0)
-            //    {
-            //        using (SearchGRNForPRForm fr = new SearchGRNForPRForm(e.FormattedValue.ToString(), ((Supplier)supplierkryptonComboBox.SelectedItem).ID, addedPI, m_mainForm.CurrentUser, dateKryptonDateTimePicker.Value))
-            //        {
-            //            fr.ShowDialog();
-            //            IList result = fr.RESULT;
-            //            m_poItems = result;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        m_poItems = res;
-            //    }
-            //}
-            //if (QtyColumn.Index == e.ColumnIndex)
-            //{
-            //    GoodReceiveNoteItem pi = (GoodReceiveNoteItem)itemsDataGrid[scanColumn.Index, e.RowIndex].Tag;
-            //    if (pi == null) return;
-            //    Part p = (Part)itemsDataGrid[codeColumn.Index, e.RowIndex].Tag;
-            //    if (p == null) return;
-            //    Unit u = (Unit)Utils.FindEntityInList(itemsDataGrid[unitColumn.Index, e.RowIndex].Value.ToString(), m_units);
-            //    if (u == null) return;
-            //    p.UNIT_CONVERSION_LIST = r_part.GetAllUnit(p.ID, p.UNIT.ID);
-            //    PaymentItem sample = new PaymentItem();
-            //    sample.PART = p;
-            //    sample.UNIT = u;
-            //    sample.QYTAMOUNT = Convert.ToDouble(e.FormattedValue);
-            //    double qty = sample.GetAmountInSmallestUnit();
-            //    double rest = pi.OUTSTANDING_AMOUNT_TO_PR - qty;
-            //    if (rest < 0)
-            //    {
-            //        e.Cancel = true;
-            //        itemsDataGrid.Rows[e.RowIndex].ErrorText = "Quantity exceed outstanding quantity";
-            //    }
-            //    itemsDataGrid[OutstandingPOColumn.Index, e.RowIndex].Value = rest;
-            //}
-            // if (e.ColumnIndex == invoiceNoColumn.Index)
-            //{
-            //    if (itemsDataGrid[invoiceDateColumn.Index, e.RowIndex].Value == null)
-            //    {
-            //        itemsDataGrid[invoiceDateColumn.Index, e.RowIndex].Value = DateTime.Today;
-            //        itemsDataGrid[dueDateColumn.Index, e.RowIndex].Value = DateTime.Today;
-            //    }
-            //}
-            //if (e.ColumnIndex == topColumn.Index)
-            //{
-            //    TermOfPayment top = (TermOfPayment)Utils.FindEntityInList(e.FormattedValue.ToString(), m_tops);
-            //    if (top == null) return;
-            //    DateTime trdate = Convert.ToDateTime( itemsDataGrid[invoiceDateColumn.Index, e.RowIndex].Value);
-            //    itemsDataGrid[dueDateColumn.Index, e.RowIndex].Value = trdate.AddDays(top.DAYS);
-            //}
-
             if (e.ColumnIndex == paymentAmountColumn.Index)
             {
                 double py = Convert.ToDouble(e.FormattedValue);
@@ -234,6 +169,32 @@ namespace Profit
                         return;
                     }
                 }
+            }
+            if (docnoColumn.Index == e.ColumnIndex)
+            {
+                PaymentType type = (PaymentType)Enum.Parse(typeof(PaymentType),itemsDataGrid[paymentTypeColumn.Index, e.RowIndex].Value.ToString());
+                if (type == PaymentType.APDebitNote)
+                {
+                    IList result = r_apdn.FindAPDNForPayment(((Supplier)supplierkryptonComboBox.SelectedItem).ID, dateKryptonDateTimePicker.Value, e.FormattedValue.ToString());
+                    if (result.Count == 1)
+                    {
+                        itemsDataGrid[docnoColumn.Index, e.RowIndex].Tag = result[0];
+                        itemsDataGrid[docnoColumn.Index, e.RowIndex].Value = ((APDebitNote)result[0]).CODE;
+                        itemsDataGrid[paymentAmountColumn.Index, e.RowIndex].Value = ((APDebitNote)result[0]).NET_AMOUNT;
+                        itemsDataGrid[docdateColumn.Index, e.RowIndex].Value = ((APDebitNote)result[0]).TRANSACTION_DATE;
+                    }
+                }
+            }
+            if (paymentTypeColumn.Index == e.ColumnIndex)
+            {
+                itemsDataGrid[paymentAmountColumn.Index, e.RowIndex].ReadOnly = false;
+                itemsDataGrid[docdateColumn.Index, e.RowIndex].ReadOnly = false;
+                 PaymentType type = (PaymentType)Enum.Parse(typeof(PaymentType),e.FormattedValue.ToString());
+                 if (type == PaymentType.APDebitNote)
+                 {
+                     itemsDataGrid[paymentAmountColumn.Index, e.RowIndex].ReadOnly = true;
+                     itemsDataGrid[docdateColumn.Index, e.RowIndex].ReadOnly = true;
+                 }
             }
         }
         private void ReCalculateNetTotal()
@@ -376,6 +337,12 @@ namespace Profit
                         }
 
                     }
+                    if (pytype == PaymentType.APDebitNote)
+                        if (itemsDataGrid[docnoColumn.Index, i].Tag  == null)
+                        {
+                            itemsDataGrid.Rows[i].ErrorText = itemsDataGrid.Rows[i].ErrorText + " Please fill AP debitnote";
+                            e = true;
+                        }
                 }
                 j++;
             }
@@ -417,6 +384,8 @@ namespace Profit
                 st.NOTES = itemsDataGrid[noteColumn.Index, i].Value == null ? "" : itemsDataGrid[noteColumn.Index, i].Value.ToString();
                 if(st.PAYMENT_TYPE== PaymentType.Bank)
                     st.BANK = (Bank)Utils.FindEntityInList(itemsDataGrid[bankColumn.Index, i].Value.ToString(), m_bank);
+                if (st.PAYMENT_TYPE == PaymentType.APDebitNote)
+                    st.AP_DEBIT_NOTE = (APDebitNote)itemsDataGrid[docnoColumn.Index, i].Tag;
                 st.VENDOR = m_prn.VENDOR;
                 st.CURRENCY = m_prn.CURRENCY;
                 st.EMPLOYEE = m_prn.EMPLOYEE;
@@ -579,26 +548,13 @@ namespace Profit
                 itemsDataGrid[docdateColumn.Index, i].Value = item.INVOICE_DATE;
                 itemsDataGrid[noteColumn.Index, i].Value = item.NOTES;
                 itemsDataGrid[bankColumn.Index, i].Value = item.PAYMENT_TYPE == PaymentType.Bank ? item.BANK.ToString() : "";
-                //itemsDataGrid[dueDateColumn.Index, i].Value = item.DUE_DATE;
-                //itemsDataGrid[invoicerColumn.Index, i].Value = (Employee)r_employee.GetById(item.EMPLOYEE);  
-                //itemsDataGrid[amountColumn.Index, i].Value = item.AMOUNT;
-                //item.UNIT = (Unit)r_unit.GetById(item.UNIT);
-                //item.GRN_ITEM.UNIT = (Unit)r_unit.GetById(item.GRN_ITEM.UNIT);
-                //item.GRN_ITEM.PART.UNIT = (Unit)r_unit.GetById(item.GRN_ITEM.PART.UNIT);
-                //int i = itemsDataGrid.Rows.Add();
-                //itemsDataGrid.Rows[i].Tag = item;
-                //itemsDataGrid[codeColumn.Index, i].Tag = item.PART;
-                //itemsDataGrid[scanColumn.Index, i].Tag = item.GRN_ITEM;
-                //itemsDataGrid[scanColumn.Index, i].Value = item.GRN_ITEM.EVENT.CODE;
-                //itemsDataGrid[codeColumn.Index, i].Value = item.PART.CODE;
-                //itemsDataGrid[nameColumn.Index, i].Value = item.PART.NAME;
-                //itemsDataGrid[QtyColumn.Index, i].Value = item.QYTAMOUNT;
-                //itemsDataGrid[warehouseColumn.Index, i].Value = r_warehouse.GetById(item.WAREHOUSE).ToString();
-                //itemsDataGrid[notesColumn.Index, i].Value = item.NOTES;
-                //itemsDataGrid[unitColumn.Index, i].Value = item.UNIT.ToString(); ;
-                //itemsDataGrid[OutstandingPOColumn.Index, i].Value = item.GRN_ITEM.OUTSTANDING_AMOUNT_TO_PR;
-                //itemsDataGrid[OutstandingunitColumn.Index, i].Value = item.GRN_ITEM.PART.UNIT.CODE;
-
+                if (item.PAYMENT_TYPE == PaymentType.APDebitNote)
+                {
+                    itemsDataGrid[docnoColumn.Index, i].Tag = item.AP_DEBIT_NOTE;
+                    itemsDataGrid[docnoColumn.Index, i].Value = item.AP_DEBIT_NOTE.CODE;
+                    itemsDataGrid[paymentAmountColumn.Index, i].Value = item.AP_DEBIT_NOTE.NET_AMOUNT;
+                    itemsDataGrid[docdateColumn.Index, i].Value = item.AP_DEBIT_NOTE.TRANSACTION_DATE;
+                }
             }
         }
         public void Refresh(object sender, EventArgs e)

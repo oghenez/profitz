@@ -9,6 +9,7 @@ namespace Profit.Server
 {
     public class APDebitNote : EventJournal
     {
+        public bool USED_FOR_PAYMENT = false;
         public APDebitNote()
         { }
         public APDebitNote(int id)
@@ -35,9 +36,10 @@ namespace Profit.Server
                     apdn_amountafterdiscamount,
                     apdn_otherexpense,
                     apdn_netamount,
-                    emp_id
+                    emp_id,
+                    apdn_usedforpayment
                 ) 
-                VALUES ('{0}','{1}',{2},{3},'{4}','{5}',{6},'{7}',{8},{9},{10},{11},{12},{13},{14},{15})",
+                VALUES ('{0}','{1}',{2},{3},'{4}','{5}',{6},'{7}',{8},{9},{10},{11},{12},{13},{14},{15},{16})",
                 CODE,
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 VENDOR.ID,
@@ -53,7 +55,8 @@ namespace Profit.Server
                 AMOUNT_AFTER_DISC_AMOUNT,
                 OTHER_EXPENSE,
                 NET_AMOUNT,
-                EMPLOYEE.ID
+                EMPLOYEE.ID,
+                USED_FOR_PAYMENT
                 );
         }
         public override string GetUpdateSQL()
@@ -74,8 +77,9 @@ namespace Profit.Server
                     apdn_amountafterdiscamount= {12},
                     apdn_otherexpense= {13},
                     apdn_netamount= {14},
-                    emp_id= {15}
-                where apdn_id = {16}",
+                    emp_id= {15},
+                    apdn_usedforpayment = {16}
+                where apdn_id = {17}",
                 CODE,
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 VENDOR.ID,
@@ -92,6 +96,7 @@ namespace Profit.Server
                 OTHER_EXPENSE,
                 NET_AMOUNT,
                 EMPLOYEE.ID,
+                USED_FOR_PAYMENT,
                 ID);
         }
         public static APDebitNote TransformReader(OdbcDataReader r)
@@ -118,6 +123,7 @@ namespace Profit.Server
                 tr.OTHER_EXPENSE = Convert.ToDouble(r["apdn_otherexpense"]);
                 tr.NET_AMOUNT = Convert.ToDouble(r["apdn_netamount"]);
                 tr.EMPLOYEE = new Employee(Convert.ToInt32(r["emp_id"]));
+                tr.USED_FOR_PAYMENT = Convert.ToBoolean(r["apdn_usedforpayment"]);
             }
             return tr;
         }
@@ -144,6 +150,7 @@ namespace Profit.Server
                 tr.OTHER_EXPENSE = Convert.ToDouble(r["apdn_otherexpense"]);
                 tr.NET_AMOUNT = Convert.ToDouble(r["apdn_netamount"]);
                 tr.EMPLOYEE = new Employee(Convert.ToInt32(r["emp_id"]));
+                tr.USED_FOR_PAYMENT = Convert.ToBoolean(r["apdn_usedforpayment"]);
                 result.Add(tr);
             }
             return result;
@@ -181,6 +188,18 @@ namespace Profit.Server
                 where concat(p.apdn_code, e.emp_code, e.emp_name)
                 like '%{0}%'", find);
         }
+        public static string GetForPayment(int supID, DateTime dt, string find)
+        {
+            return String.Format(@"select * from table_apdebitnote p
+                INNER JOIN table_employee e on e.emp_id = p.emp_id
+                where 
+                p.sup_id = {0} and
+                p.apdn_date <= '{1}'  and         
+                p.apdn_posted = true and
+                p.apdn_usedforpayment = false and
+                concat(p.apdn_code, e.emp_code, e.emp_name) like '%{2}%'",
+                supID,dt.ToString(Utils.DATE_FORMAT),  find);
+        }
         public static string SelectCountByCode(string code)
         {
             return String.Format("SELECT count(*) from table_apdebitnote where apdn_code ='{0}'", code);
@@ -192,6 +211,14 @@ namespace Profit.Server
         public static string RecordCount()
         {
             return @"select Count(*) from table_apdebitnote p";
+        }
+        public static string UpdateUsedForPayment(int apdniID, bool use)
+        {
+            return String.Format(@"update table_apdebitnote set 
+                    apdn_usedforpayment = {0}
+                where apdn_id = {1}",
+                                    use,apdniID
+                          );
         }
     }
 }

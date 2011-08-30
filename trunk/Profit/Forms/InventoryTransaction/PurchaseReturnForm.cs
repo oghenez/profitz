@@ -172,7 +172,7 @@ namespace Profit
             }
             if (unitColumn.Index == e.ColumnIndex)
             {
-                PurchaseOrderItem pi = (PurchaseOrderItem)itemsDataGrid[scanColumn.Index, e.RowIndex].Tag;
+                GoodReceiveNoteItem pi = (GoodReceiveNoteItem)itemsDataGrid[scanColumn.Index, e.RowIndex].Tag;
                 if (pi == null) return;
                 Part p = (Part)itemsDataGrid[codeColumn.Index, e.RowIndex].Tag;
                 if (p == null) return;
@@ -184,7 +184,7 @@ namespace Profit
                 sample.UNIT = u;
                 sample.QYTAMOUNT = Convert.ToDouble(itemsDataGrid[QtyColumn.Index, e.RowIndex].Value);
                 double qty = sample.GetAmountInSmallestUnit();
-                double rest = pi.OUTSTANDING_AMOUNT_TO_GRN - qty;
+                double rest = pi.OUTSTANDING_AMOUNT_TO_PR - qty;
                 if (rest < 0)
                 {
                     e.Cancel = true;

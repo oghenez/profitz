@@ -198,7 +198,8 @@ namespace Profit.Server
         {
             return String.Format(@"select * from table_supplieroutstandinginvoice p
                 INNER JOIN table_employee e on e.emp_id = p.emp_id
-                where concat(p.sosti_code, e.emp_code, e.emp_name)
+                INNER JOIN table_supplier s on s.sup_id = p.sup_id
+                where concat(p.sosti_code, e.emp_code, e.emp_name, s.sup_code, s.sup_name)
                 like '%{0}%'", find);
         }
         public static string SelectCountByCode(string code)

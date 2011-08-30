@@ -12,6 +12,7 @@ namespace Profit.Server
         public PaymentType PAYMENT_TYPE = PaymentType.Cash;
         public VendorBalanceEntryType VENDOR_BALANCE_SUPPLIER_INVOICE_TYPE = VendorBalanceEntryType.SupplierInvoice;
         public ISupplierInvoiceJournalItem SUPPLIER_INVOICE_JOURNAL_ITEM;
+        public APDebitNote AP_DEBIT_NOTE = null;
         public Bank BANK = new Bank();
         //public 
 
@@ -42,9 +43,11 @@ namespace Profit.Server
                     inv_id,
                     inv_type,
                     bank_id,
-                    payi_paymenttype
+                    payi_paymenttype,
+                    apdn_id
                 ) 
-                VALUES ({0},{1},{2},{3},{4},{5},'{6}','{7}','{8}','{9}',{10},{11},{12},{13},'{14}','{15}',{16},'{17}',{18},'{19}')",
+                VALUES ({0},{1},{2},{3},{4},{5},'{6}','{7}','{8}','{9}',{10},{11},{12},{13},
+                '{14}','{15}',{16},'{17}',{18},'{19}',{20})",
                EVENT_JOURNAL.ID,
                VENDOR.ID,
                CURRENCY.ID,
@@ -64,7 +67,8 @@ namespace Profit.Server
                SUPPLIER_INVOICE_JOURNAL_ITEM.GetID(),
                VENDOR_BALANCE_SUPPLIER_INVOICE_TYPE.ToString(),
                BANK==null?0:BANK.ID,
-               PAYMENT_TYPE.ToString()
+               PAYMENT_TYPE.ToString(),
+                 AP_DEBIT_NOTE==null?0:AP_DEBIT_NOTE.ID
                 );
         }
         public override string GetUpdateSQL()
@@ -89,8 +93,9 @@ namespace Profit.Server
                     inv_id = {16},
                     inv_type = '{17}',
                     bank_id = {18},
-                    payi_paymenttype = '{19}'
-                    where payi_id = {20}",
+                    payi_paymenttype = '{19}',
+                    apdn_id = {20}
+                    where payi_id = {21}",
                  EVENT_JOURNAL.ID,
                VENDOR.ID,
                CURRENCY.ID,
@@ -109,7 +114,8 @@ namespace Profit.Server
                NOTES,SUPPLIER_INVOICE_JOURNAL_ITEM.GetID(),
                VENDOR_BALANCE_SUPPLIER_INVOICE_TYPE.ToString(),
                BANK==null?0:BANK.ID,
-               PAYMENT_TYPE.ToString(),
+               PAYMENT_TYPE.ToString(), 
+                AP_DEBIT_NOTE==null?0:AP_DEBIT_NOTE.ID,
                 ID);
         }
         public static PaymentItem TransformReader(OdbcDataReader aReader)
@@ -143,6 +149,7 @@ namespace Profit.Server
                     transaction.SUPPLIER_INVOICE_JOURNAL_ITEM = new SupplierOutStandingInvoiceItem(Convert.ToInt32(aReader["inv_id"]));
                 transaction.BANK = new Bank(Convert.ToInt32(aReader["bank_id"]));
                 transaction.PAYMENT_TYPE = (PaymentType)Enum.Parse(typeof(PaymentType), aReader["payi_paymenttype"].ToString());
+                transaction.AP_DEBIT_NOTE = new APDebitNote(Convert.ToInt32(aReader["apdn_id"]));
             }
             return transaction;
         }
@@ -176,6 +183,7 @@ namespace Profit.Server
                     transaction.SUPPLIER_INVOICE_JOURNAL_ITEM = new SupplierOutStandingInvoiceItem(Convert.ToInt32(aReader["inv_id"]));
                 transaction.BANK = new Bank(Convert.ToInt32(aReader["bank_id"]));
                 transaction.PAYMENT_TYPE = (PaymentType)Enum.Parse(typeof(PaymentType), aReader["payi_paymenttype"].ToString());
+                transaction.AP_DEBIT_NOTE = new APDebitNote(Convert.ToInt32(aReader["apdn_id"]));
                 result.Add(transaction);
             }
             return result;
@@ -212,7 +220,13 @@ namespace Profit.Server
         //{
         //    return String.Format("SELECT * from table_paymentitem where grni_id = {0}", id);
         //}
-
+//        public static string GetUpdateAPDNSQL(int payitmid, int apdnID)
+//        {
+//            return String.Format(@"update table_paymentitem set 
+//                    apdn_id = {0}
+//                    where payi_id = {1}",
+//                                        apdnID,payitmid);
+//        }
         #region IPayment Members
 
         public double GET_AMOUNT

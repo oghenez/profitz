@@ -57,6 +57,10 @@ namespace Profit.Server
                     SupplierOutStandingInvoiceRepository.UpdateAgainstStatus(m_command, item.SUPPLIER_INVOICE_JOURNAL_ITEM.GET_EVENT_JOURNAL,
                         item.SUPPLIER_INVOICE_JOURNAL_ITEM);
                 }
+                if (item.PAYMENT_TYPE == PaymentType.APDebitNote)
+                {
+        
+                }
             }
         }
         private void assertConfirmedSIJ(EventJournal p)
@@ -97,6 +101,11 @@ namespace Profit.Server
                     m_command.ExecuteNonQuery();
                     m_command.CommandText = PaymentItem.SelectMaxIDSQL();
                     item.ID = Convert.ToInt32(m_command.ExecuteScalar());
+                    if (item.PAYMENT_TYPE == PaymentType.APDebitNote)
+                    {
+                        m_command.CommandText = APDebitNote.UpdateUsedForPayment(item.AP_DEBIT_NOTE.ID, true);
+                        m_command.ExecuteNonQuery();
+                    }
                 }
                 trc.Commit();
             }
@@ -136,6 +145,11 @@ namespace Profit.Server
                         m_command.CommandText = PaymentItem.SelectMaxIDSQL();
                         sti.ID = Convert.ToInt32(m_command.ExecuteScalar());
                     }
+                    if (sti.PAYMENT_TYPE == PaymentType.APDebitNote)
+                    {
+                        m_command.CommandText = APDebitNote.UpdateUsedForPayment(sti.AP_DEBIT_NOTE.ID, true);
+                        m_command.ExecuteNonQuery();
+                    }
                 }
                 m_command.CommandText = PaymentItem.DeleteUpdate(e.ID, e.EVENT_JOURNAL_ITEMS);
                 m_command.ExecuteNonQuery();
@@ -156,6 +170,14 @@ namespace Profit.Server
             {
                 if (getEventStatus(st.ID)== EventStatus.Confirm)
                     throw new Exception("Revise before delete");
+                foreach (PaymentItem sti in e.EVENT_JOURNAL_ITEMS)
+                {
+                    if (sti.PAYMENT_TYPE == PaymentType.APDebitNote)
+                    {
+                        m_command.CommandText = APDebitNote.UpdateUsedForPayment(sti.AP_DEBIT_NOTE.ID, false);
+                        m_command.ExecuteNonQuery();
+                    }
+                }
                 m_command.CommandText = PaymentItem.DeleteAllByEventSQL(st.ID);
                 m_command.ExecuteNonQuery();
                 m_command.CommandText = Payment.DeleteSQL(st.ID);
@@ -204,6 +226,8 @@ namespace Profit.Server
                 }
                 if (sti.PAYMENT_TYPE == PaymentType.Bank)
                     sti.BANK = getBank(sti.BANK.ID);
+                if (sti.PAYMENT_TYPE == PaymentType.APDebitNote)
+                    sti.AP_DEBIT_NOTE = APDebitNoteRepository.FindAPDNForPayment(m_command, sti.AP_DEBIT_NOTE.ID);
                 st.EVENT_JOURNAL_ITEMS.Add(sti);
             }
             return st;
