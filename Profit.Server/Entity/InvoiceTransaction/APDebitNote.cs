@@ -178,7 +178,7 @@ namespace Profit.Server
                     apdn_eventstatus= '{1}'
                 where apdn_id = {2}",
                 e.POSTED,
-                e.EVENT_STATUS.ToString(),
+                e.POSTED?EventStatus.Confirm: EventStatus.Entry,
                 e.ID);
         }
         public static string GetSearch(string find)
