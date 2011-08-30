@@ -25,6 +25,8 @@ namespace Profit.Server
         {
             foreach (SupplierOutStandingInvoiceItem item in events.EVENT_JOURNAL_ITEMS)
             {
+                if (item.PAID_AMOUNT > 0)
+                    throw new Exception("This Invoice ["+item.INVOICE_NO+"] is paid, please delete payment first.");
                 SetVendorBalance(item, p);
                 item.ProcessUnPosted();
                 updateVendorBalances(item.VENDOR_BALANCE);

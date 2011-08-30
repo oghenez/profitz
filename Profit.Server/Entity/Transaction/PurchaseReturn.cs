@@ -173,7 +173,7 @@ namespace Profit.Server
                 and p.prn_code like '%{0}%'
                 and p.sup_id = {1}
                 and p.prn_date <= '{2}'
-               {3}", find, supplierID, trdate.ToString(Utils.DATE_FORMAT), poi != "" ? " and t.prn_id not in (" + poi + ")" : "");
+               {3}", find, supplierID, trdate.ToString(Utils.DATE_FORMAT), poi != "" ? " and p.prn_id not in (" + poi + ")" : "");
         }
     }
 }

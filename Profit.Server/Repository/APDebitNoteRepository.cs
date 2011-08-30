@@ -25,6 +25,8 @@ namespace Profit.Server
         {
             foreach (APDebitNoteItem item in events.EVENT_JOURNAL_ITEMS)
             {
+                if (((APDebitNote)events).USED_FOR_PAYMENT)
+                    throw new Exception("APDN has been used by Payment, please delete payment.");
                 SetVendorBalance(item, p);
                 item.ProcessUnPosted();
                 updateVendorBalances(item.VENDOR_BALANCE);
@@ -323,6 +325,22 @@ namespace Profit.Server
             {
                 throw x;
             }
+        }
+        public IList FindAPDNForPayment(int supID, DateTime trdate, string find)
+        {
+            m_command.CommandText = APDebitNote.GetForPayment(supID, trdate, find);
+            OdbcDataReader r = m_command.ExecuteReader();
+            IList reuslt = APDebitNote.TransformReaderList(r);
+            r.Close();
+            return reuslt;
+        }
+        public static  APDebitNote FindAPDNForPayment(OdbcCommand m_command, int apdnID)
+        {
+            m_command.CommandText = APDebitNote.GetByIDSQL(apdnID);
+            OdbcDataReader r = m_command.ExecuteReader();
+            APDebitNote reuslt = APDebitNote.TransformReader(r);
+            r.Close();
+            return reuslt;
         }
     }
 }
