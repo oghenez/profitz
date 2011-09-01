@@ -208,7 +208,20 @@ namespace Profit.Server
 
         public IList GetAll(OdbcDataReader aReader)
         {
-            throw new NotImplementedException();
+            IList result = new ArrayList();
+            while (aReader.Read())
+            {
+                Period period = new Period();
+                period.ID = Convert.ToInt32(aReader[0]);
+                period.CODE = aReader[1].ToString();
+                period.PERIOD_STATUS = (PeriodStatus)Enum.Parse(typeof(PeriodStatus), aReader[2].ToString());
+                period.YEAR = new Year(Convert.ToInt32(aReader[3]));
+                period.START_DATE = Convert.ToDateTime(aReader[4]);
+                period.END_DATA = Convert.ToDateTime(aReader[5]);
+                period.CLOSED_DATE = Convert.ToDateTime(aReader[6]);
+                result.Add(period);
+            }
+            return result;
         }
 
         #endregion

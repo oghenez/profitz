@@ -14,6 +14,38 @@ namespace Profit.Server
         {
             m_command = new OdbcCommand("", m_connection);
         }
+        public int GetTotalTransactionCount()
+        {
+            return 10;
+//            m_command.CommandText = String.Format(@"select p.po_code from table_purchaseorder p where p.po_posted = false and p.po_date between '{0}' and '{1}'
+//                    union
+//                    select g.grn_code from table_goodreceivenote g where g.grn_posted = false and g.grn_date between '{0}' and '{1}'
+//                    union
+//                    select s.stk_code from table_stocktaking s where s.stk_posted = false and s.stk_date between '{0}' and '{1}'
+//                    union
+//                    select si.si_code from table_supplierinvoice si where si.si_posted = false and si.si_date between '{0}' and '{1}'
+//                    union
+//                    select pr.prn_code from table_purchasereturn pr where pr.prn_posted = false and pr.prn_date between '{0}' and '{1}'
+//                    union
+//                    select sij.sij_code from table_supplierinvoicejournal sij where sij.sij_posted = false and sij.sij_date between '{0}' and '{1}'
+//                    union
+//                    select so.sosti_code from table_supplieroutstandinginvoice so where so.sosti_posted = false and so.sosti_date between '{0}' and '{1}'
+//                    union
+//                    select ap.apdn_code from table_apdebitnote ap where ap.apdn_posted = false and ap.apdn_date between '{0}' and '{1}'
+//                    union
+//                    select py.pay_code from table_payment py where py.pay_posted = false and py.pay_date between '{0}' and '{1}'",
+//                        start.ToString(Utils.DATE_FORMAT),
+//                        end.ToString(Utils.DATE_FORMAT));
+//            OdbcDataReader r = m_command.ExecuteReader();
+//            IList result = new ArrayList();
+//            if (r.HasRows)
+//            {
+//                result.Add(r[0].ToString());
+//            }
+//            r.Close();
+//            return result;
+ 
+        }
         private IList GetAllCodeListOfNotPostedEvent(DateTime start, DateTime end)
         {
             m_command.CommandText = String.Format(@"select p.po_code from table_purchaseorder p where p.po_posted = false and p.po_date between '{0}' and '{1}'
@@ -136,7 +168,7 @@ namespace Profit.Server
                 crntPeriod.CLOSED_DATE = DateTime.Now;
                 PeriodRepository.UpdatePeriod(m_command, crntPeriod);
                 trc.Commit();
-            }----
+            }
             catch (Exception x)
             {
                 trc.Rollback();
@@ -158,7 +190,7 @@ namespace Profit.Server
                  GeneralSetup gs = GeneralSetupRepository.GetGeneralSetup(m_command);
                  if (gs.START_ENTRY_PERIOD == null)
                      throw new Exception("Start Entry Month Not Found!");
-                 IList invTrs = this.GetAllCodeListOfNotPostedEvent(crntPeriod.StartDate, crntPeriod.EndDate);
+                 IList invTrs = this.GetAllCodeListOfNotPostedEvent(crntPeriod.START_DATE, crntPeriod.END_DATA);
                  string invCodes = string.Empty;
                  if (invTrs.Count > 0)
                  {
@@ -169,7 +201,7 @@ namespace Profit.Server
                  }
 
                  if (invTrs.Count > 0)
-                     throw new Exception("Please Unpost Transaction : \r\n" + invCodes + "\r\n" + jrnlCodes);
+                     throw new Exception("Please Unpost Transaction : \r\n" + invCodes );
                  Period prevPeriod = this.GetPrevPeriod(crntPeriod) as Period;
                  if (prevPeriod == null)
                      throw new Exception("Previous Period Not Define!");
