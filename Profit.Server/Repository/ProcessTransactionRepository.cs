@@ -71,7 +71,10 @@ namespace Profit.Server
             IList result = new ArrayList();
             if (r.HasRows)
             {
-                result.Add(r[0].ToString());
+                while (r.Read())
+                {
+                    result.Add(r[0].ToString());
+                }
             }
             r.Close();
             return result;
@@ -106,6 +109,7 @@ namespace Profit.Server
         }
         public void ProcessTransaction(int currentPeriodId)
         {
+            OpenConnection();
             OdbcTransaction trc = m_connection.BeginTransaction();
             try
             {

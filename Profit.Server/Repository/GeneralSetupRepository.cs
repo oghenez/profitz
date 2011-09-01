@@ -90,6 +90,8 @@ namespace Profit.Server
                 a.AUTONUMBER_LIST.Add(s.FORM_CODE, s);
             }
 
+                a.START_ENTRY_PERIOD = PeriodRepository.FindPeriod(cmd, a.START_ENTRY_PERIOD.ID);
+
             return a;
 
         }
