@@ -43,6 +43,7 @@ namespace Profit.Server
                 generalsetup.REG_DATE = Convert.ToDateTime(aReader[6]);
                 generalsetup.EMAIL = aReader[7].ToString();
                 generalsetup.WEBSITE = aReader[8].ToString();
+                generalsetup.START_ENTRY_PERIOD = new Period(Convert.ToInt32(aReader[9]));
             }
             return generalsetup;
         }
@@ -57,9 +58,10 @@ namespace Profit.Server
                 gst_taxno,
                 gst_regdate,
                 gst_email,
-                gst_website    
+                gst_website,
+                gst_startentryperiod    
                 ) 
-                VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}')",
+                VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}',{8})",
                                          COMPANY_NAME,
                                          ADDRESS,
                                          PHONE,
@@ -67,7 +69,8 @@ namespace Profit.Server
                                          TAX_NO,
                                          REG_DATE.ToString(Utils.DATE_FORMAT),
                                          EMAIL,
-                                         WEBSITE
+                                         WEBSITE,
+                                         START_ENTRY_PERIOD.ID
                 );
         }
         public string GetDeleteSQL()
@@ -84,8 +87,9 @@ namespace Profit.Server
                 gst_taxno ='{4}',
                 gst_regdate ='{5}',
                 gst_email ='{6}',
-                gst_website  ='{7}'
-                where gst_id = {8}",
+                gst_website  ='{7}',
+                gst_startentryperiod = {8}
+                where gst_id = {9}",
                 COMPANY_NAME,
                  ADDRESS,
                  PHONE,
@@ -93,7 +97,8 @@ namespace Profit.Server
                  TAX_NO,
                  REG_DATE.ToString(Utils.DATE_FORMAT),
                  EMAIL,
-                 WEBSITE, 
+                 WEBSITE,
+                 START_ENTRY_PERIOD.ID,
                  ID);
         }
         public string GetByIDSQL(int ID)
@@ -139,6 +144,7 @@ namespace Profit.Server
                 generalsetup.REG_DATE = Convert.ToDateTime(aReader[6]);
                 generalsetup.EMAIL = aReader[7].ToString();
                 generalsetup.WEBSITE = aReader[8].ToString();
+                generalsetup.START_ENTRY_PERIOD = new Period(Convert.ToInt32(aReader[9]));
                 result.Add(generalsetup);
             }
             return result;

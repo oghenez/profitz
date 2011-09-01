@@ -43,6 +43,7 @@ namespace Profit
         const string SUPPLIER_OUTSTANDING_INVOICE_FORM = "SupplierOutstandingInvoiceForm";
         const string PAYMENT_FORM = "PaymentForm";
         const string AP_DEBIT_NOTE_FORM = "APDebitNoteForm";
+        const string PROCESS_TRANSACTION_FORM = "ProcessTransactionForm";
 
         IList m_listForm = new ArrayList();
         User m_currentUser = null;
@@ -458,6 +459,7 @@ namespace Profit
 
             userMaintenanceToolStripMenuItem.Visible = m_currentUser.FORM_ACCESS_LIST.ContainsKey(USER_FORM);
             generalSetupToolStripMenuItem.Visible = m_currentUser.FORM_ACCESS_LIST.ContainsKey(GENERALSETUP_FORM);
+            processTransactionToolStripMenuItem.Visible = m_currentUser.FORM_ACCESS_LIST.ContainsKey(PROCESS_TRANSACTION_FORM);
 
 
         }
@@ -538,6 +540,7 @@ namespace Profit
             m_listForm.Add(new FormAccess(0, MainForm.PART_FORM.ToString(), "TRCI002 - Part Master"));
             m_listForm.Add(new FormAccess(0, MainForm.USER_FORM.ToString(), "GSTP001 - User"));
             m_listForm.Add(new FormAccess(0, MainForm.GENERALSETUP_FORM.ToString(), "GSTP002 - General Setup"));
+            m_listForm.Add(new FormAccess(0, MainForm.PROCESS_TRANSACTION_FORM.ToString(), "GSTP003 - Process Transaction"));
             m_listForm.Add(new FormAccess(0, MainForm.PURCHASE_ORDER_FORM.ToString(), "TRCP001 - Purchase Order"));
             m_listForm.Add(new FormAccess(0, MainForm.GOOD_RECEIVE_NOTE_FORM.ToString(), "TRCP002 - Good Receive Note"));
             m_listForm.Add(new FormAccess(0, MainForm.SUPPLIER_INVOICE_FORM.ToString(), "TRCP003 - Supplier Invoice"));
@@ -551,6 +554,13 @@ namespace Profit
         {
             if (isChild(USER_FORM)) { this.Cursor = Cursors.Default; return; }
             UserForm user = new UserForm(this, USER_FORM);
+            user.WindowState = FormWindowState.Maximized;
+            user.Show();
+        }
+        private void processTransactionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (isChild(PROCESS_TRANSACTION_FORM)) { this.Cursor = Cursors.Default; return; }
+            ProcessTransactionForm user = new ProcessTransactionForm(this, PROCESS_TRANSACTION_FORM);
             user.WindowState = FormWindowState.Maximized;
             user.Show();
         }
@@ -579,5 +589,7 @@ namespace Profit
             UserSetting.SaveSetting("theme", toolStripComboBox1.SelectedItem.ToString(), CurrentUser.ID, this.Name, typeof(string));
             UserSetting.SaveSetting("menuwidth", kryptonPanel4.Width.ToString(), CurrentUser.ID, this.Name, typeof(int));
         }
+
+       
     }
 }

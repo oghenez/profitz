@@ -53,6 +53,7 @@ namespace Profit.Server
                 OdbcDataReader aReader = aCommand.ExecuteReader();
                 GeneralSetup a = (GeneralSetup)e.Get(aReader);
                 aReader.Close();
+                a.START_ENTRY_PERIOD = PeriodRepository.FindPeriod(aCommand, a.START_ENTRY_PERIOD.ID);
                 aCommand.CommandText = AutoNumberSetup.GetAllSQLStatic();
                 aReader = aCommand.ExecuteReader();
                 IList lst = AutoNumberSetup.GetAllStatic(aReader);
@@ -75,22 +76,36 @@ namespace Profit.Server
         }
         internal static GeneralSetup GetGeneralSetup(OdbcCommand cmd)
         {
+            GeneralSetup e = new GeneralSetup();
+            cmd.CommandText = GeneralSetup.GetAllSQLStatic();
+            OdbcDataReader aReader = cmd.ExecuteReader();
+            GeneralSetup a = (GeneralSetup)e.Get(aReader);
+            aReader.Close();
+            cmd.CommandText = AutoNumberSetup.GetAllSQLStatic();
+            aReader = cmd.ExecuteReader();
+            IList lst = AutoNumberSetup.GetAllStatic(aReader);
+            aReader.Close();
+            foreach (AutoNumberSetup s in lst)
+            {
+                a.AUTONUMBER_LIST.Add(s.FORM_CODE, s);
+            }
+
+            return a;
+
+        }
+        public override IList GetAll()
+        {
             try
             {
-                GeneralSetup e = new GeneralSetup();
-                cmd.CommandText = GeneralSetup.GetAllSQLStatic();
-                OdbcDataReader aReader = cmd.ExecuteReader();
-                GeneralSetup a = (GeneralSetup)e.Get(aReader);
+                OpenConnection();
+                OdbcCommand aCommand = new OdbcCommand(m_entity.GetAllSQL(), m_connection);
+                OdbcDataReader aReader = aCommand.ExecuteReader();
+                IList a = m_entity.GetAll(aReader);
                 aReader.Close();
-                cmd.CommandText = AutoNumberSetup.GetAllSQLStatic();
-                aReader = cmd.ExecuteReader();
-                IList lst = AutoNumberSetup.GetAllStatic(aReader);
-                aReader.Close();
-                foreach (AutoNumberSetup s in lst)
+                foreach (GeneralSetup s in a)
                 {
-                    a.AUTONUMBER_LIST.Add(s.FORM_CODE, s);
+                    s.START_ENTRY_PERIOD = PeriodRepository.FindPeriod(aCommand, s.START_ENTRY_PERIOD.ID);
                 }
-
                 return a;
             }
             catch (Exception x)

@@ -208,6 +208,12 @@
     <Compile Include="Forms\InventoryTransaction\SearchStockTakingForm.Designer.cs">
       <DependentUpon>SearchStockTakingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MasterData\ProcessTransactionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MasterData\ProcessTransactionForm.Designer.cs">
+      <DependentUpon>ProcessTransactionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MasterData\GeneralSetupForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -425,6 +431,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\SearchStockTakingForm.resx">
       <DependentUpon>SearchStockTakingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MasterData\ProcessTransactionForm.resx">
+      <DependentUpon>ProcessTransactionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MasterData\GeneralSetupForm.resx">
       <DependentUpon>GeneralSetupForm.cs</DependentUpon>

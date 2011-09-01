@@ -16,12 +16,15 @@ namespace Profit
     {
         GeneralSetup m_user = new GeneralSetup();
         GeneralSetupRepository r_gensetupRep = (GeneralSetupRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.GENERAL_SETUP_REPOSITORY);
+        PeriodRepository r_period = (PeriodRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PERIOD_REPOSITORY);
+        ProcessTransactionRepository r_prtr = (ProcessTransactionRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PROCESS_TRANSACTION_REPOSITORY);
         IMainForm m_mainForm;
 
         public GeneralSetupForm(IMainForm mainForm, string formName)
         {
             InitializeComponent();
             InitializeButtonClick();
+            InitDataSource();
             this.MdiParent = (Form)mainForm;
             this.Name = formName;
             m_mainForm = mainForm;
@@ -29,6 +32,11 @@ namespace Profit
             loadData();
             setEditMode(EditMode.View);
             setEnableForm(false);
+        }
+
+        private void InitDataSource()
+        {
+            startEntryPeriodkryptonComboBox1.DataSource = r_period.GetAll();
         }
 
         private void InitializeDataSource()
@@ -101,6 +109,7 @@ namespace Profit
             m_user.REG_DATE = regDatekryptonDateTimePicker.Value;
             m_user.TAX_NO = taxNokryptonTextBox.Text.Trim();
             m_user.WEBSITE = websiteKryptonTextBox.Text.Trim();
+            m_user.START_ENTRY_PERIOD = (Period)startEntryPeriodkryptonComboBox1.SelectedItem;
             m_user.AUTONUMBER_LIST.Clear();
             for (int i = 0; i < gridAutonumber.Rows.Count; i++)
             {
@@ -148,6 +157,7 @@ namespace Profit
             regDatekryptonDateTimePicker.Enabled = enable;
             taxNokryptonTextBox.ReadOnly = !enable;
             websiteKryptonTextBox.ReadOnly = !enable;
+            startEntryPeriodkryptonComboBox1.Enabled = enable;
 
             FormNameColumn.ReadOnly = !enable;//186
             PrefixColumn.ReadOnly = !enable;//100
@@ -217,6 +227,7 @@ namespace Profit
                 regDatekryptonDateTimePicker.Value = m_user.REG_DATE;
                 taxNokryptonTextBox.Text = m_user.TAX_NO;
                 websiteKryptonTextBox.Text = m_user.WEBSITE;
+                startEntryPeriodkryptonComboBox1.Text = m_user.START_ENTRY_PERIOD.ToString();
                 foreach (string kys in m_user.AUTONUMBER_LIST.Keys)
                 {
                     AutoNumberSetup f = m_user.AUTONUMBER_LIST[kys];
@@ -253,6 +264,22 @@ namespace Profit
 
         private void faxKryptonTextBox_TextChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void startEntryPeriodkryptonComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void startEntryPeriodkryptonComboBox1_Validating(object sender, CancelEventArgs e)
+        {
+            Period per = (Period)startEntryPeriodkryptonComboBox1.SelectedItem;
+            if (r_prtr.GetTotalTransactionCount() > 0)
+            {
+                MessageBox.Show("Can not change start entry month, some transaction has been process");
+                startEntryPeriodkryptonComboBox1.Text = per.ToString();
+            }
 
         }
     }

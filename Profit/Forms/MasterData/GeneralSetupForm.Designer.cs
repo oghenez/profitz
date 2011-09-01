@@ -50,22 +50,25 @@
             this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.gridAutonumber = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.companyNameTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.addresstextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.FormNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PrefixColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StartColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
             this.DigitColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
             this.InitColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
             this.AutonumberColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
+            this.companyNameTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.addresstextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.startEntryPeriodkryptonComboBox1 = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.kryptonLabel9 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridAutonumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.startEntryPeriodkryptonComboBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonHeader1
@@ -140,6 +143,8 @@
             // kryptonPanel1
             // 
             this.kryptonPanel1.AutoScroll = true;
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel9);
+            this.kryptonPanel1.Controls.Add(this.startEntryPeriodkryptonComboBox1);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel8);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel7);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel6);
@@ -277,41 +282,6 @@
             this.gridAutonumber.StateCommon.BackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.GridBackgroundList;
             this.gridAutonumber.TabIndex = 9;
             // 
-            // companyNameTextBox
-            // 
-            this.companyNameTextBox.Location = new System.Drawing.Point(140, 6);
-            this.companyNameTextBox.Name = "companyNameTextBox";
-            this.companyNameTextBox.Size = new System.Drawing.Size(192, 22);
-            this.companyNameTextBox.TabIndex = 2;
-            // 
-            // addresstextBox
-            // 
-            this.addresstextBox.Location = new System.Drawing.Point(140, 34);
-            this.addresstextBox.Multiline = true;
-            this.addresstextBox.Name = "addresstextBox";
-            this.addresstextBox.Size = new System.Drawing.Size(286, 82);
-            this.addresstextBox.TabIndex = 3;
-            // 
-            // kryptonLabel1
-            // 
-            this.kryptonLabel1.Location = new System.Drawing.Point(38, 6);
-            this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(96, 19);
-            this.kryptonLabel1.TabIndex = 0;
-            this.kryptonLabel1.Values.Text = "Company Name :";
-            // 
-            // kryptonLabel2
-            // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(78, 34);
-            this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(56, 19);
-            this.kryptonLabel2.TabIndex = 1;
-            this.kryptonLabel2.Values.Text = "Address :";
-            // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
             // FormNameColumn
             // 
             this.FormNameColumn.HeaderText = "Form";
@@ -379,6 +349,59 @@
             this.AutonumberColumn.Name = "AutonumberColumn";
             this.AutonumberColumn.Width = 76;
             // 
+            // companyNameTextBox
+            // 
+            this.companyNameTextBox.Location = new System.Drawing.Point(140, 6);
+            this.companyNameTextBox.Name = "companyNameTextBox";
+            this.companyNameTextBox.Size = new System.Drawing.Size(192, 22);
+            this.companyNameTextBox.TabIndex = 2;
+            // 
+            // addresstextBox
+            // 
+            this.addresstextBox.Location = new System.Drawing.Point(140, 34);
+            this.addresstextBox.Multiline = true;
+            this.addresstextBox.Name = "addresstextBox";
+            this.addresstextBox.Size = new System.Drawing.Size(286, 82);
+            this.addresstextBox.TabIndex = 3;
+            // 
+            // kryptonLabel1
+            // 
+            this.kryptonLabel1.Location = new System.Drawing.Point(38, 6);
+            this.kryptonLabel1.Name = "kryptonLabel1";
+            this.kryptonLabel1.Size = new System.Drawing.Size(96, 19);
+            this.kryptonLabel1.TabIndex = 0;
+            this.kryptonLabel1.Values.Text = "Company Name :";
+            // 
+            // kryptonLabel2
+            // 
+            this.kryptonLabel2.Location = new System.Drawing.Point(78, 34);
+            this.kryptonLabel2.Name = "kryptonLabel2";
+            this.kryptonLabel2.Size = new System.Drawing.Size(56, 19);
+            this.kryptonLabel2.TabIndex = 1;
+            this.kryptonLabel2.Values.Text = "Address :";
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // startEntryPeriodkryptonComboBox1
+            // 
+            this.startEntryPeriodkryptonComboBox1.DropDownWidth = 198;
+            this.startEntryPeriodkryptonComboBox1.Location = new System.Drawing.Point(381, 203);
+            this.startEntryPeriodkryptonComboBox1.Name = "startEntryPeriodkryptonComboBox1";
+            this.startEntryPeriodkryptonComboBox1.Size = new System.Drawing.Size(198, 22);
+            this.startEntryPeriodkryptonComboBox1.TabIndex = 22;
+            this.startEntryPeriodkryptonComboBox1.Validating += new System.ComponentModel.CancelEventHandler(this.startEntryPeriodkryptonComboBox1_Validating);
+            this.startEntryPeriodkryptonComboBox1.SelectedIndexChanged += new System.EventHandler(this.startEntryPeriodkryptonComboBox1_SelectedIndexChanged);
+            // 
+            // kryptonLabel9
+            // 
+            this.kryptonLabel9.Location = new System.Drawing.Point(381, 178);
+            this.kryptonLabel9.Name = "kryptonLabel9";
+            this.kryptonLabel9.Size = new System.Drawing.Size(104, 19);
+            this.kryptonLabel9.TabIndex = 23;
+            this.kryptonLabel9.Values.Text = "Start Entry Month :";
+            // 
             // GeneralSetupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -398,6 +421,7 @@
             this.kryptonPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridAutonumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.startEntryPeriodkryptonComboBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -437,5 +461,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn DigitColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn InitColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn AutonumberColumn;
+        private ComponentFactory.Krypton.Toolkit.KryptonComboBox startEntryPeriodkryptonComboBox1;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel9;
     }
 }
