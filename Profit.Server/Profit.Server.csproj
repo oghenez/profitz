@@ -117,6 +117,7 @@
     <Compile Include="Repository\AutoNumberSetupRepository.cs" />
     <Compile Include="Repository\APDebitNoteRepository.cs" />
     <Compile Include="Repository\PaymentRepository.cs" />
+    <Compile Include="Repository\ProcessTransactionRepository.cs" />
     <Compile Include="Repository\SupplierInvoiceJournalRepository.cs" />
     <Compile Include="Repository\SupplierOutStandingInvoiceRepository.cs" />
     <Compile Include="Repository\VendorBalanceEntryRepository.cs" />

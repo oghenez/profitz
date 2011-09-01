@@ -12,6 +12,7 @@ namespace Profit.Server
         public PeriodRepository()
             : base(new Period())
         { }
+
         public Period FindCurrentPeriod()
         {
             OpenConnection();
@@ -89,6 +90,19 @@ namespace Profit.Server
             cmd.CommandText = hql;
             int result = Convert.ToInt32(cmd.ExecuteScalar());
             return result;
+        }
+        public static IList LoadAll(OdbcCommand cmd)
+        {
+            cmd.CommandText = Period.GetAllSQLStatic();
+            OdbcDataReader r = cmd.ExecuteReader();
+            IList result = Period.TransformReaderList(r);
+            r.Close();
+            return result;
+        }
+        public static void UpdatePeriod(OdbcCommand cmd,Period p)
+        {
+            cmd.CommandText = p.GetUpdateSQL();
+            cmd.ExecuteNonQuery();
         }
     }
 }

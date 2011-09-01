@@ -115,6 +115,10 @@ namespace Profit.Server
         {
             return String.Format("select * from table_period");
         }
+        public static string GetAllSQLStatic()
+        {
+            return String.Format("select * from table_period");
+        }
         public string GetByPeriodByYearID(int ID)
         {
             return String.Format("select * from table_period where year_id = {0}", ID);
