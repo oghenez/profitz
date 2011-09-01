@@ -265,7 +265,12 @@ namespace Profit.Server
         {
             throw new NotImplementedException();
         }
-
+        public VendorBalance Create(Period newPeriod)
+        {
+            VendorBalance sCard = new VendorBalance(newPeriod, VENDOR, CURRENCY, VENDOR_BALANCE_TYPE);
+            sCard.BALANCE = BALANCE;
+            return sCard;
+        }
         #endregion
 
         #region IEntity Members

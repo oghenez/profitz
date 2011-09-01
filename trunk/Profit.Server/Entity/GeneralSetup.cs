@@ -18,6 +18,7 @@ namespace Profit.Server
         public DateTime REG_DATE = DateTime.Today;
         public string EMAIL = string.Empty;
         public string WEBSITE = string.Empty;
+        public Period START_ENTRY_PERIOD = null;
         public IDictionary<string, AutoNumberSetup> AUTONUMBER_LIST = new Dictionary<string, AutoNumberSetup>();
 
         public GeneralSetup()
@@ -114,6 +115,10 @@ namespace Profit.Server
         public string GetAllSQL()
         {
             return "";//String.Format("select * from table_generalsetup");
+        }
+        public static string GetAllSQLStatic()
+        {
+            return String.Format("select * from table_generalsetup");
         }
         public string GetConcatSearch(string find)
         {

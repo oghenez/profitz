@@ -73,5 +73,34 @@ namespace Profit.Server
                 m_connection.Close();
             }
         }
+        internal static GeneralSetup GetGeneralSetup(OdbcCommand cmd)
+        {
+            try
+            {
+                GeneralSetup e = new GeneralSetup();
+                cmd.CommandText = GeneralSetup.GetAllSQLStatic();
+                OdbcDataReader aReader = cmd.ExecuteReader();
+                GeneralSetup a = (GeneralSetup)e.Get(aReader);
+                aReader.Close();
+                cmd.CommandText = AutoNumberSetup.GetAllSQLStatic();
+                aReader = cmd.ExecuteReader();
+                IList lst = AutoNumberSetup.GetAllStatic(aReader);
+                aReader.Close();
+                foreach (AutoNumberSetup s in lst)
+                {
+                    a.AUTONUMBER_LIST.Add(s.FORM_CODE, s);
+                }
+
+                return a;
+            }
+            catch (Exception x)
+            {
+                throw new Exception(getErrorMessage(x));
+            }
+            finally
+            {
+                m_connection.Close();
+            }
+        }
     }
 }

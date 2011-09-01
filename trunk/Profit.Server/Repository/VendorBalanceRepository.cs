@@ -76,6 +76,11 @@ namespace Profit.Server
             cmd.CommandText = VendorBalance.SelectMaxIDSQL();
             sc.ID = Convert.ToInt32(cmd.ExecuteScalar());
         }
+        public static void DeleteHeader(OdbcCommand cmd, VendorBalance sc)
+        {
+            cmd.CommandText = sc.GetDeleteSQL();
+            cmd.ExecuteNonQuery();
+        }
         public static VendorBalance FindVendorBalance(OdbcCommand cmd, long vendor, long currency, long periodId, VendorBalanceType type)
         {
             cmd.CommandText = String.Format("select * from table_vendorbalance where vendor_id = {0} and ccy_id = {1} and period_id = {2} and vb_vendorbalancetype = '{3}'", 
@@ -106,11 +111,19 @@ namespace Profit.Server
             }
             return sc;
         }
-        public static VendorBalance FindVendorBalance(OdbcCommand cmd, long periodId)
+        //public static VendorBalance FindVendorBalance(OdbcCommand cmd, long periodId)
+        //{
+        //    cmd.CommandText = String.Format("select * from table_vendorbalance where period_id = {0}", periodId);
+        //    OdbcDataReader r = cmd.ExecuteReader();
+        //    VendorBalance sc = VendorBalance.TransformReader(r);
+        //    r.Close();
+        //    return sc;
+        //}
+        public static IList FindVendorBalanceByPeriod(OdbcCommand cmd, long periodId)
         {
             cmd.CommandText = String.Format("select * from table_vendorbalance where period_id = {0}", periodId);
             OdbcDataReader r = cmd.ExecuteReader();
-            VendorBalance sc = VendorBalance.TransformReader(r);
+            IList sc = VendorBalance.TransformReaderList(r);
             r.Close();
             return sc;
         }
