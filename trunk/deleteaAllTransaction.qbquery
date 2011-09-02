@@ -1,0 +1,55 @@
+﻿delete from table_vendorbalance;
+
+delete from table_vendorbalanceentry;
+
+delete from table_apdebitnoteitem;
+
+delete from table_apdebitnote;
+
+delete from table_paymentitem;
+
+delete from table_payment;
+
+delete from table_supplierinvoicejournalitem;
+
+delete from table_supplierinvoicejournal;
+
+delete from table_supplieroutstandinginvoiceitem;
+
+delete from table_supplieroutstandinginvoice;
+
+delete from table_deliveryorderitem;
+
+delete from table_deliveryorder;
+
+delete from table_stockcardentry;
+
+delete from table_stockcard;
+
+delete from table_purchasereturnitem;
+
+delete from table_purchasereturn;
+
+delete from table_goodreceivenoteitem;
+
+delete from table_goodreceivenote;
+
+delete from table_purchaseorderitem;
+
+delete from table_purchaseorder;
+
+delete from table_salesorderitem;
+
+delete from table_salesorder;
+
+delete from table_salesreturnitem;
+
+delete from table_salesreturn;
+
+delete from table_stocktakingitem;
+
+delete from table_stocktaking;
+
+delete from table_supplierinvoiceitem;
+
+delete from table_supplierinvoice;
