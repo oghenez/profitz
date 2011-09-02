@@ -308,7 +308,11 @@ namespace Profit.Server
                     r = m_command.ExecuteReader();
                     t.GRN_ITEM.PO_ITEM = PurchaseOrderItem.TransformReader(r);
                     r.Close();
-                    double subamount = (t.GRN_ITEM.PO_ITEM.SUBTOTAL / t.GRN_ITEM.PO_ITEM.QYTAMOUNT) * t.QYTAMOUNT;
+
+                    t.GRN_ITEM.PO_ITEM.PART.UNIT_CONVERSION_LIST = PartRepository.GetUnitConversionsStatic(m_command, t.GRN_ITEM.PO_ITEM.PART.ID);
+                    t.PART = t.GRN_ITEM.PO_ITEM.PART;
+
+                    double subamount = (t.GRN_ITEM.PO_ITEM.SUBTOTAL / t.GRN_ITEM.PO_ITEM.GetAmountInSmallestUnit()) * t.GetAmountInSmallestUnit();
                     p.TOTAL_AMOUNT_FROM_PO += subamount;
                 }
             }
@@ -340,7 +344,11 @@ namespace Profit.Server
                 r = cmd.ExecuteReader();
                 t.GRN_ITEM.PO_ITEM = PurchaseOrderItem.TransformReader(r);
                 r.Close();
-                double subamount = (t.GRN_ITEM.PO_ITEM.SUBTOTAL / t.GRN_ITEM.PO_ITEM.QYTAMOUNT) * t.QYTAMOUNT;
+
+                t.GRN_ITEM.PO_ITEM.PART.UNIT_CONVERSION_LIST = PartRepository.GetUnitConversionsStatic(cmd, t.GRN_ITEM.PO_ITEM.PART.ID);
+                t.PART = t.GRN_ITEM.PO_ITEM.PART;
+
+                double subamount = (t.GRN_ITEM.PO_ITEM.SUBTOTAL / t.GRN_ITEM.PO_ITEM.GetAmountInSmallestUnit()) * t.GetAmountInSmallestUnit();
                 p.TOTAL_AMOUNT_FROM_PO += subamount;
             }
             return p;
