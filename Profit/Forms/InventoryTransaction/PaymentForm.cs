@@ -249,9 +249,9 @@ namespace Profit
                     m_prn.POSTED = true;
                     KryptonMessageBox.Show("Transaction has been POSTED", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                setEnableForm(false);
-                loadData();
                 setEditMode(EditMode.View);
+                loadData();
+                setEnableForm(false);
             }
             catch (Exception x)
             {
@@ -437,7 +437,7 @@ namespace Profit
             supplierkryptonComboBox.Enabled = enable;
             itemsDataGrid.AllowUserToDeleteRows = enable;
             itemsDataGrid.AllowUserToAddRows = enable;
-
+            currencyKryptonComboBox.Enabled = enable;
             paymentTypeColumn.ReadOnly = !enable;
             paymentAmountColumn.ReadOnly = !enable;
             docdateColumn.ReadOnly = !enable;
@@ -654,7 +654,9 @@ namespace Profit
         private void toolStripButtonSearchSI_Click(object sender, EventArgs e)
         {
             Supplier sp = (Supplier)supplierkryptonComboBox.SelectedItem;
-            if(sp==null)return;
+            Currency ccy = (Currency)currencyKryptonComboBox.SelectedItem;
+            if (sp == null) return;
+            if (ccy == null) return;
             IList addedPI = new ArrayList();
             for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
             {
@@ -665,7 +667,7 @@ namespace Profit
                     addedPI.Add(pi.ID);
                 }
             }
-            using (SearchSuppInvJForPaymentForm frm = new SearchSuppInvJForPaymentForm(sp.ID, addedPI, m_mainForm.CurrentUser,
+            using (SearchSuppInvJForPaymentForm frm = new SearchSuppInvJForPaymentForm(ccy, sp, addedPI, m_mainForm.CurrentUser,
                 dateKryptonDateTimePicker.Value))
             {
                 frm.ShowDialog();
@@ -694,7 +696,9 @@ namespace Profit
         private void toolStripButtonOutstandingInvoice_Click(object sender, EventArgs e)
         {
             Supplier sp = (Supplier)supplierkryptonComboBox.SelectedItem;
+            Currency ccy = (Currency)currencyKryptonComboBox.SelectedItem;
             if (sp == null) return;
+            if (ccy == null) return;
             IList addedPI = new ArrayList();
             for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
             {
@@ -705,7 +709,7 @@ namespace Profit
                     addedPI.Add(pi.ID);
                 }
             }
-            using (SearchOstSuppInvForPaymentForm frm = new SearchOstSuppInvForPaymentForm(sp.ID, addedPI, m_mainForm.CurrentUser,
+            using (SearchOstSuppInvForPaymentForm frm = new SearchOstSuppInvForPaymentForm(ccy, sp, addedPI, m_mainForm.CurrentUser,
                 dateKryptonDateTimePicker.Value))
             {
                 frm.ShowDialog();
@@ -729,6 +733,12 @@ namespace Profit
                     //---
                 }
             }
+        }
+
+        private void currencyKryptonComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (m_editMode == EditMode.View) return;
+            itemsDataGrid.Rows.Clear();
         }
     }
 }

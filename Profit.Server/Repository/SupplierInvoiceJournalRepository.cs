@@ -368,7 +368,7 @@ namespace Profit.Server
 
             return result;
         }
-        public IList FindSIJournalItemlistForPayment(string find, int supplier, DateTime trdate, IList notIn)
+        public IList FindSIJournalItemlistForPayment(string find,int ccyID, int supplier, DateTime trdate, IList notIn)
         {
             StringBuilder poisSB = new StringBuilder();
             foreach (int i in notIn)
@@ -378,7 +378,7 @@ namespace Profit.Server
             }
             string pois = poisSB.ToString();
             pois = notIn.Count > 0 ? pois.Substring(0, pois.Length - 1) : "";
-            m_command.CommandText = SupplierInvoiceJournalItem.GetSearchForPayment(find, supplier, pois, trdate);
+            m_command.CommandText = SupplierInvoiceJournalItem.GetSearchForPayment(find, ccyID, supplier, pois, trdate);
             OdbcDataReader r = m_command.ExecuteReader();
             IList result = SupplierInvoiceJournalItem.TransformReaderList(r);
             r.Close();
