@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.CANCELkryptonButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.OKkryptonButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.gridData = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
@@ -40,11 +41,9 @@
             this.checkColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
             this.purchaseorderNoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.poDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.qtyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.warehouseColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.supplierColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.ccyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.qtyColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -78,11 +77,9 @@
             this.checkColumn,
             this.purchaseorderNoColumn,
             this.poDateColumn,
-            this.codeColumn,
-            this.nameColumn,
-            this.qtyColumn,
-            this.unitColumn,
-            this.warehouseColumn});
+            this.supplierColumn,
+            this.ccyColumn,
+            this.qtyColumn});
             this.gridData.GridStyles.Style = ComponentFactory.Krypton.Toolkit.DataGridViewStyle.Mixed;
             this.gridData.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlClient;
             this.gridData.HideOuterBorders = true;
@@ -160,47 +157,59 @@
             // 
             // purchaseorderNoColumn
             // 
-            this.purchaseorderNoColumn.HeaderText = "GRN No.";
+            this.purchaseorderNoColumn.HeaderText = "Invoice No.";
             this.purchaseorderNoColumn.Name = "purchaseorderNoColumn";
             this.purchaseorderNoColumn.ReadOnly = true;
             // 
             // poDateColumn
             // 
-            this.poDateColumn.HeaderText = "GRN Date";
+            this.poDateColumn.HeaderText = "Invoice Date";
             this.poDateColumn.Name = "poDateColumn";
             this.poDateColumn.ReadOnly = true;
             // 
-            // codeColumn
+            // supplierColumn
             // 
-            this.codeColumn.HeaderText = "Code";
-            this.codeColumn.Name = "codeColumn";
-            this.codeColumn.ReadOnly = true;
+            this.supplierColumn.HeaderText = "Supplier";
+            this.supplierColumn.Name = "supplierColumn";
+            this.supplierColumn.ReadOnly = true;
+            this.supplierColumn.Width = 100;
             // 
-            // nameColumn
+            // ccyColumn
             // 
-            this.nameColumn.HeaderText = "Part Name";
-            this.nameColumn.Name = "nameColumn";
-            this.nameColumn.ReadOnly = true;
+            this.ccyColumn.HeaderText = "Ccy";
+            this.ccyColumn.Name = "ccyColumn";
+            this.ccyColumn.ReadOnly = true;
             // 
             // qtyColumn
             // 
-            this.qtyColumn.HeaderText = "Qty";
+            this.qtyColumn.DecimalPlaces = 2;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.NullValue = "0";
+            this.qtyColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.qtyColumn.HeaderText = "Amount";
+            this.qtyColumn.Increment = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.qtyColumn.Maximum = new decimal(new int[] {
+            1410065408,
+            2,
+            0,
+            0});
+            this.qtyColumn.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             this.qtyColumn.Name = "qtyColumn";
             this.qtyColumn.ReadOnly = true;
+            this.qtyColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.qtyColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.qtyColumn.ThousandsSeparator = true;
+            this.qtyColumn.Width = 100;
             // 
-            // unitColumn
-            // 
-            this.unitColumn.HeaderText = "Unit";
-            this.unitColumn.Name = "unitColumn";
-            this.unitColumn.ReadOnly = true;
-            // 
-            // warehouseColumn
-            // 
-            this.warehouseColumn.HeaderText = "Warehouse";
-            this.warehouseColumn.Name = "warehouseColumn";
-            this.warehouseColumn.ReadOnly = true;
-            // 
-            // SearchGRNForSuppInvoiceForm
+            // SearchSuppInvJForPaymentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -209,7 +218,7 @@
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
-            this.Name = "SearchGRNForSuppInvoiceForm";
+            this.Name = "SearchSuppInvJForPaymentForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Find";
             this.Load += new System.EventHandler(this.SearchPOForGRNForm_Load);
@@ -235,10 +244,8 @@
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn checkColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn purchaseorderNoColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn poDateColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn codeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn qtyColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn unitColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn warehouseColumn;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn supplierColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ccyColumn;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn qtyColumn;
     }
 }

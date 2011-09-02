@@ -242,16 +242,18 @@ namespace Profit.Server
         //{
         //    return String.Format("SELECT * from table_supplieroutstandinginvoiceitem where grni_id = {0}", id);
         //}
-        public static string GetSearchForPayment(string find, int supplierID, string poi, DateTime trdate)
+        public static string GetSearchForPayment(string find, int ccyID, int supplierID, string poi, DateTime trdate)
         {
             return String.Format(@"SELECT t.*
                 FROM table_supplieroutstandinginvoiceitem t
                 INNER JOIN table_supplieroutstandinginvoice p on p.sosti_id = t.sosti_id
                 where t.sostii_outstandingamount > 0
+                and p.ccy_id = {4}
                 and p.sosti_code like '%{0}%' and p.sup_id = {1}  
                 and p.sosti_posted = true
                 and p.sosti_date <= '{2}'
-               {3}", find, supplierID, trdate.ToString(Utils.DATE_FORMAT), poi != "" ? " and t.sostii_id not in (" + poi + ")" : "");
+               {3}", find, supplierID, trdate.ToString(Utils.DATE_FORMAT), poi != "" ? " and t.sostii_id not in (" + poi + ")" : "",
+                   ccyID);
         }
 
         public static string GetByOutstandingSQL(int id)

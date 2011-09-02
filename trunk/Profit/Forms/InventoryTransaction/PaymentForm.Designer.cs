@@ -30,15 +30,15 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PaymentForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonHeader1 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
@@ -54,6 +54,7 @@
             this.postToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonPrint = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSearchSI = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonOutstandingInvoice = new System.Windows.Forms.ToolStripButton();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.netAmountkryptonNumericUpDown = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
             this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -70,18 +71,6 @@
             this.employeeKryptonComboBox = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.dateKryptonDateTimePicker = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
             this.itemsDataGrid = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.dataGridContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.fieldChooserTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.textBoxCode = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.buttonSpecAny1 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.buttonSpecAny2 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.buttonSpecAny3 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.buttonSpecAny4 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.buttonSpecAny5 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.buttonSpecAny6 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.kryptonContextMenuItems1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
             this.invoiceNoColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.invoiceDateColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewDateTimePickerColumn();
             this.topColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
@@ -96,7 +85,18 @@
             this.docdateColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewDateTimePickerColumn();
             this.noteColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.bankColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
-            this.toolStripButtonOutstandingInvoice = new System.Windows.Forms.ToolStripButton();
+            this.dataGridContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.fieldChooserTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBoxCode = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.buttonSpecAny1 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.buttonSpecAny2 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.buttonSpecAny3 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.buttonSpecAny4 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.buttonSpecAny5 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.buttonSpecAny6 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.kryptonContextMenuItems1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -243,6 +243,15 @@
             this.toolStripButtonSearchSI.Text = "Search SI";
             this.toolStripButtonSearchSI.Click += new System.EventHandler(this.toolStripButtonSearchSI_Click);
             // 
+            // toolStripButtonOutstandingInvoice
+            // 
+            this.toolStripButtonOutstandingInvoice.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonOutstandingInvoice.Image")));
+            this.toolStripButtonOutstandingInvoice.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonOutstandingInvoice.Name = "toolStripButtonOutstandingInvoice";
+            this.toolStripButtonOutstandingInvoice.Size = new System.Drawing.Size(103, 22);
+            this.toolStripButtonOutstandingInvoice.Text = "Search Ost Inv.";
+            this.toolStripButtonOutstandingInvoice.Click += new System.EventHandler(this.toolStripButtonOutstandingInvoice_Click);
+            // 
             // kryptonPanel1
             // 
             this.kryptonPanel1.AutoScroll = true;
@@ -312,6 +321,7 @@
             this.currencyKryptonComboBox.Size = new System.Drawing.Size(56, 22);
             this.currencyKryptonComboBox.StateDisabled.ComboBox.Content.Color1 = System.Drawing.Color.Black;
             this.currencyKryptonComboBox.TabIndex = 49;
+            this.currencyKryptonComboBox.SelectedIndexChanged += new System.EventHandler(this.currencyKryptonComboBox_SelectedIndexChanged);
             // 
             // supplierKryptonTextBox
             // 
@@ -446,6 +456,212 @@
             this.itemsDataGrid.TabIndex = 4;
             this.itemsDataGrid.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.itemsDataGrid_RowsAdded);
             // 
+            // invoiceNoColumn
+            // 
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.invoiceNoColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            this.invoiceNoColumn.HeaderText = "Invoice No.";
+            this.invoiceNoColumn.Name = "invoiceNoColumn";
+            this.invoiceNoColumn.ReadOnly = true;
+            this.invoiceNoColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.invoiceNoColumn.Width = 50;
+            // 
+            // invoiceDateColumn
+            // 
+            this.invoiceDateColumn.CalendarTodayDate = new System.DateTime(2011, 8, 19, 0, 0, 0, 0);
+            this.invoiceDateColumn.Checked = false;
+            this.invoiceDateColumn.CustomFormat = "dd-MM-yyyy";
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.invoiceDateColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.invoiceDateColumn.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.invoiceDateColumn.HeaderText = "Invoice Date";
+            this.invoiceDateColumn.Name = "invoiceDateColumn";
+            this.invoiceDateColumn.ReadOnly = true;
+            this.invoiceDateColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.invoiceDateColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.invoiceDateColumn.Width = 50;
+            // 
+            // topColumn
+            // 
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.topColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            this.topColumn.DropDownWidth = 121;
+            this.topColumn.HeaderText = "TOP";
+            this.topColumn.Name = "topColumn";
+            this.topColumn.ReadOnly = true;
+            this.topColumn.Width = 50;
+            // 
+            // dueDateColumn
+            // 
+            this.dueDateColumn.CalendarTodayDate = new System.DateTime(2011, 8, 19, 0, 0, 0, 0);
+            this.dueDateColumn.Checked = false;
+            this.dueDateColumn.CustomFormat = "dd-MM-yyyy";
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.dueDateColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dueDateColumn.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dueDateColumn.HeaderText = "Due Date";
+            this.dueDateColumn.Name = "dueDateColumn";
+            this.dueDateColumn.ReadOnly = true;
+            this.dueDateColumn.Width = 50;
+            // 
+            // invoicerColumn
+            // 
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.invoicerColumn.DefaultCellStyle = dataGridViewCellStyle5;
+            this.invoicerColumn.DropDownWidth = 121;
+            this.invoicerColumn.HeaderText = "Invoicer";
+            this.invoicerColumn.Name = "invoicerColumn";
+            this.invoicerColumn.ReadOnly = true;
+            this.invoicerColumn.Width = 50;
+            // 
+            // amountColumn
+            // 
+            this.amountColumn.DecimalPlaces = 2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle6.NullValue = "0";
+            this.amountColumn.DefaultCellStyle = dataGridViewCellStyle6;
+            this.amountColumn.HeaderText = "Amount";
+            this.amountColumn.Increment = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.amountColumn.Maximum = new decimal(new int[] {
+            -727379968,
+            232,
+            0,
+            0});
+            this.amountColumn.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.amountColumn.Name = "amountColumn";
+            this.amountColumn.ReadOnly = true;
+            this.amountColumn.ThousandsSeparator = true;
+            this.amountColumn.Width = 50;
+            // 
+            // OutstandingAmountColumn
+            // 
+            this.OutstandingAmountColumn.DecimalPlaces = 2;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle7.NullValue = "0";
+            this.OutstandingAmountColumn.DefaultCellStyle = dataGridViewCellStyle7;
+            this.OutstandingAmountColumn.HeaderText = "Ost Amount";
+            this.OutstandingAmountColumn.Increment = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.OutstandingAmountColumn.Maximum = new decimal(new int[] {
+            -727379968,
+            232,
+            0,
+            0});
+            this.OutstandingAmountColumn.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.OutstandingAmountColumn.Name = "OutstandingAmountColumn";
+            this.OutstandingAmountColumn.ReadOnly = true;
+            this.OutstandingAmountColumn.ThousandsSeparator = true;
+            this.OutstandingAmountColumn.Width = 50;
+            // 
+            // paidAmountColumn
+            // 
+            this.paidAmountColumn.DecimalPlaces = 2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle8.NullValue = "0";
+            this.paidAmountColumn.DefaultCellStyle = dataGridViewCellStyle8;
+            this.paidAmountColumn.HeaderText = "Paid Amount";
+            this.paidAmountColumn.Increment = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.paidAmountColumn.Maximum = new decimal(new int[] {
+            -727379968,
+            232,
+            0,
+            0});
+            this.paidAmountColumn.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.paidAmountColumn.Name = "paidAmountColumn";
+            this.paidAmountColumn.ReadOnly = true;
+            this.paidAmountColumn.ThousandsSeparator = true;
+            this.paidAmountColumn.Width = 50;
+            // 
+            // paymentTypeColumn
+            // 
+            this.paymentTypeColumn.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.paymentTypeColumn.DropDownWidth = 121;
+            this.paymentTypeColumn.HeaderText = "Payment Type";
+            this.paymentTypeColumn.Name = "paymentTypeColumn";
+            this.paymentTypeColumn.Width = 60;
+            // 
+            // paymentAmountColumn
+            // 
+            this.paymentAmountColumn.DecimalPlaces = 2;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.NullValue = "0";
+            this.paymentAmountColumn.DefaultCellStyle = dataGridViewCellStyle9;
+            this.paymentAmountColumn.HeaderText = "Payment Amount";
+            this.paymentAmountColumn.Increment = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.paymentAmountColumn.Maximum = new decimal(new int[] {
+            -727379968,
+            232,
+            0,
+            0});
+            this.paymentAmountColumn.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.paymentAmountColumn.Name = "paymentAmountColumn";
+            this.paymentAmountColumn.ThousandsSeparator = true;
+            this.paymentAmountColumn.Width = 60;
+            // 
+            // docnoColumn
+            // 
+            this.docnoColumn.HeaderText = "Doc. Number";
+            this.docnoColumn.Name = "docnoColumn";
+            this.docnoColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.docnoColumn.Width = 60;
+            // 
+            // docdateColumn
+            // 
+            this.docdateColumn.CalendarTodayDate = new System.DateTime(2011, 8, 26, 0, 0, 0, 0);
+            this.docdateColumn.Checked = false;
+            this.docdateColumn.CustomFormat = "dd-MM-yyyy";
+            this.docdateColumn.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.docdateColumn.HeaderText = "Doc. Date";
+            this.docdateColumn.Name = "docdateColumn";
+            this.docdateColumn.Width = 60;
+            // 
+            // noteColumn
+            // 
+            this.noteColumn.HeaderText = "Note";
+            this.noteColumn.Name = "noteColumn";
+            this.noteColumn.Width = 50;
+            // 
+            // bankColumn
+            // 
+            this.bankColumn.DropDownWidth = 121;
+            this.bankColumn.HeaderText = "Bank";
+            this.bankColumn.Name = "bankColumn";
+            this.bankColumn.Width = 50;
+            // 
             // dataGridContextMenuStrip
             // 
             this.dataGridContextMenuStrip.Font = new System.Drawing.Font("Segoe UI", 8.25F);
@@ -510,221 +726,6 @@
             // 
             this.buttonSpecAny6.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny6.UniqueName = "95BED338EBB14361B2927C3CB003454A";
-            // 
-            // invoiceNoColumn
-            // 
-            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.invoiceNoColumn.DefaultCellStyle = dataGridViewCellStyle19;
-            this.invoiceNoColumn.HeaderText = "Invoice No.";
-            this.invoiceNoColumn.Name = "invoiceNoColumn";
-            this.invoiceNoColumn.ReadOnly = true;
-            this.invoiceNoColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.invoiceNoColumn.Width = 50;
-            // 
-            // invoiceDateColumn
-            // 
-            this.invoiceDateColumn.CalendarTodayDate = new System.DateTime(2011, 8, 19, 0, 0, 0, 0);
-            this.invoiceDateColumn.Checked = false;
-            this.invoiceDateColumn.CustomFormat = "dd-MM-yyyy";
-            dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.invoiceDateColumn.DefaultCellStyle = dataGridViewCellStyle20;
-            this.invoiceDateColumn.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.invoiceDateColumn.HeaderText = "Invoice Date";
-            this.invoiceDateColumn.Name = "invoiceDateColumn";
-            this.invoiceDateColumn.ReadOnly = true;
-            this.invoiceDateColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.invoiceDateColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.invoiceDateColumn.Width = 50;
-            // 
-            // topColumn
-            // 
-            dataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.topColumn.DefaultCellStyle = dataGridViewCellStyle21;
-            this.topColumn.DropDownWidth = 121;
-            this.topColumn.HeaderText = "TOP";
-            this.topColumn.Name = "topColumn";
-            this.topColumn.ReadOnly = true;
-            this.topColumn.Width = 50;
-            // 
-            // dueDateColumn
-            // 
-            this.dueDateColumn.CalendarTodayDate = new System.DateTime(2011, 8, 19, 0, 0, 0, 0);
-            this.dueDateColumn.Checked = false;
-            this.dueDateColumn.CustomFormat = "dd-MM-yyyy";
-            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.dueDateColumn.DefaultCellStyle = dataGridViewCellStyle22;
-            this.dueDateColumn.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dueDateColumn.HeaderText = "Due Date";
-            this.dueDateColumn.Name = "dueDateColumn";
-            this.dueDateColumn.ReadOnly = true;
-            this.dueDateColumn.Width = 50;
-            // 
-            // invoicerColumn
-            // 
-            dataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.invoicerColumn.DefaultCellStyle = dataGridViewCellStyle23;
-            this.invoicerColumn.DropDownWidth = 121;
-            this.invoicerColumn.HeaderText = "Invoicer";
-            this.invoicerColumn.Name = "invoicerColumn";
-            this.invoicerColumn.ReadOnly = true;
-            this.invoicerColumn.Width = 50;
-            // 
-            // amountColumn
-            // 
-            this.amountColumn.DecimalPlaces = 2;
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            dataGridViewCellStyle24.NullValue = "0";
-            this.amountColumn.DefaultCellStyle = dataGridViewCellStyle24;
-            this.amountColumn.HeaderText = "Amount";
-            this.amountColumn.Increment = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.amountColumn.Maximum = new decimal(new int[] {
-            -727379968,
-            232,
-            0,
-            0});
-            this.amountColumn.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.amountColumn.Name = "amountColumn";
-            this.amountColumn.ReadOnly = true;
-            this.amountColumn.ThousandsSeparator = true;
-            this.amountColumn.Width = 50;
-            // 
-            // OutstandingAmountColumn
-            // 
-            this.OutstandingAmountColumn.DecimalPlaces = 2;
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle25.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            dataGridViewCellStyle25.NullValue = "0";
-            this.OutstandingAmountColumn.DefaultCellStyle = dataGridViewCellStyle25;
-            this.OutstandingAmountColumn.HeaderText = "Ost Amount";
-            this.OutstandingAmountColumn.Increment = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.OutstandingAmountColumn.Maximum = new decimal(new int[] {
-            -727379968,
-            232,
-            0,
-            0});
-            this.OutstandingAmountColumn.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.OutstandingAmountColumn.Name = "OutstandingAmountColumn";
-            this.OutstandingAmountColumn.ReadOnly = true;
-            this.OutstandingAmountColumn.ThousandsSeparator = true;
-            this.OutstandingAmountColumn.Width = 50;
-            // 
-            // paidAmountColumn
-            // 
-            this.paidAmountColumn.DecimalPlaces = 2;
-            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            dataGridViewCellStyle26.NullValue = "0";
-            this.paidAmountColumn.DefaultCellStyle = dataGridViewCellStyle26;
-            this.paidAmountColumn.HeaderText = "Paid Amount";
-            this.paidAmountColumn.Increment = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.paidAmountColumn.Maximum = new decimal(new int[] {
-            -727379968,
-            232,
-            0,
-            0});
-            this.paidAmountColumn.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.paidAmountColumn.Name = "paidAmountColumn";
-            this.paidAmountColumn.ReadOnly = true;
-            this.paidAmountColumn.ThousandsSeparator = true;
-            this.paidAmountColumn.Width = 50;
-            // 
-            // paymentTypeColumn
-            // 
-            this.paymentTypeColumn.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.paymentTypeColumn.DropDownWidth = 121;
-            this.paymentTypeColumn.HeaderText = "Payment Type";
-            this.paymentTypeColumn.Name = "paymentTypeColumn";
-            this.paymentTypeColumn.Width = 60;
-            // 
-            // paymentAmountColumn
-            // 
-            this.paymentAmountColumn.DecimalPlaces = 2;
-            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle27.NullValue = "0";
-            this.paymentAmountColumn.DefaultCellStyle = dataGridViewCellStyle27;
-            this.paymentAmountColumn.HeaderText = "Payment Amount";
-            this.paymentAmountColumn.Increment = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.paymentAmountColumn.Maximum = new decimal(new int[] {
-            -727379968,
-            232,
-            0,
-            0});
-            this.paymentAmountColumn.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.paymentAmountColumn.Name = "paymentAmountColumn";
-            this.paymentAmountColumn.ThousandsSeparator = true;
-            this.paymentAmountColumn.Width = 60;
-            // 
-            // docnoColumn
-            // 
-            this.docnoColumn.HeaderText = "Doc. Number";
-            this.docnoColumn.Name = "docnoColumn";
-            this.docnoColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.docnoColumn.Width = 60;
-            // 
-            // docdateColumn
-            // 
-            this.docdateColumn.CalendarTodayDate = new System.DateTime(2011, 8, 26, 0, 0, 0, 0);
-            this.docdateColumn.Checked = false;
-            this.docdateColumn.CustomFormat = "dd-MM-yyyy";
-            this.docdateColumn.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.docdateColumn.HeaderText = "Doc. Date";
-            this.docdateColumn.Name = "docdateColumn";
-            this.docdateColumn.Width = 60;
-            // 
-            // noteColumn
-            // 
-            this.noteColumn.HeaderText = "Note";
-            this.noteColumn.Name = "noteColumn";
-            this.noteColumn.Width = 50;
-            // 
-            // bankColumn
-            // 
-            this.bankColumn.DropDownWidth = 121;
-            this.bankColumn.HeaderText = "Bank";
-            this.bankColumn.Name = "bankColumn";
-            this.bankColumn.Width = 50;
-            // 
-            // toolStripButtonOutstandingInvoice
-            // 
-            this.toolStripButtonOutstandingInvoice.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonOutstandingInvoice.Image")));
-            this.toolStripButtonOutstandingInvoice.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonOutstandingInvoice.Name = "toolStripButtonOutstandingInvoice";
-            this.toolStripButtonOutstandingInvoice.Size = new System.Drawing.Size(103, 22);
-            this.toolStripButtonOutstandingInvoice.Text = "Search Ost Inv.";
-            this.toolStripButtonOutstandingInvoice.Click += new System.EventHandler(this.toolStripButtonOutstandingInvoice_Click);
             // 
             // PaymentForm
             // 

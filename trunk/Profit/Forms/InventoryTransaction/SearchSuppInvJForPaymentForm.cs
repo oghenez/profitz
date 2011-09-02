@@ -18,17 +18,19 @@ namespace Profit
         SupplierInvoiceJournalRepository r_po = (SupplierInvoiceJournalRepository)RepositoryFactory.GetInstance().GetJournalRepository(RepositoryFactory.SUPPLIERINVOICE_JOURNAL_REPOSITORY);
         public IList RESULT = new ArrayList();
         User m_user;
-        int m_supplierID;
+        Supplier m_supplierID;
         DateTime m_trDate;
+        Currency m_ccy;
 
-        public SearchSuppInvJForPaymentForm(int supplier, IList added, User user, DateTime trDate)
+        public SearchSuppInvJForPaymentForm(Currency ccy, Supplier supplier, IList added, User user, DateTime trDate)
         {
             InitializeComponent();
             m_user = user;
             m_trDate = trDate;
             m_supplierID = supplier;
             m_listAdded = added;
-            IList records = r_po.FindSIJournalItemlistForPayment("", supplier,m_trDate, added );
+            m_ccy = ccy;
+            IList records = r_po.FindSIJournalItemlistForPayment("", m_ccy.ID, supplier.ID,m_trDate, added );
             loadResult(records);
         }
 
@@ -36,6 +38,8 @@ namespace Profit
         {
             foreach (SupplierInvoiceJournalItem d in records)
             {
+                d.VENDOR = m_supplierID;
+                d.CURRENCY = m_ccy;
                 int row = gridData.Rows.Add();
                 gridData[checkColumn.Index, row].Value = false;
                 gridData[purchaseorderNoColumn.Index, row].Value = d.EVENT_JOURNAL.CODE;
@@ -44,7 +48,9 @@ namespace Profit
                 //gridData[dueDateColumn.Index, row].Value = ((GoodReceiveNote)d.EVENT).DUE_DATE.ToString("dd-MM-yyyy");
                // gridData[codeColumn.Index, row].Value = d.PART.CODE;
                 //gridData[nameColumn.Index, row].Value = d.PART.NAME;
+                gridData[ccyColumn.Index, row].Value = d.CURRENCY.CODE;
                 gridData[qtyColumn.Index, row].Value = d.OUTSTANDING_AMOUNT;
+                gridData[supplierColumn.Index, row].Value = d.VENDOR.NAME;
                 //gridData[unitColumn.Index, row].Value = d.PART.UNIT.CODE;
                 //gridData[warehouseColumn.Index, row].Value = d.WAREHOUSE.CODE;
                 gridData.Rows[row].Tag = d;
@@ -64,7 +70,7 @@ namespace Profit
             {
                 this.Cursor = Cursors.WaitCursor;
                 gridData.Rows.Clear();
-                IList records = r_po.FindSIJournalItemlistForPayment(searchText.Text.Trim(), m_supplierID, m_trDate, m_listAdded);
+                IList records = r_po.FindSIJournalItemlistForPayment(searchText.Text.Trim(), m_ccy.ID, m_supplierID.ID, m_trDate, m_listAdded);
                 loadResult(records);
                 this.Cursor = Cursors.Default;
             }

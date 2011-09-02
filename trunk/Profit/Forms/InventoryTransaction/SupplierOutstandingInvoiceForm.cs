@@ -417,6 +417,8 @@ namespace Profit
             employeeKryptonComboBox.Enabled = enable;
             notesKryptonTextBox.ReadOnly = !enable;
             supplierkryptonComboBox.Enabled = enable;
+            currencyKryptonComboBox.Enabled = enable;
+
             itemsDataGrid.AllowUserToDeleteRows = enable;
             itemsDataGrid.AllowUserToAddRows = enable;
             invoiceNoColumn.ReadOnly = !enable;
