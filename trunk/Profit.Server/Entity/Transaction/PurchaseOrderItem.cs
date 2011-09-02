@@ -22,6 +22,7 @@ namespace Profit.Server
         public AgainstStatus AGAINST_GRN_STATUS = AgainstStatus.Open;
         public double OUTSTANDING_AMOUNT_TO_GRN = 0;
         public double RECEIVED_AMOUNT = 0;
+        public double PRICE_IN_SMALLEST_UNIT = 0;
 
         public PurchaseOrderItem() : base() { }
         public PurchaseOrderItem(int ID) : base(ID) { }
@@ -85,10 +86,11 @@ namespace Profit.Server
                     poi_discabc,
                     poi_againstgrnstatus,
                     poi_outstandingamounttogrn,
-                    poi_receivedamount
+                    poi_receivedamount,
+                    poi_priceinsmallestunit
                 ) 
                 VALUES ({0},{1},{2},{3},{4},'{5}',{6},{7},{8},{9},{10},{11},{12},'{13}',{14},
-                    {15},{16},'{17}','{18}',{19},{20})",
+                    {15},{16},'{17}','{18}',{19},{20},{21})",
                 EVENT.ID,
                 PART.ID,
                 WAREHOUSE.ID,
@@ -109,7 +111,8 @@ namespace Profit.Server
                 DISC_ABC,
                 AGAINST_GRN_STATUS.ToString(),
                  GetAmountInSmallestUnit(),//OUTSTANDING_AMOUNT_TO_GRN,
-                0//RECEIVED_AMOUNT
+                0,//RECEIVED_AMOUNT,
+                PRICE / GetAmountInSmallestUnit()
                 );
         }
         public override string GetUpdateSQL()
@@ -135,8 +138,9 @@ namespace Profit.Server
                     poi_discabc = '{17}',
                     poi_againstgrnstatus = '{18}',
                     poi_outstandingamounttogrn = {19},
-                    poi_receivedamount = {20}
-                where poi_id = {21}",
+                    poi_receivedamount = {20},
+                    poi_priceinsmallestunit = {21}
+                where poi_id = {22}",
                 EVENT.ID,
                 PART.ID,
                 WAREHOUSE.ID,
@@ -158,6 +162,7 @@ namespace Profit.Server
                 AGAINST_GRN_STATUS.ToString(),
                 GetAmountInSmallestUnit(),
                 RECEIVED_AMOUNT,
+                PRICE / GetAmountInSmallestUnit(),
                 ID);
         }
         public static PurchaseOrderItem TransformReader(OdbcDataReader aReader)
@@ -189,6 +194,7 @@ namespace Profit.Server
                 transaction.AGAINST_GRN_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), aReader["poi_againstgrnstatus"].ToString());
                 transaction.OUTSTANDING_AMOUNT_TO_GRN = Convert.ToDouble(Convert.ToInt32(aReader["poi_outstandingamounttogrn"]));
                 transaction.RECEIVED_AMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["poi_receivedamount"]));
+                transaction.PRICE_IN_SMALLEST_UNIT = Convert.ToDouble(Convert.ToInt32(aReader["poi_priceinsmallestunit"]));
             }
             return transaction;
         }
@@ -220,6 +226,7 @@ namespace Profit.Server
                 transaction.AGAINST_GRN_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), aReader["poi_againstgrnstatus"].ToString());
                 transaction.OUTSTANDING_AMOUNT_TO_GRN = Convert.ToDouble(Convert.ToInt32(aReader["poi_outstandingamounttogrn"]));
                 transaction.RECEIVED_AMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["poi_receivedamount"]));
+                transaction.PRICE_IN_SMALLEST_UNIT = Convert.ToDouble(Convert.ToInt32(aReader["poi_priceinsmallestunit"]));
                 result.Add(transaction);
             }
             return result;

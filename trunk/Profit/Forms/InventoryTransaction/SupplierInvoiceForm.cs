@@ -836,11 +836,12 @@ namespace Profit
                     itemsDataGrid[nameColumn.Index, row].Value = p.NAME;
                     itemsDataGrid[QtyColumn.Index, row].Value = item.OUTSTANDING_AMOUNT_TO_PR;
                     p.UNIT = (Unit)r_unit.GetById(item.UNIT);
-                    //itemsDataGrid[unitColumn.Index, row].Value = p.UNIT.ToString();
-                    itemsDataGrid[unitColumn.Index, row].Value = item.UNIT.ToString();
-                    if (item.UNIT.ID == item.PO_ITEM.UNIT.ID)
-                    {
-                        itemsDataGrid[priceColumn.Index, row].Value = item.PO_ITEM != null ? item.PO_ITEM.PRICE : 0d;
+                    itemsDataGrid[unitColumn.Index, row].Value = p.UNIT.ToString();
+                    //itemsDataGrid[unitColumn.Index, row].Value = item.UNIT.ToString();
+                   // if (item.UNIT.ID == item.PO_ITEM.UNIT.ID)
+                    //{
+                        //itemsDataGrid[priceColumn.Index, row].Value = item.PO_ITEM != null ? item.PO_ITEM.PRICE : 0d;
+                        itemsDataGrid[priceColumn.Index, row].Value = item.PO_ITEM != null ? item.PO_ITEM.PRICE_IN_SMALLEST_UNIT : 0d;
                         itemsDataGrid[discpercentColumn.Index, row].Value = item.PO_ITEM != null ? item.PO_ITEM.DISC_PERCENT : 0;
                         itemsDataGrid[discAmountColumn.Index, row].Value = item.PO_ITEM != null ? item.PO_ITEM.DISC_AMOUNT : 0d;
                         itemsDataGrid[totalDiscColumn.Index, row].Value = item.PO_ITEM != null ? item.PO_ITEM.TOTAL_DISCOUNT : 0d;
@@ -848,7 +849,7 @@ namespace Profit
                         itemsDataGrid[discabcColumn.Index, row].Value = item.PO_ITEM != null ? item.PO_ITEM.DISC_ABC : "";
                         itemsDataGrid[totalAmountColumn.Index, row].Value = item.PO_ITEM != null ? item.PO_ITEM.SUBTOTAL : 0d;
                         itemsDataGrid[warehouseColumn.Index, row].Value = r_warehouse.GetById(item.WAREHOUSE).ToString();
-                    }
+                   // }
                     updateSubtotal(row);
                 }
             }

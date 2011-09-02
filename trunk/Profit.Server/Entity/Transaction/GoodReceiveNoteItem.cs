@@ -248,7 +248,7 @@ namespace Profit.Server
         }
         public static string GetOutstandingReturnSQL(int id)
         {
-            return String.Format("SELECT grni_againstprstatus from table_goodreceivenoteitem where grni_id = {0}", id);
+            return String.Format("SELECT grni_outstandingamtpr from table_goodreceivenoteitem where grni_id = {0}", id);
         }
         public static string GetReturnSQL(int id)
         {

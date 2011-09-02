@@ -63,12 +63,14 @@ namespace Profit
                 int count = 0;
                 foreach (GoodReceiveNoteItem itm in m_poItems)
                 {
+                     itm.PART.UNIT_CONVERSION_LIST= r_part.GetUnitConversions(itm.PART.ID);
                     if (count == 0)
                     {
                         itemsDataGrid[scanColumn.Index, e.RowIndex].Value = itm.EVENT.CODE;
                         itemsDataGrid[codeColumn.Index, e.RowIndex].Value = itm.PART.CODE;
                         itemsDataGrid[nameColumn.Index, e.RowIndex].Value = itm.PART.NAME;
-                        itemsDataGrid[OutstandingPOColumn.Index, e.RowIndex].Value = itm.OUTSTANDING_AMOUNT_TO_PR;
+                        itemsDataGrid[grnQtyColumn.Index, e.RowIndex].Value = itm.GetAmountInSmallestUnit();
+                        itemsDataGrid[OutstandingPOColumn.Index, e.RowIndex].Value = itm.RETURNED_AMOUNT;
                         itemsDataGrid[OutstandingunitColumn.Index, e.RowIndex].Value = itm.PART.UNIT.CODE;
                         itemsDataGrid[QtyColumn.Index, e.RowIndex].Value = 0;
                         itemsDataGrid[unitColumn.Index, e.RowIndex].Value = itm.UNIT.CODE;
@@ -83,7 +85,8 @@ namespace Profit
                         itemsDataGrid[scanColumn.Index, row].Value = itm.EVENT.CODE;
                         itemsDataGrid[codeColumn.Index, row].Value = itm.PART.CODE;
                         itemsDataGrid[nameColumn.Index, row].Value = itm.PART.NAME;
-                        itemsDataGrid[OutstandingPOColumn.Index, row].Value = itm.OUTSTANDING_AMOUNT_TO_PR;
+                        itemsDataGrid[grnQtyColumn.Index, e.RowIndex].Value = itm.GetAmountInSmallestUnit();
+                        itemsDataGrid[OutstandingPOColumn.Index, row].Value = itm.RETURNED_AMOUNT;
                         itemsDataGrid[OutstandingunitColumn.Index, row].Value = itm.PART.UNIT.CODE;
                         itemsDataGrid[QtyColumn.Index, row].Value = 0;
                         itemsDataGrid[unitColumn.Index, row].Value = itm.UNIT.CODE;
@@ -162,13 +165,13 @@ namespace Profit
                 sample.UNIT = u;
                 sample.QYTAMOUNT = Convert.ToDouble(e.FormattedValue);
                 double qty = sample.GetAmountInSmallestUnit();
-                double rest = pi.OUTSTANDING_AMOUNT_TO_PR - qty;
+                double rest = r_grn.GetOutstandingReturned(pi.ID) - qty;
                 if (rest < 0)
                 {
                     e.Cancel = true;
                     itemsDataGrid.Rows[e.RowIndex].ErrorText = "Quantity exceed outstanding quantity";
                 }
-                itemsDataGrid[OutstandingPOColumn.Index, e.RowIndex].Value = rest;
+               // itemsDataGrid[OutstandingPOColumn.Index, e.RowIndex].Value = r_grn.GetOutstandingReturned(pi.ID);
             }
             if (unitColumn.Index == e.ColumnIndex)
             {
@@ -184,13 +187,13 @@ namespace Profit
                 sample.UNIT = u;
                 sample.QYTAMOUNT = Convert.ToDouble(itemsDataGrid[QtyColumn.Index, e.RowIndex].Value);
                 double qty = sample.GetAmountInSmallestUnit();
-                double rest = pi.OUTSTANDING_AMOUNT_TO_PR - qty;
+                double rest = r_grn.GetOutstandingReturned(pi.ID) - qty;
                 if (rest < 0)
                 {
                     e.Cancel = true;
                     itemsDataGrid.Rows[e.RowIndex].ErrorText = "Quantity exceed outstanding quantity";
                 }
-                itemsDataGrid[OutstandingPOColumn.Index, e.RowIndex].Value = rest;
+                //itemsDataGrid[OutstandingPOColumn.Index, e.RowIndex].Value = rest;
             }
         }
         private void InitializeDataSource()
@@ -230,6 +233,12 @@ namespace Profit
                 }
                 setEnableForm(false);
                 setEditMode(EditMode.View);
+                for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
+                {
+                    GoodReceiveNoteItem poi = (GoodReceiveNoteItem)itemsDataGrid[scanColumn.Index, i].Tag;
+                    if (poi == null) continue;
+                    itemsDataGrid[OutstandingPOColumn.Index, i].Value = r_grn.GetReturned(poi.ID);
+                }
             }
             catch (Exception x)
             {
@@ -478,6 +487,7 @@ namespace Profit
                 itemsDataGrid[warehouseColumn.Index, i].Value = r_warehouse.GetById(item.WAREHOUSE).ToString();
                 itemsDataGrid[notesColumn.Index, i].Value = item.NOTES;
                 itemsDataGrid[unitColumn.Index, i].Value = item.UNIT.ToString(); ;
+                itemsDataGrid[grnQtyColumn.Index, i].Value = item.GRN_ITEM.QYTAMOUNT;
                 itemsDataGrid[OutstandingPOColumn.Index, i].Value = item.GRN_ITEM.OUTSTANDING_AMOUNT_TO_PR;
                 itemsDataGrid[OutstandingunitColumn.Index, i].Value = item.GRN_ITEM.PART.UNIT.CODE;
 
