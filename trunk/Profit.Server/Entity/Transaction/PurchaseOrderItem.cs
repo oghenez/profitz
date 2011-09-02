@@ -112,7 +112,7 @@ namespace Profit.Server
                 AGAINST_GRN_STATUS.ToString(),
                  GetAmountInSmallestUnit(),//OUTSTANDING_AMOUNT_TO_GRN,
                 0,//RECEIVED_AMOUNT,
-                PRICE / GetAmountInSmallestUnit()
+                PRICE / GetAmountInSmallestUnit()-----kalau Unit lain baru dibagi
                 );
         }
         public override string GetUpdateSQL()
