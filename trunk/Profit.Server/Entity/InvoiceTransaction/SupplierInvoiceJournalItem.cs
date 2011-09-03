@@ -146,7 +146,7 @@ namespace Profit.Server
                PAID_AMOUNT,
                 ID);
         }
-        public static SupplierInvoiceJournalItem TransformReader(OdbcDataReader aReader)
+        public static SupplierInvoiceJournalItem TransformReader(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             SupplierInvoiceJournalItem transaction = null;
             if (aReader.HasRows)
@@ -177,7 +177,7 @@ namespace Profit.Server
             }
             return transaction;
         }
-        public static IList TransformReaderList(OdbcDataReader aReader)
+        public static IList TransformReaderList(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())

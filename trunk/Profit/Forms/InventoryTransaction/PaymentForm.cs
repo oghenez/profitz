@@ -639,6 +639,8 @@ namespace Profit
         {
             Supplier em = (Supplier)supplierkryptonComboBox.SelectedItem;
             supplierKryptonTextBox.Text = em == null ? "" : em.NAME;
+            contactPersonKryptonTextBox.Text = em == null ? "" : em.CONTACT;
+            addressKryptonTextBox.Text = em == null ? "" : em.ADDRESS;
             itemsDataGrid.Rows.Clear();
         }
 
@@ -739,6 +741,14 @@ namespace Profit
         {
             if (m_editMode == EditMode.View) return;
             itemsDataGrid.Rows.Clear();
+        }
+
+        private void searchToolStripTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                searchToolStripButton_Click(null, null);
+            }
         }
     }
 }

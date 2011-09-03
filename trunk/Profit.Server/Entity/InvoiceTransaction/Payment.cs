@@ -94,7 +94,7 @@ namespace Profit.Server
                 EMPLOYEE.ID,
                 ID);
         }
-        public static Payment TransformReader(OdbcDataReader r)
+        public static Payment TransformReader(MySql.Data.MySqlClient.MySqlDataReader r)
         {
             Payment tr = null;
             if (r.HasRows)
@@ -122,7 +122,7 @@ namespace Profit.Server
             }
             return tr;
         }
-        public static IList TransformReaderList(OdbcDataReader r)
+        public static IList TransformReaderList(MySql.Data.MySqlClient.MySqlDataReader r)
         {
             IList result = new ArrayList();
             while (r.Read())

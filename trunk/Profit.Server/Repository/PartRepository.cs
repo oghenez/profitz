@@ -19,8 +19,8 @@ namespace Profit.Server
         public override void Save(IEntity en)
         {
             OpenConnection();
-            OdbcTransaction trans = m_connection.BeginTransaction();
-            OdbcCommand aCommand = new OdbcCommand();
+            MySql.Data.MySqlClient.MySqlTransaction trans = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand();
             aCommand.Connection = m_connection;
             aCommand.Transaction = trans;
             Part e = (Part)en;
@@ -69,8 +69,8 @@ namespace Profit.Server
         public override void Update(IEntity en)
         {
             OpenConnection();
-            OdbcTransaction trans = m_connection.BeginTransaction();
-            OdbcCommand aCommand = new OdbcCommand();
+            MySql.Data.MySqlClient.MySqlTransaction trans = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand();
             aCommand.Connection = m_connection;
             aCommand.Transaction = trans;
             try
@@ -81,7 +81,7 @@ namespace Profit.Server
                 aCommand.ExecuteNonQuery();
                 //Update base unit---------------------------
                 aCommand.CommandText = UnitConversion.GetByPartAndUnitConIDSQL(e.ID, e.UNIT.ID);
-                OdbcDataReader r = aCommand.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlDataReader r = aCommand.ExecuteReader();
                 UnitConversion uc = UnitConversion.GetUnitConversion(r);
                 r.Close();
                 if (uc == null)
@@ -145,8 +145,8 @@ namespace Profit.Server
             try
             {
                 OpenConnection();
-                OdbcCommand aCommand = new OdbcCommand(UnitConversion.GetAllByPartSQL(partID), m_connection);
-                OdbcDataReader aReader = aCommand.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand(UnitConversion.GetAllByPartSQL(partID), m_connection);
+                MySql.Data.MySqlClient.MySqlDataReader aReader = aCommand.ExecuteReader();
                 IList a = UnitConversion.GetAllStatic(aReader);
                 //if(a.Contains(
                 return a;
@@ -163,15 +163,15 @@ namespace Profit.Server
         public void Import(string s)
         {
             OpenConnection();
-            OdbcCommand aCommand = new OdbcCommand();
+            MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand();
             aCommand.Connection= m_connection;
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             aCommand.Transaction = trc;
             try
             {
                 string[] p = s.Split(',');
                 aCommand.CommandText = Part.GetByCodeSQLStatic(p[0]);
-                OdbcDataReader re = aCommand.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlDataReader re = aCommand.ExecuteReader();
                 Part fpart = Part.GetPart(re);
                 re.Close();
                 if (fpart != null) { trc.Rollback(); return; }
@@ -198,12 +198,12 @@ namespace Profit.Server
                 throw x;
             }
         }
-        private Unit GetUnit(OdbcCommand aCommand, string code, string name)
+        private Unit GetUnit(MySql.Data.MySqlClient.MySqlCommand aCommand, string code, string name)
         {
-            //OdbcCommand aCommand = new OdbcCommand();
+            //MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand();
             aCommand.Connection = m_connection;
             aCommand.CommandText = Unit.GetByCodeSQLStatic(code.Trim());
-            OdbcDataReader r = aCommand.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = aCommand.ExecuteReader();
             Unit u = Unit.GetUnit(r);
             r.Close();
             if (u == null)
@@ -218,12 +218,12 @@ namespace Profit.Server
             }
             return u;
         }
-        private PartGroup GetPartGroup(OdbcCommand aCommand, string code, string name)
+        private PartGroup GetPartGroup(MySql.Data.MySqlClient.MySqlCommand aCommand, string code, string name)
         {
-            //OdbcCommand aCommand = new OdbcCommand();
+            //MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand();
             aCommand.Connection = m_connection;
             aCommand.CommandText = PartGroup.GetByCodeSQLStatic(code.Trim());
-            OdbcDataReader r = aCommand.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = aCommand.ExecuteReader();
             PartGroup u = PartGroup.GetPartGroup(r);
             r.Close();
             if (u == null)
@@ -238,12 +238,12 @@ namespace Profit.Server
             }
             return u;
         }
-        private Currency GetCurrency(OdbcCommand aCommand, string code, string name)
+        private Currency GetCurrency(MySql.Data.MySqlClient.MySqlCommand aCommand, string code, string name)
         {
-            //OdbcCommand aCommand = new OdbcCommand();
+            //MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand();
             aCommand.Connection = m_connection;
             aCommand.CommandText = Currency.GetByCodeSQLStatic(code.Trim());
-            OdbcDataReader r = aCommand.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = aCommand.ExecuteReader();
             Currency u = Currency.GetCurrency(r);
             r.Close();
             if (u == null)
@@ -258,12 +258,12 @@ namespace Profit.Server
             }
             return u;
         }
-        private PartCategory GetPartCategory(OdbcCommand aCommand, string code, string name)
+        private PartCategory GetPartCategory(MySql.Data.MySqlClient.MySqlCommand aCommand, string code, string name)
         {
-            //OdbcCommand aCommand = new OdbcCommand();
+            //MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand();
             aCommand.Connection = m_connection;
             aCommand.CommandText = PartCategory.GetByCodeSQLStatic(code.Trim());
-            OdbcDataReader r = aCommand.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = aCommand.ExecuteReader();
             PartCategory u = PartCategory.GetPartCategory(r);
             r.Close();
             if (u == null)
@@ -283,10 +283,10 @@ namespace Profit.Server
             try
             {
                 OpenConnection();
-                OdbcCommand aCommand = new OdbcCommand(Part.GetSearchSQL(search), m_connection);
-                OdbcDataReader aReader = aCommand.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand(Part.GetSearchSQL(search), m_connection);
+                MySql.Data.MySqlClient.MySqlDataReader aReader = aCommand.ExecuteReader();
                 //DataSet ds = new DataSet();
-                //OdbcDataAdapter dc = new OdbcDataAdapter(Part.GetSearchSQL(search), m_connection);
+                //MySql.Data.MySqlClient.MySqlDataAdapter dc = new MySql.Data.MySqlClient.MySqlDataAdapter(Part.GetSearchSQL(search), m_connection);
                 //dc.Fill(ds);
                 IList a = Part.GetAllStatic(aReader);
                 aReader.Close();
@@ -307,8 +307,8 @@ namespace Profit.Server
             try
             {
                 OpenConnection();
-                OdbcCommand aCommand = new OdbcCommand(UnitConversion.GetAllByPartSQL(partID), m_connection);
-                OdbcDataReader aReader = aCommand.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand(UnitConversion.GetAllByPartSQL(partID), m_connection);
+                MySql.Data.MySqlClient.MySqlDataReader aReader = aCommand.ExecuteReader();
                 IList a = UnitConversion.GetAllStatic(aReader);
                 aReader.Close();
                 IList result = new ArrayList();
@@ -341,19 +341,19 @@ namespace Profit.Server
         }
 
         //For transaction
-        public static Part GetByID(OdbcCommand cmd, int id)
+        public static Part GetByID(MySql.Data.MySqlClient.MySqlCommand cmd, int id)
         {
             cmd.CommandText = Part.GetByIDSQLStatic(id);
-            OdbcDataReader r =  cmd.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r =  cmd.ExecuteReader();
             Part result = Part.GetPart(r);
             r.Close();
             result.UNIT_CONVERSION_LIST = PartRepository.GetUnitConversionsStatic(cmd, id);
             return result;
         }
-        public static IList GetUnitConversionsStatic(OdbcCommand cmd, int partID)
+        public static IList GetUnitConversionsStatic(MySql.Data.MySqlClient.MySqlCommand cmd, int partID)
         {
             cmd.CommandText = UnitConversion.GetAllByPartSQL(partID);
-            OdbcDataReader aReader = cmd.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader aReader = cmd.ExecuteReader();
             IList a = UnitConversion.GetAllStatic(aReader);
             aReader.Close();
             return a;
@@ -362,11 +362,11 @@ namespace Profit.Server
         {
             OpenConnection();
             StockCardInfo result = new StockCardInfo();
-            OdbcCommand cmd = new OdbcCommand();
+            MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand();
             cmd.Connection = m_connection;
             Period p = PeriodRepository.FindCurrentPeriod(cmd);
             cmd.CommandText = StockCard.FindByPartPeriod(partID, p.ID);
-            OdbcDataReader r = cmd.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             IList stockcards = StockCard.TransforReaderList(r);
             r.Close();
             foreach (StockCard sc in stockcards)
@@ -433,12 +433,12 @@ namespace Profit.Server
         //-------------
         //public void UpdatePart()
         //{
-        //    OdbcCommand cmd = new OdbcCommand();
+        //    MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand();
         //    cmd.Connection = m_connection;
         //    m_connection.Open();
         //    cmd.CommandText = m_entity.GetAllSQL();
             
-        //    OdbcDataReader r = cmd.ExecuteReader();
+        //    MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
         //    IList result = new ArrayList();
         //    while (r.Read())
         //    {

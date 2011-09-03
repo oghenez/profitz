@@ -74,6 +74,16 @@
             this.employeeKryptonComboBox = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.dateKryptonDateTimePicker = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
             this.itemsDataGrid = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.scanColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grnQtyColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.OutstandingPOColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.OutstandingunitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QtyColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.unitColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
+            this.warehouseColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
+            this.notesColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.dataGridContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.fieldChooserTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBoxCode = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -86,16 +96,6 @@
             this.buttonSpecAny5 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.buttonSpecAny6 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.kryptonContextMenuItems1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
-            this.scanColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grnQtyColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
-            this.OutstandingPOColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
-            this.OutstandingunitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QtyColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
-            this.unitColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
-            this.warehouseColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
-            this.notesColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -199,6 +199,7 @@
             this.searchToolStripTextBox.Name = "searchToolStripTextBox";
             this.searchToolStripTextBox.Size = new System.Drawing.Size(150, 25);
             this.searchToolStripTextBox.ToolTipText = "Find Stock Taking by Code, Employee";
+            this.searchToolStripTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchToolStripTextBox_KeyDown);
             // 
             // searchToolStripButton
             // 
@@ -291,7 +292,7 @@
             // 
             // kryptonLabel2
             // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(9, 75);
+            this.kryptonLabel2.Location = new System.Drawing.Point(5, 75);
             this.kryptonLabel2.Name = "kryptonLabel2";
             this.kryptonLabel2.Size = new System.Drawing.Size(68, 19);
             this.kryptonLabel2.TabIndex = 62;
@@ -330,7 +331,7 @@
             // 
             // kryptonLabel16
             // 
-            this.kryptonLabel16.Location = new System.Drawing.Point(370, 49);
+            this.kryptonLabel16.Location = new System.Drawing.Point(367, 49);
             this.kryptonLabel16.Name = "kryptonLabel16";
             this.kryptonLabel16.Size = new System.Drawing.Size(56, 19);
             this.kryptonLabel16.TabIndex = 58;
@@ -338,7 +339,7 @@
             // 
             // kryptonLabel15
             // 
-            this.kryptonLabel15.Location = new System.Drawing.Point(335, 28);
+            this.kryptonLabel15.Location = new System.Drawing.Point(331, 28);
             this.kryptonLabel15.Name = "kryptonLabel15";
             this.kryptonLabel15.Size = new System.Drawing.Size(92, 19);
             this.kryptonLabel15.TabIndex = 57;
@@ -366,7 +367,7 @@
             // 
             // kryptonLabel13
             // 
-            this.kryptonLabel13.Location = new System.Drawing.Point(370, 5);
+            this.kryptonLabel13.Location = new System.Drawing.Point(366, 5);
             this.kryptonLabel13.Name = "kryptonLabel13";
             this.kryptonLabel13.Size = new System.Drawing.Size(57, 19);
             this.kryptonLabel13.TabIndex = 45;
@@ -410,7 +411,7 @@
             // 
             // kryptonLabel4
             // 
-            this.kryptonLabel4.Location = new System.Drawing.Point(38, 29);
+            this.kryptonLabel4.Location = new System.Drawing.Point(34, 29);
             this.kryptonLabel4.Name = "kryptonLabel4";
             this.kryptonLabel4.Size = new System.Drawing.Size(39, 19);
             this.kryptonLabel4.TabIndex = 12;
@@ -418,7 +419,7 @@
             // 
             // kryptonLabel3
             // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(9, 52);
+            this.kryptonLabel3.Location = new System.Drawing.Point(5, 52);
             this.kryptonLabel3.Name = "kryptonLabel3";
             this.kryptonLabel3.Size = new System.Drawing.Size(68, 19);
             this.kryptonLabel3.TabIndex = 11;
@@ -480,71 +481,6 @@
             this.itemsDataGrid.Size = new System.Drawing.Size(1005, 215);
             this.itemsDataGrid.TabIndex = 4;
             this.itemsDataGrid.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.itemsDataGrid_RowsAdded);
-            // 
-            // dataGridContextMenuStrip
-            // 
-            this.dataGridContextMenuStrip.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.dataGridContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fieldChooserTestToolStripMenuItem});
-            this.dataGridContextMenuStrip.Name = "dataGridContextMenuStrip";
-            this.dataGridContextMenuStrip.Size = new System.Drawing.Size(153, 26);
-            // 
-            // fieldChooserTestToolStripMenuItem
-            // 
-            this.fieldChooserTestToolStripMenuItem.Name = "fieldChooserTestToolStripMenuItem";
-            this.fieldChooserTestToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.fieldChooserTestToolStripMenuItem.Text = "Field Chooser";
-            this.fieldChooserTestToolStripMenuItem.Click += new System.EventHandler(this.fieldChooserTestToolStripMenuItem_Click);
-            // 
-            // textBoxCode
-            // 
-            this.textBoxCode.Location = new System.Drawing.Point(79, 5);
-            this.textBoxCode.Name = "textBoxCode";
-            this.textBoxCode.Size = new System.Drawing.Size(154, 20);
-            this.textBoxCode.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxCode.TabIndex = 0;
-            // 
-            // kryptonLabel1
-            // 
-            this.kryptonLabel1.Location = new System.Drawing.Point(35, 5);
-            this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(42, 19);
-            this.kryptonLabel1.TabIndex = 0;
-            this.kryptonLabel1.Values.Text = "Code :";
-            // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
-            // buttonSpecAny1
-            // 
-            this.buttonSpecAny1.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Context;
-            this.buttonSpecAny1.UniqueName = "3ED14974C39D424AF483B15489413085";
-            // 
-            // buttonSpecAny2
-            // 
-            this.buttonSpecAny2.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Context;
-            this.buttonSpecAny2.UniqueName = "F6D098FF97AB48FB2A99BBB2D3AE16BB";
-            // 
-            // buttonSpecAny3
-            // 
-            this.buttonSpecAny3.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Previous;
-            this.buttonSpecAny3.UniqueName = "5FF9C97ECDF840FFA4AD11EAEA81925E";
-            // 
-            // buttonSpecAny4
-            // 
-            this.buttonSpecAny4.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Next;
-            this.buttonSpecAny4.UniqueName = "B56143FA8A234E7613B74670410D55F5";
-            // 
-            // buttonSpecAny5
-            // 
-            this.buttonSpecAny5.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Context;
-            this.buttonSpecAny5.UniqueName = "A78BD21009064A446EB0B46846D279AF";
-            // 
-            // buttonSpecAny6
-            // 
-            this.buttonSpecAny6.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
-            this.buttonSpecAny6.UniqueName = "95BED338EBB14361B2927C3CB003454A";
             // 
             // scanColumn
             // 
@@ -681,6 +617,71 @@
             this.notesColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.notesColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.notesColumn.Width = 100;
+            // 
+            // dataGridContextMenuStrip
+            // 
+            this.dataGridContextMenuStrip.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.dataGridContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fieldChooserTestToolStripMenuItem});
+            this.dataGridContextMenuStrip.Name = "dataGridContextMenuStrip";
+            this.dataGridContextMenuStrip.Size = new System.Drawing.Size(153, 26);
+            // 
+            // fieldChooserTestToolStripMenuItem
+            // 
+            this.fieldChooserTestToolStripMenuItem.Name = "fieldChooserTestToolStripMenuItem";
+            this.fieldChooserTestToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.fieldChooserTestToolStripMenuItem.Text = "Field Chooser";
+            this.fieldChooserTestToolStripMenuItem.Click += new System.EventHandler(this.fieldChooserTestToolStripMenuItem_Click);
+            // 
+            // textBoxCode
+            // 
+            this.textBoxCode.Location = new System.Drawing.Point(79, 5);
+            this.textBoxCode.Name = "textBoxCode";
+            this.textBoxCode.Size = new System.Drawing.Size(154, 20);
+            this.textBoxCode.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxCode.TabIndex = 0;
+            // 
+            // kryptonLabel1
+            // 
+            this.kryptonLabel1.Location = new System.Drawing.Point(31, 5);
+            this.kryptonLabel1.Name = "kryptonLabel1";
+            this.kryptonLabel1.Size = new System.Drawing.Size(42, 19);
+            this.kryptonLabel1.TabIndex = 0;
+            this.kryptonLabel1.Values.Text = "Code :";
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // buttonSpecAny1
+            // 
+            this.buttonSpecAny1.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Context;
+            this.buttonSpecAny1.UniqueName = "3ED14974C39D424AF483B15489413085";
+            // 
+            // buttonSpecAny2
+            // 
+            this.buttonSpecAny2.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Context;
+            this.buttonSpecAny2.UniqueName = "F6D098FF97AB48FB2A99BBB2D3AE16BB";
+            // 
+            // buttonSpecAny3
+            // 
+            this.buttonSpecAny3.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Previous;
+            this.buttonSpecAny3.UniqueName = "5FF9C97ECDF840FFA4AD11EAEA81925E";
+            // 
+            // buttonSpecAny4
+            // 
+            this.buttonSpecAny4.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Next;
+            this.buttonSpecAny4.UniqueName = "B56143FA8A234E7613B74670410D55F5";
+            // 
+            // buttonSpecAny5
+            // 
+            this.buttonSpecAny5.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Context;
+            this.buttonSpecAny5.UniqueName = "A78BD21009064A446EB0B46846D279AF";
+            // 
+            // buttonSpecAny6
+            // 
+            this.buttonSpecAny6.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
+            this.buttonSpecAny6.UniqueName = "95BED338EBB14361B2927C3CB003454A";
             // 
             // PurchaseReturnForm
             // 

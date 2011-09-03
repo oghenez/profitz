@@ -85,7 +85,7 @@ namespace Profit.Server
                 CUSTOMER == null ? 0 : CUSTOMER.ID,
                 ID);
         }
-        public static DeliveryOrder TransformReader(OdbcDataReader aReader)
+        public static DeliveryOrder TransformReader(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             DeliveryOrder transaction = null;
             if (aReader.HasRows)
@@ -106,7 +106,7 @@ namespace Profit.Server
             }
             return transaction;
         }
-        public static IList TransformReaderList(OdbcDataReader aReader)
+        public static IList TransformReaderList(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())

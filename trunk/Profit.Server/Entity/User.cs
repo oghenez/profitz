@@ -29,7 +29,7 @@ namespace Profit.Server
             ID = id;
             CODE = code;
         }
-        public IEntity Get(OdbcDataReader aReader)
+        public IEntity Get(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             User user = null;
             while (aReader.Read())
@@ -43,7 +43,7 @@ namespace Profit.Server
             }
             return user;
         }
-        public static User TransformReader(OdbcDataReader aReader)
+        public static User TransformReader(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             User user = null;
             Crypto m_crypto = new Crypto();
@@ -107,7 +107,7 @@ namespace Profit.Server
         {
             return String.Format(@"SELECT * FROM table_user p where concat(p.user_code, p.user_name) like '%{0}%'", find);
         }
-        public IList GetAll(OdbcDataReader aReader)
+        public IList GetAll(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())

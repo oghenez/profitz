@@ -24,7 +24,7 @@ namespace Profit.Server
             ID = id;
             CODE = code;
         }
-        public IEntity Get(OdbcDataReader aReader)
+        public IEntity Get(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             PartGroup partgroup = null;
             while (aReader.Read())
@@ -36,7 +36,7 @@ namespace Profit.Server
             }
             return partgroup;
         }
-        public static PartGroup GetPartGroup(OdbcDataReader aReader)
+        public static PartGroup GetPartGroup(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             PartGroup partgroup = null;
             while (aReader.Read())
@@ -91,7 +91,7 @@ namespace Profit.Server
         {
             return String.Format("select * from table_partgroup");
         }
-        public IList GetAll(OdbcDataReader aReader)
+        public IList GetAll(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())

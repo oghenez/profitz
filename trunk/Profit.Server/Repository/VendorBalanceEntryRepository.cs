@@ -9,26 +9,26 @@ namespace Profit.Server
 {
     public class VendorBalanceEntryRepository
     {
-        public static IList FindVendorBalanceEntryInfoPart(OdbcCommand cmd)
+        public static IList FindVendorBalanceEntryInfoPart(MySql.Data.MySqlClient.MySqlCommand cmd)
         {
             //string hql = String.Format("SELECT new PartDTO(p.Id, p.Code, p.Name) FROM {0} p", GetSubjectType().ToString());
            // IList result = HibernateTemplate.Find(hql);
             return null; ;
         }
-        public static void Delete(OdbcCommand cmd, VendorBalanceEntry sc)
+        public static void Delete(MySql.Data.MySqlClient.MySqlCommand cmd, VendorBalanceEntry sc)
         {
             cmd.CommandText = VendorBalanceEntry.DeleteSQL(sc.ID);
             cmd.ExecuteNonQuery();
         }
-        public static VendorBalanceEntry FindVendorBalanceEntryByEventItem(OdbcCommand cmd, int itemID, VendorBalanceEntryType scetype)
+        public static VendorBalanceEntry FindVendorBalanceEntryByEventItem(MySql.Data.MySqlClient.MySqlCommand cmd, int itemID, VendorBalanceEntryType scetype)
         {
             cmd.CommandText = VendorBalanceEntry.FindByEventJournalItem(itemID, scetype);
-            OdbcDataReader r = cmd.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             VendorBalanceEntry res = VendorBalanceEntry.TransformReader(r);
             r.Close();
             return res;
         }
-        public static void Save(OdbcCommand cmd, VendorBalanceEntry sce)
+        public static void Save(MySql.Data.MySqlClient.MySqlCommand cmd, VendorBalanceEntry sce)
         {
             if (sce.ID == 0)
             {

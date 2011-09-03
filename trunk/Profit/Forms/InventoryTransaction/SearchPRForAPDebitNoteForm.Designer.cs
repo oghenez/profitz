@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.CANCELkryptonButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.OKkryptonButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.gridData = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
@@ -40,7 +41,8 @@
             this.checkColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
             this.prNoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.prDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amountColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ccyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amountColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -74,6 +76,7 @@
             this.checkColumn,
             this.prNoColumn,
             this.prDateColumn,
+            this.ccyColumn,
             this.amountColumn});
             this.gridData.GridStyles.Style = ComponentFactory.Krypton.Toolkit.DataGridViewStyle.Mixed;
             this.gridData.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlClient;
@@ -162,11 +165,41 @@
             this.prDateColumn.Name = "prDateColumn";
             this.prDateColumn.ReadOnly = true;
             // 
+            // ccyColumn
+            // 
+            this.ccyColumn.HeaderText = "Ccy";
+            this.ccyColumn.Name = "ccyColumn";
+            this.ccyColumn.ReadOnly = true;
+            this.ccyColumn.Width = 50;
+            // 
             // amountColumn
             // 
+            this.amountColumn.DecimalPlaces = 2;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.NullValue = "0";
+            this.amountColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.amountColumn.HeaderText = "Amount";
+            this.amountColumn.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.amountColumn.Maximum = new decimal(new int[] {
+            1215752192,
+            23,
+            0,
+            0});
+            this.amountColumn.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             this.amountColumn.Name = "amountColumn";
             this.amountColumn.ReadOnly = true;
+            this.amountColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.amountColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.amountColumn.ThousandsSeparator = true;
+            this.amountColumn.Width = 100;
             // 
             // SearchPRForAPDebitNoteForm
             // 
@@ -203,6 +236,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn checkColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn prNoColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn prDateColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn amountColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ccyColumn;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn amountColumn;
     }
 }

@@ -45,7 +45,7 @@ namespace Profit.Server
         //}
         protected override void doSave(EventJournal e)
         {
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             try
             {
                 m_command.Transaction = trc;
@@ -85,7 +85,7 @@ namespace Profit.Server
         }
         protected override void doUpdate(EventJournal en)
         {
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             m_command.Transaction = trc;
             try
             {
@@ -121,7 +121,7 @@ namespace Profit.Server
         protected override void doDelete(EventJournal e)
         {
             SupplierOutStandingInvoice st = (SupplierOutStandingInvoice)e;
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             m_command.Transaction = trc;
             try
             {
@@ -149,7 +149,7 @@ namespace Profit.Server
         protected override EventJournal doGet(int ID)
         {
             m_command.CommandText = SupplierOutStandingInvoice.GetByIDSQL(ID);
-            OdbcDataReader r = m_command.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             SupplierOutStandingInvoice st = SupplierOutStandingInvoice.TransformReader(r);
             r.Close();
             m_command.CommandText = SupplierOutStandingInvoiceItem.GetByEventIDSQL(ID);
@@ -172,10 +172,10 @@ namespace Profit.Server
             m_command.CommandText = SupplierOutStandingInvoice.GetUpdateStatusSQL(e);
             m_command.ExecuteNonQuery();
         }
-        //public static SupplierOutStandingInvoiceItem FindGRNItem(OdbcCommand cmd, int grnIID)
+        //public static SupplierOutStandingInvoiceItem FindGRNItem(MySql.Data.MySqlClient.MySqlCommand cmd, int grnIID)
         //{
         //    cmd.CommandText = SupplierOutStandingInvoiceItem.FindByGrnItemIDSQL(grnIID);
-        //    OdbcDataReader r = cmd.ExecuteReader();
+        //    MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
         //    SupplierOutStandingInvoiceItem res = SupplierOutStandingInvoiceItem.TransformReader(r);
         //    r.Close();
         //    cmd.CommandText = SupplierOutStandingInvoice.GetByIDSQL(res.EVENT.ID);
@@ -190,7 +190,7 @@ namespace Profit.Server
             try
             {
                 m_command.CommandText = SupplierOutStandingInvoice.GetSearch(find);
-                OdbcDataReader r = m_command.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
                 IList rest = SupplierOutStandingInvoice.TransformReaderList(r);
                 r.Close();
                 return rest;
@@ -217,7 +217,7 @@ namespace Profit.Server
         public override EventJournal FindLastCodeAndTransactionDate(string codesample)
         {
             m_command.CommandText = SupplierOutStandingInvoice.FindLastCodeAndTransactionDate(codesample);
-            OdbcDataReader r = m_command.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             EventJournal e = SupplierOutStandingInvoice.TransformReader(r);
             r.Close();
             return e;
@@ -331,7 +331,7 @@ namespace Profit.Server
             string pois = poisSB.ToString();
             pois = notIn.Count > 0 ? pois.Substring(0, pois.Length - 1) : "";
             m_command.CommandText = SupplierOutStandingInvoiceItem.GetSearchForPayment(find, ccyID, supplier, pois, trdate);
-            OdbcDataReader r = m_command.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             IList result = SupplierOutStandingInvoiceItem.TransformReaderList(r);
             r.Close();
             foreach (SupplierOutStandingInvoiceItem t in result)
@@ -358,10 +358,10 @@ namespace Profit.Server
             }
             return result;
         }
-        internal static SupplierOutStandingInvoiceItem FindSOIItemlistForPayment(OdbcCommand cmd, int supinvItemID)
+        internal static SupplierOutStandingInvoiceItem FindSOIItemlistForPayment(MySql.Data.MySqlClient.MySqlCommand cmd, int supinvItemID)
         {
             cmd.CommandText = SupplierOutStandingInvoiceItem.GetByIDSQL(supinvItemID);
-            OdbcDataReader r = cmd.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             SupplierOutStandingInvoiceItem result = SupplierOutStandingInvoiceItem.TransformReader(r);
             r.Close();
             cmd.CommandText = SupplierOutStandingInvoice.GetByIDSQL(result.EVENT_JOURNAL.ID);
@@ -399,7 +399,7 @@ namespace Profit.Server
             double d = Convert.ToDouble(m_command.ExecuteScalar());
             return d;
         }
-        public static void UpdateAgainstStatus(OdbcCommand cmd, EventJournal e, ISupplierInvoiceJournalItem ei)
+        public static void UpdateAgainstStatus(MySql.Data.MySqlClient.MySqlCommand cmd, EventJournal e, ISupplierInvoiceJournalItem ei)
         {
             SupplierOutStandingInvoice po = (SupplierOutStandingInvoice)e;
             SupplierOutStandingInvoiceItem poi = (SupplierOutStandingInvoiceItem)ei;

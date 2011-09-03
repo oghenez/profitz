@@ -112,7 +112,7 @@ namespace Profit.Server
                 AGAINST_PAYMENT_STATUS.ToString(),
                 ID);
         }
-        public static SupplierOutStandingInvoice TransformReader(OdbcDataReader r)
+        public static SupplierOutStandingInvoice TransformReader(MySql.Data.MySqlClient.MySqlDataReader r)
         {
             SupplierOutStandingInvoice tr = null;
             if (r.HasRows)
@@ -140,7 +140,7 @@ namespace Profit.Server
             }
             return tr;
         }
-        public static IList TransformReaderList(OdbcDataReader r)
+        public static IList TransformReaderList(MySql.Data.MySqlClient.MySqlDataReader r)
         {
             IList result = new ArrayList();
             while (r.Read())

@@ -38,6 +38,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonHeader1 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
@@ -52,8 +54,6 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.postToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonPrint = new System.Windows.Forms.ToolStripButton();
-            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -90,6 +90,8 @@
             this.scanColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.codeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.poQtyColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.poUnitColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.OutstandingPOColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
             this.OutstandingunitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.QtyColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
@@ -133,8 +135,7 @@
             this.searchToolStripButton,
             this.toolStripSeparator2,
             this.postToolStripButton,
-            this.toolStripButtonPrint,
-            this.toolStripDropDownButton1});
+            this.toolStripButtonPrint});
             this.toolStrip1.Location = new System.Drawing.Point(0, 29);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1043, 25);
@@ -201,6 +202,7 @@
             this.searchToolStripTextBox.Name = "searchToolStripTextBox";
             this.searchToolStripTextBox.Size = new System.Drawing.Size(150, 25);
             this.searchToolStripTextBox.ToolTipText = "Find Stock Taking by Code, Employee";
+            this.searchToolStripTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchToolStripTextBox_KeyDown);
             // 
             // searchToolStripButton
             // 
@@ -232,25 +234,6 @@
             this.toolStripButtonPrint.Name = "toolStripButtonPrint";
             this.toolStripButtonPrint.Size = new System.Drawing.Size(51, 22);
             this.toolStripButtonPrint.Text = "Print";
-            // 
-            // toolStripDropDownButton1
-            // 
-            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.testToolStripMenuItem});
-            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
-            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(29, 22);
-            this.toolStripDropDownButton1.Text = "toolStripDropDownButton1";
-            // 
-            // testToolStripMenuItem
-            // 
-            this.testToolStripMenuItem.Checked = true;
-            this.testToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
-            this.testToolStripMenuItem.Text = "test";
             // 
             // kryptonPanel1
             // 
@@ -293,7 +276,7 @@
             // 
             // kryptonLabel2
             // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(9, 76);
+            this.kryptonLabel2.Location = new System.Drawing.Point(6, 76);
             this.kryptonLabel2.Name = "kryptonLabel2";
             this.kryptonLabel2.Size = new System.Drawing.Size(68, 19);
             this.kryptonLabel2.TabIndex = 58;
@@ -332,7 +315,7 @@
             // 
             // kryptonLabel16
             // 
-            this.kryptonLabel16.Location = new System.Drawing.Point(384, 50);
+            this.kryptonLabel16.Location = new System.Drawing.Point(382, 50);
             this.kryptonLabel16.Name = "kryptonLabel16";
             this.kryptonLabel16.Size = new System.Drawing.Size(56, 19);
             this.kryptonLabel16.TabIndex = 54;
@@ -340,7 +323,7 @@
             // 
             // kryptonLabel15
             // 
-            this.kryptonLabel15.Location = new System.Drawing.Point(349, 30);
+            this.kryptonLabel15.Location = new System.Drawing.Point(346, 30);
             this.kryptonLabel15.Name = "kryptonLabel15";
             this.kryptonLabel15.Size = new System.Drawing.Size(92, 19);
             this.kryptonLabel15.TabIndex = 53;
@@ -368,7 +351,7 @@
             // 
             // kryptonLabel13
             // 
-            this.kryptonLabel13.Location = new System.Drawing.Point(384, 7);
+            this.kryptonLabel13.Location = new System.Drawing.Point(381, 7);
             this.kryptonLabel13.Name = "kryptonLabel13";
             this.kryptonLabel13.Size = new System.Drawing.Size(57, 19);
             this.kryptonLabel13.TabIndex = 45;
@@ -413,7 +396,7 @@
             // 
             // kryptonLabel4
             // 
-            this.kryptonLabel4.Location = new System.Drawing.Point(38, 29);
+            this.kryptonLabel4.Location = new System.Drawing.Point(35, 29);
             this.kryptonLabel4.Name = "kryptonLabel4";
             this.kryptonLabel4.Size = new System.Drawing.Size(39, 19);
             this.kryptonLabel4.TabIndex = 12;
@@ -421,7 +404,7 @@
             // 
             // kryptonLabel3
             // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(9, 52);
+            this.kryptonLabel3.Location = new System.Drawing.Point(6, 52);
             this.kryptonLabel3.Name = "kryptonLabel3";
             this.kryptonLabel3.Size = new System.Drawing.Size(68, 19);
             this.kryptonLabel3.TabIndex = 11;
@@ -468,6 +451,8 @@
             this.scanColumn,
             this.codeColumn,
             this.nameColumn,
+            this.poQtyColumn,
+            this.poUnitColumn,
             this.OutstandingPOColumn,
             this.OutstandingunitColumn,
             this.QtyColumn,
@@ -510,7 +495,7 @@
             // 
             // kryptonLabel1
             // 
-            this.kryptonLabel1.Location = new System.Drawing.Point(35, 5);
+            this.kryptonLabel1.Location = new System.Drawing.Point(32, 5);
             this.kryptonLabel1.Name = "kryptonLabel1";
             this.kryptonLabel1.Size = new System.Drawing.Size(42, 19);
             this.kryptonLabel1.TabIndex = 0;
@@ -573,12 +558,45 @@
             this.nameColumn.ReadOnly = true;
             this.nameColumn.Width = 300;
             // 
+            // poQtyColumn
+            // 
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.poQtyColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            this.poQtyColumn.HeaderText = "PO Qty";
+            this.poQtyColumn.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.poQtyColumn.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.poQtyColumn.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.poQtyColumn.Name = "poQtyColumn";
+            this.poQtyColumn.ReadOnly = true;
+            this.poQtyColumn.Width = 50;
+            // 
+            // poUnitColumn
+            // 
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.poUnitColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            this.poUnitColumn.HeaderText = "PO Unit";
+            this.poUnitColumn.Name = "poUnitColumn";
+            this.poUnitColumn.ReadOnly = true;
+            this.poUnitColumn.Width = 50;
+            // 
             // OutstandingPOColumn
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            dataGridViewCellStyle3.NullValue = "0";
-            this.OutstandingPOColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle5.NullValue = "0";
+            this.OutstandingPOColumn.DefaultCellStyle = dataGridViewCellStyle5;
             this.OutstandingPOColumn.HeaderText = "O/S Qty";
             this.OutstandingPOColumn.Increment = new decimal(new int[] {
             1,
@@ -603,8 +621,8 @@
             // 
             // OutstandingunitColumn
             // 
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.OutstandingunitColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.OutstandingunitColumn.DefaultCellStyle = dataGridViewCellStyle6;
             this.OutstandingunitColumn.HeaderText = "O/S Unit";
             this.OutstandingunitColumn.Name = "OutstandingunitColumn";
             this.OutstandingunitColumn.ReadOnly = true;
@@ -612,8 +630,8 @@
             // 
             // QtyColumn
             // 
-            dataGridViewCellStyle5.NullValue = "0";
-            this.QtyColumn.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle7.NullValue = "0";
+            this.QtyColumn.DefaultCellStyle = dataGridViewCellStyle7;
             this.QtyColumn.HeaderText = "Qty";
             this.QtyColumn.Increment = new decimal(new int[] {
             1,
@@ -642,8 +660,8 @@
             // 
             // warehouseColumn
             // 
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.warehouseColumn.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.warehouseColumn.DefaultCellStyle = dataGridViewCellStyle8;
             this.warehouseColumn.DropDownWidth = 121;
             this.warehouseColumn.HeaderText = "Warehouse";
             this.warehouseColumn.Name = "warehouseColumn";
@@ -660,10 +678,10 @@
             // 
             // returnedColumn
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            dataGridViewCellStyle7.NullValue = "0";
-            this.returnedColumn.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle9.NullValue = "0";
+            this.returnedColumn.DefaultCellStyle = dataGridViewCellStyle9;
             this.returnedColumn.HeaderText = "Return Qty";
             this.returnedColumn.Increment = new decimal(new int[] {
             1,
@@ -686,8 +704,8 @@
             // 
             // returnedunitColumn
             // 
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.returnedunitColumn.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.returnedunitColumn.DefaultCellStyle = dataGridViewCellStyle10;
             this.returnedunitColumn.HeaderText = "Returned Unit";
             this.returnedunitColumn.Name = "returnedunitColumn";
             this.returnedunitColumn.ReadOnly = true;
@@ -758,8 +776,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel statusKryptonLabel;
         private System.Windows.Forms.ToolStripButton toolStripButtonPrint;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox supplierkryptonComboBox;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
-        private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel13;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems kryptonContextMenuItems1;
         private System.Windows.Forms.ContextMenuStrip dataGridContextMenuStrip;
@@ -776,6 +792,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn scanColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn codeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameColumn;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn poQtyColumn;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn poUnitColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn OutstandingPOColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn OutstandingunitColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn QtyColumn;

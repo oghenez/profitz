@@ -26,7 +26,7 @@ namespace Profit.Server
             ID = id;
             CODE = code;
         }
-        public IEntity Get(OdbcDataReader aReader)
+        public IEntity Get(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             TermOfPayment top = null;
             while (aReader.Read())
@@ -39,7 +39,7 @@ namespace Profit.Server
             }
             return top;
         }
-        public static TermOfPayment GetTOP(OdbcDataReader aReader)
+        public static TermOfPayment GetTOP(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             TermOfPayment top = null;
             while (aReader.Read())
@@ -100,7 +100,7 @@ namespace Profit.Server
         {
             return String.Format(@"SELECT * FROM table_termofpayment p where concat(p.top_code, p.top_name) like '%{0}%'", find);
         }
-        public IList GetAll(OdbcDataReader aReader)
+        public IList GetAll(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())

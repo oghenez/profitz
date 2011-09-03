@@ -18,10 +18,10 @@ namespace Profit.Server
         {
             Year e = (Year)en;
             OpenConnection();
-            OdbcTransaction transac = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction transac = m_connection.BeginTransaction();
             try
             {
-                OdbcCommand aCommand = new OdbcCommand(e.GetInsertSQL(), m_connection);
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand(e.GetInsertSQL(), m_connection);
                 aCommand.Transaction = transac;
                 aCommand.ExecuteNonQuery();
                 aCommand.CommandText = e.GetMaximumIDSQL();
@@ -50,8 +50,8 @@ namespace Profit.Server
             {
                 OpenConnection();
                 Period p = new Period();
-                OdbcCommand aCommand = new OdbcCommand(p.GetByPeriodByYearID(year.GetID()), m_connection);
-                OdbcDataReader aReader = aCommand.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand(p.GetByPeriodByYearID(year.GetID()), m_connection);
+                MySql.Data.MySqlClient.MySqlDataReader aReader = aCommand.ExecuteReader();
                 IList a = p.GetAll(aReader,year);
                 ((Year)year).PERIODS = a;
                 return year;
@@ -68,10 +68,10 @@ namespace Profit.Server
         public override void Delete(IEntity e)
         {
             OpenConnection();
-            OdbcTransaction transac = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction transac = m_connection.BeginTransaction();
             try
             {
-                OdbcCommand aCommand = new OdbcCommand();
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand();
                 aCommand.Connection = m_connection;
                 aCommand.Transaction = transac;
                 Year y = (Year)e;

@@ -10,13 +10,13 @@ namespace Profit.Server
 {
     public class Repository
     {
-        protected OdbcConnection m_connection = new OdbcConnection("Driver={MySQL ODBC 5.1 Driver};server=localhost;database=profit_db;uid=root;pwd=1234");
+        protected MySql.Data.MySqlClient.MySqlConnection m_connection = new MySql.Data.MySqlClient.MySqlConnection("server=localhost;database=profit_db;uid=root;pwd=1234");
         protected IEntity m_entity = null;
         public Repository(IEntity e)
         {
             m_entity = e;
         }
-        public void SetConnection(OdbcConnection connection)
+        public void SetConnection(MySql.Data.MySqlClient.MySqlConnection connection)
         {
             m_connection = connection;
         }
@@ -33,7 +33,7 @@ namespace Profit.Server
             try
             {
                 OpenConnection();
-                OdbcCommand aCommand = new OdbcCommand(e.GetInsertSQL(), m_connection);
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand(e.GetInsertSQL(), m_connection);
                 e.SetID(aCommand.ExecuteNonQuery());
             }
             catch (Exception x)
@@ -50,7 +50,7 @@ namespace Profit.Server
             try
             {
                 OpenConnection();
-                OdbcCommand aCommand = new OdbcCommand(e.GetUpdateSQL(), m_connection);
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand(e.GetUpdateSQL(), m_connection);
                 aCommand.ExecuteNonQuery();
 
             }
@@ -68,7 +68,7 @@ namespace Profit.Server
             try
             {
                 OpenConnection();
-                OdbcCommand aCommand = new OdbcCommand(e.GetDeleteSQL(), m_connection);
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand(e.GetDeleteSQL(), m_connection);
                 aCommand.ExecuteNonQuery();
             }
             catch (Exception x)
@@ -85,8 +85,8 @@ namespace Profit.Server
             try
             {
                 OpenConnection();
-                OdbcCommand aCommand = new OdbcCommand(e.GetByIDSQL(e.GetID()), m_connection);
-                OdbcDataReader aReader = aCommand.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand(e.GetByIDSQL(e.GetID()), m_connection);
+                MySql.Data.MySqlClient.MySqlDataReader aReader = aCommand.ExecuteReader();
                 IEntity a = e.Get(aReader);
                 return a;
             }
@@ -104,7 +104,7 @@ namespace Profit.Server
             try
             {
                 OpenConnection();
-                OdbcCommand aCommand = new OdbcCommand(e.GetMaximumIDSQL(), m_connection);
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand(e.GetMaximumIDSQL(), m_connection);
                 object r = aCommand.ExecuteScalar();
                 int aReader = r is System.DBNull ? 0 : Convert.ToInt32(r);
                 return aReader;
@@ -123,8 +123,8 @@ namespace Profit.Server
             try
             {
                 OpenConnection();
-                OdbcCommand aCommand = new OdbcCommand(m_entity.GetAllSQL(), m_connection);
-                OdbcDataReader aReader = aCommand.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand(m_entity.GetAllSQL(), m_connection);
+                MySql.Data.MySqlClient.MySqlDataReader aReader = aCommand.ExecuteReader();
                 IList a = m_entity.GetAll(aReader);
                 return a;
             }
@@ -142,8 +142,8 @@ namespace Profit.Server
             try
             {
                 OpenConnection();
-                OdbcCommand aCommand = new OdbcCommand(m_entity.GetAllSQL(), m_connection);
-                OdbcDataReader aReader = aCommand.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand(m_entity.GetAllSQL(), m_connection);
+                MySql.Data.MySqlClient.MySqlDataReader aReader = aCommand.ExecuteReader();
                 IList a = m_entity.GetAll(aReader);
                 Hashtable hs = new Hashtable();
                 foreach(IEntity e in a)
@@ -164,8 +164,8 @@ namespace Profit.Server
             try
             {
                 OpenConnection();
-                OdbcCommand aCommand = new OdbcCommand(m_entity.GetConcatSearch(text), m_connection);
-                OdbcDataReader aReader = aCommand.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand(m_entity.GetConcatSearch(text), m_connection);
+                MySql.Data.MySqlClient.MySqlDataReader aReader = aCommand.ExecuteReader();
                 IList a = m_entity.GetAll(aReader);
                 return a;
             }
@@ -183,7 +183,7 @@ namespace Profit.Server
             try
             {
                 OpenConnection();
-                OdbcDataAdapter aAdapter = new OdbcDataAdapter(m_entity.GetAllSQL(), m_connection);
+                MySql.Data.MySqlClient.MySqlDataAdapter aAdapter = new MySql.Data.MySqlClient.MySqlDataAdapter(m_entity.GetAllSQL(), m_connection);
                 DataSet ds = new DataSet("ds");
                 aAdapter.Fill(ds);
                 return ds;
@@ -202,8 +202,8 @@ namespace Profit.Server
             try
             {
                 OpenConnection();
-                OdbcCommand aCommand = new OdbcCommand(e.GetByCodeSQL(e.GetCode()), m_connection);
-                OdbcDataReader aReader = aCommand.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand(e.GetByCodeSQL(e.GetCode()), m_connection);
+                MySql.Data.MySqlClient.MySqlDataReader aReader = aCommand.ExecuteReader();
                 IEntity a = e.Get(aReader);
                 return a;
             }
@@ -222,8 +222,8 @@ namespace Profit.Server
             try
             {
                 OpenConnection();
-                OdbcCommand aCommand = new OdbcCommand(e.GetByCodeLikeSQL(text), m_connection);
-                OdbcDataReader aReader = aCommand.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand(e.GetByCodeLikeSQL(text), m_connection);
+                MySql.Data.MySqlClient.MySqlDataReader aReader = aCommand.ExecuteReader();
                 IList a = e.GetAll(aReader);
                 return a;
             }
@@ -242,8 +242,8 @@ namespace Profit.Server
             try
             {
                 OpenConnection();
-                OdbcCommand aCommand = new OdbcCommand(e.GetByNameLikeSQL(text), m_connection);
-                OdbcDataReader aReader = aCommand.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand(e.GetByNameLikeSQL(text), m_connection);
+                MySql.Data.MySqlClient.MySqlDataReader aReader = aCommand.ExecuteReader();
                 IList a = e.GetAll(aReader);
                 return a;
             }
@@ -262,7 +262,7 @@ namespace Profit.Server
             try
             {
                 OpenConnection();
-                OdbcCommand aCommand = new OdbcCommand(sql, m_connection);
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand(sql, m_connection);
                 aCommand.ExecuteNonQuery();
             }
             catch (Exception x)

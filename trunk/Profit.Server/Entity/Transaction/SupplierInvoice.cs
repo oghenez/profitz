@@ -138,7 +138,7 @@ namespace Profit.Server
                 DOCUMENT_DATE.ToString(Utils.DATE_FORMAT),
                 ID);
         }
-        public static SupplierInvoice TransformReader(OdbcDataReader aReader)
+        public static SupplierInvoice TransformReader(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             SupplierInvoice transaction = null;
             if (aReader.HasRows)
@@ -172,7 +172,7 @@ namespace Profit.Server
             }
             return transaction;
         }
-        public static IList TransformReaderList(OdbcDataReader aReader)
+        public static IList TransformReaderList(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())

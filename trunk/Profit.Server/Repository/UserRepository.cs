@@ -16,11 +16,11 @@ namespace Profit.Server
         public override void Save(IEntity p)
         {
             OpenConnection();
-            OdbcTransaction tr = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction tr = m_connection.BeginTransaction();
             User e = (User)p;
             try
             {
-                OdbcCommand aCommand = new OdbcCommand(e.GetInsertSQL(), m_connection);
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand(e.GetInsertSQL(), m_connection);
                 aCommand.Transaction = tr;
                 aCommand.ExecuteNonQuery();
                 aCommand.CommandText = e.GetMaximumIDSQL();
@@ -48,8 +48,8 @@ namespace Profit.Server
         public override void Update(IEntity en)
         {
             OpenConnection();
-            OdbcTransaction trans = m_connection.BeginTransaction();
-            OdbcCommand aCommand = new OdbcCommand();
+            MySql.Data.MySqlClient.MySqlTransaction trans = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand();
             aCommand.Connection = m_connection;
             aCommand.Transaction = trans;
             try
@@ -74,7 +74,7 @@ namespace Profit.Server
                     }
                 }
                 aCommand.CommandText = FormAccess.GetAllByUserSQL(e.ID);
-                OdbcDataReader r = aCommand.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlDataReader r = aCommand.ExecuteReader();
                 IList luc = FormAccess.GetAllStatic(r);
                 r.Close();
                 foreach (FormAccess chk in luc)
@@ -104,10 +104,10 @@ namespace Profit.Server
         public override void Delete(IEntity e)
         {
             OpenConnection();
-            OdbcTransaction transac = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction transac = m_connection.BeginTransaction();
             try
             {
-                OdbcCommand aCommand = new OdbcCommand();
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand();
                 aCommand.Connection = m_connection;
                 aCommand.Transaction = transac;
                 User y = (User)e;
@@ -137,8 +137,8 @@ namespace Profit.Server
             {
                 OpenConnection();
                 FormAccess p = new FormAccess();
-                OdbcCommand aCommand = new OdbcCommand(FormAccess.GetAllByUserSQL(userID.ID), m_connection);
-                OdbcDataReader aReader = aCommand.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand(FormAccess.GetAllByUserSQL(userID.ID), m_connection);
+                MySql.Data.MySqlClient.MySqlDataReader aReader = aCommand.ExecuteReader();
                 IList a = p.GetAll(aReader);
                 foreach (FormAccess fa in a)
                 {
@@ -160,9 +160,9 @@ namespace Profit.Server
             try
             {
                 OpenConnection();
-                OdbcCommand cmd = new OdbcCommand(User.GetByExactCodeSQL(code));
+                MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand(User.GetByExactCodeSQL(code));
                 cmd.Connection = m_connection;
-                OdbcDataReader r = cmd.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
                 User u = User.TransformReader(r);
                 r.Close();
                 if(u==null)
@@ -174,8 +174,8 @@ namespace Profit.Server
                 if (u.PASSWORD == password)
                 {
                     FormAccess p = new FormAccess();
-                    OdbcCommand aCommand = new OdbcCommand(FormAccess.GetAllByUserSQL(u.ID), m_connection);
-                    OdbcDataReader aReader = aCommand.ExecuteReader();
+                    MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand(FormAccess.GetAllByUserSQL(u.ID), m_connection);
+                    MySql.Data.MySqlClient.MySqlDataReader aReader = aCommand.ExecuteReader();
                     IList a = p.GetAll(aReader);
                     foreach (FormAccess fa in a)
                     {
@@ -200,16 +200,16 @@ namespace Profit.Server
             try
             {
                 OpenConnection();
-                OdbcCommand cmd = new OdbcCommand(User.GetByExactCodeSQL(code));
+                MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand(User.GetByExactCodeSQL(code));
                 cmd.Connection = m_connection;
-                OdbcDataReader r = cmd.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
                 User u = User.TransformReader(r);
                 r.Close();
                 if (u == null)
                     return null;
                 FormAccess p = new FormAccess();
-                OdbcCommand aCommand = new OdbcCommand(FormAccess.GetAllByUserSQL(u.ID), m_connection);
-                OdbcDataReader aReader = aCommand.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand(FormAccess.GetAllByUserSQL(u.ID), m_connection);
+                MySql.Data.MySqlClient.MySqlDataReader aReader = aCommand.ExecuteReader();
                 IList a = p.GetAll(aReader);
                 aReader.Close();
                 foreach (FormAccess fa in a)

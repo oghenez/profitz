@@ -43,7 +43,7 @@ namespace Profit.Server
             ID = id;
             CODE = code;
         }
-        public IEntity Get(OdbcDataReader r)
+        public IEntity Get(MySql.Data.MySqlClient.MySqlDataReader r)
         {
             Part part = null;
             while (r.Read())
@@ -69,7 +69,7 @@ namespace Profit.Server
              }
             return part;
         }
-        public static Part GetPart(OdbcDataReader r)
+        public static Part GetPart(MySql.Data.MySqlClient.MySqlDataReader r)
         {
             Part part = null;
             while (r.Read())
@@ -228,7 +228,7 @@ namespace Profit.Server
         {
             return String.Format(@"select * from table_part p where concat(p.part_code, p.part_name, p.part_barcode) like '%{0}%'", find);
         }
-        public IList GetAll(OdbcDataReader r)
+        public IList GetAll(MySql.Data.MySqlClient.MySqlDataReader r)
         {
             IList result = new ArrayList();
             while (r.Read())
@@ -255,7 +255,7 @@ namespace Profit.Server
             }
             return result;
         }
-        public static IList GetAllStatic(OdbcDataReader r)
+        public static IList GetAllStatic(MySql.Data.MySqlClient.MySqlDataReader r)
         {
             IList result = new ArrayList();
             while (r.Read())

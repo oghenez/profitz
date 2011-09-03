@@ -52,7 +52,7 @@ namespace Profit.Server
         }
         protected override void doSave(Event e)
         {
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             try
             {
                 m_command.Transaction = trc;
@@ -93,7 +93,7 @@ namespace Profit.Server
         }
         protected override void doUpdate(Event en)
         {
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             m_command.Transaction = trc;
             try
             {
@@ -120,7 +120,7 @@ namespace Profit.Server
                 m_command.CommandText = GoodReceiveNoteItem.DeleteUpdate(e.ID, e.EVENT_ITEMS);
                 m_command.ExecuteNonQuery();
                 //m_command.CommandText = GoodReceiveNoteItem.GetByEventIDSQL(e.ID);
-                //OdbcDataReader r = m_command.ExecuteReader();
+                //MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
                 //IList luc = GoodReceiveNoteItem.TransformReaderList(r);
                 //r.Close();
                 //foreach (GoodReceiveNoteItem chk in luc)
@@ -146,7 +146,7 @@ namespace Profit.Server
         protected override void doDelete(Event e)
         {
             GoodReceiveNote st = (GoodReceiveNote)e;//this.Get(e.ID);
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             m_command.Transaction = trc;
             try
             {
@@ -180,7 +180,7 @@ namespace Profit.Server
         protected override Event doGet(int ID)
         {
             m_command.CommandText = GoodReceiveNote.GetByIDSQL(ID);
-            OdbcDataReader r = m_command.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             GoodReceiveNote st = GoodReceiveNote.TransformReader(r);
             r.Close();
             m_command.CommandText = GoodReceiveNoteItem.GetByEventIDSQL(ID);
@@ -203,29 +203,30 @@ namespace Profit.Server
             m_command.CommandText = GoodReceiveNote.GetUpdateStatusSQL(e);
             m_command.ExecuteNonQuery();
         }
-        public static GoodReceiveNoteItem FindPOItem(OdbcCommand cmd, int PoIID)
+        public static GoodReceiveNoteItem FindPOItem(MySql.Data.MySqlClient.MySqlCommand cmd, int PoIID)
         {
             cmd.CommandText = GoodReceiveNoteItem.FindByPOItemIDSQL(PoIID);
-            OdbcDataReader r = cmd.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             GoodReceiveNoteItem res = GoodReceiveNoteItem.TransformReader(r);
             r.Close();
+            if (res == null) return res;
             cmd.CommandText = GoodReceiveNote.GetByIDSQL(res.EVENT.ID);
             r = cmd.ExecuteReader();
             res.EVENT = GoodReceiveNote.TransformReader(r);
             r.Close();
             return res;
         }
-        public static void UpdateAgainstStatus(OdbcCommand cmd, GoodReceiveNote grn, GoodReceiveNoteItem grni)
+        public static void UpdateAgainstStatus(MySql.Data.MySqlClient.MySqlCommand cmd, GoodReceiveNote grn, GoodReceiveNoteItem grni)
         {
             cmd.CommandText = grni.UpdateAgainstStatus();
             cmd.ExecuteNonQuery();
             cmd.CommandText = grn.UpdateAgainstStatus();
             cmd.ExecuteNonQuery();
         }
-        public static GoodReceiveNoteItem FindGoodReceiveNoteItem(OdbcCommand cmd, int grniID)
+        public static GoodReceiveNoteItem FindGoodReceiveNoteItem(MySql.Data.MySqlClient.MySqlCommand cmd, int grniID)
         {
             cmd.CommandText = GoodReceiveNoteItem.GetByIDSQL(grniID);
-            OdbcDataReader r = cmd.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             GoodReceiveNoteItem result = GoodReceiveNoteItem.TransformReader(r);
             r.Close();
             if (result == null) return null;
@@ -233,10 +234,10 @@ namespace Profit.Server
             result.EVENT.EVENT_ITEMS.Add(result);
             return result;
         }
-        public static GoodReceiveNote GetHeaderOnly(OdbcCommand cmd, int grnID)
+        public static GoodReceiveNote GetHeaderOnly(MySql.Data.MySqlClient.MySqlCommand cmd, int grnID)
         {
             cmd.CommandText = GoodReceiveNote.GetByIDSQL(grnID);
-            OdbcDataReader r = cmd.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             GoodReceiveNote st = GoodReceiveNote.TransformReader(r);
             r.Close();
             return st;
@@ -247,7 +248,7 @@ namespace Profit.Server
             try
             {
                 m_command.CommandText = GoodReceiveNote.GetSearch(find);
-                OdbcDataReader r = m_command.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
                 IList rest = GoodReceiveNote.TransformReaderList(r);
                 r.Close();
                 return rest;
@@ -274,7 +275,7 @@ namespace Profit.Server
         public override Event FindLastCodeAndTransactionDate(string codesample)
         {
             m_command.CommandText = GoodReceiveNote.FindLastCodeAndTransactionDate(codesample);
-            OdbcDataReader r = m_command.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             Event e = GoodReceiveNote.TransformReader(r);
             r.Close();
             return e;
@@ -302,7 +303,7 @@ namespace Profit.Server
             pois = exceptGRNI.Count > 0 ? pois.Substring(0, pois.Length - 1) : "";
 
             m_command.CommandText = GoodReceiveNoteItem.GetSearchByPartAndGRNNo(find, supplierID, pois, trDate);
-            OdbcDataReader r = m_command.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             IList result = GoodReceiveNoteItem.TransformReaderList(r);
             r.Close();
             foreach (GoodReceiveNoteItem t in result)
@@ -337,7 +338,7 @@ namespace Profit.Server
         public IList FindGRNItemlistBySupplierDate(string find, int supID, DateTime trdate, IList grnIDS)
         {
             m_command.CommandText = SupplierInvoiceItem.GetGRNUseBySupplierInvoice();
-            OdbcDataReader r = m_command.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             if (r.HasRows)
             {
                 while (r.Read())

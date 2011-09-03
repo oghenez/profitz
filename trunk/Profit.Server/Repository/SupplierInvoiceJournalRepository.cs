@@ -10,7 +10,7 @@ namespace Profit.Server
     public class SupplierInvoiceJournalRepository : JournalRepository
     {
         public SupplierInvoiceJournalRepository() : base() { }
-        public SupplierInvoiceJournalRepository(OdbcCommand cmd) : base() 
+        public SupplierInvoiceJournalRepository(MySql.Data.MySqlClient.MySqlCommand cmd) : base() 
         {
             m_command = cmd;
         }
@@ -46,7 +46,7 @@ namespace Profit.Server
         //}
         protected override void doSave(EventJournal e)
         {
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             try
             {
                 m_command.Transaction = trc;
@@ -122,7 +122,7 @@ namespace Profit.Server
         }
         protected override void doUpdate(EventJournal en)
         {
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             m_command.Transaction = trc;
             try
             {
@@ -158,7 +158,7 @@ namespace Profit.Server
         protected override void doDelete(EventJournal e)
         {
             SupplierInvoiceJournal st = (SupplierInvoiceJournal)e;
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             m_command.Transaction = trc;
             try
             {
@@ -186,7 +186,7 @@ namespace Profit.Server
         protected override EventJournal doGet(int ID)
         {
             m_command.CommandText = SupplierInvoiceJournal.GetByIDSQL(ID);
-            OdbcDataReader r = m_command.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             SupplierInvoiceJournal st = SupplierInvoiceJournal.TransformReader(r);
             r.Close();
             m_command.CommandText = SupplierInvoiceJournalItem.GetByEventIDSQL(ID);
@@ -209,10 +209,10 @@ namespace Profit.Server
             m_command.CommandText = SupplierInvoiceJournal.GetUpdateStatusSQL(e);
             m_command.ExecuteNonQuery();
         }
-        //public static SupplierInvoiceJournalItem FindGRNItem(OdbcCommand cmd, int grnIID)
+        //public static SupplierInvoiceJournalItem FindGRNItem(MySql.Data.MySqlClient.MySqlCommand cmd, int grnIID)
         //{
         //    cmd.CommandText = SupplierInvoiceJournalItem.FindByGrnItemIDSQL(grnIID);
-        //    OdbcDataReader r = cmd.ExecuteReader();
+        //    MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
         //    SupplierInvoiceJournalItem res = SupplierInvoiceJournalItem.TransformReader(r);
         //    r.Close();
         //    cmd.CommandText = SupplierInvoiceJournal.GetByIDSQL(res.EVENT.ID);
@@ -227,7 +227,7 @@ namespace Profit.Server
             try
             {
                 m_command.CommandText = SupplierInvoiceJournal.GetSearch(find);
-                OdbcDataReader r = m_command.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
                 IList rest = SupplierInvoiceJournal.TransformReaderList(r);
                 r.Close();
                 return rest;
@@ -254,7 +254,7 @@ namespace Profit.Server
         public override EventJournal FindLastCodeAndTransactionDate(string codesample)
         {
             m_command.CommandText = SupplierInvoiceJournal.FindLastCodeAndTransactionDate(codesample);
-            OdbcDataReader r = m_command.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             EventJournal e = SupplierInvoiceJournal.TransformReader(r);
             r.Close();
             return e;
@@ -325,12 +325,12 @@ namespace Profit.Server
         {
             string sql = SupplierInvoiceJournal.FindPeriodSIJId(SIId);
             m_command.CommandText = sql;
-            OdbcDataReader r = m_command.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             SupplierInvoiceJournal rest = SupplierInvoiceJournal.TransformReader(r);
             r.Close();
             return rest;
         }
-        public static void UpdateAgainstStatus(OdbcCommand cmd, EventJournal e, ISupplierInvoiceJournalItem ei)
+        public static void UpdateAgainstStatus(MySql.Data.MySqlClient.MySqlCommand cmd, EventJournal e, ISupplierInvoiceJournalItem ei)
         {
             SupplierInvoiceJournal po = (SupplierInvoiceJournal)e;
             SupplierInvoiceJournalItem poi = (SupplierInvoiceJournalItem)ei;
@@ -339,10 +339,10 @@ namespace Profit.Server
             cmd.CommandText = po.UpdateAgainstStatus();
             cmd.ExecuteNonQuery();
         }
-        internal static SupplierInvoiceJournalItem FindSIJournalItemlistForPayment(OdbcCommand cmd, int supinvItemID)
+        internal static SupplierInvoiceJournalItem FindSIJournalItemlistForPayment(MySql.Data.MySqlClient.MySqlCommand cmd, int supinvItemID)
         {
             cmd.CommandText = SupplierInvoiceJournalItem.GetByIDSQL(supinvItemID);
-            OdbcDataReader r = cmd.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             SupplierInvoiceJournalItem result = SupplierInvoiceJournalItem.TransformReader(r);
             r.Close();
             cmd.CommandText = SupplierInvoiceJournal.GetByIDSQL(result.EVENT_JOURNAL.ID);
@@ -379,7 +379,7 @@ namespace Profit.Server
             string pois = poisSB.ToString();
             pois = notIn.Count > 0 ? pois.Substring(0, pois.Length - 1) : "";
             m_command.CommandText = SupplierInvoiceJournalItem.GetSearchForPayment(find, ccyID, supplier, pois, trdate);
-            OdbcDataReader r = m_command.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             IList result = SupplierInvoiceJournalItem.TransformReaderList(r);
             r.Close();
             foreach (SupplierInvoiceJournalItem t in result)

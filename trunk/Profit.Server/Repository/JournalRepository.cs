@@ -9,8 +9,9 @@ namespace Profit.Server
 {
     public abstract class JournalRepository
     {
-        protected OdbcConnection m_connection = new OdbcConnection("Driver={MySQL ODBC 5.1 Driver};server=localhost;database=profit_db;uid=root;pwd=1234");
-        protected OdbcCommand m_command = new OdbcCommand();
+        protected MySql.Data.MySqlClient.MySqlConnection m_connection = new MySql.Data.MySqlClient.MySqlConnection("server=localhost;database=profit_db;uid=root;pwd=1234");
+        
+        protected MySql.Data.MySqlClient.MySqlCommand m_command = new MySql.Data.MySqlClient.MySqlCommand();
         abstract protected void doConfirm(EventJournal events, Period p);
         abstract protected void doRevise(EventJournal events, Period p);
         abstract protected IList doSearch(string find);
@@ -26,7 +27,7 @@ namespace Profit.Server
         }
         public void Confirm(int id)
         {
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             m_command.Transaction = trc;
             try
             {
@@ -66,7 +67,7 @@ namespace Profit.Server
         }
         public void Revise(int id)
         {
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             m_command.Transaction = trc;
             try
             {

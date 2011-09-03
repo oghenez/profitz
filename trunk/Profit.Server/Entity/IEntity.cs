@@ -22,8 +22,8 @@ namespace Profit.Server
         string GetMaximumIDSQL();
         string GetByCodeLikeSQL(string text);
         string GetByNameLikeSQL(string text);
-        IEntity Get(OdbcDataReader aReader);
-        IList GetAll(OdbcDataReader aReader);
+        IEntity Get(MySql.Data.MySqlClient.MySqlDataReader aReader);
+        IList GetAll(MySql.Data.MySqlClient.MySqlDataReader aReader);
         string GetConcatSearch(string find);
     }
 }

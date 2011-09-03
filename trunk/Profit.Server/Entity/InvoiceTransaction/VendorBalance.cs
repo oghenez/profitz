@@ -165,7 +165,7 @@ namespace Profit.Server
         {
             return String.Format("select * from table_vendorbalance");
         }
-        public static VendorBalance TransformReader(OdbcDataReader a)
+        public static VendorBalance TransformReader(MySql.Data.MySqlClient.MySqlDataReader a)
         {
             VendorBalance vb = null;
             if (a.HasRows)
@@ -182,7 +182,7 @@ namespace Profit.Server
             }
             return vb;
         }
-        public static IList TransformReaderList(OdbcDataReader a)
+        public static IList TransformReaderList(MySql.Data.MySqlClient.MySqlDataReader a)
         {
             IList result = new ArrayList();
             while (a.Read())
@@ -251,12 +251,12 @@ namespace Profit.Server
             throw new NotImplementedException();
         }
 
-        public IEntity Get(OdbcDataReader aReader)
+        public IEntity Get(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             throw new NotImplementedException();
         }
 
-        public IList GetAll(OdbcDataReader aReader)
+        public IList GetAll(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             throw new NotImplementedException();
         }

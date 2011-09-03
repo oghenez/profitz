@@ -9,10 +9,10 @@ namespace Profit.Server
 {
     public class ProcessTransactionRepository : Repository
     {
-        OdbcCommand m_command;
+        MySql.Data.MySqlClient.MySqlCommand m_command;
         public ProcessTransactionRepository(): base(null)
         {
-            m_command = new OdbcCommand("", m_connection);
+            m_command = new MySql.Data.MySqlClient.MySqlCommand("", m_connection);
         }
         public int GetTotalTransactionCount()
         {
@@ -36,7 +36,7 @@ namespace Profit.Server
 //                    select py.pay_code from table_payment py where py.pay_posted = false and py.pay_date between '{0}' and '{1}'",
 //                        start.ToString(Utils.DATE_FORMAT),
 //                        end.ToString(Utils.DATE_FORMAT));
-//            OdbcDataReader r = m_command.ExecuteReader();
+//            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
 //            IList result = new ArrayList();
 //            if (r.HasRows)
 //            {
@@ -67,7 +67,7 @@ namespace Profit.Server
                     select py.pay_code from table_payment py where py.pay_posted = false and py.pay_date between '{0}' and '{1}'", 
                      start.ToString(Utils.DATE_FORMAT),
                      end.ToString(Utils.DATE_FORMAT));
-            OdbcDataReader r = m_command.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             IList result = new ArrayList();
             if (r.HasRows)
             {
@@ -110,7 +110,7 @@ namespace Profit.Server
         public void ProcessTransaction(int currentPeriodId)
         {
             OpenConnection();
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             try
             {
                 m_command.Transaction = trc;
@@ -182,7 +182,7 @@ namespace Profit.Server
 
         public void RollBackTransaction(int currentPeriodId)
         {
-             OdbcTransaction trc = m_connection.BeginTransaction();
+             MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
              try
              {
                  m_command.Transaction = trc;

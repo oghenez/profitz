@@ -13,7 +13,7 @@ namespace Profit.Server
         {
 
         }
-        public static void Update(OdbcCommand cmd, StockCard sc)
+        public static void Update(MySql.Data.MySqlClient.MySqlCommand cmd, StockCard sc)
         {
             cmd.CommandText = sc.GetUpdateSQL();
             cmd.ExecuteNonQuery();
@@ -33,7 +33,7 @@ namespace Profit.Server
                 }
             }
             cmd.CommandText = StockCardEntry.FindByStockCard(sc.ID);
-            OdbcDataReader r = cmd.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             IList sces = StockCardEntry.TransformReaderList(r);
             r.Close();
             foreach (StockCardEntry sce in sces)
@@ -49,12 +49,12 @@ namespace Profit.Server
                 }
             }
         }
-        public static void UpdateHeader(OdbcCommand cmd, StockCard sc)
+        public static void UpdateHeader(MySql.Data.MySqlClient.MySqlCommand cmd, StockCard sc)
         {
             cmd.CommandText = sc.GetUpdateSQL();
             cmd.ExecuteNonQuery();
         }
-        public static void Save(OdbcCommand cmd, StockCard sc)
+        public static void Save(MySql.Data.MySqlClient.MySqlCommand cmd, StockCard sc)
         {
             cmd.CommandText = sc.GetInsertSQL();
             cmd.ExecuteNonQuery();
@@ -68,38 +68,38 @@ namespace Profit.Server
                 sce.ID = Convert.ToInt32(cmd.ExecuteScalar());
             }
         }
-        public static void SaveHeader(OdbcCommand cmd, StockCard sc)
+        public static void SaveHeader(MySql.Data.MySqlClient.MySqlCommand cmd, StockCard sc)
         {
             cmd.CommandText = sc.GetInsertSQL();
             cmd.ExecuteNonQuery();
             cmd.CommandText = StockCard.SelectMaxIDSQL();
             sc.ID = Convert.ToInt32(cmd.ExecuteScalar());
         }
-        public static void DeleteHeader(OdbcCommand cmd, StockCard sc)
+        public static void DeleteHeader(MySql.Data.MySqlClient.MySqlCommand cmd, StockCard sc)
         {
             cmd.CommandText = sc.GetDeleteSQL();
             cmd.ExecuteNonQuery();
         }
-        public static StockCard FindStockCard(OdbcCommand cmd, long partId, long locationId, long periodId)
+        public static StockCard FindStockCard(MySql.Data.MySqlClient.MySqlCommand cmd, long partId, long locationId, long periodId)
         {
             cmd.CommandText = String.Format("select * from table_stockcard where part_id = {0} and warehouse_id = {1} and period_id = {2}", partId, locationId, periodId);
-            OdbcDataReader r =  cmd.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r =  cmd.ExecuteReader();
             StockCard sc = StockCard.TransformReader(r);
             r.Close();
             if (sc != null)
             {
                 sc.PERIOD = PeriodRepository.FindPeriod(cmd, sc.PERIOD.ID);
                 cmd.CommandText = StockCardEntry.FindByStockCard(sc.ID);
-                OdbcDataReader rx = cmd.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlDataReader rx = cmd.ExecuteReader();
                 sc.STOCK_CARD_ENTRIES = StockCardEntry.TransformReaderList(rx);
                 rx.Close();
             }
             return sc;
         }
-        public static StockCard FindStockCardHeader(OdbcCommand cmd, long partId, long locationId, long periodId)
+        public static StockCard FindStockCardHeader(MySql.Data.MySqlClient.MySqlCommand cmd, long partId, long locationId, long periodId)
         {
             cmd.CommandText = String.Format("select * from table_stockcard where part_id = {0} and warehouse_id = {1} and period_id = {2}", partId, locationId, periodId);
-            OdbcDataReader r = cmd.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             StockCard sc = StockCard.TransformReader(r);
             r.Close();
             if (sc != null)
@@ -108,18 +108,18 @@ namespace Profit.Server
             }
             return sc;
         }
-        //public static StockCard FindStockCard(OdbcCommand cmd, long periodId)
+        //public static StockCard FindStockCard(MySql.Data.MySqlClient.MySqlCommand cmd, long periodId)
         //{
         //    cmd.CommandText = String.Format("select * from table_stockcard where period_id = {0}", periodId);
-        //    OdbcDataReader r = cmd.ExecuteReader();
+        //    MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
         //    StockCard sc = StockCard.TransformReader(r);
         //    r.Close();
         //    return sc;
         //}
-        public static IList FindStockCardByPeriod(OdbcCommand cmd, long periodId)
+        public static IList FindStockCardByPeriod(MySql.Data.MySqlClient.MySqlCommand cmd, long periodId)
         {
             cmd.CommandText = String.Format("select * from table_stockcard where period_id = {0}", periodId);
-            OdbcDataReader r = cmd.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             IList sc = StockCard.TransforReaderList(r);
             r.Close();
             return sc;

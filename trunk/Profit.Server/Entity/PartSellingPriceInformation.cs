@@ -34,7 +34,7 @@ namespace Profit.Server
             ID = id;
             CODE = code;
         }
-        public IEntity Get(OdbcDataReader aReader)
+        public IEntity Get(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             PartSellingPriceInformation bank = null;
             while (aReader.Read())
@@ -89,7 +89,7 @@ namespace Profit.Server
         {
             return String.Format(@"SELECT * FROM table_partsellingpriceinformation p where concat(p.prtsellprc_code, p.prtsellprc_name) like '%{0}%'", find);
         }
-        public IList GetAll(OdbcDataReader aReader)
+        public IList GetAll(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())

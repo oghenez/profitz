@@ -67,7 +67,7 @@ namespace Profit.Server
                 EVENT_JOURNAL_ITEM.ID,
                 ID);
         }
-        public static VendorBalanceEntry TransformReader(OdbcDataReader aReader)
+        public static VendorBalanceEntry TransformReader(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             VendorBalanceEntry tr = null;
             if (aReader.HasRows)
@@ -84,7 +84,7 @@ namespace Profit.Server
             }
             return tr;
         }
-        public static IList TransformReaderList(OdbcDataReader aReader)
+        public static IList TransformReaderList(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())

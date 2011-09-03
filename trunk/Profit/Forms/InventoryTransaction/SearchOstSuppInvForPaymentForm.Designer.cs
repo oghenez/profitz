@@ -33,10 +33,6 @@
             this.CANCELkryptonButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.OKkryptonButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.searchText = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.startSearch = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.gridData = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.checkColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
             this.purchaseorderNoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,6 +40,10 @@
             this.supplierColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.ccyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.qtyColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.searchText = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.startSearch = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
@@ -81,38 +81,6 @@
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(638, 341);
             this.kryptonPanel1.TabIndex = 6;
-            // 
-            // kryptonLabel2
-            // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(485, 15);
-            this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(149, 19);
-            this.kryptonLabel2.TabIndex = 6;
-            this.kryptonLabel2.Values.Text = "* Part of GRN No. / Part No.";
-            // 
-            // kryptonLabel1
-            // 
-            this.kryptonLabel1.Location = new System.Drawing.Point(12, 12);
-            this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(37, 19);
-            this.kryptonLabel1.TabIndex = 0;
-            this.kryptonLabel1.Values.Text = "Find :";
-            // 
-            // searchText
-            // 
-            this.searchText.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
-            this.startSearch});
-            this.searchText.Location = new System.Drawing.Point(70, 12);
-            this.searchText.Name = "searchText";
-            this.searchText.Size = new System.Drawing.Size(351, 22);
-            this.searchText.TabIndex = 1;
-            this.searchText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchText_KeyDown);
-            // 
-            // startSearch
-            // 
-            this.startSearch.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Next;
-            this.startSearch.UniqueName = "C21DE323E2AD4CD47CA5A3C9304450B8";
-            this.startSearch.Click += new System.EventHandler(this.buttonSpecAny1_Click);
             // 
             // gridData
             // 
@@ -206,6 +174,38 @@
             this.qtyColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.qtyColumn.ThousandsSeparator = true;
             this.qtyColumn.Width = 100;
+            // 
+            // kryptonLabel2
+            // 
+            this.kryptonLabel2.Location = new System.Drawing.Point(573, 15);
+            this.kryptonLabel2.Name = "kryptonLabel2";
+            this.kryptonLabel2.Size = new System.Drawing.Size(53, 19);
+            this.kryptonLabel2.TabIndex = 6;
+            this.kryptonLabel2.Values.Text = "* Invoice";
+            // 
+            // kryptonLabel1
+            // 
+            this.kryptonLabel1.Location = new System.Drawing.Point(12, 12);
+            this.kryptonLabel1.Name = "kryptonLabel1";
+            this.kryptonLabel1.Size = new System.Drawing.Size(37, 19);
+            this.kryptonLabel1.TabIndex = 0;
+            this.kryptonLabel1.Values.Text = "Find :";
+            // 
+            // searchText
+            // 
+            this.searchText.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
+            this.startSearch});
+            this.searchText.Location = new System.Drawing.Point(70, 12);
+            this.searchText.Name = "searchText";
+            this.searchText.Size = new System.Drawing.Size(351, 22);
+            this.searchText.TabIndex = 1;
+            this.searchText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchText_KeyDown);
+            // 
+            // startSearch
+            // 
+            this.startSearch.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Next;
+            this.startSearch.UniqueName = "C21DE323E2AD4CD47CA5A3C9304450B8";
+            this.startSearch.Click += new System.EventHandler(this.buttonSpecAny1_Click);
             // 
             // SearchOstSuppInvForPaymentForm
             // 

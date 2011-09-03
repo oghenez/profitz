@@ -32,6 +32,7 @@ namespace Profit
             m_ccy = ccy;
             IList records = r_po.FindSOIJournalItemlistForPayment("", ccy.ID, supplier.ID,m_trDate, added );
             loadResult(records);
+            this.Text += " [" + supplier.CODE + "-" + supplier.NAME + " in " + ccy.CODE + " ]";
         }
 
         private void loadResult(IList records)

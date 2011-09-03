@@ -29,7 +29,7 @@ namespace Profit.Server
             ID = id;
             CODE = code;
         }
-        public IEntity Get(OdbcDataReader aReader)
+        public IEntity Get(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             Year year = null;
             while (aReader.Read())
@@ -101,7 +101,7 @@ year_end
         {
             return String.Format(@"SELECT * FROM table_year p where concat(p.year_code, p.year_name) like '%{0}%'", find);
         }
-        public IList GetAll(OdbcDataReader aReader)
+        public IList GetAll(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())

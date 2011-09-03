@@ -101,7 +101,7 @@ namespace Profit.Server
                PURCHASE_RETURN==null?0:PURCHASE_RETURN.ID,
                 ID);
         }
-        public static APDebitNoteItem TransformReader(OdbcDataReader aReader)
+        public static APDebitNoteItem TransformReader(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             APDebitNoteItem transaction = null;
             if (aReader.HasRows)
@@ -129,7 +129,7 @@ namespace Profit.Server
             }
             return transaction;
         }
-        public static IList TransformReaderList(OdbcDataReader aReader)
+        public static IList TransformReaderList(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())

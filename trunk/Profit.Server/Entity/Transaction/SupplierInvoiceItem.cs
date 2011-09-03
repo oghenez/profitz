@@ -114,7 +114,7 @@ namespace Profit.Server
                 GRN_ITEM==null?0:GRN_ITEM.ID,
                 ID);
         }
-        public static SupplierInvoiceItem TransformReader(OdbcDataReader aReader)
+        public static SupplierInvoiceItem TransformReader(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             SupplierInvoiceItem transaction = null;
             if (aReader.HasRows)
@@ -144,7 +144,7 @@ namespace Profit.Server
             }
             return transaction;
         }
-        public static IList TransformReaderList(OdbcDataReader aReader)
+        public static IList TransformReaderList(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())

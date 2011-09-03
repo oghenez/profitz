@@ -76,7 +76,7 @@ namespace Profit.Server
 
         protected override void doSave(EventJournal e)
         {
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             try
             {
                 m_command.Transaction = trc;
@@ -122,7 +122,7 @@ namespace Profit.Server
         }
         protected override void doUpdate(EventJournal en)
         {
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             m_command.Transaction = trc;
             try
             {
@@ -164,7 +164,7 @@ namespace Profit.Server
         protected override void doDelete(EventJournal e)
         {
             Payment st = (Payment)e;
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             m_command.Transaction = trc;
             try
             {
@@ -200,7 +200,7 @@ namespace Profit.Server
         protected override EventJournal doGet(int ID)
         {
             m_command.CommandText = Payment.GetByIDSQL(ID);
-            OdbcDataReader r = m_command.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             Payment st = Payment.TransformReader(r);
             r.Close();
             m_command.CommandText = PaymentItem.GetByEventIDSQL(ID);
@@ -237,10 +237,10 @@ namespace Profit.Server
             m_command.CommandText = Payment.GetUpdateStatusSQL(e);
             m_command.ExecuteNonQuery();
         }
-        //public static PaymentItem FindGRNItem(OdbcCommand cmd, int grnIID)
+        //public static PaymentItem FindGRNItem(MySql.Data.MySqlClient.MySqlCommand cmd, int grnIID)
         //{
         //    cmd.CommandText = PaymentItem.FindByGrnItemIDSQL(grnIID);
-        //    OdbcDataReader r = cmd.ExecuteReader();
+        //    MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
         //    PaymentItem res = PaymentItem.TransformReader(r);
         //    r.Close();
         //    cmd.CommandText = Payment.GetByIDSQL(res.EVENT.ID);
@@ -255,7 +255,7 @@ namespace Profit.Server
             try
             {
                 m_command.CommandText = Payment.GetSearch(find);
-                OdbcDataReader r = m_command.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
                 IList rest = Payment.TransformReaderList(r);
                 r.Close();
                 return rest;
@@ -282,7 +282,7 @@ namespace Profit.Server
         public override EventJournal FindLastCodeAndTransactionDate(string codesample)
         {
             m_command.CommandText = Payment.FindLastCodeAndTransactionDate(codesample);
-            OdbcDataReader r = m_command.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             EventJournal e = Payment.TransformReader(r);
             r.Close();
             return e;
@@ -387,7 +387,7 @@ namespace Profit.Server
         private Bank getBank(int ID)
         {
             m_command.CommandText = Bank.GetByIDSQLStatic(ID);
-            OdbcDataReader r = m_command.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             Bank b = Bank.GetBank(r);
             r.Close();
             return b;

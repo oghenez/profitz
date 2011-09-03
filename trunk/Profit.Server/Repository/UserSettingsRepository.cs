@@ -8,8 +8,8 @@ namespace Profit.Server
 {
     public class UserSettingsRepository
     {
-        protected OdbcConnection m_connection = new OdbcConnection("Driver={MySQL ODBC 5.1 Driver};server=localhost;database=profit_db;uid=root;pwd=1234");
-        OdbcCommand m_cmd = new OdbcCommand();
+        protected MySql.Data.MySqlClient.MySqlConnection m_connection = new MySql.Data.MySqlClient.MySqlConnection("server=localhost;database=profit_db;uid=root;pwd=1234");
+        MySql.Data.MySqlClient.MySqlCommand m_cmd = new MySql.Data.MySqlClient.MySqlCommand();
 
         public UserSettingsRepository()
         {

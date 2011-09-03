@@ -27,7 +27,7 @@ namespace Profit.Server
         }
         protected override void doSave(Event e)
         {
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             try
             {
                 m_command.Transaction = trc;                
@@ -67,7 +67,7 @@ namespace Profit.Server
         }
         protected override void doUpdate(Event en)
         {
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             m_command.Transaction = trc;
             try
             {
@@ -103,7 +103,7 @@ namespace Profit.Server
         protected override void doDelete(Event e)
         {
             StockTaking st = (StockTaking)e;//this.Get(e.ID);
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             m_command.Transaction = trc;
             try
             {
@@ -131,7 +131,7 @@ namespace Profit.Server
         protected override Event doGet(int ID)
         {
             m_command.CommandText = StockTaking.GetByIDSQL(ID);
-            OdbcDataReader r = m_command.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             StockTaking st = StockTaking.TransformReader(r);
             r.Close();
             m_command.CommandText = StockTakingItems.GetByEventIDSQL(ID);
@@ -157,7 +157,7 @@ namespace Profit.Server
             try
             {
                 m_command.CommandText = StockTaking.GetSearch(find);
-                OdbcDataReader r = m_command.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
                 IList rest = StockTaking.TransformReaderList(r);
                 r.Close();
                 return rest;
@@ -183,7 +183,7 @@ namespace Profit.Server
         public override Event FindLastCodeAndTransactionDate(string codesample)
         {
             m_command.CommandText = StockTaking.FindLastCodeAndTransactionDate(codesample);
-            OdbcDataReader r = m_command.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             Event e = StockTaking.TransformReader(r);
             r.Close();
             return e;

@@ -67,7 +67,7 @@ namespace Profit.Server
                 GRN_ITEM==null?0:GRN_ITEM.ID,
                 ID);
         }
-        public static PurchaseReturnItem TransformReader(OdbcDataReader aReader)
+        public static PurchaseReturnItem TransformReader(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             PurchaseReturnItem transaction = null;
             if (aReader.HasRows)
@@ -88,7 +88,7 @@ namespace Profit.Server
             }
             return transaction;
         }
-        public static IList TransformReaderList(OdbcDataReader aReader)
+        public static IList TransformReaderList(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())
