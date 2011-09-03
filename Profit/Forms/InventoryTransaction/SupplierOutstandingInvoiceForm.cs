@@ -604,6 +604,8 @@ namespace Profit
         {
             Supplier em = (Supplier)supplierkryptonComboBox.SelectedItem;
             supplierKryptonTextBox.Text = em == null ? "" : em.NAME;
+            addressKryptonTextBox.Text = em == null ? "" : em.ADDRESS;
+            contactPersonKryptonTextBox.Text = em == null ? "" : em.CONTACT;
             itemsDataGrid.Rows.Clear();
         }
 

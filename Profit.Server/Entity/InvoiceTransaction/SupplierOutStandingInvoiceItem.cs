@@ -142,8 +142,9 @@ namespace Profit.Server
                DESCRIPTION,
                NOTES,
                 AGAINST_PAYMENT_STATUS.ToString(),
-               OUTSTANDING_AMOUNT,
+               //OUTSTANDING_AMOUNT,
                AMOUNT,
+               0,
                 ID);
         }
         public static SupplierOutStandingInvoiceItem TransformReader(MySql.Data.MySqlClient.MySqlDataReader aReader)
