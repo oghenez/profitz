@@ -95,6 +95,13 @@ namespace Profit.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap post {
+            get {
+                object obj = ResourceManager.GetObject("post", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap print {
             get {
                 object obj = ResourceManager.GetObject("print", resourceCulture);
