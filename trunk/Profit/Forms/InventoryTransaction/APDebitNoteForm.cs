@@ -428,6 +428,7 @@ namespace Profit
             employeeKryptonComboBox.Enabled = enable;
             notesKryptonTextBox.ReadOnly = !enable;
             supplierkryptonComboBox.Enabled = enable;
+            currencyKryptonComboBox.Enabled = enable;
             itemsDataGrid.AllowUserToDeleteRows = enable;
             itemsDataGrid.AllowUserToAddRows = enable;
             invoiceNoColumn.ReadOnly = !enable;
@@ -449,6 +450,7 @@ namespace Profit
             postToolStripButton.Enabled = (m_prn.ID > 0) && (editmode == EditMode.View) && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].POST;
             postToolStripButton.Text = m_prn.POSTED ? "Unpost" : "Post";
             statusKryptonLabel.Text = m_prn.POSTED ? "POSTED" : "ENTRY";
+            toolStripButtonFromPR.Enabled = toolStripButtonSave.Enabled;
             m_editMode = editmode;
             ReloadMainFormButton();
         }

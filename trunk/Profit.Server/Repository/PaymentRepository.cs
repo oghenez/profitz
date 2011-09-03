@@ -392,5 +392,20 @@ namespace Profit.Server
             r.Close();
             return b;
         }
+        internal static IList FindPaidSupplierOutstanding(MySql.Data.MySqlClient.MySqlCommand cmd, int soiID)
+        {
+            cmd.CommandText = PaymentItem.GetSupplierInvoiceBySOIID(soiID, VendorBalanceEntryType.SupplierOutStandingInvoice);
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
+            IList result = PaymentItem.TransformReaderList(r);
+            r.Close();
+            foreach (PaymentItem i in result)
+            {
+                cmd.CommandText = Payment.GetByIDSQL(i.EVENT_JOURNAL.ID);
+                 r = cmd.ExecuteReader();
+                 i.EVENT_JOURNAL = Payment.TransformReader(r);
+                 r.Close();
+            }
+            return result;
+        }
     }
 }

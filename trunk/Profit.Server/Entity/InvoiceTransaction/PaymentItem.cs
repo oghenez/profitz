@@ -216,6 +216,10 @@ namespace Profit.Server
         {
             return String.Format("Delete from table_paymentitem where pay_id = {0}", id);
         }
+        public static string GetSupplierInvoiceBySOIID(int soiid, VendorBalanceEntryType invtype)
+        {
+            return String.Format("select * from table_paymentitem where inv_id = {0} and inv_type = '{1}'", soiid, invtype.ToString());
+        }
         //public static string FindByGrnItemIDSQL(int id)
         //{
         //    return String.Format("SELECT * from table_paymentitem where grni_id = {0}", id);
