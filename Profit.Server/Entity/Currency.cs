@@ -24,7 +24,7 @@ namespace Profit.Server
             ID = id;
             CODE = code;
         }
-        public IEntity Get(OdbcDataReader aReader)
+        public IEntity Get(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             Currency currency = null;
             while (aReader.Read())
@@ -36,7 +36,7 @@ namespace Profit.Server
             }
             return currency;
         }
-        public static Currency GetCurrency(OdbcDataReader aReader)
+        public static Currency GetCurrency(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             Currency currency = null;
             while (aReader.Read())
@@ -99,7 +99,7 @@ namespace Profit.Server
         {
             return String.Format(@"SELECT * FROM table_currency p where concat(p.ccy_code, p.ccy_name) like '%{0}%'", find);
         }
-        public IList GetAll(OdbcDataReader aReader)
+        public IList GetAll(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())

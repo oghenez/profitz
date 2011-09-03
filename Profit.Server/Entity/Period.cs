@@ -38,7 +38,7 @@ namespace Profit.Server
             ID = id;
             CODE = code;
         }
-        public static Period TransformReader(OdbcDataReader aReader)
+        public static Period TransformReader(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             Period period = null;
             while (aReader.Read())
@@ -127,7 +127,7 @@ namespace Profit.Server
         {
             return "";
         }
-        public static IList TransformReaderList(OdbcDataReader aReader)
+        public static IList TransformReaderList(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())
@@ -144,7 +144,7 @@ namespace Profit.Server
             }
             return result;
         }
-        public IList GetAll(OdbcDataReader aReader, IEntity year)
+        public IList GetAll(MySql.Data.MySqlClient.MySqlDataReader aReader, IEntity year)
         {
             IList result = new ArrayList();
             while (aReader.Read())
@@ -201,12 +201,12 @@ namespace Profit.Server
         #region IEntity Members
 
 
-        public IEntity Get(OdbcDataReader aReader)
+        public IEntity Get(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             throw new NotImplementedException();
         }
 
-        public IList GetAll(OdbcDataReader aReader)
+        public IList GetAll(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())

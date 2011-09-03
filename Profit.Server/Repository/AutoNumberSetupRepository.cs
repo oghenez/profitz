@@ -8,7 +8,7 @@ namespace Profit.Server
 {
     public class AutoNumberSetupRepository
     {
-        public static string GetCodeSampleByDomainName(OdbcCommand cmd, string p)
+        public static string GetCodeSampleByDomainName(MySql.Data.MySqlClient.MySqlCommand cmd, string p)
         {
             AutoNumberSetup ans = GetAutoNumberSetup(cmd, p);
             if (ans == null) throw new Exception("AutoNumber Setup (" + p + ") not set");
@@ -17,10 +17,10 @@ namespace Profit.Server
             return getDateCodeUnderScore(code);
         }
 
-        internal static AutoNumberSetup GetAutoNumberSetup(OdbcCommand cmd,string domainName)
+        internal static AutoNumberSetup GetAutoNumberSetup(MySql.Data.MySqlClient.MySqlCommand cmd,string domainName)
         {
             cmd.CommandText = AutoNumberSetup.FindByDomainName(domainName);
-            OdbcDataReader r = cmd.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             AutoNumberSetup res = AutoNumberSetup.GetTransform(r);
             r.Close();
             return res;
@@ -62,7 +62,7 @@ namespace Profit.Server
             }
             return prefix;
         }
-        public static string GetAutoNumberByDomainName(OdbcCommand cmd, string domainName, string manualCode, string lastCode, DateTime lastTransactionDate,
+        public static string GetAutoNumberByDomainName(MySql.Data.MySqlClient.MySqlCommand cmd, string domainName, string manualCode, string lastCode, DateTime lastTransactionDate,
             DateTime transactionDate, bool isFirstTransaction)
         {
             AutoNumberSetup ans = GetAutoNumberSetup(cmd, domainName);

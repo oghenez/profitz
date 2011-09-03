@@ -16,8 +16,8 @@ namespace Profit.Server
         public override void Update(IEntity en)
         {
             OpenConnection();
-            OdbcTransaction trans = m_connection.BeginTransaction();
-            OdbcCommand aCommand = new OdbcCommand();
+            MySql.Data.MySqlClient.MySqlTransaction trans = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand();
             aCommand.Connection = m_connection;
             aCommand.Transaction = trans;
             try
@@ -49,8 +49,8 @@ namespace Profit.Server
             {
                 OpenConnection();
                 GeneralSetup e = (GeneralSetup)en;
-                OdbcCommand aCommand = new OdbcCommand(e.GetByIDSQL(e.GetID()), m_connection);
-                OdbcDataReader aReader = aCommand.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand(e.GetByIDSQL(e.GetID()), m_connection);
+                MySql.Data.MySqlClient.MySqlDataReader aReader = aCommand.ExecuteReader();
                 GeneralSetup a = (GeneralSetup)e.Get(aReader);
                 aReader.Close();
                 a.START_ENTRY_PERIOD = PeriodRepository.FindPeriod(aCommand, a.START_ENTRY_PERIOD.ID);
@@ -74,11 +74,11 @@ namespace Profit.Server
                 m_connection.Close();
             }
         }
-        internal static GeneralSetup GetGeneralSetup(OdbcCommand cmd)
+        internal static GeneralSetup GetGeneralSetup(MySql.Data.MySqlClient.MySqlCommand cmd)
         {
             GeneralSetup e = new GeneralSetup();
             cmd.CommandText = GeneralSetup.GetAllSQLStatic();
-            OdbcDataReader aReader = cmd.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader aReader = cmd.ExecuteReader();
             GeneralSetup a = (GeneralSetup)e.Get(aReader);
             aReader.Close();
             cmd.CommandText = AutoNumberSetup.GetAllSQLStatic();
@@ -100,8 +100,8 @@ namespace Profit.Server
             try
             {
                 OpenConnection();
-                OdbcCommand aCommand = new OdbcCommand(m_entity.GetAllSQL(), m_connection);
-                OdbcDataReader aReader = aCommand.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand(m_entity.GetAllSQL(), m_connection);
+                MySql.Data.MySqlClient.MySqlDataReader aReader = aCommand.ExecuteReader();
                 IList a = m_entity.GetAll(aReader);
                 aReader.Close();
                 foreach (GeneralSetup s in a)

@@ -74,7 +74,7 @@ namespace Profit.Server
                 EVENT_ITEM.ID,
                 ID);
         }
-        public static StockCardEntry TransformReader(OdbcDataReader aReader)
+        public static StockCardEntry TransformReader(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             StockCardEntry tr = null;
             if (aReader.HasRows)
@@ -91,7 +91,7 @@ namespace Profit.Server
             }
             return tr;
         }
-        public static IList TransformReaderList(OdbcDataReader aReader)
+        public static IList TransformReaderList(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())

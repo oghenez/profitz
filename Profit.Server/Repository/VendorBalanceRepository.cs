@@ -14,7 +14,7 @@ namespace Profit.Server
         {
 
         }
-        public static void Update(OdbcCommand cmd, VendorBalance sc)
+        public static void Update(MySql.Data.MySqlClient.MySqlCommand cmd, VendorBalance sc)
         {
             cmd.CommandText = sc.GetUpdateSQL();
             cmd.ExecuteNonQuery();
@@ -34,7 +34,7 @@ namespace Profit.Server
                 }
             }
             cmd.CommandText = VendorBalanceEntry.FindByVendorBalance(sc.ID);
-            OdbcDataReader r = cmd.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             IList sces = VendorBalanceEntry.TransformReaderList(r);
             r.Close();
             foreach (VendorBalanceEntry sce in sces)
@@ -50,12 +50,12 @@ namespace Profit.Server
                 }
             }
         }
-        public static void UpdateHeader(OdbcCommand cmd, VendorBalance sc)
+        public static void UpdateHeader(MySql.Data.MySqlClient.MySqlCommand cmd, VendorBalance sc)
         {
             cmd.CommandText = sc.GetUpdateSQL();
             cmd.ExecuteNonQuery();
         }
-        public static void Save(OdbcCommand cmd, VendorBalance sc)
+        public static void Save(MySql.Data.MySqlClient.MySqlCommand cmd, VendorBalance sc)
         {
             cmd.CommandText = sc.GetInsertSQL();
             cmd.ExecuteNonQuery();
@@ -69,40 +69,40 @@ namespace Profit.Server
                 sce.ID = Convert.ToInt32(cmd.ExecuteScalar());
             }
         }
-        public static void SaveHeader(OdbcCommand cmd, VendorBalance sc)
+        public static void SaveHeader(MySql.Data.MySqlClient.MySqlCommand cmd, VendorBalance sc)
         {
             cmd.CommandText = sc.GetInsertSQL();
             cmd.ExecuteNonQuery();
             cmd.CommandText = VendorBalance.SelectMaxIDSQL();
             sc.ID = Convert.ToInt32(cmd.ExecuteScalar());
         }
-        public static void DeleteHeader(OdbcCommand cmd, VendorBalance sc)
+        public static void DeleteHeader(MySql.Data.MySqlClient.MySqlCommand cmd, VendorBalance sc)
         {
             cmd.CommandText = sc.GetDeleteSQL();
             cmd.ExecuteNonQuery();
         }
-        public static VendorBalance FindVendorBalance(OdbcCommand cmd, long vendor, long currency, long periodId, VendorBalanceType type)
+        public static VendorBalance FindVendorBalance(MySql.Data.MySqlClient.MySqlCommand cmd, long vendor, long currency, long periodId, VendorBalanceType type)
         {
             cmd.CommandText = String.Format("select * from table_vendorbalance where vendor_id = {0} and ccy_id = {1} and period_id = {2} and vb_vendorbalancetype = '{3}'", 
                 vendor, currency, periodId, type.ToString());
-            OdbcDataReader r =  cmd.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r =  cmd.ExecuteReader();
             VendorBalance sc = VendorBalance.TransformReader(r);
             r.Close();
             if (sc != null)
             {
                 sc.PERIOD = PeriodRepository.FindPeriod(cmd, sc.PERIOD.ID);
                 cmd.CommandText = VendorBalanceEntry.FindByVendorBalance(sc.ID);
-                OdbcDataReader rx = cmd.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlDataReader rx = cmd.ExecuteReader();
                 sc.VENDOR_BALANCE_ENTRIES = VendorBalanceEntry.TransformReaderList(rx);
                 rx.Close();
             }
             return sc;
         }
-        public static VendorBalance FindVendorBalanceHeader(OdbcCommand cmd, long vendor, long currency, long periodId, VendorBalanceType type)
+        public static VendorBalance FindVendorBalanceHeader(MySql.Data.MySqlClient.MySqlCommand cmd, long vendor, long currency, long periodId, VendorBalanceType type)
         {
             cmd.CommandText = String.Format("select * from table_vendorbalance where vendor_id = {0} and ccy_id = {1} and period_id = {2} and vb_vendorbalancetype = '{3}'",
                 vendor, currency, periodId, type.ToString());
-            OdbcDataReader r = cmd.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             VendorBalance sc = VendorBalance.TransformReader(r);
             r.Close();
             if (sc != null)
@@ -111,18 +111,18 @@ namespace Profit.Server
             }
             return sc;
         }
-        //public static VendorBalance FindVendorBalance(OdbcCommand cmd, long periodId)
+        //public static VendorBalance FindVendorBalance(MySql.Data.MySqlClient.MySqlCommand cmd, long periodId)
         //{
         //    cmd.CommandText = String.Format("select * from table_vendorbalance where period_id = {0}", periodId);
-        //    OdbcDataReader r = cmd.ExecuteReader();
+        //    MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
         //    VendorBalance sc = VendorBalance.TransformReader(r);
         //    r.Close();
         //    return sc;
         //}
-        public static IList FindVendorBalanceByPeriod(OdbcCommand cmd, long periodId)
+        public static IList FindVendorBalanceByPeriod(MySql.Data.MySqlClient.MySqlCommand cmd, long periodId)
         {
             cmd.CommandText = String.Format("select * from table_vendorbalance where period_id = {0}", periodId);
-            OdbcDataReader r = cmd.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             IList sc = VendorBalance.TransformReaderList(r);
             r.Close();
             return sc;

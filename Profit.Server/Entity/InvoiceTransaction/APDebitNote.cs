@@ -99,7 +99,7 @@ namespace Profit.Server
                 USED_FOR_PAYMENT,
                 ID);
         }
-        public static APDebitNote TransformReader(OdbcDataReader r)
+        public static APDebitNote TransformReader(MySql.Data.MySqlClient.MySqlDataReader r)
         {
             APDebitNote tr = null;
             if (r.HasRows)
@@ -127,7 +127,7 @@ namespace Profit.Server
             }
             return tr;
         }
-        public static IList TransformReaderList(OdbcDataReader r)
+        public static IList TransformReaderList(MySql.Data.MySqlClient.MySqlDataReader r)
         {
             IList result = new ArrayList();
             while (r.Read())

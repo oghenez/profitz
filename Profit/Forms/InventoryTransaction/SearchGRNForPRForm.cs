@@ -18,10 +18,10 @@ namespace Profit
         GoodReceiveNoteRepository r_po = (GoodReceiveNoteRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.GOODRECEIVENOTE_REPOSITORY);
         public IList RESULT = new ArrayList();
         User m_user;
-        int m_supplierID;
+        Supplier m_supplierID;
         DateTime m_trDate;
 
-        public SearchGRNForPRForm(string textfind, int supplier, IList added, User user, DateTime trDate)
+        public SearchGRNForPRForm(string textfind, Supplier supplier, IList added, User user, DateTime trDate)
         {
             InitializeComponent();
             m_user = user;
@@ -30,6 +30,7 @@ namespace Profit
             m_supplierID = supplier;
             m_listAdded = added;
             searchText.Focus();
+            this.Text += " [" + supplier.CODE + "-" + supplier.NAME + "]";
         }
 
         private void loadResult(IList records)
@@ -65,7 +66,7 @@ namespace Profit
                 this.Cursor = Cursors.WaitCursor;
                 gridData.Rows.Clear();
 
-                IList records = r_po.FindPObyPartAndGRNNo(searchText.Text.Trim(), m_listAdded, m_supplierID, m_trDate);
+                IList records = r_po.FindPObyPartAndGRNNo(searchText.Text.Trim(), m_listAdded, m_supplierID.ID, m_trDate);
                 loadResult(records);
                 this.Cursor = Cursors.Default;
             }

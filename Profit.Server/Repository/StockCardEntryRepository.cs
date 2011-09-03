@@ -9,26 +9,26 @@ namespace Profit.Server
 {
     public class StockCardEntryRepository
     {
-        public static IList FindStockCardEntryInfoPart(OdbcCommand cmd)
+        public static IList FindStockCardEntryInfoPart(MySql.Data.MySqlClient.MySqlCommand cmd)
         {
             //string hql = String.Format("SELECT new PartDTO(p.Id, p.Code, p.Name) FROM {0} p", GetSubjectType().ToString());
            // IList result = HibernateTemplate.Find(hql);
             return null; ;
         }
-        public static void Delete(OdbcCommand cmd, StockCardEntry sc)
+        public static void Delete(MySql.Data.MySqlClient.MySqlCommand cmd, StockCardEntry sc)
         {
             cmd.CommandText = StockCardEntry.DeleteSQL(sc.ID);
             cmd.ExecuteNonQuery();
         }
-        public static StockCardEntry FindStockCardEntryByEventItem(OdbcCommand cmd, int itemID, StockCardEntryType scetype)
+        public static StockCardEntry FindStockCardEntryByEventItem(MySql.Data.MySqlClient.MySqlCommand cmd, int itemID, StockCardEntryType scetype)
         {
             cmd.CommandText = StockCardEntry.FindByEventItem(itemID, scetype);
-            OdbcDataReader r = cmd.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             StockCardEntry res = StockCardEntry.TransformReader(r);
             r.Close();
             return res;
         }
-        public static void Save(OdbcCommand cmd, StockCardEntry sce)
+        public static void Save(MySql.Data.MySqlClient.MySqlCommand cmd, StockCardEntry sce)
         {
             if (sce.ID == 0)
             {

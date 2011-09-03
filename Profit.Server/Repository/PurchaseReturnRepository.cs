@@ -45,7 +45,7 @@ namespace Profit.Server
         }
         protected override void doSave(Event e)
         {
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             try
             {
                 m_command.Transaction = trc;
@@ -85,7 +85,7 @@ namespace Profit.Server
         }
         protected override void doUpdate(Event en)
         {
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             m_command.Transaction = trc;
             try
             {
@@ -111,7 +111,7 @@ namespace Profit.Server
                 m_command.CommandText = PurchaseReturnItem.DeleteUpdate(e.ID, e.EVENT_ITEMS);
                 m_command.ExecuteNonQuery();
                 //m_command.CommandText = PurchaseReturnItem.GetByEventIDSQL(e.ID);
-                //OdbcDataReader r = m_command.ExecuteReader();
+                //MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
                 //IList luc = PurchaseReturnItem.TransformReaderList(r);
                 //r.Close();
                 //foreach (PurchaseReturnItem chk in luc)
@@ -137,7 +137,7 @@ namespace Profit.Server
         protected override void doDelete(Event e)
         {
             PurchaseReturn st = (PurchaseReturn)e;//this.Get(e.ID);
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             m_command.Transaction = trc;
             try
             {
@@ -171,7 +171,7 @@ namespace Profit.Server
         protected override Event doGet(int ID)
         {
             m_command.CommandText = PurchaseReturn.GetByIDSQL(ID);
-            OdbcDataReader r = m_command.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             PurchaseReturn st = PurchaseReturn.TransformReader(r);
             r.Close();
             m_command.CommandText = PurchaseReturnItem.GetByEventIDSQL(ID);
@@ -194,10 +194,10 @@ namespace Profit.Server
             m_command.CommandText = PurchaseReturn.GetUpdateStatusSQL(e);
             m_command.ExecuteNonQuery();
         }
-        public static PurchaseReturnItem FindGRNItem(OdbcCommand cmd, int grnIID)
+        public static PurchaseReturnItem FindGRNItem(MySql.Data.MySqlClient.MySqlCommand cmd, int grnIID)
         {
             cmd.CommandText = PurchaseReturnItem.FindByGrnItemIDSQL(grnIID);
-            OdbcDataReader r = cmd.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             PurchaseReturnItem res = PurchaseReturnItem.TransformReader(r);
             r.Close();
             if (res == null) return null;
@@ -213,7 +213,7 @@ namespace Profit.Server
             try
             {
                 m_command.CommandText = PurchaseReturn.GetSearch(find);
-                OdbcDataReader r = m_command.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
                 IList rest = PurchaseReturn.TransformReaderList(r);
                 r.Close();
                 return rest;
@@ -240,7 +240,7 @@ namespace Profit.Server
         public override Event FindLastCodeAndTransactionDate(string codesample)
         {
             m_command.CommandText = PurchaseReturn.FindLastCodeAndTransactionDate(codesample);
-            OdbcDataReader r = m_command.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             Event e = PurchaseReturn.TransformReader(r);
             r.Close();
             return e;
@@ -259,7 +259,7 @@ namespace Profit.Server
         public IList FindPRForAPDebitNote(string find, int supID,DateTime trdate,IList added)
         {
             m_command.CommandText = APDebitNoteItem.GetPRUsedByAPDN();
-            OdbcDataReader r = m_command.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             if (r.HasRows)
             {
                 while (r.Read())
@@ -309,20 +309,24 @@ namespace Profit.Server
                     t.GRN_ITEM.PO_ITEM = PurchaseOrderItem.TransformReader(r);
                     r.Close();
 
-                    t.GRN_ITEM.PO_ITEM.PART.UNIT_CONVERSION_LIST = PartRepository.GetUnitConversionsStatic(m_command, t.GRN_ITEM.PO_ITEM.PART.ID);
-                    t.PART = t.GRN_ITEM.PO_ITEM.PART;
+                    t.GRN_ITEM.PART = PartRepository.GetByID(m_command, t.GRN_ITEM.PART.ID);
+                    t.GRN_ITEM.PART.UNIT_CONVERSION_LIST = PartRepository.GetUnitConversionsStatic(m_command, t.GRN_ITEM.PO_ITEM.PART.ID);
+                    t.PART = t.GRN_ITEM.PO_ITEM.PART = t.GRN_ITEM.PART;
 
                     double subamount = (t.GRN_ITEM.PO_ITEM.SUBTOTAL / t.GRN_ITEM.PO_ITEM.GetAmountInSmallestUnit()) * t.GetAmountInSmallestUnit();
                     p.TOTAL_AMOUNT_FROM_PO += subamount;
+
+                    t.GRN_ITEM.PO_ITEM.EVENT = PurchaseOrderRepository.GetHeaderOnly(m_command, t.GRN_ITEM.PO_ITEM.EVENT.ID);
+                    p.CURRENCY = ((PurchaseOrder)t.GRN_ITEM.PO_ITEM.EVENT).CURRENCY;
                 }
             }
             return result;
         }
 
-        public static PurchaseReturn GetPurchaseReturnForDebitNote(OdbcCommand cmd, PurchaseReturn p)
+        public static PurchaseReturn GetPurchaseReturnForDebitNote(MySql.Data.MySqlClient.MySqlCommand cmd, PurchaseReturn p)
         {
             cmd.CommandText = PurchaseReturnItem.GetByEventIDSQL(p.ID);
-            OdbcDataReader r = cmd.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             p.EVENT_ITEMS = PurchaseReturnItem.TransformReaderList(r);
             r.Close();
 
@@ -345,11 +349,15 @@ namespace Profit.Server
                 t.GRN_ITEM.PO_ITEM = PurchaseOrderItem.TransformReader(r);
                 r.Close();
 
-                t.GRN_ITEM.PO_ITEM.PART.UNIT_CONVERSION_LIST = PartRepository.GetUnitConversionsStatic(cmd, t.GRN_ITEM.PO_ITEM.PART.ID);
-                t.PART = t.GRN_ITEM.PO_ITEM.PART;
+                t.GRN_ITEM.PART = PartRepository.GetByID(cmd, t.GRN_ITEM.PART.ID);
+                t.GRN_ITEM.PART.UNIT_CONVERSION_LIST = PartRepository.GetUnitConversionsStatic(cmd, t.GRN_ITEM.PO_ITEM.PART.ID);
+                t.PART = t.GRN_ITEM.PO_ITEM.PART = t.GRN_ITEM.PART;
 
                 double subamount = (t.GRN_ITEM.PO_ITEM.SUBTOTAL / t.GRN_ITEM.PO_ITEM.GetAmountInSmallestUnit()) * t.GetAmountInSmallestUnit();
                 p.TOTAL_AMOUNT_FROM_PO += subamount;
+
+                t.GRN_ITEM.PO_ITEM.EVENT = PurchaseOrderRepository.GetHeaderOnly(cmd, t.GRN_ITEM.PO_ITEM.EVENT.ID);
+                p.CURRENCY = ((PurchaseOrder)t.GRN_ITEM.PO_ITEM.EVENT).CURRENCY;
             }
             return p;
         }

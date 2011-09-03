@@ -112,7 +112,7 @@ namespace Profit.Server
                 AGAINST_GRN_STATUS.ToString(),
                  GetAmountInSmallestUnit(),//OUTSTANDING_AMOUNT_TO_GRN,
                 0,//RECEIVED_AMOUNT,
-                PRICE / GetAmountInSmallestUnit()-----kalau Unit lain baru dibagi
+                UNIT.ID==PART.UNIT.ID?PRICE :PRICE / GetAmountInSmallestUnit()//-----kalau Unit lain baru dibagi
                 );
         }
         public override string GetUpdateSQL()
@@ -162,10 +162,10 @@ namespace Profit.Server
                 AGAINST_GRN_STATUS.ToString(),
                 GetAmountInSmallestUnit(),
                 RECEIVED_AMOUNT,
-                PRICE / GetAmountInSmallestUnit(),
+                UNIT.ID==PART.UNIT.ID?PRICE :PRICE / GetAmountInSmallestUnit(),
                 ID);
         }
-        public static PurchaseOrderItem TransformReader(OdbcDataReader aReader)
+        public static PurchaseOrderItem TransformReader(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             PurchaseOrderItem transaction = null;
             if (aReader.HasRows)
@@ -198,7 +198,7 @@ namespace Profit.Server
             }
             return transaction;
         }
-        public static IList TransformReaderList(OdbcDataReader aReader)
+        public static IList TransformReaderList(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())

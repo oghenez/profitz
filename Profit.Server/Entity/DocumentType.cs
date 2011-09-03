@@ -24,7 +24,7 @@ namespace Profit.Server
             ID = id;
             CODE = code;
         }
-        public IEntity Get(OdbcDataReader aReader)
+        public IEntity Get(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             DocumentType docType = null;
             while (aReader.Read())
@@ -79,7 +79,7 @@ namespace Profit.Server
         {
             return String.Format(@"SELECT * FROM table_documenttype p where concat(p.doctype_code, p.doctype_name) like '%{0}%'", find);
         }
-        public IList GetAll(OdbcDataReader aReader)
+        public IList GetAll(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())

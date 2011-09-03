@@ -26,7 +26,7 @@ namespace Profit.Server
             ID = id;
             CODE = code;
         }
-        public IEntity Get(OdbcDataReader aReader)
+        public IEntity Get(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             Tax tax = null;
             while (aReader.Read())
@@ -83,7 +83,7 @@ namespace Profit.Server
         {
             return String.Format(@"SELECT * FROM table_tax p where concat(p.tax_code, p.tax_name) like '%{0}%'", find);
         }
-        public IList GetAll(OdbcDataReader aReader)
+        public IList GetAll(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())

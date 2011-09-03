@@ -16,30 +16,35 @@ namespace Profit
     {
         IList m_listAdded = new ArrayList();
         PurchaseReturnRepository r_po = (PurchaseReturnRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.PURCHASE_RETURN_REPOSITORY);
+        Repository r_ccy =RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY);
+
         public IList RESULT = new ArrayList();
         User m_user;
-        int m_supplierID;
+        Supplier m_supplierID;
         DateTime m_trDate;
 
-        public SearchPRForAPDebitNoteForm(int supplier, IList added, User user, DateTime trDate)
+        public SearchPRForAPDebitNoteForm(Supplier supplier, IList added, User user, DateTime trDate)
         {
             InitializeComponent();
             m_user = user;
             m_trDate = trDate;
             m_supplierID = supplier;
             m_listAdded = added;
-            IList records = r_po.FindPRForAPDebitNote("", supplier,m_trDate, added );
+            IList records = r_po.FindPRForAPDebitNote("", supplier.ID,m_trDate, added );
             loadResult(records);
+            this.Text += " [" + supplier.CODE + "-" + supplier.NAME + "]";
         }
 
         private void loadResult(IList records)
         {
             foreach (PurchaseReturn d in records)
             {
+                d.CURRENCY = (Currency)r_ccy.GetById(d.CURRENCY);
                 int row = gridData.Rows.Add();
                 gridData[checkColumn.Index, row].Value = false;
                 gridData[prNoColumn.Index, row].Value = d.CODE;
                 gridData[prDateColumn.Index, row].Value = d.TRANSACTION_DATE.ToString("dd-MM-yyyy");
+                gridData[ccyColumn.Index, row].Value = d.CURRENCY.CODE;
                 gridData[amountColumn.Index, row].Value = d.TOTAL_AMOUNT_FROM_PO;
                 gridData.Rows[row].Tag = d;
             }
@@ -58,7 +63,7 @@ namespace Profit
             {
                 this.Cursor = Cursors.WaitCursor;
                 gridData.Rows.Clear();
-                IList records = r_po.FindPRForAPDebitNote(searchText.Text.Trim(), m_supplierID, m_trDate, m_listAdded);
+                IList records = r_po.FindPRForAPDebitNote(searchText.Text.Trim(), m_supplierID.ID, m_trDate, m_listAdded);
                 loadResult(records);
                 this.Cursor = Cursors.Default;
             }
@@ -93,12 +98,27 @@ namespace Profit
 
         private void AddResult()
         {
-            for (int i = 0; i < gridData.Rows.Count; i++)
+            try
             {
-                bool check = Convert.ToBoolean(gridData[checkColumn.Index, i].Value);
-                if (!check) continue;
-                PurchaseReturn pi = (PurchaseReturn)gridData.Rows[i].Tag;
-                RESULT.Add(pi);
+                for (int i = 0; i < gridData.Rows.Count; i++)
+                {
+                    bool check = Convert.ToBoolean(gridData[checkColumn.Index, i].Value);
+                    if (!check) continue;
+                    PurchaseReturn pi = (PurchaseReturn)gridData.Rows[i].Tag;
+                    if (RESULT.Count > 0)
+                    {
+                        PurchaseReturn p1 = (PurchaseReturn)RESULT[0];
+                        if (p1.CURRENCY.ID != pi.CURRENCY.ID)
+                        {
+                            throw new Exception("Please select same currency");
+                        }
+                    }
+                    RESULT.Add(pi);
+                }
+            }
+            catch (Exception x)
+            {
+                KryptonMessageBox.Show(x.Message);
             }
         }
 

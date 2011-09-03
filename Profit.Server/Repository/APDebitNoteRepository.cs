@@ -45,7 +45,7 @@ namespace Profit.Server
         //}
         protected override void doSave(EventJournal e)
         {
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             try
             {
                 m_command.Transaction = trc;
@@ -85,7 +85,7 @@ namespace Profit.Server
         }
         protected override void doUpdate(EventJournal en)
         {
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             m_command.Transaction = trc;
             try
             {
@@ -121,7 +121,7 @@ namespace Profit.Server
         protected override void doDelete(EventJournal e)
         {
             APDebitNote st = (APDebitNote)e;
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             m_command.Transaction = trc;
             try
             {
@@ -149,7 +149,7 @@ namespace Profit.Server
         protected override EventJournal doGet(int ID)
         {
             m_command.CommandText = APDebitNote.GetByIDSQL(ID);
-            OdbcDataReader r = m_command.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             APDebitNote st = APDebitNote.TransformReader(r);
             r.Close();
             m_command.CommandText = APDebitNoteItem.GetByEventIDSQL(ID);
@@ -179,10 +179,10 @@ namespace Profit.Server
             m_command.CommandText = APDebitNote.GetUpdateStatusSQL(e);
             m_command.ExecuteNonQuery();
         }
-        //public static APDebitNoteItem FindGRNItem(OdbcCommand cmd, int grnIID)
+        //public static APDebitNoteItem FindGRNItem(MySql.Data.MySqlClient.MySqlCommand cmd, int grnIID)
         //{
         //    cmd.CommandText = APDebitNoteItem.FindByGrnItemIDSQL(grnIID);
-        //    OdbcDataReader r = cmd.ExecuteReader();
+        //    MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
         //    APDebitNoteItem res = APDebitNoteItem.TransformReader(r);
         //    r.Close();
         //    cmd.CommandText = APDebitNote.GetByIDSQL(res.EVENT.ID);
@@ -197,7 +197,7 @@ namespace Profit.Server
             try
             {
                 m_command.CommandText = APDebitNote.GetSearch(find);
-                OdbcDataReader r = m_command.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
                 IList rest = APDebitNote.TransformReaderList(r);
                 r.Close();
                 return rest;
@@ -224,7 +224,7 @@ namespace Profit.Server
         public override EventJournal FindLastCodeAndTransactionDate(string codesample)
         {
             m_command.CommandText = APDebitNote.FindLastCodeAndTransactionDate(codesample);
-            OdbcDataReader r = m_command.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             EventJournal e = APDebitNote.TransformReader(r);
             r.Close();
             return e;
@@ -329,15 +329,15 @@ namespace Profit.Server
         public IList FindAPDNForPayment(int supID, DateTime trdate, string find)
         {
             m_command.CommandText = APDebitNote.GetForPayment(supID, trdate, find);
-            OdbcDataReader r = m_command.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             IList reuslt = APDebitNote.TransformReaderList(r);
             r.Close();
             return reuslt;
         }
-        public static  APDebitNote FindAPDNForPayment(OdbcCommand m_command, int apdnID)
+        public static  APDebitNote FindAPDNForPayment(MySql.Data.MySqlClient.MySqlCommand m_command, int apdnID)
         {
             m_command.CommandText = APDebitNote.GetByIDSQL(apdnID);
-            OdbcDataReader r = m_command.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             APDebitNote reuslt = APDebitNote.TransformReader(r);
             r.Close();
             return reuslt;

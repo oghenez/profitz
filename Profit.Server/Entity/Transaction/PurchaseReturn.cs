@@ -11,6 +11,7 @@ namespace Profit.Server
     {
         public Supplier SUPPLIER = null;
         public double TOTAL_AMOUNT_FROM_PO = 0;
+        public Currency CURRENCY= null;
         public PurchaseReturn()
             : base()
         { }
@@ -76,7 +77,7 @@ namespace Profit.Server
                 DOCUMENT_DATE.ToString(Utils.DATE_FORMAT),
                 ID);
         }
-        public static PurchaseReturn TransformReader(OdbcDataReader aReader)
+        public static PurchaseReturn TransformReader(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             PurchaseReturn transaction = null;
             if (aReader.HasRows)
@@ -98,7 +99,7 @@ namespace Profit.Server
             }
             return transaction;
         }
-        public static IList TransformReaderList(OdbcDataReader aReader)
+        public static IList TransformReaderList(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())

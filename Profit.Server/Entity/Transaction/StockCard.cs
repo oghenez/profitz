@@ -191,7 +191,7 @@ namespace Profit.Server
         {
             return new StockCard(item.PART, item.WAREHOUSE, period);
         }
-        public static StockCard TransformReader(OdbcDataReader aReader)
+        public static StockCard TransformReader(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             StockCard stockcard = null;
             if (aReader.HasRows)
@@ -255,7 +255,7 @@ namespace Profit.Server
         {
             return "";
         }
-        public IList GetAll(OdbcDataReader aReader)
+        public IList GetAll(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())
@@ -272,7 +272,7 @@ namespace Profit.Server
             }
             return result;
         }
-        public static IList TransforReaderList(OdbcDataReader aReader)
+        public static IList TransforReaderList(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())
@@ -321,7 +321,7 @@ namespace Profit.Server
         #region IEntity Members
 
 
-        public IEntity Get(OdbcDataReader aReader)
+        public IEntity Get(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             throw new NotImplementedException();
         }

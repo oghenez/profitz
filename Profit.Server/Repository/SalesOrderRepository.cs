@@ -34,7 +34,7 @@ namespace Profit.Server
         }
         protected override void doSave(Event e)
         {
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             try
             {
                 m_command.Transaction = trc;
@@ -66,7 +66,7 @@ namespace Profit.Server
         }
         protected override void doUpdate(Event en)
         {
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             m_command.Transaction = trc;
             try
             {
@@ -93,7 +93,7 @@ namespace Profit.Server
                 m_command.CommandText = SalesOrderItem.DeleteUpdate(e.ID, e.EVENT_ITEMS);
                 m_command.ExecuteNonQuery();
                 //m_command.CommandText = SalesOrderItem.GetByEventIDSQL(e.ID);
-                //OdbcDataReader r = m_command.ExecuteReader();
+                //MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
                 //IList luc = SalesOrderItem.TransformReaderList(r);
                 //r.Close();
                 //foreach (SalesOrderItem chk in luc)
@@ -119,7 +119,7 @@ namespace Profit.Server
         protected override void doDelete(Event e)
         {
             SalesOrder st = (SalesOrder)e;//this.Get(e.ID);
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             m_command.Transaction = trc;
             try
             {
@@ -147,7 +147,7 @@ namespace Profit.Server
         protected override Event doGet(int ID)
         {
             m_command.CommandText = SalesOrder.GetByIDSQL(ID);
-            OdbcDataReader r = m_command.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             SalesOrder st = SalesOrder.TransformReader(r);
             r.Close();
             m_command.CommandText = SalesOrderItem.GetByEventIDSQL(ID);
@@ -168,17 +168,17 @@ namespace Profit.Server
             m_command.CommandText = SalesOrder.GetUpdateStatusSQL(e);
             m_command.ExecuteNonQuery();
         }
-        public static void UpdateAgainstStatus(OdbcCommand cmd, SalesOrder po, SalesOrderItem poi)
+        public static void UpdateAgainstStatus(MySql.Data.MySqlClient.MySqlCommand cmd, SalesOrder po, SalesOrderItem poi)
         {
             cmd.CommandText = poi.UpdateAgainstStatus();
             cmd.ExecuteNonQuery();
             cmd.CommandText = po.UpdateAgainstStatus();
             cmd.ExecuteNonQuery();
         }
-        public static SalesOrderItem FindSalesOrderItem(OdbcCommand cmd, int poiID)
+        public static SalesOrderItem FindSalesOrderItem(MySql.Data.MySqlClient.MySqlCommand cmd, int poiID)
         {
             cmd.CommandText = SalesOrderItem.GetByIDSQL(poiID);
-            OdbcDataReader r = cmd.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             SalesOrderItem result = SalesOrderItem.TransformReader(r);
             r.Close();
             //cmd.CommandText = SalesOrder.GetByIDSQL(result.ID);
@@ -188,10 +188,10 @@ namespace Profit.Server
             //r.Close();
             return result;
         }
-        public static SalesOrder GetHeaderOnly(OdbcCommand cmd , int poID)
+        public static SalesOrder GetHeaderOnly(MySql.Data.MySqlClient.MySqlCommand cmd , int poID)
         {
             cmd.CommandText = SalesOrder.GetByIDSQL(poID);
-            OdbcDataReader r = cmd.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             SalesOrder st = SalesOrder.TransformReader(r);
             r.Close();
             return st;

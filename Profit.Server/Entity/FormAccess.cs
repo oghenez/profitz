@@ -33,7 +33,7 @@ namespace Profit.Server
             CODE = code;
             NAME = name;
         }
-        public IEntity Get(OdbcDataReader aReader)
+        public IEntity Get(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             FormAccess formaccess = null;
             while (aReader.Read())
@@ -111,7 +111,7 @@ namespace Profit.Server
         {
             return String.Format("select * from table_formaccess where user_id={0}",userID);
         }
-        public IList GetAll(OdbcDataReader aReader)
+        public IList GetAll(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())
@@ -130,7 +130,7 @@ namespace Profit.Server
             }
             return result;
         }
-        public static  IList GetAllStatic(OdbcDataReader aReader)
+        public static  IList GetAllStatic(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())

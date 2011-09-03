@@ -816,7 +816,7 @@ namespace Profit
                 addedPI.Add(pi.ID);
             }
             using (SearchGRNForSuppInvoiceForm frm = new SearchGRNForSuppInvoiceForm(
-                 ((Supplier)supplierkryptonComboBox.SelectedItem).ID, addedPI, m_mainForm.CurrentUser, dateKryptonDateTimePicker.Value))
+                 ((Supplier)supplierkryptonComboBox.SelectedItem), addedPI, m_mainForm.CurrentUser, dateKryptonDateTimePicker.Value))
             {
                 frm.ShowDialog();
                 IList result = frm.RESULT;
@@ -852,6 +852,14 @@ namespace Profit
                    // }
                     updateSubtotal(row);
                 }
+            }
+        }
+
+        private void searchToolStripTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                searchToolStripButton_Click(null, null);
             }
         }
     }

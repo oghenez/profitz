@@ -96,12 +96,12 @@ namespace Profit.Server
             throw new NotImplementedException();
         }
 
-        public IEntity Get(System.Data.Odbc.OdbcDataReader aReader)
+        public IEntity Get(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             throw new NotImplementedException();
         }
 
-        public IList GetAll(System.Data.Odbc.OdbcDataReader aReader)
+        public IList GetAll(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             throw new NotImplementedException();
         }

@@ -52,7 +52,7 @@ namespace Profit.Server
         }
         protected override void doSave(Event e)
         {
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             try
             {
                 m_command.Transaction = trc;
@@ -84,7 +84,7 @@ namespace Profit.Server
         }
         protected override void doUpdate(Event en)
         {
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             m_command.Transaction = trc;
             try
             {
@@ -111,7 +111,7 @@ namespace Profit.Server
                 m_command.CommandText = DeliveryOrderItem.DeleteUpdate(e.ID,e.EVENT_ITEMS);
                 m_command.ExecuteNonQuery();
                 //m_command.CommandText = DeliveryOrderItem.GetByEventIDSQL(e.ID);
-                //OdbcDataReader r = m_command.ExecuteReader();
+                //MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
                 //IList luc = DeliveryOrderItem.TransformReaderList(r);
                 //r.Close();
                 //foreach (DeliveryOrderItem chk in luc)
@@ -137,7 +137,7 @@ namespace Profit.Server
         protected override void doDelete(Event e)
         {
             DeliveryOrder st = (DeliveryOrder)e;//this.Get(e.ID);
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             m_command.Transaction = trc;
             try
             {
@@ -165,7 +165,7 @@ namespace Profit.Server
         protected override Event doGet(int ID)
         {
             m_command.CommandText = DeliveryOrder.GetByIDSQL(ID);
-            OdbcDataReader r = m_command.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             DeliveryOrder st = DeliveryOrder.TransformReader(r);
             r.Close();
             m_command.CommandText = DeliveryOrderItem.GetByEventIDSQL(ID);
@@ -187,35 +187,35 @@ namespace Profit.Server
             m_command.CommandText = DeliveryOrder.GetUpdateStatusSQL(e);
             m_command.ExecuteNonQuery();
         }
-        public static DeliveryOrderItem FindDOItem(OdbcCommand cmd, int PoIID)
+        public static DeliveryOrderItem FindDOItem(MySql.Data.MySqlClient.MySqlCommand cmd, int PoIID)
         {
             cmd.CommandText = DeliveryOrderItem.FindBySOItemIDSQL(PoIID);
-            OdbcDataReader r = cmd.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             DeliveryOrderItem res = DeliveryOrderItem.TransformReader(r);
             r.Close();
             return res;
         }
-        public static void UpdateAgainstStatus(OdbcCommand cmd, DeliveryOrder grn, DeliveryOrderItem grni)
+        public static void UpdateAgainstStatus(MySql.Data.MySqlClient.MySqlCommand cmd, DeliveryOrder grn, DeliveryOrderItem grni)
         {
             cmd.CommandText = grni.UpdateAgainstStatus();
             cmd.ExecuteNonQuery();
             cmd.CommandText = grn.UpdateAgainstStatus();
             cmd.ExecuteNonQuery();
         }
-        public static DeliveryOrderItem FindDeliveryOrderItem(OdbcCommand cmd, int grniID)
+        public static DeliveryOrderItem FindDeliveryOrderItem(MySql.Data.MySqlClient.MySqlCommand cmd, int grniID)
         {
             cmd.CommandText = DeliveryOrderItem.GetByIDSQL(grniID);
-            OdbcDataReader r = cmd.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             DeliveryOrderItem result = DeliveryOrderItem.TransformReader(r);
             r.Close();
             result.EVENT = DeliveryOrderRepository.GetHeaderOnly(cmd, result.EVENT.ID);
             result.EVENT.EVENT_ITEMS.Add(result);
             return result;
         }
-        public static DeliveryOrder GetHeaderOnly(OdbcCommand cmd, int grnID)
+        public static DeliveryOrder GetHeaderOnly(MySql.Data.MySqlClient.MySqlCommand cmd, int grnID)
         {
             cmd.CommandText = DeliveryOrder.GetByIDSQL(grnID);
-            OdbcDataReader r = cmd.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             DeliveryOrder st = DeliveryOrder.TransformReader(r);
             r.Close();
             return st;

@@ -34,7 +34,7 @@ namespace Profit.Server
             ID = id;
             CODE = code;
         }
-        public IEntity Get(OdbcDataReader aReader)
+        public IEntity Get(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             UnitConversion unitConv = null;
             while (aReader.Read())
@@ -52,7 +52,7 @@ namespace Profit.Server
             }
             return unitConv;
         }
-        public static UnitConversion GetUnitConversion(OdbcDataReader aReader)
+        public static UnitConversion GetUnitConversion(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             UnitConversion unitConv = null;
             if (aReader.HasRows)
@@ -165,7 +165,7 @@ namespace Profit.Server
         {
             return "";
         }
-        public IList GetAll(OdbcDataReader aReader)
+        public IList GetAll(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())
@@ -184,7 +184,7 @@ namespace Profit.Server
             }
             return result;
         }
-        public static IList GetAllStatic(OdbcDataReader aReader)
+        public static IList GetAllStatic(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())

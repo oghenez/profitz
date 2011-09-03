@@ -615,6 +615,8 @@ namespace Profit
         {
             Supplier em = (Supplier)supplierkryptonComboBox.SelectedItem;
             supplierKryptonTextBox.Text = em == null ? "" : em.NAME;
+            addressKryptonTextBox.Text = em == null ? "" : em.ADDRESS;
+            contactPersonKryptonTextBox.Text = em == null ? "" : em.CONTACT;
             itemsDataGrid.Rows.Clear();
         }
 
@@ -637,7 +639,7 @@ namespace Profit
                 addedPI.Add(pi.ID);
             }
             using (SearchPRForAPDebitNoteForm frm = new SearchPRForAPDebitNoteForm(
-                 ((Supplier)supplierkryptonComboBox.SelectedItem).ID, addedPI, m_mainForm.CurrentUser, dateKryptonDateTimePicker.Value))
+                 (Supplier)supplierkryptonComboBox.SelectedItem, addedPI, m_mainForm.CurrentUser, dateKryptonDateTimePicker.Value))
             {
                 frm.ShowDialog();
                 IList result = frm.RESULT;
@@ -651,6 +653,14 @@ namespace Profit
                     itemsDataGrid[notesColumn.Index, row].Value = "Wizard from PR# " + item.CODE;
                     ReCalculateNetTotal();
                 }
+            }
+        }
+
+        private void searchToolStripTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                searchToolStripButton_Click(null, null);
             }
         }
     }

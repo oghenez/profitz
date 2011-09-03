@@ -18,10 +18,10 @@ namespace Profit
         PurchaseOrderRepository r_po = (PurchaseOrderRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.PURCHASEORDER_REPOSITORY);
         public IList RESULT = new ArrayList();
         User m_user;
-        int m_supplierID;
+        Supplier m_supplierID;
         DateTime m_trdate;
 
-        public SearchPOForGRNForm(string textfind, int supplier, IList added, User user, DateTime trDate)
+        public SearchPOForGRNForm(string textfind, Supplier supplier, IList added, User user, DateTime trDate)
         {
             InitializeComponent();
             m_user = user;
@@ -30,6 +30,7 @@ namespace Profit
             m_supplierID = supplier;
             m_listAdded = added;
             searchText.Focus();
+            this.Text += " [" + supplier.CODE + "-" + supplier.NAME + "]";
         }
 
         private void loadResult(IList records)
@@ -65,7 +66,7 @@ namespace Profit
                 this.Cursor = Cursors.WaitCursor;
                 gridData.Rows.Clear();
 
-                IList records = r_po.FindPObyPartAndPONo(searchText.Text.Trim(), m_listAdded, m_supplierID, m_trdate);
+                IList records = r_po.FindPObyPartAndPONo(searchText.Text.Trim(), m_listAdded, m_supplierID.ID, m_trdate);
                 loadResult(records);
                 this.Cursor = Cursors.Default;
             }

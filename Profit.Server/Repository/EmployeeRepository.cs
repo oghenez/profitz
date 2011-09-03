@@ -19,8 +19,8 @@ namespace Profit.Server
             {
                 OpenConnection();
                 Employee emp = (Employee)m_entity;
-                OdbcCommand aCommand = new OdbcCommand(emp.GetAllPurchaser(), m_connection);
-                OdbcDataReader aReader = aCommand.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand(emp.GetAllPurchaser(), m_connection);
+                MySql.Data.MySqlClient.MySqlDataReader aReader = aCommand.ExecuteReader();
                 IList a = m_entity.GetAll(aReader);
                 return a;
             }
@@ -39,8 +39,8 @@ namespace Profit.Server
             {
                 OpenConnection();
                 Employee emp = (Employee)m_entity;
-                OdbcCommand aCommand = new OdbcCommand(emp.GetAllStoreman(), m_connection);
-                OdbcDataReader aReader = aCommand.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand(emp.GetAllStoreman(), m_connection);
+                MySql.Data.MySqlClient.MySqlDataReader aReader = aCommand.ExecuteReader();
                 IList a = m_entity.GetAll(aReader);
                 return a;
             }
@@ -59,8 +59,8 @@ namespace Profit.Server
             {
                 OpenConnection();
                 Employee emp = (Employee)m_entity;
-                OdbcCommand aCommand = new OdbcCommand(emp.GetAllSalesman(), m_connection);
-                OdbcDataReader aReader = aCommand.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand(emp.GetAllSalesman(), m_connection);
+                MySql.Data.MySqlClient.MySqlDataReader aReader = aCommand.ExecuteReader();
                 IList a = m_entity.GetAll(aReader);
                 return a;
             }

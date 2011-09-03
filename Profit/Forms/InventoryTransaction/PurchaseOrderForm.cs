@@ -815,5 +815,13 @@ namespace Profit
                 itemsDataGrid[receivedunitColumn.Index, i].Value = p.UNIT.ToString();
             }
         }
+
+        private void searchToolStripTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                searchToolStripButton_Click(null, null);
+            }
+        }
     }
 }

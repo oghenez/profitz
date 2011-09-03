@@ -154,7 +154,7 @@ namespace Profit.Server
                 DOCUMENT_DATE.ToString(Utils.DATE_FORMAT),
                 ID);
         }
-        public static PurchaseOrder TransformReader(OdbcDataReader aReader)
+        public static PurchaseOrder TransformReader(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             PurchaseOrder transaction = null;
             if (aReader.HasRows)
@@ -189,7 +189,7 @@ namespace Profit.Server
             }
             return transaction;
         }
-        public static IList TransformReaderList(OdbcDataReader aReader)
+        public static IList TransformReaderList(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())
@@ -274,7 +274,8 @@ namespace Profit.Server
         {
             return String.Format(@"select * from table_purchaseorder p
                 INNER JOIN table_employee e on e.emp_id = p.emp_id
-                where concat(p.po_code, e.emp_code, e.emp_name)
+                INNER JOIN table_supplier s on s.sup_id = p.sup_id
+                where concat(p.po_code, e.emp_code, e.emp_name, s.sup_code, s.sup_name)
                 like '%{0}%'", find);
         }
     }

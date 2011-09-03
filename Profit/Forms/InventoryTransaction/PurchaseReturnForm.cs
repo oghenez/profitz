@@ -85,7 +85,7 @@ namespace Profit
                         itemsDataGrid[scanColumn.Index, row].Value = itm.EVENT.CODE;
                         itemsDataGrid[codeColumn.Index, row].Value = itm.PART.CODE;
                         itemsDataGrid[nameColumn.Index, row].Value = itm.PART.NAME;
-                        itemsDataGrid[grnQtyColumn.Index, e.RowIndex].Value = itm.GetAmountInSmallestUnit();
+                        itemsDataGrid[grnQtyColumn.Index, row].Value = itm.GetAmountInSmallestUnit();
                         itemsDataGrid[OutstandingPOColumn.Index, row].Value = itm.RETURNED_AMOUNT;
                         itemsDataGrid[OutstandingunitColumn.Index, row].Value = itm.PART.UNIT.CODE;
                         itemsDataGrid[QtyColumn.Index, row].Value = 0;
@@ -139,7 +139,7 @@ namespace Profit
                 IList res = r_grn.FindPObyPartAndGRNNo(e.FormattedValue.ToString(), addedPI, ((Supplier)supplierkryptonComboBox.SelectedItem).ID, dateKryptonDateTimePicker.Value);
                 if (res.Count == 0)
                 {
-                    using (SearchGRNForPRForm fr = new SearchGRNForPRForm(e.FormattedValue.ToString(), ((Supplier)supplierkryptonComboBox.SelectedItem).ID, addedPI, m_mainForm.CurrentUser, dateKryptonDateTimePicker.Value))
+                    using (SearchGRNForPRForm fr = new SearchGRNForPRForm(e.FormattedValue.ToString(), (Supplier)supplierkryptonComboBox.SelectedItem, addedPI, m_mainForm.CurrentUser, dateKryptonDateTimePicker.Value))
                     {
                         fr.ShowDialog();
                         IList result = fr.RESULT;
@@ -488,8 +488,9 @@ namespace Profit
                 itemsDataGrid[notesColumn.Index, i].Value = item.NOTES;
                 itemsDataGrid[unitColumn.Index, i].Value = item.UNIT.ToString(); ;
                 itemsDataGrid[grnQtyColumn.Index, i].Value = item.GRN_ITEM.QYTAMOUNT;
-                itemsDataGrid[OutstandingPOColumn.Index, i].Value = item.GRN_ITEM.OUTSTANDING_AMOUNT_TO_PR;
+                //itemsDataGrid[OutstandingPOColumn.Index, i].Value = item.GRN_ITEM.OUTSTANDING_AMOUNT_TO_PR;
                 itemsDataGrid[OutstandingunitColumn.Index, i].Value = item.GRN_ITEM.PART.UNIT.CODE;
+                itemsDataGrid[OutstandingPOColumn.Index, i].Value = item.GRN_ITEM.RETURNED_AMOUNT;
 
             }
         }
@@ -586,6 +587,14 @@ namespace Profit
             {
                 itemsDataGrid.Rows[count].HeaderCell.Value = string.Format((count + 1).ToString(), "0");
                 itemsDataGrid.Rows[count].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
+        }
+
+        private void searchToolStripTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                searchToolStripButton_Click(null,null);
             }
         }
     }

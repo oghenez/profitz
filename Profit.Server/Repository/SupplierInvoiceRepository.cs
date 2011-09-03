@@ -68,7 +68,7 @@ namespace Profit.Server
 
         protected override void doSave(Event e)
         {
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             try
             {
                 m_command.Transaction = trc;
@@ -107,7 +107,7 @@ namespace Profit.Server
         }
         protected override void doUpdate(Event en)
         {
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             m_command.Transaction = trc;
             try
             {
@@ -144,7 +144,7 @@ namespace Profit.Server
         protected override void doDelete(Event e)
         {
             SupplierInvoice st = (SupplierInvoice)e;
-            OdbcTransaction trc = m_connection.BeginTransaction();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             m_command.Transaction = trc;
             try
             {
@@ -172,7 +172,7 @@ namespace Profit.Server
         protected override Event doGet(int ID)
         {
             m_command.CommandText = SupplierInvoice.GetByIDSQL(ID);
-            OdbcDataReader r = m_command.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             SupplierInvoice st = SupplierInvoice.TransformReader(r);
             r.Close();
             m_command.CommandText = SupplierInvoiceItem.GetByEventIDSQL(ID);
@@ -196,20 +196,20 @@ namespace Profit.Server
             m_command.ExecuteNonQuery();
         }
 
-        public static SupplierInvoiceItem FindSupplierInvoiceItem(OdbcCommand cmd, int poiID)
+        public static SupplierInvoiceItem FindSupplierInvoiceItem(MySql.Data.MySqlClient.MySqlCommand cmd, int poiID)
         {
             cmd.CommandText = SupplierInvoiceItem.GetByIDSQL(poiID);
-            OdbcDataReader r = cmd.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             SupplierInvoiceItem result = SupplierInvoiceItem.TransformReader(r);
             r.Close();
             result.EVENT = PurchaseOrderRepository.GetHeaderOnly(cmd, result.EVENT.ID);
             result.EVENT.EVENT_ITEMS.Add(result);
             return result;
         }
-        public static SupplierInvoice GetHeaderOnly(OdbcCommand cmd , int poID)
+        public static SupplierInvoice GetHeaderOnly(MySql.Data.MySqlClient.MySqlCommand cmd , int poID)
         {
             cmd.CommandText = SupplierInvoice.GetByIDSQL(poID);
-            OdbcDataReader r = cmd.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             SupplierInvoice st = SupplierInvoice.TransformReader(r);
             r.Close();
             return st;
@@ -219,7 +219,7 @@ namespace Profit.Server
             try
             {
                 m_command.CommandText = SupplierInvoice.GetSearch(find);
-                OdbcDataReader r = m_command.ExecuteReader();
+                MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
                 IList rest = SupplierInvoice.TransformReaderList(r);
                 r.Close();
                 return rest;
@@ -245,7 +245,7 @@ namespace Profit.Server
         public override Event FindLastCodeAndTransactionDate(string codesample)
         {
             m_command.CommandText = SupplierInvoice.FindLastCodeAndTransactionDate(codesample);
-            OdbcDataReader r = m_command.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             Event e = SupplierInvoice.TransformReader(r);
             r.Close();
             return e;
@@ -273,7 +273,7 @@ namespace Profit.Server
             pois = exceptPOI.Count>0?pois.Substring(0, pois.Length - 1):"";
 
             m_command.CommandText = SupplierInvoiceItem.GetSearchByPartAndPONo(find,supplierID, pois, trDate);
-            OdbcDataReader r = m_command.ExecuteReader();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             IList result = SupplierInvoiceItem.TransformReaderList(r);
             r.Close();
             foreach (SupplierInvoiceItem t in result)

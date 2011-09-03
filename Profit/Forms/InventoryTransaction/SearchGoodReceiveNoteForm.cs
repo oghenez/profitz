@@ -21,6 +21,7 @@ namespace Profit
         PartRepository r_part = (PartRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_REPOSITORY);
         Repository r_ccy = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY);
         Repository r_unit = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY);
+        Repository r_sup = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.SUPPLIER_REPOSITORY);
         public GoodReceiveNote GOOD_RECEIVE_NOTE = null;
         IList m_listLastresult = new ArrayList();
 
@@ -43,8 +44,9 @@ namespace Profit
             foreach (GoodReceiveNote d in records)
             {
                 d.EMPLOYEE = (Employee)r_employee.GetById(d.EMPLOYEE);
+                d.SUPPLIER = (Supplier)r_sup.GetById(d.SUPPLIER);
                 //d.WAREHOUSE = (Warehouse)r_warehouse.GetById(d.WAREHOUSE);
-                int row = gridData.Rows.Add(d.CODE, d.TRANSACTION_DATE.ToString("dd-MM-yyyy"), d.EMPLOYEE.CODE,d.POSTED);
+                int row = gridData.Rows.Add(d.CODE, d.TRANSACTION_DATE.ToString("dd-MM-yyyy"), d.SUPPLIER.NAME, d.EMPLOYEE.CODE,d.POSTED);
                 gridData.Rows[row].Tag = d;
             }
             gridData.ClearSelection();

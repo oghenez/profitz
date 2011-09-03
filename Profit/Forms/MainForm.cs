@@ -416,6 +416,8 @@ namespace Profit
                 kryptonPanel4.Width = 217;
                 buttonSpecAny3_Click(null, null);
             }
+            this.Width = UserSetting.GetIntValue("mainformwidth", CurrentUser.ID, this.Name, 1024);
+            this.Height = UserSetting.GetIntValue("mainformheight", CurrentUser.ID, this.Name, 600);
         }
 
         private void SetAuthorityFormAccess()
@@ -588,6 +590,9 @@ namespace Profit
         {
             UserSetting.SaveSetting("theme", toolStripComboBox1.SelectedItem.ToString(), CurrentUser.ID, this.Name, typeof(string));
             UserSetting.SaveSetting("menuwidth", kryptonPanel4.Width.ToString(), CurrentUser.ID, this.Name, typeof(int));
+            UserSetting.SaveSetting("mainformwidth", this.Width.ToString(), CurrentUser.ID, this.Name, typeof(int));
+            UserSetting.SaveSetting("mainformheight", this.Height.ToString(), CurrentUser.ID, this.Name, typeof(int));
+
         }
 
        
