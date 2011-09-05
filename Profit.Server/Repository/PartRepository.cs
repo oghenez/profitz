@@ -13,9 +13,13 @@ namespace Profit.Server
     public class PartRepository : Repository
     {
         string m_pictureFolder = System.Windows.Forms.Application.StartupPath + @"\picture\";
+        MySql.Data.MySqlClient.MySqlCommand m_cmd;
         public PartRepository(IEntity e)
             : base(e)
-        { }
+        {
+            m_cmd = new MySql.Data.MySqlClient.MySqlCommand();
+            m_cmd.Connection = m_connection;
+        }
         public override void Save(IEntity en)
         {
             OpenConnection();
@@ -474,5 +478,88 @@ namespace Profit.Server
         //    public int PART, UNIT;
             
         //}
+        public IList GetAllEvents(int partID)
+        {
+            ArrayList result = new ArrayList();
+
+            OpenConnection();
+            MySql.Data.MySqlClient.MySqlDataReader rdr; 
+            Part p = PartRepository.GetByID(m_cmd, partID);
+            
+            m_cmd.CommandText = PurchaseOrderItem.GetByPartIDSQL(partID);
+            rdr = m_cmd.ExecuteReader();
+            IList pois = PurchaseOrderItem.TransformReaderList(rdr);
+            rdr.Close();
+            foreach (PurchaseOrderItem itm in pois)
+            {
+                itm.EVENT = PurchaseOrderRepository.GetHeaderOnly(m_cmd, itm.EVENT.ID);
+                itm.PART = p;
+                result.Add(itm);
+            }
+
+            m_cmd.CommandText = GoodReceiveNoteItem.GetByPartIDSQL(partID);
+            rdr = m_cmd.ExecuteReader();
+            IList grnis = GoodReceiveNoteItem.TransformReaderList(rdr);
+            rdr.Close();
+            foreach (GoodReceiveNoteItem itm in grnis)
+            {
+                itm.EVENT = GoodReceiveNoteRepository.GetHeaderOnly(m_cmd, itm.EVENT.ID);
+                itm.PART = p;
+                result.Add(itm);
+            }
+
+            m_cmd.CommandText = PurchaseReturnItem.GetByPartIDSQL(partID);
+            rdr = m_cmd.ExecuteReader();
+            IList prnis = PurchaseReturnItem.TransformReaderList(rdr);
+            rdr.Close();
+            foreach (PurchaseReturnItem itm in prnis)
+            {
+                itm.EVENT = PurchaseReturnRepository.GetHeaderOnly(m_cmd, itm.EVENT.ID);
+                itm.PART = p;
+                result.Add(itm);
+            }
+
+            m_cmd.CommandText = SupplierInvoiceItem.GetByPartIDSQL(partID);
+            rdr = m_cmd.ExecuteReader();
+            IList piis = SupplierInvoiceItem.TransformReaderList(rdr);
+            rdr.Close();
+            foreach (SupplierInvoiceItem itm in piis)
+            {
+                itm.EVENT = SupplierInvoiceRepository.GetHeaderOnly(m_cmd, itm.EVENT.ID);
+                itm.PART = p;
+                if(itm.GRN_ITEM.ID==0)
+                    result.Add(itm);
+            }
+
+            
+            m_cmd.CommandText = StockTakingItems.GetByPartIDSQL(partID);
+            rdr = m_cmd.ExecuteReader();
+            IList sti = StockTakingItems.TransformReaderList(rdr);
+            rdr.Close();
+            foreach (StockTakingItems itm in sti)
+            {
+                itm.EVENT = StockTakingRepository.GetHeaderOnly(m_cmd, itm.EVENT.ID);
+                itm.PART = p;
+                result.Add(itm);
+            }
+
+            result.Sort(new EventDateComparer());
+            return result; 
+        }
+        private class EventDateComparer : IComparer
+        {
+
+            #region IComparer Members
+
+            public int Compare(object x, object y)
+            {
+                EventItem X = (EventItem)x;
+                EventItem Y = (EventItem)y;
+                return DateTime.Compare(X.EVENT.TRANSACTION_DATE, Y.EVENT.TRANSACTION_DATE);
+            }
+
+            #endregion
+        }
     }
+
 }

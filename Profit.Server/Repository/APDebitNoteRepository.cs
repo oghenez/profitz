@@ -342,5 +342,20 @@ namespace Profit.Server
             r.Close();
             return reuslt;
         }
+        internal static IList FindAPDNByPurchaseReturn(MySql.Data.MySqlClient.MySqlCommand cmd, int prID)
+        {
+            cmd.CommandText = APDebitNoteItem.GetAPDNItemByPRID(prID);
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
+            IList result = APDebitNoteItem.TransformReaderList(r);
+            r.Close();
+            foreach (APDebitNoteItem i in result)
+            {
+                cmd.CommandText = APDebitNote.GetByIDSQL(i.EVENT_JOURNAL.ID);
+                r = cmd.ExecuteReader();
+                i.EVENT_JOURNAL = APDebitNote.TransformReader(r);
+                r.Close();
+            }
+            return result;
+        }
     }
 }

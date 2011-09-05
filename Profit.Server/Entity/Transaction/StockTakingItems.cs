@@ -117,6 +117,10 @@ namespace Profit.Server
         {
             return String.Format("SELECT * from table_stocktakingitem where stk_id = {0}", id);
         }
+        public static string GetByPartIDSQL(int id)
+        {
+            return String.Format("SELECT * from table_stocktakingitem where part_id = {0}", id);
+        }
         public static string DeleteUpdate(int id, IList notIN)
         {
             StringBuilder poisSB = new StringBuilder();

@@ -22,6 +22,7 @@ namespace Profit.Server
                 SetStockCard(item, p);
             }
             SupplierInvoice si = (SupplierInvoice)events;
+            
             SupplierInvoiceJournal sij = new SupplierInvoiceJournal();
            // sij.LastUpdate = DateTime.Now;
            // sij.ByTransaction = true;

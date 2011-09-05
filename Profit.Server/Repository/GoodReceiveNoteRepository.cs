@@ -28,11 +28,29 @@ namespace Profit.Server
             foreach (GoodReceiveNoteItem item in events.EVENT_ITEMS)
             {
                 assertUsedGRNItemByPRItem(item);
+                assertInvoiceAlreadyGenerated(item);
                 PurchaseOrder po = (PurchaseOrder)item.PO_ITEM.EVENT;
                 SetStockCard(item, p);
                 item.PO_ITEM.UnSetOSAgainstGRNItem(item);
                 PurchaseOrderRepository.UpdateAgainstStatus(m_command, po, item.PO_ITEM);
             }
+        }
+
+        private void assertInvoiceAlreadyGenerated(GoodReceiveNoteItem item)
+        {
+            m_command.CommandText = SupplierInvoiceItem.GetGRNUseBySupplierInvoice(item.ID);
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
+            IList invs = SupplierInvoiceItem.TransformReaderList(r);
+            r.Close();
+            foreach (SupplierInvoiceItem x in invs)
+            {
+                 m_command.CommandText = SupplierInvoice.GetByIDSQL(x.EVENT.ID);
+                 r = m_command.ExecuteReader();
+                 x.EVENT = SupplierInvoice.TransformReader(r);
+                 r.Close();
+            }
+            if (invs.Count > 0)
+                throw new Exception("GRN Part [" + item.PART.CODE + "] is used by Supplier Invoice [" + ((SupplierInvoiceItem)invs[0]).EVENT.CODE + "], please delete supplier invoice first.");
         }
         private void assertConfirmedPO(Event p)
         {

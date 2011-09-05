@@ -197,5 +197,9 @@ namespace Profit.Server
         {
             return string.Format("Select Count(*) from table_apdebitnoteitem where prn_id = ({0})", purchaseReturn);
         }
+        public static string GetAPDNItemByPRID(int prnID)
+        {
+            return String.Format("select * from table_apdebitnoteitem where prn_id = {0}", prnID);
+        }
     }
 }

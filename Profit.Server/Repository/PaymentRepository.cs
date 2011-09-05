@@ -407,5 +407,20 @@ namespace Profit.Server
             }
             return result;
         }
+        internal static IList FindPaidSupplierInvoice(MySql.Data.MySqlClient.MySqlCommand cmd, int siID)
+        {
+            cmd.CommandText = PaymentItem.GetSupplierInvoiceBySOIID(siID, VendorBalanceEntryType.SupplierInvoice);
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
+            IList result = PaymentItem.TransformReaderList(r);
+            r.Close();
+            foreach (PaymentItem i in result)
+            {
+                cmd.CommandText = Payment.GetByIDSQL(i.EVENT_JOURNAL.ID);
+                r = cmd.ExecuteReader();
+                i.EVENT_JOURNAL = Payment.TransformReader(r);
+                r.Close();
+            }
+            return result;
+        }
     }
 }

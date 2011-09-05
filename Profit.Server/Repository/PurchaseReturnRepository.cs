@@ -27,11 +27,19 @@ namespace Profit.Server
         {
             foreach (PurchaseReturnItem item in events.EVENT_ITEMS)
             {
+                assertUsedByAPDN(item);
                 GoodReceiveNote po = (GoodReceiveNote)item.GRN_ITEM.EVENT;
                 SetStockCard(item, p);
                 item.GRN_ITEM.UnSetOSAgainstPRItem(item);
                 GoodReceiveNoteRepository.UpdateAgainstStatus(m_command, po, item.GRN_ITEM);
             }
+        }
+
+        private void assertUsedByAPDN(PurchaseReturnItem item)
+        {
+            IList used = APDebitNoteRepository.FindAPDNByPurchaseReturn(m_command, item.EVENT.ID);
+            if (used.Count > 0)
+                throw new Exception("This Purchase Return [" + item.EVENT.CODE + "] is used by [" + ((APDebitNoteItem)used[0]).EVENT_JOURNAL.CODE + "], please delete APDN first.");
         }
         private void assertConfirmedPO(Event p)
         {
@@ -207,7 +215,14 @@ namespace Profit.Server
             r.Close();
             return res;
         }
-
+        public static PurchaseReturn GetHeaderOnly(MySql.Data.MySqlClient.MySqlCommand cmd, int prnID)
+        {
+            cmd.CommandText = PurchaseReturn.GetByIDSQL(prnID);
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
+            PurchaseReturn st = PurchaseReturn.TransformReader(r);
+            r.Close();
+            return st;
+        }
         protected override IList doSearch(string find)
         {
             try

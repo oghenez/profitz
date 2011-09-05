@@ -130,8 +130,8 @@ namespace Profit.Server
         }
         private void assertNotConfirmed()
         {
-            if (this.EVENT_STATUS.Equals(EventStatus.Confirm))
-                throw new Exception("Event allready Confirmed");
+            //if (this.EVENT_STATUS.Equals(EventStatus.Confirm))
+            //    throw new Exception("Event allready Confirmed");
         }
         public void ProcessRevised()
         {
@@ -148,8 +148,8 @@ namespace Profit.Server
         }
         private void assertNotRevised()
         {
-            if (this.EVENT_STATUS.Equals(EventStatus.Entry))
-                throw new Exception("Event allready Revised");
+            //if (this.EVENT_STATUS.Equals(EventStatus.Entry))
+            //    throw new Exception("Event allready Revised");
         }
 
         #region IEntity Members
