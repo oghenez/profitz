@@ -213,6 +213,10 @@ namespace Profit.Server
         {
             return String.Format("SELECT * from table_goodreceivenoteitem where grni_id = {0}", id);
         }
+        public static string GetByPartIDSQL(int id)
+        {
+            return String.Format("SELECT * from table_goodreceivenoteitem where part_id = {0}", id);
+        }
         public static string GetSearchByPartAndGRNNo(string find, int supplierID, string poi, DateTime trdate)
         {
             return String.Format(@"SELECT t.*

@@ -199,6 +199,14 @@ namespace Profit.Server
             AutoNumberSetup autonumber = AutoNumberSetupRepository.GetAutoNumberSetup(m_command, "StockTaking");
             return autonumber.AUTONUMBER_SETUP_TYPE == AutoNumberSetupType.Auto;
         }
+        public static StockTaking GetHeaderOnly(MySql.Data.MySqlClient.MySqlCommand cmd, int poID)
+        {
+            cmd.CommandText = StockTaking.GetByIDSQL(poID);
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
+            StockTaking st = StockTaking.TransformReader(r);
+            r.Close();
+            return st;
+        }
 
     }
 }

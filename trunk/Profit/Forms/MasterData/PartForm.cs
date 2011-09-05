@@ -23,6 +23,7 @@ namespace Profit
         IList m_unitList = new ArrayList();
         IList m_currencyList = new ArrayList();
         IList m_partCategoryList = new ArrayList();
+        Repository r_sup = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.SUPPLIER_REPOSITORY);
         
 
         public PartForm(IMainForm mainForm, string formName)
@@ -300,6 +301,7 @@ namespace Profit
                 pictureBox.Image = null;
                 m_part = new Part();
                 errorProvider1.Clear();
+                movemntkryptonDataGridView.Rows.Clear();
             }
             catch (Exception x)
             {
@@ -441,6 +443,51 @@ namespace Profit
             {
                 if (u.CONVERSION_UNIT.ID == m_part.UNIT.ID) continue;
                 AddUOM(u);
+            }
+            loadMovement();
+        }
+
+        private void loadMovement()
+        {
+            movemntkryptonDataGridView.Rows.Clear();
+            IList movs = r_part.GetAllEvents(m_part.ID);
+            foreach (EventItem itm in movs)
+            {
+                int r = movemntkryptonDataGridView.Rows.Add();
+                movemntkryptonDataGridView[dateMovementColumn.Index, r].Value = itm.EVENT.TRANSACTION_DATE;
+                movemntkryptonDataGridView[eventCodeMovementColumn.Index, r].Value = itm.EVENT.CODE;
+                movemntkryptonDataGridView[eventTypeMovementColumn.Index, r].Value = itm.STOCK_CARD_ENTRY_TYPE.ToString();
+                movemntkryptonDataGridView[QtyMovementColumn.Index, r].Value = itm.GetAmountInSmallestUnit();
+                movemntkryptonDataGridView[unitMovementColumn.Index, r].Value = m_part.UNIT.CODE;
+                movemntkryptonDataGridView[vendorMovementColumn.Index, r].Value = "-";
+                switch (itm.STOCK_CARD_ENTRY_TYPE)
+                {
+                    case StockCardEntryType.PurchaseOrder:
+                        PurchaseOrderItem pi = (PurchaseOrderItem)itm;
+                        PurchaseOrder p = (PurchaseOrder)pi.EVENT;
+                        p.SUPPLIER = (Supplier)r_sup.GetById(p.SUPPLIER);
+                        movemntkryptonDataGridView[vendorMovementColumn.Index, r].Value = p.SUPPLIER.NAME;
+                        break;
+                    case StockCardEntryType.GoodReceiveNote:
+                        GoodReceiveNoteItem grni = (GoodReceiveNoteItem)itm;
+                        GoodReceiveNote grn = (GoodReceiveNote)grni.EVENT;
+                        grn.SUPPLIER = (Supplier)r_sup.GetById(grn.SUPPLIER);
+                        movemntkryptonDataGridView[vendorMovementColumn.Index, r].Value = grn.SUPPLIER.NAME;
+                        break;
+                    case StockCardEntryType.SupplierInvoice:
+                        SupplierInvoiceItem sii = (SupplierInvoiceItem)itm;
+                        SupplierInvoice si = (SupplierInvoice)sii.EVENT;
+                        si.SUPPLIER = (Supplier)r_sup.GetById(si.SUPPLIER);
+                        movemntkryptonDataGridView[vendorMovementColumn.Index, r].Value = si.SUPPLIER.NAME;
+                        break;
+                    case StockCardEntryType.PurchaseReturn:
+                        PurchaseReturnItem pri = (PurchaseReturnItem)itm;
+                        PurchaseReturn pr = (PurchaseReturn)pri.EVENT;
+                        pr.SUPPLIER = (Supplier)r_sup.GetById(pr.SUPPLIER);
+                        movemntkryptonDataGridView[vendorMovementColumn.Index, r].Value = pr.SUPPLIER.NAME;
+                        break;
+                }
+                movemntkryptonDataGridView[statusMovementColumn.Index, r].Value = itm.EVENT.POSTED.ToString();
             }
         }
 
@@ -624,6 +671,16 @@ namespace Profit
         private void kryptonLabel16_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void PartForm_Load(object sender, EventArgs e)
+        {
+            UserSetting.LoadSetting(movemntkryptonDataGridView, m_mainForm.CurrentUser.ID, this.Name);
+        }
+
+        private void PartForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            UserSetting.SaveSetting(movemntkryptonDataGridView, m_mainForm.CurrentUser.ID, this.Name);
         }
 
         //private void toolStripButtonMigrate_Click(object sender, EventArgs e)

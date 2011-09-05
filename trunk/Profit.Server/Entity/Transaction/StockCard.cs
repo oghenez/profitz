@@ -131,9 +131,17 @@ namespace Profit.Server
                     assertNotMinusBalanceStock();
                     break;
                 case StockCardEntryType.SupplierInvoice:
-                    BALANCE -= qty;
-                    assertNotMinusBalanceStock();
+                    SupplierInvoiceItem sit = (SupplierInvoiceItem)item;
+                    if (sit.GRN_ITEM != null)
+                    {
+                        if (sit.GRN_ITEM.ID == 0)
+                        {
+                            BALANCE -= qty;
+                            assertNotMinusBalanceStock();
+                        }
+                    }
                     break;
+                    
                 case StockCardEntryType.CustomerInvoice:
                     BALANCE += qty;
                     break;

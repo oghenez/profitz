@@ -186,6 +186,10 @@ namespace Profit.Server
         {
             return String.Format("SELECT * from table_supplierinvoiceitem where sii_id = {0}", id);
         }
+        public static string GetByPartIDSQL(int id)
+        {
+            return String.Format("SELECT * from table_supplierinvoiceitem where part_id = {0}", id);
+        }
         public static string DeleteUpdate(int id, IList notIN)
         {
             StringBuilder poisSB = new StringBuilder();
@@ -241,6 +245,10 @@ namespace Profit.Server
         internal static string GetGRNUseBySupplierInvoice()
         {
             return "select distinct(t.grni_id) FROM table_supplierinvoiceitem t where t.grni_id != 0";
+        }
+        internal static string GetGRNUseBySupplierInvoice(int grnID)
+        {
+            return string.Format("select * FROM table_supplierinvoiceitem t where t.grni_id = {0}", grnID);
         }
         internal static string GetGRNUseBySupplierInvoice(IList grnids)
         {

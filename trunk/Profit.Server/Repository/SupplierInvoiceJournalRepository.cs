@@ -28,11 +28,19 @@ namespace Profit.Server
         {
             foreach (SupplierInvoiceJournalItem item in events.EVENT_JOURNAL_ITEMS)
             {
+                AssertPaidInvoice(item);
                 SetVendorBalance(item, p);
                 item.ProcessUnPosted();
                 updateVendorBalances(item.VENDOR_BALANCE);
                 deleteVendorBalanceEntry(item.VENDOR_BALANCE_ENTRY);
             }
+        }
+
+        private void AssertPaidInvoice(SupplierInvoiceJournalItem item)
+        {
+            IList used = PaymentRepository.FindPaidSupplierInvoice(m_command, item.ID);
+            if (used.Count > 0)
+                throw new Exception("This Invoice [" + item.INVOICE_NO + "] is paid [" + ((PaymentItem)used[0]).EVENT_JOURNAL.CODE + "], please delete payment first.");
         }
         //private void assertConfirmedPO(EventJournal p)
         //{

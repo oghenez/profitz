@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle51 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle52 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle53 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle55 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonHeader1 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
@@ -44,23 +44,32 @@
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonGroupBox4 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.unitkryptonLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.bookedKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonLabel14 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel15 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel14 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel16 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.balanceKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.BackOrderKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.balanceKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonGroupBox3 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.kryptonGroupBox2 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.dataGridViewUOM = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.barcodeColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.ConversionQTy = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.ConvUnit = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
+            this.OrigQty = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.OrigUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CostPrice = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.SellPrice = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.unitKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.unitkryptonComboBox2 = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.barcodekryptonTextBox1 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.partCategorykryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.taxkryptonCheckBox2 = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.currencyKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.unitKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.partGroupkryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel13 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.partCategorykryptonComboBox5 = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
@@ -76,10 +85,8 @@
             this.currencykryptonComboBox3 = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.minimumStockkryptonNumericUpDown1 = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
             this.maximumStockkryptonNumericUpDown2 = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
-            this.unitkryptonComboBox2 = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.kryptonLabel9 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.partGroupkryptonComboBox1 = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
-            this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.textBoxCode = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -99,14 +106,15 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.buttonSpecAny1 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.barcodeColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.ConversionQTy = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
-            this.ConvUnit = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
-            this.OrigQty = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
-            this.OrigUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CostPrice = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
-            this.SellPrice = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
-            this.unitkryptonLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.movemntkryptonDataGridView = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.dateMovementColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewDateTimePickerColumn();
+            this.eventTypeMovementColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.eventCodeMovementColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.QtyMovementColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.unitMovementColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.vendorMovementColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.statusMovementColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
@@ -130,6 +138,7 @@
             this.kryptonGroupBox2.Panel.SuspendLayout();
             this.kryptonGroupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUOM)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.unitkryptonComboBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).BeginInit();
             this.kryptonGroupBox1.Panel.SuspendLayout();
@@ -137,11 +146,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.partCategorykryptonComboBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.costMethodekryptonComboBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.currencykryptonComboBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.unitkryptonComboBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.partGroupkryptonComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
             this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.movemntkryptonDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonHeader1
@@ -262,18 +271,28 @@
             // 
             // kryptonGroupBox4.Panel
             // 
+            this.kryptonGroupBox4.Panel.Controls.Add(this.movemntkryptonDataGridView);
+            this.kryptonGroupBox4.Panel.Controls.Add(this.kryptonLabel7);
             this.kryptonGroupBox4.Panel.Controls.Add(this.unitkryptonLabel);
             this.kryptonGroupBox4.Panel.Controls.Add(this.bookedKryptonTextBox);
-            this.kryptonGroupBox4.Panel.Controls.Add(this.kryptonButton1);
             this.kryptonGroupBox4.Panel.Controls.Add(this.kryptonLabel15);
             this.kryptonGroupBox4.Panel.Controls.Add(this.kryptonLabel14);
             this.kryptonGroupBox4.Panel.Controls.Add(this.kryptonLabel16);
             this.kryptonGroupBox4.Panel.Controls.Add(this.BackOrderKryptonTextBox);
             this.kryptonGroupBox4.Panel.Controls.Add(this.balanceKryptonTextBox);
-            this.kryptonGroupBox4.Size = new System.Drawing.Size(263, 162);
+            this.kryptonGroupBox4.Size = new System.Drawing.Size(456, 410);
             this.kryptonGroupBox4.TabIndex = 33;
             this.kryptonGroupBox4.Text = "Stock Card Status";
             this.kryptonGroupBox4.Values.Heading = "Stock Card Status";
+            // 
+            // unitkryptonLabel
+            // 
+            this.unitkryptonLabel.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.TitlePanel;
+            this.unitkryptonLabel.Location = new System.Drawing.Point(215, 3);
+            this.unitkryptonLabel.Name = "unitkryptonLabel";
+            this.unitkryptonLabel.Size = new System.Drawing.Size(44, 27);
+            this.unitkryptonLabel.TabIndex = 34;
+            this.unitkryptonLabel.Values.Text = "PCS";
             // 
             // bookedKryptonTextBox
             // 
@@ -287,13 +306,14 @@
             this.bookedKryptonTextBox.Text = "0";
             this.bookedKryptonTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // kryptonButton1
+            // kryptonLabel15
             // 
-            this.kryptonButton1.Location = new System.Drawing.Point(109, 95);
-            this.kryptonButton1.Name = "kryptonButton1";
-            this.kryptonButton1.Size = new System.Drawing.Size(100, 25);
-            this.kryptonButton1.TabIndex = 32;
-            this.kryptonButton1.Values.Text = "View Movement";
+            this.kryptonLabel15.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.TitlePanel;
+            this.kryptonLabel15.Location = new System.Drawing.Point(1, 33);
+            this.kryptonLabel15.Name = "kryptonLabel15";
+            this.kryptonLabel15.Size = new System.Drawing.Size(102, 27);
+            this.kryptonLabel15.TabIndex = 1;
+            this.kryptonLabel15.Values.Text = "ORDERED :";
             // 
             // kryptonLabel14
             // 
@@ -304,15 +324,6 @@
             this.kryptonLabel14.TabIndex = 0;
             this.kryptonLabel14.Values.Text = "STOCK :";
             // 
-            // kryptonLabel15
-            // 
-            this.kryptonLabel15.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.TitlePanel;
-            this.kryptonLabel15.Location = new System.Drawing.Point(1, 33);
-            this.kryptonLabel15.Name = "kryptonLabel15";
-            this.kryptonLabel15.Size = new System.Drawing.Size(102, 27);
-            this.kryptonLabel15.TabIndex = 1;
-            this.kryptonLabel15.Values.Text = "ORDERED :";
-            // 
             // kryptonLabel16
             // 
             this.kryptonLabel16.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.TitlePanel;
@@ -322,18 +333,6 @@
             this.kryptonLabel16.TabIndex = 2;
             this.kryptonLabel16.Values.Text = "BOOKED :";
             this.kryptonLabel16.Paint += new System.Windows.Forms.PaintEventHandler(this.kryptonLabel16_Paint);
-            // 
-            // balanceKryptonTextBox
-            // 
-            this.balanceKryptonTextBox.Location = new System.Drawing.Point(109, 3);
-            this.balanceKryptonTextBox.Name = "balanceKryptonTextBox";
-            this.balanceKryptonTextBox.ReadOnly = true;
-            this.balanceKryptonTextBox.Size = new System.Drawing.Size(100, 27);
-            this.balanceKryptonTextBox.StateCommon.Content.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.balanceKryptonTextBox.StateNormal.Content.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.balanceKryptonTextBox.TabIndex = 3;
-            this.balanceKryptonTextBox.Text = "0";
-            this.balanceKryptonTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // BackOrderKryptonTextBox
             // 
@@ -346,6 +345,18 @@
             this.BackOrderKryptonTextBox.TabIndex = 4;
             this.BackOrderKryptonTextBox.Text = "0";
             this.BackOrderKryptonTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // balanceKryptonTextBox
+            // 
+            this.balanceKryptonTextBox.Location = new System.Drawing.Point(109, 3);
+            this.balanceKryptonTextBox.Name = "balanceKryptonTextBox";
+            this.balanceKryptonTextBox.ReadOnly = true;
+            this.balanceKryptonTextBox.Size = new System.Drawing.Size(100, 27);
+            this.balanceKryptonTextBox.StateCommon.Content.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.balanceKryptonTextBox.StateNormal.Content.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.balanceKryptonTextBox.TabIndex = 3;
+            this.balanceKryptonTextBox.Text = "0";
+            this.balanceKryptonTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // kryptonGroupBox3
             // 
@@ -402,6 +413,155 @@
             this.dataGridViewUOM.Name = "dataGridViewUOM";
             this.dataGridViewUOM.Size = new System.Drawing.Size(566, 87);
             this.dataGridViewUOM.TabIndex = 0;
+            // 
+            // barcodeColumn
+            // 
+            this.barcodeColumn.HeaderText = "Barcode";
+            this.barcodeColumn.Name = "barcodeColumn";
+            this.barcodeColumn.Width = 100;
+            // 
+            // ConversionQTy
+            // 
+            dataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle51.NullValue = "1";
+            this.ConversionQTy.DefaultCellStyle = dataGridViewCellStyle51;
+            this.ConversionQTy.HeaderText = "Qty";
+            this.ConversionQTy.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.ConversionQTy.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.ConversionQTy.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.ConversionQTy.Name = "ConversionQTy";
+            this.ConversionQTy.ReadOnly = true;
+            this.ConversionQTy.Width = 30;
+            // 
+            // ConvUnit
+            // 
+            this.ConvUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ConvUnit.DropDownWidth = 121;
+            this.ConvUnit.HeaderText = "Cv Unit";
+            this.ConvUnit.Name = "ConvUnit";
+            this.ConvUnit.Width = 80;
+            // 
+            // OrigQty
+            // 
+            dataGridViewCellStyle52.NullValue = "0";
+            this.OrigQty.DefaultCellStyle = dataGridViewCellStyle52;
+            this.OrigQty.HeaderText = "Cv Qty";
+            this.OrigQty.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.OrigQty.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.OrigQty.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.OrigQty.Name = "OrigQty";
+            this.OrigQty.Width = 60;
+            // 
+            // OrigUnit
+            // 
+            this.OrigUnit.HeaderText = "Base Unit";
+            this.OrigUnit.Name = "OrigUnit";
+            this.OrigUnit.ReadOnly = true;
+            this.OrigUnit.Width = 60;
+            // 
+            // CostPrice
+            // 
+            this.CostPrice.DecimalPlaces = 2;
+            dataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle53.NullValue = "0";
+            this.CostPrice.DefaultCellStyle = dataGridViewCellStyle53;
+            this.CostPrice.HeaderText = "Cost Price";
+            this.CostPrice.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.CostPrice.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.CostPrice.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.CostPrice.Name = "CostPrice";
+            this.CostPrice.ThousandsSeparator = true;
+            this.CostPrice.Width = 90;
+            // 
+            // SellPrice
+            // 
+            this.SellPrice.DecimalPlaces = 2;
+            dataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle54.NullValue = "0";
+            this.SellPrice.DefaultCellStyle = dataGridViewCellStyle54;
+            this.SellPrice.HeaderText = "Sell Price";
+            this.SellPrice.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.SellPrice.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.SellPrice.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.SellPrice.Name = "SellPrice";
+            this.SellPrice.ThousandsSeparator = true;
+            this.SellPrice.Width = 90;
+            // 
+            // unitKryptonTextBox
+            // 
+            this.unitKryptonTextBox.Enabled = false;
+            this.unitKryptonTextBox.Location = new System.Drawing.Point(185, 2);
+            this.unitKryptonTextBox.Name = "unitKryptonTextBox";
+            this.unitKryptonTextBox.Size = new System.Drawing.Size(144, 22);
+            this.unitKryptonTextBox.StateDisabled.Content.Color1 = System.Drawing.Color.Black;
+            this.unitKryptonTextBox.TabIndex = 29;
+            // 
+            // unitkryptonComboBox2
+            // 
+            this.unitkryptonComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.unitkryptonComboBox2.DropDownWidth = 151;
+            this.unitkryptonComboBox2.Location = new System.Drawing.Point(106, 2);
+            this.unitkryptonComboBox2.Name = "unitkryptonComboBox2";
+            this.unitkryptonComboBox2.Size = new System.Drawing.Size(80, 22);
+            this.unitkryptonComboBox2.StateDisabled.ComboBox.Content.Color1 = System.Drawing.Color.Black;
+            this.unitkryptonComboBox2.TabIndex = 1;
+            this.unitkryptonComboBox2.SelectedIndexChanged += new System.EventHandler(this.unitkryptonComboBox2_SelectedIndexChanged);
+            // 
+            // kryptonLabel8
+            // 
+            this.kryptonLabel8.Location = new System.Drawing.Point(34, 1);
+            this.kryptonLabel8.Name = "kryptonLabel8";
+            this.kryptonLabel8.Size = new System.Drawing.Size(63, 19);
+            this.kryptonLabel8.TabIndex = 22;
+            this.kryptonLabel8.Values.Text = "Base Unit :";
             // 
             // barcodekryptonTextBox1
             // 
@@ -469,15 +629,6 @@
             this.currencyKryptonTextBox.Size = new System.Drawing.Size(144, 22);
             this.currencyKryptonTextBox.StateDisabled.Content.Color1 = System.Drawing.Color.Black;
             this.currencyKryptonTextBox.TabIndex = 30;
-            // 
-            // unitKryptonTextBox
-            // 
-            this.unitKryptonTextBox.Enabled = false;
-            this.unitKryptonTextBox.Location = new System.Drawing.Point(185, 2);
-            this.unitKryptonTextBox.Name = "unitKryptonTextBox";
-            this.unitKryptonTextBox.Size = new System.Drawing.Size(144, 22);
-            this.unitKryptonTextBox.StateDisabled.Content.Color1 = System.Drawing.Color.Black;
-            this.unitKryptonTextBox.TabIndex = 29;
             // 
             // partGroupkryptonTextBox
             // 
@@ -638,17 +789,6 @@
             this.maximumStockkryptonNumericUpDown2.TabIndex = 6;
             this.maximumStockkryptonNumericUpDown2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // unitkryptonComboBox2
-            // 
-            this.unitkryptonComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.unitkryptonComboBox2.DropDownWidth = 151;
-            this.unitkryptonComboBox2.Location = new System.Drawing.Point(106, 2);
-            this.unitkryptonComboBox2.Name = "unitkryptonComboBox2";
-            this.unitkryptonComboBox2.Size = new System.Drawing.Size(80, 22);
-            this.unitkryptonComboBox2.StateDisabled.ComboBox.Content.Color1 = System.Drawing.Color.Black;
-            this.unitkryptonComboBox2.TabIndex = 1;
-            this.unitkryptonComboBox2.SelectedIndexChanged += new System.EventHandler(this.unitkryptonComboBox2_SelectedIndexChanged);
-            // 
             // kryptonLabel9
             // 
             this.kryptonLabel9.Location = new System.Drawing.Point(37, 28);
@@ -667,14 +807,6 @@
             this.partGroupkryptonComboBox1.StateDisabled.ComboBox.Content.Color1 = System.Drawing.Color.Black;
             this.partGroupkryptonComboBox1.TabIndex = 0;
             this.partGroupkryptonComboBox1.SelectedIndexChanged += new System.EventHandler(this.kryptonComboBox1_SelectedIndexChanged);
-            // 
-            // kryptonLabel8
-            // 
-            this.kryptonLabel8.Location = new System.Drawing.Point(34, 1);
-            this.kryptonLabel8.Name = "kryptonLabel8";
-            this.kryptonLabel8.Size = new System.Drawing.Size(63, 19);
-            this.kryptonLabel8.TabIndex = 22;
-            this.kryptonLabel8.Values.Text = "Base Unit :";
             // 
             // kryptonLabel1
             // 
@@ -775,9 +907,9 @@
             // 
             // ActiveCol
             // 
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle16.NullValue = false;
-            this.ActiveCol.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle55.NullValue = false;
+            this.ActiveCol.DefaultCellStyle = dataGridViewCellStyle55;
             this.ActiveCol.FalseValue = null;
             this.ActiveCol.HeaderText = "Active";
             this.ActiveCol.IndeterminateValue = null;
@@ -854,135 +986,102 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // barcodeColumn
+            // movemntkryptonDataGridView
             // 
-            this.barcodeColumn.HeaderText = "Barcode";
-            this.barcodeColumn.Name = "barcodeColumn";
-            this.barcodeColumn.Width = 100;
+            this.movemntkryptonDataGridView.AllowUserToAddRows = false;
+            this.movemntkryptonDataGridView.AllowUserToDeleteRows = false;
+            this.movemntkryptonDataGridView.AllowUserToResizeRows = false;
+            this.movemntkryptonDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dateMovementColumn,
+            this.eventTypeMovementColumn,
+            this.eventCodeMovementColumn,
+            this.QtyMovementColumn,
+            this.unitMovementColumn,
+            this.vendorMovementColumn,
+            this.statusMovementColumn});
+            this.movemntkryptonDataGridView.Location = new System.Drawing.Point(10, 120);
+            this.movemntkryptonDataGridView.MultiSelect = false;
+            this.movemntkryptonDataGridView.Name = "movemntkryptonDataGridView";
+            this.movemntkryptonDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.movemntkryptonDataGridView.Size = new System.Drawing.Size(433, 264);
+            this.movemntkryptonDataGridView.TabIndex = 34;
             // 
-            // ConversionQTy
+            // kryptonLabel7
             // 
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle17.NullValue = "1";
-            this.ConversionQTy.DefaultCellStyle = dataGridViewCellStyle17;
-            this.ConversionQTy.HeaderText = "Qty";
-            this.ConversionQTy.Increment = new decimal(new int[] {
+            this.kryptonLabel7.Location = new System.Drawing.Point(10, 96);
+            this.kryptonLabel7.Name = "kryptonLabel7";
+            this.kryptonLabel7.Size = new System.Drawing.Size(93, 19);
+            this.kryptonLabel7.TabIndex = 35;
+            this.kryptonLabel7.Values.Text = "Part Movement :";
+            // 
+            // dateMovementColumn
+            // 
+            this.dateMovementColumn.CalendarTodayDate = new System.DateTime(2011, 9, 5, 0, 0, 0, 0);
+            this.dateMovementColumn.Checked = false;
+            this.dateMovementColumn.CustomFormat = "dd-MM-yyyy";
+            this.dateMovementColumn.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateMovementColumn.HeaderText = "Date";
+            this.dateMovementColumn.Name = "dateMovementColumn";
+            this.dateMovementColumn.ReadOnly = true;
+            this.dateMovementColumn.Width = 50;
+            // 
+            // eventTypeMovementColumn
+            // 
+            this.eventTypeMovementColumn.HeaderText = "Event Type";
+            this.eventTypeMovementColumn.Name = "eventTypeMovementColumn";
+            this.eventTypeMovementColumn.ReadOnly = true;
+            this.eventTypeMovementColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.eventTypeMovementColumn.Width = 50;
+            // 
+            // eventCodeMovementColumn
+            // 
+            this.eventCodeMovementColumn.HeaderText = "Event Code";
+            this.eventCodeMovementColumn.Name = "eventCodeMovementColumn";
+            this.eventCodeMovementColumn.ReadOnly = true;
+            this.eventCodeMovementColumn.Width = 50;
+            // 
+            // QtyMovementColumn
+            // 
+            this.QtyMovementColumn.HeaderText = "Qty";
+            this.QtyMovementColumn.Increment = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.ConversionQTy.Maximum = new decimal(new int[] {
-            1000000000,
+            this.QtyMovementColumn.Maximum = new decimal(new int[] {
+            100,
             0,
             0,
             0});
-            this.ConversionQTy.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.ConversionQTy.Name = "ConversionQTy";
-            this.ConversionQTy.ReadOnly = true;
-            this.ConversionQTy.Width = 30;
-            // 
-            // ConvUnit
-            // 
-            this.ConvUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ConvUnit.DropDownWidth = 121;
-            this.ConvUnit.HeaderText = "Cv Unit";
-            this.ConvUnit.Name = "ConvUnit";
-            this.ConvUnit.Width = 80;
-            // 
-            // OrigQty
-            // 
-            dataGridViewCellStyle18.NullValue = "0";
-            this.OrigQty.DefaultCellStyle = dataGridViewCellStyle18;
-            this.OrigQty.HeaderText = "Cv Qty";
-            this.OrigQty.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.OrigQty.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.OrigQty.Minimum = new decimal(new int[] {
+            this.QtyMovementColumn.Minimum = new decimal(new int[] {
             0,
             0,
             0,
             0});
-            this.OrigQty.Name = "OrigQty";
-            this.OrigQty.Width = 60;
+            this.QtyMovementColumn.Name = "QtyMovementColumn";
+            this.QtyMovementColumn.ReadOnly = true;
+            this.QtyMovementColumn.Width = 50;
             // 
-            // OrigUnit
+            // unitMovementColumn
             // 
-            this.OrigUnit.HeaderText = "Base Unit";
-            this.OrigUnit.Name = "OrigUnit";
-            this.OrigUnit.ReadOnly = true;
-            this.OrigUnit.Width = 60;
+            this.unitMovementColumn.HeaderText = "Unit";
+            this.unitMovementColumn.Name = "unitMovementColumn";
+            this.unitMovementColumn.ReadOnly = true;
+            this.unitMovementColumn.Width = 50;
             // 
-            // CostPrice
+            // vendorMovementColumn
             // 
-            this.CostPrice.DecimalPlaces = 2;
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle19.NullValue = "0";
-            this.CostPrice.DefaultCellStyle = dataGridViewCellStyle19;
-            this.CostPrice.HeaderText = "Cost Price";
-            this.CostPrice.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.CostPrice.Maximum = new decimal(new int[] {
-            1000000000,
-            0,
-            0,
-            0});
-            this.CostPrice.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.CostPrice.Name = "CostPrice";
-            this.CostPrice.ThousandsSeparator = true;
-            this.CostPrice.Width = 90;
+            this.vendorMovementColumn.HeaderText = "Vendor";
+            this.vendorMovementColumn.Name = "vendorMovementColumn";
+            this.vendorMovementColumn.ReadOnly = true;
+            this.vendorMovementColumn.Width = 50;
             // 
-            // SellPrice
+            // statusMovementColumn
             // 
-            this.SellPrice.DecimalPlaces = 2;
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle20.NullValue = "0";
-            this.SellPrice.DefaultCellStyle = dataGridViewCellStyle20;
-            this.SellPrice.HeaderText = "Sell Price";
-            this.SellPrice.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.SellPrice.Maximum = new decimal(new int[] {
-            1000000000,
-            0,
-            0,
-            0});
-            this.SellPrice.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.SellPrice.Name = "SellPrice";
-            this.SellPrice.ThousandsSeparator = true;
-            this.SellPrice.Width = 90;
-            // 
-            // unitkryptonLabel
-            // 
-            this.unitkryptonLabel.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.TitlePanel;
-            this.unitkryptonLabel.Location = new System.Drawing.Point(215, 3);
-            this.unitkryptonLabel.Name = "unitkryptonLabel";
-            this.unitkryptonLabel.Size = new System.Drawing.Size(44, 27);
-            this.unitkryptonLabel.TabIndex = 34;
-            this.unitkryptonLabel.Values.Text = "PCS";
+            this.statusMovementColumn.HeaderText = "Status";
+            this.statusMovementColumn.Name = "statusMovementColumn";
+            this.statusMovementColumn.ReadOnly = true;
+            this.statusMovementColumn.Width = 50;
             // 
             // PartForm
             // 
@@ -995,7 +1094,9 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "PartForm";
             this.Text = "Part Master";
+            this.Load += new System.EventHandler(this.PartForm_Load);
             this.Activated += new System.EventHandler(this.BankForm_Activated);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PartForm_FormClosing);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).EndInit();
@@ -1024,6 +1125,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2)).EndInit();
             this.kryptonGroupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUOM)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.unitkryptonComboBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).EndInit();
             this.kryptonGroupBox1.Panel.ResumeLayout(false);
             this.kryptonGroupBox1.Panel.PerformLayout();
@@ -1032,12 +1134,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.partCategorykryptonComboBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.costMethodekryptonComboBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.currencykryptonComboBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.unitkryptonComboBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.partGroupkryptonComboBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).EndInit();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.movemntkryptonDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1107,7 +1209,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBox2;
         private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBox3;
         private System.Windows.Forms.PictureBox pictureBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBox4;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn barcodeColumn;
@@ -1118,5 +1219,14 @@
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn CostPrice;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn SellPrice;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel unitkryptonLabel;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridView movemntkryptonDataGridView;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewDateTimePickerColumn dateMovementColumn;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn eventTypeMovementColumn;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn eventCodeMovementColumn;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn QtyMovementColumn;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn unitMovementColumn;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn vendorMovementColumn;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn statusMovementColumn;
     }
 }

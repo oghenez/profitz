@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(APDebitNoteForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonHeader1 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -221,7 +220,7 @@
             // 
             // toolStripButtonFromPR
             // 
-            this.toolStripButtonFromPR.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonFromPR.Image")));
+            this.toolStripButtonFromPR.Image = global::Profit.Properties.Resources.wizard;
             this.toolStripButtonFromPR.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonFromPR.Name = "toolStripButtonFromPR";
             this.toolStripButtonFromPR.Size = new System.Drawing.Size(108, 22);
@@ -343,6 +342,7 @@
             // 
             this.supplierKryptonTextBox.Enabled = false;
             this.supplierKryptonTextBox.Location = new System.Drawing.Point(544, 6);
+            this.supplierKryptonTextBox.Multiline = true;
             this.supplierKryptonTextBox.Name = "supplierKryptonTextBox";
             this.supplierKryptonTextBox.ReadOnly = true;
             this.supplierKryptonTextBox.Size = new System.Drawing.Size(144, 22);
@@ -397,7 +397,7 @@
             // 
             // kryptonLabel4
             // 
-            this.kryptonLabel4.Location = new System.Drawing.Point(34, 29);
+            this.kryptonLabel4.Location = new System.Drawing.Point(34, 27);
             this.kryptonLabel4.Name = "kryptonLabel4";
             this.kryptonLabel4.Size = new System.Drawing.Size(39, 19);
             this.kryptonLabel4.TabIndex = 12;
@@ -405,7 +405,7 @@
             // 
             // kryptonLabel3
             // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(5, 52);
+            this.kryptonLabel3.Location = new System.Drawing.Point(5, 51);
             this.kryptonLabel3.Name = "kryptonLabel3";
             this.kryptonLabel3.Size = new System.Drawing.Size(68, 19);
             this.kryptonLabel3.TabIndex = 11;
@@ -414,7 +414,8 @@
             // EmployeekryptonTextBox
             // 
             this.EmployeekryptonTextBox.Enabled = false;
-            this.EmployeekryptonTextBox.Location = new System.Drawing.Point(186, 51);
+            this.EmployeekryptonTextBox.Location = new System.Drawing.Point(186, 49);
+            this.EmployeekryptonTextBox.Multiline = true;
             this.EmployeekryptonTextBox.Name = "EmployeekryptonTextBox";
             this.EmployeekryptonTextBox.ReadOnly = true;
             this.EmployeekryptonTextBox.Size = new System.Drawing.Size(144, 22);
@@ -425,7 +426,7 @@
             // 
             this.employeeKryptonComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.employeeKryptonComboBox.DropDownWidth = 90;
-            this.employeeKryptonComboBox.Location = new System.Drawing.Point(79, 51);
+            this.employeeKryptonComboBox.Location = new System.Drawing.Point(79, 49);
             this.employeeKryptonComboBox.Name = "employeeKryptonComboBox";
             this.employeeKryptonComboBox.Size = new System.Drawing.Size(108, 22);
             this.employeeKryptonComboBox.StateDisabled.ComboBox.Content.Color1 = System.Drawing.Color.Black;
@@ -436,7 +437,7 @@
             // 
             this.dateKryptonDateTimePicker.CustomFormat = "dd-MM-yyyy";
             this.dateKryptonDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateKryptonDateTimePicker.Location = new System.Drawing.Point(79, 28);
+            this.dateKryptonDateTimePicker.Location = new System.Drawing.Point(79, 27);
             this.dateKryptonDateTimePicker.Name = "dateKryptonDateTimePicker";
             this.dateKryptonDateTimePicker.Size = new System.Drawing.Size(85, 20);
             this.dateKryptonDateTimePicker.StateDisabled.Content.Color1 = System.Drawing.Color.Black;
