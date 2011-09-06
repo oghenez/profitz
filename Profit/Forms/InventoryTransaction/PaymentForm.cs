@@ -120,6 +120,14 @@ namespace Profit
         {
             if (m_editMode == EditMode.View) return;
             if (!itemsDataGrid[e.ColumnIndex, e.RowIndex].IsInEditMode) return;
+            if (docnoColumn.Index == e.ColumnIndex)
+            {
+                if (itemsDataGrid[docnoColumn.Index, e.RowIndex].Tag != null)
+                {
+                    APDebitNote ap = (APDebitNote)itemsDataGrid[docnoColumn.Index, e.RowIndex].Tag;
+                    itemsDataGrid[docnoColumn.Index, e.RowIndex].Value = ap.CODE;
+                }
+            }
             if (e.ColumnIndex == paymentAmountColumn.Index || e.ColumnIndex == docnoColumn.Index)
             { 
                 ReCalculateNetTotal(); 
@@ -172,16 +180,42 @@ namespace Profit
             }
             if (docnoColumn.Index == e.ColumnIndex)
             {
+                IList notin = new ArrayList();
+                for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
+                {
+                    if (i == e.RowIndex) continue;
+                    if (itemsDataGrid[docnoColumn.Index, i].Tag == null) continue;
+                    APDebitNote ap = (APDebitNote)itemsDataGrid[docnoColumn.Index, i].Tag;
+                    if (ap == null) continue;
+                    notin.Add(ap.ID);
+                }
+
                 PaymentType type = (PaymentType)Enum.Parse(typeof(PaymentType),itemsDataGrid[paymentTypeColumn.Index, e.RowIndex].Value.ToString());
                 if (type == PaymentType.APDebitNote)
                 {
-                    IList result = r_apdn.FindAPDNForPayment(((Supplier)supplierkryptonComboBox.SelectedItem).ID, dateKryptonDateTimePicker.Value, e.FormattedValue.ToString());
+                    itemsDataGrid[docnoColumn.Index, e.RowIndex].Tag = null;
+                    IList result = r_apdn.FindAPDNForPayment(((Supplier)supplierkryptonComboBox.SelectedItem).ID, dateKryptonDateTimePicker.Value, e.FormattedValue.ToString(), notin);
                     if (result.Count == 1)
                     {
                         itemsDataGrid[docnoColumn.Index, e.RowIndex].Tag = result[0];
                         itemsDataGrid[docnoColumn.Index, e.RowIndex].Value = ((APDebitNote)result[0]).CODE;
                         itemsDataGrid[paymentAmountColumn.Index, e.RowIndex].Value = ((APDebitNote)result[0]).NET_AMOUNT;
                         itemsDataGrid[docdateColumn.Index, e.RowIndex].Value = ((APDebitNote)result[0]).TRANSACTION_DATE;
+                        itemsDataGrid[noteColumn.Index, e.RowIndex].Value = ((APDebitNote)result[0]).NOTES;
+                    }
+                    else
+                    {
+                        using (SearchAPDNForPaymentForm ap = new SearchAPDNForPaymentForm(e.FormattedValue.ToString(), (Supplier)supplierkryptonComboBox.SelectedItem, result, m_mainForm.CurrentUser, dateKryptonDateTimePicker.Value, notin))
+                        {
+                            ap.ShowDialog();
+                            APDebitNote res = ap.APDEBIT_NOTE;
+                            if (res == null) return;
+                            itemsDataGrid[docnoColumn.Index, e.RowIndex].Tag = res;
+                            itemsDataGrid[docnoColumn.Index, e.RowIndex].Value = res.CODE;
+                            itemsDataGrid[paymentAmountColumn.Index, e.RowIndex].Value = res.NET_AMOUNT;
+                            itemsDataGrid[docdateColumn.Index, e.RowIndex].Value = res.TRANSACTION_DATE;
+                            itemsDataGrid[noteColumn.Index, e.RowIndex].Value = res.NOTES;
+                        }
                     }
                 }
             }

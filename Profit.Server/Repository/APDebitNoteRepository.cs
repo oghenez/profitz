@@ -25,8 +25,10 @@ namespace Profit.Server
         {
             foreach (APDebitNoteItem item in events.EVENT_JOURNAL_ITEMS)
             {
-                if (((APDebitNote)events).USED_FOR_PAYMENT)
-                    throw new Exception("APDN has been used by Payment, please delete payment.");
+                IList paid = PaymentRepository.FindPaymentUsingAPDN(m_command, item.EVENT_JOURNAL.ID);
+               // if (((APDebitNote)events).USED_FOR_PAYMENT)
+                if(paid.Count>0)
+                    throw new Exception("APDN["+item.EVENT_JOURNAL.CODE+"] has been used by Payment ["+((PaymentItem)paid[0]).EVENT_JOURNAL.CODE+"], please delete payment.");
                 SetVendorBalance(item, p);
                 item.ProcessUnPosted();
                 updateVendorBalances(item.VENDOR_BALANCE);
@@ -326,9 +328,18 @@ namespace Profit.Server
                 throw x;
             }
         }
-        public IList FindAPDNForPayment(int supID, DateTime trdate, string find)
+        public IList FindAPDNForPayment(int supID, DateTime trdate, string find, IList notInID)
         {
-            m_command.CommandText = APDebitNote.GetForPayment(supID, trdate, find);
+            StringBuilder poisSB = new StringBuilder();
+            foreach (int i in notInID)
+            {
+                poisSB.Append(i.ToString());
+                poisSB.Append(',');
+            }
+            string pois = poisSB.ToString();
+            pois = notInID.Count > 0 ? pois.Substring(0, pois.Length - 1) : "";
+
+            m_command.CommandText = APDebitNote.GetForPayment(supID, trdate, find, pois);
             MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             IList reuslt = APDebitNote.TransformReaderList(r);
             r.Close();

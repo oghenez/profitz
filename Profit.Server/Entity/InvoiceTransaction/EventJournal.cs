@@ -141,13 +141,13 @@ namespace Profit.Server
         }
         public void assertNotPosted()
         {
-            if (this.EVENT_STATUS.Equals(EventStatus.Confirm))
-                throw new Exception("Event allready Confirmed");
+            //if (this.EVENT_STATUS.Equals(EventStatus.Confirm))
+          //      throw new Exception("Event allready Confirmed");
         }
         private void assertNotUnPosted()
         {
-            if (this.EVENT_STATUS.Equals(EventStatus.Entry))
-                throw new Exception("Event allready Revised");
+          //  if (this.EVENT_STATUS.Equals(EventStatus.Entry))
+           //     throw new Exception("Event allready Revised");
         }
     }
 }
