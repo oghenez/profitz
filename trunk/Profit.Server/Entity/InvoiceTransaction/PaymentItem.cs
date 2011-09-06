@@ -208,6 +208,18 @@ namespace Profit.Server
             pois = notIN.Count > 0 ? pois.Substring(0, pois.Length - 1) : "";
             return String.Format("Delete from table_paymentitem where pay_id = {0} and payi_id not in ({1})", id, pois);
         }
+        public static string GetNotInTypeAPDN(int id, IList notIN)
+        {
+            StringBuilder poisSB = new StringBuilder();
+            foreach (PaymentItem i in notIN)
+            {
+                poisSB.Append(i.ID.ToString());
+                poisSB.Append(',');
+            }
+            string pois = poisSB.ToString();
+            pois = notIN.Count > 0 ? pois.Substring(0, pois.Length - 1) : "";
+            return String.Format("Select * from table_paymentitem where pay_id = {0} and payi_paymenttype ='{2}' and payi_id not in ({1})", id, pois, PaymentType.APDebitNote.ToString());
+        }
         public static string DeleteSQL(int id)
         {
             return String.Format("Delete from table_paymentitem where payi_id = {0}", id);
@@ -219,6 +231,10 @@ namespace Profit.Server
         public static string GetSupplierInvoiceBySOIID(int soiid, VendorBalanceEntryType invtype)
         {
             return String.Format("select * from table_paymentitem where inv_id = {0} and inv_type = '{1}'", soiid, invtype.ToString());
+        }
+        public static string GetPaymentItemByAPDN(int apdnID)
+        {
+            return String.Format("select * from table_paymentitem where apdn_id = {0}", apdnID);
         }
         //public static string FindByGrnItemIDSQL(int id)
         //{

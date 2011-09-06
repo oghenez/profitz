@@ -130,6 +130,7 @@ namespace Profit.Server
         public static IList TransformReaderList(MySql.Data.MySqlClient.MySqlDataReader r)
         {
             IList result = new ArrayList();
+            if (r == null) return result;
             while (r.Read())
             {
                 APDebitNote tr = new APDebitNote();
@@ -188,7 +189,7 @@ namespace Profit.Server
                 where concat(p.apdn_code, e.emp_code, e.emp_name)
                 like '%{0}%'", find);
         }
-        public static string GetForPayment(int supID, DateTime dt, string find)
+        public static string GetForPayment(int supID, DateTime dt, string find, string notin)
         {
             return String.Format(@"select * from table_apdebitnote p
                 INNER JOIN table_employee e on e.emp_id = p.emp_id
@@ -197,8 +198,9 @@ namespace Profit.Server
                 p.apdn_date <= '{1}'  and         
                 p.apdn_posted = true and
                 p.apdn_usedforpayment = false and
-                concat(p.apdn_code, e.emp_code, e.emp_name) like '%{2}%'",
-                supID,dt.ToString(Utils.DATE_FORMAT),  find);
+                concat(p.apdn_code, e.emp_code, e.emp_name) like '%{2}%' {3}
+                ",
+                 supID, dt.ToString(Utils.DATE_FORMAT), find, notin == "" ? "" : "and apdn_id not in ("+notin+")");
         }
         public static string SelectCountByCode(string code)
         {

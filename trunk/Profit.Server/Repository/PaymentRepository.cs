@@ -34,6 +34,10 @@ namespace Profit.Server
                     SupplierOutStandingInvoiceRepository.UpdateAgainstStatus(m_command, item.SUPPLIER_INVOICE_JOURNAL_ITEM.GET_EVENT_JOURNAL,
                         item.SUPPLIER_INVOICE_JOURNAL_ITEM);
                 }
+                // if (item.PAYMENT_TYPE == PaymentType.APDebitNote)
+                //{
+        
+                //}
             }
         }
         protected override void doRevise(EventJournal events, Period p)
@@ -57,10 +61,10 @@ namespace Profit.Server
                     SupplierOutStandingInvoiceRepository.UpdateAgainstStatus(m_command, item.SUPPLIER_INVOICE_JOURNAL_ITEM.GET_EVENT_JOURNAL,
                         item.SUPPLIER_INVOICE_JOURNAL_ITEM);
                 }
-                if (item.PAYMENT_TYPE == PaymentType.APDebitNote)
-                {
+                //if (item.PAYMENT_TYPE == PaymentType.APDebitNote)
+                //{
         
-                }
+                //}
             }
         }
         private void assertConfirmedSIJ(EventJournal p)
@@ -151,6 +155,17 @@ namespace Profit.Server
                         m_command.ExecuteNonQuery();
                     }
                 }
+                m_command.CommandText = PaymentItem.GetNotInTypeAPDN(e.ID, e.EVENT_JOURNAL_ITEMS);
+                MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
+                IList pymnts = PaymentItem.TransformReaderList(r);
+                r.Close();
+                foreach (PaymentItem itm in pymnts)
+                {
+                     m_command.CommandText = APDebitNote.UpdateUsedForPayment(itm.AP_DEBIT_NOTE.ID, false);
+                     m_command.ExecuteNonQuery();
+                }
+               
+
                 m_command.CommandText = PaymentItem.DeleteUpdate(e.ID, e.EVENT_JOURNAL_ITEMS);
                 m_command.ExecuteNonQuery();
                 trc.Commit();
@@ -410,6 +425,21 @@ namespace Profit.Server
         internal static IList FindPaidSupplierInvoice(MySql.Data.MySqlClient.MySqlCommand cmd, int siID)
         {
             cmd.CommandText = PaymentItem.GetSupplierInvoiceBySOIID(siID, VendorBalanceEntryType.SupplierInvoice);
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
+            IList result = PaymentItem.TransformReaderList(r);
+            r.Close();
+            foreach (PaymentItem i in result)
+            {
+                cmd.CommandText = Payment.GetByIDSQL(i.EVENT_JOURNAL.ID);
+                r = cmd.ExecuteReader();
+                i.EVENT_JOURNAL = Payment.TransformReader(r);
+                r.Close();
+            }
+            return result;
+        }
+        internal static IList FindPaymentUsingAPDN(MySql.Data.MySqlClient.MySqlCommand cmd, int apDNID)
+        {
+            cmd.CommandText = PaymentItem.GetPaymentItemByAPDN(apDNID);
             MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             IList result = PaymentItem.TransformReaderList(r);
             r.Close();

@@ -24,13 +24,19 @@ namespace Profit
         public APDebitNote APDEBIT_NOTE = null;
         User m_user;
         IList m_listLastresult = new ArrayList();
+        Supplier m_sup;
+        DateTime m_date;
+        IList m_notIn;
 
-        public SearchAPDNForPaymentForm(string textfind, int supID, IList result, User p)
+        public SearchAPDNForPaymentForm(string textfind, Supplier supID, IList result, User p, DateTime date, IList notIN)
         {
             InitializeComponent();
             m_listLastresult = result;
             searchText.Text = textfind;
             m_user = p;
+            m_sup = supID;
+            m_date = date;
+            m_notIn = notIN;
             if (result.Count > 0)
             {
                 loadResult(result);
@@ -38,6 +44,7 @@ namespace Profit
             }
             else
                 searchText.Focus();
+            this.Text += " [" + supID.CODE + "-" + supID.NAME + "]";
         }
 
         private void loadResult(IList records)
@@ -45,8 +52,13 @@ namespace Profit
             foreach (APDebitNote d in records)
             {
                 d.EMPLOYEE = (Employee)r_employee.GetById(d.EMPLOYEE);
-                //d.WAREHOUSE = (Warehouse)r_warehouse.GetById(d.WAREHOUSE);
-                int row = gridData.Rows.Add(d.CODE, d.TRANSACTION_DATE.ToString("dd-MM-yyyy"), d.EMPLOYEE.CODE,d.POSTED);
+                d.CURRENCY = (Currency)r_ccy.GetById(d.CURRENCY);
+                int row = gridData.Rows.Add(d.CODE, 
+                    d.TRANSACTION_DATE.ToString("dd-MM-yyyy"),
+                    d.CURRENCY.CODE,
+                    d.NET_AMOUNT,
+                    d.EMPLOYEE.CODE,
+                    d.POSTED);
                 gridData.Rows[row].Tag = d;
             }
             gridData.ClearSelection();
@@ -64,7 +76,7 @@ namespace Profit
             {
                 this.Cursor = Cursors.WaitCursor;
                 gridData.Rows.Clear();
-                IList records = r_soinv.Search(searchText.Text.Trim());
+                IList records = r_soinv.FindAPDNForPayment(m_sup.ID, m_date, searchText.Text.Trim(), m_notIn);
                 loadResult(records);
                 this.Cursor = Cursors.Default;
             }
