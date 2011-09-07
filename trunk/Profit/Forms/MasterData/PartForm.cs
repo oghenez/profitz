@@ -450,6 +450,7 @@ namespace Profit
         private void loadMovement()
         {
             movemntkryptonDataGridView.Rows.Clear();
+            if (m_part.ID == 0) return;
             IList movs = r_part.GetAllEvents(m_part.ID);
             foreach (EventItem itm in movs)
             {
@@ -681,6 +682,11 @@ namespace Profit
         private void PartForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             UserSetting.SaveSetting(movemntkryptonDataGridView, m_mainForm.CurrentUser.ID, this.Name);
+        }
+
+        private void refreshMovementkryptonButton_Click(object sender, EventArgs e)
+        {
+            loadMovement();
         }
 
         //private void toolStripButtonMigrate_Click(object sender, EventArgs e)

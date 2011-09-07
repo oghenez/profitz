@@ -172,6 +172,10 @@ namespace Profit.Server
         {
             return String.Format("SELECT apdn_eventstatus from table_apdebitnote where apdn_id ={0}", id);
         }
+        public static string GetBySupplierSQL(int id)
+        {
+            return String.Format("SELECT * from table_apdebitnote where sup_id ={0}", id);
+        }
         public static string GetUpdateStatusSQL(EventJournal e)
         {
             return String.Format(@"update table_apdebitnote set 

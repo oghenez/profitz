@@ -44,6 +44,7 @@
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.searchText = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.startSearch = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.checkAllkryptonCheckBox1 = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -165,6 +166,7 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.checkAllkryptonCheckBox1);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel2);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
             this.kryptonPanel1.Controls.Add(this.gridData);
@@ -209,6 +211,17 @@
             this.startSearch.UniqueName = "C21DE323E2AD4CD47CA5A3C9304450B8";
             this.startSearch.Click += new System.EventHandler(this.buttonSpecAny1_Click);
             // 
+            // checkAllkryptonCheckBox1
+            // 
+            this.checkAllkryptonCheckBox1.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.NormalControl;
+            this.checkAllkryptonCheckBox1.Location = new System.Drawing.Point(12, 310);
+            this.checkAllkryptonCheckBox1.Name = "checkAllkryptonCheckBox1";
+            this.checkAllkryptonCheckBox1.Size = new System.Drawing.Size(69, 19);
+            this.checkAllkryptonCheckBox1.TabIndex = 9;
+            this.checkAllkryptonCheckBox1.Text = "Check All";
+            this.checkAllkryptonCheckBox1.Values.Text = "Check All";
+            this.checkAllkryptonCheckBox1.CheckedChanged += new System.EventHandler(this.checkAllkryptonCheckBox1_CheckedChanged);
+            // 
             // SearchSuppInvJForPaymentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -247,5 +260,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn supplierColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ccyColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn qtyColumn;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox checkAllkryptonCheckBox1;
     }
 }

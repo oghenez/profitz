@@ -12,9 +12,12 @@ namespace Profit.Server
     {
         protected MySql.Data.MySqlClient.MySqlConnection m_connection = new MySql.Data.MySqlClient.MySqlConnection("server=localhost;database=profit_db;uid=root;pwd=1234");
         protected IEntity m_entity = null;
+        protected MySql.Data.MySqlClient.MySqlCommand m_cmd = new MySql.Data.MySqlClient.MySqlCommand();
+
         public Repository(IEntity e)
         {
             m_entity = e;
+            m_cmd.Connection = m_connection;
         }
         public void SetConnection(MySql.Data.MySqlClient.MySqlConnection connection)
         {

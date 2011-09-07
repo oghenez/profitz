@@ -222,6 +222,10 @@ namespace Profit.Server
         {
             return String.Format("SELECT si_eventstatus from table_supplierinvoice where si_id ={0}", id);
         }
+        public static string GetBySupplierSQL(int id)
+        {
+            return String.Format("SELECT * from table_supplierinvoice where sup_id ={0}", id);
+        }
         public static string GetUpdateStatusSQL(Event e)
         {
             return String.Format(@"update table_supplierinvoice set 

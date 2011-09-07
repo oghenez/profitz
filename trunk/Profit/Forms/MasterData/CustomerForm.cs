@@ -342,5 +342,16 @@ namespace Profit
         {
             ReloadMainFormButton();
         }
+
+        private void CustomerForm_Paint(object sender, PaintEventArgs e)
+        {
+            customTabControl1.Visible = false;
+            customTabControl1.Visible = true;
+        }
+
+        private void kryptonLabel11_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
