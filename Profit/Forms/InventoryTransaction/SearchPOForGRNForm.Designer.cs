@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.searchText = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.startSearch = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
@@ -47,6 +47,7 @@
             this.warehouseColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.checkAllkryptonCheckBox1 = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -130,9 +131,9 @@
             // 
             // checkColumn
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.NullValue = false;
-            this.checkColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.NullValue = false;
+            this.checkColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.checkColumn.FalseValue = null;
             this.checkColumn.HeaderText = "Check";
             this.checkColumn.IndeterminateValue = null;
@@ -196,6 +197,7 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.checkAllkryptonCheckBox1);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel2);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
             this.kryptonPanel1.Controls.Add(this.gridData);
@@ -215,6 +217,17 @@
             this.kryptonLabel2.Size = new System.Drawing.Size(141, 19);
             this.kryptonLabel2.TabIndex = 6;
             this.kryptonLabel2.Values.Text = "* Part of PO No. / Part No.";
+            // 
+            // checkAllkryptonCheckBox1
+            // 
+            this.checkAllkryptonCheckBox1.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.NormalControl;
+            this.checkAllkryptonCheckBox1.Location = new System.Drawing.Point(12, 310);
+            this.checkAllkryptonCheckBox1.Name = "checkAllkryptonCheckBox1";
+            this.checkAllkryptonCheckBox1.Size = new System.Drawing.Size(69, 19);
+            this.checkAllkryptonCheckBox1.TabIndex = 8;
+            this.checkAllkryptonCheckBox1.Text = "Check All";
+            this.checkAllkryptonCheckBox1.Values.Text = "Check All";
+            this.checkAllkryptonCheckBox1.CheckedChanged += new System.EventHandler(this.checkAllkryptonCheckBox1_CheckedChanged);
             // 
             // SearchPOForGRNForm
             // 
@@ -258,5 +271,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn qtyColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn unitColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn warehouseColumn;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox checkAllkryptonCheckBox1;
     }
 }

@@ -139,5 +139,13 @@ namespace Profit
                 gridData[checkColumn.Index, gridData.SelectedRows[0].Index].Value = !t; 
             }
         }
+
+        private void checkAllkryptonCheckBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            for (int i = 0; i < gridData.Rows.Count; i++)
+            {
+                gridData[checkColumn.Index, i].Value = checkAllkryptonCheckBox1.Checked;
+            }
+        }
     }
 }

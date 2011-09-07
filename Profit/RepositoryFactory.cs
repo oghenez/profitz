@@ -74,7 +74,7 @@ namespace Profit
             Repository docTypeRepository = new Repository(new DocumentType());
             Repository excRateRepository = new Repository(new ExchangeRate());
             Repository customerRepository = new Repository(new Customer());
-            Repository supplierRepository = new Repository(new Supplier());
+            SupplierRepository supplierRepository = new SupplierRepository();
             Repository yearRepository = new YearRepository();
             Repository partRepository = new PartRepository(new Part());
             StockTakingRepository stocktakingRepository = new StockTakingRepository();

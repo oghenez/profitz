@@ -180,20 +180,19 @@ namespace Profit
             }
             if (docnoColumn.Index == e.ColumnIndex)
             {
-                IList notin = new ArrayList();
-                for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
-                {
-                    if (i == e.RowIndex) continue;
-                    if (itemsDataGrid[docnoColumn.Index, i].Tag == null) continue;
-                    APDebitNote ap = (APDebitNote)itemsDataGrid[docnoColumn.Index, i].Tag;
-                    if (ap == null) continue;
-                    notin.Add(ap.ID);
-                }
-
                 PaymentType type = (PaymentType)Enum.Parse(typeof(PaymentType),itemsDataGrid[paymentTypeColumn.Index, e.RowIndex].Value.ToString());
                 if (type == PaymentType.APDebitNote)
                 {
                     itemsDataGrid[docnoColumn.Index, e.RowIndex].Tag = null;
+                    IList notin = new ArrayList();
+                    for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
+                    {
+                        if (i == e.RowIndex) continue;
+                        if (itemsDataGrid[docnoColumn.Index, i].Tag == null) continue;
+                        APDebitNote ap = (APDebitNote)itemsDataGrid[docnoColumn.Index, i].Tag;
+                        if (ap == null) continue;
+                        notin.Add(ap.ID);
+                    }
                     IList result = r_apdn.FindAPDNForPayment(((Supplier)supplierkryptonComboBox.SelectedItem).ID, dateKryptonDateTimePicker.Value, e.FormattedValue.ToString(), notin);
                     if (result.Count == 1)
                     {
@@ -221,6 +220,7 @@ namespace Profit
             }
             if (paymentTypeColumn.Index == e.ColumnIndex)
             {
+                itemsDataGrid[paymentAmountColumn.Index, e.RowIndex].Value = 0;
                 itemsDataGrid[paymentAmountColumn.Index, e.RowIndex].ReadOnly = false;
                 itemsDataGrid[docdateColumn.Index, e.RowIndex].ReadOnly = false;
                  PaymentType type = (PaymentType)Enum.Parse(typeof(PaymentType),e.FormattedValue.ToString());

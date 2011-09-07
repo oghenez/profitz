@@ -232,6 +232,10 @@ namespace Profit.Server
         {
             return String.Format("SELECT * from table_purchaseorder where po_id ={0}", id);
         }
+        public static string GetBySupplierSQL(int id)
+        {
+            return String.Format("SELECT * from table_purchaseorder where sup_id ={0}", id);
+        }
         public static string DeleteSQL(int id)
         {
             return String.Format("Delete from table_purchaseorder where po_id ={0}", id);

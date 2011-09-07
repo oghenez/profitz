@@ -53,6 +53,10 @@
       <HintPath>..\lib\ComponentFactory.Krypton.Toolkit.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="JacksonSoft.CustomTabControl, Version=1.0.1.7, Culture=neutral, PublicKeyToken=53c237210c7e462d, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\JacksonSoft.CustomTabControl.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data, Version=5.0.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Premiere\Library\MySql.Data.dll</HintPath>

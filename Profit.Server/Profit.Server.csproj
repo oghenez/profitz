@@ -124,6 +124,7 @@
     <Compile Include="Repository\ProcessTransactionRepository.cs" />
     <Compile Include="Repository\SupplierInvoiceJournalRepository.cs" />
     <Compile Include="Repository\SupplierOutStandingInvoiceRepository.cs" />
+    <Compile Include="Repository\SupplierRepository.cs" />
     <Compile Include="Repository\VendorBalanceEntryRepository.cs" />
     <Compile Include="Repository\VendorBalanceRepository.cs" />
     <Compile Include="Repository\JournalRepository.cs" />

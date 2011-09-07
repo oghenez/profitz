@@ -16,6 +16,7 @@ namespace Profit
     {
         Supplier m_supplier = new Supplier();
         IMainForm m_mainForm;
+        SupplierRepository r_sup = (SupplierRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.SUPPLIER_REPOSITORY);
 
         public SupplierForm(IMainForm mainForm, string formName)
         {
@@ -31,7 +32,7 @@ namespace Profit
         private void InitializeDataSource()
         {
             currencykryptonComboBox4.DataSource = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY).GetAll();
-            suppliercatkryptonComboBox5.DataSource = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.SUPPLIER_CATEGORY_REPOSITORY).GetAll();
+            customercatkryptonComboBox5.DataSource = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.SUPPLIER_CATEGORY_REPOSITORY).GetAll();
             purchaserkryptonComboBox2.DataSource = ((EmployeeRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.EMPLOYEE_REPOSITORY)).GetAllPurchaser();
             pricecategorykryptonComboBox6.DataSource = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PRICE_CATEGORY_REPOSITORY).GetAll();
             taxkryptonComboBox3.DataSource = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.TAX_REPOSITORY).GetAll();
@@ -51,7 +52,7 @@ namespace Profit
             {
                 this.Cursor = Cursors.WaitCursor;
                 gridData.Rows.Clear();
-                IList records = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.SUPPLIER_REPOSITORY).GetAll();
+                IList records = r_sup.GetAll();
                 foreach (Supplier d in records)
                 {
 
@@ -86,14 +87,14 @@ namespace Profit
                     UpdateEntity();
                     if (m_supplier.ID == 0)
                     {
-                        RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.SUPPLIER_REPOSITORY).Save(m_supplier);
-                        Supplier bank = (Supplier)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.SUPPLIER_REPOSITORY).GetByCode(m_supplier);
+                        r_sup.Save(m_supplier);
+                        Supplier bank = (Supplier)r_sup.GetByCode(m_supplier);
                         int r = gridData.Rows.Add(bank.CODE, bank.NAME);
                         gridData.Rows[r].Tag = bank;
                     }
                     else
                     {
-                        RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.SUPPLIER_REPOSITORY).Update(m_supplier);
+                        r_sup.Update(m_supplier);
                         updateRecord();
                     }
                     KryptonMessageBox.Show("Record has been saved","Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -143,7 +144,7 @@ namespace Profit
             m_supplier.CONTACT = contactkryptonTextBox3.Text;
             m_supplier.CREDIT_LIMIT = Convert.ToDouble(creditlimitkryptonNumericUpDown1.Value);
             m_supplier.CURRENCY = (Currency)currencykryptonComboBox4.SelectedItem;
-            m_supplier.SUPPLIER_CATEGORY = (SupplierCategory)suppliercatkryptonComboBox5.SelectedItem;
+            m_supplier.SUPPLIER_CATEGORY = (SupplierCategory)customercatkryptonComboBox5.SelectedItem;
             m_supplier.EMAIL = emailkryptonTextBox6.Text;
             m_supplier.EMPLOYEE = (Employee)purchaserkryptonComboBox2.SelectedItem;
             m_supplier.FAX = faxkryptonTextBox5.Text;
@@ -166,7 +167,7 @@ namespace Profit
                 contactkryptonTextBox3.Text = "";
                 creditlimitkryptonNumericUpDown1.Value = 0;
                 currencykryptonComboBox4.SelectedIndex = 0;
-                suppliercatkryptonComboBox5.SelectedIndex = 0;
+                customercatkryptonComboBox5.SelectedIndex = 0;
                 emailkryptonTextBox6.Text = "";
                 purchaserkryptonComboBox2.SelectedIndex = 0;
                 faxkryptonTextBox5.Text = "";
@@ -179,6 +180,7 @@ namespace Profit
                 zipcodekryptonTextBox2.Text = "";
                 m_supplier = new Supplier();
                 errorProvider1.Clear();
+                transactionkryptonDataGridView.Rows.Clear();
             }
             catch (Exception x)
             {
@@ -201,7 +203,7 @@ namespace Profit
             contactkryptonTextBox3.ReadOnly = !enable;
             creditlimitkryptonNumericUpDown1.Enabled = enable;
             currencykryptonComboBox4.Enabled = enable;
-            suppliercatkryptonComboBox5.Enabled = enable;
+            customercatkryptonComboBox5.Enabled = enable;
             emailkryptonTextBox6.ReadOnly = !enable;
             purchaserkryptonComboBox2.Enabled = enable;
             faxkryptonTextBox5.ReadOnly = !enable;
@@ -236,7 +238,7 @@ namespace Profit
                 {
                     this.Cursor = Cursors.WaitCursor;
                     if (KryptonMessageBox.Show("Are you sure to delete this record?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.No) { this.Cursor = Cursors.Default; return; }
-                    RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.SUPPLIER_REPOSITORY).Delete(m_supplier);
+                    r_sup.Delete(m_supplier);
                     removeRecord(m_supplier.ID);
                     ClearForm();
                     setEnableForm(true);
@@ -296,7 +298,7 @@ namespace Profit
             contactkryptonTextBox3.Text = m_supplier.CONTACT;
             creditlimitkryptonNumericUpDown1.Value = Convert.ToDecimal(m_supplier.CREDIT_LIMIT);
             currencykryptonComboBox4.Text = m_supplier.CURRENCY.ToString();
-            suppliercatkryptonComboBox5.Text = m_supplier.SUPPLIER_CATEGORY.ToString();
+            customercatkryptonComboBox5.Text = m_supplier.SUPPLIER_CATEGORY.ToString();
             emailkryptonTextBox6.Text = m_supplier.EMAIL;
             purchaserkryptonComboBox2.Text = m_supplier.EMPLOYEE.ToString();
             faxkryptonTextBox5.Text = m_supplier.FAX;
@@ -307,6 +309,8 @@ namespace Profit
             topkryptonComboBox1.Text = m_supplier.TERM_OF_PAYMENT.ToString();
             websitekryptonTextBox7.Text = m_supplier.WEBSITE;
             zipcodekryptonTextBox2.Text = m_supplier.ZIPCODE;
+
+            transactionkryptonDataGridView.Rows.Clear();
         }
 
         #region IChildForm Members
@@ -329,6 +333,59 @@ namespace Profit
         private void BankForm_Activated(object sender, EventArgs e)
         {
             ReloadMainFormButton();
+        }
+
+        private void transactionkryptonButton_Click(object sender, EventArgs e)
+        {
+            transactionkryptonDataGridView.Rows.Clear();
+            if (m_supplier.ID == 0) return;
+            IList trs = r_sup.GetAllTransactions(m_supplier.ID);
+            foreach (object ev in trs)
+            {
+                int r = transactionkryptonDataGridView.Rows.Add();
+                if (ev is Event)
+                {
+                    Event t = (Event)ev;
+                    transactionkryptonDataGridView[datetrColumn.Index, r].Value = t.TRANSACTION_DATE;
+                    transactionkryptonDataGridView[typeTrColumn.Index, r].Value = t.STOCK_CARD_ENTRY_TYPE.ToString();
+                    transactionkryptonDataGridView[codeTrColumn.Index, r].Value = t.CODE;
+                    transactionkryptonDataGridView[postedColumn.Index, r].Value = t.POSTED.ToString();
+                }
+                if (ev is EventJournal)
+                {
+                    EventJournal t = (EventJournal)ev;
+                    transactionkryptonDataGridView[datetrColumn.Index, r].Value = t.TRANSACTION_DATE;
+                    transactionkryptonDataGridView[typeTrColumn.Index, r].Value = t.VENDOR_BALANCE_ENTRY_TYPE.ToString();
+                    transactionkryptonDataGridView[codeTrColumn.Index, r].Value = t.CODE;
+                    transactionkryptonDataGridView[postedColumn.Index, r].Value = t.POSTED.ToString();
+
+                }
+            }
+        }
+
+        private void SupplierForm_Load(object sender, EventArgs e)
+        {
+            UserSetting.LoadSetting(transactionkryptonDataGridView, m_mainForm.CurrentUser.ID, this.Name);
+        }
+
+        private void SupplierForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            UserSetting.SaveSetting(transactionkryptonDataGridView, m_mainForm.CurrentUser.ID, this.Name);
+        }
+
+        private void transactionkryptonDataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            for (int count = 0; (count <= (transactionkryptonDataGridView.Rows.Count - 1)); count++)
+            {
+                transactionkryptonDataGridView.Rows[count].HeaderCell.Value = string.Format((count + 1).ToString(), "0");
+                transactionkryptonDataGridView.Rows[count].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
+
+        }
+
+        private void transactionkryptonDataGridView_Sorted(object sender, EventArgs e)
+        {
+            transactionkryptonDataGridView_RowsAdded(sender, null);
         }
     }
 }
