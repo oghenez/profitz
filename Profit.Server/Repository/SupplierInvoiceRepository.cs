@@ -38,6 +38,7 @@ namespace Profit.Server
             sij.SUPPLIER_INVOICE = si;
             sij.NET_AMOUNT = si.NET_TOTAL;
             sij.EMPLOYEE = si.EMPLOYEE;
+            sij.VENDOR_BALANCE_ENTRY_TYPE = VendorBalanceEntryType.SupplierInvoice;
 
             SupplierInvoiceJournalItem siji = new SupplierInvoiceJournalItem();
             siji.AMOUNT = si.NET_TOTAL;
@@ -50,6 +51,7 @@ namespace Profit.Server
             siji.EMPLOYEE = si.EMPLOYEE;
             siji.DUE_DATE = si.DUE_DATE;
             siji.OUTSTANDING_AMOUNT = si.NET_TOTAL;
+            siji.VENDOR_BALANCE_ENTRY_TYPE = VendorBalanceEntryType.SupplierInvoice;
 
             sij.EVENT_JOURNAL_ITEMS.Add(siji);
             r_sij.SaveNoTransaction(sij);

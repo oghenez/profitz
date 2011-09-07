@@ -53,7 +53,7 @@ namespace Profit
             {
                 this.Cursor = Cursors.WaitCursor;
                 gridData.Rows.Clear();
-                IList records = r_rep.SearchActivePart(searchText.Text.Trim());
+                IList records = r_rep.SearchActivePart(searchText.Text.Trim(), true);
                 loadResult(records);
                 this.Cursor = Cursors.Default;
             }
