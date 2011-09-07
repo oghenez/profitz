@@ -218,10 +218,13 @@ namespace Profit.Server
         {
             return String.Format("select * from table_part");
         }
-        public static string GetSearchSQL(string search)
+        public static string GetSearchSQL(string search, bool active)
         {
-            return String.Format(@"select * from table_part p where part_active = {0} 
-            and concat(p.part_code, p.part_name, p.part_barcode) like '%{1}%'", true, search);
+           // return String.Format(@"select * from table_part p where part_active = {0} 
+           // and concat(p.part_code, p.part_name, p.part_barcode) like '%{1}%'", true, search);
+            return String.Format(@"select distinct(p.part_id),p.* from table_part p, table_unitconversion v where {0}
+             concat(p.part_code, p.part_name, p.part_barcode, v.unitconv_barcode) like '%{1}%'
+            and v.part_id = p.part_id", active ? "p.part_active = true and" : "", search);
         }
 
         public string GetConcatSearch(string find)

@@ -184,6 +184,10 @@ namespace Profit.Server
         {
             return String.Format("SELECT sosti_eventstatus from table_supplieroutstandinginvoice where sosti_id ={0}", id);
         }
+        public static string GetBySupplierSQL(int id)
+        {
+            return String.Format("SELECT * from table_supplieroutstandinginvoice where sup_id ={0}", id);
+        }
         public static string GetUpdateStatusSQL(EventJournal e)
         {
             return String.Format(@"update table_supplieroutstandinginvoice set 

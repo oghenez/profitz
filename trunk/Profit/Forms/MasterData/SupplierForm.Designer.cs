@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonHeader1 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
@@ -79,6 +81,20 @@
             this.codeTrColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.postedColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.transactionkryptonButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.vendorbalanceentrykryptonDataGridView = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.dateVBEColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewDateTimePickerColumn();
+            this.typeVBEColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.ccyVBEColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.amountVBEColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.refreshBalanceStatuskryptonButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.vendorbalancekryptonDataGridView = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.periodVBColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.ccyVBColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.balanceVBColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.periodstatusVBColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBoxCode = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.textBoxName = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -107,6 +123,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.customercatkryptonComboBox5)).BeginInit();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.transactionkryptonDataGridView)).BeginInit();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.vendorbalanceentrykryptonDataGridView)).BeginInit();
+            this.tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.vendorbalancekryptonDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -230,6 +250,8 @@
             this.customTabControl1.Controls.Add(this.tabPage3);
             this.customTabControl1.Controls.Add(this.tabPage4);
             this.customTabControl1.Controls.Add(this.tabPage1);
+            this.customTabControl1.Controls.Add(this.tabPage2);
+            this.customTabControl1.Controls.Add(this.tabPage5);
             this.customTabControl1.DisplayStyle = System.Windows.Forms.TabStyle.Chrome;
             // 
             // 
@@ -459,6 +481,7 @@
             this.topkryptonComboBox1.Location = new System.Drawing.Point(130, 5);
             this.topkryptonComboBox1.Name = "topkryptonComboBox1";
             this.topkryptonComboBox1.Size = new System.Drawing.Size(121, 22);
+            this.topkryptonComboBox1.StateDisabled.ComboBox.Content.Color1 = System.Drawing.Color.Black;
             this.topkryptonComboBox1.TabIndex = 0;
             // 
             // kryptonLabel15
@@ -476,6 +499,7 @@
             this.purchaserkryptonComboBox2.Location = new System.Drawing.Point(130, 30);
             this.purchaserkryptonComboBox2.Name = "purchaserkryptonComboBox2";
             this.purchaserkryptonComboBox2.Size = new System.Drawing.Size(121, 22);
+            this.purchaserkryptonComboBox2.StateDisabled.ComboBox.Content.Color1 = System.Drawing.Color.Black;
             this.purchaserkryptonComboBox2.TabIndex = 1;
             // 
             // kryptonLabel14
@@ -493,6 +517,7 @@
             this.taxkryptonComboBox3.Location = new System.Drawing.Point(130, 55);
             this.taxkryptonComboBox3.Name = "taxkryptonComboBox3";
             this.taxkryptonComboBox3.Size = new System.Drawing.Size(121, 22);
+            this.taxkryptonComboBox3.StateDisabled.ComboBox.Content.Color1 = System.Drawing.Color.Black;
             this.taxkryptonComboBox3.TabIndex = 2;
             // 
             // kryptonLabel13
@@ -510,6 +535,7 @@
             this.currencykryptonComboBox4.Location = new System.Drawing.Point(130, 80);
             this.currencykryptonComboBox4.Name = "currencykryptonComboBox4";
             this.currencykryptonComboBox4.Size = new System.Drawing.Size(121, 22);
+            this.currencykryptonComboBox4.StateDisabled.ComboBox.Content.Color1 = System.Drawing.Color.Black;
             this.currencykryptonComboBox4.TabIndex = 3;
             // 
             // kryptonLabel12
@@ -527,6 +553,7 @@
             this.pricecategorykryptonComboBox6.Location = new System.Drawing.Point(130, 105);
             this.pricecategorykryptonComboBox6.Name = "pricecategorykryptonComboBox6";
             this.pricecategorykryptonComboBox6.Size = new System.Drawing.Size(121, 22);
+            this.pricecategorykryptonComboBox6.StateDisabled.ComboBox.Content.Color1 = System.Drawing.Color.Black;
             this.pricecategorykryptonComboBox6.TabIndex = 4;
             // 
             // customercatkryptonComboBox5
@@ -536,6 +563,7 @@
             this.customercatkryptonComboBox5.Location = new System.Drawing.Point(130, 130);
             this.customercatkryptonComboBox5.Name = "customercatkryptonComboBox5";
             this.customercatkryptonComboBox5.Size = new System.Drawing.Size(121, 22);
+            this.customercatkryptonComboBox5.StateDisabled.ComboBox.Content.Color1 = System.Drawing.Color.Black;
             this.customercatkryptonComboBox5.TabIndex = 5;
             // 
             // creditlimitkryptonNumericUpDown1
@@ -554,6 +582,7 @@
             0});
             this.creditlimitkryptonNumericUpDown1.Name = "creditlimitkryptonNumericUpDown1";
             this.creditlimitkryptonNumericUpDown1.Size = new System.Drawing.Size(120, 21);
+            this.creditlimitkryptonNumericUpDown1.StateCommon.Content.Color1 = System.Drawing.Color.Black;
             this.creditlimitkryptonNumericUpDown1.TabIndex = 6;
             this.creditlimitkryptonNumericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.creditlimitkryptonNumericUpDown1.ThousandsSeparator = true;
@@ -628,6 +657,186 @@
             this.transactionkryptonButton.TabIndex = 0;
             this.transactionkryptonButton.Values.Text = "Show Transaction";
             this.transactionkryptonButton.Click += new System.EventHandler(this.transactionkryptonButton_Click);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.kryptonButton1);
+            this.tabPage2.Controls.Add(this.vendorbalanceentrykryptonDataGridView);
+            this.tabPage2.Location = new System.Drawing.Point(4, 27);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(601, 200);
+            this.tabPage2.TabIndex = 3;
+            this.tabPage2.Text = "Balance History";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // kryptonButton1
+            // 
+            this.kryptonButton1.Location = new System.Drawing.Point(7, 11);
+            this.kryptonButton1.Name = "kryptonButton1";
+            this.kryptonButton1.Size = new System.Drawing.Size(123, 25);
+            this.kryptonButton1.TabIndex = 3;
+            this.kryptonButton1.Values.Text = "Show Balance Story";
+            this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
+            // 
+            // vendorbalanceentrykryptonDataGridView
+            // 
+            this.vendorbalanceentrykryptonDataGridView.AllowUserToAddRows = false;
+            this.vendorbalanceentrykryptonDataGridView.AllowUserToDeleteRows = false;
+            this.vendorbalanceentrykryptonDataGridView.AllowUserToResizeRows = false;
+            this.vendorbalanceentrykryptonDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dateVBEColumn,
+            this.typeVBEColumn,
+            this.ccyVBEColumn,
+            this.amountVBEColumn});
+            this.vendorbalanceentrykryptonDataGridView.Location = new System.Drawing.Point(7, 42);
+            this.vendorbalanceentrykryptonDataGridView.Name = "vendorbalanceentrykryptonDataGridView";
+            this.vendorbalanceentrykryptonDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.vendorbalanceentrykryptonDataGridView.Size = new System.Drawing.Size(587, 150);
+            this.vendorbalanceentrykryptonDataGridView.TabIndex = 2;
+            this.vendorbalanceentrykryptonDataGridView.Sorted += new System.EventHandler(this.vendorbalanceentrykryptonDataGridView_Sorted);
+            this.vendorbalanceentrykryptonDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.vendorbalanceentrykryptonDataGridView_RowsAdded);
+            // 
+            // dateVBEColumn
+            // 
+            this.dateVBEColumn.CalendarTodayDate = new System.DateTime(2011, 9, 7, 0, 0, 0, 0);
+            this.dateVBEColumn.Checked = false;
+            this.dateVBEColumn.CustomFormat = "dd-MM-yyyy";
+            this.dateVBEColumn.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateVBEColumn.HeaderText = "Date";
+            this.dateVBEColumn.Name = "dateVBEColumn";
+            this.dateVBEColumn.ReadOnly = true;
+            this.dateVBEColumn.Width = 100;
+            // 
+            // typeVBEColumn
+            // 
+            this.typeVBEColumn.HeaderText = "Type";
+            this.typeVBEColumn.Name = "typeVBEColumn";
+            this.typeVBEColumn.ReadOnly = true;
+            this.typeVBEColumn.Width = 100;
+            // 
+            // ccyVBEColumn
+            // 
+            this.ccyVBEColumn.HeaderText = "Ccy";
+            this.ccyVBEColumn.Name = "ccyVBEColumn";
+            this.ccyVBEColumn.ReadOnly = true;
+            this.ccyVBEColumn.Width = 100;
+            // 
+            // amountVBEColumn
+            // 
+            this.amountVBEColumn.DecimalPlaces = 2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.NullValue = "0";
+            this.amountVBEColumn.DefaultCellStyle = dataGridViewCellStyle6;
+            this.amountVBEColumn.HeaderText = "Amount";
+            this.amountVBEColumn.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.amountVBEColumn.Maximum = new decimal(new int[] {
+            -727379968,
+            232,
+            0,
+            0});
+            this.amountVBEColumn.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.amountVBEColumn.Name = "amountVBEColumn";
+            this.amountVBEColumn.ReadOnly = true;
+            this.amountVBEColumn.ThousandsSeparator = true;
+            this.amountVBEColumn.Width = 100;
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.refreshBalanceStatuskryptonButton);
+            this.tabPage5.Controls.Add(this.vendorbalancekryptonDataGridView);
+            this.tabPage5.Location = new System.Drawing.Point(4, 27);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(601, 200);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Balance Status";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // refreshBalanceStatuskryptonButton
+            // 
+            this.refreshBalanceStatuskryptonButton.Location = new System.Drawing.Point(6, 11);
+            this.refreshBalanceStatuskryptonButton.Name = "refreshBalanceStatuskryptonButton";
+            this.refreshBalanceStatuskryptonButton.Size = new System.Drawing.Size(90, 25);
+            this.refreshBalanceStatuskryptonButton.TabIndex = 4;
+            this.refreshBalanceStatuskryptonButton.Values.Text = "Refresh";
+            this.refreshBalanceStatuskryptonButton.Click += new System.EventHandler(this.refreshBalanceStatuskryptonButton_Click);
+            // 
+            // vendorbalancekryptonDataGridView
+            // 
+            this.vendorbalancekryptonDataGridView.AllowUserToAddRows = false;
+            this.vendorbalancekryptonDataGridView.AllowUserToDeleteRows = false;
+            this.vendorbalancekryptonDataGridView.AllowUserToResizeRows = false;
+            this.vendorbalancekryptonDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.periodVBColumn,
+            this.ccyVBColumn,
+            this.balanceVBColumn,
+            this.periodstatusVBColumn});
+            this.vendorbalancekryptonDataGridView.Location = new System.Drawing.Point(7, 42);
+            this.vendorbalancekryptonDataGridView.Name = "vendorbalancekryptonDataGridView";
+            this.vendorbalancekryptonDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.vendorbalancekryptonDataGridView.Size = new System.Drawing.Size(587, 150);
+            this.vendorbalancekryptonDataGridView.TabIndex = 3;
+            this.vendorbalancekryptonDataGridView.Sorted += new System.EventHandler(this.vendorbalancekryptonDataGridView_Sorted);
+            this.vendorbalancekryptonDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.vendorbalancekryptonDataGridView_RowsAdded);
+            // 
+            // periodVBColumn
+            // 
+            this.periodVBColumn.HeaderText = "Period";
+            this.periodVBColumn.Name = "periodVBColumn";
+            this.periodVBColumn.ReadOnly = true;
+            this.periodVBColumn.Width = 100;
+            // 
+            // ccyVBColumn
+            // 
+            this.ccyVBColumn.HeaderText = "Ccy";
+            this.ccyVBColumn.Name = "ccyVBColumn";
+            this.ccyVBColumn.ReadOnly = true;
+            this.ccyVBColumn.Width = 100;
+            // 
+            // balanceVBColumn
+            // 
+            this.balanceVBColumn.DecimalPlaces = 2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.NullValue = "0";
+            this.balanceVBColumn.DefaultCellStyle = dataGridViewCellStyle5;
+            this.balanceVBColumn.HeaderText = "Balance";
+            this.balanceVBColumn.Increment = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.balanceVBColumn.Maximum = new decimal(new int[] {
+            1215752192,
+            23,
+            0,
+            0});
+            this.balanceVBColumn.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.balanceVBColumn.Name = "balanceVBColumn";
+            this.balanceVBColumn.ReadOnly = true;
+            this.balanceVBColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.balanceVBColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.balanceVBColumn.ThousandsSeparator = true;
+            this.balanceVBColumn.Width = 100;
+            // 
+            // periodstatusVBColumn
+            // 
+            this.periodstatusVBColumn.HeaderText = "Period Status";
+            this.periodstatusVBColumn.Name = "periodstatusVBColumn";
+            this.periodstatusVBColumn.ReadOnly = true;
             // 
             // textBoxCode
             // 
@@ -743,6 +952,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.customercatkryptonComboBox5)).EndInit();
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.transactionkryptonDataGridView)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.vendorbalanceentrykryptonDataGridView)).EndInit();
+            this.tabPage5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.vendorbalancekryptonDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
@@ -810,5 +1023,19 @@
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn typeTrColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn codeTrColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn postedColumn;
+        private System.Windows.Forms.TabPage tabPage2;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridView vendorbalanceentrykryptonDataGridView;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewDateTimePickerColumn dateVBEColumn;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn typeVBEColumn;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn ccyVBEColumn;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn amountVBEColumn;
+        private System.Windows.Forms.TabPage tabPage5;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridView vendorbalancekryptonDataGridView;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn periodVBColumn;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn ccyVBColumn;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn balanceVBColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn periodstatusVBColumn;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton refreshBalanceStatuskryptonButton;
     }
 }

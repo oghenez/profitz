@@ -36,7 +36,7 @@ namespace Profit
             this.Name = formName;
             m_mainForm = mainForm;
             Clear(null, null);
-           // r_part.UpdatePart();
+            //r_part.UpdateUnitkeUnitConversion();
             //loadRecords();
         }
 
@@ -170,10 +170,12 @@ namespace Profit
                         updateRecord();
                     }
                     KryptonMessageBox.Show("Record has been saved","Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    gridData.ClearSelection();
-                    ClearForm();
-                    textBoxCode.Focus();
-                    this.Cursor = Cursors.Default;
+                    //gridData.ClearSelection();
+                    //ClearForm();
+                    //textBoxCode.Focus();
+                    //this.Cursor = Cursors.Default;
+                    setEnableForm(false);
+                    setEditMode(EditMode.View);
                 }
             }
             catch (Exception x)
@@ -578,7 +580,7 @@ namespace Profit
             {
                 this.Cursor = Cursors.WaitCursor;
                 gridData.Rows.Clear();
-                IList records = r_part.SearchActivePart(searchtoolStripTextBox.Text.Trim());
+                IList records = r_part.SearchActivePart(searchtoolStripTextBox.Text.Trim(), false);
                 foreach (Part d in records)
                 {
                     int row = gridData.Rows.Add(d.CODE, d.NAME, d.ACTIVE,d.BARCODE);

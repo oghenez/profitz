@@ -87,7 +87,7 @@ namespace Profit
             {
                 if (!((DataGridViewTextBoxCell)dataItemskryptonDataGridView[scanColumn.Index, e.RowIndex]).IsInEditMode)return;
                 if (e.FormattedValue.ToString() == "")return;
-                IList result = r_part.SearchActivePart(e.FormattedValue.ToString());
+                IList result = r_part.SearchActivePart(e.FormattedValue.ToString(), true);
                 if (result.Count == 1)
                 {
                     Part p = (Part)result[0];

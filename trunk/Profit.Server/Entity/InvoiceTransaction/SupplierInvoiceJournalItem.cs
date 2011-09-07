@@ -190,7 +190,7 @@ namespace Profit.Server
                 transaction.AMOUNT = Convert.ToDouble(aReader["siji_amount"]);
                 //transaction.VENDOR_BALANCE_ENTRY = new VendorBalanceEntry(
                 //VENDOR_BALANCE == null ? 0 : VENDOR_BALANCE.ID,
-                transaction.VENDOR_BALANCE_ENTRY_TYPE = VendorBalanceEntryType.SupplierOutStandingInvoice;
+                transaction.VENDOR_BALANCE_ENTRY_TYPE = VendorBalanceEntryType.SupplierInvoice;
                 transaction.INVOICE_DATE = Convert.ToDateTime(aReader["siji_invoicedate"]);
                 transaction.INVOICE_NO = aReader["siji_invoiceno"].ToString();
                 transaction.DUE_DATE = Convert.ToDateTime(aReader["siji_duedate"]);

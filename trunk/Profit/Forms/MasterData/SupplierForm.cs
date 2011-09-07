@@ -17,6 +17,9 @@ namespace Profit
         Supplier m_supplier = new Supplier();
         IMainForm m_mainForm;
         SupplierRepository r_sup = (SupplierRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.SUPPLIER_REPOSITORY);
+        Repository r_ccy = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY);
+        PeriodRepository r_per = (PeriodRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PERIOD_REPOSITORY);
+
 
         public SupplierForm(IMainForm mainForm, string formName)
         {
@@ -181,6 +184,8 @@ namespace Profit
                 m_supplier = new Supplier();
                 errorProvider1.Clear();
                 transactionkryptonDataGridView.Rows.Clear();
+                vendorbalanceentrykryptonDataGridView.Rows.Clear();
+                vendorbalancekryptonDataGridView.Rows.Clear();
             }
             catch (Exception x)
             {
@@ -311,6 +316,8 @@ namespace Profit
             zipcodekryptonTextBox2.Text = m_supplier.ZIPCODE;
 
             transactionkryptonDataGridView.Rows.Clear();
+            vendorbalanceentrykryptonDataGridView.Rows.Clear();
+            vendorbalancekryptonDataGridView.Rows.Clear();
         }
 
         #region IChildForm Members
@@ -366,11 +373,16 @@ namespace Profit
         private void SupplierForm_Load(object sender, EventArgs e)
         {
             UserSetting.LoadSetting(transactionkryptonDataGridView, m_mainForm.CurrentUser.ID, this.Name);
+            UserSetting.LoadSetting(vendorbalanceentrykryptonDataGridView, m_mainForm.CurrentUser.ID, this.Name);
+            UserSetting.LoadSetting(vendorbalancekryptonDataGridView, m_mainForm.CurrentUser.ID, this.Name);
         }
 
         private void SupplierForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             UserSetting.SaveSetting(transactionkryptonDataGridView, m_mainForm.CurrentUser.ID, this.Name);
+            UserSetting.SaveSetting(vendorbalanceentrykryptonDataGridView, m_mainForm.CurrentUser.ID, this.Name);
+            UserSetting.SaveSetting(vendorbalancekryptonDataGridView, m_mainForm.CurrentUser.ID, this.Name);
+
         }
 
         private void transactionkryptonDataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
@@ -380,12 +392,72 @@ namespace Profit
                 transactionkryptonDataGridView.Rows[count].HeaderCell.Value = string.Format((count + 1).ToString(), "0");
                 transactionkryptonDataGridView.Rows[count].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
             }
-
         }
 
         private void transactionkryptonDataGridView_Sorted(object sender, EventArgs e)
         {
             transactionkryptonDataGridView_RowsAdded(sender, null);
+        }
+
+        private void kryptonButton1_Click(object sender, EventArgs e)
+        {
+            vendorbalanceentrykryptonDataGridView.Rows.Clear();
+            if (m_supplier.ID == 0) return;
+            IList trs = r_sup.GetVendorBalanceEntry(m_supplier.ID);
+            foreach (VendorBalanceEntry ev in trs)
+            {
+                ev.CURRENCY = (Currency)r_ccy.GetById(ev.CURRENCY);
+                int r = vendorbalanceentrykryptonDataGridView.Rows.Add();
+                vendorbalanceentrykryptonDataGridView[dateVBEColumn.Index, r].Value = ev.TRANSACTION_DATE;
+                vendorbalanceentrykryptonDataGridView[typeVBEColumn.Index, r].Value = ev.VENDOR_BALANCE_ENTRY_TYPE.ToString();
+                vendorbalanceentrykryptonDataGridView[ccyVBEColumn.Index, r].Value = ev.CURRENCY.CODE;
+                vendorbalanceentrykryptonDataGridView[amountVBEColumn.Index, r].Value = ev.AMOUNT;
+            }
+        }
+
+        private void vendorbalanceentrykryptonDataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            for (int count = 0; (count <= (vendorbalanceentrykryptonDataGridView.Rows.Count - 1)); count++)
+            {
+                vendorbalanceentrykryptonDataGridView.Rows[count].HeaderCell.Value = string.Format((count + 1).ToString(), "0");
+                vendorbalanceentrykryptonDataGridView.Rows[count].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
+        }
+
+        private void vendorbalanceentrykryptonDataGridView_Sorted(object sender, EventArgs e)
+        {
+            vendorbalanceentrykryptonDataGridView_RowsAdded(sender, null);
+        }
+
+        private void refreshBalanceStatuskryptonButton_Click(object sender, EventArgs e)
+        {
+            vendorbalancekryptonDataGridView.Rows.Clear();
+            if (m_supplier.ID == 0) return;
+            IList trs = r_sup.GetVendorBalances(m_supplier.ID);
+            foreach (VendorBalance ev in trs)
+            {
+                ev.CURRENCY = (Currency)r_ccy.GetById(ev.CURRENCY);
+                ev.PERIOD = (Period)r_per.GetById(ev.PERIOD);
+                int r = vendorbalancekryptonDataGridView.Rows.Add();
+                vendorbalancekryptonDataGridView[periodVBColumn.Index, r].Value = ev.PERIOD.CODE;
+                vendorbalancekryptonDataGridView[ccyVBColumn.Index, r].Value = ev.CURRENCY.CODE;
+                vendorbalancekryptonDataGridView[balanceVBColumn.Index, r].Value = ev.BALANCE;
+                vendorbalancekryptonDataGridView[periodstatusVBColumn.Index, r].Value = ev.PERIOD.PERIOD_STATUS.ToString();
+            }
+        }
+
+        private void vendorbalancekryptonDataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            for (int count = 0; (count <= (vendorbalancekryptonDataGridView.Rows.Count - 1)); count++)
+            {
+                vendorbalancekryptonDataGridView.Rows[count].HeaderCell.Value = string.Format((count + 1).ToString(), "0");
+                vendorbalancekryptonDataGridView.Rows[count].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
+        }
+
+        private void vendorbalancekryptonDataGridView_Sorted(object sender, EventArgs e)
+        {
+            vendorbalancekryptonDataGridView_RowsAdded(sender, null);
         }
     }
 }

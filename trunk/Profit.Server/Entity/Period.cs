@@ -203,7 +203,19 @@ namespace Profit.Server
 
         public IEntity Get(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
-            throw new NotImplementedException();
+            Period period = null;
+            while (aReader.Read())
+            {
+                period = new Period();
+                period.ID = Convert.ToInt32(aReader[0]);
+                period.CODE = aReader[1].ToString();
+                period.PERIOD_STATUS = (PeriodStatus)Enum.Parse(typeof(PeriodStatus), aReader[2].ToString());
+                period.YEAR = new Year(Convert.ToInt32(aReader[3]));
+                period.START_DATE = Convert.ToDateTime(aReader[4]);
+                period.END_DATA = Convert.ToDateTime(aReader[5]);
+                period.CLOSED_DATE = Convert.ToDateTime(aReader[6]);
+            }
+            return period;
         }
 
         public IList GetAll(MySql.Data.MySqlClient.MySqlDataReader aReader)

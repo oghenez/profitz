@@ -70,8 +70,81 @@ namespace Profit.Server
             {
                 result.Add(e);
             }
-            //result.Sort(new Eve
+
+            m_cmd.CommandText = SupplierOutStandingInvoice.GetBySupplierSQL(supID);
+            r = m_cmd.ExecuteReader();
+            IList soi = SupplierOutStandingInvoice.TransformReaderList(r);
+            r.Close();
+            foreach (EventJournal e in soi)
+            {
+                result.Add(e);
+            }
+
+            result.Sort(new EventDateComparer());
             return result;
+        }
+        public IList GetVendorBalanceEntry(int supID)
+        {
+            ArrayList result = new ArrayList();
+            OpenConnection();
+            MySql.Data.MySqlClient.MySqlDataReader r;
+
+            m_cmd.CommandText = VendorBalanceEntry.FindByVendorBalanceBySupplier(supID, VendorBalanceType.Supplier);
+            r= m_cmd.ExecuteReader();
+            IList vbe = VendorBalanceEntry.TransformReaderList(r);
+            r.Close();
+
+            foreach (VendorBalanceEntry v in vbe)
+            {
+                result.Add(v);
+            }
+            result.Sort(new VendorBalanceEntryDateComparer());
+            return result;
+        }
+        public IList GetVendorBalances(int supID)
+        {
+            ArrayList result = new ArrayList();
+            OpenConnection();
+            MySql.Data.MySqlClient.MySqlDataReader r;
+
+            m_cmd.CommandText = VendorBalance.FindByVendorBalanceBySupplier(supID);
+            r = m_cmd.ExecuteReader();
+            IList vbe = VendorBalance.TransformReaderList(r);
+            r.Close();
+            foreach (VendorBalance v in vbe)
+            {
+                result.Add(v);
+            }
+            result.Sort(new VendorBalanceComparer());
+            return result;
+        }
+        private class VendorBalanceComparer : IComparer
+        {
+
+            #region IComparer Members
+
+            public int Compare(object x, object y)
+            {
+                VendorBalance X = (VendorBalance)x;
+                VendorBalance Y = (VendorBalance)y;
+                return new CaseInsensitiveComparer().Compare(X.PERIOD.ID, Y.PERIOD.ID);
+            }
+
+            #endregion
+        }
+        private class VendorBalanceEntryDateComparer : IComparer
+        {
+
+            #region IComparer Members
+
+            public int Compare(object x, object y)
+            {
+                VendorBalanceEntry X = (VendorBalanceEntry)x;
+                VendorBalanceEntry Y = (VendorBalanceEntry)y;
+                return DateTime.Compare(X.TRANSACTION_DATE, Y.TRANSACTION_DATE);
+            }
+
+            #endregion
         }
         private class EventDateComparer : IComparer
         {
@@ -80,9 +153,29 @@ namespace Profit.Server
 
             public int Compare(object x, object y)
             {
-                Event X = (Event)x;
-                Event Y = (Event)y;
-                return DateTime.Compare(X.TRANSACTION_DATE, Y.TRANSACTION_DATE);
+                DateTime xdate = DateTime.Today;
+                DateTime ydate = DateTime.Today;
+                if (x is Event)
+                {
+                    Event ev = (Event)x;
+                    xdate = ev.TRANSACTION_DATE;
+                }
+                if (x is EventJournal)
+                {
+                    EventJournal ev = (EventJournal)x;
+                    xdate = ev.TRANSACTION_DATE;
+                }
+                if (y is Event)
+                {
+                    Event ev = (Event)y;
+                    ydate = ev.TRANSACTION_DATE;
+                }
+                if (y is EventJournal)
+                {
+                    EventJournal ev = (EventJournal)y;
+                    ydate = ev.TRANSACTION_DATE;
+                }
+                return DateTime.Compare(xdate, ydate);
             }
 
             #endregion

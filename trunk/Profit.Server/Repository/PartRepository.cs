@@ -282,12 +282,12 @@ namespace Profit.Server
             }
             return u;
         }
-        public IList SearchActivePart(string search)
+        public IList SearchActivePart(string search, bool active)
         {
             try
             {
                 OpenConnection();
-                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand(Part.GetSearchSQL(search), m_connection);
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand(Part.GetSearchSQL(search, active), m_connection);
                 MySql.Data.MySqlClient.MySqlDataReader aReader = aCommand.ExecuteReader();
                 //DataSet ds = new DataSet();
                 //MySql.Data.MySqlClient.MySqlDataAdapter dc = new MySql.Data.MySqlClient.MySqlDataAdapter(Part.GetSearchSQL(search), m_connection);
@@ -545,6 +545,16 @@ namespace Profit.Server
 
             result.Sort(new EventDateComparer());
             return result; 
+        }
+        public void UpdateUnitkeUnitConversion()
+        {
+            //OpenConnection();
+            //IList result = this.GetAll();
+            //foreach (Part p in result)
+            //{
+            //    int index = result.IndexOf(p);
+            //    this.Update(p);
+            //}
         }
         private class EventDateComparer : IComparer
         {

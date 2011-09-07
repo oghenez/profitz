@@ -165,6 +165,10 @@ namespace Profit.Server
         {
             return String.Format("select * from table_vendorbalance");
         }
+        public static string FindByVendorBalanceBySupplier(int supID)
+        {
+            return String.Format("select * from table_vendorbalance where vendor_id ={0} and vb_vendorbalancetype ='{1}'", supID, VendorBalanceType.Supplier.ToString());
+        }
         public static VendorBalance TransformReader(MySql.Data.MySqlClient.MySqlDataReader a)
         {
             VendorBalance vb = null;
