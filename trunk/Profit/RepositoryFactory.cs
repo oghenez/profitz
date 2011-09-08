@@ -46,6 +46,7 @@ namespace Profit
         public const string APDEBITNOTE_REPOSITORY = "APDebitNoteRepository";
         public const string PROCESS_TRANSACTION_REPOSITORY = "ProcessTransactionRepository";
         public const string SALES_ORDER_REPOSITORY = "SalesOrderRepository";
+        public const string DELIVERY_ORDER_REPOSITORY = "DeliveryOrderRepository";
 
 
         public static RepositoryFactory GetInstance()
@@ -93,6 +94,7 @@ namespace Profit
             APDebitNoteRepository apdnRepository = new APDebitNoteRepository();
             ProcessTransactionRepository prtrRepository = new ProcessTransactionRepository();
             SalesOrderRepository slsorderRepository = new SalesOrderRepository();
+            DeliveryOrderRepository doRepository = new DeliveryOrderRepository();
 
             m_listService.Add(BANK_REPOSITORY, bankRepository);
             m_listService.Add(CURRENCY_REPOSITORY, ccyRepository);
@@ -128,6 +130,7 @@ namespace Profit
             m_listService.Add(APDEBITNOTE_REPOSITORY, apdnRepository);
             m_listService.Add(PROCESS_TRANSACTION_REPOSITORY, prtrRepository);
             m_listService.Add(SALES_ORDER_REPOSITORY, slsorderRepository);
+            m_listService.Add(DELIVERY_ORDER_REPOSITORY, doRepository);
 
         }
         public Repository GetRepository(string name)

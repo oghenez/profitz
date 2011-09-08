@@ -178,9 +178,9 @@ namespace Profit.Server
             m_command.CommandText = SalesReturn.GetUpdateStatusSQL(e);
             m_command.ExecuteNonQuery();
         }
-        public static SalesReturnItem FindGRNItem(MySql.Data.MySqlClient.MySqlCommand cmd, int grnIID)
+        public static SalesReturnItem FindDOItem(MySql.Data.MySqlClient.MySqlCommand cmd, int grnIID)
         {
-            cmd.CommandText = SalesReturnItem.FindByGrnItemIDSQL(grnIID);
+            cmd.CommandText = SalesReturnItem.FindByDOItemIDSQL(grnIID);
             MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             SalesReturnItem res = SalesReturnItem.TransformReader(r);
             r.Close();

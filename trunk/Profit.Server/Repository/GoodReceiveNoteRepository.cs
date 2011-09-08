@@ -136,22 +136,6 @@ namespace Profit.Server
                 }
                 m_command.CommandText = GoodReceiveNoteItem.DeleteUpdate(e.ID, e.EVENT_ITEMS);
                 m_command.ExecuteNonQuery();
-                //m_command.CommandText = GoodReceiveNoteItem.GetByEventIDSQL(e.ID);
-                //MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
-                //IList luc = GoodReceiveNoteItem.TransformReaderList(r);
-                //r.Close();
-                //foreach (GoodReceiveNoteItem chk in luc)
-                //{
-                //    chk.UPDATED = e.EVENT_ITEMS.Contains(chk);
-                //}
-                //foreach (GoodReceiveNoteItem chk in luc)
-                //{
-                //    if (!chk.UPDATED)
-                //    {
-                //        m_command.CommandText = GoodReceiveNoteItem.DeleteSQL(chk.ID);
-                //        m_command.ExecuteNonQuery();
-                //    }
-                //}
                 trc.Commit();
             }
             catch (Exception x)

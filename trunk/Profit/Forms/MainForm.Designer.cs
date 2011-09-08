@@ -726,7 +726,7 @@
             this.SalesTreeView.Name = "SalesTreeView";
             treeNode32.Name = "NodeSalesOrder";
             treeNode32.Text = "TRCS001 - Sales Order";
-            treeNode33.Name = "Node1";
+            treeNode33.Name = "NodeDeliveryOrder";
             treeNode33.Text = "TRCS002 - Delivery Order";
             treeNode34.Name = "Node2";
             treeNode34.Text = "TRCS003 - Customer Invoice";

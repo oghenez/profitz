@@ -90,11 +90,29 @@
     <Compile Include="Forms\InventoryTransaction\APDebitNoteForm.Designer.cs">
       <DependentUpon>APDebitNoteForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\DeliveryOrderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\DeliveryOrderForm.Designer.cs">
+      <DependentUpon>DeliveryOrderForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\InventoryTransaction\SalesTransaction\SalesOrderForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\InventoryTransaction\SalesTransaction\SalesOrderForm.Designer.cs">
       <DependentUpon>SalesOrderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchDeliveryOrderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchDeliveryOrderForm.Designer.cs">
+      <DependentUpon>SearchDeliveryOrderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchSOForDOForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchSOForDOForm.Designer.cs">
+      <DependentUpon>SearchSOForDOForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchSalesOrderForm.cs">
       <SubType>Form</SubType>
@@ -389,8 +407,17 @@
     <EmbeddedResource Include="Forms\InventoryTransaction\APDebitNoteForm.resx">
       <DependentUpon>APDebitNoteForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\DeliveryOrderForm.resx">
+      <DependentUpon>DeliveryOrderForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\SalesOrderForm.resx">
       <DependentUpon>SalesOrderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\SearchDeliveryOrderForm.resx">
+      <DependentUpon>SearchDeliveryOrderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\SearchSOForDOForm.resx">
+      <DependentUpon>SearchSOForDOForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\SearchSalesOrderForm.resx">
       <DependentUpon>SearchSalesOrderForm.cs</DependentUpon>

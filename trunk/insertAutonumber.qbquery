@@ -7,4 +7,4 @@
                     ans_initialno, 
                     ans_type, 
                     ans_istransaction) 
-                VALUES ('APDebitNote','TRCP006 - AP Debit Note','APDN#/MM/yyyy',1,3,'Yearly','Auto',True)
+                VALUES ('DeliveryPrder','TRCS002 - Delivery Order','DO#/MM/yyyy',1,3,'Yearly','Auto',True)

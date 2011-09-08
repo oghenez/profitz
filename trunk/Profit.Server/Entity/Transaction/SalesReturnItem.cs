@@ -136,7 +136,7 @@ namespace Profit.Server
         {
             return String.Format("Delete from table_salesreturnitem where srn_id = {0}", id);
         }
-        public static string FindByGrnItemIDSQL(int id)
+        public static string FindByDOItemIDSQL(int id)
         {
             return String.Format("SELECT * from table_salesreturnitem where doi_id = {0}", id);
         }
