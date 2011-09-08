@@ -145,7 +145,7 @@ INSERT INTO `table_autonumbersetup` (`ans_id`,`ans_entity`,`ans_formcode`,`ans_p
  (8,'Payment','TRCP004 - Payment','PYMN#/MM/yyyy',1,3,'Yearly','Auto',1),
  (9,'APDebitNote','TRCP006 - AP Debit Note','APDN#/MM/yyyy',1,3,'Yearly','Auto',1),
  (10,'SalesOrder','TRCS001 - Sales Order','SLA#/MM/yyyy',1,3,'Yearly','Auto',1),
- (11,'DeliveryPrder','TRCS002 - Delivery Order','DO#/MM/yyyy',1,3,'Yearly','Auto',1);
+ (11,'DeliveryOrder','TRCS002 - Delivery Order','DO#/MM/yyyy',1,3,'Yearly','Auto',1);
 /*!40000 ALTER TABLE `table_autonumbersetup` ENABLE KEYS */;
 
 
@@ -576,7 +576,7 @@ CREATE TABLE `table_formaccess` (
   PRIMARY KEY (`formaccess_id`) USING BTREE,
   KEY `FK_table_formaccess_1` (`user_id`),
   CONSTRAINT `FK_table_formaccess_1` FOREIGN KEY (`user_id`) REFERENCES `table_user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_formaccess`
@@ -616,7 +616,8 @@ INSERT INTO `table_formaccess` (`formaccess_id`,`formaccess_code`,`formaccess_na
  (32,'PaymentForm','TRCP004 - Payment',1,1,1,1,1,1),
  (33,'APDebitNoteForm','TRCP006 - APDebitNote',1,1,1,1,1,1),
  (34,'ProcessTransactionForm','GSTP003 - Process Transaction',1,1,1,1,1,1),
- (35,'SalesOrderForm','TRCS001 - Sales Order',1,1,1,1,1,1);
+ (35,'SalesOrderForm','TRCS001 - Sales Order',1,1,1,1,1,1),
+ (36,'DeliveryOrderForm','TRCS002 - Delivery Order',1,1,1,1,1,1);
 /*!40000 ALTER TABLE `table_formaccess` ENABLE KEYS */;
 
 
@@ -15005,7 +15006,7 @@ CREATE TABLE `table_user` (
 
 /*!40000 ALTER TABLE `table_user` DISABLE KEYS */;
 INSERT INTO `table_user` (`user_id`,`user_code`,`user_name`,`user_password`,`user_active`) VALUES 
- (1,'ADMIN','Administrator','ci+Feh5GZBJUNkfqWZbxJcwyWmk39cpRWN2s6UIZG80=',1),
+ (1,'ADMIN','Administrator','hp9sKhdeAJsk8RhnVyR5miFRoWpxZZkso/ttSkGsexk=',1),
  (10,'TEST','test','IaxuwwC6VETuZ0f8Wy+TeQ==',0);
 /*!40000 ALTER TABLE `table_user` ENABLE KEYS */;
 
@@ -15024,7 +15025,7 @@ CREATE TABLE `table_usersettings` (
   PRIMARY KEY (`us_id`),
   KEY `FK_table_usersettings_1` (`user_id`),
   CONSTRAINT `FK_table_usersettings_1` FOREIGN KEY (`user_id`) REFERENCES `table_user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=501 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=527 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_usersettings`
@@ -15479,7 +15480,33 @@ INSERT INTO `table_usersettings` (`us_id`,`user_id`,`us_name`,`us_value`,`us_typ
  (497,1,'SearchSalesOrderFormEmpColWidth','100','System.Int32'),
  (498,1,'SearchSalesOrderFormEmpColVisible','True','System.Boolean'),
  (499,1,'SearchSalesOrderFormPostedColWidth','50','System.Int32'),
- (500,1,'SearchSalesOrderFormPostedColVisible','True','System.Boolean');
+ (500,1,'SearchSalesOrderFormPostedColVisible','True','System.Boolean'),
+ (501,1,'DeliveryOrderFormscanColumnWidth','100','System.Int32'),
+ (502,1,'DeliveryOrderFormscanColumnVisible','True','System.Boolean'),
+ (503,1,'DeliveryOrderFormcodeColumnWidth','80','System.Int32'),
+ (504,1,'DeliveryOrderFormcodeColumnVisible','True','System.Boolean'),
+ (505,1,'DeliveryOrderFormnameColumnWidth','300','System.Int32'),
+ (506,1,'DeliveryOrderFormnameColumnVisible','True','System.Boolean'),
+ (507,1,'DeliveryOrderFormpoQtyColumnWidth','50','System.Int32'),
+ (508,1,'DeliveryOrderFormpoQtyColumnVisible','True','System.Boolean'),
+ (509,1,'DeliveryOrderFormpoUnitColumnWidth','50','System.Int32'),
+ (510,1,'DeliveryOrderFormpoUnitColumnVisible','True','System.Boolean'),
+ (511,1,'DeliveryOrderFormOutstandingPOColumnWidth','50','System.Int32'),
+ (512,1,'DeliveryOrderFormOutstandingPOColumnVisible','True','System.Boolean'),
+ (513,1,'DeliveryOrderFormOutstandingunitColumnWidth','60','System.Int32'),
+ (514,1,'DeliveryOrderFormOutstandingunitColumnVisible','True','System.Boolean'),
+ (515,1,'DeliveryOrderFormQtyColumnWidth','50','System.Int32'),
+ (516,1,'DeliveryOrderFormQtyColumnVisible','True','System.Boolean'),
+ (517,1,'DeliveryOrderFormunitColumnWidth','50','System.Int32'),
+ (518,1,'DeliveryOrderFormunitColumnVisible','True','System.Boolean'),
+ (519,1,'DeliveryOrderFormwarehouseColumnWidth','70','System.Int32'),
+ (520,1,'DeliveryOrderFormwarehouseColumnVisible','True','System.Boolean'),
+ (521,1,'DeliveryOrderFormnotesColumnWidth','100','System.Int32'),
+ (522,1,'DeliveryOrderFormnotesColumnVisible','True','System.Boolean'),
+ (523,1,'DeliveryOrderFormreturnedColumnWidth','50','System.Int32'),
+ (524,1,'DeliveryOrderFormreturnedColumnVisible','True','System.Boolean'),
+ (525,1,'DeliveryOrderFormreturnedunitColumnWidth','50','System.Int32'),
+ (526,1,'DeliveryOrderFormreturnedunitColumnVisible','True','System.Boolean');
 /*!40000 ALTER TABLE `table_usersettings` ENABLE KEYS */;
 
 
