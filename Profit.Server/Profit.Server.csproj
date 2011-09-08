@@ -71,6 +71,8 @@
     <Compile Include="Entity\InvoiceTransaction\VendorBalance.cs" />
     <Compile Include="Entity\InvoiceTransaction\VendorBalanceEntry.cs" />
     <Compile Include="Entity\StockCardInfo.cs" />
+    <Compile Include="Entity\Transaction\CustomerInvoiceItem.cs" />
+    <Compile Include="Entity\Transaction\CustomerInvoice.cs" />
     <Compile Include="Entity\Transaction\SupplierInvoiceItem.cs" />
     <Compile Include="Entity\Transaction\SupplierInvoice.cs" />
     <Compile Include="Entity\Vendor.cs" />

@@ -45,6 +45,7 @@ namespace Profit
         const string AP_DEBIT_NOTE_FORM = "APDebitNoteForm";
         const string PROCESS_TRANSACTION_FORM = "ProcessTransactionForm";
         const string SALES_ORDER_FORM = "SalesOrderForm";
+        const string DELIVERY_ORDER_FORM = "DeliveryOrderForm";
 
         IList m_listForm = new ArrayList();
         User m_currentUser = null;
@@ -266,6 +267,13 @@ namespace Profit
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
+            if (e.Node.Name == "NodeDeliveryOrder")
+            {
+                if (isChild(DELIVERY_ORDER_FORM)) { this.Cursor = Cursors.Default; return; }
+                DeliveryOrderForm user = new DeliveryOrderForm(this, DELIVERY_ORDER_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            }
             this.Cursor = Cursors.Default;
         }
         bool isChild(string name)
@@ -458,6 +466,7 @@ namespace Profit
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PAYMENT_FORM)) purchaseTreeView.Nodes["NodePayment"].Remove();
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(AP_DEBIT_NOTE_FORM)) purchaseTreeView.Nodes["NodeAPDebitNote"].Remove();
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(SALES_ORDER_FORM)) SalesTreeView.Nodes["NodeSalesOrder"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(DELIVERY_ORDER_FORM)) SalesTreeView.Nodes["NodeDeliveryOrder"].Remove();
 
 
             inventoryKryptonHeader.Visible = inventoryTreeView.Visible = inventoryTreeView.Nodes.Count > 0;
@@ -560,6 +569,7 @@ namespace Profit
             m_listForm.Add(new FormAccess(0, MainForm.PAYMENT_FORM.ToString(), "TRCP004 - Payment"));
             m_listForm.Add(new FormAccess(0, MainForm.AP_DEBIT_NOTE_FORM.ToString(), "TRCP006 - APDebitNote"));
             m_listForm.Add(new FormAccess(0, MainForm.SALES_ORDER_FORM.ToString(), "TRCS001 - Sales Order"));
+            m_listForm.Add(new FormAccess(0, MainForm.DELIVERY_ORDER_FORM.ToString(), "TRCS002 - Delivery Order"));
         }
 
         private void userMaintenanceToolStripMenuItem_Click(object sender, EventArgs e)
