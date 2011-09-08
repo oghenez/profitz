@@ -22,7 +22,7 @@ namespace Profit.Server
             double qtyAmount = doi.GetAmountInSmallestUnit();// QYTAMOUNT;
             if (qtyAmount <= 0) return;
             if (AGAINST_PR_STATUS == AgainstStatus.Close)
-                throw new Exception("GRN Item Allready Close :" + this.PART.NAME);
+                throw new Exception("GRN Item already fully received :" + this.PART.NAME);
             if (qtyAmount > OUTSTANDING_AMOUNT_TO_PR)
                 throw new Exception("PR Item Amount exceed Outstanding GRN Item Amount :" + this.PART.NAME);
             OUTSTANDING_AMOUNT_TO_PR = OUTSTANDING_AMOUNT_TO_PR - qtyAmount;

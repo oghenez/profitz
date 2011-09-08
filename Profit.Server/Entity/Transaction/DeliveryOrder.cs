@@ -177,5 +177,25 @@ namespace Profit.Server
                           AGAINST_SR_STATUS.ToString(),
                            ID);
         }
+        public static string GetSearch(string find)
+        {
+            return String.Format(@"select * from table_deliveryorder p
+                INNER JOIN table_employee e on e.emp_id = p.emp_id
+                INNER JOIN table_customer s on s.cus_id = p.cus_id
+                where concat(p.do_code, e.emp_code, e.emp_name, s.cus_code, s.cus_name)
+                like '%{0}%'", find);
+        }
+        public static string FindLastCodeAndTransactionDate(string code)
+        {
+            return String.Format(@"select * from table_deliveryorder p where p.do_code like '%{0}%' ORDER BY p.do_id DESC", code);
+        }
+        public static string RecordCount()
+        {
+            return @"select Count(*) from table_deliveryorder p";
+        }
+        public static string SelectCountByCode(string code)
+        {
+            return String.Format("SELECT count(*) from table_deliveryorder where do_code ='{0}'", code);
+        }
     }
 }
