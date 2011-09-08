@@ -24,7 +24,7 @@ namespace Profit
         Repository r_ccy = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY);
         Repository r_unit = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY);
         Repository r_warehouse = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.WAREHOUSE_REPOSITORY);
-        Repository r_sup = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.SUPPLIER_REPOSITORY);
+        CustomerRepository r_sup = (CustomerRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CUSTOMER_REPOSITORY);
         UserSettingsRepository r_setting = RepositoryFactory.GetInstance().UserSetting();
         SalesOrderRepository r_po = (SalesOrderRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.SALES_ORDER_REPOSITORY);
         DeliveryOrderRepository r_grn = (DeliveryOrderRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.DELIVERY_ORDER_REPOSITORY);
@@ -200,7 +200,7 @@ namespace Profit
         private void InitializeDataSource()
         {
             employeeKryptonComboBox.DataSource = r_employee.GetAllStoreman();
-            supplierkryptonComboBox.DataSource = r_sup.GetAll();
+            supplierkryptonComboBox.DataSource = r_sup.GetAllActive();
             m_units = r_unit.GetAll();
             m_warehouses = r_warehouse.GetAll();
             Utils.GetListCode(warehouseColumn.Items, m_warehouses);
