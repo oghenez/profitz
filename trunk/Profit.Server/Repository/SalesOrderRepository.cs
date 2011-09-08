@@ -38,6 +38,13 @@ namespace Profit.Server
             try
             {
                 m_command.Transaction = trc;
+                DateTime trDate = DateTime.Today;
+                string codesample = AutoNumberSetupRepository.GetCodeSampleByDomainName(m_command, "SalesOrder");
+                Event codeDate = FindLastCodeAndTransactionDate(codesample);
+                string lastCode = codeDate == null ? string.Empty : codeDate.CODE;
+                DateTime lastDate = codeDate == null ? trDate : codeDate.TRANSACTION_DATE;
+                int trCount = RecordCount();
+                e.CODE = AutoNumberSetupRepository.GetAutoNumberByDomainName(m_command, "SalesOrder", e.CODE, lastCode, lastDate, trDate, trCount == 0);
                 SalesOrder stk = (SalesOrder)e;
                 m_command.CommandText = e.GetInsertSQL();
                 m_command.ExecuteNonQuery();
@@ -123,7 +130,7 @@ namespace Profit.Server
             m_command.Transaction = trc;
             try
             {
-                if (getEventStatus(st.ID)== EventStatus.Confirm)
+                if (getEventStatus(st.ID) == EventStatus.Confirm)
                     throw new Exception("Revise before delete");
                 m_command.CommandText = SalesOrderItem.DeleteAllByEventSQL(st.ID);
                 m_command.ExecuteNonQuery();
@@ -181,14 +188,11 @@ namespace Profit.Server
             MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             SalesOrderItem result = SalesOrderItem.TransformReader(r);
             r.Close();
-            //cmd.CommandText = SalesOrder.GetByIDSQL(result.ID);
-            //r = cmd.ExecuteReader();
             result.EVENT = SalesOrderRepository.GetHeaderOnly(cmd, result.EVENT.ID);
             result.EVENT.EVENT_ITEMS.Add(result);
-            //r.Close();
             return result;
         }
-        public static SalesOrder GetHeaderOnly(MySql.Data.MySqlClient.MySqlCommand cmd , int poID)
+        public static SalesOrder GetHeaderOnly(MySql.Data.MySqlClient.MySqlCommand cmd, int poID)
         {
             cmd.CommandText = SalesOrder.GetByIDSQL(poID);
             MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
@@ -196,15 +200,126 @@ namespace Profit.Server
             r.Close();
             return st;
         }
-
         protected override IList doSearch(string find)
         {
-            throw new NotImplementedException();
+            try
+            {
+                m_command.CommandText = SalesOrder.GetSearch(find);
+                MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
+                IList rest = SalesOrder.TransformReaderList(r);
+                r.Close();
+                return rest;
+            }
+            catch (Exception x)
+            {
+                throw x;
+            }
         }
-
         protected override bool doIsCodeExist(string code)
         {
-            throw new NotImplementedException();
+            try
+            {
+                m_command.CommandText = SalesOrder.SelectCountByCode(code);
+                int t = Convert.ToInt32(m_command.ExecuteScalar());
+                return t > 0;
+            }
+            catch (Exception x)
+            {
+                throw x;
+            }
+        }
+        public override Event FindLastCodeAndTransactionDate(string codesample)
+        {
+            m_command.CommandText = SalesOrder.FindLastCodeAndTransactionDate(codesample);
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
+            Event e = SalesOrder.TransformReader(r);
+            r.Close();
+            return e;
+        }
+        public int RecordCount()
+        {
+            m_command.CommandText = SalesOrder.RecordCount();
+            int result = Convert.ToInt32(m_command.ExecuteScalar());
+            return result;
+        }
+        public bool IsAutoNumber()
+        {
+            AutoNumberSetup autonumber = AutoNumberSetupRepository.GetAutoNumberSetup(m_command, "SalesOrder");
+            return autonumber.AUTONUMBER_SETUP_TYPE == AutoNumberSetupType.Auto;
+        }
+        public IList FindSObyPartAndSONo(string find, IList exceptPOI, int customerID, DateTime trDate)
+        {
+            StringBuilder poisSB = new StringBuilder();
+            foreach (int i in exceptPOI)
+            {
+                poisSB.Append(i.ToString());
+                poisSB.Append(',');
+            }
+            string pois = poisSB.ToString();
+            pois = exceptPOI.Count > 0 ? pois.Substring(0, pois.Length - 1) : "";
+
+            m_command.CommandText = SalesOrderItem.GetSearchByPartAndSONo(find, customerID, pois, trDate);
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
+            IList result = SalesOrderItem.TransformReaderList(r);
+            r.Close();
+            foreach (SalesOrderItem t in result)
+            {
+                m_command.CommandText = SalesOrder.GetByIDSQL(t.EVENT.ID);
+                r = m_command.ExecuteReader();
+                t.EVENT = SalesOrder.TransformReader(r);
+                r.Close();
+                m_command.CommandText = Part.GetByIDSQLStatic(t.PART.ID);
+                r = m_command.ExecuteReader();
+                t.PART = Part.GetPart(r);
+                r.Close();
+                m_command.CommandText = Unit.GetByIDSQLstatic(t.UNIT.ID);
+                r = m_command.ExecuteReader();
+                t.UNIT = Unit.GetUnit(r);
+                r.Close();
+                m_command.CommandText = TermOfPayment.GetByIDSQLStatic(((SalesOrder)t.EVENT).TOP.ID);
+                r = m_command.ExecuteReader();
+                ((SalesOrder)t.EVENT).TOP = TermOfPayment.GetTOP(r);
+                r.Close();
+                m_command.CommandText = Warehouse.GetByIDSQLStatic(t.WAREHOUSE.ID);
+                r = m_command.ExecuteReader();
+                t.WAREHOUSE = Warehouse.GetWarehouse(r);
+                r.Close();
+                m_command.CommandText = Unit.GetByIDSQLstatic(t.PART.UNIT.ID);
+                r = m_command.ExecuteReader();
+                t.PART.UNIT = Unit.GetUnit(r);
+                r.Close();
+            }
+            return result;
+        }
+        public double GetTheLatestPOPrice(int cusID, int partID, int unitID)
+        {
+            m_command.CommandText = SalesOrderItem.GetTheLatestSOPrice(cusID, partID, unitID);
+            object r = m_command.ExecuteScalar();
+            if (r == null) return 0d;
+            double result = Convert.ToDouble(r);
+            return result;
+        }
+        public SalesOrderItem FindSalesOrderItem(int soiID)
+        {
+            m_command.CommandText = SalesOrderItem.GetByIDSQL(soiID);
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
+            SalesOrderItem result = SalesOrderItem.TransformReader(r);
+            r.Close();
+            result.EVENT = SalesOrderRepository.GetHeaderOnly(m_command, result.EVENT.ID);
+            result.EVENT.EVENT_ITEMS.Add(result);
+            return result;
+        }
+        public double GetOutstandingDelivered(int soItem)
+        {
+            m_command.CommandText = SalesOrderItem.GetOutstandingDeliveredSQL(soItem);
+            double result = Convert.ToDouble(m_command.ExecuteScalar());
+            return result;
+        }
+        public double GetReceived(int soItem)
+        {
+            m_command.CommandText = SalesOrderItem.GetDeliveredSQL(soItem);
+            double result = Convert.ToDouble(m_command.ExecuteScalar());
+            return result;
         }
     }
 }

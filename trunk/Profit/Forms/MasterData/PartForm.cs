@@ -24,6 +24,7 @@ namespace Profit
         IList m_currencyList = new ArrayList();
         IList m_partCategoryList = new ArrayList();
         Repository r_sup = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.SUPPLIER_REPOSITORY);
+        CustomerRepository r_cus = (CustomerRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CUSTOMER_REPOSITORY);
         
 
         public PartForm(IMainForm mainForm, string formName)
@@ -470,6 +471,12 @@ namespace Profit
                         PurchaseOrder p = (PurchaseOrder)pi.EVENT;
                         p.SUPPLIER = (Supplier)r_sup.GetById(p.SUPPLIER);
                         movemntkryptonDataGridView[vendorMovementColumn.Index, r].Value = p.SUPPLIER.NAME;
+                        break;
+                    case StockCardEntryType.SalesOrder:
+                        SalesOrderItem soi = (SalesOrderItem)itm;
+                        SalesOrder so = (SalesOrder)soi.EVENT;
+                        so.CUSTOMER = (Customer)r_cus.GetById(so.CUSTOMER);
+                        movemntkryptonDataGridView[vendorMovementColumn.Index, r].Value = so.CUSTOMER.NAME;
                         break;
                     case StockCardEntryType.GoodReceiveNote:
                         GoodReceiveNoteItem grni = (GoodReceiveNoteItem)itm;

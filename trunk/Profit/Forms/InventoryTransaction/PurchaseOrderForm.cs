@@ -761,6 +761,9 @@ namespace Profit
                 {
                     em.TERM_OF_PAYMENT = (TermOfPayment)r_top.GetById(em.TERM_OF_PAYMENT);
                     termofpaymentKryptonComboBox.Text = em.TERM_OF_PAYMENT.ToString();
+
+                    em.EMPLOYEE = (Employee)r_employee.GetById(em.EMPLOYEE);
+                    employeeKryptonComboBox.Text = em.EMPLOYEE.ToString();
                 }
             }
             addressKryptonTextBox.Text = em == null ? "" : em.ADDRESS;

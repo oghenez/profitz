@@ -125,7 +125,7 @@ namespace Profit.Server
                     po_againsgrnstatus = '{19}',
                     po_code = '{20}',
                     sup_id = {21},
-                     po_docno = '{22}',
+                    po_docno = '{22}',
                     po_docdate ='{23}'
                 where po_id = {24}",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),

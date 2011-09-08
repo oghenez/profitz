@@ -68,10 +68,12 @@ namespace Profit.Server
                     so_nettotal,
                     so_againsdostatus,
                     so_code,
-                    cus_id
+                    cus_id,
+                    so_docno,
+                    so_docdate
                 ) 
                 VALUES ('{0}','{1}','{2}',{3},'{4}',{5},'{6}',{7},{8},'{9}',{10},
-                        {11},{12},{13},{14},{15},{16},{17},{18},'{19}','{20}',{21})",
+                        {11},{12},{13},{14},{15},{16},{17},{18},'{19}','{20}',{21},'{22}','{23}')",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                 StockCardEntryType.SalesOrder.ToString(),
@@ -93,7 +95,9 @@ namespace Profit.Server
                 NET_TOTAL,
                 AGAINST_DO_STATUS.ToString(),
                 CODE,
-                CUSTOMER == null ? 0 : CUSTOMER.ID
+                CUSTOMER == null ? 0 : CUSTOMER.ID,
+                DOCUMENT_NO,
+                DOCUMENT_DATE.ToString(Utils.DATE_FORMAT)
                 );
         }
         public override string GetUpdateSQL()
@@ -120,8 +124,10 @@ namespace Profit.Server
                     so_nettotal = {18},
                     so_againsdostatus = '{19}',
                     so_code = '{20}',
-                    cus_id = {21}
-                where so_id = {22}",
+                    cus_id = {21},
+                    so_docno = '{22}',
+                    so_docdate ='{23}'
+                where so_id = {24}",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                 StockCardEntryType.SalesOrder.ToString(),
@@ -144,6 +150,8 @@ namespace Profit.Server
                 AGAINST_DO_STATUS.ToString(),
                 CODE,
                 CUSTOMER == null ? 0 : CUSTOMER.ID,
+                DOCUMENT_NO,
+                DOCUMENT_DATE.ToString(Utils.DATE_FORMAT),
                 ID);
         }
         public static SalesOrder TransformReader(MySql.Data.MySqlClient.MySqlDataReader aReader)
@@ -176,7 +184,8 @@ namespace Profit.Server
                 transaction.AGAINST_DO_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), aReader["so_againsdostatus"].ToString());
                 transaction.CODE = aReader["so_code"].ToString();
                 transaction.CUSTOMER = new Customer(Convert.ToInt32(aReader["cus_id"]));
-
+                transaction.DOCUMENT_NO = aReader["so_docno"].ToString();
+                transaction.DOCUMENT_DATE = Convert.ToDateTime(aReader["so_docdate"]);
             }
             return transaction;
         }
@@ -188,7 +197,7 @@ namespace Profit.Server
                 SalesOrder transaction = new SalesOrder();
                 transaction.ID = Convert.ToInt32(aReader["so_id"]);
                 transaction.TRANSACTION_DATE = Convert.ToDateTime(aReader["so_date"]);
-                transaction.NOTICE_DATE = Convert.ToDateTime(aReader["stk_noticedate"]);
+                transaction.NOTICE_DATE = Convert.ToDateTime(aReader["so_noticedate"]);
                 transaction.STOCK_CARD_ENTRY_TYPE = (StockCardEntryType)Enum.Parse(typeof(StockCardEntryType), aReader["so_scentrytype"].ToString());
                 transaction.EMPLOYEE = new Employee(Convert.ToInt32(aReader["emp_id"]));
                 transaction.NOTES = aReader["so_notes"].ToString();
@@ -209,6 +218,8 @@ namespace Profit.Server
                 transaction.AGAINST_DO_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), aReader["so_againsdostatus"].ToString());
                 transaction.CODE = aReader["so_code"].ToString();
                 transaction.CUSTOMER = new Customer(Convert.ToInt32(aReader["cus_id"]));
+                transaction.DOCUMENT_NO = aReader["so_docno"].ToString();
+                transaction.DOCUMENT_DATE = Convert.ToDateTime(aReader["so_docdate"]);
                 result.Add(transaction);
             }
             return result;
@@ -220,6 +231,10 @@ namespace Profit.Server
         public static string GetByIDSQL(int id)
         {
             return String.Format("SELECT * from table_salesorder where so_id ={0}", id);
+        }
+        public static string GetBySupplierSQL(int id)
+        {
+            return String.Format("SELECT * from table_salesorder where cus_id ={0}", id);
         }
         public static string DeleteSQL(int id)
         {
@@ -246,6 +261,26 @@ namespace Profit.Server
                 where so_id = {1}",
                           AGAINST_DO_STATUS.ToString(),
                            ID);
+        }
+        public static string FindLastCodeAndTransactionDate(string code)
+        {
+            return String.Format(@"select * from table_salesorder p where p.so_code like '%{0}%' ORDER BY p.so_id DESC", code);
+        }
+        public static string RecordCount()
+        {
+            return @"select Count(*) from table_salesorder p";
+        }
+        public static string SelectCountByCode(string code)
+        {
+            return String.Format("SELECT count(*) from table_salesorder where so_code ='{0}'", code);
+        }
+        public static string GetSearch(string find)
+        {
+            return String.Format(@"select * from table_salesorder p
+                INNER JOIN table_employee e on e.emp_id = p.emp_id
+                INNER JOIN table_customer s on s.cus_id = p.cus_id
+                where concat(p.so_code, e.emp_code, e.emp_name, s.cus_code, s.cus_name)
+                like '%{0}%'", find);
         }
     }
 }

@@ -31,7 +31,7 @@ namespace Profit.Server
             double qtyAmount = grni.GetAmountInSmallestUnit();//grni.QYTAMOUNT;
             if (qtyAmount <= 0) return;
             if (AGAINST_GRN_STATUS == AgainstStatus.Close)
-                throw new Exception("PO Item Allready Close :" + this.PART.NAME);
+                throw new Exception("PO Item already fully received :" + this.PART.NAME);
             if (qtyAmount > OUTSTANDING_AMOUNT_TO_GRN)
                 throw new Exception("GRN Item Amount exceed PO Outstanding Item Amount :" + this.PART.NAME);
             OUTSTANDING_AMOUNT_TO_GRN = OUTSTANDING_AMOUNT_TO_GRN - qtyAmount;
@@ -110,7 +110,7 @@ namespace Profit.Server
                 DISC_C,
                 DISC_ABC,
                 AGAINST_GRN_STATUS.ToString(),
-                 GetAmountInSmallestUnit(),//OUTSTANDING_AMOUNT_TO_GRN,
+                GetAmountInSmallestUnit(),//OUTSTANDING_AMOUNT_TO_GRN,
                 0,//RECEIVED_AMOUNT,
                 UNIT.ID==PART.UNIT.ID?PRICE :PRICE / GetAmountInSmallestUnit()//-----kalau Unit lain baru dibagi
                 );

@@ -97,9 +97,11 @@ namespace Profit
                         updateRecord();
                     }
                     KryptonMessageBox.Show("Record has been saved","Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    gridData.ClearSelection();
-                    ClearForm();
-                    textBoxCode.Focus();
+                    //gridData.ClearSelection();
+                    //ClearForm();
+                    //textBoxCode.Focus();
+                    setEnableForm(false);
+                    setEditMode(EditMode.View);
                     this.Cursor = Cursors.Default;
                 }
             }

@@ -22,15 +22,16 @@ namespace Profit.Server
         public AgainstStatus AGAINST_DO_STATUS = AgainstStatus.Open;
         public double OUTSTANDING_AMOUNT_TO_DO = 0;
         public double DELIVERED_AMOUNT = 0;
+        public double PRICE_IN_SMALLEST_UNIT = 0;
 
         public SalesOrderItem() : base() { }
         public SalesOrderItem(int ID) : base(ID) { }
         public void SetOSAgainstDOItem(DeliveryOrderItem grni)
         {
-            double qtyAmount = grni.QYTAMOUNT;
+            double qtyAmount = grni.GetAmountInSmallestUnit();//grni.QYTAMOUNT;
             if (qtyAmount <= 0) return;
             if (AGAINST_DO_STATUS == AgainstStatus.Close)
-                throw new Exception("SO Item Allready Close :" + this.PART.NAME);
+                throw new Exception("SO Item already fully delivered :" + this.PART.NAME);
             if (qtyAmount > OUTSTANDING_AMOUNT_TO_DO)
                 throw new Exception("DO Item Amount exceed SO Outstanding Item Amount :" + this.PART.NAME);
             OUTSTANDING_AMOUNT_TO_DO = OUTSTANDING_AMOUNT_TO_DO - qtyAmount;
@@ -43,8 +44,8 @@ namespace Profit.Server
         }
         public void UnSetOSAgainstDOItem(DeliveryOrderItem grni)
         {
-            double qtyAmount = grni.QYTAMOUNT;
-            if (qtyAmount > this.QYTAMOUNT || OUTSTANDING_AMOUNT_TO_DO + qtyAmount > this.QYTAMOUNT)
+            double qtyAmount = grni.GetAmountInSmallestUnit();//grni.QYTAMOUNT;
+            if (qtyAmount > this.GetAmountInSmallestUnit() || OUTSTANDING_AMOUNT_TO_DO + qtyAmount > this.GetAmountInSmallestUnit())
                 throw new Exception("DO Item revise Amount exceed SO Item Amount :" + this.PART.NAME);
             OUTSTANDING_AMOUNT_TO_DO = OUTSTANDING_AMOUNT_TO_DO + qtyAmount;
             DELIVERED_AMOUNT = DELIVERED_AMOUNT - qtyAmount;
@@ -58,7 +59,7 @@ namespace Profit.Server
         private bool isValidToClose()
         {
             bool validA = OUTSTANDING_AMOUNT_TO_DO == 0;
-            bool validB = DELIVERED_AMOUNT == QYTAMOUNT;
+            bool validB = DELIVERED_AMOUNT == GetAmountInSmallestUnit();
             return validA && validB;
         }
         public override string GetInsertSQL()
@@ -85,10 +86,11 @@ namespace Profit.Server
                     soi_discabc,
                     soi_againstdostatus,
                     soi_outstandingamounttodo,
-                    soi_deliveredamount
+                    soi_deliveredamount,
+                    soi_priceinsmallestunit
                 ) 
                 VALUES ({0},{1},{2},{3},{4},'{5}',{6},{7},{8},{9},{10},{11},{12},'{13}',{14},
-                    {15},{16},'{17}','{18}',{19},{20})",
+                    {15},{16},'{17}','{18}',{19},{20},{21})",
                 EVENT.ID,
                 PART.ID,
                 WAREHOUSE.ID,
@@ -109,7 +111,8 @@ namespace Profit.Server
                 DISC_ABC,
                 AGAINST_DO_STATUS.ToString(),
                 GetAmountInSmallestUnit(),// QYTAMOUNT,//OUTSTANDING_AMOUNT_TO_DO,
-                0//DELIVERED_AMOUNT
+                0,//DELIVERED_AMOUNT,
+                UNIT.ID==PART.UNIT.ID?PRICE :PRICE / GetAmountInSmallestUnit()
                 );
         }
         public override string GetUpdateSQL()
@@ -135,8 +138,9 @@ namespace Profit.Server
                     soi_discabc = {17},
                     soi_againstdostatus = {18},
                     soi_outstandingamounttodo = {19},
-                    soi_deliveredamount = {20}
-                where soi_id = {21}",
+                    soi_deliveredamount = {20},
+                    soi_priceinsmallestunit = {21}
+                where soi_id = {22}",
                 EVENT.ID,
                 PART.ID,
                 WAREHOUSE.ID,
@@ -158,6 +162,7 @@ namespace Profit.Server
                 AGAINST_DO_STATUS.ToString(),
                 GetAmountInSmallestUnit(),// OUTSTANDING_AMOUNT_TO_DO,
                 DELIVERED_AMOUNT,
+                UNIT.ID == PART.UNIT.ID ? PRICE : PRICE / GetAmountInSmallestUnit(),
                 ID);
         }
         public static SalesOrderItem TransformReader(MySql.Data.MySqlClient.MySqlDataReader aReader)
@@ -189,6 +194,7 @@ namespace Profit.Server
                 transaction.AGAINST_DO_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), aReader["soi_againstdostatus"].ToString());
                 transaction.OUTSTANDING_AMOUNT_TO_DO = Convert.ToDouble(Convert.ToInt32(aReader["soi_outstandingamounttodo"]));
                 transaction.DELIVERED_AMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["soi_deliveredamount"]));
+                transaction.PRICE_IN_SMALLEST_UNIT = Convert.ToDouble(Convert.ToInt32(aReader["soi_priceinsmallestunit"]));
             }
             return transaction;
         }
@@ -220,6 +226,7 @@ namespace Profit.Server
                 transaction.AGAINST_DO_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), aReader["soi_againstdostatus"].ToString());
                 transaction.OUTSTANDING_AMOUNT_TO_DO = Convert.ToDouble(Convert.ToInt32(aReader["soi_outstandingamounttodo"]));
                 transaction.DELIVERED_AMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["soi_deliveredamount"]));
+                transaction.PRICE_IN_SMALLEST_UNIT = Convert.ToDouble(Convert.ToInt32(aReader["soi_priceinsmallestunit"]));
                 result.Add(transaction);
             }
             return result;
@@ -235,6 +242,10 @@ namespace Profit.Server
         public static string GetByIDSQL(int id)
         {
             return String.Format("SELECT * from table_salesorderitem where soi_id = {0}", id);
+        }
+        public static string GetByPartIDSQL(int id)
+        {
+            return String.Format("SELECT * from table_salesorderitem where part_id = {0}", id);
         }
         public static string DeleteUpdate(int id, IList notIN)
         {
@@ -266,6 +277,42 @@ namespace Profit.Server
                                        OUTSTANDING_AMOUNT_TO_DO,
                                        DELIVERED_AMOUNT,
                                        ID); 
+        }
+        public static string GetSearchByPartAndSONo(string find, int customerID, string poi, DateTime trdate)
+        {
+            return String.Format(@"SELECT t.*
+                FROM table_salesorderitem t
+                INNER JOIN table_salesorder p on p.so_id = t.so_id
+                INNER JOIN table_part pt on pt.part_id = t.part_id
+                where t.soi_outstandingamounttodo > 0
+                and concat(pt.part_code, pt.part_name, p.so_code) like '%{0}%' and p.cus_id = {1}  
+                and p.so_posted = true
+                and p.so_date <= '{2}'
+               {3}", find, customerID, trdate.ToString(Utils.DATE_FORMAT), poi != "" ? " and t.soi_id not in (" + poi + ")" : "");
+        }
+        public override bool Equals(object obj)
+        {
+            SalesOrderItem e = (SalesOrderItem)obj;
+            if (e == null) return false;
+            return e.ID == this.ID;
+        }
+
+        internal static string GetTheLatestSOPrice(int cusID, int partID, int unitID)
+        {
+            return String.Format(@"SELECT t.soi_price
+                FROM table_salesorderitem t
+                INNER JOIN table_salesorder p on p.so_id = t.so_id
+                where p.cus_id = {0} and t.part_id = {1} and t.unit_id = {2}
+                order by p.so_date desc
+                ", cusID, partID, unitID);
+        }
+        public static string GetOutstandingDeliveredSQL(int id)
+        {
+            return String.Format("SELECT soi_outstandingamounttodo from table_salesorderitem where soi_id = {0}", id);
+        }
+        public static string GetDeliveredSQL(int id)
+        {
+            return String.Format("SELECT soi_deliveredamount from table_salesorderitem where soi_id = {0}", id);
         }
     }
 }
