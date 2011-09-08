@@ -120,6 +120,7 @@
     <Compile Include="Repository.cs" />
     <Compile Include="Repository\AutoNumberSetupRepository.cs" />
     <Compile Include="Repository\APDebitNoteRepository.cs" />
+    <Compile Include="Repository\CustomerRepository.cs" />
     <Compile Include="Repository\PaymentRepository.cs" />
     <Compile Include="Repository\ProcessTransactionRepository.cs" />
     <Compile Include="Repository\SupplierInvoiceJournalRepository.cs" />

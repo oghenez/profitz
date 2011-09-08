@@ -497,6 +497,18 @@ namespace Profit.Server
                 result.Add(itm);
             }
 
+            m_cmd.CommandText = SalesOrderItem.GetByPartIDSQL(partID);
+            rdr = m_cmd.ExecuteReader();
+            IList sois = SalesOrderItem.TransformReaderList(rdr);
+            rdr.Close();
+            foreach (SalesOrderItem itm in sois)
+            {
+                itm.EVENT = SalesOrderRepository.GetHeaderOnly(m_cmd, itm.EVENT.ID);
+                itm.PART = p;
+                result.Add(itm);
+            }
+
+
             m_cmd.CommandText = GoodReceiveNoteItem.GetByPartIDSQL(partID);
             rdr = m_cmd.ExecuteReader();
             IList grnis = GoodReceiveNoteItem.TransformReaderList(rdr);

@@ -44,9 +44,11 @@ namespace Profit.Server
                     do_eventstatus,
                     do_againstprstatus,
                     do_code,
-                    cus_id
+                    cus_id,
+                    do_docno,
+                    do_docdate
                 ) 
-                VALUES ('{0}','{1}','{2}',{3},'{4}',{5},'{6}','{7}','{8}',{9})",
+                VALUES ('{0}','{1}','{2}',{3},'{4}',{5},'{6}','{7}','{8}',{9},'{10}','{11}')",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                 StockCardEntryType.DeliveryOrder.ToString(),
@@ -56,7 +58,9 @@ namespace Profit.Server
                 EVENT_STATUS.ToString(),
                 AGAINST_SR_STATUS.ToString(),
                 CODE,
-                CUSTOMER == null ? 0 : CUSTOMER.ID
+                CUSTOMER == null ? 0 : CUSTOMER.ID,
+                DOCUMENT_NO,
+                DOCUMENT_DATE.ToString(Utils.DATE_FORMAT)
                 );
         }
         public override string GetUpdateSQL()
@@ -71,8 +75,10 @@ namespace Profit.Server
                     do_eventstatus= '{6}',
                     do_againstprstatus= '{7}',
                     do_code = '{8}',
-                    cus_id = {9}
-                where do_id = {10}",
+                    cus_id = {9},
+                    do_docno = '{10}',
+                    do_docdate = '{11}'
+                where do_id = {12}",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                 StockCardEntryType.DeliveryOrder.ToString(),
@@ -83,6 +89,8 @@ namespace Profit.Server
                 AGAINST_SR_STATUS.ToString(),
                 CODE,
                 CUSTOMER == null ? 0 : CUSTOMER.ID,
+                DOCUMENT_NO,
+                DOCUMENT_DATE.ToString(Utils.DATE_FORMAT),
                 ID);
         }
         public static DeliveryOrder TransformReader(MySql.Data.MySqlClient.MySqlDataReader aReader)
@@ -103,6 +111,8 @@ namespace Profit.Server
                 transaction.AGAINST_SR_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), aReader["do_againstprstatus"].ToString());
                 transaction.CODE = aReader["do_code"].ToString();
                 transaction.CUSTOMER = new Customer(Convert.ToInt32(aReader["cus_id"]));
+                transaction.DOCUMENT_NO = aReader["do_docno"].ToString();
+                transaction.DOCUMENT_DATE = Convert.ToDateTime(aReader["do_docdate"]);
             }
             return transaction;
         }
@@ -123,6 +133,8 @@ namespace Profit.Server
                 transaction.AGAINST_SR_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), aReader["do_againstprstatus"].ToString());
                 transaction.CODE = aReader["do_code"].ToString();
                 transaction.CUSTOMER = new Customer(Convert.ToInt32(aReader["cus_id"]));
+                transaction.DOCUMENT_NO = aReader["do_docno"].ToString();
+                transaction.DOCUMENT_DATE = Convert.ToDateTime(aReader["do_docdate"]);
                 result.Add(transaction);
             }
             return result;
@@ -142,6 +154,10 @@ namespace Profit.Server
         public static string GetEventStatus(int id)
         {
             return String.Format("SELECT do_eventstatus from table_deliveryorder where do_id ={0}", id);
+        }
+        public static string GetByCustomerSQL(int id)
+        {
+            return String.Format("SELECT * from table_deliveryorder where cus_id ={0}", id);
         }
         public static string GetUpdateStatusSQL(Event e)
         {
