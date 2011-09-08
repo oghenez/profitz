@@ -35,7 +35,6 @@ namespace Profit.Server
                 PurchaseOrderRepository.UpdateAgainstStatus(m_command, po, item.PO_ITEM);
             }
         }
-
         private void assertInvoiceAlreadyGenerated(GoodReceiveNoteItem item)
         {
             m_command.CommandText = SupplierInvoiceItem.GetGRNUseBySupplierInvoice(item.ID);

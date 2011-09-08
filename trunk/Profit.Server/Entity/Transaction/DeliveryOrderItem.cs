@@ -19,10 +19,10 @@ namespace Profit.Server
         public DeliveryOrderItem(int Id) : base(Id) { }
         public void SetOSAgainstSRItem(SalesReturnItem doi)
         {
-            double qtyAmount = doi.QYTAMOUNT;
+            double qtyAmount = doi.GetAmountInSmallestUnit();
             if (qtyAmount <= 0) return;
             if (AGAINST_SR_STATUS == AgainstStatus.Close)
-                throw new Exception("DO Item Allready Close :" + this.PART.NAME);
+                throw new Exception("DO Item already fully delivered :" + this.PART.NAME);
             if (qtyAmount > OUTSTANDING_AMOUNT_TO_SR)
                 throw new Exception("SR Item Amount exceed Outstanding DO Item Amount :" + this.PART.NAME);
             OUTSTANDING_AMOUNT_TO_SR = OUTSTANDING_AMOUNT_TO_SR - qtyAmount;
@@ -31,12 +31,12 @@ namespace Profit.Server
                 AGAINST_SR_STATUS = AgainstStatus.Close;
             else
                 AGAINST_SR_STATUS = AgainstStatus.Outstanding;
-            ((GoodReceiveNote)EVENT).UpdateAgainstPRStatusGRN();
+            ((DeliveryOrder)EVENT).UpdateAgainstSRStatusDO();
         }
         public void UnSetOSAgainstSRItem(SalesReturnItem doi)
         {
-            double qtyAmount = doi.QYTAMOUNT;
-            if (qtyAmount > this.QYTAMOUNT || OUTSTANDING_AMOUNT_TO_SR + qtyAmount > this.QYTAMOUNT)
+            double qtyAmount = doi.GetAmountInSmallestUnit();
+            if (qtyAmount > this.GetAmountInSmallestUnit() || OUTSTANDING_AMOUNT_TO_SR + qtyAmount > this.GetAmountInSmallestUnit())
                 throw new Exception("SR Item revise Amount exceed DO Item Amount :" + this.PART.NAME);
             OUTSTANDING_AMOUNT_TO_SR = OUTSTANDING_AMOUNT_TO_SR + qtyAmount;
             RETURNED_AMOUNT = RETURNED_AMOUNT - qtyAmount;
@@ -44,12 +44,12 @@ namespace Profit.Server
                 AGAINST_SR_STATUS = AgainstStatus.Outstanding;
             else
                 AGAINST_SR_STATUS = AgainstStatus.Open;
-            ((GoodReceiveNote)EVENT).UpdateAgainstPRStatusGRN();
+            ((DeliveryOrder)EVENT).UpdateAgainstSRStatusDO();
         }
         private bool isValidToClose()
         {
             bool validA = OUTSTANDING_AMOUNT_TO_SR == 0;
-            bool validB = RETURNED_AMOUNT == QYTAMOUNT;
+            bool validB = RETURNED_AMOUNT == GetAmountInSmallestUnit();
             return validA && validB;
         }
         public override string GetInsertSQL()
@@ -76,7 +76,7 @@ namespace Profit.Server
                 WAREHOUSE.ID,
                 QYTAMOUNT,
                 STOCK_CARD_ENTRY == null ? 0 : STOCK_CARD_ENTRY.ID,
-               StockCardEntryType.DeliveryOrder.ToString(),
+                StockCardEntryType.DeliveryOrder.ToString(),
                 STOCK_CARD == null ? 0 : STOCK_CARD.ID,
                 UNIT.ID,
                 NOTES,
@@ -108,7 +108,7 @@ namespace Profit.Server
                 WAREHOUSE.ID,
                 QYTAMOUNT,
                 STOCK_CARD_ENTRY == null ? 0 : STOCK_CARD_ENTRY.ID,
-                 StockCardEntryType.DeliveryOrder.ToString(),
+                StockCardEntryType.DeliveryOrder.ToString(),
                 STOCK_CARD == null ? 0 : STOCK_CARD.ID,
                 UNIT.ID,
                 NOTES,
@@ -212,6 +212,51 @@ namespace Profit.Server
         public static string GetByIDSQL(int id)
         {
             return String.Format("SELECT * from table_deliveryorderitem where doi_id = {0}", id);
+        }
+        public static string GetByPartIDSQL(int id)
+        {
+            return String.Format("SELECT * from table_deliveryorderitem where part_id = {0}", id);
+        }
+        public static string GetSearchByPartAndDONo(string find, int customerID, string poi, DateTime trdate)
+        {
+            return String.Format(@"SELECT t.*
+                FROM table_deliveryorderitem t
+                INNER JOIN table_deliveryorder p on p.do_id = t.do_id
+                INNER JOIN table_part pt on pt.part_id = t.part_id
+                where t.doi_outstandingamtpr > 0
+                and concat(pt.part_code, pt.part_name, p.do_code) like '%{0}%' and p.cus_id = {1}  
+                and p.do_posted = true
+                and p.do_date <= '{2}'
+               {3}", find, customerID, trdate.ToString(Utils.DATE_FORMAT), poi != "" ? " and t.doi_id not in (" + poi + ")" : "");
+        }
+        public static string GetDOItemByCusDate(int supID, DateTime date, string notInGRNItem)
+        {
+            return String.Format(@"SELECT t.*
+                FROM table_deliveryorderitem t
+                INNER JOIN table_deliveryorder p on p.do_id = t.do_id
+                INNER JOIN table_part pt on pt.part_id = t.part_id
+                where t.doi_outstandingamtpr > 0
+                and p.cus_id = {0}  
+                and p.do_posted = true
+                and p.do_date <= '{1}'
+                {2}",
+                    supID,
+                    date.ToString(Utils.DATE_FORMAT),
+                    notInGRNItem != "" ? " and t.doi_id not in (" + notInGRNItem + ")" : "");
+        }
+        public override bool Equals(object obj)
+        {
+            DeliveryOrderItem e = (DeliveryOrderItem)obj;
+            if (e == null) return false;
+            return e.ID == this.ID;
+        }
+        public static string GetOutstandingReturnSQL(int id)
+        {
+            return String.Format("SELECT doi_outstandingamtpr from table_deliveryorderitem where doi_id = {0}", id);
+        }
+        public static string GetReturnSQL(int id)
+        {
+            return String.Format("SELECT doi_returnedamount from table_deliveryorderitem where doi_id = {0}", id);
         }
     }
 }

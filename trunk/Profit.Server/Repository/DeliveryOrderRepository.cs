@@ -28,11 +28,28 @@ namespace Profit.Server
             foreach (DeliveryOrderItem item in events.EVENT_ITEMS)
             {
                 assertUsedDOItemBySRItem(item);
+                assertInvoiceAlreadyGenerated(item);
                 SalesOrder so = (SalesOrder)item.SO_ITEM.EVENT;
                 SetStockCard(item, p);
                 item.SO_ITEM.UnSetOSAgainstDOItem(item);
                 SalesOrderRepository.UpdateAgainstStatus(m_command, so, item.SO_ITEM);
             }
+        }
+        private void assertInvoiceAlreadyGenerated(DeliveryOrderItem item)
+        {
+            //m_command.CommandText = SupplierInvoiceItem.GetGRNUseBySupplierInvoice(item.ID);
+            //MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
+            //IList invs = SupplierInvoiceItem.TransformReaderList(r);
+            //r.Close();
+            //foreach (SupplierInvoiceItem x in invs)
+            //{
+            //    m_command.CommandText = SupplierInvoice.GetByIDSQL(x.EVENT.ID);
+            //    r = m_command.ExecuteReader();
+            //    x.EVENT = SupplierInvoice.TransformReader(r);
+            //    r.Close();
+            //}
+            //if (invs.Count > 0)
+            //    throw new Exception("GRN Part [" + item.PART.CODE + "] is used by Supplier Invoice [" + ((SupplierInvoiceItem)invs[0]).EVENT.CODE + "], please delete supplier invoice first.");
         }
         private void assertConfirmedSO(Event p)
         {
@@ -56,6 +73,15 @@ namespace Profit.Server
             try
             {
                 m_command.Transaction = trc;
+
+                DateTime trDate = DateTime.Today;
+                string codesample = AutoNumberSetupRepository.GetCodeSampleByDomainName(m_command, "DeliveryOrder");
+                Event codeDate = FindLastCodeAndTransactionDate(codesample);
+                string lastCode = codeDate == null ? string.Empty : codeDate.CODE;
+                DateTime lastDate = codeDate == null ? trDate : codeDate.TRANSACTION_DATE;
+                int trCount = RecordCount();
+                e.CODE = AutoNumberSetupRepository.GetAutoNumberByDomainName(m_command, "DeliveryOrder", e.CODE, lastCode, lastDate, trDate, trCount == 0);
+
                 DeliveryOrder stk = (DeliveryOrder)e;
                 m_command.CommandText = e.GetInsertSQL();
                 m_command.ExecuteNonQuery();
@@ -221,14 +247,168 @@ namespace Profit.Server
             return st;
         }
 
+        //--------------------
         protected override IList doSearch(string find)
         {
-            throw new NotImplementedException();
+            try
+            {
+                m_command.CommandText = GoodReceiveNote.GetSearch(find);
+                MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
+                IList rest = GoodReceiveNote.TransformReaderList(r);
+                r.Close();
+                return rest;
+            }
+            catch (Exception x)
+            {
+                throw x;
+            }
         }
 
         protected override bool doIsCodeExist(string code)
         {
-            throw new NotImplementedException();
+            try
+            {
+                m_command.CommandText = GoodReceiveNote.SelectCountByCode(code);
+                int t = Convert.ToInt32(m_command.ExecuteScalar());
+                return t > 0;
+            }
+            catch (Exception x)
+            {
+                throw x;
+            }
+        }
+        public override Event FindLastCodeAndTransactionDate(string codesample)
+        {
+            m_command.CommandText = GoodReceiveNote.FindLastCodeAndTransactionDate(codesample);
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
+            Event e = GoodReceiveNote.TransformReader(r);
+            r.Close();
+            return e;
+        }
+        public int RecordCount()
+        {
+            m_command.CommandText = GoodReceiveNote.RecordCount();
+            int result = Convert.ToInt32(m_command.ExecuteScalar());
+            return result;
+        }
+        public bool IsAutoNumber()
+        {
+            AutoNumberSetup autonumber = AutoNumberSetupRepository.GetAutoNumberSetup(m_command, "GoodReceiveNote");
+            return autonumber.AUTONUMBER_SETUP_TYPE == AutoNumberSetupType.Auto;
+        }
+        public IList FindPObyPartAndGRNNo(string find, IList exceptGRNI, int supplierID, DateTime trDate)
+        {
+            StringBuilder poisSB = new StringBuilder();
+            foreach (int i in exceptGRNI)
+            {
+                poisSB.Append(i.ToString());
+                poisSB.Append(',');
+            }
+            string pois = poisSB.ToString();
+            pois = exceptGRNI.Count > 0 ? pois.Substring(0, pois.Length - 1) : "";
+
+            m_command.CommandText = GoodReceiveNoteItem.GetSearchByPartAndGRNNo(find, supplierID, pois, trDate);
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
+            IList result = GoodReceiveNoteItem.TransformReaderList(r);
+            r.Close();
+            foreach (GoodReceiveNoteItem t in result)
+            {
+                m_command.CommandText = GoodReceiveNote.GetByIDSQL(t.EVENT.ID);
+                r = m_command.ExecuteReader();
+                t.EVENT = GoodReceiveNote.TransformReader(r);
+                r.Close();
+
+                m_command.CommandText = Part.GetByIDSQLStatic(t.PART.ID);
+                r = m_command.ExecuteReader();
+                t.PART = Part.GetPart(r);
+                r.Close();
+
+                m_command.CommandText = Unit.GetByIDSQLstatic(t.UNIT.ID);
+                r = m_command.ExecuteReader();
+                t.UNIT = Unit.GetUnit(r);
+                r.Close();
+
+                m_command.CommandText = Warehouse.GetByIDSQLStatic(t.WAREHOUSE.ID);
+                r = m_command.ExecuteReader();
+                t.WAREHOUSE = Warehouse.GetWarehouse(r);
+                r.Close();
+
+                m_command.CommandText = Unit.GetByIDSQLstatic(t.PART.UNIT.ID);
+                r = m_command.ExecuteReader();
+                t.PART.UNIT = Unit.GetUnit(r);
+                r.Close();
+            }
+            return result;
+        }
+        public IList FindGRNItemlistBySupplierDate(string find, int supID, DateTime trdate, IList grnIDS)
+        {
+            m_command.CommandText = SupplierInvoiceItem.GetGRNUseBySupplierInvoice();
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
+            if (r.HasRows)
+            {
+                while (r.Read())
+                {
+                    int id = Convert.ToInt32(r[0]);
+                    if (!grnIDS.Contains(id))
+                        grnIDS.Add(id);
+                }
+            }
+            r.Close();
+            StringBuilder poisSB = new StringBuilder();
+            foreach (int i in grnIDS)
+            {
+                poisSB.Append(i.ToString());
+                poisSB.Append(',');
+            }
+            string pois = poisSB.ToString();
+            pois = grnIDS.Count > 0 ? pois.Substring(0, pois.Length - 1) : "";
+            if (find == "")
+                m_command.CommandText = GoodReceiveNoteItem.GetGRNItemBySuppDate(supID, trdate, pois);
+            else
+                m_command.CommandText = GoodReceiveNoteItem.GetSearchByPartAndGRNNo(find, supID, pois, trdate);
+            r = m_command.ExecuteReader();
+            IList result = GoodReceiveNoteItem.TransformReaderList(r);
+            r.Close();
+            foreach (GoodReceiveNoteItem t in result)
+            {
+                m_command.CommandText = GoodReceiveNote.GetByIDSQL(t.EVENT.ID);
+                r = m_command.ExecuteReader();
+                t.EVENT = GoodReceiveNote.TransformReader(r);
+                r.Close();
+
+                m_command.CommandText = Part.GetByIDSQLStatic(t.PART.ID);
+                r = m_command.ExecuteReader();
+                t.PART = Part.GetPart(r);
+                r.Close();
+
+                m_command.CommandText = Unit.GetByIDSQLstatic(t.UNIT.ID);
+                r = m_command.ExecuteReader();
+                t.UNIT = Unit.GetUnit(r);
+                r.Close();
+
+                m_command.CommandText = Warehouse.GetByIDSQLStatic(t.WAREHOUSE.ID);
+                r = m_command.ExecuteReader();
+                t.WAREHOUSE = Warehouse.GetWarehouse(r);
+                r.Close();
+
+                m_command.CommandText = Unit.GetByIDSQLstatic(t.PART.UNIT.ID);
+                r = m_command.ExecuteReader();
+                t.PART.UNIT = Unit.GetUnit(r);
+                r.Close();
+            }
+            return result;
+        }
+        public double GetOutstandingReturned(int grnItem)
+        {
+            m_command.CommandText = GoodReceiveNoteItem.GetOutstandingReturnSQL(grnItem);
+            double result = Convert.ToDouble(m_command.ExecuteScalar());
+            return result;
+        }
+        public double GetReturned(int grnItem)
+        {
+            m_command.CommandText = GoodReceiveNoteItem.GetReturnSQL(grnItem);
+            double result = Convert.ToDouble(m_command.ExecuteScalar());
+            return result;
         }
     }
 }
