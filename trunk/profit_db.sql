@@ -127,7 +127,7 @@ CREATE TABLE `table_autonumbersetup` (
   `ans_istransaction` tinyint(1) NOT NULL,
   PRIMARY KEY (`ans_id`),
   UNIQUE KEY `Index_2` (`ans_entity`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_autonumbersetup`
@@ -144,7 +144,8 @@ INSERT INTO `table_autonumbersetup` (`ans_id`,`ans_entity`,`ans_formcode`,`ans_p
  (7,'SupplierInvoiceJournal','TRCP008 - Supplier Invoice Journal','SIJ#/MM/yyyy',1,3,'Yearly','Manual',1),
  (8,'Payment','TRCP004 - Payment','PYMN#/MM/yyyy',1,3,'Yearly','Auto',1),
  (9,'APDebitNote','TRCP006 - AP Debit Note','APDN#/MM/yyyy',1,3,'Yearly','Auto',1),
- (10,'SalesOrder','TRCS001 - Sales Order','SLA#/MM/yyyy',1,3,'Yearly','Auto',1);
+ (10,'SalesOrder','TRCS001 - Sales Order','SLA#/MM/yyyy',1,3,'Yearly','Auto',1),
+ (11,'DeliveryPrder','TRCS002 - Delivery Order','DO#/MM/yyyy',1,3,'Yearly','Auto',1);
 /*!40000 ALTER TABLE `table_autonumbersetup` ENABLE KEYS */;
 
 
@@ -279,6 +280,102 @@ INSERT INTO `table_customercategory` (`cuscat_id`,`cuscat_code`,`cuscat_name`) V
  (3,'CUS003','HYPER MARKET'),
  (4,'CUS004','DEPARTMENT STORE');
 /*!40000 ALTER TABLE `table_customercategory` ENABLE KEYS */;
+
+
+--
+-- Definition of table `table_customerinvoice`
+--
+
+DROP TABLE IF EXISTS `table_customerinvoice`;
+CREATE TABLE `table_customerinvoice` (
+  `ci_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ci_date` datetime NOT NULL,
+  `ci_noticedate` datetime NOT NULL,
+  `ci_scentrytype` varchar(45) NOT NULL,
+  `emp_id` int(10) unsigned NOT NULL,
+  `ci_notes` text NOT NULL,
+  `ci_posted` tinyint(1) NOT NULL,
+  `ci_eventstatus` varchar(45) NOT NULL,
+  `div_id` int(10) unsigned NOT NULL,
+  `top_id` int(10) unsigned NOT NULL,
+  `ci_duedate` datetime NOT NULL,
+  `ccy_id` int(10) unsigned NOT NULL,
+  `ci_subtotal` double NOT NULL,
+  `ci_discpercent` double NOT NULL,
+  `ci_discafteramount` double NOT NULL,
+  `ci_discamount` double NOT NULL,
+  `tax_id` int(10) unsigned NOT NULL,
+  `ci_taxafteramount` double NOT NULL,
+  `ci_otherexpense` double NOT NULL,
+  `ci_nettotal` double NOT NULL,
+  `ci_code` varchar(45) NOT NULL,
+  `cus_id` int(10) unsigned NOT NULL,
+  `ci_docno` varchar(45) NOT NULL,
+  `ci_docdate` datetime NOT NULL,
+  PRIMARY KEY (`ci_id`),
+  KEY `FK_table_customerinvoice_1` (`emp_id`),
+  KEY `FK_table_customerinvoice_2` (`div_id`),
+  KEY `FK_table_customerinvoice_3` (`top_id`),
+  KEY `FK_table_customerinvoice_4` (`ccy_id`),
+  KEY `FK_table_customerinvoice_5` (`cus_id`),
+  CONSTRAINT `FK_table_customerinvoice_1` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`),
+  CONSTRAINT `FK_table_customerinvoice_2` FOREIGN KEY (`div_id`) REFERENCES `table_division` (`div_id`),
+  CONSTRAINT `FK_table_customerinvoice_3` FOREIGN KEY (`top_id`) REFERENCES `table_termofpayment` (`top_id`),
+  CONSTRAINT `FK_table_customerinvoice_4` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
+  CONSTRAINT `FK_table_customerinvoice_5` FOREIGN KEY (`cus_id`) REFERENCES `table_customer` (`cus_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_customerinvoice`
+--
+
+/*!40000 ALTER TABLE `table_customerinvoice` DISABLE KEYS */;
+/*!40000 ALTER TABLE `table_customerinvoice` ENABLE KEYS */;
+
+
+--
+-- Definition of table `table_customerinvoiceitem`
+--
+
+DROP TABLE IF EXISTS `table_customerinvoiceitem`;
+CREATE TABLE `table_customerinvoiceitem` (
+  `cii_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ci_id` int(10) unsigned NOT NULL,
+  `part_id` int(10) unsigned NOT NULL,
+  `warehouse_id` int(10) unsigned NOT NULL,
+  `cii_amount` double NOT NULL,
+  `sce_id` int(10) unsigned NOT NULL,
+  `cii_scentrytype` varchar(45) NOT NULL,
+  `sc_id` int(10) unsigned NOT NULL,
+  `unit_id` int(10) unsigned NOT NULL,
+  `cii_price` double NOT NULL,
+  `cii_discpercent` double NOT NULL,
+  `cii_discamount` double NOT NULL,
+  `cii_totaldisc` double NOT NULL,
+  `cii_subtotal` double NOT NULL,
+  `cii_notes` text NOT NULL,
+  `cii_disca` double NOT NULL,
+  `cii_discb` double NOT NULL,
+  `cii_discc` double NOT NULL,
+  `cii_discabc` varchar(45) NOT NULL,
+  `doi_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`cii_id`),
+  KEY `FK_table_customerinvoiceitem_1` (`ci_id`),
+  KEY `FK_table_customerinvoiceitem_2` (`part_id`),
+  KEY `FK_table_customerinvoiceitem_3` (`warehouse_id`),
+  KEY `FK_table_customerinvoiceitem_4` (`unit_id`),
+  CONSTRAINT `FK_table_customerinvoiceitem_1` FOREIGN KEY (`ci_id`) REFERENCES `table_customerinvoice` (`ci_id`),
+  CONSTRAINT `FK_table_customerinvoiceitem_2` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`),
+  CONSTRAINT `FK_table_customerinvoiceitem_3` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
+  CONSTRAINT `FK_table_customerinvoiceitem_4` FOREIGN KEY (`unit_id`) REFERENCES `table_unit` (`unit_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_customerinvoiceitem`
+--
+
+/*!40000 ALTER TABLE `table_customerinvoiceitem` DISABLE KEYS */;
+/*!40000 ALTER TABLE `table_customerinvoiceitem` ENABLE KEYS */;
 
 
 --
@@ -15354,13 +15451,13 @@ INSERT INTO `table_usersettings` (`us_id`,`user_id`,`us_name`,`us_value`,`us_typ
  (469,1,'SalesOrderFormpriceColumnWidth','80','System.Int32'),
  (470,1,'SalesOrderFormpriceColumnVisible','True','System.Boolean'),
  (471,1,'SalesOrderFormdiscpercentColumnWidth','50','System.Int32'),
- (472,1,'SalesOrderFormdiscpercentColumnVisible','True','System.Boolean'),
+ (472,1,'SalesOrderFormdiscpercentColumnVisible','False','System.Boolean'),
  (473,1,'SalesOrderFormdiscAmountColumnWidth','80','System.Int32'),
- (474,1,'SalesOrderFormdiscAmountColumnVisible','True','System.Boolean'),
+ (474,1,'SalesOrderFormdiscAmountColumnVisible','False','System.Boolean'),
  (475,1,'SalesOrderFormdiscabcColumnWidth','50','System.Int32'),
- (476,1,'SalesOrderFormdiscabcColumnVisible','True','System.Boolean'),
+ (476,1,'SalesOrderFormdiscabcColumnVisible','False','System.Boolean'),
  (477,1,'SalesOrderFormtotalDiscColumnWidth','80','System.Int32'),
- (478,1,'SalesOrderFormtotalDiscColumnVisible','True','System.Boolean'),
+ (478,1,'SalesOrderFormtotalDiscColumnVisible','False','System.Boolean'),
  (479,1,'SalesOrderFormtotalAmountColumnWidth','100','System.Int32'),
  (480,1,'SalesOrderFormtotalAmountColumnVisible','True','System.Boolean'),
  (481,1,'SalesOrderFormwarehouseColumnWidth','60','System.Int32'),
@@ -15368,11 +15465,11 @@ INSERT INTO `table_usersettings` (`us_id`,`user_id`,`us_name`,`us_value`,`us_typ
  (483,1,'SalesOrderFormnotesColumnWidth','50','System.Int32'),
  (484,1,'SalesOrderFormnotesColumnVisible','True','System.Boolean'),
  (485,1,'SalesOrderFormreceivedColumnWidth','100','System.Int32'),
- (486,1,'SalesOrderFormreceivedColumnVisible','True','System.Boolean'),
+ (486,1,'SalesOrderFormreceivedColumnVisible','False','System.Boolean'),
  (487,1,'SalesOrderFormoutstandingColumnWidth','100','System.Int32'),
- (488,1,'SalesOrderFormoutstandingColumnVisible','True','System.Boolean'),
+ (488,1,'SalesOrderFormoutstandingColumnVisible','False','System.Boolean'),
  (489,1,'SalesOrderFormreceivedunitColumnWidth','100','System.Int32'),
- (490,1,'SalesOrderFormreceivedunitColumnVisible','True','System.Boolean'),
+ (490,1,'SalesOrderFormreceivedunitColumnVisible','False','System.Boolean'),
  (491,1,'SearchSalesOrderFormdgNameWidth','100','System.Int32'),
  (492,1,'SearchSalesOrderFormdgNameVisible','True','System.Boolean'),
  (493,1,'SearchSalesOrderFormdgSubjectWidth','80','System.Int32'),
