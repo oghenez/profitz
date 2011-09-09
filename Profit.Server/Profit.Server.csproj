@@ -58,6 +58,14 @@
     <Compile Include="Entity\GeneralSetup.cs" />
     <Compile Include="Entity\InvoiceTransaction\APDebitNote.cs" />
     <Compile Include="Entity\InvoiceTransaction\APDebitNoteItem.cs" />
+    <Compile Include="Entity\InvoiceTransaction\ARCreditNote.cs" />
+    <Compile Include="Entity\InvoiceTransaction\ARCreditNoteItem.cs" />
+    <Compile Include="Entity\InvoiceTransaction\CustomerOutStandingInvoice.cs" />
+    <Compile Include="Entity\InvoiceTransaction\CustomerOutStandingInvoiceItem.cs" />
+    <Compile Include="Entity\InvoiceTransaction\Receipt.cs" />
+    <Compile Include="Entity\InvoiceTransaction\ReceiptItem.cs" />
+    <Compile Include="Entity\InvoiceTransaction\CustomerInvoiceJournalItem.cs" />
+    <Compile Include="Entity\InvoiceTransaction\CustomerInvoiceJournal.cs" />
     <Compile Include="Entity\InvoiceTransaction\ISupplierInvoice.cs" />
     <Compile Include="Entity\InvoiceTransaction\PaymentItem.cs" />
     <Compile Include="Entity\InvoiceTransaction\Payment.cs" />
@@ -122,6 +130,11 @@
     <Compile Include="Repository.cs" />
     <Compile Include="Repository\AutoNumberSetupRepository.cs" />
     <Compile Include="Repository\APDebitNoteRepository.cs" />
+    <Compile Include="Repository\ARCreditNoteRepository.cs" />
+    <Compile Include="Repository\ReceiptRepository.cs" />
+    <Compile Include="Repository\CustomerOutStandingInvoiceRepository.cs" />
+    <Compile Include="Repository\CustomerInvoiceJournalRepository.cs" />
+    <Compile Include="Repository\CustomerInvoiceRepository.cs" />
     <Compile Include="Repository\CustomerRepository.cs" />
     <Compile Include="Repository\PaymentRepository.cs" />
     <Compile Include="Repository\ProcessTransactionRepository.cs" />

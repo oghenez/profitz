@@ -10,7 +10,7 @@ namespace Profit.Server
     public class CustomerInvoiceJournal : EventJournal
     {
         public CustomerInvoice CUSTOMER_INVOICE;
-        public AgainstStatus AGAINST_PAYMENT_STATUS = AgainstStatus.Open;
+        public AgainstStatus AGAINST_RECEIPT_STATUS = AgainstStatus.Open;
 
         public CustomerInvoiceJournal()
         { }
@@ -19,17 +19,17 @@ namespace Profit.Server
         {
             ID = id;
         }
-        public void UpdateAgainstPaymentStatusSIJ()
+        public void UpdateAgainstReceiptStatusSIJ()
         {
             bool allClosed = true;
             for (int i = 0; i < EVENT_JOURNAL_ITEMS.Count; i++)
             {
                 CustomerInvoiceJournalItem poi = EVENT_JOURNAL_ITEMS[i] as CustomerInvoiceJournalItem;
-                if (poi.AGAINST_PAYMENT_STATUS == AgainstStatus.Close) continue;
+                if (poi.AGAINST_RECEIPT_STATUS == AgainstStatus.Close) continue;
                 allClosed = false;
                 break;
             }
-            AGAINST_PAYMENT_STATUS = allClosed ? AgainstStatus.Close : AgainstStatus.Outstanding;
+            AGAINST_RECEIPT_STATUS = allClosed ? AgainstStatus.Close : AgainstStatus.Outstanding;
         }
         public override string GetInsertSQL()
         {
@@ -52,7 +52,7 @@ namespace Profit.Server
                     cij_netamount,
                     emp_id,
                     ci_id,
-                    cij_againstpaymentstatus
+                    cij_againstreceiptstatus
                 ) 
                 VALUES ('{0}','{1}',{2},{3},'{4}','{5}',{6},'{7}',{8},{9},{10},{11},{12},{13},{14},{15},{16},'{17}')",
                 CODE,
@@ -72,7 +72,7 @@ namespace Profit.Server
                 NET_AMOUNT,
                 EMPLOYEE.ID,
                 CUSTOMER_INVOICE == null ? 0 : CUSTOMER_INVOICE.ID,
-                AGAINST_PAYMENT_STATUS.ToString()
+                AGAINST_RECEIPT_STATUS.ToString()
                 );
         }
         public override string GetUpdateSQL()
@@ -95,7 +95,7 @@ namespace Profit.Server
                     cij_netamount= {14},
                     emp_id = {15},
                      ci_id = {16},
-                    cij_againstpaymentstatus = '{17}'
+                    cij_againstreceiptstatus = '{17}'
                 where cij_id = {18}",
                 CODE,
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
@@ -114,7 +114,7 @@ namespace Profit.Server
                 NET_AMOUNT,
                 EMPLOYEE.ID,
                 CUSTOMER_INVOICE == null ? 0 : CUSTOMER_INVOICE.ID,
-                AGAINST_PAYMENT_STATUS.ToString(),
+                AGAINST_RECEIPT_STATUS.ToString(),
                 ID);
         }
         public static CustomerInvoiceJournal TransformReader(MySql.Data.MySqlClient.MySqlDataReader r)
@@ -142,7 +142,7 @@ namespace Profit.Server
                 tr.NET_AMOUNT = Convert.ToDouble(r["cij_netamount"]);
                 tr.EMPLOYEE = new Employee(Convert.ToInt32(r["emp_id"]));
                 tr.CUSTOMER_INVOICE = new CustomerInvoice(Convert.ToInt32(r["ci_id"]));
-                tr.AGAINST_PAYMENT_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), r["cij_againstpaymentstatus"].ToString());
+                tr.AGAINST_RECEIPT_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), r["cij_againstreceiptstatus"].ToString());
             }
             return tr;
         }
@@ -170,7 +170,7 @@ namespace Profit.Server
                 tr.NET_AMOUNT = Convert.ToDouble(r["cij_netamount"]);
                 tr.EMPLOYEE = new Employee(Convert.ToInt32(r["emp_id"]));
                 tr.CUSTOMER_INVOICE = new CustomerInvoice(Convert.ToInt32(r["ci_id"]));
-                tr.AGAINST_PAYMENT_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), r["cij_againstpaymentstatus"].ToString());
+                tr.AGAINST_RECEIPT_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), r["cij_againstreceiptstatus"].ToString());
                 result.Add(tr);
             }
             return result;
@@ -216,7 +216,7 @@ namespace Profit.Server
         {
             return String.Format(@"select * from table_customerinvoicejournal p where p.cij_code like '%{0}%' ORDER BY p.cij_id DESC", code);
         }
-        public static string FindPeriodSIJId(int id)
+        public static string FindPeriodCIJId(int id)
         {
             return String.Format(@"select * from table_customerinvoicejournal p where p.ci_id = {0}", id);
         }
@@ -227,9 +227,9 @@ namespace Profit.Server
         public string UpdateAgainstStatus()
         {
             return String.Format(@"update table_customerinvoicejournal set 
-                    cij_againstpaymentstatus = '{0}'
+                    cij_againstreceiptstatus = '{0}'
                 where ci_id = {1}",
-                          AGAINST_PAYMENT_STATUS.ToString(),
+                          AGAINST_RECEIPT_STATUS.ToString(),
                            ID);
         }
     }

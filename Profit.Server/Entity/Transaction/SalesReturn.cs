@@ -10,6 +10,8 @@ namespace Profit.Server
     public class SalesReturn : Event
     {
         public Customer CUSTOMER = null;
+        public double TOTAL_AMOUNT_FROM_SO = 0;
+        public Currency CURRENCY = null;
         public SalesReturn()
             : base()
         { }
@@ -132,6 +134,35 @@ namespace Profit.Server
                  e.POSTED,
                 e.EVENT_STATUS.ToString(),
                 e.ID);
+        }
+        public static string GetSearch(string find)
+        {
+            return String.Format(@"select * from table_salesreturn p
+                INNER JOIN table_employee e on e.emp_id = p.emp_id
+                where concat(p.srn_code, e.emp_code, e.emp_name)
+                like '%{0}%'", find);
+        }
+        public static string SelectCountByCode(string code)
+        {
+            return String.Format("SELECT count(*) from table_salesreturn where srn_code ='{0}'", code);
+        }
+        public static string FindLastCodeAndTransactionDate(string code)
+        {
+            return String.Format(@"select * from table_salesreturn p where p.srn_code like '%{0}%' ORDER BY p.srn_id DESC", code);
+        }
+        public static string RecordCount()
+        {
+            return @"select Count(*) from table_salesreturn p";
+        }
+        public static string GetSearchSRNoForARCR(string find, int supplierID, string poi, DateTime trdate)
+        {
+            return String.Format(@"SELECT p.*
+                FROM table_salesreturn p
+                where p.srn_posted = true
+                and p.srn_code like '%{0}%'
+                and p.cus_id = {1}
+                and p.srn_date <= '{2}'
+               {3}", find, supplierID, trdate.ToString(Utils.DATE_FORMAT), poi != "" ? " and p.srn_id not in (" + poi + ")" : "");
         }
     }
 }

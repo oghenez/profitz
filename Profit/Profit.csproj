@@ -120,6 +120,12 @@
     <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchSalesOrderForm.Designer.cs">
       <DependentUpon>SearchSalesOrderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\CustomerOutstandingInvoiceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\CustomerOutstandingInvoiceForm.Designer.cs">
+      <DependentUpon>CustomerOutstandingInvoiceForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\InventoryTransaction\SearchAPDNForPaymentForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -421,6 +427,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\SearchSalesOrderForm.resx">
       <DependentUpon>SearchSalesOrderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\CustomerOutstandingInvoiceForm.resx">
+      <DependentUpon>CustomerOutstandingInvoiceForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\SearchAPDNForPaymentForm.resx">
       <DependentUpon>SearchAPDNForPaymentForm.cs</DependentUpon>

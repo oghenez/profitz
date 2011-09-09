@@ -38,9 +38,9 @@ namespace Profit.Server
 
         private void AssertPaidInvoice(CustomerInvoiceJournalItem item)
         {
-            IList used = PaymentRepository.FindPaidCustomerInvoice(m_command, item.ID);
+            IList used = ReceiptRepository.FindPaidCustomerInvoice(m_command, item.ID);
             if (used.Count > 0)
-                throw new Exception("This Invoice [" + item.INVOICE_NO + "] is paid [" + ((PaymentItem)used[0]).EVENT_JOURNAL.CODE + "], please delete payment first.");
+                throw new Exception("This Invoice [" + item.INVOICE_NO + "] is paid [" + ((ReceiptItem)used[0]).EVENT_JOURNAL.CODE + "], please delete receipt first.");
         }
         //private void assertConfirmedPO(EventJournal p)
         //{
@@ -329,9 +329,9 @@ namespace Profit.Server
                 throw x;
             }
         }
-        public CustomerInvoiceJournal FindPeriodSIJId(int SIId)
+        public CustomerInvoiceJournal FindPeriodCIJId(int SIId)
         {
-            string sql = CustomerInvoiceJournal.FindPeriodSIJId(SIId);
+            string sql = CustomerInvoiceJournal.FindPeriodCIJId(SIId);
             m_command.CommandText = sql;
             MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             CustomerInvoiceJournal rest = CustomerInvoiceJournal.TransformReader(r);
@@ -347,7 +347,7 @@ namespace Profit.Server
             cmd.CommandText = po.UpdateAgainstStatus();
             cmd.ExecuteNonQuery();
         }
-        internal static CustomerInvoiceJournalItem FindSIJournalItemlistForPayment(MySql.Data.MySqlClient.MySqlCommand cmd, int cusinvItemID)
+        internal static CustomerInvoiceJournalItem FindCIJournalItemlistForReceipt(MySql.Data.MySqlClient.MySqlCommand cmd, int cusinvItemID)
         {
             cmd.CommandText = CustomerInvoiceJournalItem.GetByIDSQL(cusinvItemID);
             MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
@@ -376,7 +376,7 @@ namespace Profit.Server
 
             return result;
         }
-        public IList FindSIJournalItemlistForPayment(string find,int ccyID, int customer, DateTime trdate, IList notIn)
+        public IList FindSIJournalItemlistForReceipt(string find,int ccyID, int customer, DateTime trdate, IList notIn)
         {
             StringBuilder poisSB = new StringBuilder();
             foreach (int i in notIn)
@@ -386,7 +386,7 @@ namespace Profit.Server
             }
             string pois = poisSB.ToString();
             pois = notIn.Count > 0 ? pois.Substring(0, pois.Length - 1) : "";
-            m_command.CommandText = CustomerInvoiceJournalItem.GetSearchForPayment(find, ccyID, customer, pois, trdate);
+            m_command.CommandText = CustomerInvoiceJournalItem.GetSearchForReceipt(find, ccyID, customer, pois, trdate);
             MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             IList result = CustomerInvoiceJournalItem.TransformReaderList(r);
             r.Close();
@@ -422,7 +422,7 @@ namespace Profit.Server
         }
         public double GetPaid(int sijiID)
         {
-            m_command.CommandText = CustomerInvoiceJournalItem.GetByPaidSQL(sijiID);
+            m_command.CommandText = CustomerInvoiceJournalItem.GetByReceiptSQL(sijiID);
             double d = Convert.ToDouble(m_command.ExecuteScalar());
             return d;
         }

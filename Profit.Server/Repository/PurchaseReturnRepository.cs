@@ -44,12 +44,12 @@ namespace Profit.Server
         private void assertConfirmedPO(Event p)
         {
             if (p.EVENT_STATUS.Equals(EventStatus.Entry))
-                throw new Exception("PO not confirmed :" + p.CODE);
+                throw new Exception("PR not confirmed :" + p.CODE);
         }
         private void assertValidDate(Event po, Event grn)
         {
             if (grn.TRANSACTION_DATE < po.TRANSACTION_DATE)
-                throw new Exception("GRN Date can not less than PO Date :" + po.CODE + " [ " + po.TRANSACTION_DATE.ToString("dd-MMM-yyyy") + " ] ");
+                throw new Exception("PR Date can not less than PO Date :" + po.CODE + " [ " + po.TRANSACTION_DATE.ToString("dd-MMM-yyyy") + " ] ");
         }
         protected override void doSave(Event e)
         {
