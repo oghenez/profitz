@@ -111,6 +111,95 @@ INSERT INTO `table_apdebitnoteitem` (`apdni_id`,`apdn_id`,`sup_id`,`ccy_id`,`apd
 
 
 --
+-- Definition of table `table_arcreditnote`
+--
+
+DROP TABLE IF EXISTS `table_arcreditnote`;
+CREATE TABLE `table_arcreditnote` (
+  `arcr_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `arcr_code` varchar(45) NOT NULL,
+  `arcr_date` datetime NOT NULL,
+  `cus_id` int(10) unsigned NOT NULL,
+  `ccy_id` int(10) unsigned NOT NULL,
+  `entry_type` varchar(45) NOT NULL,
+  `arcr_notes` text NOT NULL,
+  `arcr_posted` tinyint(1) NOT NULL,
+  `arcr_eventstatus` varchar(45) NOT NULL,
+  `arcr_subtotalamount` double NOT NULL,
+  `arcr_discpercent` double NOT NULL,
+  `arcr_amountafterdiscpercent` double NOT NULL,
+  `arcr_discamount` double NOT NULL,
+  `arcr_amountafterdiscamount` double NOT NULL,
+  `arcr_otherexpense` double NOT NULL,
+  `arcr_netamount` double NOT NULL,
+  `emp_id` int(10) unsigned NOT NULL,
+  `arcr_usedforreceipt` tinyint(1) NOT NULL,
+  PRIMARY KEY (`arcr_id`),
+  KEY `FK_table_arcreditnote_1` (`cus_id`),
+  KEY `FK_table_arcreditnote_2` (`ccy_id`),
+  KEY `FK_table_arcreditnote_3` (`emp_id`),
+  CONSTRAINT `FK_table_arcreditnote_1` FOREIGN KEY (`cus_id`) REFERENCES `table_customer` (`cus_id`),
+  CONSTRAINT `FK_table_arcreditnote_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
+  CONSTRAINT `FK_table_arcreditnote_3` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_arcreditnote`
+--
+
+/*!40000 ALTER TABLE `table_arcreditnote` DISABLE KEYS */;
+INSERT INTO `table_arcreditnote` (`arcr_id`,`arcr_code`,`arcr_date`,`cus_id`,`ccy_id`,`entry_type`,`arcr_notes`,`arcr_posted`,`arcr_eventstatus`,`arcr_subtotalamount`,`arcr_discpercent`,`arcr_amountafterdiscpercent`,`arcr_discamount`,`arcr_amountafterdiscamount`,`arcr_otherexpense`,`arcr_netamount`,`emp_id`,`arcr_usedforreceipt`) VALUES 
+ (1,'ARCR001/09/2011','2011-09-09 00:00:00',1,1,'ARCreditNote','',1,'Confirm',0,0,0,0,0,0,675000,2,1);
+/*!40000 ALTER TABLE `table_arcreditnote` ENABLE KEYS */;
+
+
+--
+-- Definition of table `table_arcreditnoteitem`
+--
+
+DROP TABLE IF EXISTS `table_arcreditnoteitem`;
+CREATE TABLE `table_arcreditnoteitem` (
+  `arcri_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `arcr_id` int(10) unsigned NOT NULL,
+  `cus_id` int(10) unsigned NOT NULL,
+  `ccy_id` int(10) unsigned NOT NULL,
+  `arcri_amount` double NOT NULL,
+  `vbe_id` int(10) unsigned NOT NULL,
+  `vb_id` int(10) unsigned NOT NULL,
+  `arcri_entrytype` varchar(45) NOT NULL,
+  `arcri_invoicedate` datetime NOT NULL,
+  `arcri_invoiceno` varchar(45) NOT NULL,
+  `arcri_duedate` datetime NOT NULL,
+  `emp_id` int(10) unsigned NOT NULL,
+  `arcri_discount` double NOT NULL,
+  `arcri_amountbeforediscount` double NOT NULL,
+  `top_id` int(10) unsigned NOT NULL,
+  `arcri_description` text NOT NULL,
+  `arcri_notes` text NOT NULL,
+  `srn_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`arcri_id`),
+  KEY `FK_table_arcreditnoteitem_1` (`arcr_id`),
+  KEY `FK_table_arcreditnoteitem_2` (`emp_id`),
+  KEY `FK_table_arcreditnoteitem_3` (`ccy_id`),
+  KEY `FK_table_arcreditnoteitem_4` (`cus_id`),
+  CONSTRAINT `FK_table_arcreditnoteitem_1` FOREIGN KEY (`arcr_id`) REFERENCES `table_arcreditnote` (`arcr_id`),
+  CONSTRAINT `FK_table_arcreditnoteitem_2` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`),
+  CONSTRAINT `FK_table_arcreditnoteitem_3` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
+  CONSTRAINT `FK_table_arcreditnoteitem_4` FOREIGN KEY (`cus_id`) REFERENCES `table_customer` (`cus_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_arcreditnoteitem`
+--
+
+/*!40000 ALTER TABLE `table_arcreditnoteitem` DISABLE KEYS */;
+INSERT INTO `table_arcreditnoteitem` (`arcri_id`,`arcr_id`,`cus_id`,`ccy_id`,`arcri_amount`,`vbe_id`,`vb_id`,`arcri_entrytype`,`arcri_invoicedate`,`arcri_invoiceno`,`arcri_duedate`,`emp_id`,`arcri_discount`,`arcri_amountbeforediscount`,`top_id`,`arcri_description`,`arcri_notes`,`srn_id`) VALUES 
+ (1,1,1,1,225000,0,0,'ARCreditNote','2011-09-09 00:00:00','SR001/09/2011','2011-09-09 00:00:00',2,0,0,0,'','Wizard from PR# SR001/09/2011',3),
+ (2,1,1,1,450000,0,0,'ARCreditNote','2011-09-09 00:00:00','44324/5235','2011-09-09 00:00:00',2,0,0,0,'','Discount',0);
+/*!40000 ALTER TABLE `table_arcreditnoteitem` ENABLE KEYS */;
+
+
+--
 -- Definition of table `table_autonumbersetup`
 --
 
@@ -516,7 +605,7 @@ CREATE TABLE `table_customeroutstandinginvoice` (
   CONSTRAINT `FK_table_customeroutstandinginvoice_1` FOREIGN KEY (`cus_id`) REFERENCES `table_customer` (`cus_id`),
   CONSTRAINT `FK_table_customeroutstandinginvoice_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_customeroutstandinginvoice_3` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_customeroutstandinginvoice`
@@ -524,7 +613,8 @@ CREATE TABLE `table_customeroutstandinginvoice` (
 
 /*!40000 ALTER TABLE `table_customeroutstandinginvoice` DISABLE KEYS */;
 INSERT INTO `table_customeroutstandinginvoice` (`costi_id`,`costi_code`,`costi_date`,`cus_id`,`ccy_id`,`entry_type`,`costi_notes`,`costi_posted`,`costi_eventstatus`,`costi_subtotalamount`,`costi_discpercent`,`costi_amountafterdiscpercent`,`costi_discamount`,`costi_amountafterdiscamount`,`costi_otherexpense`,`costi_netamount`,`emp_id`,`costi_againstreceiptstatus`) VALUES 
- (1,'COI001/09/2011','2011-09-09 00:00:00',3,1,'CustomerOutStandingInvoice','',1,'Confirm',0,0,0,0,0,0,5850000,1,'Close');
+ (1,'COI001/09/2011','2011-09-09 00:00:00',3,1,'CustomerOutStandingInvoice','',1,'Confirm',0,0,0,0,0,0,5850000,1,'Close'),
+ (2,'COI002/09/2011','2011-09-09 00:00:00',1,1,'CustomerOutStandingInvoice','',1,'Confirm',0,0,0,0,0,0,5000000,1,'Close');
 /*!40000 ALTER TABLE `table_customeroutstandinginvoice` ENABLE KEYS */;
 
 
@@ -563,7 +653,7 @@ CREATE TABLE `table_customeroutstandinginvoiceitem` (
   CONSTRAINT `FK_table_customeroutstandinginvoiceitem_1` FOREIGN KEY (`costi_id`) REFERENCES `table_customeroutstandinginvoice` (`costi_id`),
   CONSTRAINT `FK_table_customeroutstandinginvoiceitem_3` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_customeroutstandinginvoiceitem_4` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_customeroutstandinginvoiceitem`
@@ -572,7 +662,8 @@ CREATE TABLE `table_customeroutstandinginvoiceitem` (
 /*!40000 ALTER TABLE `table_customeroutstandinginvoiceitem` DISABLE KEYS */;
 INSERT INTO `table_customeroutstandinginvoiceitem` (`costii_id`,`costi_id`,`cus_id`,`ccy_id`,`costii_amount`,`vbe_id`,`vb_id`,`costii_entrytype`,`costii_invoicedate`,`costii_invoiceno`,`costii_duedate`,`emp_id`,`costii_discount`,`costii_amountbeforediscount`,`top_id`,`costii_description`,`costii_notes`,`costii_againstpaymentstatus`,`costii_outstandingamount`,`costii_receiptamount`) VALUES 
  (1,1,3,1,5000000,0,0,'CustomerOutStandingInvoice','2011-09-09 00:00:00','5532/443/20','2011-09-09 00:00:00',2,0,0,1,'','','Close',0,5000000),
- (2,1,3,1,850000,0,0,'CustomerOutStandingInvoice','2011-09-09 00:00:00','4482/342/443','2011-10-09 00:00:00',1,0,0,2,'','','Open',850000,0);
+ (2,1,3,1,850000,0,0,'CustomerOutStandingInvoice','2011-09-09 00:00:00','4482/342/443','2011-10-09 00:00:00',1,0,0,2,'','','Open',850000,0),
+ (3,2,1,1,5000000,0,0,'CustomerOutStandingInvoice','2011-09-09 00:00:00','44324/432','2011-09-09 00:00:00',1,0,0,1,'','','Outstanding',4325000,675000);
 /*!40000 ALTER TABLE `table_customeroutstandinginvoiceitem` ENABLE KEYS */;
 
 
@@ -609,7 +700,7 @@ CREATE TABLE `table_deliveryorder` (
 
 /*!40000 ALTER TABLE `table_deliveryorder` DISABLE KEYS */;
 INSERT INTO `table_deliveryorder` (`do_id`,`do_date`,`do_noticedate`,`do_scentrytype`,`emp_id`,`do_notes`,`do_posted`,`do_eventstatus`,`do_againstprstatus`,`do_code`,`cus_id`,`do_docno`,`do_docdate`) VALUES 
- (1,'2011-09-09 00:00:00','2011-09-09 00:00:00','DeliveryOrder',2,'',1,'Confirm','Open','DO001/09/2011',1,'','2011-09-09 00:00:00'),
+ (1,'2011-09-09 00:00:00','2011-09-09 00:00:00','DeliveryOrder',2,'',1,'Confirm','Outstanding','DO001/09/2011',1,'','2011-09-09 00:00:00'),
  (2,'2011-09-09 00:00:00','2011-09-09 00:00:00','DeliveryOrder',2,'',1,'Confirm','Open','DO002/09/2011',1,'','2011-09-09 00:00:00');
 /*!40000 ALTER TABLE `table_deliveryorder` ENABLE KEYS */;
 
@@ -653,7 +744,7 @@ CREATE TABLE `table_deliveryorderitem` (
 
 /*!40000 ALTER TABLE `table_deliveryorderitem` DISABLE KEYS */;
 INSERT INTO `table_deliveryorderitem` (`doi_id`,`do_id`,`part_id`,`warehouse_id`,`doi_amount`,`sce_id`,`do_scentrytype`,`sc_id`,`unit_id`,`doi_notes`,`soi_id`,`doi_againstprstatus`,`doi_outstandingamtpr`,`doi_returnedamount`) VALUES 
- (1,1,12747,1,14,0,'DeliveryOrder',0,1,'',2,'Open',14,0),
+ (1,1,12747,1,14,0,'DeliveryOrder',0,1,'',2,'Outstanding',4,10),
  (2,2,12747,1,2,0,'DeliveryOrder',0,1,'',2,'Open',2,0);
 /*!40000 ALTER TABLE `table_deliveryorderitem` ENABLE KEYS */;
 
@@ -782,7 +873,7 @@ CREATE TABLE `table_formaccess` (
   PRIMARY KEY (`formaccess_id`) USING BTREE,
   KEY `FK_table_formaccess_1` (`user_id`),
   CONSTRAINT `FK_table_formaccess_1` FOREIGN KEY (`user_id`) REFERENCES `table_user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_formaccess`
@@ -827,7 +918,9 @@ INSERT INTO `table_formaccess` (`formaccess_id`,`formaccess_code`,`formaccess_na
  (39,'BankForm','MSTF001 - Bank',1,1,1,1,1,11),
  (40,'CustomerOutStandingInvoiceForm','TRCS007 - Customer Outstanding Invoice',1,1,1,1,1,1),
  (41,'CustomerInvoiceForm','TRCS003 - Customer Invoice',1,1,1,1,1,1),
- (42,'ReceiptInvoice','TRCS004 - Receipt',1,1,1,1,1,1);
+ (43,'ReceiptInvoiceForm','TRCS004 - Receipt',1,1,1,1,1,1),
+ (44,'SalesReturnForm','TRCS005 - Sales Return',1,1,1,1,1,1),
+ (45,'ARCreditNoteForm','TRCS006 - AR Credit Note',1,1,1,1,1,1);
 /*!40000 ALTER TABLE `table_formaccess` ENABLE KEYS */;
 
 
@@ -7929,7 +8022,7 @@ CREATE TABLE `table_receipt` (
   CONSTRAINT `FK_table_receipt_1` FOREIGN KEY (`cus_id`) REFERENCES `table_customer` (`cus_id`),
   CONSTRAINT `FK_table_receipt_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_receipt_3` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_receipt`
@@ -7937,7 +8030,8 @@ CREATE TABLE `table_receipt` (
 
 /*!40000 ALTER TABLE `table_receipt` DISABLE KEYS */;
 INSERT INTO `table_receipt` (`rec_id`,`rec_code`,`rec_date`,`cus_id`,`ccy_id`,`entry_type`,`rec_notes`,`rec_posted`,`rec_eventstatus`,`rec_subtotalamount`,`rec_discpercent`,`rec_amountafterdiscpercent`,`rec_discamount`,`rec_amountafterdiscamount`,`rec_otherexpense`,`rec_netamount`,`emp_id`) VALUES 
- (2,'RC001/09/2011','2011-09-09 00:00:00',3,1,'Receipt','',1,'Confirm',0,0,0,0,0,0,5000000,2);
+ (2,'RC001/09/2011','2011-09-09 00:00:00',3,1,'Receipt','',1,'Confirm',0,0,0,0,0,0,5000000,2),
+ (4,'RC002/09/2011','2011-09-09 00:00:00',1,1,'Receipt','',1,'Confirm',0,0,0,0,0,0,675000,2);
 /*!40000 ALTER TABLE `table_receipt` ENABLE KEYS */;
 
 
@@ -7976,7 +8070,7 @@ CREATE TABLE `table_receiptitem` (
   CONSTRAINT `FK_table_receiptitem_1` FOREIGN KEY (`rec_id`) REFERENCES `table_receipt` (`rec_id`),
   CONSTRAINT `FK_table_receiptitem_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_receiptitem_3` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_receiptitem`
@@ -7984,7 +8078,8 @@ CREATE TABLE `table_receiptitem` (
 
 /*!40000 ALTER TABLE `table_receiptitem` DISABLE KEYS */;
 INSERT INTO `table_receiptitem` (`reci_id`,`rec_id`,`cus_id`,`ccy_id`,`reci_amount`,`vbe_id`,`vb_id`,`reci_entrytype`,`reci_invoicedate`,`reci_invoiceno`,`reci_duedate`,`emp_id`,`reci_discount`,`reci_amountbeforediscount`,`top_id`,`reci_description`,`reci_notes`,`inv_id`,`inv_type`,`bank_id`,`reci_receipttype`,`arcr_id`) VALUES 
- (3,2,3,1,5000000,0,0,'Receipt','2011-09-09 00:00:00','','2011-09-09 00:00:00',2,0,0,0,'','',1,'CustomerOutStandingInvoice',0,'Cash',0);
+ (3,2,3,1,5000000,0,0,'Receipt','2011-09-09 00:00:00','','2011-09-09 00:00:00',2,0,0,0,'','',1,'CustomerOutStandingInvoice',0,'Cash',0),
+ (5,4,1,1,675000,0,0,'Receipt','2011-09-09 00:00:00','ARCR001/09/2011','2011-09-09 00:00:00',2,0,0,0,'','',3,'CustomerOutStandingInvoice',0,'ARCreditNote',1);
 /*!40000 ALTER TABLE `table_receiptitem` ENABLE KEYS */;
 
 
@@ -8115,13 +8210,15 @@ CREATE TABLE `table_salesreturn` (
   KEY `FK_table_salesreturn_2` (`cus_id`),
   CONSTRAINT `FK_table_salesreturn_1` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`),
   CONSTRAINT `FK_table_salesreturn_2` FOREIGN KEY (`cus_id`) REFERENCES `table_customer` (`cus_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_salesreturn`
 --
 
 /*!40000 ALTER TABLE `table_salesreturn` DISABLE KEYS */;
+INSERT INTO `table_salesreturn` (`srn_id`,`srn_date`,`srn_noticedate`,`srn_scentrytype`,`emp_id`,`srn_notes`,`srn_posted`,`srn_eventstatus`,`srn_code`,`cus_id`) VALUES 
+ (3,'2011-09-09 00:00:00','2011-09-09 00:00:00','SalesReturn',2,'',1,'Confirm','SR001/09/2011',1);
 /*!40000 ALTER TABLE `table_salesreturn` ENABLE KEYS */;
 
 
@@ -8153,13 +8250,15 @@ CREATE TABLE `table_salesreturnitem` (
   CONSTRAINT `FK_table_salesreturnitem_3` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
   CONSTRAINT `FK_table_salesreturnitem_4` FOREIGN KEY (`unit_id`) REFERENCES `table_unit` (`unit_id`),
   CONSTRAINT `FK_table_salesreturnitem_5` FOREIGN KEY (`doi_id`) REFERENCES `table_deliveryorderitem` (`doi_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_salesreturnitem`
 --
 
 /*!40000 ALTER TABLE `table_salesreturnitem` DISABLE KEYS */;
+INSERT INTO `table_salesreturnitem` (`srni_id`,`srn_id`,`part_id`,`warehouse_id`,`srni_amount`,`sce_id`,`srn_scentrytype`,`sc_id`,`unit_id`,`srni_notes`,`doi_id`) VALUES 
+ (2,3,12747,1,10,0,'SalesReturn',0,1,'',1);
 /*!40000 ALTER TABLE `table_salesreturnitem` ENABLE KEYS */;
 
 
@@ -8197,7 +8296,7 @@ INSERT INTO `table_stockcard` (`sc_id`,`part_id`,`warehouse_id`,`period_id`,`sc_
  (90,10760,1,21,1,8,0),
  (91,9068,1,21,0,0,0),
  (92,11844,1,21,0,0,0),
- (93,12747,1,21,0,5,4),
+ (93,12747,1,21,10,5,4),
  (94,14361,1,21,10,0,0);
 /*!40000 ALTER TABLE `table_stockcard` ENABLE KEYS */;
 
@@ -8220,7 +8319,7 @@ CREATE TABLE `table_stockcardentry` (
   KEY `FK_table_stockcardentry_2` (`sc_id`),
   CONSTRAINT `FK_table_stockcardentry_1` FOREIGN KEY (`unit_id`) REFERENCES `table_unit` (`unit_id`),
   CONSTRAINT `FK_table_stockcardentry_2` FOREIGN KEY (`sc_id`) REFERENCES `table_stockcard` (`sc_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=349 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=353 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_stockcardentry`
@@ -8255,7 +8354,8 @@ INSERT INTO `table_stockcardentry` (`sce_id`,`sc_id`,`sce_stockcardentrytype`,`s
  (343,94,'SupplierInvoice','2011-09-09 00:00:00',1,10,77),
  (346,91,'CustomerInvoice','2011-09-09 00:00:00',1,200,2),
  (347,93,'CustomerInvoice','2011-09-09 00:00:00',1,14,3),
- (348,93,'DeliveryOrder','2011-09-09 00:00:00',1,2,2);
+ (348,93,'DeliveryOrder','2011-09-09 00:00:00',1,2,2),
+ (352,93,'SalesReturn','2011-09-09 00:00:00',1,10,2);
 /*!40000 ALTER TABLE `table_stockcardentry` ENABLE KEYS */;
 
 
@@ -15321,7 +15421,7 @@ CREATE TABLE `table_user` (
 
 /*!40000 ALTER TABLE `table_user` DISABLE KEYS */;
 INSERT INTO `table_user` (`user_id`,`user_code`,`user_name`,`user_password`,`user_active`) VALUES 
- (1,'ADMIN','Administrator','Y2jSDROZVL6wD7z6bktKsA==',1),
+ (1,'ADMIN','Administrator','+RHDHfvJhag7oORzT8B8iA==',1),
  (10,'TEST','test','IaxuwwC6VETuZ0f8Wy+TeQ==',0),
  (11,'TEST2','TEST2','GT9PVcBysqM2GD+hSyWiCQ==',1);
 /*!40000 ALTER TABLE `table_user` ENABLE KEYS */;
@@ -15341,7 +15441,7 @@ CREATE TABLE `table_usersettings` (
   PRIMARY KEY (`us_id`),
   KEY `FK_table_usersettings_1` (`user_id`),
   CONSTRAINT `FK_table_usersettings_1` FOREIGN KEY (`user_id`) REFERENCES `table_user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=583 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=667 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_usersettings`
@@ -15554,7 +15654,7 @@ INSERT INTO `table_usersettings` (`us_id`,`user_id`,`us_name`,`us_value`,`us_typ
  (255,1,'SearchGRNForSuppInvoiceFormwarehouseColumnWidth','72','System.Int32'),
  (256,1,'SearchGRNForSuppInvoiceFormwarehouseColumnVisible','True','System.Boolean'),
  (257,1,'SupplierInvoiceFormGRNNoColumnWidth','100','System.Int32'),
- (258,1,'PaymentForminvoiceNoColumnWidth','103','System.Int32'),
+ (258,1,'PaymentForminvoiceNoColumnWidth','86','System.Int32'),
  (259,1,'PaymentForminvoiceNoColumnVisible','True','System.Boolean'),
  (260,1,'PaymentForminvoiceDateColumnWidth','84','System.Int32'),
  (261,1,'PaymentForminvoiceDateColumnVisible','True','System.Boolean'),
@@ -15653,8 +15753,8 @@ INSERT INTO `table_usersettings` (`us_id`,`user_id`,`us_name`,`us_value`,`us_typ
  (354,1,'SearchOstSuppInvForPaymentFormqtyColumnVisible','True','System.Boolean'),
  (355,1,'PurchaseReturnFormgrnQtyColumnWidth','58','System.Int32'),
  (356,1,'PurchaseReturnFormgrnQtyColumnVisible','True','System.Boolean'),
- (357,1,'MainFormmainformwidth','1608','System.Int32'),
- (358,1,'MainFormmainformheight','874','System.Int32'),
+ (357,1,'MainFormmainformwidth','1350','System.Int32'),
+ (358,1,'MainFormmainformheight','690','System.Int32'),
  (359,1,'SearchPurchaseOrderFormsupplierColumnWidth','103','System.Int32'),
  (360,1,'SearchPurchaseOrderFormsupplierColumnVisible','True','System.Boolean'),
  (361,1,'SearchGoodReceiveNoteFormsupplierColumnWidth','108','System.Int32'),
@@ -15817,9 +15917,9 @@ INSERT INTO `table_usersettings` (`us_id`,`user_id`,`us_name`,`us_value`,`us_typ
  (518,1,'DeliveryOrderFormunitColumnVisible','True','System.Boolean'),
  (519,1,'DeliveryOrderFormwarehouseColumnWidth','70','System.Int32'),
  (520,1,'DeliveryOrderFormwarehouseColumnVisible','True','System.Boolean'),
- (521,1,'DeliveryOrderFormnotesColumnWidth','100','System.Int32'),
+ (521,1,'DeliveryOrderFormnotesColumnWidth','72','System.Int32'),
  (522,1,'DeliveryOrderFormnotesColumnVisible','True','System.Boolean'),
- (523,1,'DeliveryOrderFormreturnedColumnWidth','50','System.Int32'),
+ (523,1,'DeliveryOrderFormreturnedColumnWidth','71','System.Int32'),
  (524,1,'DeliveryOrderFormreturnedColumnVisible','True','System.Boolean'),
  (525,1,'DeliveryOrderFormreturnedunitColumnWidth','50','System.Int32'),
  (526,1,'DeliveryOrderFormreturnedunitColumnVisible','True','System.Boolean'),
@@ -15878,7 +15978,91 @@ INSERT INTO `table_usersettings` (`us_id`,`user_id`,`us_name`,`us_value`,`us_typ
  (579,1,'CustomerOutStandingInvoiceFormamountColumnWidth','100','System.Int32'),
  (580,1,'CustomerOutStandingInvoiceFormamountColumnVisible','True','System.Boolean'),
  (581,1,'CustomerOutStandingInvoiceFormpaidAmountColumnWidth','100','System.Int32'),
- (582,1,'CustomerOutStandingInvoiceFormpaidAmountColumnVisible','True','System.Boolean');
+ (582,1,'CustomerOutStandingInvoiceFormpaidAmountColumnVisible','True','System.Boolean'),
+ (583,1,'SalesReturnFormscanColumnWidth','100','System.Int32'),
+ (584,1,'SalesReturnFormscanColumnVisible','True','System.Boolean'),
+ (585,1,'SalesReturnFormcodeColumnWidth','80','System.Int32'),
+ (586,1,'SalesReturnFormcodeColumnVisible','True','System.Boolean'),
+ (587,1,'SalesReturnFormnameColumnWidth','300','System.Int32'),
+ (588,1,'SalesReturnFormnameColumnVisible','True','System.Boolean'),
+ (589,1,'SalesReturnFormgrnQtyColumnWidth','100','System.Int32'),
+ (590,1,'SalesReturnFormgrnQtyColumnVisible','True','System.Boolean'),
+ (591,1,'SalesReturnFormOutstandingPOColumnWidth','50','System.Int32'),
+ (592,1,'SalesReturnFormOutstandingPOColumnVisible','True','System.Boolean'),
+ (593,1,'SalesReturnFormOutstandingunitColumnWidth','60','System.Int32'),
+ (594,1,'SalesReturnFormOutstandingunitColumnVisible','True','System.Boolean'),
+ (595,1,'SalesReturnFormQtyColumnWidth','50','System.Int32'),
+ (596,1,'SalesReturnFormQtyColumnVisible','True','System.Boolean'),
+ (597,1,'SalesReturnFormunitColumnWidth','50','System.Int32'),
+ (598,1,'SalesReturnFormunitColumnVisible','True','System.Boolean'),
+ (599,1,'SalesReturnFormwarehouseColumnWidth','70','System.Int32'),
+ (600,1,'SalesReturnFormwarehouseColumnVisible','True','System.Boolean'),
+ (601,1,'SalesReturnFormnotesColumnWidth','100','System.Int32'),
+ (602,1,'SalesReturnFormnotesColumnVisible','True','System.Boolean'),
+ (603,1,'CustomerInvoiceFormscanColumnWidth','100','System.Int32'),
+ (604,1,'CustomerInvoiceFormscanColumnVisible','True','System.Boolean'),
+ (605,1,'CustomerInvoiceFormGRNNoColumnWidth','100','System.Int32'),
+ (606,1,'CustomerInvoiceFormGRNNoColumnVisible','True','System.Boolean'),
+ (607,1,'CustomerInvoiceFormcodeColumnWidth','80','System.Int32'),
+ (608,1,'CustomerInvoiceFormcodeColumnVisible','True','System.Boolean'),
+ (609,1,'CustomerInvoiceFormnameColumnWidth','300','System.Int32'),
+ (610,1,'CustomerInvoiceFormnameColumnVisible','True','System.Boolean'),
+ (611,1,'CustomerInvoiceFormQtyColumnWidth','50','System.Int32'),
+ (612,1,'CustomerInvoiceFormQtyColumnVisible','True','System.Boolean'),
+ (613,1,'CustomerInvoiceFormunitColumnWidth','50','System.Int32'),
+ (614,1,'CustomerInvoiceFormunitColumnVisible','True','System.Boolean'),
+ (615,1,'CustomerInvoiceFormpriceColumnWidth','80','System.Int32'),
+ (616,1,'CustomerInvoiceFormpriceColumnVisible','True','System.Boolean'),
+ (617,1,'CustomerInvoiceFormdiscpercentColumnWidth','50','System.Int32'),
+ (618,1,'CustomerInvoiceFormdiscpercentColumnVisible','True','System.Boolean'),
+ (619,1,'CustomerInvoiceFormdiscAmountColumnWidth','80','System.Int32'),
+ (620,1,'CustomerInvoiceFormdiscAmountColumnVisible','True','System.Boolean'),
+ (621,1,'CustomerInvoiceFormdiscabcColumnWidth','50','System.Int32'),
+ (622,1,'CustomerInvoiceFormdiscabcColumnVisible','True','System.Boolean'),
+ (623,1,'CustomerInvoiceFormtotalDiscColumnWidth','80','System.Int32'),
+ (624,1,'CustomerInvoiceFormtotalDiscColumnVisible','True','System.Boolean'),
+ (625,1,'CustomerInvoiceFormtotalAmountColumnWidth','100','System.Int32'),
+ (626,1,'CustomerInvoiceFormtotalAmountColumnVisible','True','System.Boolean'),
+ (627,1,'CustomerInvoiceFormwarehouseColumnWidth','60','System.Int32'),
+ (628,1,'CustomerInvoiceFormwarehouseColumnVisible','True','System.Boolean'),
+ (629,1,'CustomerInvoiceFormnotesColumnWidth','50','System.Int32'),
+ (630,1,'CustomerInvoiceFormnotesColumnVisible','True','System.Boolean'),
+ (631,1,'ReceiptInvoiceForminvoiceNoColumnWidth','90','System.Int32'),
+ (632,1,'ReceiptInvoiceForminvoiceNoColumnVisible','True','System.Boolean'),
+ (633,1,'ReceiptInvoiceForminvoiceDateColumnWidth','80','System.Int32'),
+ (634,1,'ReceiptInvoiceForminvoiceDateColumnVisible','True','System.Boolean'),
+ (635,1,'ReceiptInvoiceFormtopColumnWidth','52','System.Int32'),
+ (636,1,'ReceiptInvoiceFormtopColumnVisible','True','System.Boolean'),
+ (637,1,'ReceiptInvoiceFormdueDateColumnWidth','77','System.Int32'),
+ (638,1,'ReceiptInvoiceFormdueDateColumnVisible','True','System.Boolean'),
+ (639,1,'ReceiptInvoiceForminvoicerColumnWidth','87','System.Int32'),
+ (640,1,'ReceiptInvoiceForminvoicerColumnVisible','True','System.Boolean'),
+ (641,1,'ReceiptInvoiceFormamountColumnWidth','99','System.Int32'),
+ (642,1,'ReceiptInvoiceFormamountColumnVisible','True','System.Boolean'),
+ (643,1,'ReceiptInvoiceFormOutstandingAmountColumnWidth','50','System.Int32'),
+ (644,1,'ReceiptInvoiceFormOutstandingAmountColumnVisible','True','System.Boolean'),
+ (645,1,'ReceiptInvoiceFormpaidAmountColumnWidth','102','System.Int32'),
+ (646,1,'ReceiptInvoiceFormpaidAmountColumnVisible','True','System.Boolean'),
+ (647,1,'ReceiptInvoiceFormpaymentTypeColumnWidth','60','System.Int32'),
+ (648,1,'ReceiptInvoiceFormpaymentTypeColumnVisible','True','System.Boolean'),
+ (649,1,'ReceiptInvoiceFormpaymentAmountColumnWidth','98','System.Int32'),
+ (650,1,'ReceiptInvoiceFormpaymentAmountColumnVisible','True','System.Boolean'),
+ (651,1,'ReceiptInvoiceFormdocnoColumnWidth','60','System.Int32'),
+ (652,1,'ReceiptInvoiceFormdocnoColumnVisible','True','System.Boolean'),
+ (653,1,'ReceiptInvoiceFormdocdateColumnWidth','60','System.Int32'),
+ (654,1,'ReceiptInvoiceFormdocdateColumnVisible','True','System.Boolean'),
+ (655,1,'ReceiptInvoiceFormnoteColumnWidth','50','System.Int32'),
+ (656,1,'ReceiptInvoiceFormnoteColumnVisible','True','System.Boolean'),
+ (657,1,'ReceiptInvoiceFormbankColumnWidth','50','System.Int32'),
+ (658,1,'ReceiptInvoiceFormbankColumnVisible','True','System.Boolean'),
+ (659,1,'ARCreditNoteForminvoiceNoColumnWidth','100','System.Int32'),
+ (660,1,'ARCreditNoteForminvoiceNoColumnVisible','True','System.Boolean'),
+ (661,1,'ARCreditNoteForminvoiceDateColumnWidth','100','System.Int32'),
+ (662,1,'ARCreditNoteForminvoiceDateColumnVisible','True','System.Boolean'),
+ (663,1,'ARCreditNoteFormamountColumnWidth','100','System.Int32'),
+ (664,1,'ARCreditNoteFormamountColumnVisible','True','System.Boolean'),
+ (665,1,'ARCreditNoteFormnotesColumnWidth','250','System.Int32'),
+ (666,1,'ARCreditNoteFormnotesColumnVisible','True','System.Boolean');
 /*!40000 ALTER TABLE `table_usersettings` ENABLE KEYS */;
 
 
@@ -15910,7 +16094,7 @@ INSERT INTO `table_vendorbalance` (`vb_id`,`vb_vendorbalancetype`,`period_id`,`v
  (8,'Supplier',21,1,1,3550000),
  (9,'Supplier',21,3,1,0),
  (10,'Customer',21,3,1,850000),
- (12,'Customer',21,1,1,3315000);
+ (12,'Customer',21,1,1,7640000);
 /*!40000 ALTER TABLE `table_vendorbalance` ENABLE KEYS */;
 
 
@@ -15932,7 +16116,7 @@ CREATE TABLE `table_vendorbalanceentry` (
   KEY `FK_table_vendorbalanceentry_2` (`ccy_id`),
   CONSTRAINT `FK_table_vendorbalanceentry_1` FOREIGN KEY (`vb_id`) REFERENCES `table_vendorbalance` (`vb_id`),
   CONSTRAINT `FK_table_vendorbalanceentry_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=140 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_vendorbalanceentry`
@@ -15953,7 +16137,11 @@ INSERT INTO `table_vendorbalanceentry` (`vbe_id`,`vb_id`,`vbe_vendorbalanceentry
  (125,8,'SupplierInvoice','2011-09-09 00:00:00',1,100000,35),
  (129,12,'CustomerInvoice','2011-09-09 00:00:00',1,3000000,5),
  (130,12,'CustomerInvoice','2011-09-09 00:00:00',1,315000,6),
- (133,10,'Receipt','2011-09-09 00:00:00',1,5000000,3);
+ (133,10,'Receipt','2011-09-09 00:00:00',1,5000000,3),
+ (135,12,'CustomerOutStandingInvoice','2011-09-09 00:00:00',1,5000000,3),
+ (137,12,'ARCreditNote','2011-09-09 00:00:00',1,225000,1),
+ (138,12,'ARCreditNote','2011-09-09 00:00:00',1,450000,2),
+ (139,12,'Receipt','2011-09-09 00:00:00',1,675000,5);
 /*!40000 ALTER TABLE `table_vendorbalanceentry` ENABLE KEYS */;
 
 
