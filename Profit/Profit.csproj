@@ -96,11 +96,23 @@
     <Compile Include="Forms\InventoryTransaction\SalesTransaction\DeliveryOrderForm.Designer.cs">
       <DependentUpon>DeliveryOrderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\ReceiptForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\ReceiptForm.Designer.cs">
+      <DependentUpon>ReceiptForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\InventoryTransaction\SalesTransaction\SalesOrderForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\InventoryTransaction\SalesTransaction\SalesOrderForm.Designer.cs">
       <DependentUpon>SalesOrderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchARCRForReceiptForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchARCRForReceiptForm.Designer.cs">
+      <DependentUpon>SearchARCRForReceiptForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchDeliveryOrderForm.cs">
       <SubType>Form</SubType>
@@ -113,6 +125,18 @@
     </Compile>
     <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchDOForCussInvoiceForm.Designer.cs">
       <DependentUpon>SearchDOForCussInvoiceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchOstCussInvForReceiptForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchOstCussInvForReceiptForm.Designer.cs">
+      <DependentUpon>SearchOstCussInvForReceiptForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchReceiptForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchReceiptForm.Designer.cs">
+      <DependentUpon>SearchReceiptForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchSOForDOForm.cs">
       <SubType>Form</SubType>
@@ -149,6 +173,12 @@
     </Compile>
     <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchCustomerInvoiceForm.Designer.cs">
       <DependentUpon>SearchCustomerInvoiceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchCussInvJForReceiptForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchCussInvJForReceiptForm.Designer.cs">
+      <DependentUpon>SearchCussInvJForReceiptForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\InventoryTransaction\SearchAPDNForPaymentForm.cs">
       <SubType>Form</SubType>
@@ -440,14 +470,26 @@
     <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\DeliveryOrderForm.resx">
       <DependentUpon>DeliveryOrderForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\ReceiptForm.resx">
+      <DependentUpon>ReceiptForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\SalesOrderForm.resx">
       <DependentUpon>SalesOrderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\SearchARCRForReceiptForm.resx">
+      <DependentUpon>SearchARCRForReceiptForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\SearchDeliveryOrderForm.resx">
       <DependentUpon>SearchDeliveryOrderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\SearchDOForCussInvoiceForm.resx">
       <DependentUpon>SearchDOForCussInvoiceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\SearchOstCussInvForReceiptForm.resx">
+      <DependentUpon>SearchOstCussInvForReceiptForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\SearchReceiptForm.resx">
+      <DependentUpon>SearchReceiptForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\SearchSOForDOForm.resx">
       <DependentUpon>SearchSOForDOForm.cs</DependentUpon>
@@ -466,6 +508,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\SearchCustomerInvoiceForm.resx">
       <DependentUpon>SearchCustomerInvoiceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\SearchCussInvJForReceiptForm.resx">
+      <DependentUpon>SearchCussInvJForReceiptForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\SearchAPDNForPaymentForm.resx">
       <DependentUpon>SearchAPDNForPaymentForm.cs</DependentUpon>

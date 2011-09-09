@@ -63,7 +63,7 @@
             System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("TRCS001 - Sales Order");
             System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("TRCS002 - Delivery Order");
             System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("TRCS003 - Customer Invoice");
-            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("TRCS004 - Customer Payment");
+            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("TRCS004 - Receipt");
             System.Windows.Forms.TreeNode treeNode36 = new System.Windows.Forms.TreeNode("TRCS005 - Sales Return");
             System.Windows.Forms.TreeNode treeNode37 = new System.Windows.Forms.TreeNode("TRCS006 - Credit Note");
             System.Windows.Forms.TreeNode treeNode38 = new System.Windows.Forms.TreeNode("TRCS007 - Customer Outstanding Invoice");
@@ -729,10 +729,10 @@
             treeNode32.Text = "TRCS001 - Sales Order";
             treeNode33.Name = "NodeDeliveryOrder";
             treeNode33.Text = "TRCS002 - Delivery Order";
-            treeNode34.Name = "Node2";
+            treeNode34.Name = "NodeCustomerInvoice";
             treeNode34.Text = "TRCS003 - Customer Invoice";
-            treeNode35.Name = "Node3";
-            treeNode35.Text = "TRCS004 - Customer Payment";
+            treeNode35.Name = "NodeReceipt";
+            treeNode35.Text = "TRCS004 - Receipt";
             treeNode36.Name = "Node4";
             treeNode36.Text = "TRCS005 - Sales Return";
             treeNode37.Name = "Node5";

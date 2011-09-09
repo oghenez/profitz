@@ -281,6 +281,7 @@ namespace Profit
                 GoodReceiveNoteItem item = (GoodReceiveNoteItem)itemsDataGrid[GRNNoColumn.Index, e.RowIndex].Tag;
                 if (item != null)
                 {
+                    if (item.ID == 0) return;
                     e.Cancel = true;
                     itemsDataGrid.Rows[e.RowIndex].ErrorText = "GRN Qty / Unit  can not change";
                 }

@@ -543,6 +543,17 @@ namespace Profit.Server
                     result.Add(itm);
             }
 
+            m_cmd.CommandText = CustomerInvoiceItem.GetByPartIDSQL(partID);
+            rdr = m_cmd.ExecuteReader();
+            IList ciis = CustomerInvoiceItem.TransformReaderList(rdr);
+            rdr.Close();
+            foreach (CustomerInvoiceItem itm in ciis)
+            {
+                itm.EVENT = CustomerInvoiceRepository.GetHeaderOnly(m_cmd, itm.EVENT.ID);
+                itm.PART = p;
+                if (itm.DO_ITEM.ID == 0)
+                    result.Add(itm);
+            }
             
             m_cmd.CommandText = StockTakingItems.GetByPartIDSQL(partID);
             rdr = m_cmd.ExecuteReader();

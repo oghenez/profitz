@@ -108,6 +108,7 @@ namespace Profit.Server
                 sc = StockCard.CreateStockCard(item, period);
             }
             item.STOCK_CARD = sc;
+            item.STOCK_CARD.PART = item.PART;
         }
 
         abstract protected void doSave(Event e);

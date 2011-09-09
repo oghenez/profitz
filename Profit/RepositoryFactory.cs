@@ -50,6 +50,10 @@ namespace Profit
         public const string SALES_RETURN_REPOSITORY = "SalesReturnRepository";
         public const string CUSTOMER_OUTSTANDING_INVOICE_REPOSITORY = "CustomerOutStandingInvoiceRepository";
         public const string CUSTOMERINVOICE_REPOSITORY = "CustomerInvoiceRepository";
+        public const string RECEIPT_REPOSITORY = "ReceiptRepository";
+        public const string ARCREDITNOTE_REPOSITORY = "ARCreditNoteRepository";
+        public const string CUSTOMERINVOICE_JOURNAL_REPOSITORY = "CustomerInvoiceJournalRepository";
+
 
 
         public static RepositoryFactory GetInstance()
@@ -101,6 +105,9 @@ namespace Profit
             SalesReturnRepository srRepository = new SalesReturnRepository();
             CustomerOutStandingInvoiceRepository coirRepository = new CustomerOutStandingInvoiceRepository();
             CustomerInvoiceRepository cirRepository = new CustomerInvoiceRepository();
+            ReceiptRepository rcptRepository = new ReceiptRepository();
+            ARCreditNoteRepository arcrRepository = new ARCreditNoteRepository();
+            CustomerInvoiceJournalRepository cijRepository = new CustomerInvoiceJournalRepository();
 
             m_listService.Add(BANK_REPOSITORY, bankRepository);
             m_listService.Add(CURRENCY_REPOSITORY, ccyRepository);
@@ -140,6 +147,9 @@ namespace Profit
             m_listService.Add(SALES_RETURN_REPOSITORY, srRepository);
             m_listService.Add(CUSTOMER_OUTSTANDING_INVOICE_REPOSITORY, coirRepository);
             m_listService.Add(CUSTOMERINVOICE_REPOSITORY, cirRepository);
+            m_listService.Add(RECEIPT_REPOSITORY, rcptRepository);
+            m_listService.Add(ARCREDITNOTE_REPOSITORY, arcrRepository);
+            m_listService.Add(CUSTOMERINVOICE_JOURNAL_REPOSITORY, cijRepository);
 
         }
         public Repository GetRepository(string name)

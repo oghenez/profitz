@@ -376,7 +376,7 @@ namespace Profit.Server
 
             return result;
         }
-        public IList FindSIJournalItemlistForReceipt(string find,int ccyID, int customer, DateTime trdate, IList notIn)
+        public IList FindCIJournalItemlistForReceipt(string find,int ccyID, int customer, DateTime trdate, IList notIn)
         {
             StringBuilder poisSB = new StringBuilder();
             foreach (int i in notIn)

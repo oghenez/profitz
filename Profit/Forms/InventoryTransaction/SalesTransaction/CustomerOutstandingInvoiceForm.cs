@@ -501,7 +501,7 @@ namespace Profit
                 itemsDataGrid[dueDateColumn.Index, i].Value = item.DUE_DATE;
                 itemsDataGrid[invoicerColumn.Index, i].Value = (Employee)r_employee.GetById(item.EMPLOYEE);
                 itemsDataGrid[amountColumn.Index, i].Value = item.AMOUNT;
-                itemsDataGrid[paidAmountColumn.Index, i].Value = item.PAID_AMOUNT;
+                itemsDataGrid[paidAmountColumn.Index, i].Value = item.RECEIPT_AMOUNT;
 
                 //item.UNIT = (Unit)r_unit.GetById(item.UNIT);
                 //item.GRN_ITEM.UNIT = (Unit)r_unit.GetById(item.GRN_ITEM.UNIT);
