@@ -222,7 +222,7 @@ namespace Profit.Server
         {
             return String.Format("SELECT ci_eventstatus from table_customerinvoice where ci_id ={0}", id);
         }
-        public static string GetBySupplierSQL(int id)
+        public static string GetByCustomerSQL(int id)
         {
             return String.Format("SELECT * from table_customerinvoice where cus_id ={0}", id);
         }

@@ -484,6 +484,12 @@ namespace Profit
                         grn.SUPPLIER = (Supplier)r_sup.GetById(grn.SUPPLIER);
                         movemntkryptonDataGridView[vendorMovementColumn.Index, r].Value = grn.SUPPLIER.NAME;
                         break;
+                    case StockCardEntryType.DeliveryOrder:
+                        DeliveryOrderItem doi = (DeliveryOrderItem)itm;
+                        DeliveryOrder dor = (DeliveryOrder)doi.EVENT;
+                        dor.CUSTOMER = (Customer)r_cus.GetById(dor.CUSTOMER);
+                        movemntkryptonDataGridView[vendorMovementColumn.Index, r].Value = dor.CUSTOMER.NAME;
+                        break;
                     case StockCardEntryType.SupplierInvoice:
                         SupplierInvoiceItem sii = (SupplierInvoiceItem)itm;
                         SupplierInvoice si = (SupplierInvoice)sii.EVENT;
