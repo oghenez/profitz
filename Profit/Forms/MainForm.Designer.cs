@@ -666,7 +666,7 @@
             this.purchaseTreeView.Dock = System.Windows.Forms.DockStyle.Top;
             this.purchaseTreeView.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.purchaseTreeView.FullRowSelect = true;
-            this.purchaseTreeView.Location = new System.Drawing.Point(1, 210);
+            this.purchaseTreeView.Location = new System.Drawing.Point(1, 231);
             this.purchaseTreeView.Name = "purchaseTreeView";
             treeNode25.Name = "NodePurchaseOrder";
             treeNode25.Text = "TRCP001 - Purchase Order";
@@ -701,7 +701,7 @@
             this.purchaseKryptonHeader.Cursor = System.Windows.Forms.Cursors.Hand;
             this.purchaseKryptonHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.purchaseKryptonHeader.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.Secondary;
-            this.purchaseKryptonHeader.Location = new System.Drawing.Point(1, 189);
+            this.purchaseKryptonHeader.Location = new System.Drawing.Point(1, 210);
             this.purchaseKryptonHeader.Name = "purchaseKryptonHeader";
             this.purchaseKryptonHeader.Size = new System.Drawing.Size(218, 21);
             this.purchaseKryptonHeader.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom)));
@@ -747,7 +747,7 @@
             treeNode36,
             treeNode37,
             treeNode38});
-            this.SalesTreeView.Size = new System.Drawing.Size(218, 113);
+            this.SalesTreeView.Size = new System.Drawing.Size(218, 134);
             this.SalesTreeView.TabIndex = 17;
             this.SalesTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
             // 
