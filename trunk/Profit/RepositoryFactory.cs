@@ -49,6 +49,7 @@ namespace Profit
         public const string DELIVERY_ORDER_REPOSITORY = "DeliveryOrderRepository";
         public const string SALES_RETURN_REPOSITORY = "SalesReturnRepository";
         public const string CUSTOMER_OUTSTANDING_INVOICE_REPOSITORY = "CustomerOutStandingInvoiceRepository";
+        public const string CUSTOMERINVOICE_REPOSITORY = "CustomerInvoiceRepository";
 
 
         public static RepositoryFactory GetInstance()
@@ -99,6 +100,7 @@ namespace Profit
             DeliveryOrderRepository doRepository = new DeliveryOrderRepository();
             SalesReturnRepository srRepository = new SalesReturnRepository();
             CustomerOutStandingInvoiceRepository coirRepository = new CustomerOutStandingInvoiceRepository();
+            CustomerInvoiceRepository cirRepository = new CustomerInvoiceRepository();
 
             m_listService.Add(BANK_REPOSITORY, bankRepository);
             m_listService.Add(CURRENCY_REPOSITORY, ccyRepository);
@@ -137,6 +139,7 @@ namespace Profit
             m_listService.Add(DELIVERY_ORDER_REPOSITORY, doRepository);
             m_listService.Add(SALES_RETURN_REPOSITORY, srRepository);
             m_listService.Add(CUSTOMER_OUTSTANDING_INVOICE_REPOSITORY, coirRepository);
+            m_listService.Add(CUSTOMERINVOICE_REPOSITORY, cirRepository);
 
         }
         public Repository GetRepository(string name)
