@@ -40,7 +40,7 @@ namespace Profit.Server
                 AGAINST_DO_STATUS = AgainstStatus.Close;
             else
                 AGAINST_DO_STATUS = AgainstStatus.Outstanding;
-            ((PurchaseOrder)EVENT).UpdateAgainstGRNStatusPO();
+            ((SalesOrder)EVENT).UpdateAgainstDOStatusSO();
         }
         public void UnSetOSAgainstDOItem(DeliveryOrderItem grni)
         {
@@ -54,7 +54,7 @@ namespace Profit.Server
                 AGAINST_DO_STATUS = AgainstStatus.Outstanding;
             else
                 AGAINST_DO_STATUS = AgainstStatus.Open;
-            ((PurchaseOrder)EVENT).UpdateAgainstGRNStatusPO();
+            ((SalesOrder)EVENT).UpdateAgainstDOStatusSO();
         }
         private bool isValidToClose()
         {

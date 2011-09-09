@@ -23,6 +23,7 @@ namespace Profit.Server
             MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             AutoNumberSetup res = AutoNumberSetup.GetTransform(r);
             r.Close();
+            if (res == null) throw new Exception("AutoNumber Setup (" + domainName + ") not set");
             return res;
         }
         internal static string getUnderScore(int count)

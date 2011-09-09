@@ -85,4 +85,11 @@ namespace Profit.Server
         Bank,
         APDebitNote
     }
+
+    public enum ReceiptType
+    {
+        Cash,
+        Bank,
+        ARCreditNote
+    }
 }

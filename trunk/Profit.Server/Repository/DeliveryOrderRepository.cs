@@ -188,6 +188,7 @@ namespace Profit.Server
                 sti.PART = PartRepository.GetByID(m_command, sti.PART.ID);
                 sti.STOCK_CARD_ENTRY = StockCardEntryRepository.FindStockCardEntryByEventItem(m_command, sti.ID, sti.STOCK_CARD_ENTRY_TYPE);
                 sti.SO_ITEM = SalesOrderRepository.FindSalesOrderItem(m_command, sti.SO_ITEM.ID);
+                sti.SO_ITEM.PART = PartRepository.GetByID(m_command, sti.SO_ITEM.PART.ID);
                 st.EVENT_ITEMS.Add(sti);
             }
             return st;

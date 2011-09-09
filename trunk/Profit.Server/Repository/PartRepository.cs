@@ -555,6 +555,17 @@ namespace Profit.Server
                 result.Add(itm);
             }
 
+            m_cmd.CommandText = DeliveryOrderItem.GetByPartIDSQL(partID);
+            rdr = m_cmd.ExecuteReader();
+            IList doi = DeliveryOrderItem.TransformReaderList(rdr);
+            rdr.Close();
+            foreach (DeliveryOrderItem itm in doi)
+            {
+                itm.EVENT = DeliveryOrderRepository.GetHeaderOnly(m_cmd, itm.EVENT.ID);
+                itm.PART = p;
+                result.Add(itm);
+            }
+
             result.Sort(new EventDateComparer());
             return result; 
         }

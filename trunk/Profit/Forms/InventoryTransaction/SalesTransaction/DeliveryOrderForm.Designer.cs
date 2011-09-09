@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonHeader1 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
@@ -74,6 +74,18 @@
             this.employeeKryptonComboBox = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.dateKryptonDateTimePicker = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
             this.itemsDataGrid = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.dataGridContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.fieldChooserTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBoxCode = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.buttonSpecAny1 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.buttonSpecAny2 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.buttonSpecAny3 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.buttonSpecAny4 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.buttonSpecAny5 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.buttonSpecAny6 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.kryptonContextMenuItems1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
             this.scanColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.codeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -87,18 +99,6 @@
             this.notesColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.returnedColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
             this.returnedunitColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.dataGridContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.fieldChooserTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.textBoxCode = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.buttonSpecAny1 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.buttonSpecAny2 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.buttonSpecAny3 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.buttonSpecAny4 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.buttonSpecAny5 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.buttonSpecAny6 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.kryptonContextMenuItems1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -117,7 +117,7 @@
             this.kryptonHeader1.Size = new System.Drawing.Size(1043, 29);
             this.kryptonHeader1.TabIndex = 2;
             this.kryptonHeader1.Values.Description = "";
-            this.kryptonHeader1.Values.Heading = "TRCP002 - Good Receive Note";
+            this.kryptonHeader1.Values.Heading = "TRCS002 - Delivery Order";
             // 
             // toolStrip1
             // 
@@ -314,7 +314,7 @@
             // 
             // kryptonLabel16
             // 
-            this.kryptonLabel16.Location = new System.Drawing.Point(382, 50);
+            this.kryptonLabel16.Location = new System.Drawing.Point(381, 51);
             this.kryptonLabel16.Name = "kryptonLabel16";
             this.kryptonLabel16.Size = new System.Drawing.Size(56, 19);
             this.kryptonLabel16.TabIndex = 54;
@@ -350,11 +350,11 @@
             // 
             // kryptonLabel13
             // 
-            this.kryptonLabel13.Location = new System.Drawing.Point(381, 7);
+            this.kryptonLabel13.Location = new System.Drawing.Point(373, 7);
             this.kryptonLabel13.Name = "kryptonLabel13";
-            this.kryptonLabel13.Size = new System.Drawing.Size(57, 19);
+            this.kryptonLabel13.Size = new System.Drawing.Size(64, 19);
             this.kryptonLabel13.TabIndex = 45;
-            this.kryptonLabel13.Values.Text = "Supplier :";
+            this.kryptonLabel13.Values.Text = "Customer :";
             // 
             // supplierkryptonComboBox
             // 
@@ -395,7 +395,7 @@
             // 
             // kryptonLabel4
             // 
-            this.kryptonLabel4.Location = new System.Drawing.Point(35, 29);
+            this.kryptonLabel4.Location = new System.Drawing.Point(35, 28);
             this.kryptonLabel4.Name = "kryptonLabel4";
             this.kryptonLabel4.Size = new System.Drawing.Size(39, 19);
             this.kryptonLabel4.TabIndex = 12;
@@ -403,11 +403,11 @@
             // 
             // kryptonLabel3
             // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(6, 52);
+            this.kryptonLabel3.Location = new System.Drawing.Point(4, 53);
             this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Size = new System.Drawing.Size(68, 19);
+            this.kryptonLabel3.Size = new System.Drawing.Size(71, 19);
             this.kryptonLabel3.TabIndex = 11;
-            this.kryptonLabel3.Values.Text = "Receipt By :";
+            this.kryptonLabel3.Values.Text = "Proceed By :";
             // 
             // EmployeekryptonTextBox
             // 
@@ -468,182 +468,6 @@
             this.itemsDataGrid.Size = new System.Drawing.Size(1028, 215);
             this.itemsDataGrid.TabIndex = 4;
             this.itemsDataGrid.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.itemsDataGrid_RowsAdded);
-            // 
-            // scanColumn
-            // 
-            this.scanColumn.HeaderText = "PO No. / Cari";
-            this.scanColumn.Name = "scanColumn";
-            // 
-            // codeColumn
-            // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.codeColumn.DefaultCellStyle = dataGridViewCellStyle1;
-            this.codeColumn.HeaderText = "Code";
-            this.codeColumn.Name = "codeColumn";
-            this.codeColumn.ReadOnly = true;
-            this.codeColumn.Width = 80;
-            // 
-            // nameColumn
-            // 
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.nameColumn.DefaultCellStyle = dataGridViewCellStyle2;
-            this.nameColumn.HeaderText = "Name";
-            this.nameColumn.Name = "nameColumn";
-            this.nameColumn.ReadOnly = true;
-            this.nameColumn.Width = 300;
-            // 
-            // poQtyColumn
-            // 
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.poQtyColumn.DefaultCellStyle = dataGridViewCellStyle3;
-            this.poQtyColumn.HeaderText = "PO Qty";
-            this.poQtyColumn.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.poQtyColumn.Maximum = new decimal(new int[] {
-            1000000000,
-            0,
-            0,
-            0});
-            this.poQtyColumn.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.poQtyColumn.Name = "poQtyColumn";
-            this.poQtyColumn.ReadOnly = true;
-            this.poQtyColumn.Width = 50;
-            // 
-            // poUnitColumn
-            // 
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.poUnitColumn.DefaultCellStyle = dataGridViewCellStyle4;
-            this.poUnitColumn.HeaderText = "PO Unit";
-            this.poUnitColumn.Name = "poUnitColumn";
-            this.poUnitColumn.ReadOnly = true;
-            this.poUnitColumn.Width = 50;
-            // 
-            // OutstandingPOColumn
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            dataGridViewCellStyle5.NullValue = "0";
-            this.OutstandingPOColumn.DefaultCellStyle = dataGridViewCellStyle5;
-            this.OutstandingPOColumn.HeaderText = "O/S Qty";
-            this.OutstandingPOColumn.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.OutstandingPOColumn.Maximum = new decimal(new int[] {
-            10000000,
-            0,
-            0,
-            0});
-            this.OutstandingPOColumn.Minimum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            -2147483648});
-            this.OutstandingPOColumn.Name = "OutstandingPOColumn";
-            this.OutstandingPOColumn.ReadOnly = true;
-            this.OutstandingPOColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.OutstandingPOColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.OutstandingPOColumn.Width = 50;
-            // 
-            // OutstandingunitColumn
-            // 
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.OutstandingunitColumn.DefaultCellStyle = dataGridViewCellStyle6;
-            this.OutstandingunitColumn.HeaderText = "O/S Unit";
-            this.OutstandingunitColumn.Name = "OutstandingunitColumn";
-            this.OutstandingunitColumn.ReadOnly = true;
-            this.OutstandingunitColumn.Width = 60;
-            // 
-            // QtyColumn
-            // 
-            dataGridViewCellStyle7.NullValue = "0";
-            this.QtyColumn.DefaultCellStyle = dataGridViewCellStyle7;
-            this.QtyColumn.HeaderText = "Qty";
-            this.QtyColumn.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.QtyColumn.Maximum = new decimal(new int[] {
-            10000000,
-            0,
-            0,
-            0});
-            this.QtyColumn.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.QtyColumn.Name = "QtyColumn";
-            this.QtyColumn.Width = 50;
-            // 
-            // unitColumn
-            // 
-            this.unitColumn.DropDownWidth = 121;
-            this.unitColumn.HeaderText = "Unit";
-            this.unitColumn.Name = "unitColumn";
-            this.unitColumn.Width = 50;
-            // 
-            // warehouseColumn
-            // 
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.warehouseColumn.DefaultCellStyle = dataGridViewCellStyle8;
-            this.warehouseColumn.DropDownWidth = 121;
-            this.warehouseColumn.HeaderText = "Warehouse";
-            this.warehouseColumn.Name = "warehouseColumn";
-            this.warehouseColumn.ReadOnly = true;
-            this.warehouseColumn.Width = 70;
-            // 
-            // notesColumn
-            // 
-            this.notesColumn.HeaderText = "Notes";
-            this.notesColumn.Name = "notesColumn";
-            this.notesColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.notesColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.notesColumn.Width = 100;
-            // 
-            // returnedColumn
-            // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            dataGridViewCellStyle9.NullValue = "0";
-            this.returnedColumn.DefaultCellStyle = dataGridViewCellStyle9;
-            this.returnedColumn.HeaderText = "Return Qty";
-            this.returnedColumn.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.returnedColumn.Maximum = new decimal(new int[] {
-            1000000000,
-            0,
-            0,
-            0});
-            this.returnedColumn.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.returnedColumn.Name = "returnedColumn";
-            this.returnedColumn.ReadOnly = true;
-            this.returnedColumn.Width = 50;
-            // 
-            // returnedunitColumn
-            // 
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.returnedunitColumn.DefaultCellStyle = dataGridViewCellStyle10;
-            this.returnedunitColumn.HeaderText = "Returned Unit";
-            this.returnedunitColumn.Name = "returnedunitColumn";
-            this.returnedunitColumn.ReadOnly = true;
-            this.returnedunitColumn.Width = 50;
             // 
             // dataGridContextMenuStrip
             // 
@@ -710,7 +534,183 @@
             this.buttonSpecAny6.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny6.UniqueName = "95BED338EBB14361B2927C3CB003454A";
             // 
-            // GoodReceiptNoteForm
+            // scanColumn
+            // 
+            this.scanColumn.HeaderText = "SO No. / Search";
+            this.scanColumn.Name = "scanColumn";
+            // 
+            // codeColumn
+            // 
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.codeColumn.DefaultCellStyle = dataGridViewCellStyle11;
+            this.codeColumn.HeaderText = "Code";
+            this.codeColumn.Name = "codeColumn";
+            this.codeColumn.ReadOnly = true;
+            this.codeColumn.Width = 80;
+            // 
+            // nameColumn
+            // 
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.nameColumn.DefaultCellStyle = dataGridViewCellStyle12;
+            this.nameColumn.HeaderText = "Name";
+            this.nameColumn.Name = "nameColumn";
+            this.nameColumn.ReadOnly = true;
+            this.nameColumn.Width = 300;
+            // 
+            // poQtyColumn
+            // 
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.poQtyColumn.DefaultCellStyle = dataGridViewCellStyle13;
+            this.poQtyColumn.HeaderText = "SO Qty";
+            this.poQtyColumn.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.poQtyColumn.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.poQtyColumn.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.poQtyColumn.Name = "poQtyColumn";
+            this.poQtyColumn.ReadOnly = true;
+            this.poQtyColumn.Width = 50;
+            // 
+            // poUnitColumn
+            // 
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.poUnitColumn.DefaultCellStyle = dataGridViewCellStyle14;
+            this.poUnitColumn.HeaderText = "SO Unit";
+            this.poUnitColumn.Name = "poUnitColumn";
+            this.poUnitColumn.ReadOnly = true;
+            this.poUnitColumn.Width = 50;
+            // 
+            // OutstandingPOColumn
+            // 
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle15.NullValue = "0";
+            this.OutstandingPOColumn.DefaultCellStyle = dataGridViewCellStyle15;
+            this.OutstandingPOColumn.HeaderText = "O/S Qty";
+            this.OutstandingPOColumn.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.OutstandingPOColumn.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.OutstandingPOColumn.Minimum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            -2147483648});
+            this.OutstandingPOColumn.Name = "OutstandingPOColumn";
+            this.OutstandingPOColumn.ReadOnly = true;
+            this.OutstandingPOColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.OutstandingPOColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.OutstandingPOColumn.Width = 50;
+            // 
+            // OutstandingunitColumn
+            // 
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.OutstandingunitColumn.DefaultCellStyle = dataGridViewCellStyle16;
+            this.OutstandingunitColumn.HeaderText = "O/S Unit";
+            this.OutstandingunitColumn.Name = "OutstandingunitColumn";
+            this.OutstandingunitColumn.ReadOnly = true;
+            this.OutstandingunitColumn.Width = 60;
+            // 
+            // QtyColumn
+            // 
+            dataGridViewCellStyle17.NullValue = "0";
+            this.QtyColumn.DefaultCellStyle = dataGridViewCellStyle17;
+            this.QtyColumn.HeaderText = "Qty";
+            this.QtyColumn.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.QtyColumn.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.QtyColumn.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.QtyColumn.Name = "QtyColumn";
+            this.QtyColumn.Width = 50;
+            // 
+            // unitColumn
+            // 
+            this.unitColumn.DropDownWidth = 121;
+            this.unitColumn.HeaderText = "Unit";
+            this.unitColumn.Name = "unitColumn";
+            this.unitColumn.Width = 50;
+            // 
+            // warehouseColumn
+            // 
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.warehouseColumn.DefaultCellStyle = dataGridViewCellStyle18;
+            this.warehouseColumn.DropDownWidth = 121;
+            this.warehouseColumn.HeaderText = "Warehouse";
+            this.warehouseColumn.Name = "warehouseColumn";
+            this.warehouseColumn.ReadOnly = true;
+            this.warehouseColumn.Width = 70;
+            // 
+            // notesColumn
+            // 
+            this.notesColumn.HeaderText = "Notes";
+            this.notesColumn.Name = "notesColumn";
+            this.notesColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.notesColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.notesColumn.Width = 100;
+            // 
+            // returnedColumn
+            // 
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle19.NullValue = "0";
+            this.returnedColumn.DefaultCellStyle = dataGridViewCellStyle19;
+            this.returnedColumn.HeaderText = "Return Qty";
+            this.returnedColumn.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.returnedColumn.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.returnedColumn.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.returnedColumn.Name = "returnedColumn";
+            this.returnedColumn.ReadOnly = true;
+            this.returnedColumn.Width = 50;
+            // 
+            // returnedunitColumn
+            // 
+            dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.returnedunitColumn.DefaultCellStyle = dataGridViewCellStyle20;
+            this.returnedunitColumn.HeaderText = "Returned Unit";
+            this.returnedunitColumn.Name = "returnedunitColumn";
+            this.returnedunitColumn.ReadOnly = true;
+            this.returnedunitColumn.Width = 50;
+            // 
+            // DeliveryOrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -719,8 +719,8 @@
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.kryptonHeader1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "GoodReceiptNoteForm";
-            this.Text = "Good Receive Note";
+            this.Name = "DeliveryOrderForm";
+            this.Text = "Delivery Order";
             this.Load += new System.EventHandler(this.GRNForm_Load);
             this.Activated += new System.EventHandler(this.BankForm_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GRNForm_FormClosing);

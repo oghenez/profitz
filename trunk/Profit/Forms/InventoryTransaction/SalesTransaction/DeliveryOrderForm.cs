@@ -485,7 +485,7 @@ namespace Profit
                 itemsDataGrid[unitColumn.Index, i].Value = item.UNIT.ToString(); ;
                 itemsDataGrid[OutstandingPOColumn.Index, i].Value = item.SO_ITEM.OUTSTANDING_AMOUNT_TO_DO;
                 itemsDataGrid[OutstandingunitColumn.Index, i].Value = item.SO_ITEM.PART.UNIT.CODE;
-                itemsDataGrid[poQtyColumn.Index, i].Value = item.QYTAMOUNT;
+                itemsDataGrid[poQtyColumn.Index, i].Value = item.SO_ITEM.QYTAMOUNT;
                 itemsDataGrid[poUnitColumn.Index, i].Value = item.UNIT.CODE;
             }
             updateReturned();
