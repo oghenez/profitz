@@ -11,7 +11,7 @@ namespace Profit.Server
     {
         public AgainstStatus AGAINST_RECEIPT_STATUS = AgainstStatus.Open;
         public double OUTSTANDING_AMOUNT = 0;
-        public double PAID_AMOUNT = 0;
+        public double RECEIPT_AMOUNT = 0;
 
         public CustomerOutStandingInvoiceItem() : base()
         {
@@ -31,7 +31,7 @@ namespace Profit.Server
             if (qtyAmount > OUTSTANDING_AMOUNT)
                 throw new Exception("Receipt Item Amount exceed SIJ Outstanding Item Amount :" + this.INVOICE_NO);
             OUTSTANDING_AMOUNT = OUTSTANDING_AMOUNT - qtyAmount;
-            PAID_AMOUNT = PAID_AMOUNT + qtyAmount;
+            RECEIPT_AMOUNT = RECEIPT_AMOUNT + qtyAmount;
             if (isValidToClose())
                 AGAINST_RECEIPT_STATUS = AgainstStatus.Close;
             else
@@ -44,7 +44,7 @@ namespace Profit.Server
             if (qtyAmount > this.AMOUNT || OUTSTANDING_AMOUNT + qtyAmount > this.AMOUNT)
                 throw new Exception("Receipt Item revise Amount exceed SIJ Item Amount :" + this.INVOICE_NO);
             OUTSTANDING_AMOUNT = OUTSTANDING_AMOUNT + qtyAmount;
-            PAID_AMOUNT = PAID_AMOUNT - qtyAmount;
+            RECEIPT_AMOUNT = RECEIPT_AMOUNT - qtyAmount;
             if (OUTSTANDING_AMOUNT > 0)
                 AGAINST_RECEIPT_STATUS = AgainstStatus.Outstanding;
             ((CustomerOutStandingInvoice)EVENT_JOURNAL).UpdateAgainstReceiptStatusSIJ();
@@ -52,7 +52,7 @@ namespace Profit.Server
         private bool isValidToClose()
         {
             bool validA = OUTSTANDING_AMOUNT == 0;
-            bool validB = PAID_AMOUNT == AMOUNT;
+            bool validB = RECEIPT_AMOUNT == AMOUNT;
             return validA && validB;
         }
         public override string GetInsertSQL()
@@ -173,7 +173,7 @@ namespace Profit.Server
                 transaction.NOTES = aReader["costii_notes"].ToString();
                 transaction.AGAINST_RECEIPT_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), aReader["costii_againstpaymentstatus"].ToString());
                 transaction.OUTSTANDING_AMOUNT = Convert.ToDouble(aReader["costii_outstandingamount"]);
-                transaction.PAID_AMOUNT = Convert.ToDouble(aReader["costii_receiptamount"]);
+                transaction.RECEIPT_AMOUNT = Convert.ToDouble(aReader["costii_receiptamount"]);
             }
             return transaction;
         }
@@ -202,7 +202,7 @@ namespace Profit.Server
                 transaction.NOTES = aReader["costii_notes"].ToString();
                 transaction.AGAINST_RECEIPT_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), aReader["costii_againstpaymentstatus"].ToString());
                 transaction.OUTSTANDING_AMOUNT = Convert.ToDouble(aReader["costii_outstandingamount"]);
-                transaction.PAID_AMOUNT = Convert.ToDouble(aReader["costii_receiptamount"]);
+                transaction.RECEIPT_AMOUNT = Convert.ToDouble(aReader["costii_receiptamount"]);
                 result.Add(transaction);
             }
             return result;
@@ -274,7 +274,7 @@ namespace Profit.Server
                     costii_receiptamount = {2}
                     where costii_id = {3}", AGAINST_RECEIPT_STATUS.ToString(),
                                        OUTSTANDING_AMOUNT,
-                                       PAID_AMOUNT,
+                                       RECEIPT_AMOUNT,
                                        ID);
         }
         #region ICustomerInvoiceJournalItem Members

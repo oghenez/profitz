@@ -328,7 +328,7 @@ namespace Profit.Server
                 throw x;
             }
         }
-        public IList FindAPDNForReceipt(int supID, DateTime trdate, string find, IList notInID)
+        public IList FindARCRForReceipt(int supID, DateTime trdate, string find, IList notInID)
         {
             StringBuilder poisSB = new StringBuilder();
             foreach (int i in notInID)

@@ -279,8 +279,9 @@ namespace Profit
             if (e.ColumnIndex == QtyColumn.Index || e.ColumnIndex == unitColumn.Index)
             {
                 DeliveryOrderItem item = (DeliveryOrderItem)itemsDataGrid[GRNNoColumn.Index, e.RowIndex].Tag;
-                if (item != null)
+                if (item != null) 
                 {
+                    if (item.ID == 0) return;
                     e.Cancel = true;
                     itemsDataGrid.Rows[e.RowIndex].ErrorText = "DO Qty / Unit  can not change";
                 }

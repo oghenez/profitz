@@ -46,7 +46,9 @@ namespace Profit
         const string PROCESS_TRANSACTION_FORM = "ProcessTransactionForm";
         const string SALES_ORDER_FORM = "SalesOrderForm";
         const string DELIVERY_ORDER_FORM = "DeliveryOrderForm";
-        const string CUSTOMER_OS_INVOICE_FORM = "CustomerOutStandingInvoice";
+        const string CUSTOMER_OS_INVOICE_FORM = "CustomerOutStandingInvoiceForm";
+        const string CUSTOMER_INVOICE_FORM = "CustomerInvoiceForm";
+        const string RECEIPT_FORM = "ReceiptInvoice";
 
         IList m_listForm = new ArrayList();
         User m_currentUser = null;
@@ -282,6 +284,20 @@ namespace Profit
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
+            if (e.Node.Name == "NodeCustomerInvoice")
+            {
+                if (isChild(CUSTOMER_INVOICE_FORM)) { this.Cursor = Cursors.Default; return; }
+                CustomerInvoiceForm user = new CustomerInvoiceForm(this, CUSTOMER_INVOICE_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            }
+            if (e.Node.Name == "NodeReceipt")
+            {
+                if (isChild(RECEIPT_FORM)) { this.Cursor = Cursors.Default; return; }
+                ReceiptForm user = new ReceiptForm(this, RECEIPT_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            }
             this.Cursor = Cursors.Default;
         }
         bool isChild(string name)
@@ -476,6 +492,8 @@ namespace Profit
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(SALES_ORDER_FORM)) SalesTreeView.Nodes["NodeSalesOrder"].Remove();
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(DELIVERY_ORDER_FORM)) SalesTreeView.Nodes["NodeDeliveryOrder"].Remove();
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(CUSTOMER_OS_INVOICE_FORM)) SalesTreeView.Nodes["NodeCustomerOutstandingInvoice"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(CUSTOMER_INVOICE_FORM)) SalesTreeView.Nodes["NodeCustomerInvoice"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(RECEIPT_FORM)) SalesTreeView.Nodes["NodeReceipt"].Remove();
 
 
             inventoryKryptonHeader.Visible = inventoryTreeView.Visible = inventoryTreeView.Nodes.Count > 0;
@@ -580,6 +598,8 @@ namespace Profit
             m_listForm.Add(new FormAccess(0, MainForm.SALES_ORDER_FORM.ToString(), "TRCS001 - Sales Order"));
             m_listForm.Add(new FormAccess(0, MainForm.DELIVERY_ORDER_FORM.ToString(), "TRCS002 - Delivery Order"));
             m_listForm.Add(new FormAccess(0, MainForm.CUSTOMER_OS_INVOICE_FORM.ToString(), "TRCS007 - Customer Outstanding Invoice"));
+            m_listForm.Add(new FormAccess(0, MainForm.CUSTOMER_INVOICE_FORM.ToString(), "TRCS003 - Customer Invoice"));
+            m_listForm.Add(new FormAccess(0, MainForm.RECEIPT_FORM.ToString(), "TRCS004 - Receipt"));
         }
 
         private void userMaintenanceToolStripMenuItem_Click(object sender, EventArgs e)

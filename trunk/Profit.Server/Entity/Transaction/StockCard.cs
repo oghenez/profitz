@@ -213,6 +213,9 @@ namespace Profit.Server
                 stockcard.BALANCE =  Convert.ToDouble(aReader["sc_balance"]);
                 stockcard.BACK_ORDER =  Convert.ToDouble(aReader["sc_backorder"]);
                 stockcard.BOOKED = Convert.ToDouble(aReader["sc_booked"]);
+                stockcard.BALANCE_AVAILABLE = stockcard.BALANCE;
+                stockcard.BACK_ORDER_AVAILABLE = stockcard.BACK_ORDER;
+                stockcard.BOOK_AVAILABLE = stockcard.BOOKED;
             }
             return stockcard;
         }
@@ -276,6 +279,9 @@ namespace Profit.Server
                 stockcard.BALANCE = Convert.ToDouble(aReader["sc_balance"]);
                 stockcard.BACK_ORDER = Convert.ToDouble(aReader["sc_backorder"]);
                 stockcard.BOOKED = Convert.ToDouble(aReader["sc_booked"]);
+                stockcard.BALANCE_AVAILABLE = stockcard.BALANCE;
+                stockcard.BACK_ORDER_AVAILABLE = stockcard.BACK_ORDER;
+                stockcard.BOOK_AVAILABLE = stockcard.BOOKED;
                 result.Add(stockcard);
             }
             return result;
@@ -293,6 +299,9 @@ namespace Profit.Server
                 stockcard.BALANCE = Convert.ToDouble(aReader["sc_balance"]);
                 stockcard.BACK_ORDER = Convert.ToDouble(aReader["sc_backorder"]);
                 stockcard.BOOKED = Convert.ToDouble(aReader["sc_booked"]);
+                stockcard.BALANCE_AVAILABLE = stockcard.BALANCE;
+                stockcard.BACK_ORDER_AVAILABLE = stockcard.BACK_ORDER;
+                stockcard.BOOK_AVAILABLE = stockcard.BOOKED;
                 result.Add(stockcard);
             }
             return result;
