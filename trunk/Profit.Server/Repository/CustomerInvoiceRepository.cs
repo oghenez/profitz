@@ -9,11 +9,11 @@ namespace Profit.Server
 {
     public class CustomerInvoiceRepository : TransactionRepository
     {
-        SupplierInvoiceJournalRepository r_sij;
+        CustomerInvoiceJournalRepository r_sij;
         public CustomerInvoiceRepository()
             : base() 
         {
-            r_sij = new SupplierInvoiceJournalRepository(m_command);
+            r_sij = new CustomerInvoiceJournalRepository(m_command);
         }
 
         protected override void doConfirm(Event events, Period p)
@@ -22,9 +22,9 @@ namespace Profit.Server
             {
                 SetStockCard(item, p);
             }
-            SupplierInvoice si = (SupplierInvoice)events;
+            CustomerInvoice si = (CustomerInvoice)events;
             
-            SupplierInvoiceJournal sij = new SupplierInvoiceJournal();
+            CustomerInvoiceJournal sij = new CustomerInvoiceJournal();
            // sij.LastUpdate = DateTime.Now;
            // sij.ByTransaction = true;
             sij.CODE = si.CODE;
@@ -35,24 +35,24 @@ namespace Profit.Server
             sij.NOTICE_DATE = si.NOTICE_DATE;
             sij.TRANSACTION_DATE = si.TRANSACTION_DATE;
            // sij.UserName = si.UserName;
-            sij.VENDOR = si.SUPPLIER;
-            sij.SUPPLIER_INVOICE = si;
+            sij.VENDOR = si.CUSTOMER;
+            sij.CUSTOMER_INVOICE = si;
             sij.NET_AMOUNT = si.NET_TOTAL;
             sij.EMPLOYEE = si.EMPLOYEE;
-            sij.VENDOR_BALANCE_ENTRY_TYPE = VendorBalanceEntryType.SupplierInvoice;
+            sij.VENDOR_BALANCE_ENTRY_TYPE = VendorBalanceEntryType.CustomerInvoice;
 
-            SupplierInvoiceJournalItem siji = new SupplierInvoiceJournalItem();
+            CustomerInvoiceJournalItem siji = new CustomerInvoiceJournalItem();
             siji.AMOUNT = si.NET_TOTAL;
             siji.CURRENCY = si.CURRENCY;
             siji.EVENT_JOURNAL = sij;
-            siji.VENDOR = si.SUPPLIER;
+            siji.VENDOR = si.CUSTOMER;
             siji.INVOICE_NO = si.CODE;
             siji.INVOICE_DATE = si.TRANSACTION_DATE;
             siji.TOP = si.TOP;
             siji.EMPLOYEE = si.EMPLOYEE;
             siji.DUE_DATE = si.DUE_DATE;
             siji.OUTSTANDING_AMOUNT = si.NET_TOTAL;
-            siji.VENDOR_BALANCE_ENTRY_TYPE = VendorBalanceEntryType.SupplierInvoice;
+            siji.VENDOR_BALANCE_ENTRY_TYPE = VendorBalanceEntryType.CustomerInvoice;
 
             sij.EVENT_JOURNAL_ITEMS.Add(siji);
             r_sij.SaveNoTransaction(sij);
@@ -64,8 +64,8 @@ namespace Profit.Server
             {
                 SetStockCard(item, p);
             }
-            SupplierInvoiceJournal sij = (SupplierInvoiceJournal)r_sij.FindPeriodSIJId(events.ID);
-            if (sij == null) throw new Exception("Supplier Invoice Journal is missing");
+            CustomerInvoiceJournal sij = (CustomerInvoiceJournal)r_sij.FindPeriodCIJId(events.ID);
+            if (sij == null) throw new Exception("Customer Invoice Journal is missing");
             r_sij.ReviseNoTransaction(sij.ID);
             r_sij.DeleteNoTransaction(sij);
         }
@@ -77,23 +77,23 @@ namespace Profit.Server
             {
                 m_command.Transaction = trc;
                 DateTime trDate = DateTime.Today;
-                string codesample = AutoNumberSetupRepository.GetCodeSampleByDomainName(m_command, "SupplierInvoice");
+                string codesample = AutoNumberSetupRepository.GetCodeSampleByDomainName(m_command, "CustomerInvoice");
                 Event codeDate = FindLastCodeAndTransactionDate(codesample);
                 string lastCode = codeDate == null ? string.Empty : codeDate.CODE;
                 DateTime lastDate = codeDate == null ? trDate : codeDate.TRANSACTION_DATE;
                 int trCount = RecordCount();
-                e.CODE = AutoNumberSetupRepository.GetAutoNumberByDomainName(m_command, "SupplierInvoice", e.CODE, lastCode, lastDate, trDate, trCount == 0);
-                SupplierInvoice stk = (SupplierInvoice)e;
+                e.CODE = AutoNumberSetupRepository.GetAutoNumberByDomainName(m_command, "CustomerInvoice", e.CODE, lastCode, lastDate, trDate, trCount == 0);
+                CustomerInvoice stk = (CustomerInvoice)e;
                 m_command.CommandText = e.GetInsertSQL();
                 m_command.ExecuteNonQuery();
-                m_command.CommandText = SupplierInvoice.SelectMaxIDSQL();
+                m_command.CommandText = CustomerInvoice.SelectMaxIDSQL();
                 stk.ID = Convert.ToInt32(m_command.ExecuteScalar());
-                foreach (SupplierInvoiceItem item in stk.EVENT_ITEMS)
+                foreach (CustomerInvoiceItem item in stk.EVENT_ITEMS)
                 {
                     item.PART.UNIT_CONVERSION_LIST = PartRepository.GetUnitConversionsStatic(m_command, item.PART.ID);
                     m_command.CommandText = item.GetInsertSQL();
                     m_command.ExecuteNonQuery();
-                    m_command.CommandText = SupplierInvoiceItem.SelectMaxIDSQL();
+                    m_command.CommandText = CustomerInvoiceItem.SelectMaxIDSQL();
                     item.ID = Convert.ToInt32(m_command.ExecuteScalar());
                 }
                 trc.Commit();
@@ -115,11 +115,11 @@ namespace Profit.Server
             m_command.Transaction = trc;
             try
             {
-                SupplierInvoice e = (SupplierInvoice)en;
+                CustomerInvoice e = (CustomerInvoice)en;
                 m_command.CommandText = e.GetUpdateSQL();
                 m_command.ExecuteNonQuery();
 
-                foreach (SupplierInvoiceItem sti in e.EVENT_ITEMS)
+                foreach (CustomerInvoiceItem sti in e.EVENT_ITEMS)
                 {
                     sti.PART.UNIT_CONVERSION_LIST = PartRepository.GetUnitConversionsStatic(m_command, sti.PART.ID);
                     if (sti.ID > 0)
@@ -131,11 +131,11 @@ namespace Profit.Server
                     {
                         m_command.CommandText = sti.GetInsertSQL();
                         m_command.ExecuteNonQuery();
-                        m_command.CommandText = SupplierInvoiceItem.SelectMaxIDSQL();
+                        m_command.CommandText = CustomerInvoiceItem.SelectMaxIDSQL();
                         sti.ID = Convert.ToInt32(m_command.ExecuteScalar());
                     }
                 }
-                m_command.CommandText = SupplierInvoiceItem.DeleteUpdate(e.ID, e.EVENT_ITEMS);
+                m_command.CommandText = CustomerInvoiceItem.DeleteUpdate(e.ID, e.EVENT_ITEMS);
                 m_command.ExecuteNonQuery();
                 trc.Commit();
             }
@@ -147,16 +147,16 @@ namespace Profit.Server
         }
         protected override void doDelete(Event e)
         {
-            SupplierInvoice st = (SupplierInvoice)e;
+            CustomerInvoice st = (CustomerInvoice)e;
             MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
             m_command.Transaction = trc;
             try
             {
                 if (getEventStatus(st.ID)== EventStatus.Confirm)
                     throw new Exception("Revise before delete");
-                m_command.CommandText = SupplierInvoiceItem.DeleteAllByEventSQL(st.ID);
+                m_command.CommandText = CustomerInvoiceItem.DeleteAllByEventSQL(st.ID);
                 m_command.ExecuteNonQuery();
-                m_command.CommandText = SupplierInvoice.DeleteSQL(st.ID);
+                m_command.CommandText = CustomerInvoice.DeleteSQL(st.ID);
                 m_command.ExecuteNonQuery();
                 trc.Commit();
             }
@@ -168,53 +168,53 @@ namespace Profit.Server
         }
         private EventStatus getEventStatus(int id)
         {
-            m_command.CommandText = SupplierInvoice.GetEventStatus(id);
+            m_command.CommandText = CustomerInvoice.GetEventStatus(id);
             object b = m_command.ExecuteScalar();
             EventStatus m = (EventStatus)Enum.Parse(typeof(EventStatus), b.ToString());
             return m;
         }
         protected override Event doGet(int ID)
         {
-            m_command.CommandText = SupplierInvoice.GetByIDSQL(ID);
+            m_command.CommandText = CustomerInvoice.GetByIDSQL(ID);
             MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
-            SupplierInvoice st = SupplierInvoice.TransformReader(r);
+            CustomerInvoice st = CustomerInvoice.TransformReader(r);
             r.Close();
-            m_command.CommandText = SupplierInvoiceItem.GetByEventIDSQL(ID);
+            m_command.CommandText = CustomerInvoiceItem.GetByEventIDSQL(ID);
             r = m_command.ExecuteReader();
-            IList stis = SupplierInvoiceItem.TransformReaderList(r);
+            IList stis = CustomerInvoiceItem.TransformReaderList(r);
             r.Close();
-            foreach (SupplierInvoiceItem sti in stis)
+            foreach (CustomerInvoiceItem sti in stis)
             {
                 sti.EVENT = st;
                 sti.PART = PartRepository.GetByID(m_command, sti.PART.ID);
                 sti.STOCK_CARD_ENTRY = StockCardEntryRepository.FindStockCardEntryByEventItem(m_command, sti.ID, sti.STOCK_CARD_ENTRY_TYPE);
-                if(sti.GRN_ITEM.ID>0)
-                    sti.GRN_ITEM = GoodReceiveNoteRepository.FindGoodReceiveNoteItem(m_command, sti.GRN_ITEM.ID);
+                if(sti.DO_ITEM.ID>0)
+                    sti.DO_ITEM = DeliveryOrderRepository.FindDeliveryOrderItem(m_command, sti.DO_ITEM.ID);
                 st.EVENT_ITEMS.Add(sti);
             }
             return st;
         }
         protected override void doUpdateStatus(Event e, bool posted)
         {
-            m_command.CommandText = SupplierInvoice.GetUpdateStatusSQL(e);
+            m_command.CommandText = CustomerInvoice.GetUpdateStatusSQL(e);
             m_command.ExecuteNonQuery();
         }
 
-        public static SupplierInvoiceItem FindSupplierInvoiceItem(MySql.Data.MySqlClient.MySqlCommand cmd, int poiID)
+        public static CustomerInvoiceItem FindCustomerInvoiceItem(MySql.Data.MySqlClient.MySqlCommand cmd, int poiID)
         {
-            cmd.CommandText = SupplierInvoiceItem.GetByIDSQL(poiID);
+            cmd.CommandText = CustomerInvoiceItem.GetByIDSQL(poiID);
             MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
-            SupplierInvoiceItem result = SupplierInvoiceItem.TransformReader(r);
+            CustomerInvoiceItem result = CustomerInvoiceItem.TransformReader(r);
             r.Close();
-            result.EVENT = PurchaseOrderRepository.GetHeaderOnly(cmd, result.EVENT.ID);
+            result.EVENT = SalesOrderRepository.GetHeaderOnly(cmd, result.EVENT.ID);
             result.EVENT.EVENT_ITEMS.Add(result);
             return result;
         }
-        public static SupplierInvoice GetHeaderOnly(MySql.Data.MySqlClient.MySqlCommand cmd , int poID)
+        public static CustomerInvoice GetHeaderOnly(MySql.Data.MySqlClient.MySqlCommand cmd , int poID)
         {
-            cmd.CommandText = SupplierInvoice.GetByIDSQL(poID);
+            cmd.CommandText = CustomerInvoice.GetByIDSQL(poID);
             MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
-            SupplierInvoice st = SupplierInvoice.TransformReader(r);
+            CustomerInvoice st = CustomerInvoice.TransformReader(r);
             r.Close();
             return st;
         }
@@ -222,9 +222,9 @@ namespace Profit.Server
         {
             try
             {
-                m_command.CommandText = SupplierInvoice.GetSearch(find);
+                m_command.CommandText = CustomerInvoice.GetSearch(find);
                 MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
-                IList rest = SupplierInvoice.TransformReaderList(r);
+                IList rest = CustomerInvoice.TransformReaderList(r);
                 r.Close();
                 return rest;
             }
@@ -237,7 +237,7 @@ namespace Profit.Server
         {
             try
             {
-                m_command.CommandText = SupplierInvoice.SelectCountByCode(code);
+                m_command.CommandText = CustomerInvoice.SelectCountByCode(code);
                 int t = Convert.ToInt32(m_command.ExecuteScalar());
                 return t > 0;
             }
@@ -248,21 +248,21 @@ namespace Profit.Server
         }
         public override Event FindLastCodeAndTransactionDate(string codesample)
         {
-            m_command.CommandText = SupplierInvoice.FindLastCodeAndTransactionDate(codesample);
+            m_command.CommandText = CustomerInvoice.FindLastCodeAndTransactionDate(codesample);
             MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
-            Event e = SupplierInvoice.TransformReader(r);
+            Event e = CustomerInvoice.TransformReader(r);
             r.Close();
             return e;
         }
         public int RecordCount()
         {
-            m_command.CommandText = SupplierInvoice.RecordCount();
+            m_command.CommandText = CustomerInvoice.RecordCount();
             int result = Convert.ToInt32(m_command.ExecuteScalar());
             return result;
         }
         public bool IsAutoNumber()
         {
-            AutoNumberSetup autonumber = AutoNumberSetupRepository.GetAutoNumberSetup(m_command, "SupplierInvoice");
+            AutoNumberSetup autonumber = AutoNumberSetupRepository.GetAutoNumberSetup(m_command, "CustomerInvoice");
             return autonumber.AUTONUMBER_SETUP_TYPE == AutoNumberSetupType.Auto;
         }
         public IList FindSIbyPartAndPONo(string find, IList exceptPOI, int supplierID, DateTime trDate)
@@ -276,15 +276,15 @@ namespace Profit.Server
             string pois = poisSB.ToString();
             pois = exceptPOI.Count>0?pois.Substring(0, pois.Length - 1):"";
 
-            m_command.CommandText = SupplierInvoiceItem.GetSearchByPartAndPONo(find,supplierID, pois, trDate);
+            m_command.CommandText = CustomerInvoiceItem.GetSearchByPartAndPONo(find,supplierID, pois, trDate);
             MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
-            IList result = SupplierInvoiceItem.TransformReaderList(r);
+            IList result = CustomerInvoiceItem.TransformReaderList(r);
             r.Close();
-            foreach (SupplierInvoiceItem t in result)
+            foreach (CustomerInvoiceItem t in result)
             {
-                m_command.CommandText = SupplierInvoice.GetByIDSQL(t.EVENT.ID);
+                m_command.CommandText = CustomerInvoice.GetByIDSQL(t.EVENT.ID);
                 r = m_command.ExecuteReader();
-                t.EVENT = SupplierInvoice.TransformReader(r);
+                t.EVENT = CustomerInvoice.TransformReader(r);
                 r.Close();
                 m_command.CommandText = Part.GetByIDSQLStatic(t.PART.ID);
                 r = m_command.ExecuteReader();
@@ -294,9 +294,9 @@ namespace Profit.Server
                 r = m_command.ExecuteReader();
                 t.UNIT = Unit.GetUnit(r);
                 r.Close();
-                m_command.CommandText = TermOfPayment.GetByIDSQLStatic(((SupplierInvoice)t.EVENT).TOP.ID);
+                m_command.CommandText = TermOfPayment.GetByIDSQLStatic(((CustomerInvoice)t.EVENT).TOP.ID);
                 r = m_command.ExecuteReader();
-                ((SupplierInvoice)t.EVENT).TOP = TermOfPayment.GetTOP(r);
+                ((CustomerInvoice)t.EVENT).TOP = TermOfPayment.GetTOP(r);
                 r.Close();
                 m_command.CommandText = Warehouse.GetByIDSQLStatic(t.WAREHOUSE.ID);
                 r = m_command.ExecuteReader();
@@ -311,7 +311,7 @@ namespace Profit.Server
         }
         public double GetTheLatestSIPrice(int supID, int partID, int unitID)
         {
-            m_command.CommandText = SupplierInvoiceItem.GetTheLatestPOPrice(supID, partID, unitID);
+            m_command.CommandText = CustomerInvoiceItem.GetTheLatestSOPrice(supID, partID, unitID);
             object r = m_command.ExecuteScalar();
             if (r == null) return 0d;
             double result = Convert.ToDouble(r);

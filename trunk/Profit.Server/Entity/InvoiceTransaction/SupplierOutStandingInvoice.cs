@@ -23,7 +23,7 @@ namespace Profit.Server
             bool allClosed = true;
             for (int i = 0; i < EVENT_JOURNAL_ITEMS.Count; i++)
             {
-                SupplierInvoiceJournalItem poi = EVENT_JOURNAL_ITEMS[i] as SupplierInvoiceJournalItem;
+                SupplierOutStandingInvoiceItem poi = EVENT_JOURNAL_ITEMS[i] as SupplierOutStandingInvoiceItem;
                 if (poi.AGAINST_PAYMENT_STATUS == AgainstStatus.Close) continue;
                 allClosed = false;
                 break;

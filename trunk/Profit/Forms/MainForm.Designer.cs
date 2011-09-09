@@ -66,8 +66,9 @@
             System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("TRCS004 - Customer Payment");
             System.Windows.Forms.TreeNode treeNode36 = new System.Windows.Forms.TreeNode("TRCS005 - Sales Return");
             System.Windows.Forms.TreeNode treeNode37 = new System.Windows.Forms.TreeNode("TRCS006 - Credit Note");
-            System.Windows.Forms.TreeNode treeNode38 = new System.Windows.Forms.TreeNode("TRCI001 - Stock Taking");
-            System.Windows.Forms.TreeNode treeNode39 = new System.Windows.Forms.TreeNode("TRCI002 - Part Master");
+            System.Windows.Forms.TreeNode treeNode38 = new System.Windows.Forms.TreeNode("TRCS007 - Customer Outstanding Invoice");
+            System.Windows.Forms.TreeNode treeNode39 = new System.Windows.Forms.TreeNode("TRCI001 - Stock Taking");
+            System.Windows.Forms.TreeNode treeNode40 = new System.Windows.Forms.TreeNode("TRCI002 - Part Master");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -665,7 +666,7 @@
             this.purchaseTreeView.Dock = System.Windows.Forms.DockStyle.Top;
             this.purchaseTreeView.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.purchaseTreeView.FullRowSelect = true;
-            this.purchaseTreeView.Location = new System.Drawing.Point(1, 195);
+            this.purchaseTreeView.Location = new System.Drawing.Point(1, 210);
             this.purchaseTreeView.Name = "purchaseTreeView";
             treeNode25.Name = "NodePurchaseOrder";
             treeNode25.Text = "TRCP001 - Purchase Order";
@@ -700,7 +701,7 @@
             this.purchaseKryptonHeader.Cursor = System.Windows.Forms.Cursors.Hand;
             this.purchaseKryptonHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.purchaseKryptonHeader.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.Secondary;
-            this.purchaseKryptonHeader.Location = new System.Drawing.Point(1, 174);
+            this.purchaseKryptonHeader.Location = new System.Drawing.Point(1, 189);
             this.purchaseKryptonHeader.Name = "purchaseKryptonHeader";
             this.purchaseKryptonHeader.Size = new System.Drawing.Size(218, 21);
             this.purchaseKryptonHeader.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom)));
@@ -736,14 +737,17 @@
             treeNode36.Text = "TRCS005 - Sales Return";
             treeNode37.Name = "Node5";
             treeNode37.Text = "TRCS006 - Credit Note";
+            treeNode38.Name = "NodeCustomerOutstandingInvoice";
+            treeNode38.Text = "TRCS007 - Customer Outstanding Invoice";
             this.SalesTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode32,
             treeNode33,
             treeNode34,
             treeNode35,
             treeNode36,
-            treeNode37});
-            this.SalesTreeView.Size = new System.Drawing.Size(218, 98);
+            treeNode37,
+            treeNode38});
+            this.SalesTreeView.Size = new System.Drawing.Size(218, 113);
             this.SalesTreeView.TabIndex = 17;
             this.SalesTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
             // 
@@ -777,13 +781,13 @@
             this.internalTreeView.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.internalTreeView.Location = new System.Drawing.Point(1, 22);
             this.internalTreeView.Name = "internalTreeView";
-            treeNode38.Name = "NodeStockTaking";
-            treeNode38.Text = "TRCI001 - Stock Taking";
-            treeNode39.Name = "NodePart";
-            treeNode39.Text = "TRCI002 - Part Master";
+            treeNode39.Name = "NodeStockTaking";
+            treeNode39.Text = "TRCI001 - Stock Taking";
+            treeNode40.Name = "NodePart";
+            treeNode40.Text = "TRCI002 - Part Master";
             this.internalTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode38,
-            treeNode39});
+            treeNode39,
+            treeNode40});
             this.internalTreeView.Size = new System.Drawing.Size(218, 33);
             this.internalTreeView.TabIndex = 15;
             this.internalTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);

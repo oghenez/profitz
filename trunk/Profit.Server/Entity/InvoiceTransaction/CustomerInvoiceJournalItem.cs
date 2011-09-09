@@ -9,9 +9,9 @@ namespace Profit.Server
 {
     public class CustomerInvoiceJournalItem : EventJournalItem, ICustomerInvoiceJournalItem
     {
-        public AgainstStatus AGAINST_PAYMENT_STATUS = AgainstStatus.Open;
+        public AgainstStatus AGAINST_RECEIPT_STATUS = AgainstStatus.Open;
         public double OUTSTANDING_AMOUNT = 0;
-        public double PAID_AMOUNT = 0;
+        public double RECEIPT_AMOUNT = 0;
 
         public CustomerInvoiceJournalItem()
             : base()
@@ -23,37 +23,37 @@ namespace Profit.Server
         {
             ID = id;
         }
-        public void SetOSAgainstPaymentItem(IPayment pyi)
+        public void SetOSAgainstReceiptItem(IReceipt pyi)
         {
             double qtyAmount = pyi.GET_AMOUNT;
             if (qtyAmount <= 0) return;
-            if (AGAINST_PAYMENT_STATUS == AgainstStatus.Close)
+            if (AGAINST_RECEIPT_STATUS == AgainstStatus.Close)
                 throw new Exception("Invoice Item Allready Close :" + this.INVOICE_NO);
             if (qtyAmount > OUTSTANDING_AMOUNT)
-                throw new Exception("Payment Item Amount exceed SIJ Outstanding Item Amount :" + this.INVOICE_NO);
+                throw new Exception("Receipt Item Amount exceed SIJ Outstanding Item Amount :" + this.INVOICE_NO);
             OUTSTANDING_AMOUNT = OUTSTANDING_AMOUNT - qtyAmount;
-            PAID_AMOUNT = PAID_AMOUNT + qtyAmount;
+            RECEIPT_AMOUNT = RECEIPT_AMOUNT + qtyAmount;
             if (isValidToClose())
-                AGAINST_PAYMENT_STATUS = AgainstStatus.Close;
+                AGAINST_RECEIPT_STATUS = AgainstStatus.Close;
             else
-                AGAINST_PAYMENT_STATUS = AgainstStatus.Outstanding;
-            ((CustomerInvoiceJournal)EVENT_JOURNAL).UpdateAgainstPaymentStatusSIJ();
+                AGAINST_RECEIPT_STATUS = AgainstStatus.Outstanding;
+            ((CustomerInvoiceJournal)EVENT_JOURNAL).UpdateAgainstReceiptStatusSIJ();
         }
-        public void UnSetOSAgainstPaymentItem(IPayment grni)
+        public void UnSetOSAgainstReceiptItem(IReceipt grni)
         {
             double qtyAmount = grni.GET_AMOUNT;
             if (qtyAmount > this.AMOUNT || OUTSTANDING_AMOUNT + qtyAmount > this.AMOUNT)
-                throw new Exception("Payment Item revise Amount exceed SIJ Item Amount :" + this.INVOICE_NO);
+                throw new Exception("Receipt Item revise Amount exceed SIJ Item Amount :" + this.INVOICE_NO);
             OUTSTANDING_AMOUNT = OUTSTANDING_AMOUNT + qtyAmount;
-            PAID_AMOUNT = PAID_AMOUNT - qtyAmount;
+            RECEIPT_AMOUNT = RECEIPT_AMOUNT - qtyAmount;
             if (OUTSTANDING_AMOUNT > 0)
-                AGAINST_PAYMENT_STATUS = AgainstStatus.Outstanding;
-            ((CustomerInvoiceJournal)EVENT_JOURNAL).UpdateAgainstPaymentStatusSIJ();
+                AGAINST_RECEIPT_STATUS = AgainstStatus.Outstanding;
+            ((CustomerInvoiceJournal)EVENT_JOURNAL).UpdateAgainstReceiptStatusSIJ();
         }
         private bool isValidToClose()
         {
             bool validA = OUTSTANDING_AMOUNT == 0;
-            bool validB = PAID_AMOUNT == AMOUNT;
+            bool validB = RECEIPT_AMOUNT == AMOUNT;
             return validA && validB;
         }
         public override string GetInsertSQL()
@@ -78,7 +78,7 @@ namespace Profit.Server
                     ciji_notes,
                     ciji_againstpaymentstatus,
                     ciji_outstandingamount,
-                    ciji_paidamount 
+                    ciji_receiptamount 
                 ) 
                 VALUES ({0},{1},{2},{3},{4},{5},'{6}','{7}','{8}','{9}',{10},{11},{12},{13},'{14}','{15}','{16}',{17},{18})",
                EVENT_JOURNAL.ID,
@@ -97,7 +97,7 @@ namespace Profit.Server
                TOP.ID,
                DESCRIPTION,
                NOTES,
-               AGAINST_PAYMENT_STATUS.ToString(),
+               AGAINST_RECEIPT_STATUS.ToString(),
                AMOUNT,
                0
                 );
@@ -123,7 +123,7 @@ namespace Profit.Server
                     ciji_notes  = '{15}',
                     ciji_againstpaymentstatus = '{16}',
                     ciji_outstandingamount = {17},
-                    ciji_paidamount  = {18}
+                    ciji_receiptamount  = {18}
                     where ciji_id = {16}",
                  EVENT_JOURNAL.ID,
                VENDOR.ID,
@@ -141,9 +141,9 @@ namespace Profit.Server
                TOP.ID,
                DESCRIPTION,
                NOTES,
-               AGAINST_PAYMENT_STATUS.ToString(),
+               AGAINST_RECEIPT_STATUS.ToString(),
                OUTSTANDING_AMOUNT,
-               PAID_AMOUNT,
+               RECEIPT_AMOUNT,
                 ID);
         }
         public static CustomerInvoiceJournalItem TransformReader(MySql.Data.MySqlClient.MySqlDataReader aReader)
@@ -170,9 +170,9 @@ namespace Profit.Server
                 transaction.TOP = new TermOfPayment(Convert.ToInt32(aReader["top_id"]));
                 transaction.DESCRIPTION = aReader["ciji_description"].ToString();
                 transaction.NOTES = aReader["ciji_notes"].ToString();
-                transaction.AGAINST_PAYMENT_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), aReader["ciji_againstpaymentstatus"].ToString());
+                transaction.AGAINST_RECEIPT_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), aReader["ciji_againstpaymentstatus"].ToString());
                 transaction.OUTSTANDING_AMOUNT = Convert.ToDouble(aReader["ciji_outstandingamount"]);
-                transaction.PAID_AMOUNT = Convert.ToDouble(aReader["ciji_paidamount"]);
+                transaction.RECEIPT_AMOUNT = Convert.ToDouble(aReader["ciji_receiptamount"]);
 
             }
             return transaction;
@@ -200,9 +200,9 @@ namespace Profit.Server
                 transaction.TOP = new TermOfPayment(Convert.ToInt32(aReader["top_id"]));
                 transaction.DESCRIPTION = aReader["ciji_description"].ToString();
                 transaction.NOTES = aReader["ciji_notes"].ToString();
-                transaction.AGAINST_PAYMENT_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), aReader["ciji_againstpaymentstatus"].ToString());
+                transaction.AGAINST_RECEIPT_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), aReader["ciji_againstpaymentstatus"].ToString());
                 transaction.OUTSTANDING_AMOUNT = Convert.ToDouble(aReader["ciji_outstandingamount"]);
-                transaction.PAID_AMOUNT = Convert.ToDouble(aReader["ciji_paidamount"]);
+                transaction.RECEIPT_AMOUNT = Convert.ToDouble(aReader["ciji_receiptamount"]);
                 result.Add(transaction);
             }
             return result;
@@ -249,13 +249,13 @@ namespace Profit.Server
             return String.Format(@"Update table_customerinvoicejournalitem set 
                     ciji_againstpaymentstatus = '{0}',
                     ciji_outstandingamount = {1},
-                    ciji_paidamount = {2}
-                    where ciji_id = {3}", AGAINST_PAYMENT_STATUS.ToString(),
+                    ciji_receiptamount = {2}
+                    where ciji_id = {3}", AGAINST_RECEIPT_STATUS.ToString(),
                                        OUTSTANDING_AMOUNT,
-                                       PAID_AMOUNT,
+                                       RECEIPT_AMOUNT,
                                        ID);
         }
-        public static string GetSearchForPayment(string find,int ccyID, int customerID, string poi, DateTime trdate)
+        public static string GetSearchForReceipt(string find,int ccyID, int customerID, string poi, DateTime trdate)
         {
             return String.Format(@"SELECT t.*
                 FROM table_customerinvoicejournalitem t
@@ -286,9 +286,9 @@ namespace Profit.Server
         {
             return String.Format("SELECT ciji_outstandingamount from table_customerinvoicejournalitem where ciji_id = {0}", id);
         }
-        public static string GetByPaidSQL(int id)
+        public static string GetByReceiptSQL(int id)
         {
-            return String.Format("SELECT ciji_paidamount from table_customerinvoicejournalitem where ciji_id = {0}", id);
+            return String.Format("SELECT ciji_receiptamount from table_customerinvoicejournalitem where ciji_id = {0}", id);
         }
     }
 }

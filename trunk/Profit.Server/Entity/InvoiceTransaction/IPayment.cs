@@ -9,4 +9,8 @@ namespace Profit.Server
     {
         double GET_AMOUNT { get; }
     }
+    public interface IReceipt
+    {
+        double GET_AMOUNT { get; }
+    }
 }
