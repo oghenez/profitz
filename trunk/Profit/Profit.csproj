@@ -90,11 +90,23 @@
     <Compile Include="Forms\InventoryTransaction\APDebitNoteForm.Designer.cs">
       <DependentUpon>APDebitNoteForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\ARCreditNoteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\ARCreditNoteForm.Designer.cs">
+      <DependentUpon>ARCreditNoteForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\InventoryTransaction\SalesTransaction\DeliveryOrderForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\InventoryTransaction\SalesTransaction\DeliveryOrderForm.Designer.cs">
       <DependentUpon>DeliveryOrderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\SalesReturnForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\SalesReturnForm.Designer.cs">
+      <DependentUpon>SalesReturnForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\InventoryTransaction\SalesTransaction\ReceiptForm.cs">
       <SubType>Form</SubType>
@@ -107,6 +119,12 @@
     </Compile>
     <Compile Include="Forms\InventoryTransaction\SalesTransaction\SalesOrderForm.Designer.cs">
       <DependentUpon>SalesOrderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchARCreditNoteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchARCreditNoteForm.Designer.cs">
+      <DependentUpon>SearchARCreditNoteForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchARCRForReceiptForm.cs">
       <SubType>Form</SubType>
@@ -126,11 +144,29 @@
     <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchDOForCussInvoiceForm.Designer.cs">
       <DependentUpon>SearchDOForCussInvoiceForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchDOForSRForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchDOForSRForm.Designer.cs">
+      <DependentUpon>SearchDOForSRForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchOstCussInvForReceiptForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchOstCussInvForReceiptForm.Designer.cs">
       <DependentUpon>SearchOstCussInvForReceiptForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchSRForARCreditNoteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchSRForARCreditNoteForm.Designer.cs">
+      <DependentUpon>SearchSRForARCreditNoteForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchSalesReturnForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchSalesReturnForm.Designer.cs">
+      <DependentUpon>SearchSalesReturnForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\InventoryTransaction\SalesTransaction\SearchReceiptForm.cs">
       <SubType>Form</SubType>
@@ -467,14 +503,23 @@
     <EmbeddedResource Include="Forms\InventoryTransaction\APDebitNoteForm.resx">
       <DependentUpon>APDebitNoteForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\ARCreditNoteForm.resx">
+      <DependentUpon>ARCreditNoteForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\DeliveryOrderForm.resx">
       <DependentUpon>DeliveryOrderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\SalesReturnForm.resx">
+      <DependentUpon>SalesReturnForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\ReceiptForm.resx">
       <DependentUpon>ReceiptForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\SalesOrderForm.resx">
       <DependentUpon>SalesOrderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\SearchARCreditNoteForm.resx">
+      <DependentUpon>SearchARCreditNoteForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\SearchARCRForReceiptForm.resx">
       <DependentUpon>SearchARCRForReceiptForm.cs</DependentUpon>
@@ -485,8 +530,17 @@
     <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\SearchDOForCussInvoiceForm.resx">
       <DependentUpon>SearchDOForCussInvoiceForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\SearchDOForSRForm.resx">
+      <DependentUpon>SearchDOForSRForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\SearchOstCussInvForReceiptForm.resx">
       <DependentUpon>SearchOstCussInvForReceiptForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\SearchSRForARCreditNoteForm.resx">
+      <DependentUpon>SearchSRForARCreditNoteForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\SearchSalesReturnForm.resx">
+      <DependentUpon>SearchSalesReturnForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\SearchReceiptForm.resx">
       <DependentUpon>SearchReceiptForm.cs</DependentUpon>

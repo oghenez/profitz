@@ -48,7 +48,9 @@ namespace Profit
         const string DELIVERY_ORDER_FORM = "DeliveryOrderForm";
         const string CUSTOMER_OS_INVOICE_FORM = "CustomerOutStandingInvoiceForm";
         const string CUSTOMER_INVOICE_FORM = "CustomerInvoiceForm";
-        const string RECEIPT_FORM = "ReceiptInvoice";
+        const string RECEIPT_FORM = "ReceiptInvoiceForm";
+        const string SALES_RETURN_FORM = "SalesReturnForm";
+        const string AR_CREDIT_NOTE_FORM = "ARCreditNoteForm";
 
         IList m_listForm = new ArrayList();
         User m_currentUser = null;
@@ -298,6 +300,20 @@ namespace Profit
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
+            if (e.Node.Name == "NodeSalesReturn")
+            {
+                if (isChild(SALES_RETURN_FORM)) { this.Cursor = Cursors.Default; return; }
+                SalesReturnForm user = new SalesReturnForm(this, SALES_RETURN_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            }
+            if (e.Node.Name == "NodeARCreditNote")
+            {
+                if (isChild(AR_CREDIT_NOTE_FORM)) { this.Cursor = Cursors.Default; return; }
+                ARCreditNoteForm user = new ARCreditNoteForm(this, AR_CREDIT_NOTE_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            }
             this.Cursor = Cursors.Default;
         }
         bool isChild(string name)
@@ -494,6 +510,8 @@ namespace Profit
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(CUSTOMER_OS_INVOICE_FORM)) SalesTreeView.Nodes["NodeCustomerOutstandingInvoice"].Remove();
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(CUSTOMER_INVOICE_FORM)) SalesTreeView.Nodes["NodeCustomerInvoice"].Remove();
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(RECEIPT_FORM)) SalesTreeView.Nodes["NodeReceipt"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(SALES_RETURN_FORM)) SalesTreeView.Nodes["NodeSalesReturn"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(AR_CREDIT_NOTE_FORM)) SalesTreeView.Nodes["NodeARCreditNote"].Remove();
 
 
             inventoryKryptonHeader.Visible = inventoryTreeView.Visible = inventoryTreeView.Nodes.Count > 0;
@@ -600,6 +618,8 @@ namespace Profit
             m_listForm.Add(new FormAccess(0, MainForm.CUSTOMER_OS_INVOICE_FORM.ToString(), "TRCS007 - Customer Outstanding Invoice"));
             m_listForm.Add(new FormAccess(0, MainForm.CUSTOMER_INVOICE_FORM.ToString(), "TRCS003 - Customer Invoice"));
             m_listForm.Add(new FormAccess(0, MainForm.RECEIPT_FORM.ToString(), "TRCS004 - Receipt"));
+            m_listForm.Add(new FormAccess(0, MainForm.SALES_RETURN_FORM.ToString(), "TRCS005 - Sales Return"));
+            m_listForm.Add(new FormAccess(0, MainForm.AR_CREDIT_NOTE_FORM.ToString(), "TRCS006 - AR Credit Note"));
         }
 
         private void userMaintenanceToolStripMenuItem_Click(object sender, EventArgs e)

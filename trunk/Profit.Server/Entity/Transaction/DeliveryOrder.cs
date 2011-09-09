@@ -173,7 +173,7 @@ namespace Profit.Server
         {
             return String.Format(@"update table_deliveryorder set 
                     do_againstprstatus = '{0}'
-                where po_id = {1}",
+                where do_id = {1}",
                           AGAINST_SR_STATUS.ToString(),
                            ID);
         }

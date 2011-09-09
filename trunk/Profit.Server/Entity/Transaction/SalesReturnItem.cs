@@ -25,7 +25,7 @@ namespace Profit.Server
                     sc_id,
                     unit_id,
                     srni_notes,
-                    doi_id,
+                    doi_id
                 ) 
                 VALUES ({0},{1},{2},{3},{4},'{5}',{6},{7},'{8}',{9})",
                 EVENT.ID,
@@ -139,6 +139,10 @@ namespace Profit.Server
         public static string FindByDOItemIDSQL(int id)
         {
             return String.Format("SELECT * from table_salesreturnitem where doi_id = {0}", id);
+        }
+        public static string GetByPartIDSQL(int id)
+        {
+            return String.Format("SELECT * from table_salesreturnitem where part_id = {0}", id);
         }
     }
 }

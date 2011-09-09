@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PaymentForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReceiptForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -120,7 +120,7 @@
             this.kryptonHeader1.Size = new System.Drawing.Size(867, 29);
             this.kryptonHeader1.TabIndex = 2;
             this.kryptonHeader1.Values.Description = "";
-            this.kryptonHeader1.Values.Heading = "TRCP004 - Payment";
+            this.kryptonHeader1.Values.Heading = "TRCS004 - Receipt";
             // 
             // toolStrip1
             // 
@@ -381,11 +381,11 @@
             // 
             // kryptonLabel13
             // 
-            this.kryptonLabel13.Location = new System.Drawing.Point(386, 6);
+            this.kryptonLabel13.Location = new System.Drawing.Point(379, 6);
             this.kryptonLabel13.Name = "kryptonLabel13";
-            this.kryptonLabel13.Size = new System.Drawing.Size(57, 19);
+            this.kryptonLabel13.Size = new System.Drawing.Size(64, 19);
             this.kryptonLabel13.TabIndex = 45;
-            this.kryptonLabel13.Values.Text = "Supplier :";
+            this.kryptonLabel13.Values.Text = "Customer :";
             // 
             // supplierkryptonComboBox
             // 
@@ -435,11 +435,11 @@
             // 
             // kryptonLabel3
             // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(21, 51);
+            this.kryptonLabel3.Location = new System.Drawing.Point(6, 51);
             this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Size = new System.Drawing.Size(52, 19);
+            this.kryptonLabel3.Size = new System.Drawing.Size(68, 19);
             this.kryptonLabel3.TabIndex = 11;
-            this.kryptonLabel3.Values.Text = "Paid By :";
+            this.kryptonLabel3.Values.Text = "Receipt By :";
             // 
             // EmployeekryptonTextBox
             // 
@@ -648,7 +648,7 @@
             // 
             this.paymentTypeColumn.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.paymentTypeColumn.DropDownWidth = 121;
-            this.paymentTypeColumn.HeaderText = "Payment Type";
+            this.paymentTypeColumn.HeaderText = "Receipt Type";
             this.paymentTypeColumn.Name = "paymentTypeColumn";
             this.paymentTypeColumn.Width = 60;
             // 
@@ -658,7 +658,7 @@
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle9.NullValue = "0";
             this.paymentAmountColumn.DefaultCellStyle = dataGridViewCellStyle9;
-            this.paymentAmountColumn.HeaderText = "Payment Amount";
+            this.paymentAmountColumn.HeaderText = "Receipt Amount";
             this.paymentAmountColumn.Increment = new decimal(new int[] {
             1000,
             0,
@@ -773,7 +773,7 @@
             this.buttonSpecAny6.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny6.UniqueName = "95BED338EBB14361B2927C3CB003454A";
             // 
-            // PaymentForm
+            // ReceiptForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -782,11 +782,11 @@
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.kryptonHeader1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "PaymentForm";
-            this.Text = "Payment";
+            this.Name = "ReceiptForm";
+            this.Text = "Receipt";
             this.Load += new System.EventHandler(this.SalesReturnForm_Load);
             this.Activated += new System.EventHandler(this.BankForm_Activated);
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SalesReturnForm_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SalesReturnrForm_FormClosing);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
@@ -847,6 +847,12 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel6;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox currencyKryptonComboBox;
         private System.Windows.Forms.ToolStripButton toolStripButtonSearchSI;
+        private System.Windows.Forms.ToolStripButton toolStripButtonOutstandingInvoice;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox addressKryptonTextBox;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel16;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel15;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox contactPersonKryptonTextBox;
+        private ComponentFactory.Krypton.Toolkit.KryptonComboBox supplierkryptonComboBox;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn invoiceNoColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewDateTimePickerColumn invoiceDateColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn topColumn;
@@ -861,11 +867,5 @@
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewDateTimePickerColumn docdateColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn noteColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn bankColumn;
-        private System.Windows.Forms.ToolStripButton toolStripButtonOutstandingInvoice;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox addressKryptonTextBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel16;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel15;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox contactPersonKryptonTextBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonComboBox supplierkryptonComboBox;
     }
 }

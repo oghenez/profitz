@@ -330,7 +330,6 @@
             this.treeView3.Dock = System.Windows.Forms.DockStyle.Top;
             this.treeView3.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.treeView3.FullRowSelect = true;
-            this.treeView3.LineColor = System.Drawing.Color.Empty;
             this.treeView3.Location = new System.Drawing.Point(0, 76);
             this.treeView3.Name = "treeView3";
             treeNode1.Name = "Node0";
@@ -636,7 +635,7 @@
             // kryptonSeparator1
             // 
             this.kryptonSeparator1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.kryptonSeparator1.Location = new System.Drawing.Point(0, 914);
+            this.kryptonSeparator1.Location = new System.Drawing.Point(0, 917);
             this.kryptonSeparator1.Name = "kryptonSeparator1";
             this.kryptonSeparator1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             this.kryptonSeparator1.Size = new System.Drawing.Size(220, 5);
@@ -733,9 +732,9 @@
             treeNode34.Text = "TRCS003 - Customer Invoice";
             treeNode35.Name = "NodeReceipt";
             treeNode35.Text = "TRCS004 - Receipt";
-            treeNode36.Name = "Node4";
+            treeNode36.Name = "NodeSalesReturn";
             treeNode36.Text = "TRCS005 - Sales Return";
-            treeNode37.Name = "Node5";
+            treeNode37.Name = "NodeARCreditNote";
             treeNode37.Text = "TRCS006 - Credit Note";
             treeNode38.Name = "NodeCustomerOutstandingInvoice";
             treeNode38.Text = "TRCS007 - Customer Outstanding Invoice";
@@ -873,7 +872,7 @@
             // 
             this.TransactionkryptonCheckButton2.Checked = true;
             this.TransactionkryptonCheckButton2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.TransactionkryptonCheckButton2.Location = new System.Drawing.Point(0, 919);
+            this.TransactionkryptonCheckButton2.Location = new System.Drawing.Point(0, 922);
             this.TransactionkryptonCheckButton2.Name = "TransactionkryptonCheckButton2";
             this.TransactionkryptonCheckButton2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.TransactionkryptonCheckButton2.Size = new System.Drawing.Size(220, 30);
@@ -886,7 +885,7 @@
             // MasterDatakryptonCheckButton1
             // 
             this.MasterDatakryptonCheckButton1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.MasterDatakryptonCheckButton1.Location = new System.Drawing.Point(0, 949);
+            this.MasterDatakryptonCheckButton1.Location = new System.Drawing.Point(0, 952);
             this.MasterDatakryptonCheckButton1.Name = "MasterDatakryptonCheckButton1";
             this.MasterDatakryptonCheckButton1.Size = new System.Drawing.Size(220, 30);
             this.MasterDatakryptonCheckButton1.StateCommon.Content.Image.ImageH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Near;

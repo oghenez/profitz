@@ -24,11 +24,11 @@ namespace Profit
         Repository r_ccy = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY);
         Repository r_unit = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY);
         Repository r_warehouse = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.WAREHOUSE_REPOSITORY);
-        Repository r_sup = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.SUPPLIER_REPOSITORY);
+        Repository r_sup = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CUSTOMER_REPOSITORY);
         UserSettingsRepository r_setting = RepositoryFactory.GetInstance().UserSetting();
-        SalesOrderRepository r_po = (SalesOrderRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.PURCHASEORDER_REPOSITORY);
-        GoodReceiveNoteRepository r_grn = (GoodReceiveNoteRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.GOODRECEIVENOTE_REPOSITORY);
-        SalesReturnRepository r_prn = (SalesReturnRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.PURCHASE_RETURN_REPOSITORY);
+        SalesOrderRepository r_po = (SalesOrderRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.SALES_ORDER_REPOSITORY);
+        DeliveryOrderRepository r_grn = (DeliveryOrderRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.DELIVERY_ORDER_REPOSITORY);
+        SalesReturnRepository r_prn = (SalesReturnRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.SALES_RETURN_REPOSITORY);
         IList m_units;
         IList m_warehouses;
         IList m_poItems = new ArrayList();
@@ -61,7 +61,7 @@ namespace Profit
             if (e.ColumnIndex == scanColumn.Index)
             {
                 int count = 0;
-                foreach (GoodReceiveNoteItem itm in m_poItems)
+                foreach (DeliveryOrderItem itm in m_poItems)
                 {
                      itm.PART.UNIT_CONVERSION_LIST= r_part.GetUnitConversions(itm.PART.ID);
                     if (count == 0)
@@ -132,14 +132,14 @@ namespace Profit
                 for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
                 {
                     if (i == e.RowIndex) continue;
-                    GoodReceiveNoteItem pi = (GoodReceiveNoteItem)itemsDataGrid[scanColumn.Index, i].Tag;
+                    DeliveryOrderItem pi = (DeliveryOrderItem)itemsDataGrid[scanColumn.Index, i].Tag;
                     if (pi == null) continue;
                     addedPI.Add(pi.ID);
                 }
-                IList res = r_grn.FindPObyPartAndGRNNo(e.FormattedValue.ToString(), addedPI, ((Supplier)supplierkryptonComboBox.SelectedItem).ID, dateKryptonDateTimePicker.Value);
+                IList res = r_grn.FindSObyPartAndDONo(e.FormattedValue.ToString(), addedPI, ((Customer)supplierkryptonComboBox.SelectedItem).ID, dateKryptonDateTimePicker.Value);
                 if (res.Count == 0)
                 {
-                    using (SearchGRNForPRForm fr = new SearchGRNForPRForm(e.FormattedValue.ToString(), (Supplier)supplierkryptonComboBox.SelectedItem, addedPI, m_mainForm.CurrentUser, dateKryptonDateTimePicker.Value))
+                    using (SearchDOForSRForm fr = new SearchDOForSRForm(e.FormattedValue.ToString(), (Customer)supplierkryptonComboBox.SelectedItem, addedPI, m_mainForm.CurrentUser, dateKryptonDateTimePicker.Value))
                     {
                         fr.ShowDialog();
                         IList result = fr.RESULT;
@@ -153,7 +153,7 @@ namespace Profit
             }
             if (QtyColumn.Index == e.ColumnIndex)
             {
-                GoodReceiveNoteItem pi = (GoodReceiveNoteItem)itemsDataGrid[scanColumn.Index, e.RowIndex].Tag;
+                DeliveryOrderItem pi = (DeliveryOrderItem)itemsDataGrid[scanColumn.Index, e.RowIndex].Tag;
                 if (pi == null) return;
                 Part p = (Part)itemsDataGrid[codeColumn.Index, e.RowIndex].Tag;
                 if (p == null) return;
@@ -175,14 +175,14 @@ namespace Profit
             }
             if (unitColumn.Index == e.ColumnIndex)
             {
-                GoodReceiveNoteItem pi = (GoodReceiveNoteItem)itemsDataGrid[scanColumn.Index, e.RowIndex].Tag;
+                DeliveryOrderItem pi = (DeliveryOrderItem)itemsDataGrid[scanColumn.Index, e.RowIndex].Tag;
                 if (pi == null) return;
                 Part p = (Part)itemsDataGrid[codeColumn.Index, e.RowIndex].Tag;
                 if (p == null) return;
                 Unit u = (Unit)Utils.FindEntityInList(e.FormattedValue.ToString(), m_units);
                 if (u == null) return;
                 p.UNIT_CONVERSION_LIST = r_part.GetUnitConversions(p.ID);
-                GoodReceiveNoteItem sample = new GoodReceiveNoteItem();
+                DeliveryOrderItem sample = new DeliveryOrderItem();
                 sample.PART = p;
                 sample.UNIT = u;
                 sample.QYTAMOUNT = Convert.ToDouble(itemsDataGrid[QtyColumn.Index, e.RowIndex].Value);
@@ -235,7 +235,7 @@ namespace Profit
                 setEditMode(EditMode.View);
                 for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
                 {
-                    GoodReceiveNoteItem poi = (GoodReceiveNoteItem)itemsDataGrid[scanColumn.Index, i].Tag;
+                    DeliveryOrderItem poi = (DeliveryOrderItem)itemsDataGrid[scanColumn.Index, i].Tag;
                     if (poi == null) continue;
                     itemsDataGrid[OutstandingPOColumn.Index, i].Value = r_grn.GetReturned(poi.ID);
                 }
@@ -293,13 +293,13 @@ namespace Profit
             
             if (a) errorProvider1.SetError(textBoxCode, "Code Can not Empty");
             if (b) errorProvider1.SetError(employeeKryptonComboBox, "Employee Can not Empty");
-            if (k) errorProvider1.SetError(supplierkryptonComboBox, "Supplier Can not Empty");
+            if (k) errorProvider1.SetError(supplierkryptonComboBox, "Customer Can not Empty");
             if (f) errorProvider1.SetError(textBoxCode, a ? "Code Can not Empty & Code already used" : "Code already used");
 
             int j = 0;
             for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
             {
-                GoodReceiveNoteItem pi = (GoodReceiveNoteItem)itemsDataGrid[scanColumn.Index, i].Tag;
+                DeliveryOrderItem pi = (DeliveryOrderItem)itemsDataGrid[scanColumn.Index, i].Tag;
                 if (pi == null) continue;
                 Part p = (Part)itemsDataGrid[codeColumn.Index, i].Tag;
                 if (p == null) continue;
@@ -333,7 +333,7 @@ namespace Profit
             m_prn.TRANSACTION_DATE = dateKryptonDateTimePicker.Value;
             m_prn.EMPLOYEE = (Employee)employeeKryptonComboBox.SelectedItem;
             m_prn.NOTES = notesKryptonTextBox.Text;
-            m_prn.SUPPLIER = (Supplier)supplierkryptonComboBox.SelectedItem;
+            m_prn.CUSTOMER = (Customer)supplierkryptonComboBox.SelectedItem;
             m_prn.DOCUMENT_DATE = docdatekryptonDateTimePicker.Value;
             m_prn.DOCUMENT_NO = docnokryptonTextBox.Text;
             m_prn.EVENT_ITEMS = getItems();
@@ -344,7 +344,7 @@ namespace Profit
             IList items = new ArrayList();
             for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
             {
-                GoodReceiveNoteItem poi = (GoodReceiveNoteItem)itemsDataGrid[scanColumn.Index, i].Tag;
+                DeliveryOrderItem poi = (DeliveryOrderItem)itemsDataGrid[scanColumn.Index, i].Tag;
                 if (poi == null) continue;
                 Part p = (Part)itemsDataGrid[codeColumn.Index, i].Tag;
                 if (itemsDataGrid[unitColumn.Index, i].Value == null) continue;
@@ -358,7 +358,7 @@ namespace Profit
                 st.WAREHOUSE = (Warehouse)Utils.FindEntityInList(itemsDataGrid[warehouseColumn.Index, i].Value.ToString(), m_warehouses);
                 st.QYTAMOUNT = Convert.ToDouble(itemsDataGrid[QtyColumn.Index, i].Value);
                 st.UNIT = u;
-                st.GRN_ITEM = poi;
+                st.DO_ITEM = poi;
                 st.NOTES = itemsDataGrid[notesColumn.Index, i].Value == null ? "" : itemsDataGrid[notesColumn.Index, i].Value.ToString();
                 if (st.QYTAMOUNT == 0) continue;
                 items.Add(st);
@@ -467,30 +467,30 @@ namespace Profit
             dateKryptonDateTimePicker.Value = m_prn.TRANSACTION_DATE;
             employeeKryptonComboBox.Text = m_prn.EMPLOYEE.ToString();
             notesKryptonTextBox.Text = m_prn.NOTES;
-            supplierkryptonComboBox.Text = m_prn.SUPPLIER.ToString();
+            supplierkryptonComboBox.Text = m_prn.CUSTOMER.ToString();
             docnokryptonTextBox.Text = m_prn.DOCUMENT_NO;
             docdatekryptonDateTimePicker.Value = m_prn.DOCUMENT_DATE;
             itemsDataGrid.Rows.Clear();
             foreach (SalesReturnItem item in m_prn.EVENT_ITEMS)
             {
                 item.UNIT = (Unit)r_unit.GetById(item.UNIT);
-                item.GRN_ITEM.UNIT = (Unit)r_unit.GetById(item.GRN_ITEM.UNIT);
-                item.GRN_ITEM.PART.UNIT = (Unit)r_unit.GetById(item.GRN_ITEM.PART.UNIT);
+                item.DO_ITEM.UNIT = (Unit)r_unit.GetById(item.DO_ITEM.UNIT);
+                item.DO_ITEM.PART.UNIT = (Unit)r_unit.GetById(item.DO_ITEM.PART.UNIT);
                 int i = itemsDataGrid.Rows.Add();
                 itemsDataGrid.Rows[i].Tag = item;
                 itemsDataGrid[codeColumn.Index, i].Tag = item.PART;
-                itemsDataGrid[scanColumn.Index, i].Tag = item.GRN_ITEM;
-                itemsDataGrid[scanColumn.Index, i].Value = item.GRN_ITEM.EVENT.CODE;
+                itemsDataGrid[scanColumn.Index, i].Tag = item.DO_ITEM;
+                itemsDataGrid[scanColumn.Index, i].Value = item.DO_ITEM.EVENT.CODE;
                 itemsDataGrid[codeColumn.Index, i].Value = item.PART.CODE;
                 itemsDataGrid[nameColumn.Index, i].Value = item.PART.NAME;
                 itemsDataGrid[QtyColumn.Index, i].Value = item.QYTAMOUNT;
                 itemsDataGrid[warehouseColumn.Index, i].Value = r_warehouse.GetById(item.WAREHOUSE).ToString();
                 itemsDataGrid[notesColumn.Index, i].Value = item.NOTES;
                 itemsDataGrid[unitColumn.Index, i].Value = item.UNIT.ToString(); ;
-                itemsDataGrid[grnQtyColumn.Index, i].Value = item.GRN_ITEM.QYTAMOUNT;
-                //itemsDataGrid[OutstandingPOColumn.Index, i].Value = item.GRN_ITEM.OUTSTANDING_AMOUNT_TO_PR;
-                itemsDataGrid[OutstandingunitColumn.Index, i].Value = item.GRN_ITEM.PART.UNIT.CODE;
-                itemsDataGrid[OutstandingPOColumn.Index, i].Value = item.GRN_ITEM.RETURNED_AMOUNT;
+                itemsDataGrid[grnQtyColumn.Index, i].Value = item.DO_ITEM.QYTAMOUNT;
+                //itemsDataGrid[OutstandingPOColumn.Index, i].Value = item.DO_ITEM.OUTSTANDING_AMOUNT_TO_PR;
+                itemsDataGrid[OutstandingunitColumn.Index, i].Value = item.DO_ITEM.PART.UNIT.CODE;
+                itemsDataGrid[OutstandingPOColumn.Index, i].Value = item.DO_ITEM.RETURNED_AMOUNT;
 
             }
         }
@@ -528,7 +528,7 @@ namespace Profit
                 m_prn = (SalesReturn)result[0];
                 m_prn = (SalesReturn)r_prn.Get(m_prn.ID);
                 m_prn.EMPLOYEE = (Employee)r_employee.GetById(m_prn.EMPLOYEE);
-                m_prn.SUPPLIER = (Supplier)r_sup.GetById(m_prn.SUPPLIER);
+                m_prn.CUSTOMER = (Customer)r_sup.GetById(m_prn.CUSTOMER);
                 setEditMode(EditMode.View);
                 loadData();
                 setEnableForm(false);
@@ -538,16 +538,16 @@ namespace Profit
                 using (SearchSalesReturnForm frm = new SearchSalesReturnForm(searchToolStripTextBox.Text, result))
                 {
                     frm.ShowDialog();
-                    if (frm.PURCHASE_RETURN == null)
+                    if (frm.SALES_RETURN == null)
                     {
                         return;
                     }
                     else
                     {
-                        m_prn = frm.PURCHASE_RETURN;
+                        m_prn = frm.SALES_RETURN;
                         m_prn = (SalesReturn)r_prn.Get(m_prn.ID);
                         m_prn.EMPLOYEE = (Employee)r_employee.GetById(m_prn.EMPLOYEE);
-                        m_prn.SUPPLIER = (Supplier)r_sup.GetById(m_prn.SUPPLIER);
+                        m_prn.CUSTOMER = (Customer)r_sup.GetById(m_prn.CUSTOMER);
                         setEditMode(EditMode.View);
                         loadData();
                         setEnableForm(false);
@@ -574,7 +574,7 @@ namespace Profit
 
         private void supplierkryptonComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Supplier em = (Supplier)supplierkryptonComboBox.SelectedItem;
+            Customer em = (Customer)supplierkryptonComboBox.SelectedItem;
             supplierKryptonTextBox.Text = em == null ? "" : em.NAME;
             addressKryptonTextBox.Text = em == null ? "" : em.ADDRESS;
             contactPersonKryptonTextBox.Text = em == null ? "" : em.CONTACT;

@@ -204,7 +204,7 @@ namespace Profit.Server
                     doi_againstprstatus = '{0}',
                     doi_outstandingamtpr = {1},
                     doi_returnedamount = {2}
-                    where soi_id = {3}", AGAINST_SR_STATUS.ToString(),
+                    where doi_id = {3}", AGAINST_SR_STATUS.ToString(),
                                        OUTSTANDING_AMOUNT_TO_SR,
                                        RETURNED_AMOUNT,
                                        ID);

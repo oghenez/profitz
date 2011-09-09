@@ -125,6 +125,10 @@ namespace Profit.Server
         {
             return String.Format("SELECT srn_eventstatus from table_salesreturn where srn_id ={0}", id);
         }
+        public static string GetByCustomerSQL(int id)
+        {
+            return String.Format("SELECT * from table_salesreturn where cus_id ={0}", id);
+        }
         public static string GetUpdateStatusSQL(Event e)
         {
             return String.Format(@"update table_salesreturn set 

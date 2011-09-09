@@ -32,6 +32,12 @@
             this.CANCELkryptonButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.OKkryptonButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.gridData = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.checkAllkryptonCheckBox1 = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
+            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.searchText = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.startSearch = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.checkColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
             this.purchaseorderNoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.poDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -40,12 +46,6 @@
             this.qtyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.warehouseColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.searchText = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.startSearch = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.checkAllkryptonCheckBox1 = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -101,60 +101,6 @@
             this.gridData.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridData_CellMouseDoubleClick);
             this.gridData.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gridData_KeyDown);
             // 
-            // checkColumn
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.NullValue = false;
-            this.checkColumn.DefaultCellStyle = dataGridViewCellStyle1;
-            this.checkColumn.FalseValue = null;
-            this.checkColumn.HeaderText = "Check";
-            this.checkColumn.IndeterminateValue = null;
-            this.checkColumn.Name = "checkColumn";
-            this.checkColumn.TrueValue = null;
-            this.checkColumn.Width = 50;
-            // 
-            // purchaseorderNoColumn
-            // 
-            this.purchaseorderNoColumn.HeaderText = "GRN No.";
-            this.purchaseorderNoColumn.Name = "purchaseorderNoColumn";
-            this.purchaseorderNoColumn.ReadOnly = true;
-            // 
-            // poDateColumn
-            // 
-            this.poDateColumn.HeaderText = "GRN Date";
-            this.poDateColumn.Name = "poDateColumn";
-            this.poDateColumn.ReadOnly = true;
-            // 
-            // codeColumn
-            // 
-            this.codeColumn.HeaderText = "Code";
-            this.codeColumn.Name = "codeColumn";
-            this.codeColumn.ReadOnly = true;
-            // 
-            // nameColumn
-            // 
-            this.nameColumn.HeaderText = "Part Name";
-            this.nameColumn.Name = "nameColumn";
-            this.nameColumn.ReadOnly = true;
-            // 
-            // qtyColumn
-            // 
-            this.qtyColumn.HeaderText = "Qty";
-            this.qtyColumn.Name = "qtyColumn";
-            this.qtyColumn.ReadOnly = true;
-            // 
-            // unitColumn
-            // 
-            this.unitColumn.HeaderText = "Unit";
-            this.unitColumn.Name = "unitColumn";
-            this.unitColumn.ReadOnly = true;
-            // 
-            // warehouseColumn
-            // 
-            this.warehouseColumn.HeaderText = "Warehouse";
-            this.warehouseColumn.Name = "warehouseColumn";
-            this.warehouseColumn.ReadOnly = true;
-            // 
             // kryptonPanel1
             // 
             this.kryptonPanel1.Controls.Add(this.checkAllkryptonCheckBox1);
@@ -169,6 +115,17 @@
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(638, 341);
             this.kryptonPanel1.TabIndex = 6;
+            // 
+            // checkAllkryptonCheckBox1
+            // 
+            this.checkAllkryptonCheckBox1.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.NormalControl;
+            this.checkAllkryptonCheckBox1.Location = new System.Drawing.Point(12, 307);
+            this.checkAllkryptonCheckBox1.Name = "checkAllkryptonCheckBox1";
+            this.checkAllkryptonCheckBox1.Size = new System.Drawing.Size(69, 19);
+            this.checkAllkryptonCheckBox1.TabIndex = 7;
+            this.checkAllkryptonCheckBox1.Text = "Check All";
+            this.checkAllkryptonCheckBox1.Values.Text = "Check All";
+            this.checkAllkryptonCheckBox1.CheckedChanged += new System.EventHandler(this.checkAllkryptonCheckBox1_CheckedChanged);
             // 
             // kryptonLabel2
             // 
@@ -202,18 +159,61 @@
             this.startSearch.UniqueName = "C21DE323E2AD4CD47CA5A3C9304450B8";
             this.startSearch.Click += new System.EventHandler(this.buttonSpecAny1_Click);
             // 
-            // checkAllkryptonCheckBox1
+            // checkColumn
             // 
-            this.checkAllkryptonCheckBox1.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.NormalControl;
-            this.checkAllkryptonCheckBox1.Location = new System.Drawing.Point(12, 307);
-            this.checkAllkryptonCheckBox1.Name = "checkAllkryptonCheckBox1";
-            this.checkAllkryptonCheckBox1.Size = new System.Drawing.Size(69, 19);
-            this.checkAllkryptonCheckBox1.TabIndex = 7;
-            this.checkAllkryptonCheckBox1.Text = "Check All";
-            this.checkAllkryptonCheckBox1.Values.Text = "Check All";
-            this.checkAllkryptonCheckBox1.CheckedChanged += new System.EventHandler(this.checkAllkryptonCheckBox1_CheckedChanged);
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.NullValue = false;
+            this.checkColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            this.checkColumn.FalseValue = null;
+            this.checkColumn.HeaderText = "Check";
+            this.checkColumn.IndeterminateValue = null;
+            this.checkColumn.Name = "checkColumn";
+            this.checkColumn.TrueValue = null;
+            this.checkColumn.Width = 50;
             // 
-            // SearchGRNForSuppInvoiceForm
+            // purchaseorderNoColumn
+            // 
+            this.purchaseorderNoColumn.HeaderText = "DO No.";
+            this.purchaseorderNoColumn.Name = "purchaseorderNoColumn";
+            this.purchaseorderNoColumn.ReadOnly = true;
+            // 
+            // poDateColumn
+            // 
+            this.poDateColumn.HeaderText = "DO Date";
+            this.poDateColumn.Name = "poDateColumn";
+            this.poDateColumn.ReadOnly = true;
+            // 
+            // codeColumn
+            // 
+            this.codeColumn.HeaderText = "Code";
+            this.codeColumn.Name = "codeColumn";
+            this.codeColumn.ReadOnly = true;
+            // 
+            // nameColumn
+            // 
+            this.nameColumn.HeaderText = "Part Name";
+            this.nameColumn.Name = "nameColumn";
+            this.nameColumn.ReadOnly = true;
+            // 
+            // qtyColumn
+            // 
+            this.qtyColumn.HeaderText = "Qty";
+            this.qtyColumn.Name = "qtyColumn";
+            this.qtyColumn.ReadOnly = true;
+            // 
+            // unitColumn
+            // 
+            this.unitColumn.HeaderText = "Unit";
+            this.unitColumn.Name = "unitColumn";
+            this.unitColumn.ReadOnly = true;
+            // 
+            // warehouseColumn
+            // 
+            this.warehouseColumn.HeaderText = "Warehouse";
+            this.warehouseColumn.Name = "warehouseColumn";
+            this.warehouseColumn.ReadOnly = true;
+            // 
+            // SearchDOForCussInvoiceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -222,7 +222,7 @@
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
-            this.Name = "SearchGRNForSuppInvoiceForm";
+            this.Name = "SearchDOForCussInvoiceForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Find";
             this.Load += new System.EventHandler(this.SearchPOForGRNForm_Load);
@@ -245,6 +245,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox searchText;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny startSearch;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox checkAllkryptonCheckBox1;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn checkColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn purchaseorderNoColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn poDateColumn;
@@ -253,6 +254,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn qtyColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn unitColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn warehouseColumn;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox checkAllkryptonCheckBox1;
     }
 }
