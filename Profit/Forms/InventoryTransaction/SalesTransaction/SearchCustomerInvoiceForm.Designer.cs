@@ -148,7 +148,7 @@
             // 
             // supplierColumn
             // 
-            this.supplierColumn.HeaderText = "Supplier";
+            this.supplierColumn.HeaderText = "Customer";
             this.supplierColumn.Name = "supplierColumn";
             this.supplierColumn.ReadOnly = true;
             this.supplierColumn.Width = 50;
@@ -166,7 +166,7 @@
             this.PostedCol.ReadOnly = true;
             this.PostedCol.Width = 50;
             // 
-            // SearchSupplierInvoiceForm
+            // SearchCustomerInvoiceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -175,7 +175,7 @@
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
-            this.Name = "SearchSupplierInvoiceForm";
+            this.Name = "SearchCustomerInvoiceForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Find";
             this.Load += new System.EventHandler(this.SearchPurchaseOrderForm_Load);

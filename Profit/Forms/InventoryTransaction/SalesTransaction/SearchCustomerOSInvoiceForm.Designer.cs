@@ -52,7 +52,7 @@
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(12, 12);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(40, 20);
+            this.kryptonLabel1.Size = new System.Drawing.Size(37, 19);
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.Values.Text = "Find :";
             // 
@@ -62,7 +62,7 @@
             this.startSearch});
             this.searchText.Location = new System.Drawing.Point(67, 12);
             this.searchText.Name = "searchText";
-            this.searchText.Size = new System.Drawing.Size(346, 20);
+            this.searchText.Size = new System.Drawing.Size(346, 22);
             this.searchText.TabIndex = 1;
             this.searchText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchText_KeyDown);
             // 
@@ -153,7 +153,7 @@
             // 
             // supplierColumn
             // 
-            this.supplierColumn.HeaderText = "Supplier";
+            this.supplierColumn.HeaderText = "Customer";
             this.supplierColumn.Name = "supplierColumn";
             this.supplierColumn.ReadOnly = true;
             this.supplierColumn.Width = 100;
@@ -178,9 +178,19 @@
             dataGridViewCellStyle1.NullValue = "0";
             this.amountColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.amountColumn.HeaderText = "Amount";
+            this.amountColumn.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.amountColumn.Maximum = new decimal(new int[] {
             1410065408,
             2,
+            0,
+            0});
+            this.amountColumn.Minimum = new decimal(new int[] {
+            0,
+            0,
             0,
             0});
             this.amountColumn.Name = "amountColumn";
@@ -195,7 +205,7 @@
             this.PostedCol.ReadOnly = true;
             this.PostedCol.Width = 50;
             // 
-            // SearchSupplierOSInvoiceForm
+            // SearchCustomerOSInvoiceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -204,7 +214,7 @@
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
-            this.Name = "SearchSupplierOSInvoiceForm";
+            this.Name = "SearchCustomerOSInvoiceForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Find";
             this.Load += new System.EventHandler(this.SearchPurchaseReturnForm_Load);

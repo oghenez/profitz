@@ -28,23 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.CANCELkryptonButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.OKkryptonButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.checkAllkryptonCheckBox1 = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.gridData = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.searchText = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.startSearch = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.checkColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
             this.purchaseorderNoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.poDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.supplierColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.ccyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.qtyColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
-            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.searchText = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.startSearch = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.checkAllkryptonCheckBox1 = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
@@ -84,6 +84,17 @@
             this.kryptonPanel1.Size = new System.Drawing.Size(638, 341);
             this.kryptonPanel1.TabIndex = 6;
             // 
+            // checkAllkryptonCheckBox1
+            // 
+            this.checkAllkryptonCheckBox1.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.NormalControl;
+            this.checkAllkryptonCheckBox1.Location = new System.Drawing.Point(12, 310);
+            this.checkAllkryptonCheckBox1.Name = "checkAllkryptonCheckBox1";
+            this.checkAllkryptonCheckBox1.Size = new System.Drawing.Size(69, 19);
+            this.checkAllkryptonCheckBox1.TabIndex = 10;
+            this.checkAllkryptonCheckBox1.Text = "Check All";
+            this.checkAllkryptonCheckBox1.Values.Text = "Check All";
+            this.checkAllkryptonCheckBox1.CheckedChanged += new System.EventHandler(this.checkAllkryptonCheckBox1_CheckedChanged);
+            // 
             // gridData
             // 
             this.gridData.AllowUserToAddRows = false;
@@ -110,72 +121,6 @@
             this.gridData.StateCommon.DataCell.Border.DrawBorders = ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom;
             this.gridData.TabIndex = 7;
             this.gridData.TabStop = false;
-            // 
-            // checkColumn
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.NullValue = false;
-            this.checkColumn.DefaultCellStyle = dataGridViewCellStyle3;
-            this.checkColumn.FalseValue = null;
-            this.checkColumn.HeaderText = "Check";
-            this.checkColumn.IndeterminateValue = null;
-            this.checkColumn.Name = "checkColumn";
-            this.checkColumn.TrueValue = null;
-            this.checkColumn.Width = 50;
-            // 
-            // purchaseorderNoColumn
-            // 
-            this.purchaseorderNoColumn.HeaderText = "Invoice No.";
-            this.purchaseorderNoColumn.Name = "purchaseorderNoColumn";
-            this.purchaseorderNoColumn.ReadOnly = true;
-            // 
-            // poDateColumn
-            // 
-            this.poDateColumn.HeaderText = "Invoice Date";
-            this.poDateColumn.Name = "poDateColumn";
-            this.poDateColumn.ReadOnly = true;
-            // 
-            // supplierColumn
-            // 
-            this.supplierColumn.HeaderText = "Supplier";
-            this.supplierColumn.Name = "supplierColumn";
-            this.supplierColumn.ReadOnly = true;
-            this.supplierColumn.Width = 100;
-            // 
-            // ccyColumn
-            // 
-            this.ccyColumn.HeaderText = "Ccy";
-            this.ccyColumn.Name = "ccyColumn";
-            this.ccyColumn.ReadOnly = true;
-            // 
-            // qtyColumn
-            // 
-            this.qtyColumn.DecimalPlaces = 2;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.NullValue = "0";
-            this.qtyColumn.DefaultCellStyle = dataGridViewCellStyle4;
-            this.qtyColumn.HeaderText = "Amount";
-            this.qtyColumn.Increment = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.qtyColumn.Maximum = new decimal(new int[] {
-            1410065408,
-            2,
-            0,
-            0});
-            this.qtyColumn.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.qtyColumn.Name = "qtyColumn";
-            this.qtyColumn.ReadOnly = true;
-            this.qtyColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.qtyColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.qtyColumn.ThousandsSeparator = true;
-            this.qtyColumn.Width = 100;
             // 
             // kryptonLabel2
             // 
@@ -209,18 +154,73 @@
             this.startSearch.UniqueName = "C21DE323E2AD4CD47CA5A3C9304450B8";
             this.startSearch.Click += new System.EventHandler(this.buttonSpecAny1_Click);
             // 
-            // checkAllkryptonCheckBox1
+            // checkColumn
             // 
-            this.checkAllkryptonCheckBox1.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.NormalControl;
-            this.checkAllkryptonCheckBox1.Location = new System.Drawing.Point(12, 310);
-            this.checkAllkryptonCheckBox1.Name = "checkAllkryptonCheckBox1";
-            this.checkAllkryptonCheckBox1.Size = new System.Drawing.Size(69, 19);
-            this.checkAllkryptonCheckBox1.TabIndex = 10;
-            this.checkAllkryptonCheckBox1.Text = "Check All";
-            this.checkAllkryptonCheckBox1.Values.Text = "Check All";
-            this.checkAllkryptonCheckBox1.CheckedChanged += new System.EventHandler(this.checkAllkryptonCheckBox1_CheckedChanged);
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.NullValue = false;
+            this.checkColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            this.checkColumn.FalseValue = null;
+            this.checkColumn.HeaderText = "Check";
+            this.checkColumn.IndeterminateValue = null;
+            this.checkColumn.Name = "checkColumn";
+            this.checkColumn.TrueValue = null;
+            this.checkColumn.Width = 50;
             // 
-            // SearchOstSuppInvForPaymentForm
+            // purchaseorderNoColumn
+            // 
+            this.purchaseorderNoColumn.HeaderText = "Invoice No.";
+            this.purchaseorderNoColumn.Name = "purchaseorderNoColumn";
+            this.purchaseorderNoColumn.ReadOnly = true;
+            // 
+            // poDateColumn
+            // 
+            this.poDateColumn.HeaderText = "Invoice Date";
+            this.poDateColumn.Name = "poDateColumn";
+            this.poDateColumn.ReadOnly = true;
+            // 
+            // supplierColumn
+            // 
+            this.supplierColumn.HeaderText = "Customer";
+            this.supplierColumn.Name = "supplierColumn";
+            this.supplierColumn.ReadOnly = true;
+            this.supplierColumn.Width = 100;
+            // 
+            // ccyColumn
+            // 
+            this.ccyColumn.HeaderText = "Ccy";
+            this.ccyColumn.Name = "ccyColumn";
+            this.ccyColumn.ReadOnly = true;
+            // 
+            // qtyColumn
+            // 
+            this.qtyColumn.DecimalPlaces = 2;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.NullValue = "0";
+            this.qtyColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.qtyColumn.HeaderText = "Amount";
+            this.qtyColumn.Increment = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.qtyColumn.Maximum = new decimal(new int[] {
+            1410065408,
+            2,
+            0,
+            0});
+            this.qtyColumn.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.qtyColumn.Name = "qtyColumn";
+            this.qtyColumn.ReadOnly = true;
+            this.qtyColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.qtyColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.qtyColumn.ThousandsSeparator = true;
+            this.qtyColumn.Width = 100;
+            // 
+            // SearchOstCussInvForReceiptForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -229,7 +229,7 @@
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
-            this.Name = "SearchOstSuppInvForPaymentForm";
+            this.Name = "SearchOstCussInvForReceiptForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Find";
             this.Load += new System.EventHandler(this.SearchPOForGRNForm_Load);
@@ -252,12 +252,12 @@
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox searchText;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny startSearch;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridView gridData;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox checkAllkryptonCheckBox1;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn checkColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn purchaseorderNoColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn poDateColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn supplierColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ccyColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn qtyColumn;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox checkAllkryptonCheckBox1;
     }
 }

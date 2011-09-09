@@ -508,6 +508,12 @@ namespace Profit
                         pr.SUPPLIER = (Supplier)r_sup.GetById(pr.SUPPLIER);
                         movemntkryptonDataGridView[vendorMovementColumn.Index, r].Value = pr.SUPPLIER.NAME;
                         break;
+                    case StockCardEntryType.SalesReturn:
+                        SalesReturnItem sri = (SalesReturnItem)itm;
+                        SalesReturn sr = (SalesReturn)sri.EVENT;
+                        sr.CUSTOMER = (Customer)r_cus.GetById(sr.CUSTOMER);
+                        movemntkryptonDataGridView[vendorMovementColumn.Index, r].Value = sr.CUSTOMER.NAME;
+                        break;
                 }
                 movemntkryptonDataGridView[statusMovementColumn.Index, r].Value = itm.EVENT.POSTED.ToString();
             }

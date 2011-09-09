@@ -232,7 +232,7 @@ namespace Profit.Server
         {
             return String.Format("SELECT * from table_salesorder where so_id ={0}", id);
         }
-        public static string GetBySupplierSQL(int id)
+        public static string GetByCustomerSQL(int id)
         {
             return String.Format("SELECT * from table_salesorder where cus_id ={0}", id);
         }

@@ -270,7 +270,7 @@ namespace Profit.Server
             AutoNumberSetup autonumber = AutoNumberSetupRepository.GetAutoNumberSetup(m_command, "SalesReturn");
             return autonumber.AUTONUMBER_SETUP_TYPE == AutoNumberSetupType.Auto;
         }
-        public IList FindPRForARCreditNote(string find, int supID, DateTime trdate, IList added)
+        public IList FindSRForARCreditNote(string find, int supID, DateTime trdate, IList added)
         {
             m_command.CommandText = ARCreditNoteItem.GetSRUsedByARCR();
             MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();

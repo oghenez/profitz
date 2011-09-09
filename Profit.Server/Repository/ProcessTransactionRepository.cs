@@ -64,7 +64,24 @@ namespace Profit.Server
                     union
                     select ap.apdn_code from table_apdebitnote ap where ap.apdn_posted = false and ap.apdn_date between '{0}' and '{1}'
                     union
-                    select py.pay_code from table_payment py where py.pay_posted = false and py.pay_date between '{0}' and '{1}'", 
+                    select py.pay_code from table_payment py where py.pay_posted = false and py.pay_date between '{0}' and '{1}'
+                    union
+                    select p.so_code from table_salesorder p where p.so_posted = false and p.so_date between '{0}' and '{1}'
+                    union
+                    select g.do_code from table_deliveryorder g where g.do_posted = false and g.do_date between '{0}' and '{1}'
+                    union
+                    select ci.ci_code from table_customerinvoice ci where ci.ci_posted = false and ci.ci_date between '{0}' and '{1}'
+                    union
+                    select pr.srn_code from table_salesreturn pr where pr.srn_posted = false and pr.srn_date between '{0}' and '{1}'
+                    union
+                    select sij.cij_code from table_customerinvoicejournal sij where sij.cij_posted = false and sij.cij_date between '{0}' and '{1}'
+                    union
+                    select so.costi_code from table_customeroutstandinginvoice so where so.costi_posted = false and so.costi_date between '{0}' and '{1}'
+                    union
+                    select ap.arcr_code from table_arcreditnote ap where ap.arcr_posted = false and ap.arcr_date between '{0}' and '{1}'
+                    union
+                    select py.rec_code from table_receipt py where py.rec_posted = false and py.rec_date between '{0}' and '{1}'
+", 
                      start.ToString(Utils.DATE_FORMAT),
                      end.ToString(Utils.DATE_FORMAT));
             MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();

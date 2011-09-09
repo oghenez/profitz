@@ -27,63 +27,63 @@ namespace Profit.Server
             OpenConnection();
             MySql.Data.MySqlClient.MySqlDataReader r;
 
-            m_cmd.CommandText = PurchaseOrder.GetBySupplierSQL(supID);
+            m_cmd.CommandText = SalesOrder.GetByCustomerSQL(supID);
             r = m_cmd.ExecuteReader();
-            IList po = PurchaseOrder.TransformReaderList(r);
+            IList po = SalesOrder.TransformReaderList(r);
             r.Close();
             foreach (Event e in po)
             {
                 result.Add(e);
             }
 
-            m_cmd.CommandText = GoodReceiveNote.GetBySupplierSQL(supID);
+            m_cmd.CommandText = DeliveryOrder.GetByCustomerSQL(supID);
             r = m_cmd.ExecuteReader();
-            IList grn = GoodReceiveNote.TransformReaderList(r);
+            IList grn = DeliveryOrder.TransformReaderList(r);
             r.Close();
             foreach (Event e in grn)
             {
                 result.Add(e);
             }
 
-            m_cmd.CommandText = SupplierInvoice.GetBySupplierSQL(supID);
+            m_cmd.CommandText = CustomerInvoice.GetByCustomerSQL(supID);
             r = m_cmd.ExecuteReader();
-            IList si = SupplierInvoice.TransformReaderList(r);
+            IList si = CustomerInvoice.TransformReaderList(r);
             r.Close();
             foreach (Event e in si)
             {
                 result.Add(e);
             }
 
-            m_cmd.CommandText = PurchaseReturn.GetBySupplierSQL(supID);
+            m_cmd.CommandText = SalesReturn.GetByCustomerSQL(supID);
             r = m_cmd.ExecuteReader();
-            IList pr = PurchaseReturn.TransformReaderList(r);
+            IList pr = SalesReturn.TransformReaderList(r);
             r.Close();
             foreach (Event e in pr)
             {
                 result.Add(e);
             }
 
-            m_cmd.CommandText = APDebitNote.GetBySupplierSQL(supID);
+            m_cmd.CommandText = ARCreditNote.GetByCustomerSQL(supID);
             r = m_cmd.ExecuteReader();
-            IList apdn = APDebitNote.TransformReaderList(r);
+            IList apdn = ARCreditNote.TransformReaderList(r);
             r.Close();
             foreach (EventJournal e in apdn)
             {
                 result.Add(e);
             }
 
-            m_cmd.CommandText = Payment.GetBySupplierSQL(supID);
+            m_cmd.CommandText = Receipt.GetByCustomerSQL(supID);
             r = m_cmd.ExecuteReader();
-            IList py = Payment.TransformReaderList(r);
+            IList py = Receipt.TransformReaderList(r);
             r.Close();
             foreach (EventJournal e in py)
             {
                 result.Add(e);
             }
 
-            m_cmd.CommandText = SupplierOutStandingInvoice.GetBySupplierSQL(supID);
+            m_cmd.CommandText = CustomerOutStandingInvoice.GetByCustomerSQL(supID);
             r = m_cmd.ExecuteReader();
-            IList soi = SupplierOutStandingInvoice.TransformReaderList(r);
+            IList soi = CustomerOutStandingInvoice.TransformReaderList(r);
             r.Close();
             foreach (EventJournal e in soi)
             {
@@ -99,7 +99,7 @@ namespace Profit.Server
             OpenConnection();
             MySql.Data.MySqlClient.MySqlDataReader r;
 
-            m_cmd.CommandText = VendorBalanceEntry.FindByVendorBalanceBySupplier(supID, VendorBalanceType.Supplier);
+            m_cmd.CommandText = VendorBalanceEntry.FindByVendorBalanceBySupplier(supID, VendorBalanceType.Customer);
             r= m_cmd.ExecuteReader();
             IList vbe = VendorBalanceEntry.TransformReaderList(r);
             r.Close();
