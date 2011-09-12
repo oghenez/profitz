@@ -53,6 +53,7 @@ namespace Profit
         public const string RECEIPT_REPOSITORY = "ReceiptRepository";
         public const string ARCREDITNOTE_REPOSITORY = "ARCreditNoteRepository";
         public const string CUSTOMERINVOICE_JOURNAL_REPOSITORY = "CustomerInvoiceJournalRepository";
+        public const string OPENING_STOCK_REPOSITORY = "OpeningStockRepository";
 
 
 
@@ -108,6 +109,7 @@ namespace Profit
             ReceiptRepository rcptRepository = new ReceiptRepository();
             ARCreditNoteRepository arcrRepository = new ARCreditNoteRepository();
             CustomerInvoiceJournalRepository cijRepository = new CustomerInvoiceJournalRepository();
+            OpeningStockRepository opstRepository = new OpeningStockRepository();
 
             m_listService.Add(BANK_REPOSITORY, bankRepository);
             m_listService.Add(CURRENCY_REPOSITORY, ccyRepository);
@@ -150,6 +152,7 @@ namespace Profit
             m_listService.Add(RECEIPT_REPOSITORY, rcptRepository);
             m_listService.Add(ARCREDITNOTE_REPOSITORY, arcrRepository);
             m_listService.Add(CUSTOMERINVOICE_JOURNAL_REPOSITORY, cijRepository);
+            m_listService.Add(OPENING_STOCK_REPOSITORY, opstRepository);
 
         }
         public Repository GetRepository(string name)

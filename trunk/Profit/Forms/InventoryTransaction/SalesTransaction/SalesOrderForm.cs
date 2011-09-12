@@ -274,7 +274,7 @@ namespace Profit
         }
         private void InitializeDataSource()
         {
-            employeeKryptonComboBox.DataSource = r_employee.GetAll();
+            employeeKryptonComboBox.DataSource = r_employee.GetAllSalesman();
             currencyKryptonComboBox.DataSource = r_ccy.GetAll();
             divisionKryptonComboBox.DataSource = r_division.GetAll();
             termofpaymentKryptonComboBox.DataSource = r_top.GetAll();

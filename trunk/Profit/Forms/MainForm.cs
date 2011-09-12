@@ -51,6 +51,7 @@ namespace Profit
         const string RECEIPT_FORM = "ReceiptInvoiceForm";
         const string SALES_RETURN_FORM = "SalesReturnForm";
         const string AR_CREDIT_NOTE_FORM = "ARCreditNoteForm";
+        const string OPENING_STOCK_FORM = "OpeningStockForm";
 
         IList m_listForm = new ArrayList();
         User m_currentUser = null;
@@ -314,6 +315,13 @@ namespace Profit
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
+            if (e.Node.Name == "NodeOpeningStock")
+            {
+                if (isChild(OPENING_STOCK_FORM)) { this.Cursor = Cursors.Default; return; }
+                OpeningStockForm user = new OpeningStockForm(this, OPENING_STOCK_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            }
             this.Cursor = Cursors.Default;
         }
         bool isChild(string name)
@@ -512,6 +520,7 @@ namespace Profit
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(RECEIPT_FORM)) SalesTreeView.Nodes["NodeReceipt"].Remove();
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(SALES_RETURN_FORM)) SalesTreeView.Nodes["NodeSalesReturn"].Remove();
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(AR_CREDIT_NOTE_FORM)) SalesTreeView.Nodes["NodeARCreditNote"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(OPENING_STOCK_FORM)) internalTreeView.Nodes["NodeOpeningStock"].Remove();
 
 
             inventoryKryptonHeader.Visible = inventoryTreeView.Visible = inventoryTreeView.Nodes.Count > 0;
@@ -603,6 +612,7 @@ namespace Profit
             m_listForm.Add(new FormAccess(0, MainForm.TOP_FORM.ToString(), "MSTD007 - Term Of Payment"));
             m_listForm.Add(new FormAccess(0, MainForm.STOCK_TAKING_FORM.ToString(), "TRCI001 - Stock Taking"));
             m_listForm.Add(new FormAccess(0, MainForm.PART_FORM.ToString(), "TRCI002 - Part Master"));
+            m_listForm.Add(new FormAccess(0, MainForm.OPENING_STOCK_FORM.ToString(), "TRCI003 - Opening Stock"));
             m_listForm.Add(new FormAccess(0, MainForm.USER_FORM.ToString(), "GSTP001 - User"));
             m_listForm.Add(new FormAccess(0, MainForm.GENERALSETUP_FORM.ToString(), "GSTP002 - General Setup"));
             m_listForm.Add(new FormAccess(0, MainForm.PROCESS_TRANSACTION_FORM.ToString(), "GSTP003 - Process Transaction"));

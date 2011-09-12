@@ -69,6 +69,7 @@
             System.Windows.Forms.TreeNode treeNode38 = new System.Windows.Forms.TreeNode("TRCS007 - Customer Outstanding Invoice");
             System.Windows.Forms.TreeNode treeNode39 = new System.Windows.Forms.TreeNode("TRCI001 - Stock Taking");
             System.Windows.Forms.TreeNode treeNode40 = new System.Windows.Forms.TreeNode("TRCI002 - Part Master");
+            System.Windows.Forms.TreeNode treeNode41 = new System.Windows.Forms.TreeNode("TRCI003 - Opening Stock");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -330,6 +331,7 @@
             this.treeView3.Dock = System.Windows.Forms.DockStyle.Top;
             this.treeView3.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.treeView3.FullRowSelect = true;
+            this.treeView3.LineColor = System.Drawing.Color.Empty;
             this.treeView3.Location = new System.Drawing.Point(0, 76);
             this.treeView3.Name = "treeView3";
             treeNode1.Name = "Node0";
@@ -635,7 +637,7 @@
             // kryptonSeparator1
             // 
             this.kryptonSeparator1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.kryptonSeparator1.Location = new System.Drawing.Point(0, 917);
+            this.kryptonSeparator1.Location = new System.Drawing.Point(0, 914);
             this.kryptonSeparator1.Name = "kryptonSeparator1";
             this.kryptonSeparator1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             this.kryptonSeparator1.Size = new System.Drawing.Size(220, 5);
@@ -665,7 +667,7 @@
             this.purchaseTreeView.Dock = System.Windows.Forms.DockStyle.Top;
             this.purchaseTreeView.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.purchaseTreeView.FullRowSelect = true;
-            this.purchaseTreeView.Location = new System.Drawing.Point(1, 231);
+            this.purchaseTreeView.Location = new System.Drawing.Point(1, 252);
             this.purchaseTreeView.Name = "purchaseTreeView";
             treeNode25.Name = "NodePurchaseOrder";
             treeNode25.Text = "TRCP001 - Purchase Order";
@@ -700,7 +702,7 @@
             this.purchaseKryptonHeader.Cursor = System.Windows.Forms.Cursors.Hand;
             this.purchaseKryptonHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.purchaseKryptonHeader.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.Secondary;
-            this.purchaseKryptonHeader.Location = new System.Drawing.Point(1, 210);
+            this.purchaseKryptonHeader.Location = new System.Drawing.Point(1, 231);
             this.purchaseKryptonHeader.Name = "purchaseKryptonHeader";
             this.purchaseKryptonHeader.Size = new System.Drawing.Size(218, 21);
             this.purchaseKryptonHeader.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom)));
@@ -722,7 +724,7 @@
             this.SalesTreeView.Dock = System.Windows.Forms.DockStyle.Top;
             this.SalesTreeView.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SalesTreeView.FullRowSelect = true;
-            this.SalesTreeView.Location = new System.Drawing.Point(1, 76);
+            this.SalesTreeView.Location = new System.Drawing.Point(1, 97);
             this.SalesTreeView.Name = "SalesTreeView";
             treeNode32.Name = "NodeSalesOrder";
             treeNode32.Text = "TRCS001 - Sales Order";
@@ -757,7 +759,7 @@
             this.kryptonHeader9.Cursor = System.Windows.Forms.Cursors.Hand;
             this.kryptonHeader9.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonHeader9.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.Secondary;
-            this.kryptonHeader9.Location = new System.Drawing.Point(1, 55);
+            this.kryptonHeader9.Location = new System.Drawing.Point(1, 76);
             this.kryptonHeader9.Name = "kryptonHeader9";
             this.kryptonHeader9.Size = new System.Drawing.Size(218, 21);
             this.kryptonHeader9.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom)));
@@ -784,10 +786,13 @@
             treeNode39.Text = "TRCI001 - Stock Taking";
             treeNode40.Name = "NodePart";
             treeNode40.Text = "TRCI002 - Part Master";
+            treeNode41.Name = "NodeOpeningStock";
+            treeNode41.Text = "TRCI003 - Opening Stock";
             this.internalTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode39,
-            treeNode40});
-            this.internalTreeView.Size = new System.Drawing.Size(218, 33);
+            treeNode40,
+            treeNode41});
+            this.internalTreeView.Size = new System.Drawing.Size(218, 54);
             this.internalTreeView.TabIndex = 15;
             this.internalTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
             this.internalTreeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
@@ -872,7 +877,7 @@
             // 
             this.TransactionkryptonCheckButton2.Checked = true;
             this.TransactionkryptonCheckButton2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.TransactionkryptonCheckButton2.Location = new System.Drawing.Point(0, 922);
+            this.TransactionkryptonCheckButton2.Location = new System.Drawing.Point(0, 919);
             this.TransactionkryptonCheckButton2.Name = "TransactionkryptonCheckButton2";
             this.TransactionkryptonCheckButton2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.TransactionkryptonCheckButton2.Size = new System.Drawing.Size(220, 30);
@@ -885,7 +890,7 @@
             // MasterDatakryptonCheckButton1
             // 
             this.MasterDatakryptonCheckButton1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.MasterDatakryptonCheckButton1.Location = new System.Drawing.Point(0, 952);
+            this.MasterDatakryptonCheckButton1.Location = new System.Drawing.Point(0, 949);
             this.MasterDatakryptonCheckButton1.Name = "MasterDatakryptonCheckButton1";
             this.MasterDatakryptonCheckButton1.Size = new System.Drawing.Size(220, 30);
             this.MasterDatakryptonCheckButton1.StateCommon.Content.Image.ImageH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Near;

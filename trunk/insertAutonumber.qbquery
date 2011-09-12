@@ -7,4 +7,4 @@
                     ans_initialno, 
                     ans_type, 
                     ans_istransaction) 
-                VALUES ('DeliveryPrder','TRCS002 - Delivery Order','DO#/MM/yyyy',1,3,'Yearly','Auto',True)
+                VALUES ('OpeningStock','TRCI003 - Opening Stock','OP#/MM/yyyy',1,3,'Yearly','Auto',True)

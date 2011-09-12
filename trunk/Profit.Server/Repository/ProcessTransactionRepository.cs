@@ -96,6 +96,56 @@ namespace Profit.Server
             r.Close();
             return result;
         }
+        private IList GetAllCodeListOfPostedEvent(DateTime start, DateTime end)
+        {
+            m_command.CommandText = String.Format(@"select p.po_code from table_purchaseorder p where p.po_posted = true and p.po_date between '{0}' and '{1}'
+                    union
+                    select g.grn_code from table_goodreceivenote g where g.grn_posted = true and g.grn_date between '{0}' and '{1}'
+                    union
+                    select s.stk_code from table_stocktaking s where s.stk_posted = true and s.stk_date between '{0}' and '{1}'
+                    union
+                    select si.si_code from table_supplierinvoice si where si.si_posted = true and si.si_date between '{0}' and '{1}'
+                    union
+                    select pr.prn_code from table_purchasereturn pr where pr.prn_posted = true and pr.prn_date between '{0}' and '{1}'
+                    union
+                    select sij.sij_code from table_supplierinvoicejournal sij where sij.sij_posted = true and sij.sij_date between '{0}' and '{1}'
+                    union
+                    select so.sosti_code from table_supplieroutstandinginvoice so where so.sosti_posted = true and so.sosti_date between '{0}' and '{1}'
+                    union
+                    select ap.apdn_code from table_apdebitnote ap where ap.apdn_posted = true and ap.apdn_date between '{0}' and '{1}'
+                    union
+                    select py.pay_code from table_payment py where py.pay_posted = true and py.pay_date between '{0}' and '{1}'
+                    union
+                    select p.so_code from table_salesorder p where p.so_posted = true and p.so_date between '{0}' and '{1}'
+                    union
+                    select g.do_code from table_deliveryorder g where g.do_posted = true and g.do_date between '{0}' and '{1}'
+                    union
+                    select ci.ci_code from table_customerinvoice ci where ci.ci_posted = true and ci.ci_date between '{0}' and '{1}'
+                    union
+                    select pr.srn_code from table_salesreturn pr where pr.srn_posted = true and pr.srn_date between '{0}' and '{1}'
+                    union
+                    select sij.cij_code from table_customerinvoicejournal sij where sij.cij_posted = true and sij.cij_date between '{0}' and '{1}'
+                    union
+                    select so.costi_code from table_customeroutstandinginvoice so where so.costi_posted = true and so.costi_date between '{0}' and '{1}'
+                    union
+                    select ap.arcr_code from table_arcreditnote ap where ap.arcr_posted = true and ap.arcr_date between '{0}' and '{1}'
+                    union
+                    select py.rec_code from table_receipt py where py.rec_posted = true and py.rec_date between '{0}' and '{1}'
+",
+                     start.ToString(Utils.DATE_FORMAT),
+                     end.ToString(Utils.DATE_FORMAT));
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
+            IList result = new ArrayList();
+            if (r.HasRows)
+            {
+                while (r.Read())
+                {
+                    result.Add(r[0].ToString());
+                }
+            }
+            r.Close();
+            return result;
+        }
         private Period GetNextPeriod(Period crnt)
         {
             if (crnt == null)
@@ -182,7 +232,7 @@ namespace Profit.Server
                     VendorBalanceRepository.SaveHeader(m_command, sc);
                 }
                 nextPeriod.PERIOD_STATUS = PeriodStatus.Current;
-                nextPeriod.START_DATE = DateTime.Now;
+                nextPeriod.CLOSED_DATE = DateTime.Now;
                 PeriodRepository.UpdatePeriod(m_command, nextPeriod);
 
                 crntPeriod.PERIOD_STATUS = PeriodStatus.Close;
@@ -199,7 +249,8 @@ namespace Profit.Server
 
         public void RollBackTransaction(int currentPeriodId)
         {
-             MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
+            OpenConnection();
+            MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
              try
              {
                  m_command.Transaction = trc;
@@ -211,7 +262,8 @@ namespace Profit.Server
                  GeneralSetup gs = GeneralSetupRepository.GetGeneralSetup(m_command);
                  if (gs.START_ENTRY_PERIOD == null)
                      throw new Exception("Start Entry Month Not Found!");
-                 IList invTrs = this.GetAllCodeListOfNotPostedEvent(crntPeriod.START_DATE, crntPeriod.END_DATA);
+                 IList invTrs = GetAllCodeListOfPostedEvent(crntPeriod.START_DATE, crntPeriod.END_DATA);
+                 //this.GetAllCodeListOfNotPostedEvent(crntPeriod.START_DATE, crntPeriod.END_DATA);
                  string invCodes = string.Empty;
                  if (invTrs.Count > 0)
                  {

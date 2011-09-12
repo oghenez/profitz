@@ -577,6 +577,17 @@ namespace Profit.Server
                 result.Add(itm);
             }
 
+            m_cmd.CommandText = OpeningStockItem.GetByPartIDSQL(partID);
+            rdr = m_cmd.ExecuteReader();
+            IList opi = OpeningStockItem.TransformReaderList(rdr);
+            rdr.Close();
+            foreach (OpeningStockItem itm in opi)
+            {
+                itm.EVENT = OpeningStockRepository.GetHeaderOnly(m_cmd, itm.EVENT.ID);
+                itm.PART = p;
+                result.Add(itm);
+            }
+
             m_cmd.CommandText = DeliveryOrderItem.GetByPartIDSQL(partID);
             rdr = m_cmd.ExecuteReader();
             IList doi = DeliveryOrderItem.TransformReaderList(rdr);

@@ -29,7 +29,9 @@ namespace Profit.Server
         SupplierInvoice, //8
         CustomerInvoice, //9
         Payment, //10
-        POS //11
+        POS//, //11
+        //StockTransferSubstraction,
+        //StockTransferAddition
     }
     public enum EventStatus
     {
@@ -42,7 +44,8 @@ namespace Profit.Server
         Sample,
         Conversion,
         Unexpected,
-        OpeningStock
+        OpeningStock,
+        Transfer
     }
     public enum AgainstStatus
     {

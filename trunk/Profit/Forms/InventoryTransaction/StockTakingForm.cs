@@ -61,6 +61,8 @@ namespace Profit
             if ((e.ColumnIndex == priceColumn.Index) || (e.ColumnIndex == QtyColumn.Index))
             {
                 decimal qty = Convert.ToDecimal(dataItemskryptonDataGridView[QtyColumn.Index, e.RowIndex].Value);
+                if (qty < 0)
+                    qty = decimal.Negate(qty);
                 decimal price = Convert.ToDecimal(dataItemskryptonDataGridView[priceColumn.Index, e.RowIndex].Value);
                 dataItemskryptonDataGridView[totalAmountColumn.Index, e.RowIndex].Value = qty * price;
                 updateTotalAmount();

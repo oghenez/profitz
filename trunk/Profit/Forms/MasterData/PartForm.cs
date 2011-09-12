@@ -349,6 +349,7 @@ namespace Profit
             toolStripButtonEdit.Enabled = (editmode == EditMode.View) && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].SAVE;
             toolStripButtonDelete.Enabled = (editmode == EditMode.View) && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].DELETE;
             toolStripButtonClear.Enabled = m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].SAVE;
+            openingstocktoolStripButton.Enabled = toolStripButtonSave.Enabled;
             ReloadMainFormButton();
         }
         private void ReloadMainFormButton()
@@ -524,10 +525,15 @@ namespace Profit
 
         public void Refresh(object sender, EventArgs e)
         {
-            InitializeDataSource();
+            if(toolStripButtonSave.Enabled) InitializeDataSource();
             //loadRecords(); 
-            gridData.Rows.Clear();
-            gridData.ClearSelection(); 
+            StockCardInfo sci = r_part.GetStockCardInfo(m_part.ID);
+            balanceKryptonTextBox.Text = sci.BALANCE.ToString();
+            BackOrderKryptonTextBox.Text = sci.BACKORDER.ToString();
+            bookedKryptonTextBox.Text = sci.BOOKED.ToString();
+
+           // gridData.Rows.Clear();
+           // gridData.ClearSelection(); 
         }
 
         public void Print(object sender, EventArgs e)
@@ -714,6 +720,18 @@ namespace Profit
         private void refreshMovementkryptonButton_Click(object sender, EventArgs e)
         {
             loadMovement();
+        }
+
+        private void openingstocktoolStripButton_Click(object sender, EventArgs e)
+        {
+            if (m_part.ID == 0)
+            {
+                KryptonMessageBox.Show("Please save first.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            OpeningStockForm frm = new OpeningStockForm(m_mainForm, "OpeningStockForm");
+            frm.WizardFromPart(m_part);
+            frm.Show();
         }
 
         //private void toolStripButtonMigrate_Click(object sender, EventArgs e)
