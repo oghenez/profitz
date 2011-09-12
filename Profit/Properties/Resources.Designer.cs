@@ -60,6 +60,13 @@ namespace Profit.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap blueprint__plus {
+            get {
+                object obj = ResourceManager.GetObject("blueprint--plus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap delete {
             get {
                 object obj = ResourceManager.GetObject("delete", resourceCulture);

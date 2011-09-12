@@ -90,6 +90,18 @@
     <Compile Include="Forms\InventoryTransaction\APDebitNoteForm.Designer.cs">
       <DependentUpon>APDebitNoteForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\InventoryTransaction\SearchOpeningStockForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SearchOpeningStockForm.Designer.cs">
+      <DependentUpon>SearchOpeningStockForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\OpeningStockForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\OpeningStockForm.Designer.cs">
+      <DependentUpon>OpeningStockForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\InventoryTransaction\SalesTransaction\ARCreditNoteForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -503,6 +515,12 @@
     <EmbeddedResource Include="Forms\InventoryTransaction\APDebitNoteForm.resx">
       <DependentUpon>APDebitNoteForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\SearchOpeningStockForm.resx">
+      <DependentUpon>SearchOpeningStockForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\OpeningStockForm.resx">
+      <DependentUpon>OpeningStockForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\ARCreditNoteForm.resx">
       <DependentUpon>ARCreditNoteForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -815,6 +833,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\wizard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blueprint--plus.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

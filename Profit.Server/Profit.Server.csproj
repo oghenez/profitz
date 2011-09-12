@@ -79,6 +79,8 @@
     <Compile Include="Entity\InvoiceTransaction\VendorBalance.cs" />
     <Compile Include="Entity\InvoiceTransaction\VendorBalanceEntry.cs" />
     <Compile Include="Entity\StockCardInfo.cs" />
+    <Compile Include="Entity\Transaction\OpeningStockItem.cs" />
+    <Compile Include="Entity\Transaction\OpeningStock.cs" />
     <Compile Include="Entity\Transaction\CustomerInvoiceItem.cs" />
     <Compile Include="Entity\Transaction\CustomerInvoice.cs" />
     <Compile Include="Entity\Transaction\SupplierInvoiceItem.cs" />
@@ -131,6 +133,7 @@
     <Compile Include="Repository\AutoNumberSetupRepository.cs" />
     <Compile Include="Repository\APDebitNoteRepository.cs" />
     <Compile Include="Repository\ARCreditNoteRepository.cs" />
+    <Compile Include="Repository\OpeningStockRepository.cs" />
     <Compile Include="Repository\ReceiptRepository.cs" />
     <Compile Include="Repository\CustomerOutStandingInvoiceRepository.cs" />
     <Compile Include="Repository\CustomerInvoiceJournalRepository.cs" />

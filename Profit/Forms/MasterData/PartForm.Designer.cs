@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonHeader1 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
@@ -41,10 +41,13 @@
             this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonClear = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonRefresh = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.openingstocktoolStripButton = new System.Windows.Forms.ToolStripButton();
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.customTabControl1 = new System.Windows.Forms.CustomTabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.partCategorykryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -78,6 +81,8 @@
             this.unitKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.unitkryptonComboBox2 = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.refreshMovementkryptonButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.movemntkryptonDataGridView = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.dateMovementColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewDateTimePickerColumn();
             this.eventTypeMovementColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
@@ -86,19 +91,20 @@
             this.unitMovementColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.vendorMovementColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.statusMovementColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.unitkryptonLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.bookedKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.kryptonLabel15 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel14 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel16 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.BackOrderKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.balanceKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonLabel16 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel15 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.bookedKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.barcodekryptonTextBox1 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.unitkryptonLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.textBoxCode = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel14 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.activekryptonCheckBox1 = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
+            this.balanceKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.textBoxName = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.gridData = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.dgName = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewMaskedTextBoxColumn();
@@ -113,10 +119,6 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.buttonSpecAny1 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.refreshMovementkryptonButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
@@ -136,12 +138,12 @@
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUOM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.unitkryptonComboBox2)).BeginInit();
+            this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.movemntkryptonDataGridView)).BeginInit();
+            this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
             this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            this.tabPage2.SuspendLayout();
-            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonHeader1
@@ -162,7 +164,9 @@
             this.toolStripButtonEdit,
             this.toolStripButtonDelete,
             this.toolStripButtonClear,
-            this.toolStripButtonRefresh});
+            this.toolStripButtonRefresh,
+            this.toolStripSeparator1,
+            this.openingstocktoolStripButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 29);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1072, 25);
@@ -213,6 +217,20 @@
             this.toolStripButtonRefresh.Size = new System.Drawing.Size(66, 22);
             this.toolStripButtonRefresh.Text = "Refresh";
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // openingstocktoolStripButton
+            // 
+            this.openingstocktoolStripButton.Image = global::Profit.Properties.Resources.blueprint__plus;
+            this.openingstocktoolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openingstocktoolStripButton.Name = "openingstocktoolStripButton";
+            this.openingstocktoolStripButton.Size = new System.Drawing.Size(104, 22);
+            this.openingstocktoolStripButton.Text = "Opening Stock";
+            this.openingstocktoolStripButton.Click += new System.EventHandler(this.openingstocktoolStripButton_Click);
+            // 
             // kryptonSplitContainer1
             // 
             this.kryptonSplitContainer1.Cursor = System.Windows.Forms.Cursors.Default;
@@ -231,7 +249,7 @@
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.gridData);
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.toolStrip2);
             this.kryptonSplitContainer1.Size = new System.Drawing.Size(1072, 547);
-            this.kryptonSplitContainer1.SplitterDistance = 349;
+            this.kryptonSplitContainer1.SplitterDistance = 332;
             this.kryptonSplitContainer1.TabIndex = 4;
             // 
             // kryptonPanel1
@@ -251,7 +269,7 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(1072, 349);
+            this.kryptonPanel1.Size = new System.Drawing.Size(1072, 332);
             this.kryptonPanel1.TabIndex = 4;
             this.kryptonPanel1.DoubleClick += new System.EventHandler(this.kryptonPanel1_DoubleClick);
             // 
@@ -285,7 +303,7 @@
             this.customTabControl1.Location = new System.Drawing.Point(12, 54);
             this.customTabControl1.Name = "customTabControl1";
             this.customTabControl1.SelectedIndex = 0;
-            this.customTabControl1.Size = new System.Drawing.Size(840, 284);
+            this.customTabControl1.Size = new System.Drawing.Size(840, 271);
             this.customTabControl1.TabIndex = 34;
             // 
             // tabPage3
@@ -315,10 +333,18 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 27);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(832, 253);
+            this.tabPage3.Size = new System.Drawing.Size(832, 240);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "More Info";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // kryptonLabel7
+            // 
+            this.kryptonLabel7.Location = new System.Drawing.Point(345, 6);
+            this.kryptonLabel7.Name = "kryptonLabel7";
+            this.kryptonLabel7.Size = new System.Drawing.Size(96, 19);
+            this.kryptonLabel7.TabIndex = 33;
+            this.kryptonLabel7.Values.Text = "Product Preview :";
             // 
             // pictureBox
             // 
@@ -352,7 +378,7 @@
             // taxkryptonCheckBox2
             // 
             this.taxkryptonCheckBox2.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.NormalControl;
-            this.taxkryptonCheckBox2.Location = new System.Drawing.Point(116, 200);
+            this.taxkryptonCheckBox2.Location = new System.Drawing.Point(116, 203);
             this.taxkryptonCheckBox2.Name = "taxkryptonCheckBox2";
             this.taxkryptonCheckBox2.Size = new System.Drawing.Size(40, 19);
             this.taxkryptonCheckBox2.TabIndex = 17;
@@ -458,7 +484,7 @@
             // 
             // kryptonLabel6
             // 
-            this.kryptonLabel6.Location = new System.Drawing.Point(47, 175);
+            this.kryptonLabel6.Location = new System.Drawing.Point(47, 178);
             this.kryptonLabel6.Name = "kryptonLabel6";
             this.kryptonLabel6.Size = new System.Drawing.Size(60, 19);
             this.kryptonLabel6.TabIndex = 20;
@@ -575,9 +601,9 @@
             // 
             // ConversionQTy
             // 
-            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle31.NullValue = "1";
-            this.ConversionQTy.DefaultCellStyle = dataGridViewCellStyle31;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle11.NullValue = "1";
+            this.ConversionQTy.DefaultCellStyle = dataGridViewCellStyle11;
             this.ConversionQTy.HeaderText = "Qty";
             this.ConversionQTy.Increment = new decimal(new int[] {
             1,
@@ -608,8 +634,8 @@
             // 
             // OrigQty
             // 
-            dataGridViewCellStyle32.NullValue = "0";
-            this.OrigQty.DefaultCellStyle = dataGridViewCellStyle32;
+            dataGridViewCellStyle12.NullValue = "0";
+            this.OrigQty.DefaultCellStyle = dataGridViewCellStyle12;
             this.OrigQty.HeaderText = "Cv Qty";
             this.OrigQty.Increment = new decimal(new int[] {
             1,
@@ -639,9 +665,9 @@
             // CostPrice
             // 
             this.CostPrice.DecimalPlaces = 2;
-            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle33.NullValue = "0";
-            this.CostPrice.DefaultCellStyle = dataGridViewCellStyle33;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle13.NullValue = "0";
+            this.CostPrice.DefaultCellStyle = dataGridViewCellStyle13;
             this.CostPrice.HeaderText = "Cost Price";
             this.CostPrice.Increment = new decimal(new int[] {
             1,
@@ -665,9 +691,9 @@
             // SellPrice
             // 
             this.SellPrice.DecimalPlaces = 2;
-            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle34.NullValue = "0";
-            this.SellPrice.DefaultCellStyle = dataGridViewCellStyle34;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle14.NullValue = "0";
+            this.SellPrice.DefaultCellStyle = dataGridViewCellStyle14;
             this.SellPrice.HeaderText = "Sell Price";
             this.SellPrice.Increment = new decimal(new int[] {
             1,
@@ -715,6 +741,27 @@
             this.kryptonLabel8.Size = new System.Drawing.Size(63, 19);
             this.kryptonLabel8.TabIndex = 22;
             this.kryptonLabel8.Values.Text = "Base Unit :";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.refreshMovementkryptonButton);
+            this.tabPage2.Controls.Add(this.movemntkryptonDataGridView);
+            this.tabPage2.Location = new System.Drawing.Point(4, 27);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(832, 253);
+            this.tabPage2.TabIndex = 2;
+            this.tabPage2.Text = "Movement";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // refreshMovementkryptonButton
+            // 
+            this.refreshMovementkryptonButton.Location = new System.Drawing.Point(6, 11);
+            this.refreshMovementkryptonButton.Name = "refreshMovementkryptonButton";
+            this.refreshMovementkryptonButton.Size = new System.Drawing.Size(64, 25);
+            this.refreshMovementkryptonButton.TabIndex = 35;
+            this.refreshMovementkryptonButton.Values.Text = "Refresh";
+            this.refreshMovementkryptonButton.Click += new System.EventHandler(this.refreshMovementkryptonButton_Click);
             // 
             // movemntkryptonDataGridView
             // 
@@ -805,54 +852,19 @@
             this.statusMovementColumn.ReadOnly = true;
             this.statusMovementColumn.Width = 50;
             // 
-            // unitkryptonLabel
+            // tabPage4
             // 
-            this.unitkryptonLabel.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.TitlePanel;
-            this.unitkryptonLabel.Location = new System.Drawing.Point(713, 5);
-            this.unitkryptonLabel.Name = "unitkryptonLabel";
-            this.unitkryptonLabel.Size = new System.Drawing.Size(44, 27);
-            this.unitkryptonLabel.TabIndex = 34;
-            this.unitkryptonLabel.Values.Text = "PCS";
-            // 
-            // bookedKryptonTextBox
-            // 
-            this.bookedKryptonTextBox.Location = new System.Drawing.Point(120, 36);
-            this.bookedKryptonTextBox.Name = "bookedKryptonTextBox";
-            this.bookedKryptonTextBox.ReadOnly = true;
-            this.bookedKryptonTextBox.Size = new System.Drawing.Size(100, 27);
-            this.bookedKryptonTextBox.StateCommon.Content.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bookedKryptonTextBox.StateNormal.Content.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bookedKryptonTextBox.TabIndex = 5;
-            this.bookedKryptonTextBox.Text = "0";
-            this.bookedKryptonTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // kryptonLabel15
-            // 
-            this.kryptonLabel15.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.TitlePanel;
-            this.kryptonLabel15.Location = new System.Drawing.Point(12, 7);
-            this.kryptonLabel15.Name = "kryptonLabel15";
-            this.kryptonLabel15.Size = new System.Drawing.Size(102, 27);
-            this.kryptonLabel15.TabIndex = 1;
-            this.kryptonLabel15.Values.Text = "ORDERED :";
-            // 
-            // kryptonLabel14
-            // 
-            this.kryptonLabel14.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.TitlePanel;
-            this.kryptonLabel14.Location = new System.Drawing.Point(524, 5);
-            this.kryptonLabel14.Name = "kryptonLabel14";
-            this.kryptonLabel14.Size = new System.Drawing.Size(77, 27);
-            this.kryptonLabel14.TabIndex = 0;
-            this.kryptonLabel14.Values.Text = "STOCK :";
-            // 
-            // kryptonLabel16
-            // 
-            this.kryptonLabel16.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.TitlePanel;
-            this.kryptonLabel16.Location = new System.Drawing.Point(21, 36);
-            this.kryptonLabel16.Name = "kryptonLabel16";
-            this.kryptonLabel16.Size = new System.Drawing.Size(93, 27);
-            this.kryptonLabel16.TabIndex = 2;
-            this.kryptonLabel16.Values.Text = "BOOKED :";
-            this.kryptonLabel16.Paint += new System.Windows.Forms.PaintEventHandler(this.kryptonLabel16_Paint);
+            this.tabPage4.Controls.Add(this.BackOrderKryptonTextBox);
+            this.tabPage4.Controls.Add(this.kryptonLabel16);
+            this.tabPage4.Controls.Add(this.kryptonLabel15);
+            this.tabPage4.Controls.Add(this.bookedKryptonTextBox);
+            this.tabPage4.Location = new System.Drawing.Point(4, 27);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(832, 253);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Order Info";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // BackOrderKryptonTextBox
             // 
@@ -866,17 +878,36 @@
             this.BackOrderKryptonTextBox.Text = "0";
             this.BackOrderKryptonTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // balanceKryptonTextBox
+            // kryptonLabel16
             // 
-            this.balanceKryptonTextBox.Location = new System.Drawing.Point(607, 5);
-            this.balanceKryptonTextBox.Name = "balanceKryptonTextBox";
-            this.balanceKryptonTextBox.ReadOnly = true;
-            this.balanceKryptonTextBox.Size = new System.Drawing.Size(100, 27);
-            this.balanceKryptonTextBox.StateCommon.Content.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.balanceKryptonTextBox.StateNormal.Content.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.balanceKryptonTextBox.TabIndex = 3;
-            this.balanceKryptonTextBox.Text = "0";
-            this.balanceKryptonTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.kryptonLabel16.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.TitlePanel;
+            this.kryptonLabel16.Location = new System.Drawing.Point(21, 36);
+            this.kryptonLabel16.Name = "kryptonLabel16";
+            this.kryptonLabel16.Size = new System.Drawing.Size(93, 27);
+            this.kryptonLabel16.TabIndex = 2;
+            this.kryptonLabel16.Values.Text = "BOOKED :";
+            this.kryptonLabel16.Paint += new System.Windows.Forms.PaintEventHandler(this.kryptonLabel16_Paint);
+            // 
+            // kryptonLabel15
+            // 
+            this.kryptonLabel15.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.TitlePanel;
+            this.kryptonLabel15.Location = new System.Drawing.Point(12, 7);
+            this.kryptonLabel15.Name = "kryptonLabel15";
+            this.kryptonLabel15.Size = new System.Drawing.Size(102, 27);
+            this.kryptonLabel15.TabIndex = 1;
+            this.kryptonLabel15.Values.Text = "ORDERED :";
+            // 
+            // bookedKryptonTextBox
+            // 
+            this.bookedKryptonTextBox.Location = new System.Drawing.Point(120, 36);
+            this.bookedKryptonTextBox.Name = "bookedKryptonTextBox";
+            this.bookedKryptonTextBox.ReadOnly = true;
+            this.bookedKryptonTextBox.Size = new System.Drawing.Size(100, 27);
+            this.bookedKryptonTextBox.StateCommon.Content.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bookedKryptonTextBox.StateNormal.Content.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bookedKryptonTextBox.TabIndex = 5;
+            this.bookedKryptonTextBox.Text = "0";
+            this.bookedKryptonTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // barcodekryptonTextBox1
             // 
@@ -884,6 +915,15 @@
             this.barcodekryptonTextBox1.Name = "barcodekryptonTextBox1";
             this.barcodekryptonTextBox1.Size = new System.Drawing.Size(192, 22);
             this.barcodekryptonTextBox1.TabIndex = 2;
+            // 
+            // unitkryptonLabel
+            // 
+            this.unitkryptonLabel.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.TitlePanel;
+            this.unitkryptonLabel.Location = new System.Drawing.Point(713, 5);
+            this.unitkryptonLabel.Name = "unitkryptonLabel";
+            this.unitkryptonLabel.Size = new System.Drawing.Size(44, 27);
+            this.unitkryptonLabel.TabIndex = 34;
+            this.unitkryptonLabel.Values.Text = "PCS";
             // 
             // kryptonLabel1
             // 
@@ -908,6 +948,15 @@
             this.kryptonLabel2.TabIndex = 1;
             this.kryptonLabel2.Values.Text = "Name :";
             // 
+            // kryptonLabel14
+            // 
+            this.kryptonLabel14.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.TitlePanel;
+            this.kryptonLabel14.Location = new System.Drawing.Point(524, 5);
+            this.kryptonLabel14.Name = "kryptonLabel14";
+            this.kryptonLabel14.Size = new System.Drawing.Size(77, 27);
+            this.kryptonLabel14.TabIndex = 0;
+            this.kryptonLabel14.Values.Text = "STOCK :";
+            // 
             // kryptonLabel3
             // 
             this.kryptonLabel3.Location = new System.Drawing.Point(235, 4);
@@ -925,6 +974,18 @@
             this.activekryptonCheckBox1.TabIndex = 1;
             this.activekryptonCheckBox1.Text = "Active";
             this.activekryptonCheckBox1.Values.Text = "Active";
+            // 
+            // balanceKryptonTextBox
+            // 
+            this.balanceKryptonTextBox.Location = new System.Drawing.Point(607, 5);
+            this.balanceKryptonTextBox.Name = "balanceKryptonTextBox";
+            this.balanceKryptonTextBox.ReadOnly = true;
+            this.balanceKryptonTextBox.Size = new System.Drawing.Size(100, 27);
+            this.balanceKryptonTextBox.StateCommon.Content.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.balanceKryptonTextBox.StateNormal.Content.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.balanceKryptonTextBox.TabIndex = 3;
+            this.balanceKryptonTextBox.Text = "0";
+            this.balanceKryptonTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBoxName
             // 
@@ -954,7 +1015,7 @@
             this.gridData.RowHeadersVisible = false;
             this.gridData.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gridData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridData.Size = new System.Drawing.Size(1072, 168);
+            this.gridData.Size = new System.Drawing.Size(1072, 185);
             this.gridData.StateCommon.BackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlClient;
             this.gridData.StateCommon.DataCell.Border.DrawBorders = ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom;
             this.gridData.TabIndex = 1;
@@ -984,9 +1045,9 @@
             // 
             // ActiveCol
             // 
-            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle35.NullValue = false;
-            this.ActiveCol.DefaultCellStyle = dataGridViewCellStyle35;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle15.NullValue = false;
+            this.ActiveCol.DefaultCellStyle = dataGridViewCellStyle15;
             this.ActiveCol.FalseValue = null;
             this.ActiveCol.HeaderText = "Active";
             this.ActiveCol.IndeterminateValue = null;
@@ -1063,49 +1124,6 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.refreshMovementkryptonButton);
-            this.tabPage2.Controls.Add(this.movemntkryptonDataGridView);
-            this.tabPage2.Location = new System.Drawing.Point(4, 27);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(832, 253);
-            this.tabPage2.TabIndex = 2;
-            this.tabPage2.Text = "Movement";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // refreshMovementkryptonButton
-            // 
-            this.refreshMovementkryptonButton.Location = new System.Drawing.Point(6, 11);
-            this.refreshMovementkryptonButton.Name = "refreshMovementkryptonButton";
-            this.refreshMovementkryptonButton.Size = new System.Drawing.Size(64, 25);
-            this.refreshMovementkryptonButton.TabIndex = 35;
-            this.refreshMovementkryptonButton.Values.Text = "Refresh";
-            this.refreshMovementkryptonButton.Click += new System.EventHandler(this.refreshMovementkryptonButton_Click);
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.BackOrderKryptonTextBox);
-            this.tabPage4.Controls.Add(this.kryptonLabel16);
-            this.tabPage4.Controls.Add(this.kryptonLabel15);
-            this.tabPage4.Controls.Add(this.bookedKryptonTextBox);
-            this.tabPage4.Location = new System.Drawing.Point(4, 27);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(832, 253);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Order Info";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // kryptonLabel7
-            // 
-            this.kryptonLabel7.Location = new System.Drawing.Point(345, 6);
-            this.kryptonLabel7.Name = "kryptonLabel7";
-            this.kryptonLabel7.Size = new System.Drawing.Size(96, 19);
-            this.kryptonLabel7.TabIndex = 33;
-            this.kryptonLabel7.Values.Text = "Product Preview :";
-            // 
             // PartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1144,14 +1162,14 @@
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUOM)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.unitkryptonComboBox2)).EndInit();
+            this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.movemntkryptonDataGridView)).EndInit();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).EndInit();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1242,5 +1260,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton refreshMovementkryptonButton;
         private System.Windows.Forms.TabPage tabPage4;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton openingstocktoolStripButton;
     }
 }
