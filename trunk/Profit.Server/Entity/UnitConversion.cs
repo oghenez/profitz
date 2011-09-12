@@ -157,6 +157,10 @@ namespace Profit.Server
         {
             return String.Format("select * from table_unitconversion where part_id = '{0}'",partID);
         }
+        public static string GetAllByBarcodeSQL(string barcode)
+        {
+            return String.Format("select * from table_unitconversion where unitconv_barcode = '{0}'", barcode);
+        }
         public static string GetByPartAndUnitConIDSQL(int partID, int unitConvID)
         {
             return String.Format("select * from table_unitconversion where part_id = {0} and unitconv_unit = {1}", partID, unitConvID);

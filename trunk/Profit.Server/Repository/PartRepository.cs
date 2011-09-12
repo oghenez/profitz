@@ -304,7 +304,40 @@ namespace Profit.Server
             {
                 m_connection.Close();
             }
+        }
+        public IList SearchActivePartByBarcode(string barcode, bool active)
+        {
+            try
+            {
+                OpenConnection();
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand();
+                aCommand.Connection = m_connection;
+                MySql.Data.MySqlClient.MySqlDataReader aReader;
 
+                aCommand.CommandText = UnitConversion.GetAllByBarcodeSQL(barcode);
+                aReader = aCommand.ExecuteReader();
+                IList unv = UnitConversion.GetAllStatic(aReader);
+                aReader.Close();
+                IList result = new ArrayList();
+                foreach (UnitConversion c in unv)
+                {
+                    c.PART = PartRepository.GetByID(aCommand, c.PART.ID);
+                    c.CONVERSION_UNIT = PartRepository.GetUnitByID(aCommand, c.CONVERSION_UNIT.ID);
+                    c.PART.UNIT_BY_SEARCH = c.CONVERSION_UNIT;
+                    c.PART.SELL_PRICE_BY_SEARCH = c.SELL_PRICE;
+                    c.PART.COST_PRICE_BY_SEARCH = c.COST_PRICE;
+                    result.Add(c.PART);
+                }
+                return result;
+            }
+            catch (Exception x)
+            {
+                throw new Exception(getErrorMessage(x));
+            }
+            finally
+            {
+                m_connection.Close();
+            }
         }
         public IList GetAllUnit(int partID, int unitID)
         {
@@ -359,6 +392,14 @@ namespace Profit.Server
             cmd.CommandText = UnitConversion.GetAllByPartSQL(partID);
             MySql.Data.MySqlClient.MySqlDataReader aReader = cmd.ExecuteReader();
             IList a = UnitConversion.GetAllStatic(aReader);
+            aReader.Close();
+            return a;
+        }
+        public static Unit GetUnitByID(MySql.Data.MySqlClient.MySqlCommand cmd, int unitID)
+        {
+            cmd.CommandText = Unit.GetByIDSQLstatic(unitID);
+            MySql.Data.MySqlClient.MySqlDataReader aReader = cmd.ExecuteReader();
+            Unit a = Unit.GetUnit(aReader);
             aReader.Close();
             return a;
         }
