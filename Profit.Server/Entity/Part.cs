@@ -31,6 +31,9 @@ namespace Profit.Server
         public byte[] PICTURE;
         public string PICTURE_NAME = "";
 
+        public Unit UNIT_BY_SEARCH = null;// for searching unit conversion
+        public double SELL_PRICE_BY_SEARCH = 0;
+        public double COST_PRICE_BY_SEARCH = 0;
         public Part()
         {
         }
