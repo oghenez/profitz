@@ -10,7 +10,11 @@ namespace Profit.Server
     public class PaymentRepository : JournalRepository
     {
         public PaymentRepository() : base() { }
-
+        public PaymentRepository(MySql.Data.MySqlClient.MySqlCommand cmd)
+            : base() 
+        {
+            m_command = cmd;
+        }
         protected override void doConfirm(EventJournal events, Period p)
         {
             foreach (PaymentItem item in events.EVENT_JOURNAL_ITEMS)
@@ -333,10 +337,16 @@ namespace Profit.Server
                 stk.ID = Convert.ToInt32(m_command.ExecuteScalar());
                 foreach (PaymentItem item in stk.EVENT_JOURNAL_ITEMS)
                 {
+                    item.VENDOR_BALANCE_SUPPLIER_INVOICE_TYPE = item.SUPPLIER_INVOICE_JOURNAL_ITEM.GET_EVENT_JOURNAL.VENDOR_BALANCE_ENTRY_TYPE;
                     m_command.CommandText = item.GetInsertSQL();
                     m_command.ExecuteNonQuery();
                     m_command.CommandText = PaymentItem.SelectMaxIDSQL();
                     item.ID = Convert.ToInt32(m_command.ExecuteScalar());
+                    if (item.PAYMENT_TYPE == PaymentType.APDebitNote)
+                    {
+                        m_command.CommandText = APDebitNote.UpdateUsedForPayment(item.AP_DEBIT_NOTE.ID, true);
+                        m_command.ExecuteNonQuery();
+                    }
                 }
             }
             catch (Exception x)

@@ -512,7 +512,7 @@ namespace Profit
                 taxKryptonComboBox.SelectedIndex = 0;
                 taxAfterAmountkryptonNumericUpDown.Value = 0m;
                 otherExpensekryptonNumericUpDown.Value = 0m;
-                supplierkryptonComboBox.SelectedIndex = 0;
+                supplierkryptonComboBox.Text = "POS";
                 docnokryptonTextBox.Text = "";
                 docdatekryptonDateTimePicker.Value = DateTime.Today;
                 itemsDataGrid.Rows.Clear();
@@ -549,7 +549,7 @@ namespace Profit
             taxKryptonComboBox.Enabled = enable;
             //taxAfterAmountkryptonNumericUpDown.Enabled = enable;
             otherExpensekryptonNumericUpDown.Enabled = enable;
-            supplierkryptonComboBox.Enabled = enable;
+           // supplierkryptonComboBox.Enabled = enable;
 
             itemsDataGrid.AllowUserToDeleteRows = enable;
             itemsDataGrid.AllowUserToAddRows = enable;

@@ -198,5 +198,9 @@ namespace Profit.Server
         {
             return @"select Count(*) from table_receipt p";
         }
+        public static string FindReceiptId(int id)
+        {
+            return String.Format(@"select * from table_receipt p where p.ci_id = {0}", id);
+        }
     }
 }
