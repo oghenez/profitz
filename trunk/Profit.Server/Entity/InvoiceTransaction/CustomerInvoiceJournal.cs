@@ -10,6 +10,7 @@ namespace Profit.Server
     public class CustomerInvoiceJournal : EventJournal
     {
         public CustomerInvoice CUSTOMER_INVOICE;
+        public POS POS_INVOICE;
         public AgainstStatus AGAINST_RECEIPT_STATUS = AgainstStatus.Open;
 
         public CustomerInvoiceJournal()

@@ -10,6 +10,11 @@ namespace Profit.Server
     public class ReceiptRepository : JournalRepository
     {
         public ReceiptRepository() : base() { }
+        public ReceiptRepository(MySql.Data.MySqlClient.MySqlCommand cmd)
+            : base() 
+        {
+            m_command = cmd;
+        }
 
         protected override void doConfirm(EventJournal events, Period p)
         {
@@ -333,10 +338,16 @@ namespace Profit.Server
                 stk.ID = Convert.ToInt32(m_command.ExecuteScalar());
                 foreach (ReceiptItem item in stk.EVENT_JOURNAL_ITEMS)
                 {
+                    item.VENDOR_BALANCE_CUSTOMER_INVOICE_TYPE = item.CUSTOMER_INVOICE_JOURNAL_ITEM.GET_EVENT_JOURNAL.VENDOR_BALANCE_ENTRY_TYPE;
                     m_command.CommandText = item.GetInsertSQL();
                     m_command.ExecuteNonQuery();
                     m_command.CommandText = ReceiptItem.SelectMaxIDSQL();
                     item.ID = Convert.ToInt32(m_command.ExecuteScalar());
+                    if (item.PAYMENT_TYPE == ReceiptType.ARCreditNote)
+                    {
+                        m_command.CommandText = ARCreditNote.UpdateUsedForReceipt(item.AR_CREDIT_NOTE.ID, true);
+                        m_command.ExecuteNonQuery();
+                    }
                 }
             }
             catch (Exception x)
@@ -384,11 +395,20 @@ namespace Profit.Server
 
         protected override void doDeleteNoTransaction(EventJournal e)
         {
-            Receipt st = (Receipt)e;
+            Receipt st = (Receipt)this.Get(e.ID);
             try
             {
+                
                 if (getEventStatus(st.ID) == EventStatus.Confirm)
                     throw new Exception("Revise before delete");
+                foreach (ReceiptItem sti in e.EVENT_JOURNAL_ITEMS)
+                {
+                    if (sti.PAYMENT_TYPE == ReceiptType.ARCreditNote)
+                    {
+                        m_command.CommandText = ARCreditNote.UpdateUsedForReceipt(sti.AR_CREDIT_NOTE.ID, false);
+                        m_command.ExecuteNonQuery();
+                    }
+                }
                 m_command.CommandText = ReceiptItem.DeleteAllByEventSQL(st.ID);
                 m_command.ExecuteNonQuery();
                 m_command.CommandText = Receipt.DeleteSQL(st.ID);
@@ -466,6 +486,15 @@ namespace Profit.Server
                 r.Close();
             }
             return result;
+        }
+        public ReceiptItem FindReceiptItemByCIJ(int CIId)
+        {
+            string sql = ReceiptItem.GetCustomerInvoiceBySOIID(CIId, VendorBalanceEntryType.CustomerInvoice);
+            m_command.CommandText = sql;
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
+            ReceiptItem rest = ReceiptItem.TransformReader(r);
+            r.Close();
+            return rest;
         }
     }
 }

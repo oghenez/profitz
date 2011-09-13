@@ -818,6 +818,7 @@
             // 
             this.supplierkryptonComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.supplierkryptonComboBox.DropDownWidth = 90;
+            this.supplierkryptonComboBox.Enabled = false;
             this.supplierkryptonComboBox.Location = new System.Drawing.Point(411, 4);
             this.supplierkryptonComboBox.Name = "supplierkryptonComboBox";
             this.supplierkryptonComboBox.Size = new System.Drawing.Size(108, 22);
