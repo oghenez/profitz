@@ -53,9 +53,10 @@ namespace Profit.Server
                     cij_netamount,
                     emp_id,
                     ci_id,
-                    cij_againstreceiptstatus
+                    cij_againstreceiptstatus,
+                    pos_id
                 ) 
-                VALUES ('{0}','{1}',{2},{3},'{4}','{5}',{6},'{7}',{8},{9},{10},{11},{12},{13},{14},{15},{16},'{17}')",
+                VALUES ('{0}','{1}',{2},{3},'{4}','{5}',{6},'{7}',{8},{9},{10},{11},{12},{13},{14},{15},{16},'{17}',{18})",
                 CODE,
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 VENDOR.ID,
@@ -73,7 +74,8 @@ namespace Profit.Server
                 NET_AMOUNT,
                 EMPLOYEE.ID,
                 CUSTOMER_INVOICE == null ? 0 : CUSTOMER_INVOICE.ID,
-                AGAINST_RECEIPT_STATUS.ToString()
+                AGAINST_RECEIPT_STATUS.ToString(),
+                POS_INVOICE == null ? 0 : POS_INVOICE.ID
                 );
         }
         public override string GetUpdateSQL()
@@ -96,8 +98,9 @@ namespace Profit.Server
                     cij_netamount= {14},
                     emp_id = {15},
                      ci_id = {16},
-                    cij_againstreceiptstatus = '{17}'
-                where cij_id = {18}",
+                    cij_againstreceiptstatus = '{17}',
+                    pos_id = {18}
+                where cij_id = {19}",
                 CODE,
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 VENDOR.ID,
@@ -116,6 +119,7 @@ namespace Profit.Server
                 EMPLOYEE.ID,
                 CUSTOMER_INVOICE == null ? 0 : CUSTOMER_INVOICE.ID,
                 AGAINST_RECEIPT_STATUS.ToString(),
+                POS_INVOICE == null ? 0 : POS_INVOICE.ID,
                 ID);
         }
         public static CustomerInvoiceJournal TransformReader(MySql.Data.MySqlClient.MySqlDataReader r)
@@ -144,6 +148,7 @@ namespace Profit.Server
                 tr.EMPLOYEE = new Employee(Convert.ToInt32(r["emp_id"]));
                 tr.CUSTOMER_INVOICE = new CustomerInvoice(Convert.ToInt32(r["ci_id"]));
                 tr.AGAINST_RECEIPT_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), r["cij_againstreceiptstatus"].ToString());
+                tr.POS_INVOICE = new POS(Convert.ToInt32(r["pos_id"]));
             }
             return tr;
         }
@@ -172,6 +177,8 @@ namespace Profit.Server
                 tr.EMPLOYEE = new Employee(Convert.ToInt32(r["emp_id"]));
                 tr.CUSTOMER_INVOICE = new CustomerInvoice(Convert.ToInt32(r["ci_id"]));
                 tr.AGAINST_RECEIPT_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), r["cij_againstreceiptstatus"].ToString());
+                tr.POS_INVOICE = new POS(Convert.ToInt32(r["pos_id"]));
+
                 result.Add(tr);
             }
             return result;
@@ -220,6 +227,10 @@ namespace Profit.Server
         public static string FindPeriodCIJId(int id)
         {
             return String.Format(@"select * from table_customerinvoicejournal p where p.ci_id = {0}", id);
+        }
+        public static string FindCustomerInvoiceJournalItembyPOSId(int posid)
+        {
+            return String.Format(@"select * from table_customerinvoicejournal p where p.pos_id = {0}", posid);
         }
         public static string RecordCount()
         {

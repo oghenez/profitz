@@ -49,6 +49,7 @@ namespace Profit.Server
         {
             foreach (ReceiptItem item in events.EVENT_JOURNAL_ITEMS)
             {
+                
                 item.CURRENCY = events.CURRENCY;
                 item.VENDOR = events.VENDOR;
                 SetVendorBalance(item, p);
@@ -60,6 +61,11 @@ namespace Profit.Server
                 {
                     CustomerInvoiceJournalRepository.UpdateAgainstStatus(m_command, item.CUSTOMER_INVOICE_JOURNAL_ITEM.GET_EVENT_JOURNAL,
                         item.CUSTOMER_INVOICE_JOURNAL_ITEM);
+                    CustomerInvoiceJournal cij = (CustomerInvoiceJournal)((CustomerInvoiceJournalItem)item.CUSTOMER_INVOICE_JOURNAL_ITEM).EVENT_JOURNAL;
+                    if (cij.POS_INVOICE.ID > 0)
+                    {
+                        throw new Exception("POS Receipt can not revise, please revise POS");
+                    }
                 }
                 if (item.CUSTOMER_INVOICE_JOURNAL_ITEM is CustomerOutStandingInvoiceItem)
                 {
@@ -70,6 +76,44 @@ namespace Profit.Server
                 //{
         
                 //}
+            }
+        }
+        public void ReviseForPOSNoTransaction(int id)
+        {
+            try
+            {
+                EventJournal events = this.Get(id);
+                if (events.EVENT_STATUS == EventStatus.Entry)
+                    throw new Exception("Status is already Unposted/Entry");
+                Period p = AssertValidPeriod(events.TRANSACTION_DATE);
+                foreach (ReceiptItem item in events.EVENT_JOURNAL_ITEMS)
+                {
+
+                    item.CURRENCY = events.CURRENCY;
+                    item.VENDOR = events.VENDOR;
+                    SetVendorBalance(item, p);
+                    item.ProcessUnPosted();
+                    updateVendorBalances(item.VENDOR_BALANCE);
+                    deleteVendorBalanceEntry(item.VENDOR_BALANCE_ENTRY);
+                    item.CUSTOMER_INVOICE_JOURNAL_ITEM.UnSetOSAgainstReceiptItem(item);
+                    if (item.CUSTOMER_INVOICE_JOURNAL_ITEM is CustomerInvoiceJournalItem)
+                    {
+                        CustomerInvoiceJournalRepository.UpdateAgainstStatus(m_command, item.CUSTOMER_INVOICE_JOURNAL_ITEM.GET_EVENT_JOURNAL,
+                            item.CUSTOMER_INVOICE_JOURNAL_ITEM);
+                        CustomerInvoiceJournal cij = (CustomerInvoiceJournal)((CustomerInvoiceJournalItem)item.CUSTOMER_INVOICE_JOURNAL_ITEM).EVENT_JOURNAL;
+                    }
+                    //if (item.CUSTOMER_INVOICE_JOURNAL_ITEM is CustomerOutStandingInvoiceItem)
+                    //{
+                    //    CustomerOutStandingInvoiceRepository.UpdateAgainstStatus(m_command, item.CUSTOMER_INVOICE_JOURNAL_ITEM.GET_EVENT_JOURNAL,
+                    //        item.CUSTOMER_INVOICE_JOURNAL_ITEM);
+                    //}
+                }
+                events.ProcessUnPosted();
+                this.UpdateStatus(events, false);
+            }
+            catch (Exception x)
+            {
+                throw x;
             }
         }
         private void assertConfirmedSIJ(EventJournal p)
@@ -223,6 +267,7 @@ namespace Profit.Server
             MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             Receipt st = Receipt.TransformReader(r);
             r.Close();
+            if (st == null) return null;
             m_command.CommandText = ReceiptItem.GetByEventIDSQL(ID);
             r = m_command.ExecuteReader();
             IList stis = ReceiptItem.TransformReaderList(r);
@@ -338,6 +383,7 @@ namespace Profit.Server
                 stk.ID = Convert.ToInt32(m_command.ExecuteScalar());
                 foreach (ReceiptItem item in stk.EVENT_JOURNAL_ITEMS)
                 {
+                    item.EVENT_JOURNAL = stk;
                     item.VENDOR_BALANCE_CUSTOMER_INVOICE_TYPE = item.CUSTOMER_INVOICE_JOURNAL_ITEM.GET_EVENT_JOURNAL.VENDOR_BALANCE_ENTRY_TYPE;
                     m_command.CommandText = item.GetInsertSQL();
                     m_command.ExecuteNonQuery();

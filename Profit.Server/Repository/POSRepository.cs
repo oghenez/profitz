@@ -9,13 +9,13 @@ namespace Profit.Server
 {
     public class POSRepository : TransactionRepository
     {
-        CustomerInvoiceJournalRepository r_sij;
+        CustomerInvoiceJournalRepository r_cij;
         ReceiptRepository r_receipt;
 
         public POSRepository()
             : base() 
         {
-            r_sij = new CustomerInvoiceJournalRepository(m_command);
+            r_cij = new CustomerInvoiceJournalRepository(m_command);
             r_receipt = new ReceiptRepository(m_command);
         }
 
@@ -25,73 +25,75 @@ namespace Profit.Server
             {
                 SetStockCard(item, p);
             }
-            POS si = (POS)events;
+            POS pos = (POS)events;
             
-            CustomerInvoiceJournal sij = new CustomerInvoiceJournal();
+            CustomerInvoiceJournal cij = new CustomerInvoiceJournal();
            // sij.LastUpdate = DateTime.Now;
            // sij.ByTransaction = true;
-            sij.CODE = si.CODE;
+            cij.CODE = pos.CODE;
             //sij.ComputerName = si.ComputerName;
-            sij.CURRENCY = si.CURRENCY;
-            sij.EVENT_STATUS = EventStatus.Entry;
-            sij.NOTES = si.NOTES;
-            sij.NOTICE_DATE = si.NOTICE_DATE;
-            sij.TRANSACTION_DATE = si.TRANSACTION_DATE;
+            cij.CURRENCY = pos.CURRENCY;
+            cij.EVENT_STATUS = EventStatus.Entry;
+            cij.NOTES = pos.NOTES;
+            cij.NOTICE_DATE = pos.NOTICE_DATE;
+            cij.TRANSACTION_DATE = pos.TRANSACTION_DATE;
            // sij.UserName = si.UserName;
-            sij.VENDOR = si.CUSTOMER;
-            sij.POS_INVOICE = si;
-            sij.NET_AMOUNT = si.NET_TOTAL;
-            sij.EMPLOYEE = si.EMPLOYEE;
-            sij.VENDOR_BALANCE_ENTRY_TYPE = VendorBalanceEntryType.CustomerInvoice;
+            cij.VENDOR = pos.CUSTOMER;
+            cij.POS_INVOICE = pos;
+            cij.NET_AMOUNT = pos.NET_TOTAL;
+            cij.EMPLOYEE = pos.EMPLOYEE;
+            cij.VENDOR_BALANCE_ENTRY_TYPE = VendorBalanceEntryType.CustomerInvoice;
+            
 
-            CustomerInvoiceJournalItem siji = new CustomerInvoiceJournalItem();
-            siji.AMOUNT = si.NET_TOTAL;
-            siji.CURRENCY = si.CURRENCY;
-            siji.EVENT_JOURNAL = sij;
-            siji.VENDOR = si.CUSTOMER;
-            siji.INVOICE_NO = si.CODE;
-            siji.INVOICE_DATE = si.TRANSACTION_DATE;
-            siji.TOP = si.TOP;
-            siji.EMPLOYEE = si.EMPLOYEE;
-            siji.DUE_DATE = si.DUE_DATE;
-            siji.OUTSTANDING_AMOUNT = si.NET_TOTAL;
-            siji.VENDOR_BALANCE_ENTRY_TYPE = VendorBalanceEntryType.CustomerInvoice;
+            CustomerInvoiceJournalItem ciji = new CustomerInvoiceJournalItem();
+            ciji.AMOUNT = pos.NET_TOTAL;
+            ciji.CURRENCY = pos.CURRENCY;
+            ciji.EVENT_JOURNAL = cij;
+            ciji.VENDOR = pos.CUSTOMER;
+            ciji.INVOICE_NO = pos.CODE;
+            ciji.INVOICE_DATE = pos.TRANSACTION_DATE;
+            ciji.TOP = pos.TOP;
+            ciji.EMPLOYEE = pos.EMPLOYEE;
+            ciji.DUE_DATE = pos.DUE_DATE;
+            ciji.OUTSTANDING_AMOUNT = pos.NET_TOTAL;
+            ciji.VENDOR_BALANCE_ENTRY_TYPE = VendorBalanceEntryType.CustomerInvoice;
 
-            sij.EVENT_JOURNAL_ITEMS.Add(siji);
-            r_sij.SaveNoTransaction(sij);
-            r_sij.ConfirmNoTransaction(sij.ID);
+            cij.EVENT_JOURNAL_ITEMS.Add(ciji);
+            r_cij.SaveNoTransaction(cij);
+            r_cij.ConfirmNoTransaction(cij.ID);
 
-            Receipt py = new Receipt();
-            py.CURRENCY = sij.CURRENCY;
-            py.NET_AMOUNT = sij.NET_AMOUNT;
-            py.NOTES = "Auto generate from POS Transaction";
-            py.NOTICE_DATE = sij.NOTICE_DATE;
-            py.OTHER_EXPENSE = sij.OTHER_EXPENSE;
-            py.SUBTOTAL_AMOUNT = sij.SUBTOTAL_AMOUNT;
-            py.TRANSACTION_DATE = sij.TRANSACTION_DATE;
-            py.VENDOR = sij.VENDOR;
-            py.VENDOR_BALANCE_ENTRY_TYPE = VendorBalanceEntryType.Receipt;
-            py.EMPLOYEE = sij.EMPLOYEE;
+            Receipt rc = new Receipt();
+            rc.CURRENCY = cij.CURRENCY;
+            rc.NET_AMOUNT = cij.NET_AMOUNT;
+            rc.NOTES = "Auto generate from POS Transaction";
+            rc.NOTICE_DATE = cij.NOTICE_DATE;
+            rc.OTHER_EXPENSE = cij.OTHER_EXPENSE;
+            rc.SUBTOTAL_AMOUNT = cij.SUBTOTAL_AMOUNT;
+            rc.TRANSACTION_DATE = cij.TRANSACTION_DATE;
+            rc.VENDOR = cij.VENDOR;
+            rc.VENDOR_BALANCE_ENTRY_TYPE = VendorBalanceEntryType.Receipt;
+            rc.EMPLOYEE = cij.EMPLOYEE;
 
-            ReceiptItem pyi = new ReceiptItem();
-            pyi.AMOUNT = siji.AMOUNT;
-            pyi.CURRENCY = py.CURRENCY;
-            pyi.DUE_DATE = py.TRANSACTION_DATE;
-            pyi.EMPLOYEE = py.EMPLOYEE;
-            pyi.EVENT_JOURNAL = sij;
-            pyi.INVOICE_DATE = sij.TRANSACTION_DATE;
-            pyi.INVOICE_NO = sij.CODE;
-            pyi.NOTES = "Autogenerate Payment from POS transaction";
-            pyi.PAYMENT_TYPE = ReceiptType.Cash;
-            pyi.VENDOR_BALANCE_CUSTOMER_INVOICE_TYPE = VendorBalanceEntryType.Receipt;
-            pyi.VENDOR_BALANCE_ENTRY_TYPE = VendorBalanceEntryType.Receipt;
-            pyi.VENDOR_BALANCE_TYPE = VendorBalanceType.Customer;
-            pyi.CUSTOMER_INVOICE_JOURNAL_ITEM = siji;
-            pyi.VENDOR = sij.VENDOR;
-            py.EVENT_JOURNAL_ITEMS.Add(pyi);
+            ReceiptItem rci = new ReceiptItem();
+            rci.EVENT_JOURNAL = rc;
+            rci.AMOUNT = ciji.AMOUNT;
+            rci.CURRENCY = rc.CURRENCY;
+            rci.DUE_DATE = rc.TRANSACTION_DATE;
+            rci.EMPLOYEE = rc.EMPLOYEE;
+            rci.EVENT_JOURNAL = cij;
+            rci.INVOICE_DATE = cij.TRANSACTION_DATE;
+            rci.INVOICE_NO = cij.CODE;
+            rci.NOTES = "Autogenerate Payment from POS transaction";
+            rci.PAYMENT_TYPE = ReceiptType.Cash;
+            rci.VENDOR_BALANCE_CUSTOMER_INVOICE_TYPE = VendorBalanceEntryType.Receipt;
+            rci.VENDOR_BALANCE_ENTRY_TYPE = VendorBalanceEntryType.Receipt;
+            rci.VENDOR_BALANCE_TYPE = VendorBalanceType.Customer;
+            rci.CUSTOMER_INVOICE_JOURNAL_ITEM = ciji;
+            rci.VENDOR = cij.VENDOR;
+            rc.EVENT_JOURNAL_ITEMS.Add(rci);
 
-            r_receipt.SaveNoTransaction(sij);
-            r_receipt.ConfirmNoTransaction(sij.ID);
+            r_receipt.SaveNoTransaction(rc);
+            r_receipt.ConfirmNoTransaction(rc.ID);
 
         }
         protected override void doRevise(Event events, Period p)
@@ -100,19 +102,18 @@ namespace Profit.Server
             {
                 SetStockCard(item, p);
             }
-            CustomerInvoiceJournal sij = (CustomerInvoiceJournal)r_sij.FindPeriodCIJId(events.ID);
+
+            CustomerInvoiceJournal sij = (CustomerInvoiceJournal)r_cij.FindCIJbyPOSId(events.ID);
             if (sij == null) throw new Exception("Customer Invoice Journal is missing");
 
-            ReceiptItem rec = r_receipt.FindReceiptItemByCIJ(sij.ID);
+            ReceiptItem rec = r_receipt.FindReceiptItemByCIJ(((CustomerInvoiceJournalItem)sij.EVENT_JOURNAL_ITEMS[0]).ID);
             if (rec == null) throw new Exception("Receipt is missing");
 
-            r_receipt.ReviseNoTransaction(rec.EVENT_JOURNAL.ID);
-            r_receipt.DeleteNoTransaction(sij);
+            r_receipt.ReviseForPOSNoTransaction(rec.EVENT_JOURNAL.ID);
+            r_receipt.DeleteNoTransaction(rec.EVENT_JOURNAL);
 
-            r_sij.ReviseNoTransaction(sij.ID);
-            r_sij.DeleteNoTransaction(sij);
-
-
+            r_cij.ReviseNoTransaction(sij.ID);
+            r_cij.DeleteNoTransaction(sij);
         }
 
         protected override void doSave(Event e)

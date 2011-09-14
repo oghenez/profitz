@@ -16,6 +16,10 @@ namespace Profit
     {
         Customer m_customer = new Customer();
         IMainForm m_mainForm;
+        CustomerRepository r_sup = (CustomerRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CUSTOMER_REPOSITORY);
+        Repository r_ccy = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY);
+        PeriodRepository r_per = (PeriodRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PERIOD_REPOSITORY);
+
 
         public CustomerForm(IMainForm mainForm, string formName)
         {
@@ -96,7 +100,7 @@ namespace Profit
                         RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CUSTOMER_REPOSITORY).Update(m_customer);
                         updateRecord();
                     }
-                    KryptonMessageBox.Show("Record has been saved","Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    KryptonMessageBox.Show("Record has been saved", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     //gridData.ClearSelection();
                     //ClearForm();
                     //textBoxCode.Focus();
@@ -181,6 +185,9 @@ namespace Profit
                 zipcodekryptonTextBox2.Text = "";
                 m_customer = new Customer();
                 errorProvider1.Clear();
+                transactionkryptonDataGridView.Rows.Clear();
+                vendorbalanceentrykryptonDataGridView.Rows.Clear();
+                vendorbalancekryptonDataGridView.Rows.Clear();
             }
             catch (Exception x)
             {
@@ -310,6 +317,9 @@ namespace Profit
             topkryptonComboBox1.Text = m_customer.TERM_OF_PAYMENT.ToString();
             websitekryptonTextBox7.Text = m_customer.WEBSITE;
             zipcodekryptonTextBox2.Text = m_customer.ZIPCODE;
+            transactionkryptonDataGridView.Rows.Clear();
+            vendorbalanceentrykryptonDataGridView.Rows.Clear();
+            vendorbalancekryptonDataGridView.Rows.Clear();
         }
 
         #region IChildForm Members
@@ -336,7 +346,7 @@ namespace Profit
 
         public void Print(object sender, EventArgs e)
         {
-            
+
         }
 
         #endregion
@@ -355,6 +365,94 @@ namespace Profit
         private void kryptonLabel11_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        //vendorbalancekryptonDataGridView.Rows.Clear();
+        //if (m_customer.ID == 0) return;
+        //IList trs = r_sup.GetVendorBalances(m_customer.ID);
+        //foreach (VendorBalance ev in trs)
+        //{
+        //    ev.CURRENCY = (Currency)r_ccy.GetById(ev.CURRENCY);
+        //    ev.PERIOD = (Period)r_per.GetById(ev.PERIOD);
+        //    int r = vendorbalancekryptonDataGridView.Rows.Add();
+        //    vendorbalancekryptonDataGridView[periodVBColumn.Index, r].Value = ev.PERIOD.CODE;
+        //    vendorbalancekryptonDataGridView[ccyVBColumn.Index, r].Value = ev.CURRENCY.CODE;
+        //    vendorbalancekryptonDataGridView[balanceVBColumn.Index, r].Value = ev.BALANCE;
+        //    vendorbalancekryptonDataGridView[periodstatusVBColumn.Index, r].Value = ev.PERIOD.PERIOD_STATUS.ToString();
+        //}
+        private void transactionkryptonButton_Click(object sender, EventArgs e)
+        {
+            transactionkryptonDataGridView.Rows.Clear();
+            if (m_customer.ID == 0) return;
+            IList trs = r_sup.GetAllTransactions(m_customer.ID);
+            foreach (object ev in trs)
+            {
+                int r = transactionkryptonDataGridView.Rows.Add();
+                if (ev is Event)
+                {
+                    Event t = (Event)ev;
+                    transactionkryptonDataGridView[datetrColumn.Index, r].Value = t.TRANSACTION_DATE;
+                    transactionkryptonDataGridView[typeTrColumn.Index, r].Value = t.STOCK_CARD_ENTRY_TYPE.ToString();
+                    transactionkryptonDataGridView[codeTrColumn.Index, r].Value = t.CODE;
+                    transactionkryptonDataGridView[postedColumn.Index, r].Value = t.POSTED.ToString();
+                }
+                if (ev is EventJournal)
+                {
+                    EventJournal t = (EventJournal)ev;
+                    transactionkryptonDataGridView[datetrColumn.Index, r].Value = t.TRANSACTION_DATE;
+                    transactionkryptonDataGridView[typeTrColumn.Index, r].Value = t.VENDOR_BALANCE_ENTRY_TYPE.ToString();
+                    transactionkryptonDataGridView[codeTrColumn.Index, r].Value = t.CODE;
+                    transactionkryptonDataGridView[postedColumn.Index, r].Value = t.POSTED.ToString();
+
+                }
+            }
+        }
+
+        private void kryptonButton1_Click(object sender, EventArgs e)
+        {
+            vendorbalanceentrykryptonDataGridView.Rows.Clear();
+            if (m_customer.ID == 0) return;
+            IList trs = r_sup.GetVendorBalanceEntry(m_customer.ID);
+            foreach (VendorBalanceEntry ev in trs)
+            {
+                ev.CURRENCY = (Currency)r_ccy.GetById(ev.CURRENCY);
+                int r = vendorbalanceentrykryptonDataGridView.Rows.Add();
+                vendorbalanceentrykryptonDataGridView[dateVBEColumn.Index, r].Value = ev.TRANSACTION_DATE;
+                vendorbalanceentrykryptonDataGridView[typeVBEColumn.Index, r].Value = ev.VENDOR_BALANCE_ENTRY_TYPE.ToString();
+                vendorbalanceentrykryptonDataGridView[ccyVBEColumn.Index, r].Value = ev.CURRENCY.CODE;
+                vendorbalanceentrykryptonDataGridView[amountVBEColumn.Index, r].Value = ev.AMOUNT;
+            }
+        }
+
+        private void refreshBalanceStatuskryptonButton_Click(object sender, EventArgs e)
+        {
+            vendorbalancekryptonDataGridView.Rows.Clear();
+            if (m_customer.ID == 0) return;
+            IList trs = r_sup.GetVendorBalances(m_customer.ID);
+            foreach (VendorBalance ev in trs)
+            {
+                ev.CURRENCY = (Currency)r_ccy.GetById(ev.CURRENCY);
+                ev.PERIOD = (Period)r_per.GetById(ev.PERIOD);
+                int r = vendorbalancekryptonDataGridView.Rows.Add();
+                vendorbalancekryptonDataGridView[periodVBColumn.Index, r].Value = ev.PERIOD.CODE;
+                vendorbalancekryptonDataGridView[ccyVBColumn.Index, r].Value = ev.CURRENCY.CODE;
+                vendorbalancekryptonDataGridView[balanceVBColumn.Index, r].Value = ev.BALANCE;
+                vendorbalancekryptonDataGridView[periodstatusVBColumn.Index, r].Value = ev.PERIOD.PERIOD_STATUS.ToString();
+            }
+        }
+
+        private void CustomerForm_Load(object sender, EventArgs e)
+        {
+            UserSetting.LoadSetting(transactionkryptonDataGridView, m_mainForm.CurrentUser.ID, this.Name);
+            UserSetting.LoadSetting(vendorbalanceentrykryptonDataGridView, m_mainForm.CurrentUser.ID, this.Name);
+            UserSetting.LoadSetting(vendorbalancekryptonDataGridView, m_mainForm.CurrentUser.ID, this.Name);
+        }
+
+        private void CustomerForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            UserSetting.SaveSetting(transactionkryptonDataGridView, m_mainForm.CurrentUser.ID, this.Name);
+            UserSetting.SaveSetting(vendorbalanceentrykryptonDataGridView, m_mainForm.CurrentUser.ID, this.Name);
+            UserSetting.SaveSetting(vendorbalancekryptonDataGridView, m_mainForm.CurrentUser.ID, this.Name);
         }
     }
 }

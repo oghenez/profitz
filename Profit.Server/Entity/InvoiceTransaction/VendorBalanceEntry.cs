@@ -122,6 +122,11 @@ namespace Profit.Server
             return String.Format(@"Select vbe.* from table_vendorbalanceentry vbe, table_vendorbalance vb 
             where vbe.vb_id = vb.vb_id and vb.vendor_id = {0} and vb.vb_vendorbalancetype = '{1}'", supid, type.ToString());
         }
+        public static string FindByVendorBalanceByCustomer(int supid, VendorBalanceType type)
+        {
+            return String.Format(@"Select vbe.* from table_vendorbalanceentry vbe, table_vendorbalance vb 
+            where vbe.vb_id = vb.vb_id and vb.vendor_id = {0} and vb.vb_vendorbalancetype = '{1}'", supid, type.ToString());
+        }
         public override bool Equals(object obj)
         {
             VendorBalanceEntry sce = (VendorBalanceEntry)obj;

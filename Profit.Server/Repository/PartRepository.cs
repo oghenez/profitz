@@ -606,6 +606,18 @@ namespace Profit.Server
                 if (itm.DO_ITEM.ID == 0)
                     result.Add(itm);
             }
+
+            m_cmd.CommandText = POSItem.GetByPartIDSQL(partID);
+            rdr = m_cmd.ExecuteReader();
+            IList posi = POSItem.TransformReaderList(rdr);
+            rdr.Close();
+            foreach (POSItem itm in posi)
+            {
+                itm.EVENT = POSRepository.GetHeaderOnly(m_cmd, itm.EVENT.ID);
+                itm.PART = p;
+                if (itm.DO_ITEM.ID == 0)
+                    result.Add(itm);
+            }
             
             m_cmd.CommandText = StockTakingItems.GetByPartIDSQL(partID);
             rdr = m_cmd.ExecuteReader();
