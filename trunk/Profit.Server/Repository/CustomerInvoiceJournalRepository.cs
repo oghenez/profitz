@@ -336,6 +336,25 @@ namespace Profit.Server
             MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             CustomerInvoiceJournal rest = CustomerInvoiceJournal.TransformReader(r);
             r.Close();
+            if (rest == null) return null;
+            m_command.CommandText = CustomerInvoiceJournalItem.GetByEventIDSQL(rest.ID);
+            r = m_command.ExecuteReader();
+            rest.EVENT_JOURNAL_ITEMS = CustomerInvoiceJournalItem.TransformReaderList(r);
+            r.Close();
+            return rest;
+        }
+        public CustomerInvoiceJournal FindCIJbyPOSId(int POSId)
+        {
+            string sql = CustomerInvoiceJournal.FindCustomerInvoiceJournalItembyPOSId(POSId);
+            m_command.CommandText = sql;
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
+            CustomerInvoiceJournal rest = CustomerInvoiceJournal.TransformReader(r);
+            r.Close();
+            if (rest == null) return null;
+            m_command.CommandText = CustomerInvoiceJournalItem.GetByEventIDSQL(rest.ID);
+            r = m_command.ExecuteReader();
+            rest.EVENT_JOURNAL_ITEMS = CustomerInvoiceJournalItem.TransformReaderList(r);
+            r.Close();
             return rest;
         }
         public static void UpdateAgainstStatus(MySql.Data.MySqlClient.MySqlCommand cmd, EventJournal e, ICustomerInvoiceJournalItem ei)

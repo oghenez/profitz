@@ -219,7 +219,7 @@ namespace Profit.Server
             return "";
 //            return String.Format(@"SELECT t.*
 //                FROM table_positem t
-//                INNER JOIN table_customerinvoice p on p.pos_id = t.pos_id
+//                INNER JOIN table_pos p on p.pos_id = t.pos_id
 //                INNER JOIN table_part pt on pt.part_id = t.part_id
 //                where t.posi_outstandingamounttodo > 0
 //                and concat(pt.part_code, pt.part_name, p.pos_code) like '%{0}%' and p.cus_id = {1}  
@@ -238,7 +238,7 @@ namespace Profit.Server
         {
             return String.Format(@"SELECT t.posi_price
                 FROM table_positem t
-                INNER JOIN table_customerinvoice p on p.pos_id = t.pos_id
+                INNER JOIN table_pos p on p.pos_id = t.pos_id
                 where p.cus_id = {0} and t.part_id = {1} and t.unit_id = {2}
                 order by p.pos_date desc
                 ", cusID, partID, unitID);

@@ -158,6 +158,7 @@
             this.kryptonTextBox1.Location = new System.Drawing.Point(3, 34);
             this.kryptonTextBox1.Multiline = true;
             this.kryptonTextBox1.Name = "kryptonTextBox1";
+            this.kryptonTextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.kryptonTextBox1.Size = new System.Drawing.Size(506, 161);
             this.kryptonTextBox1.TabIndex = 2;
             // 

@@ -72,6 +72,7 @@ namespace Profit.Server
             try
             {
                 EventJournal events = this.Get(id);
+                if (events == null) throw new Exception("Transaction is deleted");
                 if (events.EVENT_STATUS == EventStatus.Entry)
                     throw new Exception("Status is already Unposted/Entry");
                 Period p = AssertValidPeriod(events.TRANSACTION_DATE);

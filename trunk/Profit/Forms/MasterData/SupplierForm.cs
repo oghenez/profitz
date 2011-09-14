@@ -461,5 +461,10 @@ namespace Profit
         {
             vendorbalancekryptonDataGridView_RowsAdded(sender, null);
         }
+
+        private void vendorbalancekryptonDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

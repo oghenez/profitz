@@ -82,6 +82,17 @@ namespace Profit.Server
                     }
                     break;
                 case StockCardEntryType.CustomerInvoice:
+                    CustomerInvoiceItem cit = (CustomerInvoiceItem)item;
+                    if (cit.DO_ITEM != null)
+                    {
+                        if (cit.DO_ITEM.ID == 0)
+                        {
+                            BALANCE -= qty;
+                            assertNotMinusBalanceStock();
+                        }
+                    }
+                    break;
+                case StockCardEntryType.POS:
                     BALANCE -= qty;
                     assertNotMinusBalanceStock();
                     break;
@@ -143,6 +154,16 @@ namespace Profit.Server
                     break;
                     
                 case StockCardEntryType.CustomerInvoice:
+                     CustomerInvoiceItem cit = (CustomerInvoiceItem)item;
+                     if (cit.DO_ITEM != null)
+                     {
+                         if (cit.DO_ITEM.ID == 0)
+                         {
+                             BALANCE += qty;
+                         }
+                     }
+                    break;
+                case StockCardEntryType.POS:
                     BALANCE += qty;
                     break;
                 default:

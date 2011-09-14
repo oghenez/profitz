@@ -99,7 +99,7 @@ namespace Profit.Server
             OpenConnection();
             MySql.Data.MySqlClient.MySqlDataReader r;
 
-            m_cmd.CommandText = VendorBalanceEntry.FindByVendorBalanceBySupplier(supID, VendorBalanceType.Customer);
+            m_cmd.CommandText = VendorBalanceEntry.FindByVendorBalanceByCustomer(supID, VendorBalanceType.Customer);
             r= m_cmd.ExecuteReader();
             IList vbe = VendorBalanceEntry.TransformReaderList(r);
             r.Close();
@@ -117,7 +117,7 @@ namespace Profit.Server
             OpenConnection();
             MySql.Data.MySqlClient.MySqlDataReader r;
 
-            m_cmd.CommandText = VendorBalance.FindByVendorBalanceBySupplier(supID);
+            m_cmd.CommandText = VendorBalance.FindByVendorBalanceByCustomer(supID);
             r = m_cmd.ExecuteReader();
             IList vbe = VendorBalance.TransformReaderList(r);
             r.Close();

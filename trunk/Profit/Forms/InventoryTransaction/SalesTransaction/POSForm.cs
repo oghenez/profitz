@@ -14,7 +14,7 @@ namespace Profit
 {
     public partial class POSForm : KryptonForm, IChildForm
     {
-        CustomerInvoice m_si = new CustomerInvoice(); 
+        POS m_si = new POS(); 
         IMainForm m_mainForm;
         Repository r_top = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.TOP_REPOSITORY);
         Repository r_division = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.DIVISION_REPOSITORY);
@@ -26,7 +26,7 @@ namespace Profit
         Repository r_warehouse = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.WAREHOUSE_REPOSITORY);
         Repository r_sup = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CUSTOMER_REPOSITORY);
         UserSettingsRepository r_setting = RepositoryFactory.GetInstance().UserSetting();
-        CustomerInvoiceRepository r_si = (CustomerInvoiceRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.CUSTOMERINVOICE_REPOSITORY);
+        POSRepository r_si = (POSRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.POS_REPOSITORY);
         SalesOrderRepository r_po = (SalesOrderRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.SALES_ORDER_REPOSITORY);
         IList m_units;
         IList m_warehouses;
@@ -326,7 +326,7 @@ namespace Profit
                     m_si.POSTED = true;
                     KryptonMessageBox.Show("Transaction has been POSTED", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                //m_po = (CustomerInvoice)r_si.Get(m_po.ID);
+                //m_po = (POS)r_si.Get(m_po.ID);
                 //m_po.EMPLOYEE = (Employee)r_employee.GetById(m_po.EMPLOYEE);
                 //m_po.WAREHOUSE = (Warehouse)r_warehouse.GetById(m_po.WAREHOUSE);
                 //m_po.CURRENCY = (Currency)r_ccy.GetById(m_po.CURRENCY);
@@ -465,9 +465,9 @@ namespace Profit
                 Unit u = (Unit)Utils.FindEntityInList(itemsDataGrid[unitColumn.Index, i].Value.ToString(), m_units);
                 if ((p == null) || (u == null))
                     continue;
-                CustomerInvoiceItem st=(CustomerInvoiceItem)itemsDataGrid.Rows[i].Tag;
+                POSItem st=(POSItem)itemsDataGrid.Rows[i].Tag;
                 if(st==null)
-                    st = new CustomerInvoiceItem();
+                    st = new POSItem();
                 itemsDataGrid.Rows[i].Tag = st;
                 st.EVENT = m_si;
                 st.PART = p;
@@ -495,7 +495,7 @@ namespace Profit
         {
             try
             {
-                m_si = new CustomerInvoice();
+                m_si = new POS();
                 textBoxCode.Text = "";
                 dateKryptonDateTimePicker.Value = DateTime.Today;
                 employeeKryptonComboBox.SelectedIndex = 0;
@@ -642,7 +642,7 @@ namespace Profit
             
 
             itemsDataGrid.Rows.Clear();
-            foreach (CustomerInvoiceItem item in m_si.EVENT_ITEMS)
+            foreach (POSItem item in m_si.EVENT_ITEMS)
             {
                 item.UNIT = (Unit)r_unit.GetById(item.UNIT);
                 int i = itemsDataGrid.Rows.Add();
@@ -700,8 +700,8 @@ namespace Profit
             IList result = searchToolStripTextBox.Text == string.Empty ? new ArrayList() : r_si.Search(searchToolStripTextBox.Text);
             if (result.Count == 1)
             {
-                m_si = (CustomerInvoice)result[0];
-                m_si = (CustomerInvoice)r_si.Get(m_si.ID);
+                m_si = (POS)result[0];
+                m_si = (POS)r_si.Get(m_si.ID);
                 m_si.EMPLOYEE = (Employee)r_employee.GetById(m_si.EMPLOYEE);
                 m_si.CURRENCY = (Currency)r_ccy.GetById(m_si.CURRENCY);
                 m_si.DIVISION = (Division)r_division.GetById(m_si.DIVISION);
@@ -714,17 +714,17 @@ namespace Profit
             }
             else
             {
-                using (SearchCustomerInvoiceForm frm = new SearchCustomerInvoiceForm(searchToolStripTextBox.Text, result))
+                using (SearchPOSForm frm = new SearchPOSForm(searchToolStripTextBox.Text, result))
                 {
                     frm.ShowDialog();
-                    if (frm.CUSTOMER_INVOICE == null)
+                    if (frm.POS == null)
                     {
                         return;
                     }
                     else
                     {
-                        m_si = frm.CUSTOMER_INVOICE;
-                        m_si = (CustomerInvoice)r_si.Get(m_si.ID);
+                        m_si = frm.POS;
+                        m_si = (POS)r_si.Get(m_si.ID);
                         m_si.EMPLOYEE = (Employee)r_employee.GetById(m_si.EMPLOYEE);
                         m_si.CURRENCY = (Currency)r_ccy.GetById(m_si.CURRENCY);
                         m_si.DIVISION = (Division)r_division.GetById(m_si.DIVISION);

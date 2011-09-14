@@ -81,6 +81,8 @@ namespace Profit.Server
                     select ap.arcr_code from table_arcreditnote ap where ap.arcr_posted = false and ap.arcr_date between '{0}' and '{1}'
                     union
                     select py.rec_code from table_receipt py where py.rec_posted = false and py.rec_date between '{0}' and '{1}'
+                    union
+                    select pss.pos_code from table_pos pss where pss.pos_posted = false and pss.pos_date between '{0}' and '{1}'
 ", 
                      start.ToString(Utils.DATE_FORMAT),
                      end.ToString(Utils.DATE_FORMAT));
@@ -131,6 +133,8 @@ namespace Profit.Server
                     select ap.arcr_code from table_arcreditnote ap where ap.arcr_posted = true and ap.arcr_date between '{0}' and '{1}'
                     union
                     select py.rec_code from table_receipt py where py.rec_posted = true and py.rec_date between '{0}' and '{1}'
+                    union
+                    select pss.pos_code from table_pos pss where pss.pos_posted = true and pss.pos_date between '{0}' and '{1}'
 ",
                      start.ToString(Utils.DATE_FORMAT),
                      end.ToString(Utils.DATE_FORMAT));
