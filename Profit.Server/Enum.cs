@@ -75,7 +75,8 @@ namespace Profit.Server
         APCreditNote,
         APDebitNote,
         ARCreditNote,
-        ARDebitNote
+        ARDebitNote,
+        POS
     }
     public enum VendorBalanceType
     {

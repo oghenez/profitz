@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonHeader1 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
@@ -608,6 +608,8 @@
             this.transactionkryptonDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.transactionkryptonDataGridView.Size = new System.Drawing.Size(587, 150);
             this.transactionkryptonDataGridView.TabIndex = 3;
+            this.transactionkryptonDataGridView.Sorted += new System.EventHandler(this.vendorbalanceentrykryptonDataGridView_Sorted);
+            this.transactionkryptonDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGrid_RowsAdded);
             // 
             // datetrColumn
             // 
@@ -686,6 +688,8 @@
             this.vendorbalanceentrykryptonDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.vendorbalanceentrykryptonDataGridView.Size = new System.Drawing.Size(587, 150);
             this.vendorbalanceentrykryptonDataGridView.TabIndex = 4;
+            this.vendorbalanceentrykryptonDataGridView.Sorted += new System.EventHandler(this.vendorbalanceentrykryptonDataGridView_Sorted);
+            this.vendorbalanceentrykryptonDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGrid_RowsAdded);
             // 
             // dateVBEColumn
             // 
@@ -715,10 +719,10 @@
             // amountVBEColumn
             // 
             this.amountVBEColumn.DecimalPlaces = 2;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.NullValue = "0";
-            this.amountVBEColumn.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.NullValue = "0";
+            this.amountVBEColumn.DefaultCellStyle = dataGridViewCellStyle6;
             this.amountVBEColumn.HeaderText = "Amount";
             this.amountVBEColumn.Increment = new decimal(new int[] {
             1,
@@ -776,6 +780,8 @@
             this.vendorbalancekryptonDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.vendorbalancekryptonDataGridView.Size = new System.Drawing.Size(587, 150);
             this.vendorbalancekryptonDataGridView.TabIndex = 5;
+            this.vendorbalancekryptonDataGridView.Sorted += new System.EventHandler(this.vendorbalanceentrykryptonDataGridView_Sorted);
+            this.vendorbalancekryptonDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGrid_RowsAdded);
             // 
             // periodVBColumn
             // 
@@ -794,9 +800,9 @@
             // balanceVBColumn
             // 
             this.balanceVBColumn.DecimalPlaces = 2;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.NullValue = "0";
-            this.balanceVBColumn.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.NullValue = "0";
+            this.balanceVBColumn.DefaultCellStyle = dataGridViewCellStyle5;
             this.balanceVBColumn.HeaderText = "Balance";
             this.balanceVBColumn.Increment = new decimal(new int[] {
             1000,
