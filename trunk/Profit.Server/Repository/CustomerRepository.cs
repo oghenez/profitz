@@ -54,6 +54,15 @@ namespace Profit.Server
                 result.Add(e);
             }
 
+            m_cmd.CommandText = POS.GetByCustomerSQL(supID);
+            r = m_cmd.ExecuteReader();
+            IList pos = POS.TransformReaderList(r);
+            r.Close();
+            foreach (Event e in pos)
+            {
+                result.Add(e);
+            }
+
             m_cmd.CommandText = SalesReturn.GetByCustomerSQL(supID);
             r = m_cmd.ExecuteReader();
             IList pr = SalesReturn.TransformReaderList(r);
