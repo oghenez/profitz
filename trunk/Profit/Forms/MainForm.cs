@@ -701,14 +701,16 @@ namespace Profit
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (!((KryptonMessageBox.Show("Are you sure to exit?", "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question)) == DialogResult.Yes))
+            {
+                e.Cancel = true;
+                return;
+            }
             m_loginForm.Close();
             UserSetting.SaveSetting("theme", toolStripComboBox1.SelectedItem.ToString(), CurrentUser.ID, this.Name, typeof(string));
             UserSetting.SaveSetting("menuwidth", kryptonPanel4.Width.ToString(), CurrentUser.ID, this.Name, typeof(int));
             UserSetting.SaveSetting("mainformwidth", this.Width.ToString(), CurrentUser.ID, this.Name, typeof(int));
             UserSetting.SaveSetting("mainformheight", this.Height.ToString(), CurrentUser.ID, this.Name, typeof(int));
-
         }
-
-       
     }
 }
