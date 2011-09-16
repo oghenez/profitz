@@ -712,5 +712,10 @@ namespace Profit
             UserSetting.SaveSetting("mainformwidth", this.Width.ToString(), CurrentUser.ID, this.Name, typeof(int));
             UserSetting.SaveSetting("mainformheight", this.Height.ToString(), CurrentUser.ID, this.Name, typeof(int));
         }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
