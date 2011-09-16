@@ -456,12 +456,7 @@ namespace Profit
         }
         private void dataGrid_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            KryptonDataGridView dgrid = (KryptonDataGridView)sender;
-            for (int count = 0; (count <= (dgrid.Rows.Count - 1)); count++)
-            {
-                dgrid.Rows[count].HeaderCell.Value = string.Format((count + 1).ToString(), "0");
-                dgrid.Rows[count].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
-            }
+            UserSetting.AddNumberToGrid((KryptonDataGridView)sender);
         }
 
         private void vendorbalanceentrykryptonDataGridView_Sorted(object sender, EventArgs e)

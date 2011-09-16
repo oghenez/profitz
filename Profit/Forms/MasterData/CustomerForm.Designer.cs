@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonHeader1 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
@@ -218,6 +218,9 @@
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.gridData);
             this.kryptonSplitContainer1.Size = new System.Drawing.Size(924, 357);
             this.kryptonSplitContainer1.SplitterDistance = 297;
+            this.kryptonSplitContainer1.StateCommon.Back.Color1 = System.Drawing.SystemColors.ScrollBar;
+            this.kryptonSplitContainer1.StateCommon.Separator.Back.Color1 = System.Drawing.Color.White;
+            this.kryptonSplitContainer1.StateCommon.Separator.Back.Color2 = System.Drawing.Color.White;
             this.kryptonSplitContainer1.TabIndex = 4;
             // 
             // kryptonPanel1
@@ -247,6 +250,9 @@
             // 
             // customTabControl1
             // 
+            this.customTabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.customTabControl1.Controls.Add(this.tabPage3);
             this.customTabControl1.Controls.Add(this.tabPage4);
             this.customTabControl1.Controls.Add(this.tabPage1);
@@ -276,7 +282,7 @@
             this.customTabControl1.Location = new System.Drawing.Point(4, 56);
             this.customTabControl1.Name = "customTabControl1";
             this.customTabControl1.SelectedIndex = 0;
-            this.customTabControl1.Size = new System.Drawing.Size(609, 227);
+            this.customTabControl1.Size = new System.Drawing.Size(609, 238);
             this.customTabControl1.TabIndex = 21;
             // 
             // tabPage3
@@ -598,6 +604,9 @@
             this.transactionkryptonDataGridView.AllowUserToAddRows = false;
             this.transactionkryptonDataGridView.AllowUserToDeleteRows = false;
             this.transactionkryptonDataGridView.AllowUserToResizeRows = false;
+            this.transactionkryptonDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.transactionkryptonDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.datetrColumn,
             this.typeTrColumn,
@@ -678,6 +687,9 @@
             this.vendorbalanceentrykryptonDataGridView.AllowUserToAddRows = false;
             this.vendorbalanceentrykryptonDataGridView.AllowUserToDeleteRows = false;
             this.vendorbalanceentrykryptonDataGridView.AllowUserToResizeRows = false;
+            this.vendorbalanceentrykryptonDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.vendorbalanceentrykryptonDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dateVBEColumn,
             this.typeVBEColumn,
@@ -719,10 +731,10 @@
             // amountVBEColumn
             // 
             this.amountVBEColumn.DecimalPlaces = 2;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.NullValue = "0";
-            this.amountVBEColumn.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle14.NullValue = "0";
+            this.amountVBEColumn.DefaultCellStyle = dataGridViewCellStyle14;
             this.amountVBEColumn.HeaderText = "Amount";
             this.amountVBEColumn.Increment = new decimal(new int[] {
             1,
@@ -751,7 +763,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 27);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(601, 196);
+            this.tabPage5.Size = new System.Drawing.Size(601, 207);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Balance Status";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -770,6 +782,9 @@
             this.vendorbalancekryptonDataGridView.AllowUserToAddRows = false;
             this.vendorbalancekryptonDataGridView.AllowUserToDeleteRows = false;
             this.vendorbalancekryptonDataGridView.AllowUserToResizeRows = false;
+            this.vendorbalancekryptonDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.vendorbalancekryptonDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.periodVBColumn,
             this.ccyVBColumn,
@@ -778,7 +793,7 @@
             this.vendorbalancekryptonDataGridView.Location = new System.Drawing.Point(7, 39);
             this.vendorbalancekryptonDataGridView.Name = "vendorbalancekryptonDataGridView";
             this.vendorbalancekryptonDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.vendorbalancekryptonDataGridView.Size = new System.Drawing.Size(587, 150);
+            this.vendorbalancekryptonDataGridView.Size = new System.Drawing.Size(587, 161);
             this.vendorbalancekryptonDataGridView.TabIndex = 5;
             this.vendorbalancekryptonDataGridView.Sorted += new System.EventHandler(this.vendorbalanceentrykryptonDataGridView_Sorted);
             this.vendorbalancekryptonDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGrid_RowsAdded);
@@ -800,9 +815,9 @@
             // balanceVBColumn
             // 
             this.balanceVBColumn.DecimalPlaces = 2;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.NullValue = "0";
-            this.balanceVBColumn.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle13.NullValue = "0";
+            this.balanceVBColumn.DefaultCellStyle = dataGridViewCellStyle13;
             this.balanceVBColumn.HeaderText = "Balance";
             this.balanceVBColumn.Increment = new decimal(new int[] {
             1000,

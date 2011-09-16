@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonHeader1 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
@@ -119,6 +119,7 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.buttonSpecAny1 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.foundtoolStripLabel = new System.Windows.Forms.ToolStripLabel();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
@@ -250,6 +251,7 @@
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.toolStrip2);
             this.kryptonSplitContainer1.Size = new System.Drawing.Size(1072, 547);
             this.kryptonSplitContainer1.SplitterDistance = 332;
+            this.kryptonSplitContainer1.StateCommon.Back.Color1 = System.Drawing.SystemColors.ScrollBar;
             this.kryptonSplitContainer1.TabIndex = 4;
             // 
             // kryptonPanel1
@@ -275,6 +277,9 @@
             // 
             // customTabControl1
             // 
+            this.customTabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.customTabControl1.Controls.Add(this.tabPage3);
             this.customTabControl1.Controls.Add(this.tabPage1);
             this.customTabControl1.Controls.Add(this.tabPage2);
@@ -303,7 +308,7 @@
             this.customTabControl1.Location = new System.Drawing.Point(12, 54);
             this.customTabControl1.Name = "customTabControl1";
             this.customTabControl1.SelectedIndex = 0;
-            this.customTabControl1.Size = new System.Drawing.Size(840, 271);
+            this.customTabControl1.Size = new System.Drawing.Size(840, 275);
             this.customTabControl1.TabIndex = 34;
             // 
             // tabPage3
@@ -573,13 +578,16 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 27);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(832, 240);
+            this.tabPage1.Size = new System.Drawing.Size(832, 244);
             this.tabPage1.TabIndex = 1;
             this.tabPage1.Text = "Unit Conversion";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // dataGridViewUOM
             // 
+            this.dataGridViewUOM.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewUOM.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.barcodeColumn,
             this.ConversionQTy,
@@ -590,7 +598,7 @@
             this.SellPrice});
             this.dataGridViewUOM.Location = new System.Drawing.Point(8, 44);
             this.dataGridViewUOM.Name = "dataGridViewUOM";
-            this.dataGridViewUOM.Size = new System.Drawing.Size(816, 203);
+            this.dataGridViewUOM.Size = new System.Drawing.Size(816, 190);
             this.dataGridViewUOM.TabIndex = 0;
             // 
             // barcodeColumn
@@ -601,9 +609,9 @@
             // 
             // ConversionQTy
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.NullValue = "1";
-            this.ConversionQTy.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.NullValue = "1";
+            this.ConversionQTy.DefaultCellStyle = dataGridViewCellStyle6;
             this.ConversionQTy.HeaderText = "Qty";
             this.ConversionQTy.Increment = new decimal(new int[] {
             1,
@@ -634,8 +642,8 @@
             // 
             // OrigQty
             // 
-            dataGridViewCellStyle2.NullValue = "0";
-            this.OrigQty.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.NullValue = "0";
+            this.OrigQty.DefaultCellStyle = dataGridViewCellStyle7;
             this.OrigQty.HeaderText = "Cv Qty";
             this.OrigQty.Increment = new decimal(new int[] {
             1,
@@ -665,9 +673,9 @@
             // CostPrice
             // 
             this.CostPrice.DecimalPlaces = 2;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.NullValue = "0";
-            this.CostPrice.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.NullValue = "0";
+            this.CostPrice.DefaultCellStyle = dataGridViewCellStyle8;
             this.CostPrice.HeaderText = "Cost Price";
             this.CostPrice.Increment = new decimal(new int[] {
             1,
@@ -691,9 +699,9 @@
             // SellPrice
             // 
             this.SellPrice.DecimalPlaces = 2;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.NullValue = "0";
-            this.SellPrice.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.NullValue = "0";
+            this.SellPrice.DefaultCellStyle = dataGridViewCellStyle9;
             this.SellPrice.HeaderText = "Sell Price";
             this.SellPrice.Increment = new decimal(new int[] {
             1,
@@ -749,7 +757,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 27);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(832, 240);
+            this.tabPage2.Size = new System.Drawing.Size(832, 244);
             this.tabPage2.TabIndex = 2;
             this.tabPage2.Text = "Movement";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -768,6 +776,9 @@
             this.movemntkryptonDataGridView.AllowUserToAddRows = false;
             this.movemntkryptonDataGridView.AllowUserToDeleteRows = false;
             this.movemntkryptonDataGridView.AllowUserToResizeRows = false;
+            this.movemntkryptonDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.movemntkryptonDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dateMovementColumn,
             this.eventTypeMovementColumn,
@@ -861,7 +872,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 27);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(832, 240);
+            this.tabPage4.Size = new System.Drawing.Size(832, 244);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Order Info";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -1045,9 +1056,9 @@
             // 
             // ActiveCol
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.NullValue = false;
-            this.ActiveCol.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.NullValue = false;
+            this.ActiveCol.DefaultCellStyle = dataGridViewCellStyle10;
             this.ActiveCol.FalseValue = null;
             this.ActiveCol.HeaderText = "Active";
             this.ActiveCol.IndeterminateValue = null;
@@ -1072,7 +1083,8 @@
             this.toolStripLabel1,
             this.searchtoolStripTextBox,
             this.toolStripButtonSearch,
-            this.toolStripButtonLoadAll});
+            this.toolStripButtonLoadAll,
+            this.foundtoolStripLabel});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(1072, 25);
@@ -1123,6 +1135,11 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // foundtoolStripLabel
+            // 
+            this.foundtoolStripLabel.Name = "foundtoolStripLabel";
+            this.foundtoolStripLabel.Size = new System.Drawing.Size(0, 22);
             // 
             // PartForm
             // 
@@ -1262,5 +1279,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton openingstocktoolStripButton;
+        private System.Windows.Forms.ToolStripLabel foundtoolStripLabel;
     }
 }
