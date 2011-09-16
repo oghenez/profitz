@@ -24,7 +24,7 @@ namespace Profit
         Repository r_ccy = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY);
         Repository r_unit = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY);
         Repository r_warehouse = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.WAREHOUSE_REPOSITORY);
-        Repository r_sup = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.SUPPLIER_REPOSITORY);
+        SupplierRepository r_sup = (SupplierRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.SUPPLIER_REPOSITORY);
         UserSettingsRepository r_setting = RepositoryFactory.GetInstance().UserSetting();
 
         PurchaseOrderRepository r_po = (PurchaseOrderRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.PURCHASEORDER_REPOSITORY);
@@ -278,7 +278,7 @@ namespace Profit
             currencyKryptonComboBox.DataSource = r_ccy.GetAll();
             divisionKryptonComboBox.DataSource = r_division.GetAll();
             termofpaymentKryptonComboBox.DataSource = r_top.GetAll();
-            supplierkryptonComboBox.DataSource = r_sup.GetAll();
+            supplierkryptonComboBox.DataSource = r_sup.GetAllActive();
             taxKryptonComboBox.DataSource = r_tax.GetAll();
             m_units = r_unit.GetAll();
             m_warehouses = r_warehouse.GetAll();

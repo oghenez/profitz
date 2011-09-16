@@ -60,6 +60,13 @@ namespace Profit.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap _lock {
+            get {
+                object obj = ResourceManager.GetObject("lock", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap blueprint__plus {
             get {
                 object obj = ResourceManager.GetObject("blueprint--plus", resourceCulture);
@@ -91,6 +98,13 @@ namespace Profit.Properties {
         internal static System.Drawing.Bitmap loadall {
             get {
                 object obj = ResourceManager.GetObject("loadall", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Logo {
+            get {
+                object obj = ResourceManager.GetObject("Logo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

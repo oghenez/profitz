@@ -181,11 +181,44 @@ namespace Profit.Server
         {
             return String.Format("select * from table_supplier");
         }
+        public static string GetAllActiveSQL()
+        {
+            return String.Format("select * from table_supplier where sup_active = true");
+        }
         public string GetConcatSearch(string find)
         {
             return String.Format(@"SELECT * FROM table_supplier p where concat(p.sup_code, p.sup_name) like '%{0}%'", find);
         }
         public IList GetAll(MySql.Data.MySqlClient.MySqlDataReader aReader)
+        {
+            IList result = new ArrayList();
+            while (aReader.Read())
+            {
+                Supplier supplier = new Supplier();
+                supplier.ID = Convert.ToInt32(aReader[0]);
+                supplier.CODE = aReader[1].ToString();
+                supplier.NAME = aReader[2].ToString();
+                supplier.ACTIVE = Convert.ToBoolean(aReader[3]);
+                supplier.ADDRESS = aReader[4].ToString();
+                supplier.CONTACT = aReader[5].ToString();
+                supplier.CREDIT_LIMIT = Convert.ToDouble(aReader[6]);
+                supplier.CURRENCY = new Currency(Convert.ToInt32(aReader[7]));
+                supplier.SUPPLIER_CATEGORY = new SupplierCategory(Convert.ToInt32(aReader[8]));
+                supplier.EMAIL = aReader[9].ToString();
+                supplier.EMPLOYEE = new Employee(Convert.ToInt32(aReader[10]));
+                supplier.FAX = aReader[11].ToString();
+                supplier.PHONE = aReader[12].ToString();
+                supplier.PRICE_CATEGORY = new PriceCategory(Convert.ToInt32(aReader[13]));
+                supplier.TAX = new Tax(Convert.ToInt32(aReader[14]));
+                supplier.TAX_NO = aReader[15].ToString();
+                supplier.TERM_OF_PAYMENT = new TermOfPayment(Convert.ToInt32(aReader[16]));
+                supplier.WEBSITE = aReader[17].ToString();
+                supplier.ZIPCODE = aReader[18].ToString();
+                result.Add(supplier);
+            }
+            return result;
+        }
+        public static IList GetAllTransform(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())

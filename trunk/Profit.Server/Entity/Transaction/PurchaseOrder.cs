@@ -186,6 +186,7 @@ namespace Profit.Server
                 transaction.SUPPLIER = new Supplier(Convert.ToInt32(aReader["sup_id"]));
                 transaction.DOCUMENT_NO = aReader["po_docno"].ToString();
                 transaction.DOCUMENT_DATE = Convert.ToDateTime(aReader["po_docdate"]);
+                transaction.VENDOR = transaction.SUPPLIER;
             }
             return transaction;
         }
@@ -220,6 +221,7 @@ namespace Profit.Server
                 transaction.SUPPLIER = new Supplier(Convert.ToInt32(aReader["sup_id"]));
                 transaction.DOCUMENT_NO = aReader["po_docno"].ToString();
                 transaction.DOCUMENT_DATE = Convert.ToDateTime(aReader["po_docdate"]);
+                transaction.VENDOR = transaction.SUPPLIER;
                 result.Add(transaction);
             }
             return result;
@@ -235,6 +237,15 @@ namespace Profit.Server
         public static string GetBySupplierSQL(int id)
         {
             return String.Format("SELECT * from table_purchaseorder where sup_id ={0}", id);
+        }
+        public static string GetBySupplierSQL(DateTime startDate, DateTime endDate, int supid, 
+            bool allStatus, bool status)
+        {
+            return String.Format(@"SELECT * from table_purchaseorder where 
+            po_date between '{0}' and '{1}' {2} {3}",
+                startDate.ToString(Utils.DATE_FORMAT), endDate.ToString(Utils.DATE_FORMAT),
+                supid == 0 ? "" : " and sup_id = " + supid,
+                allStatus ? "" : " and po_posted = " + status);
         }
         public static string DeleteSQL(int id)
         {

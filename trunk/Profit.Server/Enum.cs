@@ -33,6 +33,29 @@ namespace Profit.Server
         //StockTransferSubstraction,
         //StockTransferAddition
     }
+    public enum StockCardEntryTypeSupplier
+    {
+        ALL,
+        PurchaseOrder, 
+        GoodReceiveNote, 
+        PurchaseReturn, 
+        SupplierInvoice,
+        Payment,
+        APDebitNote,
+        SupplierOutStandingInvoice
+    }
+    public enum StockCardEntryTypeCustomer
+    {
+        ALL,
+        SalesOrder,
+        DeliveryOrder,
+        SalesReturn,
+        CustomerInvoice,
+        Receipt,
+        ARCreditNote,
+        CustomerOutStandingInvoice,
+        POS
+    }
     public enum EventStatus
     {
         Entry,

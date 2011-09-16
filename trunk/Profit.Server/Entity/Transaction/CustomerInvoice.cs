@@ -169,6 +169,7 @@ namespace Profit.Server
                 transaction.CUSTOMER = new Customer(Convert.ToInt32(aReader["cus_id"]));
                 transaction.DOCUMENT_NO = aReader["ci_docno"].ToString();
                 transaction.DOCUMENT_DATE = Convert.ToDateTime(aReader["ci_docdate"]);
+                transaction.VENDOR = transaction.CUSTOMER;
             }
             return transaction;
         }
@@ -202,6 +203,7 @@ namespace Profit.Server
                 transaction.CUSTOMER = new Customer(Convert.ToInt32(aReader["cus_id"]));
                 transaction.DOCUMENT_NO = aReader["ci_docno"].ToString();
                 transaction.DOCUMENT_DATE = Convert.ToDateTime(aReader["ci_docdate"]);
+                transaction.VENDOR = transaction.CUSTOMER;
                 result.Add(transaction);
             }
             return result;
@@ -225,6 +227,15 @@ namespace Profit.Server
         public static string GetByCustomerSQL(int id)
         {
             return String.Format("SELECT * from table_customerinvoice where cus_id ={0}", id);
+        }
+        public static string GetByCustomerSQL(DateTime startDate, DateTime endDate, int supid,
+         bool allStatus, bool status)
+        {
+            return String.Format(@"SELECT * from table_customerinvoice where 
+            ci_date between '{0}' and '{1}' {2} {3}",
+                startDate.ToString(Utils.DATE_FORMAT), endDate.ToString(Utils.DATE_FORMAT),
+                supid == 0 ? "" : " and cus_id = " + supid,
+                allStatus ? "" : " and ci_posted = " + status);
         }
         public static string GetUpdateStatusSQL(Event e)
         {

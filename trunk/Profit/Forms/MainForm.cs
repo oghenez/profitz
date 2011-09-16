@@ -53,22 +53,27 @@ namespace Profit
         const string AR_CREDIT_NOTE_FORM = "ARCreditNoteForm";
         const string OPENING_STOCK_FORM = "OpeningStockForm";
         const string POS_FORM = "POSForm";
+        const string SUPPLIER_TRANSACTION_SUMMARY = "SupplierTransactionSummary";
+        const string CUSTOMER_TRANSACTION_SUMMARY = "CustomerTransactionSummary";
+
 
         IList m_listForm = new ArrayList();
         User m_currentUser = null;
         Period m_currentPeriod = null;
+        LoginForm m_loginForm;
 
         UserRepository r_user = (UserRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.USER_REPOSITORY);
         PeriodRepository r_period = (PeriodRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PERIOD_REPOSITORY);
 
-        public MainForm()
+        public MainForm(LoginForm loginForm)
         {
             InitializeComponent();
             kryptonManager1.GlobalPaletteMode = PaletteModeManager.ProfessionalSystem;
             toolStripComboBox1.Items.AddRange(Enum.GetNames(typeof(PaletteModeManager)));
             InitFormAccessList();
-            m_currentUser = (User)r_user.getUser("ADMIN");
-            m_currentPeriod = r_period.FindCurrentPeriod();
+            m_loginForm = loginForm;
+            //m_currentUser = (User)r_user.getUser("ADMIN");
+            //m_currentPeriod = r_period.FindCurrentPeriod();
         }
 
         //private void buttonSpecHeaderGroup1_Click(object sender, EventArgs e)
@@ -330,6 +335,20 @@ namespace Profit
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
+            if (e.Node.Name == "NodeSupplierTransactionSummary")
+            {
+                if (isChild(SUPPLIER_TRANSACTION_SUMMARY)) { this.Cursor = Cursors.Default; return; }
+                SupplierTransactionSummaryForm user = new SupplierTransactionSummaryForm(this, SUPPLIER_TRANSACTION_SUMMARY);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            }
+            if (e.Node.Name == "NodeCustomerTransactionSummary")
+            {
+                if (isChild(CUSTOMER_TRANSACTION_SUMMARY)) { this.Cursor = Cursors.Default; return; }
+                CustomerTransactionSummaryForm user = new CustomerTransactionSummaryForm(this, CUSTOMER_TRANSACTION_SUMMARY);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            }
             this.Cursor = Cursors.Default;
         }
         bool isChild(string name)
@@ -530,6 +549,8 @@ namespace Profit
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(AR_CREDIT_NOTE_FORM)) SalesTreeView.Nodes["NodeARCreditNote"].Remove();
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(OPENING_STOCK_FORM)) internalTreeView.Nodes["NodeOpeningStock"].Remove();
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(POS_FORM)) SalesTreeView.Nodes["NodePOS"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(SUPPLIER_TRANSACTION_SUMMARY)) purchaseTreeView.Nodes["NodeSupplierTransactionSummary"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(CUSTOMER_TRANSACTION_SUMMARY)) SalesTreeView.Nodes["NodeCustomerTransactionSummary"].Remove();
 
 
             inventoryKryptonHeader.Visible = inventoryTreeView.Visible = inventoryTreeView.Nodes.Count > 0;
@@ -640,6 +661,8 @@ namespace Profit
             m_listForm.Add(new FormAccess(0, MainForm.SALES_RETURN_FORM.ToString(), "TRCS005 - Sales Return"));
             m_listForm.Add(new FormAccess(0, MainForm.AR_CREDIT_NOTE_FORM.ToString(), "TRCS006 - AR Credit Note"));
             m_listForm.Add(new FormAccess(0, MainForm.POS_FORM.ToString(), "TRCS008 - POS"));
+            m_listForm.Add(new FormAccess(0, MainForm.SUPPLIER_TRANSACTION_SUMMARY.ToString(), "TRCP008 - Supplier Transaction Summary"));
+            m_listForm.Add(new FormAccess(0, MainForm.CUSTOMER_TRANSACTION_SUMMARY.ToString(), "TRCP010 - Customer Transaction Summary"));
         }
 
         private void userMaintenanceToolStripMenuItem_Click(object sender, EventArgs e)
@@ -678,6 +701,7 @@ namespace Profit
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            m_loginForm.Close();
             UserSetting.SaveSetting("theme", toolStripComboBox1.SelectedItem.ToString(), CurrentUser.ID, this.Name, typeof(string));
             UserSetting.SaveSetting("menuwidth", kryptonPanel4.Width.ToString(), CurrentUser.ID, this.Name, typeof(int));
             UserSetting.SaveSetting("mainformwidth", this.Width.ToString(), CurrentUser.ID, this.Name, typeof(int));
