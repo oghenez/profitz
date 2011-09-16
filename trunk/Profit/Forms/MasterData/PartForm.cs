@@ -140,6 +140,8 @@ namespace Profit
                 if (gridData.Rows.Count > 0) gridData.Rows[0].Selected = true;
                 gridData_SelectionChanged(null, null);
                 this.Cursor = Cursors.Default;
+                foundtoolStripLabel.Text = "Found " + gridData.Rows.Count.ToString() + " item(s)";
+
             }
             catch (Exception x)
             {
@@ -624,6 +626,7 @@ namespace Profit
                 gridData.ClearSelection();
                 if (gridData.Rows.Count > 0) gridData.Rows[0].Selected = true; ;
                 this.Cursor = Cursors.Default;
+                foundtoolStripLabel.Text = "Found " + gridData.Rows.Count.ToString() + " item(s)";
             }
             catch (Exception x)
             {
