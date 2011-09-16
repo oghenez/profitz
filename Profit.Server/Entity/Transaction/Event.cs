@@ -24,6 +24,7 @@ namespace Profit.Server
 
         public EventStatus EVENT_STATUS = EventStatus.Entry;
         public IList DELETED_STOCK_CARD_ENTRY = new ArrayList();
+        public Vendor VENDOR;
         public Event()
         { }
 

@@ -90,6 +90,12 @@
     <Compile Include="Forms\InventoryTransaction\APDebitNoteForm.Designer.cs">
       <DependentUpon>APDebitNoteForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\CustomerTransactionSummaryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\CustomerTransactionSummaryForm.Designer.cs">
+      <DependentUpon>CustomerTransactionSummaryForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\InventoryTransaction\SupplierTransactionSummaryForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -372,6 +378,12 @@
     <Compile Include="Forms\InventoryTransaction\SearchStockTakingForm.Designer.cs">
       <DependentUpon>SearchStockTakingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MasterData\ProcessTransactionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -533,6 +545,9 @@
     <EmbeddedResource Include="Forms\InventoryTransaction\APDebitNoteForm.resx">
       <DependentUpon>APDebitNoteForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\CustomerTransactionSummaryForm.resx">
+      <DependentUpon>CustomerTransactionSummaryForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\SupplierTransactionSummaryForm.resx">
       <DependentUpon>SupplierTransactionSummaryForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -673,6 +688,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\SearchStockTakingForm.resx">
       <DependentUpon>SearchStockTakingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MasterData\ProcessTransactionForm.resx">
       <DependentUpon>ProcessTransactionForm.cs</DependentUpon>
@@ -863,6 +881,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\blueprint--plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lock.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -176,6 +176,15 @@ namespace Profit.Server
         {
             return String.Format("SELECT * from table_apdebitnote where sup_id ={0}", id);
         }
+        public static string GetBySupplierSQL(DateTime startDate, DateTime endDate, int supid,
+            bool allStatus, bool status)
+        {
+            return String.Format(@"SELECT * from table_apdebitnote where 
+            apdn_date between '{0}' and '{1}' {2} {3}",
+                startDate.ToString(Utils.DATE_FORMAT), endDate.ToString(Utils.DATE_FORMAT),
+                supid == 0 ? "" : " and sup_id = " + supid,
+                allStatus ? "" : " and apdn_posted = " + status);
+        }
         public static string GetUpdateStatusSQL(EventJournal e)
         {
             return String.Format(@"update table_apdebitnote set 

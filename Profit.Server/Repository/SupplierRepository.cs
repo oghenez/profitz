@@ -10,8 +10,17 @@ namespace Profit.Server
     {
         public SupplierRepository():base(new Supplier())
         { }
-
-        public IList GetAllTransactions(int supID)
+        public IList GetAllActive()
+        {
+            OpenConnection();
+            MySql.Data.MySqlClient.MySqlDataReader r;
+            m_cmd.CommandText = Supplier.GetAllActiveSQL();
+            r = m_cmd.ExecuteReader();
+            IList result = Supplier.GetAllTransform(r);
+            r.Close();
+            return result;
+        }
+        public IList GetAllTransactions(int supID )
         {
             ArrayList result = new ArrayList();
             OpenConnection();
@@ -72,6 +81,78 @@ namespace Profit.Server
             }
 
             m_cmd.CommandText = SupplierOutStandingInvoice.GetBySupplierSQL(supID);
+            r = m_cmd.ExecuteReader();
+            IList soi = SupplierOutStandingInvoice.TransformReaderList(r);
+            r.Close();
+            foreach (EventJournal e in soi)
+            {
+                result.Add(e);
+            }
+
+            result.Sort(new EventDateComparer());
+            return result;
+        }
+        public IList GetAllTransactions(int supID, DateTime startDate, DateTime enDate, bool allStatus, bool status)
+        {
+            ArrayList result = new ArrayList();
+            OpenConnection();
+            MySql.Data.MySqlClient.MySqlDataReader r;
+
+            m_cmd.CommandText = PurchaseOrder.GetBySupplierSQL(startDate, enDate, supID, allStatus, status);
+            r = m_cmd.ExecuteReader();
+            IList po = PurchaseOrder.TransformReaderList(r);
+            r.Close();
+            foreach (Event e in po)
+            {
+                result.Add(e);
+            }
+
+            m_cmd.CommandText = GoodReceiveNote.GetBySupplierSQL(startDate, enDate, supID, allStatus, status);
+            r = m_cmd.ExecuteReader();
+            IList grn = GoodReceiveNote.TransformReaderList(r);
+            r.Close();
+            foreach (Event e in grn)
+            {
+                result.Add(e);
+            }
+
+            m_cmd.CommandText = SupplierInvoice.GetBySupplierSQL(startDate, enDate, supID, allStatus, status);
+            r = m_cmd.ExecuteReader();
+            IList si = SupplierInvoice.TransformReaderList(r);
+            r.Close();
+            foreach (Event e in si)
+            {
+                result.Add(e);
+            }
+
+            m_cmd.CommandText = PurchaseReturn.GetBySupplierSQL(startDate, enDate, supID, allStatus, status);
+            r = m_cmd.ExecuteReader();
+            IList pr = PurchaseReturn.TransformReaderList(r);
+            r.Close();
+            foreach (Event e in pr)
+            {
+                result.Add(e);
+            }
+
+            m_cmd.CommandText = APDebitNote.GetBySupplierSQL(startDate, enDate, supID, allStatus, status);
+            r = m_cmd.ExecuteReader();
+            IList apdn = APDebitNote.TransformReaderList(r);
+            r.Close();
+            foreach (EventJournal e in apdn)
+            {
+                result.Add(e);
+            }
+
+            m_cmd.CommandText = Payment.GetBySupplierSQL(startDate, enDate, supID, allStatus, status);
+            r = m_cmd.ExecuteReader();
+            IList py = Payment.TransformReaderList(r);
+            r.Close();
+            foreach (EventJournal e in py)
+            {
+                result.Add(e);
+            }
+
+            m_cmd.CommandText = SupplierOutStandingInvoice.GetBySupplierSQL(startDate, enDate, supID, allStatus, status);
             r = m_cmd.ExecuteReader();
             IList soi = SupplierOutStandingInvoice.TransformReaderList(r);
             r.Close();

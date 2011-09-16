@@ -155,7 +155,7 @@ namespace Profit.Server
                 m_connection.Close();
             }
         }
-        public User getUser(string code, string password)
+        public User GetUser(string code, string password)
         {
             try
             {
