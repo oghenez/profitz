@@ -679,6 +679,166 @@ namespace Profit.Server
 
             #endregion
         }
+        public IList FindAllMarkDownSellingPrice(MarkUpDownSellingPrice mrk)
+        {
+            string sql = Part.FindPartBy(mrk.PART_GROUP.ID > 0, mrk.PART_GROUP.ID, mrk.PART_CATEGORY.ID > 0, mrk.PART_CATEGORY.ID, mrk.PART.ID > 0, mrk.PART.ID);
+            OpenConnection();
+            MySql.Data.MySqlClient.MySqlDataReader rdr;
+            m_cmd.CommandText = sql;
+            rdr = m_cmd.ExecuteReader();
+            IList result = Part.GetAllStatic(rdr);
+            rdr.Close();
+
+            switch (mrk.MARK_MARK_TYPE)
+            {
+                case MarkUpDownSellingPriceMarkType.Percentage:
+                    {
+                        switch (mrk.MARK_BASE_ON)
+                        {
+                            case MarkUpDownSellingPriceBaseOn.CostPrice:
+                                {
+                                    foreach (Part p in result)
+                                    {
+                                        double value = p.COST_PRICE * mrk.PERCENTAGE / 100;
+                                        value = p.COST_PRICE + value;
+                                        if (mrk.ROUNDING > 0)
+                                        {
+                                            double remainder = value % mrk.ROUNDING;
+                                            if (remainder > 0)
+                                            {
+                                                switch (mrk.ROUND_TYPE)
+                                                {
+                                                    case RoundType.Down:
+                                                        value = value - remainder;
+                                                        break;
+                                                    case RoundType.Up:
+                                                        value = value + mrk.ROUNDING - remainder;
+                                                        break;
+                                                }
+                                            }
+                                        }
+                                        p.NEW_SELL_PRICE = value;
+                                    }
+                                    break;
+                                }
+                            case MarkUpDownSellingPriceBaseOn.SellPrice:
+                                {
+                                    foreach (Part p in result)
+                                    {
+                                        double value = p.SELL_PRICE * mrk.PERCENTAGE / 100;
+                                        value = p.SELL_PRICE + value;
+                                        if (mrk.ROUNDING > 0)
+                                        {
+                                            double remainder = value % mrk.ROUNDING;
+                                            if (remainder > 0)
+                                            {
+                                                switch (mrk.ROUND_TYPE)
+                                                {
+                                                    case RoundType.Down:
+                                                        value = value - remainder;
+                                                        break;
+                                                    case RoundType.Up:
+                                                        value = value + mrk.ROUNDING - remainder;
+                                                        break;
+                                                }
+                                            }
+                                        }
+                                        p.NEW_SELL_PRICE = value;
+                                    }
+                                    break;
+                                }
+                        }
+                        break;
+                    }
+                case MarkUpDownSellingPriceMarkType.Value:
+                    {
+                        switch (mrk.MARK_BASE_ON)
+                        {
+                            case MarkUpDownSellingPriceBaseOn.SellPrice:
+                                {
+                                    foreach (Part p in result)
+                                    {
+                                        if (p.CURRENCY.ID == mrk.CURRENCY.ID)
+                                        {
+                                            double value = p.SELL_PRICE + mrk.VALUE;
+                                            if (mrk.ROUNDING > 0)
+                                            {
+                                                double remainder = value % mrk.ROUNDING;
+                                                if (remainder > 0)
+                                                {
+                                                    switch (mrk.ROUND_TYPE)
+                                                    {
+                                                        case RoundType.Down:
+                                                            value = value - remainder;
+                                                            break;
+                                                        case RoundType.Up:
+                                                            value = value + mrk.ROUNDING - remainder;
+                                                            break;
+                                                    }
+                                                }
+                                            }
+                                            p.NEW_SELL_PRICE = value;
+                                            //PartRepository.UpdatePartSellingPriceInformation(p);
+                                        }
+                                    }
+                                    break;
+                                }
+                            case MarkUpDownSellingPriceBaseOn.CostPrice:
+                                {
+                                    foreach (Part p in result)
+                                    {
+                                        if (p.CURRENCY.ID == mrk.CURRENCY.ID)
+                                        {
+                                            double value = p.COST_PRICE + mrk.VALUE;
+                                            if (mrk.ROUNDING > 0)
+                                            {
+                                                double remainder = value % mrk.ROUNDING;
+                                                if (remainder > 0)
+                                                {
+                                                    switch (mrk.ROUND_TYPE)
+                                                    {
+                                                        case RoundType.Down:
+                                                            value = value - remainder;
+                                                            break;
+                                                        case RoundType.Up:
+                                                            value = value + mrk.ROUNDING - remainder;
+                                                            break;
+                                                    }
+                                                }
+                                            }
+                                            p.NEW_SELL_PRICE = value;
+                                            //PartRepository.UpdatePartSellingPriceInformation(p);
+                                        }
+                                    }
+                                    break;
+                                }
+
+                        }
+                        break;
+                    }
+                    break;
+            }
+            return result;
+        }
+        public void UpdateSellingPrice(IList parts)
+        {
+            foreach (Part p in parts)
+            {
+                OpenConnection();
+                m_cmd.CommandText = p.updateSellingPrice();
+                m_cmd.ExecuteNonQuery();
+
+                m_cmd.CommandText = UnitConversion.GetByPartAndUnitConIDSQL(p.ID, p.UNIT.ID);
+                MySql.Data.MySqlClient.MySqlDataReader r = m_cmd.ExecuteReader();
+                UnitConversion uc = UnitConversion.GetUnitConversion(r);
+                r.Close();
+                if (uc == null)
+                    continue;
+                uc.SELL_PRICE = p.NEW_SELL_PRICE;
+                m_cmd.CommandText = uc.GetUpdateSQL();
+                m_cmd.ExecuteNonQuery();
+            }
+        }
     }
 
 }
