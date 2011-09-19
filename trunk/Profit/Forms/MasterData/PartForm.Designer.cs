@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PartForm));
             this.kryptonHeader1 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
@@ -116,10 +117,11 @@
             this.searchtoolStripTextBox = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripButtonSearch = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonLoadAll = new System.Windows.Forms.ToolStripButton();
+            this.foundtoolStripLabel = new System.Windows.Forms.ToolStripLabel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.buttonSpecAny1 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.foundtoolStripLabel = new System.Windows.Forms.ToolStripLabel();
+            this.markupdownselltoolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
@@ -167,7 +169,8 @@
             this.toolStripButtonClear,
             this.toolStripButtonRefresh,
             this.toolStripSeparator1,
-            this.openingstocktoolStripButton});
+            this.openingstocktoolStripButton,
+            this.markupdownselltoolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 29);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1072, 25);
@@ -338,7 +341,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 27);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(832, 240);
+            this.tabPage3.Size = new System.Drawing.Size(832, 244);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "More Info";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -609,9 +612,9 @@
             // 
             // ConversionQTy
             // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.NullValue = "1";
-            this.ConversionQTy.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.NullValue = "1";
+            this.ConversionQTy.DefaultCellStyle = dataGridViewCellStyle1;
             this.ConversionQTy.HeaderText = "Qty";
             this.ConversionQTy.Increment = new decimal(new int[] {
             1,
@@ -642,8 +645,8 @@
             // 
             // OrigQty
             // 
-            dataGridViewCellStyle7.NullValue = "0";
-            this.OrigQty.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle2.NullValue = "0";
+            this.OrigQty.DefaultCellStyle = dataGridViewCellStyle2;
             this.OrigQty.HeaderText = "Cv Qty";
             this.OrigQty.Increment = new decimal(new int[] {
             1,
@@ -673,9 +676,9 @@
             // CostPrice
             // 
             this.CostPrice.DecimalPlaces = 2;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.NullValue = "0";
-            this.CostPrice.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.NullValue = "0";
+            this.CostPrice.DefaultCellStyle = dataGridViewCellStyle3;
             this.CostPrice.HeaderText = "Cost Price";
             this.CostPrice.Increment = new decimal(new int[] {
             1,
@@ -699,9 +702,9 @@
             // SellPrice
             // 
             this.SellPrice.DecimalPlaces = 2;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.NullValue = "0";
-            this.SellPrice.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.NullValue = "0";
+            this.SellPrice.DefaultCellStyle = dataGridViewCellStyle4;
             this.SellPrice.HeaderText = "Sell Price";
             this.SellPrice.Increment = new decimal(new int[] {
             1,
@@ -1056,9 +1059,9 @@
             // 
             // ActiveCol
             // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.NullValue = false;
-            this.ActiveCol.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.NullValue = false;
+            this.ActiveCol.DefaultCellStyle = dataGridViewCellStyle5;
             this.ActiveCol.FalseValue = null;
             this.ActiveCol.HeaderText = "Active";
             this.ActiveCol.IndeterminateValue = null;
@@ -1123,6 +1126,11 @@
             this.toolStripButtonLoadAll.Text = "Load All";
             this.toolStripButtonLoadAll.Click += new System.EventHandler(this.toolStripButtonLoadAll_Click);
             // 
+            // foundtoolStripLabel
+            // 
+            this.foundtoolStripLabel.Name = "foundtoolStripLabel";
+            this.foundtoolStripLabel.Size = new System.Drawing.Size(0, 22);
+            // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
@@ -1136,10 +1144,14 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // foundtoolStripLabel
+            // markupdownselltoolStripButton1
             // 
-            this.foundtoolStripLabel.Name = "foundtoolStripLabel";
-            this.foundtoolStripLabel.Size = new System.Drawing.Size(0, 22);
+            this.markupdownselltoolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("markupdownselltoolStripButton1.Image")));
+            this.markupdownselltoolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.markupdownselltoolStripButton1.Name = "markupdownselltoolStripButton1";
+            this.markupdownselltoolStripButton1.Size = new System.Drawing.Size(171, 22);
+            this.markupdownselltoolStripButton1.Text = "Mark Up/Down Selling Price";
+            this.markupdownselltoolStripButton1.Click += new System.EventHandler(this.markupdownselltoolStripButton1_Click);
             // 
             // PartForm
             // 
@@ -1280,5 +1292,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton openingstocktoolStripButton;
         private System.Windows.Forms.ToolStripLabel foundtoolStripLabel;
+        private System.Windows.Forms.ToolStripButton markupdownselltoolStripButton1;
     }
 }

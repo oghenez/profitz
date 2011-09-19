@@ -34,6 +34,7 @@ namespace Profit.Server
         public Unit UNIT_BY_SEARCH = null;// for searching unit conversion
         public double SELL_PRICE_BY_SEARCH = 0;
         public double COST_PRICE_BY_SEARCH = 0;
+        public double NEW_SELL_PRICE = 0;//update mark up down
         public Part()
         {
         }
@@ -349,6 +350,17 @@ namespace Profit.Server
             }
             return null;
         }
+        public static string FindPartBy(bool prtGroup, int prtGroupID, bool prtCat, int prtCatID, bool part, int partID)
+        {
+            string sql =
+                String.Format(@"select * from table_part where part_active = True {0} {1} {2}",
+                prtGroup ? " and prtgroup_id = " + prtGroupID : "", prtCat ? " and prtcat_id =" + prtCatID : "", part ? " and part_id =" + partID : "");
+            return  sql;
+        }
 
+        internal string updateSellingPrice()
+        {
+            return "update table_part set part_sellprice = " + this.NEW_SELL_PRICE;
+        }
     }
 }

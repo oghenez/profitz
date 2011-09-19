@@ -119,4 +119,27 @@ namespace Profit.Server
         Bank,
         ARCreditNote
     }
+
+    public enum MarkUpDownSellingPriceType
+    {
+        BottomPrice,
+        SellingPrice,
+        CostPriceRecalculate,
+        CostPriceWithoutRecalculate
+    }
+    public enum MarkUpDownSellingPriceBaseOn
+    {
+        CostPrice,
+        SellPrice,
+    }
+    public enum MarkUpDownSellingPriceMarkType
+    {
+        Percentage,
+        Value
+    }
+    public enum RoundType
+    {
+        Up,
+        Down
+    }
 }

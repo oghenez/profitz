@@ -402,6 +402,12 @@
     <Compile Include="Forms\MasterData\UserForm.Designer.cs">
       <DependentUpon>UserForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MasterData\MarkDownSellingPriceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MasterData\MarkDownSellingPriceForm.Designer.cs">
+      <DependentUpon>MarkDownSellingPriceForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SearchPartForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -691,6 +697,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MasterData\MarkDownSellingPriceForm.resx">
+      <DependentUpon>MarkDownSellingPriceForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MasterData\ProcessTransactionForm.resx">
       <DependentUpon>ProcessTransactionForm.cs</DependentUpon>

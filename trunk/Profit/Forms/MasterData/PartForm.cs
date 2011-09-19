@@ -737,6 +737,12 @@ namespace Profit
             frm.Show();
         }
 
+        private void markupdownselltoolStripButton1_Click(object sender, EventArgs e)
+        {
+            MarkDownSellingPriceForm frm = new MarkDownSellingPriceForm();
+            frm.ShowDialog();
+        }
+
         //private void toolStripButtonMigrate_Click(object sender, EventArgs e)
         //{
         //    StreamReader p = new StreamReader(@"part.csv");

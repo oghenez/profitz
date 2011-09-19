@@ -78,6 +78,7 @@
     <Compile Include="Entity\InvoiceTransaction\SupplierOutStandingInvoiceItem.cs" />
     <Compile Include="Entity\InvoiceTransaction\VendorBalance.cs" />
     <Compile Include="Entity\InvoiceTransaction\VendorBalanceEntry.cs" />
+    <Compile Include="Entity\MarkUpDownSellingPrice.cs" />
     <Compile Include="Entity\StockCardInfo.cs" />
     <Compile Include="Entity\Transaction\POSItem.cs" />
     <Compile Include="Entity\Transaction\POS.cs" />
