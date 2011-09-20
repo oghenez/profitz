@@ -25,7 +25,7 @@ namespace Profit
         IList m_partCategoryList = new ArrayList();
         Repository r_sup = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.SUPPLIER_REPOSITORY);
         CustomerRepository r_cus = (CustomerRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CUSTOMER_REPOSITORY);
-        
+        SupplierInvoiceRepository r_sir = (SupplierInvoiceRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.SUPPLIERINVOICE_REPOSITORY);
 
         public PartForm(IMainForm mainForm, string formName)
         {
@@ -520,6 +520,7 @@ namespace Profit
                 }
                 movemntkryptonDataGridView[statusMovementColumn.Index, r].Value = itm.EVENT.POSTED.ToString();
             }
+            UserSetting.AddNumberToGrid(movemntkryptonDataGridView);
         }
 
         #region IChildForm Members
@@ -713,11 +714,13 @@ namespace Profit
         private void PartForm_Load(object sender, EventArgs e)
         {
             UserSetting.LoadSetting(movemntkryptonDataGridView, m_mainForm.CurrentUser.ID, this.Name);
+            UserSetting.LoadSetting(pricemovementkryptonDataGridView1, m_mainForm.CurrentUser.ID, this.Name);
         }
 
         private void PartForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             UserSetting.SaveSetting(movemntkryptonDataGridView, m_mainForm.CurrentUser.ID, this.Name);
+            UserSetting.SaveSetting(pricemovementkryptonDataGridView1, m_mainForm.CurrentUser.ID, this.Name);
         }
 
         private void refreshMovementkryptonButton_Click(object sender, EventArgs e)
@@ -741,6 +744,42 @@ namespace Profit
         {
             MarkDownSellingPriceForm frm = new MarkDownSellingPriceForm();
             frm.ShowDialog();
+        }
+
+        private void pricemovkryptonButton1_Click(object sender, EventArgs e)
+        {
+            pricemovementkryptonDataGridView1.Rows.Clear();
+            if (m_part.ID == 0) return;
+            IList movs = r_sir.GetSupplierInvoiceItem(m_part.ID);
+            foreach (EventItem itm in movs)
+            {
+                int r = pricemovementkryptonDataGridView1.Rows.Add();
+                pricemovementkryptonDataGridView1[dateprcmovColumn1.Index, r].Value = itm.EVENT.TRANSACTION_DATE;
+                pricemovementkryptonDataGridView1[codeprcmovColumn2.Index, r].Value = itm.EVENT.CODE;
+                pricemovementkryptonDataGridView1[typeprcmovColumn1.Index, r].Value = itm.STOCK_CARD_ENTRY_TYPE.ToString();
+                pricemovementkryptonDataGridView1[qtyprcmovColumn1.Index, r].Value = itm.GetAmountInSmallestUnit();
+                pricemovementkryptonDataGridView1[unitprcmovColumn3.Index, r].Value = m_part.UNIT.CODE;
+                switch (itm.STOCK_CARD_ENTRY_TYPE)
+                {
+                    case StockCardEntryType.SupplierInvoice:
+                        SupplierInvoiceItem sii = (SupplierInvoiceItem)itm;
+                        SupplierInvoice si = (SupplierInvoice)sii.EVENT;
+                        si.SUPPLIER = (Supplier)r_sup.GetById(si.SUPPLIER);
+                        pricemovementkryptonDataGridView1[vendorprcmovColumn4.Index, r].Value = si.SUPPLIER.NAME;
+                        pricemovementkryptonDataGridView1[priceprcmovColumn.Index, r].Value = sii.SUBTOTAL / sii.GetAmountInSmallestUnit();
+                        break;
+                    case StockCardEntryType.StockTaking:
+                        StockTakingItems sii = (StockTakingItems)itm;
+                        pricemovementkryptonDataGridView1[priceprcmovColumn.Index, r].Value = sii.SUBTOTAL / sii.GetAmountInSmallestUnit();
+                        break;
+                    case StockCardEntryType.OpeningStock:
+                        OpeningStockItem sii = (OpeningStockItem)itm;
+                        pricemovementkryptonDataGridView1[priceprcmovColumn.Index, r].Value = sii.SUBTOTAL / sii.GetAmountInSmallestUnit();
+                        break;
+                }
+                movemntkryptonDataGridView[statusMovementColumn.Index, r].Value = itm.EVENT.POSTED.ToString();
+            }
+            UserSetting.AddNumberToGrid(pricemovementkryptonDataGridView1);
         }
 
         //private void toolStripButtonMigrate_Click(object sender, EventArgs e)
