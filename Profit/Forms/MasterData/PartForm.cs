@@ -769,12 +769,12 @@ namespace Profit
                         pricemovementkryptonDataGridView1[priceprcmovColumn.Index, r].Value = sii.SUBTOTAL / sii.GetAmountInSmallestUnit();
                         break;
                     case StockCardEntryType.StockTaking:
-                        StockTakingItems sii = (StockTakingItems)itm;
-                        pricemovementkryptonDataGridView1[priceprcmovColumn.Index, r].Value = sii.SUBTOTAL / sii.GetAmountInSmallestUnit();
+                        StockTakingItems stk = (StockTakingItems)itm;
+                        pricemovementkryptonDataGridView1[priceprcmovColumn.Index, r].Value = stk.TOTAL_AMOUNT / stk.GetAmountInSmallestUnit();
                         break;
                     case StockCardEntryType.OpeningStock:
-                        OpeningStockItem sii = (OpeningStockItem)itm;
-                        pricemovementkryptonDataGridView1[priceprcmovColumn.Index, r].Value = sii.SUBTOTAL / sii.GetAmountInSmallestUnit();
+                        OpeningStockItem opn = (OpeningStockItem)itm;
+                        pricemovementkryptonDataGridView1[priceprcmovColumn.Index, r].Value = opn.TOTAL_AMOUNT / opn.GetAmountInSmallestUnit();
                         break;
                 }
                 movemntkryptonDataGridView[statusMovementColumn.Index, r].Value = itm.EVENT.POSTED.ToString();
