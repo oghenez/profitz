@@ -190,6 +190,17 @@ namespace Profit.Server
         {
             return String.Format("SELECT * from table_supplierinvoiceitem where part_id = {0}", id);
         }
+        public static string GetByPartIDOrderByDateSQL(int id)
+        {
+            return String.Format(@"SELECT i.* from table_supplierinvoice h, 
+            table_supplierinvoiceitem i 
+            where 
+            h.si_id = i.si_id 
+            and i.part_id = {0}
+            and h.si_posted = True
+            order by h.si_date asc",
+             id);
+        }
         public static string DeleteUpdate(int id, IList notIN)
         {
             StringBuilder poisSB = new StringBuilder();

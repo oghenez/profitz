@@ -665,7 +665,7 @@ namespace Profit.Server
             //    this.Update(p);
             //}
         }
-        private class EventDateComparer : IComparer
+        public class EventDateComparer : IComparer
         {
 
             #region IComparer Members

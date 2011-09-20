@@ -141,5 +141,16 @@ namespace Profit.Server
         {
             return String.Format("Delete from table_stocktakingitem where stk_id = {0}", id);
         }
+        public static string GetByPartIDOrderByDateSQL(int id)
+        {
+            return String.Format(@"SELECT i.* from table_stocktaking h, 
+            table_stocktakingitem i 
+            where 
+            h.stk_id = i.stk_id 
+            and i.part_id = {0}
+            and h.stk_posted = True
+            order by h.stk_date asc",
+             id);
+        }
     }
 }
