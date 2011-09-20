@@ -330,6 +330,7 @@ namespace Profit.Server
             {
                 itm.EVENT = SupplierInvoiceRepository.GetHeaderOnly(m_command, itm.EVENT.ID);
                 itm.PART = p;
+                result.Add(itm);
             }
 
             m_command.CommandText = StockTakingItems.GetByPartIDOrderByDateSQL(partID);
