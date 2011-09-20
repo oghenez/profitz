@@ -307,6 +307,7 @@ namespace Profit
                 m_part = new Part();
                 errorProvider1.Clear();
                 movemntkryptonDataGridView.Rows.Clear();
+                pricemovementkryptonDataGridView1.Rows.Clear();
             }
             catch (Exception x)
             {
@@ -450,7 +451,7 @@ namespace Profit
                 if (u.CONVERSION_UNIT.ID == m_part.UNIT.ID) continue;
                 AddUOM(u);
             }
-            loadMovement();
+            //loadMovement();
         }
 
         private void loadMovement()
@@ -777,11 +778,24 @@ namespace Profit
                         pricemovementkryptonDataGridView1[priceprcmovColumn.Index, r].Value = opn.TOTAL_AMOUNT / opn.GetAmountInSmallestUnit();
                         break;
                 }
-                movemntkryptonDataGridView[statusMovementColumn.Index, r].Value = itm.EVENT.POSTED.ToString();
+                pricemovementkryptonDataGridView1[statusMovementColumn.Index, r].Value = itm.EVENT.POSTED.ToString();
             }
             UserSetting.AddNumberToGrid(pricemovementkryptonDataGridView1);
-        }
+            updatePriceMovement();
 
+        }
+        private void updatePriceMovement()
+        {
+            int r = 0;
+            for (int i = 1; i < pricemovementkryptonDataGridView1.Rows.Count; i++)
+            {
+                r = i - 1;
+                double p1 = Convert.ToDouble(pricemovementkryptonDataGridView1[priceprcmovColumn.Index, r].Value);
+                double p2 = Convert.ToDouble(pricemovementkryptonDataGridView1[priceprcmovColumn.Index, i].Value);
+                pricemovementkryptonDataGridView1[pricemovementColumn.Index, i].Value = (p1 + p2) / 2;
+
+            }
+        }
         //private void toolStripButtonMigrate_Click(object sender, EventArgs e)
         //{
         //    StreamReader p = new StreamReader(@"part.csv");
