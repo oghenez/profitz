@@ -159,7 +159,7 @@ namespace Profit
             websiteKryptonTextBox.ReadOnly = !enable;
             startEntryPeriodkryptonComboBox1.Enabled = enable;
 
-            FormNameColumn.ReadOnly = !enable;//186
+            //FormNameColumn.ReadOnly = !enable;//186
             PrefixColumn.ReadOnly = !enable;//100
             StartColumn.ReadOnly = !enable;//35
             DigitColumn.ReadOnly = !enable;//38

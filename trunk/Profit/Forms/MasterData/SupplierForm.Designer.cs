@@ -271,7 +271,7 @@
             this.customTabControl1.DisplayStyleProvider.Opacity = 1F;
             this.customTabControl1.DisplayStyleProvider.Overlap = 16;
             this.customTabControl1.DisplayStyleProvider.Padding = new System.Drawing.Point(7, 5);
-            this.customTabControl1.DisplayStyleProvider.Radius = 30;
+            this.customTabControl1.DisplayStyleProvider.Radius = 16;
             this.customTabControl1.DisplayStyleProvider.ShowTabCloser = false;
             this.customTabControl1.DisplayStyleProvider.TextColor = System.Drawing.SystemColors.ControlText;
             this.customTabControl1.DisplayStyleProvider.TextColorDisabled = System.Drawing.SystemColors.ControlDark;
