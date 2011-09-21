@@ -24,12 +24,14 @@ namespace Profit
         Repository r_ccy = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY);
         Repository r_unit = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY);
         Repository r_warehouse = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.WAREHOUSE_REPOSITORY);
-        Repository r_sup = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CUSTOMER_REPOSITORY);
+        Repository r_cus = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CUSTOMER_REPOSITORY);
         UserSettingsRepository r_setting = RepositoryFactory.GetInstance().UserSetting();
         POSRepository r_si = (POSRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.POS_REPOSITORY);
         SalesOrderRepository r_po = (SalesOrderRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.SALES_ORDER_REPOSITORY);
         IList m_units;
         IList m_warehouses;
+        Customer m_customer = null;
+        TermOfPayment m_top = null;
 
         EditMode m_editMode = EditMode.New;
         bool m_enable = false;
@@ -76,15 +78,15 @@ namespace Profit
             {
                 updateSubtotal(e.RowIndex);
             }
-            if (e.ColumnIndex == unitColumn.Index)
-            {
-                Part p = (Part)itemsDataGrid[codeColumn.Index, e.RowIndex].Tag;
-                object ou = itemsDataGrid[unitColumn.Index, e.RowIndex].Value;
-                if ((p == null) || (ou == null)) return;
-                Unit u = (Unit)Utils.FindEntityInList(ou.ToString(), m_units);
-                itemsDataGrid[priceColumn.Index, e.RowIndex].Value = r_si.GetTheLatestSIPrice(((Customer)supplierkryptonComboBox.SelectedItem).ID, p.ID, u.ID);
-                updateSubtotal(e.RowIndex);
-            }
+            //if (e.ColumnIndex == unitColumn.Index)
+            //{
+            //    Part p = (Part)itemsDataGrid[codeColumn.Index, e.RowIndex].Tag;
+            //    object ou = itemsDataGrid[unitColumn.Index, e.RowIndex].Value;
+            //    if ((p == null) || (ou == null)) return;
+            //    Unit u = (Unit)Utils.FindEntityInList(ou.ToString(), m_units);
+            //    itemsDataGrid[priceColumn.Index, e.RowIndex].Value = r_si.GetTheLatestSIPrice(((Customer)supplierkryptonComboBox.SelectedItem).ID, p.ID, u.ID);
+            //    updateSubtotal(e.RowIndex);
+            //}
              
         }
 
@@ -201,7 +203,7 @@ namespace Profit
                     //Utils.GetListCode(unitColumn.Items, units);
                     p.UNIT = (Unit)r_unit.GetById(p.UNIT);
                     itemsDataGrid[unitColumn.Index, e.RowIndex].Value = p.UNIT.ToString();
-                    itemsDataGrid[priceColumn.Index, e.RowIndex].Value = r_si.GetTheLatestSIPrice(((Customer)supplierkryptonComboBox.SelectedItem).ID, p.ID, p.UNIT.ID);
+                    itemsDataGrid[priceColumn.Index, e.RowIndex].Value = 0;// r_si.GetTheLatestSIPrice(((Customer)supplierkryptonComboBox.SelectedItem).ID, p.ID, p.UNIT.ID);
                     //dataItemskryptonDataGridView[totalAmountColumn.Index, e.RowIndex].Value = 0;
                     itemsDataGrid[warehouseColumn.Index, e.RowIndex].Value = m_warehouses[0].ToString();
 
@@ -247,7 +249,7 @@ namespace Profit
                             //Utils.GetListCode(unitColumn.Items, units);
                             p.UNIT = (Unit)r_unit.GetById(p.UNIT);
                             itemsDataGrid[unitColumn.Index, e.RowIndex].Value = p.UNIT.ToString();
-                            itemsDataGrid[priceColumn.Index, e.RowIndex].Value = r_si.GetTheLatestSIPrice(((Customer)supplierkryptonComboBox.SelectedItem).ID, p.ID, p.UNIT.ID);
+                            itemsDataGrid[priceColumn.Index, e.RowIndex].Value = 0;// r_si.GetTheLatestSIPrice(((Customer)supplierkryptonComboBox.SelectedItem).ID, p.ID, p.UNIT.ID);
                            // dataItemskryptonDataGridView[totalAmountColumn.Index, e.RowIndex].Value = 0;
                             itemsDataGrid[warehouseColumn.Index, e.RowIndex].Value = m_warehouses[0].ToString();
                         }
@@ -292,8 +294,8 @@ namespace Profit
             employeeKryptonComboBox.DataSource = r_employee.GetAll();
             currencyKryptonComboBox.DataSource = r_ccy.GetAll();
             divisionKryptonComboBox.DataSource = r_division.GetAll();
-            termofpaymentKryptonComboBox.DataSource = r_top.GetAll();
-            supplierkryptonComboBox.DataSource = r_sup.GetAll();
+            m_customer = (Customer)r_cus.GetByCode(new Customer(0, "POS"));
+            m_top = (TermOfPayment)r_top.GetByCode(new TermOfPayment(0, "COD"));
             taxKryptonComboBox.DataSource = r_tax.GetAll();
             m_units = r_unit.GetAll();
             m_warehouses = r_warehouse.GetAll();
@@ -361,10 +363,10 @@ namespace Profit
                     }
                     KryptonMessageBox.Show("Transaction '" + m_si.CODE + "' Record has been saved", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     //ClearForm();
-                    textBoxCode.Text = m_si.CODE;
+                   // textBoxCode.Text = m_si.CODE;
                     setEnableForm(false);
                     setEditMode(EditMode.View);
-                    textBoxCode.Focus();
+                   // textBoxCode.Focus();
                     this.Cursor = Cursors.Default;
                 }
             }
@@ -380,22 +382,22 @@ namespace Profit
         public bool Valid()
         {
             errorProvider1.Clear();
-            bool a = textBoxCode.Text == "" && !r_si.IsAutoNumber();
+           // bool a = textBoxCode.Text == "" && !r_si.IsAutoNumber();
             bool b = employeeKryptonComboBox.SelectedItem == null;
             bool c = divisionKryptonComboBox.SelectedItem == null;
             bool d = currencyKryptonComboBox.SelectedItem == null;
-            bool h = termofpaymentKryptonComboBox.SelectedItem == null;
-            bool k = supplierkryptonComboBox.SelectedItem == null;
+            //bool h = termofpaymentKryptonComboBox.SelectedItem == null;
+            //bool k = supplierkryptonComboBox.SelectedItem == null;
             bool e = false;
-            bool f = m_si.ID > 0 ? false : r_si.IsCodeExist(textBoxCode.Text);
+           // bool f = m_si.ID > 0 ? false : r_si.IsCodeExist(textBoxCode.Text);
             
-            if (a) errorProvider1.SetError(textBoxCode, "Code Can not Empty");
+           // if (a) errorProvider1.SetError(textBoxCode, "Code Can not Empty");
             if (b) errorProvider1.SetError(employeeKryptonComboBox, "Employee Can not Empty");
             if (c) errorProvider1.SetError(divisionKryptonComboBox, "Division Can not Empty");
             if (d) errorProvider1.SetError(currencyKryptonComboBox, "Currency Can not Empty");
-            if (h) errorProvider1.SetError(termofpaymentKryptonComboBox, "TOP Can not Empty");
-            if (k) errorProvider1.SetError(supplierkryptonComboBox, "Customer Can not Empty");
-            if (f) errorProvider1.SetError(textBoxCode, a ? "Code Can not Empty & Code already used" : "Code already used");
+           // if (h) errorProvider1.SetError(termofpaymentKryptonComboBox, "TOP Can not Empty");
+            //if (k) errorProvider1.SetError(supplierkryptonComboBox, "Customer Can not Empty");
+            //if (f) errorProvider1.SetError(textBoxCode, a ? "Code Can not Empty & Code already used" : "Code already used");
 
             int j = 0;
             for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
@@ -427,18 +429,18 @@ namespace Profit
 
             bool g = j == 0;
             if (g) errorProvider1.SetError(itemsDataGrid,"Items must at least 1(one)");
-            return !a && !b && !c && !d && !e && !f && !g;
+            return !b && !c && !d && !e && !g;//!a && && !f 
         }
         private void UpdateEntity()
         {
             itemsDataGrid.RefreshEdit();
-            m_si.CODE = textBoxCode.Text.Trim();
-            m_si.TRANSACTION_DATE = dateKryptonDateTimePicker.Value;
+            //m_si.CODE = textBoxCode.Text.Trim();
+            m_si.TRANSACTION_DATE = DateTime.Today;//dateKryptonDateTimePicker.Value;
             m_si.EMPLOYEE = (Employee)employeeKryptonComboBox.SelectedItem;
             m_si.NOTES = notesKryptonTextBox.Text;
             m_si.DIVISION = (Division)divisionKryptonComboBox.SelectedItem;
-            m_si.TOP = (TermOfPayment)termofpaymentKryptonComboBox.SelectedItem;
-            m_si.DUE_DATE = duedateKryptonDateTimePicker.Value;
+            m_si.TOP = m_top;// (TermOfPayment)termofpaymentKryptonComboBox.SelectedItem;
+            m_si.DUE_DATE = DateTime.Today;//duedateKryptonDateTimePicker.Value;
             m_si.CURRENCY = (Currency)currencyKryptonComboBox.SelectedItem;
             m_si.SUB_TOTAL = Convert.ToDouble(subTotalKryptonNumericUpDown.Value);
             m_si.DISC_PERCENT = Convert.ToDouble(discPercentKryptonNumericUpDown.Value);
@@ -448,9 +450,9 @@ namespace Profit
             m_si.TAX_AFTER_AMOUNT = Convert.ToDouble(taxAfterAmountkryptonNumericUpDown.Value);
             m_si.OTHER_EXPENSE = Convert.ToDouble(otherExpensekryptonNumericUpDown.Value);
             m_si.NET_TOTAL = Convert.ToDouble(nettotalAmountkryptonNumericUpDown.Value);
-            m_si.CUSTOMER = (Customer)supplierkryptonComboBox.SelectedItem;
+            m_si.CUSTOMER = m_customer;// (Customer)supplierkryptonComboBox.SelectedItem;
             m_si.DOCUMENT_NO = docnokryptonTextBox.Text;
-            m_si.DOCUMENT_DATE = docdatekryptonDateTimePicker.Value;
+            m_si.DOCUMENT_DATE = DateTime.Today;// docdatekryptonDateTimePicker.Value;
             m_si.EVENT_ITEMS = getItems();
         }
 
@@ -496,15 +498,15 @@ namespace Profit
             try
             {
                 m_si = new POS();
-                textBoxCode.Text = "";
-                dateKryptonDateTimePicker.Value = DateTime.Today;
+              //  textBoxCode.Text = "";
+               // dateKryptonDateTimePicker.Value = DateTime.Today;
                 employeeKryptonComboBox.SelectedIndex = 0;
                 currencyKryptonComboBox.SelectedIndex = 0;
                 nettotalAmountkryptonNumericUpDown.Value = 0m;
                 notesKryptonTextBox.Text = "";
                 divisionKryptonComboBox.SelectedIndex = 0;
-                termofpaymentKryptonComboBox.SelectedIndex = 0;
-                duedateKryptonDateTimePicker.Value = DateTime.Today;
+                //termofpaymentKryptonComboBox.SelectedIndex = 0;
+                //duedateKryptonDateTimePicker.Value = DateTime.Today;
                 subTotalKryptonNumericUpDown.Value = 0m;
                 discPercentKryptonNumericUpDown.Value = 0m;
                 discAmountkryptonNumericUpDown.Value = 0m;
@@ -512,9 +514,9 @@ namespace Profit
                 taxKryptonComboBox.SelectedIndex = 0;
                 taxAfterAmountkryptonNumericUpDown.Value = 0m;
                 otherExpensekryptonNumericUpDown.Value = 0m;
-                supplierkryptonComboBox.Text = "POS";
+                //supplierkryptonComboBox.Text = "POS";
                 docnokryptonTextBox.Text = "";
-                docdatekryptonDateTimePicker.Value = DateTime.Today;
+                //docdatekryptonDateTimePicker.Value = DateTime.Today;
                 itemsDataGrid.Rows.Clear();
                 errorProvider1.Clear();
             }
@@ -527,21 +529,21 @@ namespace Profit
         {
             setEnableForm(true);
             setEditMode(EditMode.Update);
-            textBoxCode.Focus();
+            //textBoxCode.Focus();
         }
         public void setEnableForm(bool enable)
         {
-            textBoxCode.ReadOnly = r_si.IsAutoNumber()?true:!enable;
-            dateKryptonDateTimePicker.Enabled = enable;
+            //textBoxCode.ReadOnly = r_si.IsAutoNumber()?true:!enable;
+           // dateKryptonDateTimePicker.Enabled = enable;
             employeeKryptonComboBox.Enabled = enable;
             currencyKryptonComboBox.Enabled = enable;
             notesKryptonTextBox.ReadOnly = !enable;
-            docdatekryptonDateTimePicker.Enabled = enable;
+            //docdatekryptonDateTimePicker.Enabled = enable;
             docnokryptonTextBox.ReadOnly = !enable;
 
             divisionKryptonComboBox.Enabled = enable;
-            termofpaymentKryptonComboBox.Enabled = enable;
-            duedateKryptonDateTimePicker.Enabled = enable;
+            //termofpaymentKryptonComboBox.Enabled = enable;
+            //duedateKryptonDateTimePicker.Enabled = enable;
             //subTotalKryptonNumericUpDown.Enabled = enable;
             discPercentKryptonNumericUpDown.Enabled = enable;
             discAmountkryptonNumericUpDown.Enabled = enable;
@@ -563,7 +565,7 @@ namespace Profit
             discAmountColumn.ReadOnly = !enable;
             notesColumn.ReadOnly = !enable;
             discabcColumn.ReadOnly = !enable;
-            wizardFromGRNToolStripButton.Enabled = enable;
+            //wizardFromGRNToolStripButton.Enabled = enable;
             m_enable = enable;
         }
         private void setEditMode(EditMode editmode)
@@ -598,7 +600,7 @@ namespace Profit
                     ClearForm();
                     setEnableForm(true);
                     setEditMode(EditMode.New);
-                    textBoxCode.Focus();
+                    //textBoxCode.Focus();
                     this.Cursor = Cursors.Default;
                 }
             }
@@ -616,28 +618,28 @@ namespace Profit
             ClearForm();
             setEnableForm(true);
             setEditMode(EditMode.New);
-            textBoxCode.Focus();
+           // textBoxCode.Focus();
         }
         private void loadData()
         {
-            textBoxCode.Text = m_si.CODE;
-            dateKryptonDateTimePicker.Value = m_si.TRANSACTION_DATE;
+          //  textBoxCode.Text = m_si.CODE;
+          //  dateKryptonDateTimePicker.Value = m_si.TRANSACTION_DATE;
             employeeKryptonComboBox.Text = m_si.EMPLOYEE.ToString();
             currencyKryptonComboBox.Text = m_si.CURRENCY.ToString();
             nettotalAmountkryptonNumericUpDown.Value = Convert.ToDecimal(m_si.NET_TOTAL);
             notesKryptonTextBox.Text = m_si.NOTES;
             divisionKryptonComboBox.Text = m_si.DIVISION.ToString();
-            termofpaymentKryptonComboBox.Text = m_si.TOP.ToString();
-            duedateKryptonDateTimePicker.Value = m_si.DUE_DATE;
+            //termofpaymentKryptonComboBox.Text = m_si.TOP.ToString();
+            //duedateKryptonDateTimePicker.Value = m_si.DUE_DATE;
             subTotalKryptonNumericUpDown.Value = Convert.ToDecimal(m_si.SUB_TOTAL);
             discPercentKryptonNumericUpDown.Value = Convert.ToDecimal(m_si.DISC_PERCENT);
             discAfterAmountKryptonNumericUpDown.Value = Convert.ToDecimal(m_si.DISC_AFTER_AMOUNT);
             discAmountkryptonNumericUpDown.Value = Convert.ToDecimal(m_si.DISC_AMOUNT);
-            supplierkryptonComboBox.Text = m_si.CUSTOMER.ToString();
+            //supplierkryptonComboBox.Text = m_si.CUSTOMER.ToString();
             taxKryptonComboBox.Text = m_si.TAX == null ? "" : m_si.TAX.ToString();
             taxAfterAmountkryptonNumericUpDown.Value = Convert.ToDecimal(m_si.TAX_AFTER_AMOUNT);
             otherExpensekryptonNumericUpDown.Value = Convert.ToDecimal(m_si.OTHER_EXPENSE);
-            docdatekryptonDateTimePicker.Value = m_si.DOCUMENT_DATE;
+            //docdatekryptonDateTimePicker.Value = m_si.DOCUMENT_DATE;
             docnokryptonTextBox.Text = m_si.DOCUMENT_NO;
             
 
@@ -707,7 +709,7 @@ namespace Profit
                 m_si.DIVISION = (Division)r_division.GetById(m_si.DIVISION);
                 m_si.TOP = (TermOfPayment)r_top.GetById(m_si.TOP);
                 m_si.TAX = m_si.TAX == null ? null : (Tax)r_tax.GetById(m_si.TAX);
-                m_si.CUSTOMER = (Customer)r_sup.GetById(m_si.CUSTOMER);
+                m_si.CUSTOMER = (Customer)r_cus.GetById(m_si.CUSTOMER);
                 setEditMode(EditMode.View);
                 loadData();
                 setEnableForm(false);
@@ -730,7 +732,7 @@ namespace Profit
                         m_si.DIVISION = (Division)r_division.GetById(m_si.DIVISION);
                         m_si.TOP = (TermOfPayment)r_top.GetById(m_si.TOP);
                         m_si.TAX = m_si.TAX == null ? null : (Tax)r_tax.GetById(m_si.TAX);
-                        m_si.CUSTOMER = (Customer)r_sup.GetById(m_si.CUSTOMER);
+                        m_si.CUSTOMER = (Customer)r_cus.GetById(m_si.CUSTOMER);
                         setEditMode(EditMode.View);
                         loadData();
                         setEnableForm(false);
@@ -769,33 +771,18 @@ namespace Profit
             UserSetting.SaveSetting(itemsDataGrid, m_mainForm.CurrentUser.ID, this.Name);
         }
 
-        private void supplierkryptonComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Customer em = (Customer)supplierkryptonComboBox.SelectedItem;
-            supplierKryptonTextBox.Text = em == null ? "" : em.NAME;
-            contactPersonKryptonTextBox.Text = em == null ? "" : em.CONTACT;
-            if ((m_editMode == EditMode.New) || (m_editMode == EditMode.Update))
-            {
-                if (m_enable)
-                {
-                    em.TERM_OF_PAYMENT = (TermOfPayment)r_top.GetById(em.TERM_OF_PAYMENT);
-                    termofpaymentKryptonComboBox.Text = em.TERM_OF_PAYMENT.ToString();
-                }
-            }
-            addressKryptonTextBox.Text = em == null ? "" : em.ADDRESS;
-        }
 
         private void termofpaymentKryptonComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((m_editMode == EditMode.New) || (m_editMode == EditMode.Update))
-            {
-                if (m_enable)
-                {
-                    TermOfPayment top = (TermOfPayment)termofpaymentKryptonComboBox.SelectedItem;
-                    if(top==null)return;
-                    duedateKryptonDateTimePicker.Value = dateKryptonDateTimePicker.Value.AddDays(top.DAYS);
-                }
-            }
+            //if ((m_editMode == EditMode.New) || (m_editMode == EditMode.Update))
+            //{
+            //    if (m_enable)
+            //    {
+            //        TermOfPayment top = (TermOfPayment)termofpaymentKryptonComboBox.SelectedItem;
+            //        if(top==null)return;
+            //        duedateKryptonDateTimePicker.Value = dateKryptonDateTimePicker.Value.AddDays(top.DAYS);
+            //    }
+            //}
         }
 
         private void itemsDataGrid_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
@@ -807,54 +794,54 @@ namespace Profit
             }
         }
 
-        private void wizardFromDOToolStripButton_Click(object sender, EventArgs e)
-        {
-            IList addedPI = new ArrayList();
-            for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
-            {
-                DeliveryOrderItem pi = (DeliveryOrderItem)itemsDataGrid[GRNNoColumn.Index, i].Tag;
-                if (pi == null) continue;
-                addedPI.Add(pi.ID);
-            }
-            using (SearchDOForCussInvoiceForm frm = new SearchDOForCussInvoiceForm(
-                 ((Customer)supplierkryptonComboBox.SelectedItem), addedPI, m_mainForm.CurrentUser, dateKryptonDateTimePicker.Value))
-            {
-                frm.ShowDialog();
-                IList result = frm.RESULT;
-                foreach (DeliveryOrderItem item in result)
-                {
-                    if (item.SO_ITEM.ID > 0)
-                    {
-                        item.SO_ITEM = r_po.FindSalesOrderItem(item.SO_ITEM.ID);
-                    }
-                    Part p = item.PART;
-                    int row = itemsDataGrid.Rows.Add();
-                    itemsDataGrid[codeColumn.Index, row].Tag = p;
-                    itemsDataGrid[GRNNoColumn.Index, row].Tag = item;
-                    itemsDataGrid[scanColumn.Index, row].Value = p.BARCODE;
-                    itemsDataGrid[GRNNoColumn.Index, row].Value = item.EVENT.CODE;
-                    itemsDataGrid[codeColumn.Index, row].Value = p.CODE;
-                    itemsDataGrid[nameColumn.Index, row].Value = p.NAME;
-                    itemsDataGrid[QtyColumn.Index, row].Value = item.OUTSTANDING_AMOUNT_TO_SR;
-                    p.UNIT = (Unit)r_unit.GetById(item.UNIT);
-                    itemsDataGrid[unitColumn.Index, row].Value = p.UNIT.ToString();
-                    //itemsDataGrid[unitColumn.Index, row].Value = item.UNIT.ToString();
-                   // if (item.UNIT.ID == item.SO_ITEM.UNIT.ID)
-                    //{
-                        //itemsDataGrid[priceColumn.Index, row].Value = item.SO_ITEM != null ? item.SO_ITEM.PRICE : 0d;
-                        itemsDataGrid[priceColumn.Index, row].Value = item.SO_ITEM != null ? item.SO_ITEM.PRICE_IN_SMALLEST_UNIT : 0d;
-                        itemsDataGrid[discpercentColumn.Index, row].Value = item.SO_ITEM != null ? item.SO_ITEM.DISC_PERCENT : 0;
-                        itemsDataGrid[discAmountColumn.Index, row].Value = item.SO_ITEM != null ? item.SO_ITEM.DISC_AMOUNT : 0d;
-                        itemsDataGrid[totalDiscColumn.Index, row].Value = item.SO_ITEM != null ? item.SO_ITEM.TOTAL_DISCOUNT : 0d;
-                        itemsDataGrid[notesColumn.Index, row].Value = item.SO_ITEM != null ? item.SO_ITEM.NOTES : "";
-                        itemsDataGrid[discabcColumn.Index, row].Value = item.SO_ITEM != null ? item.SO_ITEM.DISC_ABC : "";
-                        itemsDataGrid[totalAmountColumn.Index, row].Value = item.SO_ITEM != null ? item.SO_ITEM.SUBTOTAL : 0d;
-                        itemsDataGrid[warehouseColumn.Index, row].Value = r_warehouse.GetById(item.WAREHOUSE).ToString();
-                   // }
-                    updateSubtotal(row);
-                }
-            }
-        }
+        //private void wizardFromDOToolStripButton_Click(object sender, EventArgs e)
+        //{
+        //    IList addedPI = new ArrayList();
+        //    for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
+        //    {
+        //        DeliveryOrderItem pi = (DeliveryOrderItem)itemsDataGrid[GRNNoColumn.Index, i].Tag;
+        //        if (pi == null) continue;
+        //        addedPI.Add(pi.ID);
+        //    }
+        //    using (SearchDOForCussInvoiceForm frm = new SearchDOForCussInvoiceForm(
+        //         ((Customer)supplierkryptonComboBox.SelectedItem), addedPI, m_mainForm.CurrentUser, dateKryptonDateTimePicker.Value))
+        //    {
+        //        frm.ShowDialog();
+        //        IList result = frm.RESULT;
+        //        foreach (DeliveryOrderItem item in result)
+        //        {
+        //            if (item.SO_ITEM.ID > 0)
+        //            {
+        //                item.SO_ITEM = r_po.FindSalesOrderItem(item.SO_ITEM.ID);
+        //            }
+        //            Part p = item.PART;
+        //            int row = itemsDataGrid.Rows.Add();
+        //            itemsDataGrid[codeColumn.Index, row].Tag = p;
+        //            itemsDataGrid[GRNNoColumn.Index, row].Tag = item;
+        //            itemsDataGrid[scanColumn.Index, row].Value = p.BARCODE;
+        //            itemsDataGrid[GRNNoColumn.Index, row].Value = item.EVENT.CODE;
+        //            itemsDataGrid[codeColumn.Index, row].Value = p.CODE;
+        //            itemsDataGrid[nameColumn.Index, row].Value = p.NAME;
+        //            itemsDataGrid[QtyColumn.Index, row].Value = item.OUTSTANDING_AMOUNT_TO_SR;
+        //            p.UNIT = (Unit)r_unit.GetById(item.UNIT);
+        //            itemsDataGrid[unitColumn.Index, row].Value = p.UNIT.ToString();
+        //            //itemsDataGrid[unitColumn.Index, row].Value = item.UNIT.ToString();
+        //           // if (item.UNIT.ID == item.SO_ITEM.UNIT.ID)
+        //            //{
+        //                //itemsDataGrid[priceColumn.Index, row].Value = item.SO_ITEM != null ? item.SO_ITEM.PRICE : 0d;
+        //                itemsDataGrid[priceColumn.Index, row].Value = item.SO_ITEM != null ? item.SO_ITEM.PRICE_IN_SMALLEST_UNIT : 0d;
+        //                itemsDataGrid[discpercentColumn.Index, row].Value = item.SO_ITEM != null ? item.SO_ITEM.DISC_PERCENT : 0;
+        //                itemsDataGrid[discAmountColumn.Index, row].Value = item.SO_ITEM != null ? item.SO_ITEM.DISC_AMOUNT : 0d;
+        //                itemsDataGrid[totalDiscColumn.Index, row].Value = item.SO_ITEM != null ? item.SO_ITEM.TOTAL_DISCOUNT : 0d;
+        //                itemsDataGrid[notesColumn.Index, row].Value = item.SO_ITEM != null ? item.SO_ITEM.NOTES : "";
+        //                itemsDataGrid[discabcColumn.Index, row].Value = item.SO_ITEM != null ? item.SO_ITEM.DISC_ABC : "";
+        //                itemsDataGrid[totalAmountColumn.Index, row].Value = item.SO_ITEM != null ? item.SO_ITEM.SUBTOTAL : 0d;
+        //                itemsDataGrid[warehouseColumn.Index, row].Value = r_warehouse.GetById(item.WAREHOUSE).ToString();
+        //           // }
+        //            updateSubtotal(row);
+        //        }
+        //    }
+        //}
 
         private void searchToolStripTextBox_KeyDown(object sender, KeyEventArgs e)
         {
