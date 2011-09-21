@@ -53,6 +53,7 @@ namespace Profit
         const string AR_CREDIT_NOTE_FORM = "ARCreditNoteForm";
         const string OPENING_STOCK_FORM = "OpeningStockForm";
         const string POS_FORM = "POSForm";
+        const string POS_CASHIER_FORM = "POSCashierForm";
         const string SUPPLIER_TRANSACTION_SUMMARY = "SupplierTransactionSummary";
         const string CUSTOMER_TRANSACTION_SUMMARY = "CustomerTransactionSummary";
 
@@ -72,6 +73,7 @@ namespace Profit
             toolStripComboBox1.Items.AddRange(Enum.GetNames(typeof(PaletteModeManager)));
             InitFormAccessList();
             m_loginForm = loginForm;
+            
             //m_currentUser = (User)r_user.getUser("ADMIN");
             //m_currentPeriod = r_period.FindCurrentPeriod();
         }
@@ -335,6 +337,13 @@ namespace Profit
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
+            if (e.Node.Name == "NodePOSCashier")
+            {
+                if (isChild(POS_CASHIER_FORM)) { this.Cursor = Cursors.Default; return; }
+                POSCashierForm user = new POSCashierForm(this, POS_CASHIER_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            }
             if (e.Node.Name == "NodeSupplierTransactionSummary")
             {
                 if (isChild(SUPPLIER_TRANSACTION_SUMMARY)) { this.Cursor = Cursors.Default; return; }
@@ -549,6 +558,7 @@ namespace Profit
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(AR_CREDIT_NOTE_FORM)) SalesTreeView.Nodes["NodeARCreditNote"].Remove();
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(OPENING_STOCK_FORM)) internalTreeView.Nodes["NodeOpeningStock"].Remove();
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(POS_FORM)) SalesTreeView.Nodes["NodePOS"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(POS_CASHIER_FORM)) SalesTreeView.Nodes["NodePOSCashier"].Remove();
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(SUPPLIER_TRANSACTION_SUMMARY)) purchaseTreeView.Nodes["NodeSupplierTransactionSummary"].Remove();
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(CUSTOMER_TRANSACTION_SUMMARY)) SalesTreeView.Nodes["NodeCustomerTransactionSummary"].Remove();
 
@@ -661,6 +671,7 @@ namespace Profit
             m_listForm.Add(new FormAccess(0, MainForm.SALES_RETURN_FORM.ToString(), "TRCS005 - Sales Return"));
             m_listForm.Add(new FormAccess(0, MainForm.AR_CREDIT_NOTE_FORM.ToString(), "TRCS006 - AR Credit Note"));
             m_listForm.Add(new FormAccess(0, MainForm.POS_FORM.ToString(), "TRCS008 - POS"));
+            m_listForm.Add(new FormAccess(0, MainForm.POS_CASHIER_FORM.ToString(), "TRCS009 - POS Cashier"));
             m_listForm.Add(new FormAccess(0, MainForm.SUPPLIER_TRANSACTION_SUMMARY.ToString(), "TRCP008 - Supplier Transaction Summary"));
             m_listForm.Add(new FormAccess(0, MainForm.CUSTOMER_TRANSACTION_SUMMARY.ToString(), "TRCP010 - Customer Transaction Summary"));
         }
@@ -683,7 +694,13 @@ namespace Profit
         public User CurrentUser
         {
             get { return m_currentUser; }
-            set { m_currentUser = value; }
+            set
+            {
+                m_currentUser = value;
+                usernametoolStripStatusLabel2.Text = m_currentUser.NAME;
+                timelogintoolStripStatusLabel3.Text = DateTime.Now.ToString("hh:mm:ss");
+                datelogintoolStripStatusLabel4.Text = DateTime.Now.ToString("dd-MM-yyyy");
+            }
         }
         public Period CurrentPeriod
         {
