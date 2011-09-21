@@ -54,6 +54,7 @@
     <Compile Include="Crypto.cs" />
     <Compile Include="Entity\AutoNumberSetup.cs" />
     <Compile Include="Entity\Bank.cs" />
+    <Compile Include="Entity\Entity.cs" />
     <Compile Include="Entity\FormAccess.cs" />
     <Compile Include="Entity\GeneralSetup.cs" />
     <Compile Include="Entity\InvoiceTransaction\APDebitNote.cs" />

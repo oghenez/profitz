@@ -7,7 +7,7 @@ using System.Collections;
 
 namespace Profit.Server
 {
-    public class Bank : IEntity
+    public class Bank : Entity, IEntity
     {
         public int ID = 0;
         public string CODE = "B001";

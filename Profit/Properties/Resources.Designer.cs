@@ -116,6 +116,13 @@ namespace Profit.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap PointofSale {
+            get {
+                object obj = ResourceManager.GetObject("PointofSale", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap post {
             get {
                 object obj = ResourceManager.GetObject("post", resourceCulture);

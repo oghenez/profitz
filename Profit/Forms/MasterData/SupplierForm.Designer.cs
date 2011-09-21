@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonHeader1 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
@@ -271,16 +271,16 @@
             this.customTabControl1.DisplayStyleProvider.Opacity = 1F;
             this.customTabControl1.DisplayStyleProvider.Overlap = 16;
             this.customTabControl1.DisplayStyleProvider.Padding = new System.Drawing.Point(7, 5);
-            this.customTabControl1.DisplayStyleProvider.Radius = 16;
+            this.customTabControl1.DisplayStyleProvider.Radius = 30;
             this.customTabControl1.DisplayStyleProvider.ShowTabCloser = false;
             this.customTabControl1.DisplayStyleProvider.TextColor = System.Drawing.SystemColors.ControlText;
             this.customTabControl1.DisplayStyleProvider.TextColorDisabled = System.Drawing.SystemColors.ControlDark;
             this.customTabControl1.DisplayStyleProvider.TextColorSelected = System.Drawing.SystemColors.ControlText;
             this.customTabControl1.HotTrack = true;
-            this.customTabControl1.Location = new System.Drawing.Point(8, 56);
+            this.customTabControl1.Location = new System.Drawing.Point(3, 56);
             this.customTabControl1.Name = "customTabControl1";
             this.customTabControl1.SelectedIndex = 0;
-            this.customTabControl1.Size = new System.Drawing.Size(609, 231);
+            this.customTabControl1.Size = new System.Drawing.Size(693, 231);
             this.customTabControl1.TabIndex = 22;
             // 
             // tabPage3
@@ -304,7 +304,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 27);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(601, 200);
+            this.tabPage3.Size = new System.Drawing.Size(685, 200);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "More Info";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -449,7 +449,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 27);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(601, 200);
+            this.tabPage4.Size = new System.Drawing.Size(685, 200);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "Other";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -598,7 +598,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 27);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(601, 200);
+            this.tabPage1.Size = new System.Drawing.Size(685, 200);
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "Transactions";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -672,7 +672,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 27);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(601, 200);
+            this.tabPage2.Size = new System.Drawing.Size(685, 200);
             this.tabPage2.TabIndex = 3;
             this.tabPage2.Text = "Balance History";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -735,10 +735,10 @@
             // amountVBEColumn
             // 
             this.amountVBEColumn.DecimalPlaces = 2;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.NullValue = "0";
-            this.amountVBEColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.NullValue = "0";
+            this.amountVBEColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.amountVBEColumn.HeaderText = "Amount";
             this.amountVBEColumn.Increment = new decimal(new int[] {
             1,
@@ -767,7 +767,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 27);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(601, 200);
+            this.tabPage5.Size = new System.Drawing.Size(685, 200);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Balance Status";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -820,9 +820,9 @@
             // balanceVBColumn
             // 
             this.balanceVBColumn.DecimalPlaces = 2;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.NullValue = "0";
-            this.balanceVBColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.NullValue = "0";
+            this.balanceVBColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.balanceVBColumn.HeaderText = "Balance";
             this.balanceVBColumn.Increment = new decimal(new int[] {
             1000,
