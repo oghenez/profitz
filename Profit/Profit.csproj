@@ -90,6 +90,12 @@
     <Compile Include="Forms\InventoryTransaction\APDebitNoteForm.Designer.cs">
       <DependentUpon>APDebitNoteForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\POSCashierForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryTransaction\SalesTransaction\POSCashierForm.Designer.cs">
+      <DependentUpon>POSCashierForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\InventoryTransaction\SalesTransaction\CustomerTransactionSummaryForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -550,6 +556,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\APDebitNoteForm.resx">
       <DependentUpon>APDebitNoteForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\POSCashierForm.resx">
+      <DependentUpon>POSCashierForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\SalesTransaction\CustomerTransactionSummaryForm.resx">
       <DependentUpon>CustomerTransactionSummaryForm.cs</DependentUpon>
