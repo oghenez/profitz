@@ -40,18 +40,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonEdit = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonClear = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonRefresh = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.searchToolStripTextBox = new System.Windows.Forms.ToolStripTextBox();
-            this.searchToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.postToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonPrint = new System.Windows.Forms.ToolStripButton();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.readyscankryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -80,7 +72,6 @@
             this.notesKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.scanBarcodekryptonTextBox1 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.kryptonLabel10 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.subTotalKryptonNumericUpDown = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
             this.kryptonLabel9 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -108,6 +99,17 @@
             this.buttonSpecAny5 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.buttonSpecAny6 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.kryptonContextMenuItems1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonEdit = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonClear = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonRefresh = new System.Windows.Forms.ToolStripButton();
+            this.searchToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.postToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonPrint = new System.Windows.Forms.ToolStripButton();
+            this.companylabel1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -117,16 +119,16 @@
             this.headerGroup2Custom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsDataGrid)).BeginInit();
             this.dataGridContextMenuStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.employeeKryptonComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.divisionKryptonComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
             // 
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.toolStrip1.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.toolStrip1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonSave,
             this.toolStripButtonEdit,
@@ -146,50 +148,6 @@
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripButtonSave
-            // 
-            this.toolStripButtonSave.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButtonSave.Image = global::Profit.Properties.Resources.save;
-            this.toolStripButtonSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonSave.Name = "toolStripButtonSave";
-            this.toolStripButtonSave.Size = new System.Drawing.Size(49, 22);
-            this.toolStripButtonSave.Text = "Save";
-            // 
-            // toolStripButtonEdit
-            // 
-            this.toolStripButtonEdit.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButtonEdit.Image = global::Profit.Properties.Resources.edit;
-            this.toolStripButtonEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonEdit.Name = "toolStripButtonEdit";
-            this.toolStripButtonEdit.Size = new System.Drawing.Size(45, 22);
-            this.toolStripButtonEdit.Text = "Edit";
-            // 
-            // toolStripButtonDelete
-            // 
-            this.toolStripButtonDelete.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButtonDelete.Image = global::Profit.Properties.Resources.delete;
-            this.toolStripButtonDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonDelete.Name = "toolStripButtonDelete";
-            this.toolStripButtonDelete.Size = new System.Drawing.Size(59, 22);
-            this.toolStripButtonDelete.Text = "Delete";
-            // 
-            // toolStripButtonClear
-            // 
-            this.toolStripButtonClear.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButtonClear.Image = global::Profit.Properties.Resources.Gnome_Edit_Redo_32;
-            this.toolStripButtonClear.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonClear.Name = "toolStripButtonClear";
-            this.toolStripButtonClear.Size = new System.Drawing.Size(52, 22);
-            this.toolStripButtonClear.Text = "Clear";
-            // 
-            // toolStripButtonRefresh
-            // 
-            this.toolStripButtonRefresh.Image = global::Profit.Properties.Resources.refresh;
-            this.toolStripButtonRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonRefresh.Name = "toolStripButtonRefresh";
-            this.toolStripButtonRefresh.Size = new System.Drawing.Size(66, 22);
-            this.toolStripButtonRefresh.Text = "Refresh";
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -208,40 +166,16 @@
             this.searchToolStripTextBox.ToolTipText = "Find Stock Taking by Code, Employee";
             this.searchToolStripTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchToolStripTextBox_KeyDown);
             // 
-            // searchToolStripButton
-            // 
-            this.searchToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.searchToolStripButton.Image = global::Profit.Properties.Resources.printpreview;
-            this.searchToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.searchToolStripButton.Name = "searchToolStripButton";
-            this.searchToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.searchToolStripButton.Text = "Find";
-            this.searchToolStripButton.Click += new System.EventHandler(this.searchToolStripButton_Click);
-            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // postToolStripButton
-            // 
-            this.postToolStripButton.Image = global::Profit.Properties.Resources.post;
-            this.postToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.postToolStripButton.Name = "postToolStripButton";
-            this.postToolStripButton.Size = new System.Drawing.Size(49, 22);
-            this.postToolStripButton.Text = "Post";
-            // 
-            // toolStripButtonPrint
-            // 
-            this.toolStripButtonPrint.Image = global::Profit.Properties.Resources.print;
-            this.toolStripButtonPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonPrint.Name = "toolStripButtonPrint";
-            this.toolStripButtonPrint.Size = new System.Drawing.Size(51, 22);
-            this.toolStripButtonPrint.Text = "Print";
-            // 
             // kryptonPanel1
             // 
             this.kryptonPanel1.AutoScroll = true;
+            this.kryptonPanel1.Controls.Add(this.label2);
+            this.kryptonPanel1.Controls.Add(this.companylabel1);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
             this.kryptonPanel1.Controls.Add(this.readyscankryptonLabel1);
             this.kryptonPanel1.Controls.Add(this.ccykryptonLabel1);
@@ -278,13 +212,13 @@
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(9, 93);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(83, 19);
+            this.kryptonLabel1.Size = new System.Drawing.Size(90, 20);
             this.kryptonLabel1.TabIndex = 73;
             this.kryptonLabel1.Values.Text = "Barcode Scan :";
             // 
             // readyscankryptonLabel1
             // 
-            this.readyscankryptonLabel1.Location = new System.Drawing.Point(398, 93);
+            this.readyscankryptonLabel1.Location = new System.Drawing.Point(426, 93);
             this.readyscankryptonLabel1.Name = "readyscankryptonLabel1";
             this.readyscankryptonLabel1.Size = new System.Drawing.Size(79, 19);
             this.readyscankryptonLabel1.StateNormal.ShortText.Color1 = System.Drawing.Color.Red;
@@ -355,7 +289,7 @@
             // 
             this.kryptonLabel18.Location = new System.Drawing.Point(14, 6);
             this.kryptonLabel18.Name = "kryptonLabel18";
-            this.kryptonLabel18.Size = new System.Drawing.Size(55, 19);
+            this.kryptonLabel18.Size = new System.Drawing.Size(60, 20);
             this.kryptonLabel18.TabIndex = 66;
             this.kryptonLabel18.Values.Text = "Ref. No. :";
             // 
@@ -363,7 +297,7 @@
             // 
             this.docnokryptonTextBox.Location = new System.Drawing.Point(81, 5);
             this.docnokryptonTextBox.Name = "docnokryptonTextBox";
-            this.docnokryptonTextBox.Size = new System.Drawing.Size(190, 20);
+            this.docnokryptonTextBox.Size = new System.Drawing.Size(190, 17);
             this.docnokryptonTextBox.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.docnokryptonTextBox.StateDisabled.Content.Color1 = System.Drawing.Color.Black;
             this.docnokryptonTextBox.TabIndex = 0;
@@ -632,12 +566,12 @@
             this.dataGridContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fieldChooserTestToolStripMenuItem});
             this.dataGridContextMenuStrip.Name = "dataGridContextMenuStrip";
-            this.dataGridContextMenuStrip.Size = new System.Drawing.Size(153, 26);
+            this.dataGridContextMenuStrip.Size = new System.Drawing.Size(146, 26);
             // 
             // fieldChooserTestToolStripMenuItem
             // 
             this.fieldChooserTestToolStripMenuItem.Name = "fieldChooserTestToolStripMenuItem";
-            this.fieldChooserTestToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.fieldChooserTestToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.fieldChooserTestToolStripMenuItem.Text = "Field Chooser";
             this.fieldChooserTestToolStripMenuItem.Click += new System.EventHandler(this.fieldChooserTestToolStripMenuItem_Click);
             // 
@@ -645,44 +579,33 @@
             // 
             this.notesKryptonTextBox.Location = new System.Drawing.Point(348, 4);
             this.notesKryptonTextBox.Name = "notesKryptonTextBox";
-            this.notesKryptonTextBox.Size = new System.Drawing.Size(262, 22);
+            this.notesKryptonTextBox.Size = new System.Drawing.Size(262, 20);
             this.notesKryptonTextBox.TabIndex = 1;
             // 
             // kryptonLabel7
             // 
             this.kryptonLabel7.Location = new System.Drawing.Point(277, 6);
             this.kryptonLabel7.Name = "kryptonLabel7";
-            this.kryptonLabel7.Size = new System.Drawing.Size(65, 19);
+            this.kryptonLabel7.Size = new System.Drawing.Size(70, 20);
             this.kryptonLabel7.TabIndex = 20;
             this.kryptonLabel7.Values.Text = "Comment :";
             // 
             // scanBarcodekryptonTextBox1
             // 
-            this.scanBarcodekryptonTextBox1.Location = new System.Drawing.Point(94, 92);
+            this.scanBarcodekryptonTextBox1.Location = new System.Drawing.Point(111, 93);
             this.scanBarcodekryptonTextBox1.Name = "scanBarcodekryptonTextBox1";
-            this.scanBarcodekryptonTextBox1.Size = new System.Drawing.Size(297, 22);
+            this.scanBarcodekryptonTextBox1.Size = new System.Drawing.Size(297, 20);
             this.scanBarcodekryptonTextBox1.TabIndex = 0;
             this.scanBarcodekryptonTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.scanBarcodekryptonTextBox1_KeyDown);
             this.scanBarcodekryptonTextBox1.Enter += new System.EventHandler(this.kryptonTextBox1_Enter);
             this.scanBarcodekryptonTextBox1.Leave += new System.EventHandler(this.scanBarcodekryptonTextBox1_Leave);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Image = global::Profit.Properties.Resources.POSprofit3;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(720, 84);
-            this.pictureBox1.TabIndex = 69;
-            this.pictureBox1.TabStop = false;
-            // 
             // kryptonLabel10
             // 
             this.kryptonLabel10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonLabel10.Location = new System.Drawing.Point(654, 365);
+            this.kryptonLabel10.Location = new System.Drawing.Point(649, 364);
             this.kryptonLabel10.Name = "kryptonLabel10";
-            this.kryptonLabel10.Size = new System.Drawing.Size(63, 19);
+            this.kryptonLabel10.Size = new System.Drawing.Size(68, 20);
             this.kryptonLabel10.TabIndex = 42;
             this.kryptonLabel10.Values.Text = "Sub Total :";
             // 
@@ -703,7 +626,7 @@
             0,
             0});
             this.subTotalKryptonNumericUpDown.Name = "subTotalKryptonNumericUpDown";
-            this.subTotalKryptonNumericUpDown.Size = new System.Drawing.Size(167, 21);
+            this.subTotalKryptonNumericUpDown.Size = new System.Drawing.Size(167, 22);
             this.subTotalKryptonNumericUpDown.StateDisabled.Content.Color1 = System.Drawing.Color.Black;
             this.subTotalKryptonNumericUpDown.TabIndex = 28;
             this.subTotalKryptonNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -712,36 +635,36 @@
             // kryptonLabel9
             // 
             this.kryptonLabel9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonLabel9.Location = new System.Drawing.Point(552, 389);
+            this.kryptonLabel9.Location = new System.Drawing.Point(546, 388);
             this.kryptonLabel9.Name = "kryptonLabel9";
-            this.kryptonLabel9.Size = new System.Drawing.Size(80, 19);
+            this.kryptonLabel9.Size = new System.Drawing.Size(86, 20);
             this.kryptonLabel9.TabIndex = 41;
             this.kryptonLabel9.Values.Text = "Disc. Percent :";
             // 
             // kryptonLabel8
             // 
             this.kryptonLabel8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonLabel8.Location = new System.Drawing.Point(635, 411);
+            this.kryptonLabel8.Location = new System.Drawing.Point(628, 410);
             this.kryptonLabel8.Name = "kryptonLabel8";
-            this.kryptonLabel8.Size = new System.Drawing.Size(82, 19);
+            this.kryptonLabel8.Size = new System.Drawing.Size(89, 20);
             this.kryptonLabel8.TabIndex = 40;
             this.kryptonLabel8.Values.Text = "Disc. Amount :";
             // 
             // kryptonLabel6
             // 
             this.kryptonLabel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.kryptonLabel6.Location = new System.Drawing.Point(9, 365);
+            this.kryptonLabel6.Location = new System.Drawing.Point(9, 364);
             this.kryptonLabel6.Name = "kryptonLabel6";
-            this.kryptonLabel6.Size = new System.Drawing.Size(84, 19);
+            this.kryptonLabel6.Size = new System.Drawing.Size(91, 20);
             this.kryptonLabel6.TabIndex = 17;
             this.kryptonLabel6.Values.Text = "Total Amount :";
             // 
             // kryptonLabel5
             // 
             this.kryptonLabel5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonLabel5.Location = new System.Drawing.Point(684, 436);
+            this.kryptonLabel5.Location = new System.Drawing.Point(682, 435);
             this.kryptonLabel5.Name = "kryptonLabel5";
-            this.kryptonLabel5.Size = new System.Drawing.Size(33, 19);
+            this.kryptonLabel5.Size = new System.Drawing.Size(35, 20);
             this.kryptonLabel5.TabIndex = 39;
             this.kryptonLabel5.Values.Text = "Tax :";
             // 
@@ -773,9 +696,9 @@
             // kryptonLabel2
             // 
             this.kryptonLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonLabel2.Location = new System.Drawing.Point(629, 462);
+            this.kryptonLabel2.Location = new System.Drawing.Point(621, 461);
             this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(88, 19);
+            this.kryptonLabel2.Size = new System.Drawing.Size(96, 20);
             this.kryptonLabel2.TabIndex = 38;
             this.kryptonLabel2.Values.Text = "Other Expense :";
             // 
@@ -789,7 +712,7 @@
             0});
             this.discPercentKryptonNumericUpDown.Location = new System.Drawing.Point(638, 387);
             this.discPercentKryptonNumericUpDown.Name = "discPercentKryptonNumericUpDown";
-            this.discPercentKryptonNumericUpDown.Size = new System.Drawing.Size(72, 21);
+            this.discPercentKryptonNumericUpDown.Size = new System.Drawing.Size(72, 22);
             this.discPercentKryptonNumericUpDown.StateDisabled.Content.Color1 = System.Drawing.Color.Black;
             this.discPercentKryptonNumericUpDown.TabIndex = 8;
             this.discPercentKryptonNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -802,7 +725,7 @@
             this.employeeKryptonComboBox.DropDownWidth = 90;
             this.employeeKryptonComboBox.Location = new System.Drawing.Point(143, 436);
             this.employeeKryptonComboBox.Name = "employeeKryptonComboBox";
-            this.employeeKryptonComboBox.Size = new System.Drawing.Size(108, 22);
+            this.employeeKryptonComboBox.Size = new System.Drawing.Size(108, 21);
             this.employeeKryptonComboBox.StateDisabled.ComboBox.Content.Color1 = System.Drawing.Color.Black;
             this.employeeKryptonComboBox.TabIndex = 2;
             this.employeeKryptonComboBox.SelectedIndexChanged += new System.EventHandler(this.employeeKryptonComboBox_SelectedIndexChanged);
@@ -828,7 +751,7 @@
             0,
             -2147483648});
             this.otherExpensekryptonNumericUpDown.Name = "otherExpensekryptonNumericUpDown";
-            this.otherExpensekryptonNumericUpDown.Size = new System.Drawing.Size(167, 21);
+            this.otherExpensekryptonNumericUpDown.Size = new System.Drawing.Size(167, 22);
             this.otherExpensekryptonNumericUpDown.StateDisabled.Content.Color1 = System.Drawing.Color.Black;
             this.otherExpensekryptonNumericUpDown.TabIndex = 11;
             this.otherExpensekryptonNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -852,7 +775,7 @@
             0,
             0});
             this.discAfterAmountKryptonNumericUpDown.Name = "discAfterAmountKryptonNumericUpDown";
-            this.discAfterAmountKryptonNumericUpDown.Size = new System.Drawing.Size(167, 21);
+            this.discAfterAmountKryptonNumericUpDown.Size = new System.Drawing.Size(167, 22);
             this.discAfterAmountKryptonNumericUpDown.StateDisabled.Content.Color1 = System.Drawing.Color.Black;
             this.discAfterAmountKryptonNumericUpDown.TabIndex = 30;
             this.discAfterAmountKryptonNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -875,7 +798,7 @@
             0,
             0});
             this.taxAfterAmountkryptonNumericUpDown.Name = "taxAfterAmountkryptonNumericUpDown";
-            this.taxAfterAmountkryptonNumericUpDown.Size = new System.Drawing.Size(167, 21);
+            this.taxAfterAmountkryptonNumericUpDown.Size = new System.Drawing.Size(167, 22);
             this.taxAfterAmountkryptonNumericUpDown.StateDisabled.Content.Color1 = System.Drawing.Color.Black;
             this.taxAfterAmountkryptonNumericUpDown.TabIndex = 33;
             this.taxAfterAmountkryptonNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -888,7 +811,7 @@
             this.divisionKryptonComboBox.DropDownWidth = 90;
             this.divisionKryptonComboBox.Location = new System.Drawing.Point(143, 460);
             this.divisionKryptonComboBox.Name = "divisionKryptonComboBox";
-            this.divisionKryptonComboBox.Size = new System.Drawing.Size(108, 22);
+            this.divisionKryptonComboBox.Size = new System.Drawing.Size(108, 21);
             this.divisionKryptonComboBox.StateDisabled.ComboBox.Content.Color1 = System.Drawing.Color.Black;
             this.divisionKryptonComboBox.TabIndex = 3;
             // 
@@ -908,7 +831,7 @@
             0,
             0});
             this.discAmountkryptonNumericUpDown.Name = "discAmountkryptonNumericUpDown";
-            this.discAmountkryptonNumericUpDown.Size = new System.Drawing.Size(167, 21);
+            this.discAmountkryptonNumericUpDown.Size = new System.Drawing.Size(167, 22);
             this.discAmountkryptonNumericUpDown.StateDisabled.Content.Color1 = System.Drawing.Color.Black;
             this.discAmountkryptonNumericUpDown.TabIndex = 9;
             this.discAmountkryptonNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -922,7 +845,7 @@
             this.EmployeekryptonTextBox.Location = new System.Drawing.Point(250, 436);
             this.EmployeekryptonTextBox.Name = "EmployeekryptonTextBox";
             this.EmployeekryptonTextBox.ReadOnly = true;
-            this.EmployeekryptonTextBox.Size = new System.Drawing.Size(144, 22);
+            this.EmployeekryptonTextBox.Size = new System.Drawing.Size(144, 20);
             this.EmployeekryptonTextBox.StateDisabled.Content.Color1 = System.Drawing.Color.Black;
             this.EmployeekryptonTextBox.TabIndex = 7;
             // 
@@ -930,27 +853,27 @@
             // 
             this.statusKryptonLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.statusKryptonLabel.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.TitleControl;
-            this.statusKryptonLabel.Location = new System.Drawing.Point(4, 433);
+            this.statusKryptonLabel.Location = new System.Drawing.Point(4, 431);
             this.statusKryptonLabel.Name = "statusKryptonLabel";
-            this.statusKryptonLabel.Size = new System.Drawing.Size(68, 27);
+            this.statusKryptonLabel.Size = new System.Drawing.Size(71, 29);
             this.statusKryptonLabel.TabIndex = 23;
             this.statusKryptonLabel.Values.Text = "ENTRY";
             // 
             // kryptonLabel11
             // 
             this.kryptonLabel11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.kryptonLabel11.Location = new System.Drawing.Point(82, 460);
+            this.kryptonLabel11.Location = new System.Drawing.Point(82, 459);
             this.kryptonLabel11.Name = "kryptonLabel11";
-            this.kryptonLabel11.Size = new System.Drawing.Size(55, 19);
+            this.kryptonLabel11.Size = new System.Drawing.Size(60, 20);
             this.kryptonLabel11.TabIndex = 43;
             this.kryptonLabel11.Values.Text = "Division :";
             // 
             // kryptonLabel3
             // 
             this.kryptonLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.kryptonLabel3.Location = new System.Drawing.Point(72, 439);
+            this.kryptonLabel3.Location = new System.Drawing.Point(72, 438);
             this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Size = new System.Drawing.Size(65, 19);
+            this.kryptonLabel3.Size = new System.Drawing.Size(70, 20);
             this.kryptonLabel3.TabIndex = 11;
             this.kryptonLabel3.Values.Text = "Employee :";
             // 
@@ -988,6 +911,113 @@
             this.buttonSpecAny6.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny6.UniqueName = "95BED338EBB14361B2927C3CB003454A";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.BackgroundImage = global::Profit.Properties.Resources.POSprofit4;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(884, 84);
+            this.pictureBox1.TabIndex = 69;
+            this.pictureBox1.TabStop = false;
+            // 
+            // toolStripButtonSave
+            // 
+            this.toolStripButtonSave.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButtonSave.Image = global::Profit.Properties.Resources.save;
+            this.toolStripButtonSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonSave.Name = "toolStripButtonSave";
+            this.toolStripButtonSave.Size = new System.Drawing.Size(49, 22);
+            this.toolStripButtonSave.Text = "Save";
+            // 
+            // toolStripButtonEdit
+            // 
+            this.toolStripButtonEdit.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButtonEdit.Image = global::Profit.Properties.Resources.edit;
+            this.toolStripButtonEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonEdit.Name = "toolStripButtonEdit";
+            this.toolStripButtonEdit.Size = new System.Drawing.Size(45, 22);
+            this.toolStripButtonEdit.Text = "Edit";
+            // 
+            // toolStripButtonDelete
+            // 
+            this.toolStripButtonDelete.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButtonDelete.Image = global::Profit.Properties.Resources.delete;
+            this.toolStripButtonDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonDelete.Name = "toolStripButtonDelete";
+            this.toolStripButtonDelete.Size = new System.Drawing.Size(59, 22);
+            this.toolStripButtonDelete.Text = "Delete";
+            // 
+            // toolStripButtonClear
+            // 
+            this.toolStripButtonClear.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButtonClear.Image = global::Profit.Properties.Resources.Gnome_Edit_Redo_32;
+            this.toolStripButtonClear.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonClear.Name = "toolStripButtonClear";
+            this.toolStripButtonClear.Size = new System.Drawing.Size(52, 22);
+            this.toolStripButtonClear.Text = "Clear";
+            // 
+            // toolStripButtonRefresh
+            // 
+            this.toolStripButtonRefresh.Image = global::Profit.Properties.Resources.refresh;
+            this.toolStripButtonRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonRefresh.Name = "toolStripButtonRefresh";
+            this.toolStripButtonRefresh.Size = new System.Drawing.Size(66, 22);
+            this.toolStripButtonRefresh.Text = "Refresh";
+            // 
+            // searchToolStripButton
+            // 
+            this.searchToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.searchToolStripButton.Image = global::Profit.Properties.Resources.printpreview;
+            this.searchToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.searchToolStripButton.Name = "searchToolStripButton";
+            this.searchToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.searchToolStripButton.Text = "Find";
+            this.searchToolStripButton.Click += new System.EventHandler(this.searchToolStripButton_Click);
+            // 
+            // postToolStripButton
+            // 
+            this.postToolStripButton.Image = global::Profit.Properties.Resources.post;
+            this.postToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.postToolStripButton.Name = "postToolStripButton";
+            this.postToolStripButton.Size = new System.Drawing.Size(50, 22);
+            this.postToolStripButton.Text = "Post";
+            // 
+            // toolStripButtonPrint
+            // 
+            this.toolStripButtonPrint.Image = global::Profit.Properties.Resources.print;
+            this.toolStripButtonPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonPrint.Name = "toolStripButtonPrint";
+            this.toolStripButtonPrint.Size = new System.Drawing.Size(52, 22);
+            this.toolStripButtonPrint.Text = "Print";
+            // 
+            // companylabel1
+            // 
+            this.companylabel1.AutoSize = true;
+            this.companylabel1.BackColor = System.Drawing.Color.Black;
+            this.companylabel1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 26.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.companylabel1.ForeColor = System.Drawing.Color.White;
+            this.companylabel1.Location = new System.Drawing.Point(13, 9);
+            this.companylabel1.Name = "companylabel1";
+            this.companylabel1.Size = new System.Drawing.Size(347, 40);
+            this.companylabel1.TabIndex = 74;
+            this.companylabel1.Text = "Profit Super Market";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Black;
+            this.label2.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(17, 52);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(122, 24);
+            this.label2.TabIndex = 75;
+            this.label2.Text = "Point Of Sale";
+            // 
             // POSCashierForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1013,10 +1043,10 @@
             this.headerGroup2Custom.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.itemsDataGrid)).EndInit();
             this.dataGridContextMenuStrip.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.employeeKryptonComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.divisionKryptonComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1093,5 +1123,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn totalAmountColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn warehouseColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn notesColumn;
+        private System.Windows.Forms.Label companylabel1;
+        private System.Windows.Forms.Label label2;
     }
 }

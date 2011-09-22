@@ -62,9 +62,11 @@ namespace Profit
         User m_currentUser = null;
         Period m_currentPeriod = null;
         LoginForm m_loginForm;
+        GeneralSetup m_generalSetup = null;
 
         UserRepository r_user = (UserRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.USER_REPOSITORY);
         PeriodRepository r_period = (PeriodRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PERIOD_REPOSITORY);
+        Repository r_generalSetup = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.GENERAL_SETUP_REPOSITORY);
 
         public MainForm(LoginForm loginForm)
         {
@@ -73,6 +75,7 @@ namespace Profit
             toolStripComboBox1.Items.AddRange(Enum.GetNames(typeof(PaletteModeManager)));
             InitFormAccessList();
             m_loginForm = loginForm;
+            m_generalSetup = (GeneralSetup)r_generalSetup.GetById(new GeneralSetup(1));
             
             //m_currentUser = (User)r_user.getUser("ADMIN");
             //m_currentPeriod = r_period.FindCurrentPeriod();
@@ -734,5 +737,15 @@ namespace Profit
         {
             this.Close();
         }
+
+        #region IMainForm Members
+
+
+        public GeneralSetup GeneralSetup
+        {
+            get { return m_generalSetup; }
+        }
+
+        #endregion
     }
 }

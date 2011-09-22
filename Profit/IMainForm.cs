@@ -17,6 +17,7 @@ namespace Profit
         void EnableButtonRefresh(bool enable);
         User CurrentUser { get; set; }
         Period CurrentPeriod { get; set; }
+        GeneralSetup GeneralSetup { get; }
         //void SetUser(User user);
         //User CurrentUser { get; }
     }

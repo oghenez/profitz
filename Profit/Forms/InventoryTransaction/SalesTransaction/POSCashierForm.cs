@@ -49,6 +49,7 @@ namespace Profit
             InitializeDataGridValidation();
             m_timer.Interval = 250;
             m_timer.Tick += new EventHandler(m_timer_Tick);
+            companylabel1.Text = mainForm.GeneralSetup.COMPANY_NAME;
             this.headerGroup2Custom.ValuesPrimary.Heading = DateTime.Today.ToLongDateString();
             this.MdiParent = (Form)mainForm;
             this.Name = formName;
