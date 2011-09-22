@@ -883,6 +883,7 @@ namespace Profit
         {
             string barcode = scanBarcodekryptonTextBox1.Text.Trim();
             decimal qty = 1;
+            itemsDataGrid.ClearSelection();
             try
             {
                 if (e.KeyData == Keys.Enter)
@@ -930,6 +931,8 @@ namespace Profit
                         itemsDataGrid[taxableColumn.Index, newRow].Value = p.TAXABLE;
                         itemsDataGrid[discpercentColumn.Index, newRow].Value = p.PRICE_CATEGORY.DISCOUNT_PERCENT;
                         updateSubtotal(newRow);
+                        itemsDataGrid.Rows[newRow].Selected = true;
+                        itemsDataGrid[0, newRow].Selected = true;
                     }
                     //if ((result.Count == 0) || (result.Count > 1))
                     //{
