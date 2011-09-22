@@ -39,6 +39,7 @@ namespace Profit
 
         EditMode m_editMode = EditMode.New;
         bool m_enable = false;
+        Timer m_timer = new Timer();
 
         public POSCashierForm(IMainForm mainForm, string formName)
         {
@@ -46,11 +47,18 @@ namespace Profit
             InitializeButtonClick();
             InitializeDataSource();
             InitializeDataGridValidation();
+            m_timer.Interval = 250;
+            m_timer.Tick += new EventHandler(m_timer_Tick);
             this.headerGroup2Custom.ValuesPrimary.Heading = DateTime.Today.ToLongDateString();
             this.MdiParent = (Form)mainForm;
             this.Name = formName;
             m_mainForm = mainForm;
             Clear(null, null);
+        }
+
+        void m_timer_Tick(object sender, EventArgs e)
+        {
+            readyscankryptonLabel1.Visible = !readyscankryptonLabel1.Visible;
         }
 
         private void InitializeDataGridValidation()
@@ -772,12 +780,12 @@ namespace Profit
 
         private void SalesOrderForm_Load(object sender, EventArgs e)
         {
-            UserSetting.LoadSetting(itemsDataGrid, m_mainForm.CurrentUser.ID, this.Name);
+            UserSetting.LoadSetting(itemsDataGrid, 1, this.Name);
         }
 
         private void SalesOrderForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            UserSetting.SaveSetting(itemsDataGrid, m_mainForm.CurrentUser.ID, this.Name);
+            UserSetting.SaveSetting(itemsDataGrid, 1, this.Name);
         }
 
 
@@ -857,6 +865,127 @@ namespace Profit
             if (e.KeyData == Keys.Enter)
             {
                 searchToolStripButton_Click(null, null);
+            }
+        }
+
+        private void kryptonTextBox1_Enter(object sender, EventArgs e)
+        {
+            m_timer.Start();
+        }
+
+        private void scanBarcodekryptonTextBox1_Leave(object sender, EventArgs e)
+        {
+            m_timer.Stop();
+            readyscankryptonLabel1.Visible = false;
+        }
+
+        private void scanBarcodekryptonTextBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            string barcode = scanBarcodekryptonTextBox1.Text.Trim();
+            decimal qty = 1;
+            try
+            {
+                if (e.KeyData == Keys.Enter)
+                {
+                    string[] brcs = barcode.Split('*');
+                    if (brcs.Length == 2)
+                    {
+                        qty = Convert.ToDecimal(brcs[0]);
+                        barcode = brcs[1];
+                    }
+
+                    IList result = r_part.SearchActivePartByBarcode(barcode, true);
+                    if (result.Count == 1)
+                    {
+                        Part p = (Part)result[0];
+                        for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
+                        {
+                            Part pi = (Part)itemsDataGrid[codeColumn.Index, i].Tag;
+                            if (pi == null) continue;
+                            if (pi.ID == p.ID)
+                            {
+                                decimal v = Convert.ToDecimal(itemsDataGrid[QtyColumn.Index, i].Value);
+                                itemsDataGrid[QtyColumn.Index, i].Value = v + qty;
+                                updateSubtotal(i);
+                                scanBarcodekryptonTextBox1.Text = "";
+                                scanBarcodekryptonTextBox1.Focus();
+                                return;
+                            }
+                        }
+                        int newRow = itemsDataGrid.Rows.Add();
+                        p.TAX = (Tax)r_tax.GetById(p.TAX);
+                        p.UNIT_BY_SEARCH = (Unit)r_unit.GetById(p.UNIT_BY_SEARCH);
+                        p.PRICE_CATEGORY = (PriceCategory)r_pricecat.GetById(p.PRICE_CATEGORY);
+
+                        itemsDataGrid[codeColumn.Index, newRow].Tag = p;
+                        itemsDataGrid[GRNNoColumn.Index, newRow].Tag = null;
+                        itemsDataGrid[GRNNoColumn.Index, newRow].Value = "";
+                        itemsDataGrid[scanColumn.Index, newRow].Value = p.BARCODE;
+                        itemsDataGrid[codeColumn.Index, newRow].Value = p.CODE;
+                        itemsDataGrid[nameColumn.Index, newRow].Value = p.NAME;
+                        itemsDataGrid[QtyColumn.Index, newRow].Value = qty;
+                        itemsDataGrid[unitColumn.Index, newRow].Value = p.UNIT_BY_SEARCH.ToString();
+                        itemsDataGrid[priceColumn.Index, newRow].Value = p.TAXABLE ? (p.SELL_PRICE_BY_SEARCH + (p.SELL_PRICE_BY_SEARCH * p.TAX.RATE / 100)) : p.SELL_PRICE_BY_SEARCH;
+                        itemsDataGrid[warehouseColumn.Index, newRow].Value = m_warehouses[0].ToString();
+                        itemsDataGrid[taxableColumn.Index, newRow].Value = p.TAXABLE;
+                        itemsDataGrid[discpercentColumn.Index, newRow].Value = p.PRICE_CATEGORY.DISCOUNT_PERCENT;
+                        updateSubtotal(newRow);
+                    }
+                    //if ((result.Count == 0) || (result.Count > 1))
+                    //{
+                    //    int newRow = itemsDataGrid.Rows.Add();
+                    //    using (SearchPartForm fr = new SearchPartForm(barcode, result))
+                    //    {
+                    //        fr.ShowDialog();
+                    //        Part p = fr.PART;
+                    //        if (p == null)
+                    //        {
+                    //            p = (Part)itemsDataGrid[codeColumn.Index, newRow].Tag;
+                    //            if (p == null)
+                    //            {
+                    //                return;
+                    //            }
+                    //        }
+                    //        else
+                    //        {
+                    //            for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
+                    //            {
+                    //                if (i == e.RowIndex) continue;
+                    //                Part pi = (Part)itemsDataGrid[codeColumn.Index, i].Tag;
+                    //                if (pi == null) continue;
+                    //                if (pi.ID == p.ID)
+                    //                {
+                    //                    itemsDataGrid.Rows[e.RowIndex].ErrorText = "Part : " + p.NAME + " already add.";
+                    //                    e.Cancel = true;
+                    //                    return;
+                    //                }
+                    //            }
+                    //            itemsDataGrid[codeColumn.Index, e.RowIndex].Tag = p;
+                    //            itemsDataGrid[GRNNoColumn.Index, e.RowIndex].Tag = null;
+                    //            itemsDataGrid[GRNNoColumn.Index, e.RowIndex].Value = "";
+                    //            itemsDataGrid[scanColumn.Index, e.RowIndex].Value = p.BARCODE;
+                    //            itemsDataGrid[codeColumn.Index, e.RowIndex].Value = p.CODE;
+                    //            itemsDataGrid[nameColumn.Index, e.RowIndex].Value = p.NAME;
+                    //            //dataItemskryptonDataGridView[QtyColumn.Index, e.RowIndex].Value = 0;
+                    //            //unitColumn.Items.Clear();
+                    //            //IList units = r_part.GetAllUnit(p.ID, p.UNIT.ID);
+                    //            //Utils.GetListCode(unitColumn.Items, units);
+                    //            p.UNIT = (Unit)r_unit.GetById(p.UNIT);
+                    //            itemsDataGrid[unitColumn.Index, e.RowIndex].Value = p.UNIT.ToString();
+                    //            itemsDataGrid[priceColumn.Index, e.RowIndex].Value = 0;// r_si.GetTheLatestSIPrice(((Customer)supplierkryptonComboBox.SelectedItem).ID, p.ID, p.UNIT.ID);
+                    //            // dataItemskryptonDataGridView[totalAmountColumn.Index, e.RowIndex].Value = 0;
+                    //            itemsDataGrid[warehouseColumn.Index, e.RowIndex].Value = m_warehouses[0].ToString();
+                    //        }
+                    //    }
+                    //}
+                    scanBarcodekryptonTextBox1.Text = "";
+                    scanBarcodekryptonTextBox1.Focus();
+                }
+
+            }
+            catch (Exception x)
+            {
+
             }
         }
     }

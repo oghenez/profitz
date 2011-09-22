@@ -305,6 +305,26 @@ namespace Profit.Server
                 m_connection.Close();
             }
         }
+        public IList SearchActivePartBarcodeOnly(string search, bool active)
+        {
+            try
+            {
+                OpenConnection();
+                MySql.Data.MySqlClient.MySqlCommand aCommand = new MySql.Data.MySqlClient.MySqlCommand(Part.GetSearchBarcodeOnlySQL(search, active), m_connection);
+                MySql.Data.MySqlClient.MySqlDataReader aReader = aCommand.ExecuteReader();
+                IList a = Part.GetAllStatic(aReader);
+                aReader.Close();
+                return a;
+            }
+            catch (Exception x)
+            {
+                throw new Exception(getErrorMessage(x));
+            }
+            finally
+            {
+                m_connection.Close();
+            }
+        }
         public IList SearchActivePartByBarcode(string barcode, bool active)
         {
             try

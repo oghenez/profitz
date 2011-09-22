@@ -110,6 +110,8 @@ namespace Profit.Server
     {
         Cash,
         Bank,
+        //CreditCard,
+       // DebitCard,
         APDebitNote
     }
 
