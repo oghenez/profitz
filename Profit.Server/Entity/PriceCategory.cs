@@ -12,6 +12,9 @@ namespace Profit.Server
         public int ID = 0;
         public string CODE = "B001";
         public string NAME = "";
+        public double DISCOUNT_PERCENT = 0;
+        public double DISCOUNT_AMOUNT = 0; 
+
         public PriceCategory()
         {
         }
@@ -33,15 +36,17 @@ namespace Profit.Server
                 pricecategory.ID = Convert.ToInt32(aReader[0]);
                 pricecategory.CODE = aReader[1].ToString();
                 pricecategory.NAME = aReader[2].ToString();
+                pricecategory.DISCOUNT_PERCENT = Convert.ToDouble(aReader[3]);
+                pricecategory.DISCOUNT_AMOUNT = Convert.ToDouble(aReader[4]);
             }
             return pricecategory;
         }
         public string GetInsertSQL()
         {
             return String.Format(@"insert into table_pricecategory 
-                (pricecat_code,pricecat_name) 
-                VALUES ('{0}','{1}')",
-                CODE, NAME);
+                (pricecat_code,pricecat_name,pricecat_disc,pricecat_amount) 
+                VALUES ('{0}','{1}',{2},{3})",
+                CODE, NAME,DISCOUNT_PERCENT,DISCOUNT_AMOUNT);
         }
         public string GetDeleteSQL()
         {
@@ -51,9 +56,11 @@ namespace Profit.Server
         {
             return String.Format(@"update table_pricecategory set 
                 pricecat_code = '{0}', 
-                pricecat_name='{1}'
-                where pricecat_id = {2}",
-                CODE, NAME, ID);
+                pricecat_name='{1}',
+                pricecat_disc = {2},
+                pricecat_amount = {3}
+                where pricecat_id = {4}",
+                CODE, NAME, DISCOUNT_PERCENT,DISCOUNT_AMOUNT, ID);
         }
         public string GetByIDSQL(int ID)
         {
@@ -88,6 +95,8 @@ namespace Profit.Server
                 pricecategory.ID = Convert.ToInt32(aReader[0]);
                 pricecategory.CODE = aReader[1].ToString();
                 pricecategory.NAME = aReader[2].ToString();
+                pricecategory.DISCOUNT_PERCENT = Convert.ToDouble(aReader[3]);
+                pricecategory.DISCOUNT_AMOUNT = Convert.ToDouble(aReader[4]);
                 result.Add(pricecategory);
             }
             return result;

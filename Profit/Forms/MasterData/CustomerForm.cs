@@ -202,7 +202,9 @@ namespace Profit
         }
         public void setEnableForm(bool enable)
         {
-            textBoxCode.ReadOnly = !enable;
+            bool poscustomer = m_customer.CODE == "POS";
+
+            textBoxCode.ReadOnly = (!enable) || (poscustomer);
             textBoxName.ReadOnly = !enable;
 
             activekryptonCheckBox1.Enabled = enable;
@@ -224,11 +226,11 @@ namespace Profit
         }
         private void setEditMode(EditMode editmode)
         {
-            bool poscustomer = m_customer.CODE == "POS";
-            toolStripButtonSave.Enabled = !poscustomer && (editmode == EditMode.New || editmode == EditMode.Update) && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].SAVE;
-            toolStripButtonEdit.Enabled = !poscustomer && (editmode == EditMode.View) && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].SAVE;
+             bool poscustomer = m_customer.CODE == "POS";//!poscustomer &&
+            toolStripButtonSave.Enabled =  (editmode == EditMode.New || editmode == EditMode.Update) && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].SAVE;
+            toolStripButtonEdit.Enabled = (editmode == EditMode.View) && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].SAVE;
             toolStripButtonDelete.Enabled = !poscustomer && (editmode == EditMode.View) && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].DELETE;
-            toolStripButtonClear.Enabled = !poscustomer && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].SAVE;
+            toolStripButtonClear.Enabled =  m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].SAVE;
             ReloadMainFormButton();
         }
         private void ReloadMainFormButton()

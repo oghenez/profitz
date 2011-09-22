@@ -119,6 +119,7 @@ namespace Profit
         {
             m_pricecat.CODE = textBoxCode.Text.Trim();
             m_pricecat.NAME = textBoxName.Text.Trim();
+            m_pricecat.DISCOUNT_PERCENT = Convert.ToDouble(discountkryptonNumericUpDown1.Value);
         }
         public void ClearForm()
         {
@@ -126,6 +127,7 @@ namespace Profit
             {
                 textBoxCode.Text = "";
                 textBoxName.Text = "";
+                discountkryptonNumericUpDown1.Value = 0;
                 m_pricecat = new PriceCategory();
                 errorProvider1.Clear();
             }
@@ -144,6 +146,7 @@ namespace Profit
         {
             textBoxCode.ReadOnly = !enable;
             textBoxName.ReadOnly = !enable;
+            discountkryptonNumericUpDown1.Enabled = enable;
         }
         private void setEditMode(EditMode editmode)
         {
@@ -223,6 +226,7 @@ namespace Profit
         {
             textBoxCode.Text = m_pricecat.CODE;
             textBoxName.Text = m_pricecat.NAME;
+            discountkryptonNumericUpDown1.Value = Convert.ToDecimal(m_pricecat.DISCOUNT_PERCENT);
         }
 
         #region IChildForm Members
