@@ -19,12 +19,14 @@ namespace Profit.Server
         public Currency CURRENCY = new Currency();
         public CostMethod COST_METHOD = CostMethod.MovingAverage;
         public PartCategory PART_CATEGORY = new PartCategory();
+        public PriceCategory PRICE_CATEGORY = null;
         public double MINIMUM_STOCK = 0;
         public double MAXIMUM_STOCK = 0;
         public double COST_PRICE = 0;
         public double SELL_PRICE = 0;
         public double CURRENT_STOCK = 0;
         public bool TAXABLE = false;
+        public Tax TAX = null;
         public bool ACTIVE = true;
         public IList UNIT_CONVERSION_LIST = new ArrayList();
         public IDictionary SELLING_PRICE_INFO_LIST = new Hashtable();
@@ -70,6 +72,8 @@ namespace Profit.Server
                 part.TAXABLE = Convert.ToBoolean(r["part_taxable"]);
                 part.UNIT = new Unit(Convert.ToInt32(r["unit_id"]));
                 part.PICTURE_NAME = r["part_picture"].ToString();
+                part.TAX = new Tax(Convert.ToInt32(r["tax_id"]));
+                part.PRICE_CATEGORY = new PriceCategory(Convert.ToInt32(r["pricecat_id"]));
              }
             return part;
         }
@@ -96,6 +100,8 @@ namespace Profit.Server
                 part.TAXABLE = Convert.ToBoolean(r["part_taxable"]);
                 part.UNIT = new Unit(Convert.ToInt32(r["unit_id"]));
                 part.PICTURE_NAME = r["part_picture"].ToString();
+                part.TAX = new Tax(Convert.ToInt32(r["tax_id"]));
+                part.PRICE_CATEGORY = new PriceCategory(Convert.ToInt32(r["pricecat_id"]));
             }
             return part;
         }
@@ -117,7 +123,9 @@ namespace Profit.Server
                     part_sellprice,
                     part_taxable,
                     unit_id,
-                    part_picture) 
+                    part_picture,
+                    tax_id,
+                    pricecat_id) 
                 VALUES (
                     '{0}',
                     '{1}',
@@ -134,7 +142,9 @@ namespace Profit.Server
                     '{12}',
                     {13},
                     '{14}',
-                    '{15}'
+                    '{15}',
+                    {16},
+                    {17}
                     )",
                 CODE, 
                 NAME,
@@ -151,7 +161,9 @@ namespace Profit.Server
                 SELL_PRICE,
                 TAXABLE,
                 UNIT.ID,
-                CODE
+                CODE,
+                TAX==null?0:TAX.ID,
+                PRICE_CATEGORY==null?0:PRICE_CATEGORY.ID
                 );
         }
         public string GetDeleteSQL()
@@ -176,8 +188,10 @@ namespace Profit.Server
                 part_sellprice='{12}',
                 part_taxable={13},
                 unit_id='{14}',
-                part_picture = '{15}'
-                where part_id = {16}",
+                part_picture = '{15}',
+                tax_id = {16},
+                pricecat_id = {17}
+                where part_id = {18}",
                 CODE, NAME, ACTIVE,
                 BARCODE,
                 COST_METHOD.ToString(),
@@ -192,6 +206,8 @@ namespace Profit.Server
                 TAXABLE,
                 UNIT.ID,
                 CODE,
+                TAX==null?0:TAX.ID,
+                PRICE_CATEGORY==null?0:PRICE_CATEGORY.ID,
                 ID);
         }
         public string GetByIDSQL(int ID)
@@ -258,6 +274,8 @@ namespace Profit.Server
                 part.TAXABLE = Convert.ToBoolean(r["part_taxable"]);
                 part.UNIT = new Unit(Convert.ToInt32(r["unit_id"]));
                 part.PICTURE_NAME = r["part_picture"].ToString();
+                part.TAX = new Tax(Convert.ToInt32(r["tax_id"]));
+                part.PRICE_CATEGORY = new PriceCategory(Convert.ToInt32(r["pricecat_id"]));
                 result.Add(part);
             }
             return result;
@@ -285,6 +303,8 @@ namespace Profit.Server
                 part.TAXABLE = Convert.ToBoolean(r["part_taxable"]);
                 part.UNIT = new Unit(Convert.ToInt32(r["unit_id"]));
                 part.PICTURE_NAME = r["part_picture"].ToString();
+                part.TAX = new Tax(Convert.ToInt32(r["tax_id"]));
+                part.PRICE_CATEGORY = new PriceCategory(Convert.ToInt32(r["pricecat_id"]));
                 result.Add(part);
             }
             return result;
@@ -313,6 +333,8 @@ namespace Profit.Server
                 part.TAXABLE = Convert.ToBoolean(r["part_taxable"]);
                 part.UNIT = new Unit(Convert.ToInt32(r["unit_id"]));
                 part.PICTURE_NAME = r["part_picture"].ToString();
+                part.TAX = new Tax(Convert.ToInt32(r["tax_id"]));
+                part.PRICE_CATEGORY = new PriceCategory(Convert.ToInt32(r["pricecat_id"]));
                 result.Add(part);
             }
             return result;

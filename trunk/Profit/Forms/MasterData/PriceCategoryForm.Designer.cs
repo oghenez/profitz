@@ -46,6 +46,9 @@
             this.dgName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgSubject = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.discountkryptonNumericUpDown1 = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
+            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
@@ -151,6 +154,9 @@
             // kryptonPanel1
             // 
             this.kryptonPanel1.AutoScroll = true;
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel4);
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel3);
+            this.kryptonPanel1.Controls.Add(this.discountkryptonNumericUpDown1);
             this.kryptonPanel1.Controls.Add(this.textBoxCode);
             this.kryptonPanel1.Controls.Add(this.textBoxName);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
@@ -237,6 +243,34 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // discountkryptonNumericUpDown1
+            // 
+            this.discountkryptonNumericUpDown1.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.discountkryptonNumericUpDown1.Location = new System.Drawing.Point(332, 35);
+            this.discountkryptonNumericUpDown1.Name = "discountkryptonNumericUpDown1";
+            this.discountkryptonNumericUpDown1.Size = new System.Drawing.Size(68, 21);
+            this.discountkryptonNumericUpDown1.TabIndex = 4;
+            // 
+            // kryptonLabel3
+            // 
+            this.kryptonLabel3.Location = new System.Drawing.Point(266, 37);
+            this.kryptonLabel3.Name = "kryptonLabel3";
+            this.kryptonLabel3.Size = new System.Drawing.Size(60, 19);
+            this.kryptonLabel3.TabIndex = 5;
+            this.kryptonLabel3.Values.Text = "Discount :";
+            // 
+            // kryptonLabel4
+            // 
+            this.kryptonLabel4.Location = new System.Drawing.Point(406, 37);
+            this.kryptonLabel4.Name = "kryptonLabel4";
+            this.kryptonLabel4.Size = new System.Drawing.Size(19, 19);
+            this.kryptonLabel4.TabIndex = 6;
+            this.kryptonLabel4.Values.Text = "%";
+            // 
             // PriceCategoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -286,5 +320,8 @@
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox textBoxCode;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox textBoxName;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
+        private ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown discountkryptonNumericUpDown1;
     }
 }

@@ -30,13 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PartForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonHeader1 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
@@ -103,6 +103,15 @@
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.pricemovkryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.pricemovementkryptonDataGridView1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.dateprcmovColumn1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewDateTimePickerColumn();
+            this.typeprcmovColumn1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.codeprcmovColumn2 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.qtyprcmovColumn1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.unitprcmovColumn3 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.vendorprcmovColumn4 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.statusprcmovColumn5 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.priceprcmovColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.pricemovementColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
             this.barcodekryptonTextBox1 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.unitkryptonLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -127,15 +136,9 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.buttonSpecAny1 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.dateprcmovColumn1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewDateTimePickerColumn();
-            this.typeprcmovColumn1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.codeprcmovColumn2 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.qtyprcmovColumn1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
-            this.unitprcmovColumn3 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.vendorprcmovColumn4 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.statusprcmovColumn5 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.priceprcmovColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
-            this.pricemovementColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.taxkryptonComboBox1 = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.pricecatkryptonComboBox1 = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.kryptonLabel17 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
@@ -163,6 +166,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
             this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.taxkryptonComboBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pricecatkryptonComboBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonHeader1
@@ -342,6 +347,9 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.kryptonLabel17);
+            this.tabPage3.Controls.Add(this.pricecatkryptonComboBox1);
+            this.tabPage3.Controls.Add(this.taxkryptonComboBox1);
             this.tabPage3.Controls.Add(this.kryptonLabel7);
             this.tabPage3.Controls.Add(this.pictureBox);
             this.tabPage3.Controls.Add(this.partCategorykryptonTextBox);
@@ -408,7 +416,7 @@
             // taxkryptonCheckBox2
             // 
             this.taxkryptonCheckBox2.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.NormalControl;
-            this.taxkryptonCheckBox2.Location = new System.Drawing.Point(116, 157);
+            this.taxkryptonCheckBox2.Location = new System.Drawing.Point(64, 181);
             this.taxkryptonCheckBox2.Name = "taxkryptonCheckBox2";
             this.taxkryptonCheckBox2.Size = new System.Drawing.Size(40, 19);
             this.taxkryptonCheckBox2.TabIndex = 17;
@@ -437,7 +445,7 @@
             // 
             // kryptonLabel9
             // 
-            this.kryptonLabel9.Location = new System.Drawing.Point(47, 31);
+            this.kryptonLabel9.Location = new System.Drawing.Point(47, 32);
             this.kryptonLabel9.Name = "kryptonLabel9";
             this.kryptonLabel9.Size = new System.Drawing.Size(60, 19);
             this.kryptonLabel9.TabIndex = 23;
@@ -532,7 +540,7 @@
             // 
             // kryptonLabel10
             // 
-            this.kryptonLabel10.Location = new System.Drawing.Point(26, 59);
+            this.kryptonLabel10.Location = new System.Drawing.Point(26, 57);
             this.kryptonLabel10.Name = "kryptonLabel10";
             this.kryptonLabel10.Size = new System.Drawing.Size(81, 19);
             this.kryptonLabel10.TabIndex = 24;
@@ -590,9 +598,9 @@
             // 
             // ConversionQTy
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.NullValue = "1";
-            this.ConversionQTy.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle15.NullValue = "1";
+            this.ConversionQTy.DefaultCellStyle = dataGridViewCellStyle15;
             this.ConversionQTy.HeaderText = "Qty";
             this.ConversionQTy.Increment = new decimal(new int[] {
             1,
@@ -623,8 +631,8 @@
             // 
             // OrigQty
             // 
-            dataGridViewCellStyle2.NullValue = "0";
-            this.OrigQty.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle16.NullValue = "0";
+            this.OrigQty.DefaultCellStyle = dataGridViewCellStyle16;
             this.OrigQty.HeaderText = "Cv Qty";
             this.OrigQty.Increment = new decimal(new int[] {
             1,
@@ -654,9 +662,9 @@
             // CostPrice
             // 
             this.CostPrice.DecimalPlaces = 2;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.NullValue = "0";
-            this.CostPrice.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle17.NullValue = "0";
+            this.CostPrice.DefaultCellStyle = dataGridViewCellStyle17;
             this.CostPrice.HeaderText = "Cost Price";
             this.CostPrice.Increment = new decimal(new int[] {
             1,
@@ -680,9 +688,9 @@
             // SellPrice
             // 
             this.SellPrice.DecimalPlaces = 2;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.NullValue = "0";
-            this.SellPrice.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle18.NullValue = "0";
+            this.SellPrice.DefaultCellStyle = dataGridViewCellStyle18;
             this.SellPrice.HeaderText = "Sell Price";
             this.SellPrice.Increment = new decimal(new int[] {
             1,
@@ -995,6 +1003,127 @@
             this.pricemovementkryptonDataGridView1.Size = new System.Drawing.Size(1040, 192);
             this.pricemovementkryptonDataGridView1.TabIndex = 35;
             // 
+            // dateprcmovColumn1
+            // 
+            this.dateprcmovColumn1.CalendarTodayDate = new System.DateTime(2011, 9, 5, 0, 0, 0, 0);
+            this.dateprcmovColumn1.Checked = false;
+            this.dateprcmovColumn1.CustomFormat = "dd-MM-yyyy";
+            this.dateprcmovColumn1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateprcmovColumn1.HeaderText = "Date";
+            this.dateprcmovColumn1.Name = "dateprcmovColumn1";
+            this.dateprcmovColumn1.ReadOnly = true;
+            this.dateprcmovColumn1.Width = 50;
+            // 
+            // typeprcmovColumn1
+            // 
+            this.typeprcmovColumn1.HeaderText = "Event Type";
+            this.typeprcmovColumn1.Name = "typeprcmovColumn1";
+            this.typeprcmovColumn1.ReadOnly = true;
+            this.typeprcmovColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.typeprcmovColumn1.Width = 50;
+            // 
+            // codeprcmovColumn2
+            // 
+            this.codeprcmovColumn2.HeaderText = "Event Code";
+            this.codeprcmovColumn2.Name = "codeprcmovColumn2";
+            this.codeprcmovColumn2.ReadOnly = true;
+            this.codeprcmovColumn2.Width = 50;
+            // 
+            // qtyprcmovColumn1
+            // 
+            this.qtyprcmovColumn1.HeaderText = "Qty";
+            this.qtyprcmovColumn1.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.qtyprcmovColumn1.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.qtyprcmovColumn1.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.qtyprcmovColumn1.Name = "qtyprcmovColumn1";
+            this.qtyprcmovColumn1.ReadOnly = true;
+            this.qtyprcmovColumn1.Width = 50;
+            // 
+            // unitprcmovColumn3
+            // 
+            this.unitprcmovColumn3.HeaderText = "Unit";
+            this.unitprcmovColumn3.Name = "unitprcmovColumn3";
+            this.unitprcmovColumn3.ReadOnly = true;
+            this.unitprcmovColumn3.Width = 50;
+            // 
+            // vendorprcmovColumn4
+            // 
+            this.vendorprcmovColumn4.HeaderText = "Vendor";
+            this.vendorprcmovColumn4.Name = "vendorprcmovColumn4";
+            this.vendorprcmovColumn4.ReadOnly = true;
+            this.vendorprcmovColumn4.Width = 50;
+            // 
+            // statusprcmovColumn5
+            // 
+            this.statusprcmovColumn5.HeaderText = "Status";
+            this.statusprcmovColumn5.Name = "statusprcmovColumn5";
+            this.statusprcmovColumn5.ReadOnly = true;
+            this.statusprcmovColumn5.Width = 50;
+            // 
+            // priceprcmovColumn
+            // 
+            this.priceprcmovColumn.DecimalPlaces = 2;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.priceprcmovColumn.DefaultCellStyle = dataGridViewCellStyle19;
+            this.priceprcmovColumn.HeaderText = "Price per Unit";
+            this.priceprcmovColumn.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.priceprcmovColumn.Maximum = new decimal(new int[] {
+            1215752192,
+            23,
+            0,
+            0});
+            this.priceprcmovColumn.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.priceprcmovColumn.Name = "priceprcmovColumn";
+            this.priceprcmovColumn.ReadOnly = true;
+            this.priceprcmovColumn.ThousandsSeparator = true;
+            this.priceprcmovColumn.Width = 100;
+            // 
+            // pricemovementColumn
+            // 
+            this.pricemovementColumn.DecimalPlaces = 2;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.pricemovementColumn.DefaultCellStyle = dataGridViewCellStyle20;
+            this.pricemovementColumn.HeaderText = "Price Movement";
+            this.pricemovementColumn.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.pricemovementColumn.Maximum = new decimal(new int[] {
+            1215752192,
+            23,
+            0,
+            0});
+            this.pricemovementColumn.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.pricemovementColumn.Name = "pricemovementColumn";
+            this.pricemovementColumn.ReadOnly = true;
+            this.pricemovementColumn.ThousandsSeparator = true;
+            this.pricemovementColumn.Width = 100;
+            // 
             // barcodekryptonTextBox1
             // 
             this.barcodekryptonTextBox1.Location = new System.Drawing.Point(300, 4);
@@ -1131,9 +1260,9 @@
             // 
             // ActiveCol
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.NullValue = false;
-            this.ActiveCol.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle21.NullValue = false;
+            this.ActiveCol.DefaultCellStyle = dataGridViewCellStyle21;
             this.ActiveCol.FalseValue = null;
             this.ActiveCol.HeaderText = "Active";
             this.ActiveCol.IndeterminateValue = null;
@@ -1216,126 +1345,34 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // dateprcmovColumn1
+            // taxkryptonComboBox1
             // 
-            this.dateprcmovColumn1.CalendarTodayDate = new System.DateTime(2011, 9, 5, 0, 0, 0, 0);
-            this.dateprcmovColumn1.Checked = false;
-            this.dateprcmovColumn1.CustomFormat = "dd-MM-yyyy";
-            this.dateprcmovColumn1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateprcmovColumn1.HeaderText = "Date";
-            this.dateprcmovColumn1.Name = "dateprcmovColumn1";
-            this.dateprcmovColumn1.ReadOnly = true;
-            this.dateprcmovColumn1.Width = 50;
+            this.taxkryptonComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.taxkryptonComboBox1.DropDownWidth = 151;
+            this.taxkryptonComboBox1.Location = new System.Drawing.Point(116, 179);
+            this.taxkryptonComboBox1.Name = "taxkryptonComboBox1";
+            this.taxkryptonComboBox1.Size = new System.Drawing.Size(80, 22);
+            this.taxkryptonComboBox1.StateDisabled.ComboBox.Content.Color1 = System.Drawing.Color.Black;
+            this.taxkryptonComboBox1.TabIndex = 34;
+            this.taxkryptonComboBox1.SelectedIndexChanged += new System.EventHandler(this.kryptonComboBox1_SelectedIndexChanged_1);
             // 
-            // typeprcmovColumn1
+            // pricecatkryptonComboBox1
             // 
-            this.typeprcmovColumn1.HeaderText = "Event Type";
-            this.typeprcmovColumn1.Name = "typeprcmovColumn1";
-            this.typeprcmovColumn1.ReadOnly = true;
-            this.typeprcmovColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.typeprcmovColumn1.Width = 50;
+            this.pricecatkryptonComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.pricecatkryptonComboBox1.DropDownWidth = 151;
+            this.pricecatkryptonComboBox1.Location = new System.Drawing.Point(116, 154);
+            this.pricecatkryptonComboBox1.Name = "pricecatkryptonComboBox1";
+            this.pricecatkryptonComboBox1.Size = new System.Drawing.Size(80, 22);
+            this.pricecatkryptonComboBox1.StateDisabled.ComboBox.Content.Color1 = System.Drawing.Color.Black;
+            this.pricecatkryptonComboBox1.TabIndex = 35;
             // 
-            // codeprcmovColumn2
+            // kryptonLabel17
             // 
-            this.codeprcmovColumn2.HeaderText = "Event Code";
-            this.codeprcmovColumn2.Name = "codeprcmovColumn2";
-            this.codeprcmovColumn2.ReadOnly = true;
-            this.codeprcmovColumn2.Width = 50;
-            // 
-            // qtyprcmovColumn1
-            // 
-            this.qtyprcmovColumn1.HeaderText = "Qty";
-            this.qtyprcmovColumn1.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.qtyprcmovColumn1.Maximum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.qtyprcmovColumn1.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.qtyprcmovColumn1.Name = "qtyprcmovColumn1";
-            this.qtyprcmovColumn1.ReadOnly = true;
-            this.qtyprcmovColumn1.Width = 50;
-            // 
-            // unitprcmovColumn3
-            // 
-            this.unitprcmovColumn3.HeaderText = "Unit";
-            this.unitprcmovColumn3.Name = "unitprcmovColumn3";
-            this.unitprcmovColumn3.ReadOnly = true;
-            this.unitprcmovColumn3.Width = 50;
-            // 
-            // vendorprcmovColumn4
-            // 
-            this.vendorprcmovColumn4.HeaderText = "Vendor";
-            this.vendorprcmovColumn4.Name = "vendorprcmovColumn4";
-            this.vendorprcmovColumn4.ReadOnly = true;
-            this.vendorprcmovColumn4.Width = 50;
-            // 
-            // statusprcmovColumn5
-            // 
-            this.statusprcmovColumn5.HeaderText = "Status";
-            this.statusprcmovColumn5.Name = "statusprcmovColumn5";
-            this.statusprcmovColumn5.ReadOnly = true;
-            this.statusprcmovColumn5.Width = 50;
-            // 
-            // priceprcmovColumn
-            // 
-            this.priceprcmovColumn.DecimalPlaces = 2;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.priceprcmovColumn.DefaultCellStyle = dataGridViewCellStyle5;
-            this.priceprcmovColumn.HeaderText = "Price per Unit";
-            this.priceprcmovColumn.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.priceprcmovColumn.Maximum = new decimal(new int[] {
-            1215752192,
-            23,
-            0,
-            0});
-            this.priceprcmovColumn.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.priceprcmovColumn.Name = "priceprcmovColumn";
-            this.priceprcmovColumn.ReadOnly = true;
-            this.priceprcmovColumn.ThousandsSeparator = true;
-            this.priceprcmovColumn.Width = 100;
-            // 
-            // pricemovementColumn
-            // 
-            this.pricemovementColumn.DecimalPlaces = 2;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.pricemovementColumn.DefaultCellStyle = dataGridViewCellStyle6;
-            this.pricemovementColumn.HeaderText = "Price Movement";
-            this.pricemovementColumn.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.pricemovementColumn.Maximum = new decimal(new int[] {
-            1215752192,
-            23,
-            0,
-            0});
-            this.pricemovementColumn.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.pricemovementColumn.Name = "pricemovementColumn";
-            this.pricemovementColumn.ReadOnly = true;
-            this.pricemovementColumn.ThousandsSeparator = true;
-            this.pricemovementColumn.Width = 100;
+            this.kryptonLabel17.Location = new System.Drawing.Point(18, 154);
+            this.kryptonLabel17.Name = "kryptonLabel17";
+            this.kryptonLabel17.Size = new System.Drawing.Size(88, 19);
+            this.kryptonLabel17.TabIndex = 36;
+            this.kryptonLabel17.Values.Text = "Price Category :";
             // 
             // PartForm
             // 
@@ -1385,6 +1422,8 @@
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.taxkryptonComboBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pricecatkryptonComboBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1491,5 +1530,8 @@
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn statusprcmovColumn5;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn priceprcmovColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn pricemovementColumn;
+        private ComponentFactory.Krypton.Toolkit.KryptonComboBox taxkryptonComboBox1;
+        private ComponentFactory.Krypton.Toolkit.KryptonComboBox pricecatkryptonComboBox1;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel17;
     }
 }

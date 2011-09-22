@@ -25,6 +25,7 @@ namespace Profit
         Repository r_unit = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY);
         Repository r_warehouse = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.WAREHOUSE_REPOSITORY);
         Repository r_cus = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CUSTOMER_REPOSITORY);
+        Repository r_pricecat = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PRICE_CATEGORY_REPOSITORY);
         UserSettingsRepository r_setting = RepositoryFactory.GetInstance().UserSetting();
         POSRepository r_si = (POSRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.POS_REPOSITORY);
         SalesOrderRepository r_po = (SalesOrderRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.SALES_ORDER_REPOSITORY);
@@ -32,6 +33,9 @@ namespace Profit
         IList m_warehouses;
         Customer m_customer = null;
         TermOfPayment m_top = null;
+        Currency m_currency = null;
+        PriceCategory m_priceCat = null;
+        Tax m_tax = null;
 
         EditMode m_editMode = EditMode.New;
         bool m_enable = false;
@@ -42,6 +46,7 @@ namespace Profit
             InitializeButtonClick();
             InitializeDataSource();
             InitializeDataGridValidation();
+            this.headerGroup2Custom.ValuesPrimary.Heading = DateTime.Today.ToLongDateString();
             this.MdiParent = (Form)mainForm;
             this.Name = formName;
             m_mainForm = mainForm;
@@ -141,7 +146,7 @@ namespace Profit
         }
         public void CalculateTax()
         {
-            Tax tax = (Tax)taxKryptonComboBox.SelectedItem;
+            Tax tax = m_tax;
             decimal taxAmount = 0m;
             if (tax == null)
                 taxAmount = 0m;
@@ -292,11 +297,15 @@ namespace Profit
         private void InitializeDataSource()
         {
             employeeKryptonComboBox.DataSource = r_employee.GetAll();
-            currencyKryptonComboBox.DataSource = r_ccy.GetAll();
             divisionKryptonComboBox.DataSource = r_division.GetAll();
             m_customer = (Customer)r_cus.GetByCode(new Customer(0, "POS"));
             m_top = (TermOfPayment)r_top.GetByCode(new TermOfPayment(0, "COD"));
-            taxKryptonComboBox.DataSource = r_tax.GetAll();
+            m_tax = (Tax)r_tax.GetById(m_customer.TAX);
+            m_currency = (Currency)r_ccy.GetById(m_customer.CURRENCY);
+            m_priceCat = (PriceCategory)r_pricecat.GetById(m_customer.PRICE_CATEGORY);
+
+            ccykryptonLabel1.Text = m_currency.CODE;
+            discPercentKryptonNumericUpDown.Value = Convert.ToDecimal(m_priceCat.DISCOUNT_PERCENT);
             m_units = r_unit.GetAll();
             m_warehouses = r_warehouse.GetAll();
             Utils.GetListCode(warehouseColumn.Items, m_warehouses);
@@ -385,7 +394,7 @@ namespace Profit
            // bool a = textBoxCode.Text == "" && !r_si.IsAutoNumber();
             bool b = employeeKryptonComboBox.SelectedItem == null;
             bool c = divisionKryptonComboBox.SelectedItem == null;
-            bool d = currencyKryptonComboBox.SelectedItem == null;
+           // bool d = currencyKryptonComboBox.SelectedItem == null;
             //bool h = termofpaymentKryptonComboBox.SelectedItem == null;
             //bool k = supplierkryptonComboBox.SelectedItem == null;
             bool e = false;
@@ -394,7 +403,7 @@ namespace Profit
            // if (a) errorProvider1.SetError(textBoxCode, "Code Can not Empty");
             if (b) errorProvider1.SetError(employeeKryptonComboBox, "Employee Can not Empty");
             if (c) errorProvider1.SetError(divisionKryptonComboBox, "Division Can not Empty");
-            if (d) errorProvider1.SetError(currencyKryptonComboBox, "Currency Can not Empty");
+            //if (d) errorProvider1.SetError(currencyKryptonComboBox, "Currency Can not Empty");
            // if (h) errorProvider1.SetError(termofpaymentKryptonComboBox, "TOP Can not Empty");
             //if (k) errorProvider1.SetError(supplierkryptonComboBox, "Customer Can not Empty");
             //if (f) errorProvider1.SetError(textBoxCode, a ? "Code Can not Empty & Code already used" : "Code already used");
@@ -429,7 +438,7 @@ namespace Profit
 
             bool g = j == 0;
             if (g) errorProvider1.SetError(itemsDataGrid,"Items must at least 1(one)");
-            return !b && !c && !d && !e && !g;//!a && && !f 
+            return !b && !c && !e && !g;//!a && && !f 
         }
         private void UpdateEntity()
         {
@@ -441,12 +450,12 @@ namespace Profit
             m_si.DIVISION = (Division)divisionKryptonComboBox.SelectedItem;
             m_si.TOP = m_top;// (TermOfPayment)termofpaymentKryptonComboBox.SelectedItem;
             m_si.DUE_DATE = DateTime.Today;//duedateKryptonDateTimePicker.Value;
-            m_si.CURRENCY = (Currency)currencyKryptonComboBox.SelectedItem;
+            m_si.CURRENCY = m_currency;
             m_si.SUB_TOTAL = Convert.ToDouble(subTotalKryptonNumericUpDown.Value);
             m_si.DISC_PERCENT = Convert.ToDouble(discPercentKryptonNumericUpDown.Value);
             m_si.DISC_AFTER_AMOUNT = Convert.ToDouble(discAfterAmountKryptonNumericUpDown.Value);
             m_si.DISC_AMOUNT = Convert.ToDouble(discAmountkryptonNumericUpDown.Value);
-            m_si.TAX = (Tax)taxKryptonComboBox.SelectedItem;
+            m_si.TAX = m_tax;
             m_si.TAX_AFTER_AMOUNT = Convert.ToDouble(taxAfterAmountkryptonNumericUpDown.Value);
             m_si.OTHER_EXPENSE = Convert.ToDouble(otherExpensekryptonNumericUpDown.Value);
             m_si.NET_TOTAL = Convert.ToDouble(nettotalAmountkryptonNumericUpDown.Value);
@@ -501,17 +510,17 @@ namespace Profit
               //  textBoxCode.Text = "";
                // dateKryptonDateTimePicker.Value = DateTime.Today;
                 employeeKryptonComboBox.SelectedIndex = 0;
-                currencyKryptonComboBox.SelectedIndex = 0;
+                //currencyKryptonComboBox.SelectedIndex = 0;
                 nettotalAmountkryptonNumericUpDown.Value = 0m;
                 notesKryptonTextBox.Text = "";
                 divisionKryptonComboBox.SelectedIndex = 0;
                 //termofpaymentKryptonComboBox.SelectedIndex = 0;
                 //duedateKryptonDateTimePicker.Value = DateTime.Today;
                 subTotalKryptonNumericUpDown.Value = 0m;
-                discPercentKryptonNumericUpDown.Value = 0m;
+                discPercentKryptonNumericUpDown.Value =  Convert.ToDecimal(m_priceCat.DISCOUNT_PERCENT);
                 discAmountkryptonNumericUpDown.Value = 0m;
                 discAfterAmountKryptonNumericUpDown.Value = 0m;
-                taxKryptonComboBox.SelectedIndex = 0;
+                //taxKryptonComboBox.SelectedIndex = 0;
                 taxAfterAmountkryptonNumericUpDown.Value = 0m;
                 otherExpensekryptonNumericUpDown.Value = 0m;
                 //supplierkryptonComboBox.Text = "POS";
@@ -536,7 +545,7 @@ namespace Profit
             //textBoxCode.ReadOnly = r_si.IsAutoNumber()?true:!enable;
            // dateKryptonDateTimePicker.Enabled = enable;
             employeeKryptonComboBox.Enabled = enable;
-            currencyKryptonComboBox.Enabled = enable;
+            //currencyKryptonComboBox.Enabled = enable;
             notesKryptonTextBox.ReadOnly = !enable;
             //docdatekryptonDateTimePicker.Enabled = enable;
             docnokryptonTextBox.ReadOnly = !enable;
@@ -548,7 +557,7 @@ namespace Profit
             discPercentKryptonNumericUpDown.Enabled = enable;
             discAmountkryptonNumericUpDown.Enabled = enable;
             //discAfterAmountKryptonNumericUpDown.Enabled = enable;
-            taxKryptonComboBox.Enabled = enable;
+            //taxKryptonComboBox.Enabled = enable;
             //taxAfterAmountkryptonNumericUpDown.Enabled = enable;
             otherExpensekryptonNumericUpDown.Enabled = enable;
            // supplierkryptonComboBox.Enabled = enable;
@@ -625,7 +634,7 @@ namespace Profit
           //  textBoxCode.Text = m_si.CODE;
           //  dateKryptonDateTimePicker.Value = m_si.TRANSACTION_DATE;
             employeeKryptonComboBox.Text = m_si.EMPLOYEE.ToString();
-            currencyKryptonComboBox.Text = m_si.CURRENCY.ToString();
+            ccykryptonLabel1.Text = m_si.CURRENCY.CODE;
             nettotalAmountkryptonNumericUpDown.Value = Convert.ToDecimal(m_si.NET_TOTAL);
             notesKryptonTextBox.Text = m_si.NOTES;
             divisionKryptonComboBox.Text = m_si.DIVISION.ToString();
@@ -636,7 +645,7 @@ namespace Profit
             discAfterAmountKryptonNumericUpDown.Value = Convert.ToDecimal(m_si.DISC_AFTER_AMOUNT);
             discAmountkryptonNumericUpDown.Value = Convert.ToDecimal(m_si.DISC_AMOUNT);
             //supplierkryptonComboBox.Text = m_si.CUSTOMER.ToString();
-            taxKryptonComboBox.Text = m_si.TAX == null ? "" : m_si.TAX.ToString();
+            //taxKryptonComboBox.Text = m_si.TAX == null ? "" : m_si.TAX.ToString();
             taxAfterAmountkryptonNumericUpDown.Value = Convert.ToDecimal(m_si.TAX_AFTER_AMOUNT);
             otherExpensekryptonNumericUpDown.Value = Convert.ToDecimal(m_si.OTHER_EXPENSE);
             //docdatekryptonDateTimePicker.Value = m_si.DOCUMENT_DATE;

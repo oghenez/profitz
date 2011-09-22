@@ -22,7 +22,11 @@ namespace Profit
         IList m_partGroupList = new ArrayList();
         IList m_unitList = new ArrayList();
         IList m_currencyList = new ArrayList();
+        IList m_taxList = new ArrayList();
+        IList m_priceCatList = new ArrayList();
         IList m_partCategoryList = new ArrayList();
+        Repository r_tax = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.TAX_REPOSITORY);
+        Repository r_priceCat = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PRICE_CATEGORY_REPOSITORY);
         Repository r_sup = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.SUPPLIER_REPOSITORY);
         CustomerRepository r_cus = (CustomerRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CUSTOMER_REPOSITORY);
         SupplierInvoiceRepository r_sir = (SupplierInvoiceRepository)RepositoryFactory.GetInstance().GetTransactionRepository(RepositoryFactory.SUPPLIERINVOICE_REPOSITORY);
@@ -112,6 +116,12 @@ namespace Profit
             partCategorykryptonComboBox5.DataSource = m_partCategoryList;
 
             Utils.GetListCode(ConvUnit.Items, RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY).GetAll());
+
+            m_taxList = r_tax.GetAll();
+            taxkryptonComboBox1.DataSource = m_taxList;
+
+            m_priceCatList = r_priceCat.GetAll();
+            pricecatkryptonComboBox1.DataSource = m_priceCatList;
         }
         private void InitializeButtonClick()
         {
@@ -256,6 +266,8 @@ namespace Profit
             m_part.SELL_PRICE = Convert.ToDouble(sellPricekryptonNumericUpDown4.Value);
             m_part.TAXABLE = taxkryptonCheckBox2.Checked;
             m_part.UNIT = (Unit)unitkryptonComboBox2.SelectedItem;
+            m_part.TAX = (Tax)taxkryptonComboBox1.SelectedItem;
+            m_part.PRICE_CATEGORY = (PriceCategory)pricecatkryptonComboBox1.SelectedItem;
             m_part.UNIT_CONVERSION_LIST.Clear();
             //if (m_part.PICTURE != null) m_part.PICTURE.Dispose();
             //m_part.PICTURE = null; 
@@ -299,6 +311,8 @@ namespace Profit
                 sellPricekryptonNumericUpDown4.Value = 0;
                 taxkryptonCheckBox2.Checked = false;
                 unitkryptonComboBox2.SelectedIndex = 0;
+                taxkryptonComboBox1.SelectedIndex = 0;
+                pricecatkryptonComboBox1.SelectedIndex = 0;
                 dataGridViewUOM.Rows.Clear();
                 balanceKryptonTextBox.Text = "0";
                 bookedKryptonTextBox.Text = "0";
@@ -337,6 +351,8 @@ namespace Profit
             sellPricekryptonNumericUpDown4.Enabled = enable;
             taxkryptonCheckBox2.Enabled = enable;
             unitkryptonComboBox2.Enabled = enable;
+            taxkryptonComboBox1.Enabled = enable;
+            pricecatkryptonComboBox1.Enabled = enable;
 
             dataGridViewUOM.AllowUserToAddRows = enable;
             dataGridViewUOM.AllowUserToDeleteRows = enable;
@@ -439,6 +455,8 @@ namespace Profit
             sellPricekryptonNumericUpDown4.Value = Convert.ToDecimal(m_part.SELL_PRICE);
             taxkryptonCheckBox2.Checked = m_part.TAXABLE;
             unitkryptonComboBox2.Text = m_part.UNIT.ToString();
+            taxkryptonComboBox1.Text = m_part.TAX.ToString();
+            pricecatkryptonComboBox1.Text = m_part.PRICE_CATEGORY.ToString();
             StockCardInfo sci = r_part.GetStockCardInfo(m_part.ID);
             balanceKryptonTextBox.Text = sci.BALANCE.ToString();
             BackOrderKryptonTextBox.Text = sci.BACKORDER.ToString();
@@ -795,6 +813,11 @@ namespace Profit
                 pricemovementkryptonDataGridView1[pricemovementColumn.Index, i].Value = (p1 + p2) / 2;
 
             }
+        }
+
+        private void kryptonComboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
         }
         //private void toolStripButtonMigrate_Click(object sender, EventArgs e)
         //{
