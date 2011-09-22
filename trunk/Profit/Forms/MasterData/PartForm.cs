@@ -25,7 +25,11 @@ namespace Profit
         IList m_taxList = new ArrayList();
         IList m_priceCatList = new ArrayList();
         IList m_partCategoryList = new ArrayList();
+        Repository r_unit = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY);
         Repository r_tax = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.TAX_REPOSITORY);
+        Repository r_ccy = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY);
+        Repository r_prtCat = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_CATEGORY_REPOSITORY);
+        Repository r_prtGrp = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_GROUP_REPOSITORY);
         Repository r_priceCat = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PRICE_CATEGORY_REPOSITORY);
         Repository r_sup = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.SUPPLIER_REPOSITORY);
         CustomerRepository r_cus = (CustomerRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CUSTOMER_REPOSITORY);
@@ -101,21 +105,21 @@ namespace Profit
 
         private void InitializeDataSource()
         {
-            m_partGroupList = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_GROUP_REPOSITORY).GetAll();
+            m_partGroupList = r_prtGrp.GetAll();
             partGroupkryptonComboBox1.DataSource = m_partGroupList;
 
-            m_unitList = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY).GetAll();
+            m_unitList = r_unit.GetAll();
             unitkryptonComboBox2.DataSource = m_unitList;
 
-            m_currencyList = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY).GetAll();
+            m_currencyList = r_ccy.GetAll();
             currencykryptonComboBox3.DataSource = m_currencyList;
 
             costMethodekryptonComboBox4.DataSource = Enum.GetValues(typeof(CostMethod));
 
-            m_partCategoryList = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_CATEGORY_REPOSITORY).GetAll();
+            m_partCategoryList = r_prtCat.GetAll();
             partCategorykryptonComboBox5.DataSource = m_partCategoryList;
 
-            Utils.GetListCode(ConvUnit.Items, RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY).GetAll());
+            Utils.GetListCode(ConvUnit.Items, r_unit.GetAll());
 
             m_taxList = r_tax.GetAll();
             taxkryptonComboBox1.DataSource = m_taxList;
@@ -439,6 +443,14 @@ namespace Profit
         }
         private void loadData()
         {
+            m_part.CURRENCY = (Currency)r_ccy.GetById(m_part.CURRENCY);
+            m_part.PART_CATEGORY = (PartCategory)r_prtCat.GetById(m_part.PART_CATEGORY);
+            m_part.PART_GROUP = (PartGroup)r_prtGrp.GetById(m_part.PART_GROUP);
+            m_part.PRICE_CATEGORY = (PriceCategory)r_priceCat.GetById(m_part.PRICE_CATEGORY);
+            m_part.TAX = (Tax)r_tax.GetById(m_part.TAX);
+            m_part.UNIT = (Unit)r_unit.GetById(m_part.UNIT);
+            
+
             textBoxCode.Text = m_part.CODE;
             textBoxName.Text = m_part.NAME;
 
@@ -602,7 +614,7 @@ namespace Profit
         }
         public void AddUOM(UnitConversion u)
         {
-            u.CONVERSION_UNIT = (Unit)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY).GetById(u.CONVERSION_UNIT);
+            u.CONVERSION_UNIT = (Unit)r_unit.GetById(u.CONVERSION_UNIT);
             int index = dataGridViewUOM.Rows.Add(u.BARCODE, 1, u.CONVERSION_UNIT.CODE, u.CONVERSION_QTY,
                 m_part.UNIT.CODE, u.COST_PRICE, u.SELL_PRICE);
             dataGridViewUOM.Rows[index].Tag = u;

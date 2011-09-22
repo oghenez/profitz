@@ -23,6 +23,11 @@ namespace Profit.Server
         public double NET_TOTAL = 0;
         public Customer CUSTOMER = null;
 
+        public PaymentType PAYMENT_TYPE = PaymentType.Cash;
+        public string CREDIT_CARD_NO = "";
+        public string HOLDER_NAME = "";
+        public string ACCOUNT_NO = "";
+
         public POS()
             : base()
         { }
