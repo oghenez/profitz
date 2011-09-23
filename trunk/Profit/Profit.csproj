@@ -414,16 +414,16 @@
     <Compile Include="Forms\MasterData\MarkDownSellingPriceForm.Designer.cs">
       <DependentUpon>MarkDownSellingPriceForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PartPreviewPOSForm.cs">
+    <Compile Include="Forms\InventoryTransaction\PartPreviewPOSForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PartPreviewPOSForm.Designer.cs">
+    <Compile Include="Forms\InventoryTransaction\PartPreviewPOSForm.Designer.cs">
       <DependentUpon>PartPreviewPOSForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="POSPaymentForm.cs">
+    <Compile Include="Forms\InventoryTransaction\POSPaymentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="POSPaymentForm.Designer.cs">
+    <Compile Include="Forms\InventoryTransaction\POSPaymentForm.Designer.cs">
       <DependentUpon>POSPaymentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="SearchPartForm.cs">
@@ -731,10 +731,10 @@
     <EmbeddedResource Include="Forms\MasterData\UserForm.resx">
       <DependentUpon>UserForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PartPreviewPOSForm.resx">
+    <EmbeddedResource Include="Forms\InventoryTransaction\PartPreviewPOSForm.resx">
       <DependentUpon>PartPreviewPOSForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="POSPaymentForm.resx">
+    <EmbeddedResource Include="Forms\InventoryTransaction\POSPaymentForm.resx">
       <DependentUpon>POSPaymentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SearchPartForm.resx">

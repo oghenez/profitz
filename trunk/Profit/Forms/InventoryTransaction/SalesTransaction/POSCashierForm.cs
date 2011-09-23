@@ -943,7 +943,7 @@ namespace Profit
                         autoScroll();
                     } 
                     if ((result.Count == 0) || (result.Count > 1))
-                    {
+                    {ff
                     //    int newRow = itemsDataGrid.Rows.Add();
                     //    using (SearchPartForm fr = new SearchPartForm(barcode, result))
                     //    {
