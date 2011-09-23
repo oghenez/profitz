@@ -113,6 +113,20 @@ namespace Profit
         {
             if (e.KeyCode == Keys.Escape)
                 this.Close();
+            if (e.KeyData == Keys.F3)
+            {
+                searchText.SelectAll();
+                searchText.Focus();
+            }
+            if (e.KeyData == Keys.F4)
+            {
+                gridData.Focus();
+            }
+            if (e.KeyCode == Keys.Enter)
+            {
+                if(sender is DataGridView)
+                    OKkryptonButton_Click(sender, null);
+            }
         }
 
         private void gridData_KeyDown(object sender, KeyEventArgs e)

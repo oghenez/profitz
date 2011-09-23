@@ -943,52 +943,54 @@ namespace Profit
                         autoScroll();
                     } 
                     if ((result.Count == 0) || (result.Count > 1))
-                    {ff
+                    {
                     //    int newRow = itemsDataGrid.Rows.Add();
-                    //    using (SearchPartForm fr = new SearchPartForm(barcode, result))
-                    //    {
-                    //        fr.ShowDialog();
-                    //        Part p = fr.PART;
-                    //        if (p == null)
-                    //        {
-                    //            p = (Part)itemsDataGrid[codeColumn.Index, newRow].Tag;
-                    //            if (p == null)
-                    //            {
-                    //                return;
-                    //            }
-                    //        }
-                    //        else
-                    //        {
-                    //            for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
-                    //            {
-                    //                if (i == e.RowIndex) continue;
-                    //                Part pi = (Part)itemsDataGrid[codeColumn.Index, i].Tag;
-                    //                if (pi == null) continue;
-                    //                if (pi.ID == p.ID)
-                    //                {
-                    //                    itemsDataGrid.Rows[e.RowIndex].ErrorText = "Part : " + p.NAME + " already add.";
-                    //                    e.Cancel = true;
-                    //                    return;
-                    //                }
-                    //            }
-                    //            itemsDataGrid[codeColumn.Index, e.RowIndex].Tag = p;
-                    //            itemsDataGrid[GRNNoColumn.Index, e.RowIndex].Tag = null;
-                    //            itemsDataGrid[GRNNoColumn.Index, e.RowIndex].Value = "";
-                    //            itemsDataGrid[scanColumn.Index, e.RowIndex].Value = p.BARCODE;
-                    //            itemsDataGrid[codeColumn.Index, e.RowIndex].Value = p.CODE;
-                    //            itemsDataGrid[nameColumn.Index, e.RowIndex].Value = p.NAME;
-                    //            //dataItemskryptonDataGridView[QtyColumn.Index, e.RowIndex].Value = 0;
-                    //            //unitColumn.Items.Clear();
-                    //            //IList units = r_part.GetAllUnit(p.ID, p.UNIT.ID);
-                    //            //Utils.GetListCode(unitColumn.Items, units);
-                    //            p.UNIT = (Unit)r_unit.GetById(p.UNIT);
-                    //            itemsDataGrid[unitColumn.Index, e.RowIndex].Value = p.UNIT.ToString();
-                    //            itemsDataGrid[priceColumn.Index, e.RowIndex].Value = 0;// r_si.GetTheLatestSIPrice(((Customer)supplierkryptonComboBox.SelectedItem).ID, p.ID, p.UNIT.ID);
-                    //            // dataItemskryptonDataGridView[totalAmountColumn.Index, e.RowIndex].Value = 0;
-                    //            itemsDataGrid[warehouseColumn.Index, e.RowIndex].Value = m_warehouses[0].ToString();
-                    //        }
-                    //    }
-                    //}
+                        using (SearchPartForm fr = new SearchPartForm(barcode, result))
+                        {
+                            fr.ShowDialog();
+                            p = fr.PART;
+                            if (p == null)
+                            {
+                                return;
+                            }
+                            else
+                            {
+                                for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
+                                {
+                                    Part pi = (Part)itemsDataGrid[codeColumn.Index, i].Tag;
+                                    if (pi == null) continue;
+                                    if (pi.ID == p.ID)
+                                    {
+                                        decimal v = Convert.ToDecimal(itemsDataGrid[QtyColumn.Index, i].Value);
+                                        itemsDataGrid[QtyColumn.Index, i].Value = v + qty;
+                                        updateSubtotal(i);
+                                        scanBarcodekryptonTextBox1.Text = "";
+                                        scanBarcodekryptonTextBox1.Focus();
+                                        return;
+                                    }
+                                }
+                                int newRow = itemsDataGrid.Rows.Add();
+                                p.TAX = (Tax)r_tax.GetById(p.TAX);
+                                p.UNIT_BY_SEARCH = (Unit)r_unit.GetById(p.UNIT_BY_SEARCH);
+                                p.PRICE_CATEGORY = (PriceCategory)r_pricecat.GetById(p.PRICE_CATEGORY);
+
+                                itemsDataGrid[codeColumn.Index, newRow].Tag = p;
+                                itemsDataGrid[GRNNoColumn.Index, newRow].Tag = null;
+                                itemsDataGrid[GRNNoColumn.Index, newRow].Value = "";
+                                itemsDataGrid[scanColumn.Index, newRow].Value = p.BARCODE;
+                                itemsDataGrid[codeColumn.Index, newRow].Value = p.CODE;
+                                itemsDataGrid[nameColumn.Index, newRow].Value = p.NAME;
+                                itemsDataGrid[QtyColumn.Index, newRow].Value = qty;
+                                itemsDataGrid[unitColumn.Index, newRow].Value = p.UNIT_BY_SEARCH.ToString();
+                                itemsDataGrid[priceColumn.Index, newRow].Value = p.TAXABLE ? (p.SELL_PRICE_BY_SEARCH + (p.SELL_PRICE_BY_SEARCH * p.TAX.RATE / 100)) : p.SELL_PRICE_BY_SEARCH;
+                                itemsDataGrid[warehouseColumn.Index, newRow].Value = m_warehouses[0].ToString();
+                                itemsDataGrid[taxableColumn.Index, newRow].Value = p.TAXABLE;
+                                itemsDataGrid[discpercentColumn.Index, newRow].Value = p.PRICE_CATEGORY.DISCOUNT_PERCENT;
+                                updateSubtotal(newRow);
+                                autoScroll();
+                            }
+                        }
+                    }
                     scanBarcodekryptonTextBox1.Text = "";
                     scanBarcodekryptonTextBox1.Focus();
                 }
