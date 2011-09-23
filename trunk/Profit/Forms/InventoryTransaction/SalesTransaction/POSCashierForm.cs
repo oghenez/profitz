@@ -1015,17 +1015,18 @@ namespace Profit
 
         public void Items(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            itemsDataGrid.Focus();
         }
 
         public void Barcode(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            scanBarcodekryptonTextBox1.SelectAll();
+            scanBarcodekryptonTextBox1.Focus();
         }
 
         public void Help(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+           // throw new NotImplementedException();
         }
 
         public void Member(object sender, EventArgs e)
@@ -1035,12 +1036,13 @@ namespace Profit
 
         public void New(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Clear(sender, e);
+            Barcode(sender, e);
         }
 
         void IPOSChildForm.Post(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Post(sender, e);
         }
 
         public void Antrian(object sender, EventArgs e)
@@ -1050,7 +1052,8 @@ namespace Profit
 
         public void Exit(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            if (KryptonMessageBox.Show("Exit POS?", "POS Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                this.Close();
         }
 
         #endregion
