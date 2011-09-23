@@ -12,7 +12,7 @@ using System.Collections;
 
 namespace Profit
 {
-    public partial class POSCashierForm : KryptonForm, IChildForm
+    public partial class POSCashierForm : KryptonForm, IChildForm, IPOSChildForm
     {
         POS m_si = new POS(); 
         IMainForm m_mainForm;
@@ -322,8 +322,8 @@ namespace Profit
         private void InitializeButtonClick()
         {
             toolStripButtonSave.Click += new EventHandler(Save);
-            toolStripButtonEdit.Click += new EventHandler(Edit);
-            toolStripButtonDelete.Click += new EventHandler(Delete);
+          //  toolStripButtonEdit.Click += new EventHandler(Edit);
+           // toolStripButtonDelete.Click += new EventHandler(Delete);
             toolStripButtonClear.Click += new EventHandler(Clear);
             toolStripButtonRefresh.Click+=new EventHandler(Refresh);
             postToolStripButton.Click += new EventHandler(Post);
@@ -589,8 +589,8 @@ namespace Profit
         private void setEditMode(EditMode editmode)
         {
             toolStripButtonSave.Enabled = (editmode == EditMode.New || editmode == EditMode.Update) && !m_si.POSTED && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].SAVE;
-            toolStripButtonEdit.Enabled = (editmode == EditMode.View) && !m_si.POSTED && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].SAVE;
-            toolStripButtonDelete.Enabled = (editmode == EditMode.View) && !m_si.POSTED && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].DELETE;
+           // toolStripButtonEdit.Enabled = (editmode == EditMode.View) && !m_si.POSTED && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].SAVE;
+           // toolStripButtonDelete.Enabled = (editmode == EditMode.View) && !m_si.POSTED && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].DELETE;
             toolStripButtonClear.Enabled = m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].SAVE;
             toolStripButtonPrint.Enabled = m_si.POSTED && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].PRINT;
             postToolStripButton.Enabled = (m_si.ID > 0) && (editmode == EditMode.View) && m_mainForm.CurrentUser.FORM_ACCESS_LIST[Name].POST;
@@ -602,8 +602,8 @@ namespace Profit
         private void ReloadMainFormButton()
         {
             m_mainForm.EnableButtonSave(toolStripButtonSave.Enabled);
-            m_mainForm.EnableButtonEdit(toolStripButtonEdit.Enabled);
-            m_mainForm.EnableButtonDelete(toolStripButtonDelete.Enabled);
+           // m_mainForm.EnableButtonEdit(toolStripButtonEdit.Enabled);
+           // m_mainForm.EnableButtonDelete(toolStripButtonDelete.Enabled);
             m_mainForm.EnableButtonClear(true);
         }
         public void Delete(object obj, EventArgs e)
@@ -717,47 +717,47 @@ namespace Profit
 
         private void searchToolStripButton_Click(object sender, EventArgs e)
         {
-            IList result = searchToolStripTextBox.Text == string.Empty ? new ArrayList() : r_si.Search(searchToolStripTextBox.Text);
-            if (result.Count == 1)
-            {
-                m_si = (POS)result[0];
-                m_si = (POS)r_si.Get(m_si.ID);
-                m_si.EMPLOYEE = (Employee)r_employee.GetById(m_si.EMPLOYEE);
-                m_si.CURRENCY = (Currency)r_ccy.GetById(m_si.CURRENCY);
-                m_si.DIVISION = (Division)r_division.GetById(m_si.DIVISION);
-                m_si.TOP = (TermOfPayment)r_top.GetById(m_si.TOP);
-                m_si.TAX = m_si.TAX == null ? null : (Tax)r_tax.GetById(m_si.TAX);
-                m_si.CUSTOMER = (Customer)r_cus.GetById(m_si.CUSTOMER);
-                setEditMode(EditMode.View);
-                loadData();
-                setEnableForm(false);
-            }
-            else
-            {
-                using (SearchPOSForm frm = new SearchPOSForm(searchToolStripTextBox.Text, result))
-                {
-                    frm.ShowDialog();
-                    if (frm.POS == null)
-                    {
-                        return;
-                    }
-                    else
-                    {
-                        m_si = frm.POS;
-                        m_si = (POS)r_si.Get(m_si.ID);
-                        m_si.EMPLOYEE = (Employee)r_employee.GetById(m_si.EMPLOYEE);
-                        m_si.CURRENCY = (Currency)r_ccy.GetById(m_si.CURRENCY);
-                        m_si.DIVISION = (Division)r_division.GetById(m_si.DIVISION);
-                        m_si.TOP = (TermOfPayment)r_top.GetById(m_si.TOP);
-                        m_si.TAX = m_si.TAX == null ? null : (Tax)r_tax.GetById(m_si.TAX);
-                        m_si.CUSTOMER = (Customer)r_cus.GetById(m_si.CUSTOMER);
-                        setEditMode(EditMode.View);
-                        loadData();
-                        setEnableForm(false);
-                        //setEditMode(EditMode.View);
-                    }
-                }
-            }
+            //IList result = searchToolStripTextBox.Text == string.Empty ? new ArrayList() : r_si.Search(searchToolStripTextBox.Text);
+            //if (result.Count == 1)
+            //{
+            //    m_si = (POS)result[0];
+            //    m_si = (POS)r_si.Get(m_si.ID);
+            //    m_si.EMPLOYEE = (Employee)r_employee.GetById(m_si.EMPLOYEE);
+            //    m_si.CURRENCY = (Currency)r_ccy.GetById(m_si.CURRENCY);
+            //    m_si.DIVISION = (Division)r_division.GetById(m_si.DIVISION);
+            //    m_si.TOP = (TermOfPayment)r_top.GetById(m_si.TOP);
+            //    m_si.TAX = m_si.TAX == null ? null : (Tax)r_tax.GetById(m_si.TAX);
+            //    m_si.CUSTOMER = (Customer)r_cus.GetById(m_si.CUSTOMER);
+            //    setEditMode(EditMode.View);
+            //    loadData();
+            //    setEnableForm(false);
+            //}
+            //else
+            //{
+            //    using (SearchPOSForm frm = new SearchPOSForm(searchToolStripTextBox.Text, result))
+            //    {
+            //        frm.ShowDialog();
+            //        if (frm.POS == null)
+            //        {
+            //            return;
+            //        }
+            //        else
+            //        {
+            //            m_si = frm.POS;
+            //            m_si = (POS)r_si.Get(m_si.ID);
+            //            m_si.EMPLOYEE = (Employee)r_employee.GetById(m_si.EMPLOYEE);
+            //            m_si.CURRENCY = (Currency)r_ccy.GetById(m_si.CURRENCY);
+            //            m_si.DIVISION = (Division)r_division.GetById(m_si.DIVISION);
+            //            m_si.TOP = (TermOfPayment)r_top.GetById(m_si.TOP);
+            //            m_si.TAX = m_si.TAX == null ? null : (Tax)r_tax.GetById(m_si.TAX);
+            //            m_si.CUSTOMER = (Customer)r_cus.GetById(m_si.CUSTOMER);
+            //            setEditMode(EditMode.View);
+            //            loadData();
+            //            setEnableForm(false);
+            //            //setEditMode(EditMode.View);
+            //        }
+            //    }
+            //}
         }
 
         private void discPercentKryptonNumericUpDown_ValueChanged(object sender, EventArgs e)
@@ -932,8 +932,7 @@ namespace Profit
                         itemsDataGrid[taxableColumn.Index, newRow].Value = p.TAXABLE;
                         itemsDataGrid[discpercentColumn.Index, newRow].Value = p.PRICE_CATEGORY.DISCOUNT_PERCENT;
                         updateSubtotal(newRow);
-                        itemsDataGrid.Rows[newRow].Selected = true;
-                        itemsDataGrid[0, newRow].Selected = true;
+                        autoScroll();
                     }
                     //if ((result.Count == 0) || (result.Count > 1))
                     //{
@@ -992,5 +991,68 @@ namespace Profit
 
             }
         }
+        private void autoScroll()
+        {
+            if (this.itemsDataGrid.Visible)
+            {
+                foreach (Control ctl in this.itemsDataGrid.Controls)
+                {
+                    if (ctl is VScrollBar)
+                    {
+                        VScrollBar scroll = (VScrollBar)ctl;
+                        if (scroll.Visible)
+                        {
+                            this.itemsDataGrid.FirstDisplayedScrollingRowIndex = 
+                                this.itemsDataGrid.FirstDisplayedScrollingRowIndex + 1;
+                            //scroll.Value = scroll.Maximum;
+                        }
+                    }
+                }
+            }
+        }
+
+        #region IPOSChildForm Members
+
+        public void Items(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Barcode(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Help(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Member(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void New(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IPOSChildForm.Post(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Antrian(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Exit(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

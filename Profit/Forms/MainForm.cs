@@ -747,5 +747,82 @@ namespace Profit
         }
 
         #endregion
+
+        private void itemsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IPOSChildForm frm = (IPOSChildForm)this.ActiveMdiChild;
+            if (frm == null) return;
+            frm.Items(sender, e);
+        }
+
+        private void barcodeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IPOSChildForm frm = (IPOSChildForm)this.ActiveMdiChild;
+            if (frm == null) return;
+            frm.Barcode(sender, e);
+        }
+
+        private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            IPOSChildForm frm = (IPOSChildForm)this.ActiveMdiChild;
+            if (frm == null) return;
+            frm.Help(sender, e);
+        }
+
+        private void refreshToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            IPOSChildForm frm = (IPOSChildForm)this.ActiveMdiChild;
+            if (frm == null) return;
+            frm.Refresh(sender, e);
+        }
+
+        private void memberToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IPOSChildForm frm = (IPOSChildForm)this.ActiveMdiChild;
+            if (frm == null) return;
+            frm.Member(sender, e);
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IPOSChildForm frm = (IPOSChildForm)this.ActiveMdiChild;
+            if (frm == null) return;
+            frm.New(sender, e);
+        }
+
+        private void saveToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            IPOSChildForm frm = (IPOSChildForm)this.ActiveMdiChild;
+            if (frm == null) return;
+            frm.Save(sender, e);
+        }
+
+        private void postToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IPOSChildForm frm = (IPOSChildForm)this.ActiveMdiChild;
+            if (frm == null) return;
+            frm.Post(sender, e);
+        }
+
+        private void printToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            IPOSChildForm frm = (IPOSChildForm)this.ActiveMdiChild;
+            if (frm == null) return;
+            frm.Print(sender, e);
+        }
+
+        private void antrianToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IPOSChildForm frm = (IPOSChildForm)this.ActiveMdiChild;
+            if (frm == null) return;
+            frm.Antrian(sender, e);
+        }
+
+        private void exitToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            IPOSChildForm frm = (IPOSChildForm)this.ActiveMdiChild;
+            if (frm == null) return;
+            frm.Exit(sender, e);
+        }
     }
 }
