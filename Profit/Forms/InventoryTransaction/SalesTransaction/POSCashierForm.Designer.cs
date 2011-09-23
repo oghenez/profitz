@@ -29,18 +29,27 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.itemstoolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.barcodetoolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.helptoolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonRefresh = new System.Windows.Forms.ToolStripButton();
+            this.membertoolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonClear = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonPrint = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.companylabel1 = new System.Windows.Forms.Label();
@@ -71,6 +80,7 @@
             this.notesKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.scanBarcodekryptonTextBox1 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.kryptonLabel10 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.subTotalKryptonNumericUpDown = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
             this.kryptonLabel9 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -98,18 +108,7 @@
             this.buttonSpecAny5 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.buttonSpecAny6 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.kryptonContextMenuItems1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.itemstoolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.barcodetoolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.helptoolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonRefresh = new System.Windows.Forms.ToolStripButton();
-            this.membertoolStripButton4 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonClear = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
             this.postToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonPrint = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -119,10 +118,10 @@
             this.headerGroup2Custom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsDataGrid)).BeginInit();
             this.dataGridContextMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.employeeKryptonComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.divisionKryptonComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -138,7 +137,6 @@
             this.membertoolStripButton4,
             this.toolStripButtonClear,
             this.toolStripButtonSave,
-            this.toolStripSeparator1,
             this.postToolStripButton,
             this.toolStripButtonPrint,
             this.toolStripButton5,
@@ -149,10 +147,111 @@
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripSeparator1
+            // itemstoolStripButton1
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 39);
+            this.itemstoolStripButton1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.itemstoolStripButton1.Image = global::Profit.Properties.Resources.advanced_data_grid;
+            this.itemstoolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.itemstoolStripButton1.Name = "itemstoolStripButton1";
+            this.itemstoolStripButton1.Size = new System.Drawing.Size(63, 36);
+            this.itemstoolStripButton1.Text = "F1";
+            this.itemstoolStripButton1.ToolTipText = "Items";
+            this.itemstoolStripButton1.Click += new System.EventHandler(this.Items);
+            // 
+            // barcodetoolStripButton2
+            // 
+            this.barcodetoolStripButton2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.barcodetoolStripButton2.Image = global::Profit.Properties.Resources.barcode;
+            this.barcodetoolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.barcodetoolStripButton2.Name = "barcodetoolStripButton2";
+            this.barcodetoolStripButton2.Size = new System.Drawing.Size(63, 36);
+            this.barcodetoolStripButton2.Text = "F2";
+            this.barcodetoolStripButton2.ToolTipText = "Barcode";
+            this.barcodetoolStripButton2.Click += new System.EventHandler(this.Barcode);
+            // 
+            // helptoolStripButton3
+            // 
+            this.helptoolStripButton3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helptoolStripButton3.Image = global::Profit.Properties.Resources.help;
+            this.helptoolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.helptoolStripButton3.Name = "helptoolStripButton3";
+            this.helptoolStripButton3.Size = new System.Drawing.Size(63, 36);
+            this.helptoolStripButton3.Text = "F3";
+            this.helptoolStripButton3.ToolTipText = "Help";
+            this.helptoolStripButton3.Click += new System.EventHandler(this.Help);
+            // 
+            // toolStripButtonRefresh
+            // 
+            this.toolStripButtonRefresh.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButtonRefresh.Image = global::Profit.Properties.Resources.copyleft;
+            this.toolStripButtonRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonRefresh.Name = "toolStripButtonRefresh";
+            this.toolStripButtonRefresh.Size = new System.Drawing.Size(63, 36);
+            this.toolStripButtonRefresh.Text = "F4";
+            this.toolStripButtonRefresh.ToolTipText = "Refresh";
+            this.toolStripButtonRefresh.Click += new System.EventHandler(this.Refresh);
+            // 
+            // membertoolStripButton4
+            // 
+            this.membertoolStripButton4.Enabled = false;
+            this.membertoolStripButton4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.membertoolStripButton4.Image = global::Profit.Properties.Resources.account_balances;
+            this.membertoolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.membertoolStripButton4.Name = "membertoolStripButton4";
+            this.membertoolStripButton4.Size = new System.Drawing.Size(63, 36);
+            this.membertoolStripButton4.Text = "F5";
+            this.membertoolStripButton4.ToolTipText = "Member";
+            this.membertoolStripButton4.Click += new System.EventHandler(this.Member);
+            // 
+            // toolStripButtonClear
+            // 
+            this.toolStripButtonClear.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButtonClear.Image = global::Profit.Properties.Resources.application_add;
+            this.toolStripButtonClear.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonClear.Name = "toolStripButtonClear";
+            this.toolStripButtonClear.Size = new System.Drawing.Size(60, 36);
+            this.toolStripButtonClear.Text = "F7";
+            this.toolStripButtonClear.ToolTipText = "New";
+            // 
+            // toolStripButtonSave
+            // 
+            this.toolStripButtonSave.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButtonSave.Image = global::Profit.Properties.Resources.disk;
+            this.toolStripButtonSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonSave.Name = "toolStripButtonSave";
+            this.toolStripButtonSave.Size = new System.Drawing.Size(71, 36);
+            this.toolStripButtonSave.Text = "End";
+            this.toolStripButtonSave.ToolTipText = "Simpan";
+            // 
+            // toolStripButtonPrint
+            // 
+            this.toolStripButtonPrint.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButtonPrint.Image = global::Profit.Properties.Resources.printer;
+            this.toolStripButtonPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonPrint.Name = "toolStripButtonPrint";
+            this.toolStripButtonPrint.Size = new System.Drawing.Size(72, 36);
+            this.toolStripButtonPrint.Text = "F10";
+            this.toolStripButtonPrint.ToolTipText = "Print Receipt";
+            // 
+            // toolStripButton5
+            // 
+            this.toolStripButton5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButton5.Image = global::Profit.Properties.Resources.layers;
+            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton5.Name = "toolStripButton5";
+            this.toolStripButton5.Size = new System.Drawing.Size(72, 36);
+            this.toolStripButton5.Text = "F11";
+            this.toolStripButton5.ToolTipText = "Antrian";
+            // 
+            // toolStripButton6
+            // 
+            this.toolStripButton6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButton6.Image = global::Profit.Properties.Resources.cross;
+            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton6.Name = "toolStripButton6";
+            this.toolStripButton6.Size = new System.Drawing.Size(72, 36);
+            this.toolStripButton6.Text = "F12";
+            this.toolStripButton6.ToolTipText = "Close";
             // 
             // kryptonPanel1
             // 
@@ -346,8 +445,8 @@
             // 
             // GRNNoColumn
             // 
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.GRNNoColumn.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.GRNNoColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.GRNNoColumn.HeaderText = "DO No.";
             this.GRNNoColumn.Name = "GRNNoColumn";
             this.GRNNoColumn.ReadOnly = true;
@@ -356,8 +455,8 @@
             // 
             // codeColumn
             // 
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.codeColumn.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.codeColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.codeColumn.HeaderText = "Code";
             this.codeColumn.Name = "codeColumn";
             this.codeColumn.ReadOnly = true;
@@ -365,8 +464,8 @@
             // 
             // nameColumn
             // 
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.nameColumn.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.nameColumn.DefaultCellStyle = dataGridViewCellStyle3;
             this.nameColumn.HeaderText = "Name";
             this.nameColumn.Name = "nameColumn";
             this.nameColumn.ReadOnly = true;
@@ -374,9 +473,9 @@
             // 
             // QtyColumn
             // 
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle14.NullValue = "0";
-            this.QtyColumn.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.NullValue = "0";
+            this.QtyColumn.DefaultCellStyle = dataGridViewCellStyle4;
             this.QtyColumn.HeaderText = "Qty";
             this.QtyColumn.Increment = new decimal(new int[] {
             1,
@@ -406,9 +505,9 @@
             // priceColumn
             // 
             this.priceColumn.DecimalPlaces = 2;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle15.NullValue = "0";
-            this.priceColumn.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.NullValue = "0";
+            this.priceColumn.DefaultCellStyle = dataGridViewCellStyle5;
             this.priceColumn.HeaderText = "Price";
             this.priceColumn.Increment = new decimal(new int[] {
             100,
@@ -431,9 +530,9 @@
             // 
             // discpercentColumn
             // 
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle16.NullValue = "0";
-            this.discpercentColumn.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.NullValue = "0";
+            this.discpercentColumn.DefaultCellStyle = dataGridViewCellStyle6;
             this.discpercentColumn.HeaderText = "Disc(%)";
             this.discpercentColumn.Increment = new decimal(new int[] {
             1,
@@ -456,9 +555,9 @@
             // discAmountColumn
             // 
             this.discAmountColumn.DecimalPlaces = 2;
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle17.NullValue = "0";
-            this.discAmountColumn.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.NullValue = "0";
+            this.discAmountColumn.DefaultCellStyle = dataGridViewCellStyle7;
             this.discAmountColumn.HeaderText = "Disc";
             this.discAmountColumn.Increment = new decimal(new int[] {
             1000,
@@ -488,9 +587,9 @@
             // totalDiscColumn
             // 
             this.totalDiscColumn.DecimalPlaces = 2;
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle18.NullValue = "0";
-            this.totalDiscColumn.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.NullValue = "0";
+            this.totalDiscColumn.DefaultCellStyle = dataGridViewCellStyle8;
             this.totalDiscColumn.HeaderText = "Total Disc";
             this.totalDiscColumn.Increment = new decimal(new int[] {
             1,
@@ -513,9 +612,9 @@
             // 
             // taxableColumn
             // 
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle19.NullValue = false;
-            this.taxableColumn.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.NullValue = false;
+            this.taxableColumn.DefaultCellStyle = dataGridViewCellStyle9;
             this.taxableColumn.FalseValue = null;
             this.taxableColumn.HeaderText = "Taxable";
             this.taxableColumn.IndeterminateValue = null;
@@ -527,9 +626,9 @@
             // totalAmountColumn
             // 
             this.totalAmountColumn.DecimalPlaces = 2;
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle20.NullValue = "0";
-            this.totalAmountColumn.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.NullValue = "0";
+            this.totalAmountColumn.DefaultCellStyle = dataGridViewCellStyle10;
             this.totalAmountColumn.HeaderText = "Amount";
             this.totalAmountColumn.Increment = new decimal(new int[] {
             1,
@@ -605,6 +704,19 @@
             this.scanBarcodekryptonTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.scanBarcodekryptonTextBox1_KeyDown);
             this.scanBarcodekryptonTextBox1.Enter += new System.EventHandler(this.kryptonTextBox1_Enter);
             this.scanBarcodekryptonTextBox1.Leave += new System.EventHandler(this.scanBarcodekryptonTextBox1_Leave);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.BackgroundImage = global::Profit.Properties.Resources.POSprofit4;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(785, 84);
+            this.pictureBox1.TabIndex = 69;
+            this.pictureBox1.TabStop = false;
             // 
             // kryptonLabel10
             // 
@@ -917,95 +1029,6 @@
             this.buttonSpecAny6.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny6.UniqueName = "95BED338EBB14361B2927C3CB003454A";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.BackgroundImage = global::Profit.Properties.Resources.POSprofit4;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(785, 84);
-            this.pictureBox1.TabIndex = 69;
-            this.pictureBox1.TabStop = false;
-            // 
-            // itemstoolStripButton1
-            // 
-            this.itemstoolStripButton1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.itemstoolStripButton1.Image = global::Profit.Properties.Resources.advanced_data_grid;
-            this.itemstoolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.itemstoolStripButton1.Name = "itemstoolStripButton1";
-            this.itemstoolStripButton1.Size = new System.Drawing.Size(63, 36);
-            this.itemstoolStripButton1.Text = "F1";
-            this.itemstoolStripButton1.ToolTipText = "Items";
-            this.itemstoolStripButton1.Click += new System.EventHandler(this.Items);
-            // 
-            // barcodetoolStripButton2
-            // 
-            this.barcodetoolStripButton2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.barcodetoolStripButton2.Image = global::Profit.Properties.Resources.barcode;
-            this.barcodetoolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.barcodetoolStripButton2.Name = "barcodetoolStripButton2";
-            this.barcodetoolStripButton2.Size = new System.Drawing.Size(63, 36);
-            this.barcodetoolStripButton2.Text = "F2";
-            this.barcodetoolStripButton2.ToolTipText = "Barcode";
-            this.barcodetoolStripButton2.Click += new System.EventHandler(this.Barcode);
-            // 
-            // helptoolStripButton3
-            // 
-            this.helptoolStripButton3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.helptoolStripButton3.Image = global::Profit.Properties.Resources.help;
-            this.helptoolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.helptoolStripButton3.Name = "helptoolStripButton3";
-            this.helptoolStripButton3.Size = new System.Drawing.Size(63, 36);
-            this.helptoolStripButton3.Text = "F3";
-            this.helptoolStripButton3.ToolTipText = "Help";
-            this.helptoolStripButton3.Click += new System.EventHandler(this.Help);
-            // 
-            // toolStripButtonRefresh
-            // 
-            this.toolStripButtonRefresh.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButtonRefresh.Image = global::Profit.Properties.Resources.copyleft;
-            this.toolStripButtonRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonRefresh.Name = "toolStripButtonRefresh";
-            this.toolStripButtonRefresh.Size = new System.Drawing.Size(63, 36);
-            this.toolStripButtonRefresh.Text = "F4";
-            this.toolStripButtonRefresh.ToolTipText = "Refresh";
-            this.toolStripButtonRefresh.Click += new System.EventHandler(this.Refresh);
-            // 
-            // membertoolStripButton4
-            // 
-            this.membertoolStripButton4.Enabled = false;
-            this.membertoolStripButton4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.membertoolStripButton4.Image = global::Profit.Properties.Resources.account_balances;
-            this.membertoolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.membertoolStripButton4.Name = "membertoolStripButton4";
-            this.membertoolStripButton4.Size = new System.Drawing.Size(63, 36);
-            this.membertoolStripButton4.Text = "F5";
-            this.membertoolStripButton4.ToolTipText = "Member";
-            this.membertoolStripButton4.Click += new System.EventHandler(this.Member);
-            // 
-            // toolStripButtonClear
-            // 
-            this.toolStripButtonClear.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButtonClear.Image = global::Profit.Properties.Resources.application_add;
-            this.toolStripButtonClear.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonClear.Name = "toolStripButtonClear";
-            this.toolStripButtonClear.Size = new System.Drawing.Size(60, 36);
-            this.toolStripButtonClear.Text = "F7";
-            this.toolStripButtonClear.ToolTipText = "New";
-            // 
-            // toolStripButtonSave
-            // 
-            this.toolStripButtonSave.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButtonSave.Image = global::Profit.Properties.Resources.disk;
-            this.toolStripButtonSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonSave.Name = "toolStripButtonSave";
-            this.toolStripButtonSave.Size = new System.Drawing.Size(65, 36);
-            this.toolStripButtonSave.Text = "Save";
-            this.toolStripButtonSave.ToolTipText = "Simpan";
-            // 
             // postToolStripButton
             // 
             this.postToolStripButton.Image = global::Profit.Properties.Resources.post;
@@ -1013,36 +1036,6 @@
             this.postToolStripButton.Name = "postToolStripButton";
             this.postToolStripButton.Size = new System.Drawing.Size(65, 36);
             this.postToolStripButton.Text = "Post";
-            // 
-            // toolStripButtonPrint
-            // 
-            this.toolStripButtonPrint.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButtonPrint.Image = global::Profit.Properties.Resources.printer;
-            this.toolStripButtonPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonPrint.Name = "toolStripButtonPrint";
-            this.toolStripButtonPrint.Size = new System.Drawing.Size(72, 36);
-            this.toolStripButtonPrint.Text = "F10";
-            this.toolStripButtonPrint.ToolTipText = "Print Receipt";
-            // 
-            // toolStripButton5
-            // 
-            this.toolStripButton5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton5.Image = global::Profit.Properties.Resources.layers;
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(72, 36);
-            this.toolStripButton5.Text = "F11";
-            this.toolStripButton5.ToolTipText = "Antrian";
-            // 
-            // toolStripButton6
-            // 
-            this.toolStripButton6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton6.Image = global::Profit.Properties.Resources.cross;
-            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(72, 36);
-            this.toolStripButton6.Text = "F12";
-            this.toolStripButton6.ToolTipText = "Close";
             // 
             // POSCashierForm
             // 
@@ -1070,10 +1063,10 @@
             this.headerGroup2Custom.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.itemsDataGrid)).EndInit();
             this.dataGridContextMenuStrip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.employeeKryptonComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.divisionKryptonComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1099,10 +1092,8 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel6;
         private ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown nettotalAmountkryptonNumericUpDown;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox notesKryptonTextBox;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
-        private System.Windows.Forms.ToolStripButton postToolStripButton;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel statusKryptonLabel;
         private System.Windows.Forms.ToolStripButton toolStripButtonPrint;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox divisionKryptonComboBox;
@@ -1152,5 +1143,6 @@
         private System.Windows.Forms.ToolStripButton membertoolStripButton4;
         private System.Windows.Forms.ToolStripButton toolStripButton5;
         private System.Windows.Forms.ToolStripButton toolStripButton6;
+        private System.Windows.Forms.ToolStripButton postToolStripButton;
     }
 }

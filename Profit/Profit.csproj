@@ -414,6 +414,18 @@
     <Compile Include="Forms\MasterData\MarkDownSellingPriceForm.Designer.cs">
       <DependentUpon>MarkDownSellingPriceForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PartPreviewPOSForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PartPreviewPOSForm.Designer.cs">
+      <DependentUpon>PartPreviewPOSForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="POSPaymentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="POSPaymentForm.Designer.cs">
+      <DependentUpon>POSPaymentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SearchPartForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -719,6 +731,12 @@
     <EmbeddedResource Include="Forms\MasterData\UserForm.resx">
       <DependentUpon>UserForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PartPreviewPOSForm.resx">
+      <DependentUpon>PartPreviewPOSForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="POSPaymentForm.resx">
+      <DependentUpon>POSPaymentForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SearchPartForm.resx">
       <DependentUpon>SearchPartForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -956,6 +974,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\cross.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\money.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
