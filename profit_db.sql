@@ -515,7 +515,7 @@ CREATE TABLE `table_customerinvoicejournal` (
   CONSTRAINT `FK_table_customerinvoicejournal_1` FOREIGN KEY (`cus_id`) REFERENCES `table_customer` (`cus_id`),
   CONSTRAINT `FK_table_customerinvoicejournal_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_customerinvoicejournal_3` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_customerinvoicejournal`
@@ -569,7 +569,7 @@ CREATE TABLE `table_customerinvoicejournalitem` (
   CONSTRAINT `FK_table_customerinvoicejournalitem_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_customerinvoicejournalitem_3` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`),
   CONSTRAINT `FK_table_customerinvoicejournalitem_4` FOREIGN KEY (`cij_id`) REFERENCES `table_customerinvoicejournal` (`cij_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_customerinvoicejournalitem`
@@ -1187,7 +1187,7 @@ CREATE TABLE `table_part` (
 
 /*!40000 ALTER TABLE `table_part` DISABLE KEYS */;
 INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_barcode`,`part_costmethod`,`part_costprice`,`ccy_id`,`part_currentstock`,`part_maximumstock`,`part_minimumstock`,`prtcat_id`,`prtgroup_id`,`part_sellprice`,`part_taxable`,`unit_id`,`part_picture`,`tax_id`,`pricecat_id`) VALUES 
- (9068,'4046','PASEO 10`S HS CHILDREN',1,'4046','MovingAverage','0',7,'0','0','0',2,5,'0',0,1,'4046',2,2),
+ (9068,'4046','PASEO 10`S HS CHILDREN',1,'404689898989','MovingAverage','14750',7,'0','0','0',2,5,'15150',0,1,'4046',2,2),
  (9069,'4047','PASEO 260`S SOFT PACK REFILL',1,'4047','MovingAverage','0',1,'0','0','0',2,4,'0',0,1,'4047',1,1),
  (9070,'4048','PENA 4 WARNA',1,'4048','MovingAverage','0',7,'0','0','0',2,4,'0',0,1,'4048',1,1),
  (9071,'4049','PENA 638B KECIL',1,'4049','MovingAverage','0',7,'0','0','0',2,4,'0',0,1,'4049',1,1),
@@ -1725,9 +1725,9 @@ INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_
  (9603,'4585','HARMONY SABUN 80G*72 ORANGE',1,'8993379200886','MovingAverage','0',7,'0','0','0',2,5,'0',0,1,'4585',1,1),
  (9604,'4586','HARMONY SABUN 80G*72 PEACH',1,'8993379254537','MovingAverage','0',7,'0','0','0',2,5,'0',0,1,'4586',1,1),
  (9605,'4587','HARMONY SABUN 80G*72 STRAWBERRY',1,'8993379200855','MovingAverage','0',7,'0','0','0',2,5,'0',0,1,'4587',1,1),
- (9606,'4588','HEAD&SHOULDERS 90ML*48 CLEAN & BALANCE',1,'4902430102018','MovingAverage','0',7,'0','0','0',2,5,'0',0,1,'4588',1,1),
- (9607,'4589','HEAD&SHOULDERS 90ML*48 REFRESHING',1,'4902430102001','MovingAverage','0',7,'0','0','0',2,5,'0',0,1,'4589',1,1);
+ (9606,'4588','HEAD&SHOULDERS 90ML*48 CLEAN & BALANCE',1,'4902430102018','MovingAverage','0',7,'0','0','0',2,5,'0',0,1,'4588',1,1);
 INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_barcode`,`part_costmethod`,`part_costprice`,`ccy_id`,`part_currentstock`,`part_maximumstock`,`part_minimumstock`,`prtcat_id`,`prtgroup_id`,`part_sellprice`,`part_taxable`,`unit_id`,`part_picture`,`tax_id`,`pricecat_id`) VALUES 
+ (9607,'4589','HEAD&SHOULDERS 90ML*48 REFRESHING',1,'4902430102001','MovingAverage','0',7,'0','0','0',2,5,'0',0,1,'4589',1,1),
  (9608,'4590','HEAD&SHOULDERS 90ML*48 SMOOTH&SILKY',1,'4902430101981','MovingAverage','0',7,'0','0','0',2,5,'0',0,1,'4590',1,1),
  (9609,'4591','HERBAL ESSENCES 80ML*48 DANGER STRAIGHT',1,'4902430164030','MovingAverage','0',7,'0','0','0',2,5,'0',0,1,'4591',1,1),
  (9610,'4592','HERBAL ESSENCES 80ML*48 HELLO HYDRATION',1,'4902430179898','MovingAverage','0',7,'0','0','0',2,5,'0',0,1,'4592',1,1),
@@ -2257,9 +2257,9 @@ INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_
  (10134,'236','CLASS MILD 16`S*10*10',1,'8993989311699','MovingAverage','0',7,'0','0','0',2,7,'0',0,1,'236',1,1),
  (10135,'237','CLUB MILD (X-MILD) 16`S*10',1,'8998127217178','MovingAverage','0',7,'0','0','0',2,7,'0',0,1,'237',1,1),
  (10136,'238','DJARUM 76 12`S*10',1,'8991906101668','MovingAverage','0',7,'0','0','0',2,7,'0',0,1,'238',1,1),
- (10137,'239','DJARUM BLACK 12`S*10',1,'8991906101118','MovingAverage','0',7,'0','0','0',2,7,'0',0,1,'239',1,1),
- (10138,'240','DJARUM BLACK 16`S*10',1,'8991906101125','MovingAverage','0',7,'0','0','0',2,7,'0',0,1,'240',1,1);
+ (10137,'239','DJARUM BLACK 12`S*10',1,'8991906101118','MovingAverage','0',7,'0','0','0',2,7,'0',0,1,'239',1,1);
 INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_barcode`,`part_costmethod`,`part_costprice`,`ccy_id`,`part_currentstock`,`part_maximumstock`,`part_minimumstock`,`prtcat_id`,`prtgroup_id`,`part_sellprice`,`part_taxable`,`unit_id`,`part_picture`,`tax_id`,`pricecat_id`) VALUES 
+ (10138,'240','DJARUM BLACK 16`S*10',1,'8991906101125','MovingAverage','0',7,'0','0','0',2,7,'0',0,1,'240',1,1),
  (10139,'241','DJARUM BLACK 16`S*10 CAPPUCINO',1,'8991906101170','MovingAverage','0',7,'0','0','0',2,7,'0',0,1,'241',1,1),
  (10140,'242','DJARUM BLACK 16`S*10 SLIM',1,'8991906101231','MovingAverage','0',7,'0','0','0',2,7,'0',0,1,'242',1,1),
  (10141,'243','DJARUM BLACK 16`S*10 TEA',1,'8991906101217','MovingAverage','0',7,'0','0','0',2,7,'0',0,1,'243',1,1),
@@ -2773,9 +2773,9 @@ INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_
  (10649,'752','NIVEA FOR MEN FF 50ML MULTI PROTECT',1,'8999777813680','MovingAverage','0',7,'0','0','0',2,8,'0',0,1,'752',1,1),
  (10650,'753','NIVEA FOR MEN FF 50ML OIL CONTROL',1,'8999777888374','MovingAverage','0',7,'0','0','0',2,8,'0',0,1,'753',1,1),
  (10651,'754','NIVEA FOR MEN FF 50ML WH & PROTECT',1,'8999777888350','MovingAverage','0',7,'0','0','0',2,8,'0',0,1,'754',1,1),
- (10652,'755','NIVEA SOAP 100G DRY SKIN',1,'8999777806965','MovingAverage','0',7,'0','0','0',2,8,'0',0,1,'755',1,1),
- (10653,'756','NIVEA SOAP 100G EXFOLIATING',1,'8999777806972','MovingAverage','0',7,'0','0','0',2,8,'0',0,1,'756',1,1);
+ (10652,'755','NIVEA SOAP 100G DRY SKIN',1,'8999777806965','MovingAverage','0',7,'0','0','0',2,8,'0',0,1,'755',1,1);
 INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_barcode`,`part_costmethod`,`part_costprice`,`ccy_id`,`part_currentstock`,`part_maximumstock`,`part_minimumstock`,`prtcat_id`,`prtgroup_id`,`part_sellprice`,`part_taxable`,`unit_id`,`part_picture`,`tax_id`,`pricecat_id`) VALUES 
+ (10653,'756','NIVEA SOAP 100G EXFOLIATING',1,'8999777806972','MovingAverage','0',7,'0','0','0',2,8,'0',0,1,'756',1,1),
  (10654,'757','NIVEA SOAP 100G NORMAL SKIN',1,'8999777806958','MovingAverage','0',7,'0','0','0',2,8,'0',0,1,'757',1,1),
  (10655,'758','NIVEA SOFT 25ML KRIM LEMBUT',1,'8999777890537','MovingAverage','0',7,'0','0','0',2,8,'0',0,1,'758',1,1),
  (10656,'759','NIVEA SOFT 50ML KRIM LEMBUT',1,'8999777890544','MovingAverage','0',7,'0','0','0',2,8,'0',0,1,'759',1,1),
@@ -3291,9 +3291,9 @@ INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_
  (11166,'1278','BUAVITA 1000ML*12 ORANGE JUICE',1,'8998009020162','MovingAverage','0',7,'0','0','0',2,2,'0',0,1,'1278',1,1),
  (11167,'1279','CALCIMEX VITALIZE 300G FULL CREAM',1,'8992753450206','MovingAverage','0',7,'0','0','0',2,2,'0',0,1,'1279',1,1),
  (11168,'1280','CALCIMEX VITALIZE 600G CHOCOLATE',1,'8992753432509','MovingAverage','0',7,'0','0','0',2,2,'0',0,1,'1280',1,1),
- (11169,'1281','CALCIMEX VITALIZE 600G FULL CREAM',1,'8992753450305','MovingAverage','0',7,'0','0','0',2,2,'0',0,1,'1281',1,1),
- (11170,'1282','CALPICO MINI ASAM MANIS 100ML',1,'8992714041061','MovingAverage','0',7,'0','0','0',2,2,'0',0,1,'1282',1,1);
+ (11169,'1281','CALCIMEX VITALIZE 600G FULL CREAM',1,'8992753450305','MovingAverage','0',7,'0','0','0',2,2,'0',0,1,'1281',1,1);
 INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_barcode`,`part_costmethod`,`part_costprice`,`ccy_id`,`part_currentstock`,`part_maximumstock`,`part_minimumstock`,`prtcat_id`,`prtgroup_id`,`part_sellprice`,`part_taxable`,`unit_id`,`part_picture`,`tax_id`,`pricecat_id`) VALUES 
+ (11170,'1282','CALPICO MINI ASAM MANIS 100ML',1,'8992714041061','MovingAverage','0',7,'0','0','0',2,2,'0',0,1,'1282',1,1),
  (11171,'1284','CALPICO 100ML STRAWBERRY',1,'8992714042068','MovingAverage','0',7,'0','0','0',2,2,'0',0,1,'1284',1,1),
  (11172,'1285','CALPICO SODA 320MLX24 ASAM MANIS',1,'8992714031048','MovingAverage','0',7,'0','0','0',2,2,'0',0,1,'1285',1,1),
  (11173,'1286','CALPICO SODA 320MLX24 GRAPE',1,'8992714035046','MovingAverage','0',7,'0','0','0',2,2,'0',0,1,'1286',1,1),
@@ -3813,9 +3813,9 @@ INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_
  (11687,'1816','SOSRO FTC 318MLX24 STRAWBERRY',1,'8996006763303','MovingAverage','0',7,'0','0','0',2,2,'0',0,1,'1816',1,1),
  (11688,'1817','SOSRO FTC 318MLX24 X-TREME',1,'8996006853493','MovingAverage','0',7,'0','0','0',2,2,'0',0,1,'1817',1,1),
  (11689,'1818','SOSRO FTG 200ML APPLE',1,'8996006120014','MovingAverage','0',7,'0','0','0',2,2,'0',0,1,'1818',1,1),
- (11690,'1819','SOSRO FTG 200ML APPLE LITE + MINT',1,'8996006855985','MovingAverage','0',7,'0','0','0',2,2,'0',0,1,'1819',1,1),
- (11691,'1820','SOSRO FTG 200ML BLACKCURRANT',1,'8996006841018','MovingAverage','0',7,'0','0','0',2,2,'0',0,1,'1820',1,1);
+ (11690,'1819','SOSRO FTG 200ML APPLE LITE + MINT',1,'8996006855985','MovingAverage','0',7,'0','0','0',2,2,'0',0,1,'1819',1,1);
 INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_barcode`,`part_costmethod`,`part_costprice`,`ccy_id`,`part_currentstock`,`part_maximumstock`,`part_minimumstock`,`prtcat_id`,`prtgroup_id`,`part_sellprice`,`part_taxable`,`unit_id`,`part_picture`,`tax_id`,`pricecat_id`) VALUES 
+ (11691,'1820','SOSRO FTG 200ML BLACKCURRANT',1,'8996006841018','MovingAverage','0',7,'0','0','0',2,2,'0',0,1,'1820',1,1),
  (11692,'1821','SOSRO FTG 200ML BLACKCURRANT LITE + MINT',1,'8996006855992','MovingAverage','0',7,'0','0','0',2,2,'0',0,1,'1821',1,1),
  (11693,'1822','SOSRO FTG 200ML BLAST',1,'8996006853455','MovingAverage','0',7,'0','0','0',2,2,'0',0,1,'1822',1,1),
  (11694,'1823','SOSRO FTG 200ML FUSION',1,'8996006853448','MovingAverage','0',7,'0','0','0',2,2,'0',0,1,'1823',1,1),
@@ -4347,9 +4347,9 @@ INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_
  (12220,'2360','MAMA SUKA TERASI UDANG 5G*20*16',1,'2360','MovingAverage','0',7,'0','0','0',2,9,'0',0,1,'2360',1,1),
  (12221,'2361','MARGARINE 15KG CAP MENARA',1,'2361','MovingAverage','0',7,'0','0','0',2,9,'0',0,1,'2361',1,1),
  (12222,'2362','MASAKO 16G*30 AYAM',1,'8992770033130','MovingAverage','0',7,'0','0','0',2,9,'0',0,1,'2362',1,1),
- (12223,'2363','MASAKO 16G*30 SAPI',1,'8992770035127','MovingAverage','0',7,'0','0','0',2,9,'0',0,1,'2363',1,1),
- (12224,'2364','MASAKO 50G*20 AYAM',1,'8992770034045','MovingAverage','0',7,'0','0','0',2,9,'0',0,1,'2364',1,1);
+ (12223,'2363','MASAKO 16G*30 SAPI',1,'8992770035127','MovingAverage','0',7,'0','0','0',2,9,'0',0,1,'2363',1,1);
 INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_barcode`,`part_costmethod`,`part_costprice`,`ccy_id`,`part_currentstock`,`part_maximumstock`,`part_minimumstock`,`prtcat_id`,`prtgroup_id`,`part_sellprice`,`part_taxable`,`unit_id`,`part_picture`,`tax_id`,`pricecat_id`) VALUES 
+ (12224,'2364','MASAKO 50G*20 AYAM',1,'8992770034045','MovingAverage','0',7,'0','0','0',2,9,'0',0,1,'2364',1,1),
  (12225,'2365','MASAKO 50G*20 SAPI',1,'8992770034090','MovingAverage','0',7,'0','0','0',2,9,'0',0,1,'2365',1,1),
  (12226,'2366','MASAKO 9G*12*10 SAPI',1,'8992770033222','MovingAverage','0',7,'0','0','0',2,9,'0',0,1,'2366',1,1),
  (12227,'2367','MASAKO 9G*6*30 AYAM',1,'8992770035110','MovingAverage','0',7,'0','0','0',2,9,'0',0,1,'2367',1,1),
@@ -4878,9 +4878,9 @@ INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_
  (12750,'2900','KAPSUL TUNTAS 6`S*10',1,'8992003120606','MovingAverage','0',7,'0','0','0',2,11,'0',0,1,'2900',1,1),
  (12751,'2901','KASA STERIL 16X16',1,'2901','MovingAverage','0',7,'0','0','0',2,11,'0',0,1,'2901',1,1),
  (12752,'2902','KIMIA FARMA KAPAS PEMBALUT 25 GR',1,'2902','MovingAverage','0',7,'0','0','0',2,11,'0',0,1,'2902',1,1),
- (12753,'2903','KOMIX 7ML*30 JAHE',1,'8993058300500','MovingAverage','0',7,'0','0','0',2,11,'0',0,1,'2903',1,1),
- (12754,'2904','KOMIX 7ML*30 JERUK NIPIS',1,'8993058300807','MovingAverage','0',7,'0','0','0',2,11,'0',0,1,'2904',1,1);
+ (12753,'2903','KOMIX 7ML*30 JAHE',1,'8993058300500','MovingAverage','0',7,'0','0','0',2,11,'0',0,1,'2903',1,1);
 INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_barcode`,`part_costmethod`,`part_costprice`,`ccy_id`,`part_currentstock`,`part_maximumstock`,`part_minimumstock`,`prtcat_id`,`prtgroup_id`,`part_sellprice`,`part_taxable`,`unit_id`,`part_picture`,`tax_id`,`pricecat_id`) VALUES 
+ (12754,'2904','KOMIX 7ML*30 JERUK NIPIS',1,'8993058300807','MovingAverage','0',7,'0','0','0',2,11,'0',0,1,'2904',1,1),
  (12755,'2905','KOMIX 7ML*30 OBH',1,'8993058301200','MovingAverage','0',7,'0','0','0',2,11,'0',0,1,'2905',1,1),
  (12756,'2906','KOMIX 7ML*30 PEPPERMINT',1,'8993058300401','MovingAverage','0',7,'0','0','0',2,11,'0',0,1,'2906',1,1),
  (12757,'2907','KOMIX KIDS 7ML*12 OBH MADU',1,'8993058302900','MovingAverage','0',7,'0','0','0',2,11,'0',0,1,'2907',1,1),
@@ -5414,9 +5414,9 @@ INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_
  (13285,'3442','KG SHORTCAKE 150G*6*8 VANILA',1,'3442','MovingAverage','0',7,'0','0','0',2,1,'0',0,1,'3442',1,1),
  (13286,'3443','KG SHORTCAKE 200G*5*6 CHOCO',1,'8888166605893','MovingAverage','0',7,'0','0','0',2,1,'0',0,1,'3443',1,1),
  (13287,'3444','KG SHORTCAKE 200G*5*6 VANILLA',1,'8888166605886','MovingAverage','0',7,'0','0','0',2,1,'0',0,1,'3444',1,1),
- (13288,'3445','KG SHORTCAKE 225G*30 CHOCO',1,'8888166603240','MovingAverage','0',7,'0','0','0',2,1,'0',0,1,'3445',1,1),
- (13289,'3446','KG SHORTCAKE 225G*5*6 MILK',1,'8888166606173','MovingAverage','0',7,'0','0','0',2,1,'0',0,1,'3446',1,1);
+ (13288,'3445','KG SHORTCAKE 225G*30 CHOCO',1,'8888166603240','MovingAverage','0',7,'0','0','0',2,1,'0',0,1,'3445',1,1);
 INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_barcode`,`part_costmethod`,`part_costprice`,`ccy_id`,`part_currentstock`,`part_maximumstock`,`part_minimumstock`,`prtcat_id`,`prtgroup_id`,`part_sellprice`,`part_taxable`,`unit_id`,`part_picture`,`tax_id`,`pricecat_id`) VALUES 
+ (13289,'3446','KG SHORTCAKE 225G*5*6 MILK',1,'8888166606173','MovingAverage','0',7,'0','0','0',2,1,'0',0,1,'3446',1,1),
  (13290,'3447','KG SHORTCAKE 60G TELUR',1,'3447','MovingAverage','0',7,'0','0','0',2,1,'0',0,1,'3447',1,1),
  (13291,'3448','KG SUGAR PUFF MTLZ BIRU (24)',1,'8888166604827','MovingAverage','0',7,'0','0','0',2,1,'0',0,1,'3448',1,1),
  (13292,'3449','KG SULTANA 160G*30',1,'8888166603516','MovingAverage','0',7,'0','0','0',2,1,'0',0,1,'3449',1,1),
@@ -5960,9 +5960,9 @@ INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_
  (13830,'3994','KANTONG TALI 5X8 (LAUK)',1,'3994','MovingAverage','0',7,'0','0','0',2,4,'0',0,1,'3994',1,1),
  (13831,'3995','KAUS KAKI ANEKA RUPA (MERK CAMPUR)',1,'3995','MovingAverage','0',7,'0','0','0',2,4,'0',0,1,'3995',1,1),
  (13832,'3996','KAUS KAKI DF4-M601 MUNDO CLASSIC',1,'8996668046615','MovingAverage','0',7,'0','0','0',2,4,'0',0,1,'3996',1,1),
- (13833,'3997','KAUS KAKI ME2-P601 MUNDO CLASSIC',1,'8996668001782','MovingAverage','0',7,'0','0','0',2,4,'0',0,1,'3997',1,1),
- (13834,'3998','KAUS KAKI ME3-P601 MUNDO CLASSIC',1,'8996668001805','MovingAverage','0',7,'0','0','0',2,4,'0',0,1,'3998',1,1);
+ (13833,'3997','KAUS KAKI ME2-P601 MUNDO CLASSIC',1,'8996668001782','MovingAverage','0',7,'0','0','0',2,4,'0',0,1,'3997',1,1);
 INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_barcode`,`part_costmethod`,`part_costprice`,`ccy_id`,`part_currentstock`,`part_maximumstock`,`part_minimumstock`,`prtcat_id`,`prtgroup_id`,`part_sellprice`,`part_taxable`,`unit_id`,`part_picture`,`tax_id`,`pricecat_id`) VALUES 
+ (13834,'3998','KAUS KAKI ME3-P601 MUNDO CLASSIC',1,'8996668001805','MovingAverage','0',7,'0','0','0',2,4,'0',0,1,'3998',1,1),
  (13835,'3999','KAUS KAKI ME4-P601 MUNDO CLASSIC',1,'8996668001829','MovingAverage','0',7,'0','0','0',2,4,'0',0,1,'3999',1,1),
  (13836,'4000','KAUS KAKI ME5-P601 MUNDO CLASSIC',1,'8996668001843','MovingAverage','0',7,'0','0','0',2,4,'0',0,1,'4000',1,1),
  (13837,'4001','KAYAGI PENSIL WARNA 12`S*12 PANJANG',1,'4001','MovingAverage','0',7,'0','0','0',2,4,'0',0,1,'4001',1,1),
@@ -6487,9 +6487,9 @@ INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_
  (14356,'5420','PANTENE PRO-V 200MLX24 SMOOTH SILKY',1,'4902430977258','MovingAverage','0',7,'0','0','0',2,5,'0',0,1,'5420',1,1),
  (14357,'5421','PANTENE PRO-V 200MLX24 TOTAL CARE',1,'4902430145695','MovingAverage','0',7,'0','0','0',2,5,'0',0,1,'5421',1,1),
  (14358,'5422','PROMINA 120G*24 AYAM SAYUR',1,'89686530421','MovingAverage','0',7,'0','0','0',2,5,'0',0,1,'5422',1,1),
- (14359,'5423','REJOICE SHAMPOO 200MLX24 COMPLETE',1,'4902430104357','MovingAverage','0',7,'0','0','0',2,5,'0',0,1,'5423',1,1),
- (14360,'5424','REJOICE SHAMPOO 200MLX24 FRUITY SMOOTH',1,'4902430104555','MovingAverage','0',7,'0','0','0',2,5,'0',0,1,'5424',1,1);
+ (14359,'5423','REJOICE SHAMPOO 200MLX24 COMPLETE',1,'4902430104357','MovingAverage','0',7,'0','0','0',2,5,'0',0,1,'5423',1,1);
 INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_barcode`,`part_costmethod`,`part_costprice`,`ccy_id`,`part_currentstock`,`part_maximumstock`,`part_minimumstock`,`prtcat_id`,`prtgroup_id`,`part_sellprice`,`part_taxable`,`unit_id`,`part_picture`,`tax_id`,`pricecat_id`) VALUES 
+ (14360,'5424','REJOICE SHAMPOO 200MLX24 FRUITY SMOOTH',1,'4902430104555','MovingAverage','0',7,'0','0','0',2,5,'0',0,1,'5424',1,1),
  (14361,'5425','REJOICE SHAMPOO 200MLX24 FRUTY A.D',1,'4902430104432','MovingAverage','0',7,'0','0','0',2,5,'0',0,1,'5425',1,1),
  (14362,'5426','REJOICE SHAMPOO 200MLX24 LONG',1,'4902430104753','MovingAverage','0',7,'0','0','0',2,5,'0',0,1,'5426',1,1),
  (14363,'5427','REJOICE SHAMPOO 200MLX24 RICH',1,'4902430105019','MovingAverage','0',7,'0','0','0',2,5,'0',0,1,'5427',1,1),
@@ -7046,9 +7046,9 @@ INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_
  (14914,'5988','AULIA LOVELY PERFUME 110ML WHITE LOVE',1,'8994037800219','MovingAverage','0',7,'0','0','0',2,8,'0',0,1,'5988',1,1),
  (14915,'5989','AULIA LOVELY PERFUME 110ML BLACK INTENCE',1,'8994037800202','MovingAverage','0',7,'0','0','0',2,8,'0',0,1,'5989',1,1),
  (14916,'5990','SAKATONIK LIVER 100ML',1,'8993218301002','MovingAverage','0',7,'0','0','0',2,11,'0',0,1,'5990',1,1),
- (14917,'5991','CURCUMA PLUS EMULSION SYRUP 200ML STRAWBERY',1,'8998777140185','MovingAverage','0',7,'0','0','0',2,11,'0',0,1,'5991',1,1),
- (14918,'5992','FOR HIM PERFUME SPRAY 120ML 6`S*8 INFERNO BLUE',1,'8997016370741','MovingAverage','0',7,'0','0','0',2,8,'0',0,1,'5992',1,1);
+ (14917,'5991','CURCUMA PLUS EMULSION SYRUP 200ML STRAWBERY',1,'8998777140185','MovingAverage','0',7,'0','0','0',2,11,'0',0,1,'5991',1,1);
 INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_barcode`,`part_costmethod`,`part_costprice`,`ccy_id`,`part_currentstock`,`part_maximumstock`,`part_minimumstock`,`prtcat_id`,`prtgroup_id`,`part_sellprice`,`part_taxable`,`unit_id`,`part_picture`,`tax_id`,`pricecat_id`) VALUES 
+ (14918,'5992','FOR HIM PERFUME SPRAY 120ML 6`S*8 INFERNO BLUE',1,'8997016370741','MovingAverage','0',7,'0','0','0',2,8,'0',0,1,'5992',1,1),
  (14919,'5993','FOR HIM PERFUME SPRAY 120ML 6`S*8 ICE BLINK GREY',1,'8997016370987','MovingAverage','0',7,'0','0','0',2,8,'0',0,1,'5993',1,1),
  (14920,'5994','FOR HIM PERFUME SPRAY 120ML 6`S*8 ENERGIZE  RED',1,'8997016370727','MovingAverage','0',7,'0','0','0',2,8,'0',0,1,'5994',1,1),
  (14921,'5995','FOR HIM PERFUME SPRAY 120ML 6`S*8 EVOLUTION BROWN',1,'8997016370994','MovingAverage','0',7,'0','0','0',2,8,'0',0,1,'5995',1,1),
@@ -7572,9 +7572,9 @@ INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_
  (15439,'6446','RAID MAX SPRAY 420ML FLORAL FRESH',1,'8992779301308','MovingAverage','0',7,'0','0','0',2,5,'0',0,1,'6446',1,1),
  (15440,'6447','CAMERA KOMPENG SILICONE',1,'4711146155511','MovingAverage','0',7,'0','0','0',2,4,'0',0,1,'6447',1,1),
  (15441,'6448','CAMERA KOMPENG SILICONE TUTUP',1,'4711146165510','MovingAverage','0',7,'0','0','0',2,4,'0',0,1,'6448',1,1),
- (15442,'6449','SISIR RAMBUT BEST FRIEND',1,'6449','MovingAverage','0',7,'0','0','0',2,4,'0',0,1,'6449',1,1),
- (15443,'6450','SISIR RAMBUT BEAUTIFULL DAY',1,'6450','MovingAverage','0',7,'0','0','0',2,4,'0',0,1,'6450',1,1);
+ (15442,'6449','SISIR RAMBUT BEST FRIEND',1,'6449','MovingAverage','0',7,'0','0','0',2,4,'0',0,1,'6449',1,1);
 INSERT INTO `table_part` (`part_id`,`part_code`,`part_name`,`part_active`,`part_barcode`,`part_costmethod`,`part_costprice`,`ccy_id`,`part_currentstock`,`part_maximumstock`,`part_minimumstock`,`prtcat_id`,`prtgroup_id`,`part_sellprice`,`part_taxable`,`unit_id`,`part_picture`,`tax_id`,`pricecat_id`) VALUES 
+ (15443,'6450','SISIR RAMBUT BEAUTIFULL DAY',1,'6450','MovingAverage','0',7,'0','0','0',2,4,'0',0,1,'6450',1,1),
  (15444,'6451','MASKING TAPE KIRIN 12MM',1,'6451','MovingAverage','0',7,'0','0','0',2,4,'0',0,1,'6451',1,1),
  (15445,'6452','MASKING TAPE KIRIN 24MM',1,'6452','MovingAverage','0',7,'0','0','0',2,4,'0',0,1,'6452',1,1),
  (15446,'6453','MASKING TAPE KIRIN 36MM',1,'6453','MovingAverage','0',7,'0','0','0',2,4,'0',0,1,'6453',1,1),
@@ -7918,6 +7918,8 @@ CREATE TABLE `table_pos` (
   `cus_id` int(10) unsigned NOT NULL,
   `pos_docno` varchar(45) NOT NULL,
   `pos_docdate` datetime NOT NULL,
+  `pos_cashpayamount` double NOT NULL,
+  `pos_changepayamount` double NOT NULL,
   PRIMARY KEY (`pos_id`),
   UNIQUE KEY `Index_2` (`pos_code`),
   KEY `FK_table_pos_1` (`emp_id`),
@@ -7928,23 +7930,28 @@ CREATE TABLE `table_pos` (
   CONSTRAINT `FK_table_pos_2` FOREIGN KEY (`top_id`) REFERENCES `table_termofpayment` (`top_id`),
   CONSTRAINT `FK_table_pos_3` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_pos_4` FOREIGN KEY (`cus_id`) REFERENCES `table_customer` (`cus_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_pos`
 --
 
 /*!40000 ALTER TABLE `table_pos` DISABLE KEYS */;
-INSERT INTO `table_pos` (`pos_id`,`pos_date`,`pos_noticedate`,`pos_scentrytype`,`emp_id`,`pos_notes`,`pos_posted`,`pos_eventstatus`,`div_id`,`top_id`,`pos_duedate`,`ccy_id`,`pos_subtotal`,`pos_discpercent`,`pos_discafteramount`,`pos_discamount`,`tax_id`,`pos_taxafteramount`,`pos_otherexpense`,`pos_nettotal`,`pos_code`,`cus_id`,`pos_docno`,`pos_docdate`) VALUES 
- (1,'2011-09-14 00:00:00','2011-09-14 00:00:00','POS',1,'',1,'Confirm',1,1,'2011-09-14 00:00:00',1,20000,0,0,0,1,0,0,20000,'POS001/09/2011',3,'TEST','2011-09-14 00:00:00'),
- (2,'2011-09-14 00:00:00','2011-09-14 00:00:00','POS',1,'',1,'Confirm',1,1,'2011-09-14 00:00:00',1,80000,0,0,0,1,0,0,80000,'POS002/09/2011',3,'','2011-09-14 00:00:00'),
- (3,'2011-09-14 00:00:00','2011-09-14 00:00:00','POS',1,'',0,'Entry',1,1,'2011-09-14 00:00:00',1,150000,0,0,0,1,0,0,150000,'POS003/09/2011',3,'','2011-09-14 00:00:00'),
- (4,'2011-09-15 00:00:00','2011-09-15 00:00:00','POS',1,'',1,'Confirm',1,1,'2011-09-15 00:00:00',1,15000,0,0,0,1,0,0,15000,'POS004/09/2011',3,'','2011-09-15 00:00:00'),
- (5,'2011-09-16 00:00:00','2011-09-16 00:00:00','POS',1,'',0,'Entry',1,1,'2011-09-16 00:00:00',1,160000,0,0,0,1,0,0,160000,'POS005/09/2011',3,'','2011-09-16 00:00:00'),
- (6,'2011-09-21 00:00:00','2011-09-21 00:00:00','POS',1,'',1,'Confirm',1,1,'2011-09-21 00:00:00',1,25000,0,0,0,1,0,0,25000,'POS006/09/2011',3,'','2011-09-21 00:00:00'),
- (7,'2011-09-21 00:00:00','2011-09-21 00:00:00','POS',1,'',0,'Entry',1,1,'2011-09-21 00:00:00',1,0,0,0,0,1,0,0,0,'POS007/09/2011',3,'','2011-09-21 00:00:00'),
- (8,'2011-09-22 00:00:00','2011-09-22 00:00:00','POS',1,'',1,'Confirm',1,1,'2011-09-22 00:00:00',1,28750,10,2875,0,1,0,0,25875,'POS008/09/2011',3,'','2011-09-22 00:00:00'),
- (9,'2011-09-22 00:00:00','2011-09-22 00:00:00','POS',1,'',1,'Confirm',1,1,'2011-09-22 00:00:00',1,13860,10,1386,0,1,0,0,12474,'POS009/09/2011',3,'','2011-09-22 00:00:00');
+INSERT INTO `table_pos` (`pos_id`,`pos_date`,`pos_noticedate`,`pos_scentrytype`,`emp_id`,`pos_notes`,`pos_posted`,`pos_eventstatus`,`div_id`,`top_id`,`pos_duedate`,`ccy_id`,`pos_subtotal`,`pos_discpercent`,`pos_discafteramount`,`pos_discamount`,`tax_id`,`pos_taxafteramount`,`pos_otherexpense`,`pos_nettotal`,`pos_code`,`cus_id`,`pos_docno`,`pos_docdate`,`pos_cashpayamount`,`pos_changepayamount`) VALUES 
+ (1,'2011-09-14 00:00:00','2011-09-14 00:00:00','POS',1,'',1,'Confirm',1,1,'2011-09-14 00:00:00',1,20000,0,0,0,1,0,0,20000,'POS001/09/2011',3,'TEST','2011-09-14 00:00:00',0,0),
+ (2,'2011-09-14 00:00:00','2011-09-14 00:00:00','POS',1,'',1,'Confirm',1,1,'2011-09-14 00:00:00',1,80000,0,0,0,1,0,0,80000,'POS002/09/2011',3,'','2011-09-14 00:00:00',0,0),
+ (3,'2011-09-14 00:00:00','2011-09-14 00:00:00','POS',1,'',0,'Entry',1,1,'2011-09-14 00:00:00',1,150000,0,0,0,1,0,0,150000,'POS003/09/2011',3,'','2011-09-14 00:00:00',0,0),
+ (4,'2011-09-15 00:00:00','2011-09-15 00:00:00','POS',1,'',1,'Confirm',1,1,'2011-09-15 00:00:00',1,15000,0,0,0,1,0,0,15000,'POS004/09/2011',3,'','2011-09-15 00:00:00',0,0),
+ (5,'2011-09-16 00:00:00','2011-09-16 00:00:00','POS',1,'',0,'Entry',1,1,'2011-09-16 00:00:00',1,160000,0,0,0,1,0,0,160000,'POS005/09/2011',3,'','2011-09-16 00:00:00',0,0),
+ (6,'2011-09-21 00:00:00','2011-09-21 00:00:00','POS',1,'',1,'Confirm',1,1,'2011-09-21 00:00:00',1,25000,0,0,0,1,0,0,25000,'POS006/09/2011',3,'','2011-09-21 00:00:00',0,0),
+ (7,'2011-09-21 00:00:00','2011-09-21 00:00:00','POS',1,'',0,'Entry',1,1,'2011-09-21 00:00:00',1,0,0,0,0,1,0,0,0,'POS007/09/2011',3,'','2011-09-21 00:00:00',0,0),
+ (8,'2011-09-22 00:00:00','2011-09-22 00:00:00','POS',1,'',1,'Confirm',1,1,'2011-09-22 00:00:00',1,28750,10,2875,0,1,0,0,25875,'POS008/09/2011',3,'','2011-09-22 00:00:00',0,0),
+ (9,'2011-09-22 00:00:00','2011-09-22 00:00:00','POS',1,'',1,'Confirm',1,1,'2011-09-22 00:00:00',1,13860,10,1386,0,1,0,0,12474,'POS009/09/2011',3,'','2011-09-22 00:00:00',0,0),
+ (10,'2011-09-23 00:00:00','2011-09-23 00:00:00','POS',1,'',0,'Entry',1,1,'2011-09-23 00:00:00',1,0,10,0,0,1,0,0,0,'POS010/09/2011',3,'','2011-09-23 00:00:00',0,0),
+ (11,'2011-09-23 00:00:00','2011-09-23 00:00:00','POS',1,'',0,'Entry',1,1,'2011-09-23 00:00:00',1,1000,10,100,0,1,0,0,900,'POS011/09/2011',3,'','2011-09-23 00:00:00',1000,100),
+ (12,'2011-09-23 00:00:00','2011-09-23 00:00:00','POS',1,'',0,'Entry',1,1,'2011-09-23 00:00:00',1,5000,10,500,0,1,0,0,4500,'POS012/09/2011',3,'','2011-09-23 00:00:00',1500,0),
+ (13,'2011-09-23 00:00:00','2011-09-23 00:00:00','POS',1,'',0,'Entry',1,1,'2011-09-23 00:00:00',1,2000,10,200,0,1,0,0,1800,'POS013/09/2011',3,'','2011-09-23 00:00:00',2000,200),
+ (14,'2011-09-23 00:00:00','2011-09-23 00:00:00','POS',1,'',0,'Entry',1,1,'2011-09-23 00:00:00',1,17500,10,1750,0,1,0,0,15750,'POS014/09/2011',3,'','2011-09-23 00:00:00',16000,250);
 /*!40000 ALTER TABLE `table_pos` ENABLE KEYS */;
 
 
@@ -7983,7 +7990,7 @@ CREATE TABLE `table_positem` (
   CONSTRAINT `FK_table_positem_2` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`),
   CONSTRAINT `FK_table_positem_3` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
   CONSTRAINT `FK_table_positem_4` FOREIGN KEY (`unit_id`) REFERENCES `table_unit` (`unit_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_positem`
@@ -7999,7 +8006,13 @@ INSERT INTO `table_positem` (`posi_id`,`pos_id`,`part_id`,`warehouse_id`,`posi_a
  (6,6,15535,1,10,0,'POS',0,1,2500,0,0,0,25000,'',0,0,0,'',0),
  (7,7,14242,1,1,0,'POS',0,1,0,0,0,0,0,'',0,0,0,'',0),
  (8,8,9090,1,5,0,'POS',0,1,5750,0,0,0,28750,'',0,0,0,'',0),
- (9,9,9077,1,2,0,'POS',0,1,7700,10,0,770,13860,'',0,0,0,'',0);
+ (9,9,9077,1,2,0,'POS',0,1,7700,10,0,770,13860,'',0,0,0,'',0),
+ (10,10,9073,1,1,0,'POS',0,1,0,0,0,0,0,'',0,0,0,'',0),
+ (11,11,9073,1,1,0,'POS',0,1,1000,0,0,0,1000,'',0,0,0,'',0),
+ (12,12,9073,1,1,0,'POS',0,1,5000,0,0,0,5000,'',0,0,0,'',0),
+ (13,13,13838,1,1,0,'POS',0,1,2000,0,0,0,2000,'',0,0,0,'',0),
+ (14,14,14773,1,1,0,'POS',0,1,2500,0,0,0,2500,'',0,0,0,'',0),
+ (15,14,14568,1,1,0,'POS',0,1,15000,0,0,0,15000,'',0,0,0,'',0);
 /*!40000 ALTER TABLE `table_positem` ENABLE KEYS */;
 
 
@@ -8255,7 +8268,7 @@ CREATE TABLE `table_receipt` (
   CONSTRAINT `FK_table_receipt_1` FOREIGN KEY (`cus_id`) REFERENCES `table_customer` (`cus_id`),
   CONSTRAINT `FK_table_receipt_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_receipt_3` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_receipt`
@@ -8308,7 +8321,7 @@ CREATE TABLE `table_receiptitem` (
   CONSTRAINT `FK_table_receiptitem_1` FOREIGN KEY (`rec_id`) REFERENCES `table_receipt` (`rec_id`),
   CONSTRAINT `FK_table_receiptitem_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_receiptitem_3` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_receiptitem`
@@ -9220,7 +9233,7 @@ CREATE TABLE `table_unitconversion` (
 
 /*!40000 ALTER TABLE `table_unitconversion` DISABLE KEYS */;
 INSERT INTO `table_unitconversion` (`unitconv_id`,`unitconv_code`,`unitconv_name`,`unitconv_qty`,`unitconv_unit`,`unitconv_costprice`,`unitconv_sellprice`,`part_id`,`unitconv_barcode`) VALUES 
- (34,'-','-',1,1,0,0,9068,'4046'),
+ (34,'-','-',1,1,14750,15150,9068,'404689898989'),
  (35,'-','-',1,1,0,0,9069,'4047'),
  (36,'-','-',1,1,0,0,9070,'4048'),
  (37,'-','-',1,1,0,0,9071,'4049'),
@@ -15787,7 +15800,7 @@ INSERT INTO `table_usersettings` (`us_id`,`user_id`,`us_name`,`us_value`,`us_typ
  (90,1,'StockTakingFormpriceColumnVisible','True','System.Boolean'),
  (91,1,'StockTakingFormtotalAmountColumnWidth','81','System.Int32'),
  (92,1,'StockTakingFormtotalAmountColumnVisible','True','System.Boolean'),
- (93,1,'MainFormtheme','ProfessionalSystem','System.String'),
+ (93,1,'MainFormtheme','Office2010Blue','System.String'),
  (94,1,'SearchPOForGRNFormcheckColumnWidth','50','System.Int32'),
  (95,1,'SearchPOForGRNFormcheckColumnVisible','True','System.Boolean'),
  (96,1,'SearchPOForGRNFormpurchaseorderNoColumnWidth','111','System.Int32'),
@@ -16051,8 +16064,8 @@ INSERT INTO `table_usersettings` (`us_id`,`user_id`,`us_name`,`us_value`,`us_typ
  (354,1,'SearchOstSuppInvForPaymentFormqtyColumnVisible','True','System.Boolean'),
  (355,1,'PurchaseReturnFormgrnQtyColumnWidth','58','System.Int32'),
  (356,1,'PurchaseReturnFormgrnQtyColumnVisible','True','System.Boolean'),
- (357,1,'MainFormmainformwidth','1138','System.Int32'),
- (358,1,'MainFormmainformheight','604','System.Int32'),
+ (357,1,'MainFormmainformwidth','800','System.Int32'),
+ (358,1,'MainFormmainformheight','600','System.Int32'),
  (359,1,'SearchPurchaseOrderFormsupplierColumnWidth','103','System.Int32'),
  (360,1,'SearchPurchaseOrderFormsupplierColumnVisible','True','System.Boolean'),
  (361,1,'SearchGoodReceiveNoteFormsupplierColumnWidth','108','System.Int32'),
@@ -16535,29 +16548,29 @@ INSERT INTO `table_usersettings` (`us_id`,`user_id`,`us_name`,`us_value`,`us_typ
  (838,1,'POSCashierFormGRNNoColumnVisible','False','System.Boolean'),
  (839,1,'POSCashierFormcodeColumnWidth','68','System.Int32'),
  (840,1,'POSCashierFormcodeColumnVisible','True','System.Boolean'),
- (841,1,'POSCashierFormnameColumnWidth','201','System.Int32'),
+ (841,1,'POSCashierFormnameColumnWidth','212','System.Int32'),
  (842,1,'POSCashierFormnameColumnVisible','True','System.Boolean'),
- (843,1,'POSCashierFormQtyColumnWidth','35','System.Int32'),
+ (843,1,'POSCashierFormQtyColumnWidth','42','System.Int32'),
  (844,1,'POSCashierFormQtyColumnVisible','True','System.Boolean'),
- (845,1,'POSCashierFormunitColumnWidth','43','System.Int32'),
+ (845,1,'POSCashierFormunitColumnWidth','34','System.Int32'),
  (846,1,'POSCashierFormunitColumnVisible','True','System.Boolean'),
- (847,1,'POSCashierFormpriceColumnWidth','96','System.Int32'),
+ (847,1,'POSCashierFormpriceColumnWidth','79','System.Int32'),
  (848,1,'POSCashierFormpriceColumnVisible','True','System.Boolean'),
- (849,1,'POSCashierFormdiscpercentColumnWidth','50','System.Int32'),
+ (849,1,'POSCashierFormdiscpercentColumnWidth','47','System.Int32'),
  (850,1,'POSCashierFormdiscpercentColumnVisible','True','System.Boolean'),
- (851,1,'POSCashierFormdiscAmountColumnWidth','80','System.Int32'),
+ (851,1,'POSCashierFormdiscAmountColumnWidth','46','System.Int32'),
  (852,1,'POSCashierFormdiscAmountColumnVisible','True','System.Boolean'),
  (853,1,'POSCashierFormdiscabcColumnWidth','50','System.Int32'),
  (854,1,'POSCashierFormdiscabcColumnVisible','False','System.Boolean'),
  (855,1,'POSCashierFormtotalDiscColumnWidth','80','System.Int32'),
  (856,1,'POSCashierFormtotalDiscColumnVisible','False','System.Boolean'),
- (857,1,'POSCashierFormtotalAmountColumnWidth','100','System.Int32'),
+ (857,1,'POSCashierFormtotalAmountColumnWidth','88','System.Int32'),
  (858,1,'POSCashierFormtotalAmountColumnVisible','True','System.Boolean'),
  (859,1,'POSCashierFormwarehouseColumnWidth','60','System.Int32'),
  (860,1,'POSCashierFormwarehouseColumnVisible','False','System.Boolean'),
  (861,1,'POSCashierFormnotesColumnWidth','50','System.Int32'),
  (862,1,'POSCashierFormnotesColumnVisible','False','System.Boolean'),
- (863,1,'POSCashierFormtaxableColumnWidth','50','System.Int32'),
+ (863,1,'POSCashierFormtaxableColumnWidth','47','System.Int32'),
  (864,1,'POSCashierFormtaxableColumnVisible','True','System.Boolean');
 /*!40000 ALTER TABLE `table_usersettings` ENABLE KEYS */;
 
@@ -16612,7 +16625,7 @@ CREATE TABLE `table_vendorbalanceentry` (
   KEY `FK_table_vendorbalanceentry_2` (`ccy_id`),
   CONSTRAINT `FK_table_vendorbalanceentry_1` FOREIGN KEY (`vb_id`) REFERENCES `table_vendorbalance` (`vb_id`),
   CONSTRAINT `FK_table_vendorbalanceentry_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=189 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=205 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_vendorbalanceentry`
