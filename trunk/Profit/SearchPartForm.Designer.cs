@@ -39,6 +39,10 @@
             this.ActiveCol = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.barcodeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -71,7 +75,7 @@
             // CANCELkryptonButton
             // 
             this.CANCELkryptonButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CANCELkryptonButton.Location = new System.Drawing.Point(358, 310);
+            this.CANCELkryptonButton.Location = new System.Drawing.Point(12, 310);
             this.CANCELkryptonButton.Name = "CANCELkryptonButton";
             this.CANCELkryptonButton.Size = new System.Drawing.Size(63, 25);
             this.CANCELkryptonButton.TabIndex = 3;
@@ -80,11 +84,12 @@
             // 
             // OKkryptonButton
             // 
-            this.OKkryptonButton.Location = new System.Drawing.Point(289, 310);
+            this.OKkryptonButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.OKkryptonButton.Location = new System.Drawing.Point(333, 310);
             this.OKkryptonButton.Name = "OKkryptonButton";
             this.OKkryptonButton.Size = new System.Drawing.Size(63, 25);
             this.OKkryptonButton.TabIndex = 4;
-            this.OKkryptonButton.Values.Text = "OK";
+            this.OKkryptonButton.Values.Text = "Accept";
             this.OKkryptonButton.Click += new System.EventHandler(this.OKkryptonButton_Click);
             // 
             // gridData
@@ -146,6 +151,10 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel5);
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel4);
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel3);
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel2);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
             this.kryptonPanel1.Controls.Add(this.gridData);
             this.kryptonPanel1.Controls.Add(this.searchText);
@@ -154,17 +163,49 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(433, 341);
+            this.kryptonPanel1.Size = new System.Drawing.Size(449, 341);
             this.kryptonPanel1.TabIndex = 6;
+            // 
+            // kryptonLabel2
+            // 
+            this.kryptonLabel2.Location = new System.Drawing.Point(420, 12);
+            this.kryptonLabel2.Name = "kryptonLabel2";
+            this.kryptonLabel2.Size = new System.Drawing.Size(29, 19);
+            this.kryptonLabel2.TabIndex = 6;
+            this.kryptonLabel2.Values.Text = "[F3]";
+            // 
+            // kryptonLabel3
+            // 
+            this.kryptonLabel3.Location = new System.Drawing.Point(423, 282);
+            this.kryptonLabel3.Name = "kryptonLabel3";
+            this.kryptonLabel3.Size = new System.Drawing.Size(29, 19);
+            this.kryptonLabel3.TabIndex = 7;
+            this.kryptonLabel3.Values.Text = "[F4]";
+            // 
+            // kryptonLabel4
+            // 
+            this.kryptonLabel4.Location = new System.Drawing.Point(81, 316);
+            this.kryptonLabel4.Name = "kryptonLabel4";
+            this.kryptonLabel4.Size = new System.Drawing.Size(33, 19);
+            this.kryptonLabel4.TabIndex = 8;
+            this.kryptonLabel4.Values.Text = "[Esc]";
+            // 
+            // kryptonLabel5
+            // 
+            this.kryptonLabel5.Location = new System.Drawing.Point(402, 316);
+            this.kryptonLabel5.Name = "kryptonLabel5";
+            this.kryptonLabel5.Size = new System.Drawing.Size(43, 19);
+            this.kryptonLabel5.TabIndex = 9;
+            this.kryptonLabel5.Values.Text = "[Enter]";
             // 
             // SearchPartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.CANCELkryptonButton;
-            this.ClientSize = new System.Drawing.Size(433, 341);
+            this.ClientSize = new System.Drawing.Size(449, 341);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.KeyPreview = true;
             this.Name = "SearchPartForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Find Part";
@@ -192,5 +233,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgSubject;
         private System.Windows.Forms.DataGridViewCheckBoxColumn ActiveCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn barcodeCol;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel5;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
     }
 }

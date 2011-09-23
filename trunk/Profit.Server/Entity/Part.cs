@@ -313,6 +313,8 @@ namespace Profit.Server
                 part.PICTURE_NAME = r["part_picture"].ToString();
                 part.TAX = new Tax(Convert.ToInt32(r["tax_id"]));
                 part.PRICE_CATEGORY = new PriceCategory(Convert.ToInt32(r["pricecat_id"]));
+                part.UNIT_BY_SEARCH = part.UNIT;//pos control
+                part.SELL_PRICE_BY_SEARCH = part.SELL_PRICE;//pos control
                 result.Add(part);
             }
             return result;
