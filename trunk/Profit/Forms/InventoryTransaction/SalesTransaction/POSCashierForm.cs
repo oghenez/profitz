@@ -344,15 +344,15 @@ namespace Profit
                 {
                     r_si.Confirm(m_si.ID);
                     m_si.POSTED = true;
-                    KryptonMessageBox.Show("Transaction has been POSTED", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //KryptonMessageBox.Show("Transaction has been POSTED", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 //m_po = (POS)r_si.Get(m_po.ID);
                 //m_po.EMPLOYEE = (Employee)r_employee.GetById(m_po.EMPLOYEE);
                 //m_po.WAREHOUSE = (Warehouse)r_warehouse.GetById(m_po.WAREHOUSE);
                 //m_po.CURRENCY = (Currency)r_ccy.GetById(m_po.CURRENCY);
                 //loadData();
-                setEnableForm(false);
-                setEditMode(EditMode.View);
+                //setEnableForm(false);
+                //setEditMode(EditMode.View);
             }
             catch (Exception x)
             {
@@ -371,8 +371,11 @@ namespace Profit
                 {
                     this.Cursor = Cursors.WaitCursor;
                     UpdateEntity();
+                    POSPaymentForm frm = new POSPaymentForm(m_si);
+                    if (frm.ShowDialog() == DialogResult.Cancel)
+                        return;
                     if (m_si.ID == 0)
-                    {
+                   {
                         r_si.Save(m_si);
                     }
                     else
@@ -380,11 +383,14 @@ namespace Profit
                         r_si.Update(m_si);
                     }
                     KryptonMessageBox.Show("Transaction '" + m_si.CODE + "' Record has been saved", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //ClearForm();
-                   // textBoxCode.Text = m_si.CODE;
-                    setEnableForm(false);
-                    setEditMode(EditMode.View);
-                   // textBoxCode.Focus();
+                    Post(null, null);
+                    Clear(null, null);
+                    Barcode(null, null);
+                    // textBoxCode.Text = m_si.CODE;
+                    //setEnableForm(false);
+                    //setEditMode(EditMode.View);
+                    // textBoxCode.Focus();
+                    
                     this.Cursor = Cursors.Default;
                 }
             }
@@ -895,11 +901,13 @@ namespace Profit
                         qty = Convert.ToDecimal(brcs[0]);
                         barcode = brcs[1];
                     }
-
+                    Part p = null;
                     IList result = r_part.SearchActivePartByBarcode(barcode, true);
                     if (result.Count == 1)
                     {
-                        Part p = (Part)result[0];
+                        p = (Part)result[0];
+                        PartPreviewPOSForm shp = new PartPreviewPOSForm(p);
+                        shp.ShowDialog();
                         for (int i = 0; i < itemsDataGrid.Rows.Count; i++)
                         {
                             Part pi = (Part)itemsDataGrid[codeColumn.Index, i].Tag;
@@ -933,9 +941,9 @@ namespace Profit
                         itemsDataGrid[discpercentColumn.Index, newRow].Value = p.PRICE_CATEGORY.DISCOUNT_PERCENT;
                         updateSubtotal(newRow);
                         autoScroll();
-                    }
-                    //if ((result.Count == 0) || (result.Count > 1))
-                    //{
+                    } 
+                    if ((result.Count == 0) || (result.Count > 1))
+                    {
                     //    int newRow = itemsDataGrid.Rows.Add();
                     //    using (SearchPartForm fr = new SearchPartForm(barcode, result))
                     //    {
@@ -1047,7 +1055,7 @@ namespace Profit
 
         public void Antrian(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+           
         }
 
         public void Exit(object sender, EventArgs e)

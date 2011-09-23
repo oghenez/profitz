@@ -23,6 +23,8 @@ namespace Profit.Server
         public double NET_TOTAL = 0;
         public Customer CUSTOMER = null;
 
+        public double CASH_PAY_AMOUNT = 0;
+        public double CHANGE_AMOUNT = 0;
         public PaymentType PAYMENT_TYPE = PaymentType.Cash;
         public string CREDIT_CARD_NO = "";
         public string HOLDER_NAME = "";
@@ -62,10 +64,12 @@ namespace Profit.Server
                     pos_code,
                     cus_id,
                     pos_docno,
-                    pos_docdate
+                    pos_docdate,
+                    pos_cashpayamount,
+                    pos_changepayamount
                 ) 
                 VALUES ('{0}','{1}','{2}',{3},'{4}',{5},'{6}',{7},{8},'{9}',{10},
-                        {11},{12},{13},{14},{15},{16},{17},{18},'{19}',{20},'{21}','{22}')",
+                        {11},{12},{13},{14},{15},{16},{17},{18},'{19}',{20},'{21}','{22}',{23},{24})",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                 StockCardEntryType.POS.ToString(),
@@ -88,7 +92,9 @@ namespace Profit.Server
                 CODE,
                 CUSTOMER == null ? 0 : CUSTOMER.ID,
                 DOCUMENT_NO,
-                DOCUMENT_DATE.ToString(Utils.DATE_FORMAT)
+                DOCUMENT_DATE.ToString(Utils.DATE_FORMAT),
+                CASH_PAY_AMOUNT,
+                CHANGE_AMOUNT
                 );
         }
         public override string GetUpdateSQL()
@@ -116,8 +122,10 @@ namespace Profit.Server
                     pos_code = '{19}',
                     cus_id = {20},
                     pos_docno= '{21}',
-                    pos_docdate= '{22}'
-                where pos_id = {23}",
+                    pos_docdate= '{22}',
+                    pos_cashpayamount = {23},
+                    pos_changepayamount = {24}
+                where pos_id = {25}",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                 StockCardEntryType.POS.ToString(),
@@ -141,6 +149,8 @@ namespace Profit.Server
                 CUSTOMER == null ? 0 : CUSTOMER.ID,
                 DOCUMENT_NO,
                 DOCUMENT_DATE.ToString(Utils.DATE_FORMAT),
+                CASH_PAY_AMOUNT,
+                CHANGE_AMOUNT,
                 ID);
         }
         public static POS TransformReader(MySql.Data.MySqlClient.MySqlDataReader aReader)
