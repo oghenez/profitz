@@ -382,11 +382,16 @@ namespace Profit.Server
             }
             return null;
         }
-        public static string FindPartBy(bool prtGroup, int prtGroupID, bool prtCat, int prtCatID, bool part, int partID)
+        public static string FindPartBy(bool prtGroup, int prtGroupID, bool prtCat, 
+            int prtCatID, bool part, int partID, bool pricecat, int pricecatID            )
         {
             string sql =
                 String.Format(@"select * from table_part where part_active = True {0} {1} {2}",
-                prtGroup ? " and prtgroup_id = " + prtGroupID : "", prtCat ? " and prtcat_id =" + prtCatID : "", part ? " and part_id =" + partID : "");
+                prtGroup ? " and prtgroup_id = " + prtGroupID : "", 
+                prtCat ? " and prtcat_id =" + prtCatID : "",
+                part ? " and part_id =" + partID : "",
+                pricecat ? " and pricecat_id =" + pricecatID : ""
+                );
             return  sql;
         }
 

@@ -28,6 +28,13 @@ namespace Profit
         IList m_priceCategoryList = new ArrayList();
         IList m_partList = new ArrayList();
 
+
+        IDictionary<int, PartGroup> m_partGroupDic = new Dictionary<int, PartGroup>();
+        IDictionary<int, Currency> m_ccyDic = new Dictionary<int, Currency>();
+        IDictionary<int, PartCategory> m_partCategoryDic = new Dictionary<int, PartCategory>();
+        IDictionary<int, PriceCategory> m_priceCategoryDic = new Dictionary<int, PriceCategory>();
+        IDictionary<int, Unit> m_unitDic = new Dictionary<int, Unit>();
+
         MarkUpDownSellingPrice m_marksellingprice = new MarkUpDownSellingPrice();
         IList m_result = new ArrayList();
 
@@ -54,6 +61,8 @@ namespace Profit
             m_partList.Add(new Part(0, "ALL"));
             partkryptonComboBox1.DataSource = m_partList;
 
+
+
             //typekryptonComboBox1.DataSource = Enum.GetValues(typeof(MarkUpDownSellingPriceType));
             baseonkryptonComboBox2.DataSource = Enum.GetValues(typeof(MarkUpDownSellingPriceBaseOn));
             marktypekryptonComboBox3.DataSource = Enum.GetValues(typeof(MarkUpDownSellingPriceMarkType));
@@ -65,6 +74,31 @@ namespace Profit
             currencykryptonComboBox4.Text = "ALL";
             partkryptonComboBox1.Text = "ALL";
 
+            initDictionary();
+        }
+
+        private void initDictionary()
+        {
+            foreach (PartGroup pg in m_partGroupList)
+            {
+                m_partGroupDic.Add(pg.ID,pg);
+            }
+            foreach (Currency ccy in m_currencyList)
+            {
+                m_ccyDic.Add(ccy.ID,ccy);
+            }
+            foreach (PartCategory prtCat in m_partCategoryList)
+            {
+                m_partCategoryDic.Add(prtCat.ID,prtCat);
+            }
+            foreach (PriceCategory prcCat in m_priceCategoryList)
+            {
+                m_priceCategoryDic.Add(prcCat.ID,prcCat);
+            }
+            foreach (Unit u in r_unit.GetAll())
+            {
+                m_unitDic.Add(u.ID,u);
+            }
         }
 
         private void findkryptonButton1_Click(object sender, EventArgs e)
@@ -78,10 +112,10 @@ namespace Profit
                 m_result = result;
                 foreach (Part p in result)
                 {
-                    p.UNIT = (Unit)r_unit.GetById(p.UNIT);
-                    p.PART_GROUP = (PartGroup)r_group.GetById(p.PART_GROUP);
-                    p.PART_CATEGORY = (PartCategory)r_category.GetById(p.PART_CATEGORY);
-                    p.CURRENCY = (Currency)r_group.GetById(p.CURRENCY);
+                    p.UNIT = m_unitDic[p.UNIT.ID];
+                    p.PART_GROUP = m_partGroupDic[p.PART_GROUP.ID];
+                    p.PART_CATEGORY = m_partCategoryDic[p.PART_CATEGORY.ID];
+                    p.CURRENCY = m_ccyDic[p.CURRENCY.ID];
 
                     int r = partDataGridView1.Rows.Add();
                     partDataGridView1[codeColumn.Index, r].Value = p.CODE;
@@ -157,11 +191,69 @@ namespace Profit
         {
             if (KryptonMessageBox.Show("Are you sure to update?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                if (m_result.Count > 0)
+                try
                 {
-                    r_part.UpdateSellingPrice(m_result);
-                    KryptonMessageBox.Show("Update completed.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Cursor = Cursors.WaitCursor;
+                    if (m_result.Count > 0)
+                    {
+                        r_part.UpdateSellingPrice(m_result);
+                        KryptonMessageBox.Show("Update completed.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    this.Cursor = Cursors.Default;
                 }
+                catch (Exception x)
+                {
+                    KryptonMessageBox.Show(x.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    this.Cursor = Cursors.Default;
+                }
+            }
+        }
+
+        private void buttonSpecHeaderGroup1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void partkryptonComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            partkryptonTextBox2.Text = "";
+            if (partkryptonComboBox1.SelectedItem != null)
+            {
+                Part p = (Part)partkryptonComboBox1.SelectedItem;
+                partkryptonTextBox2.Text = p.NAME;
+            }
+        }
+
+        private void partGroupkryptonComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            partGroupkryptonTextBox.Text = "";
+            if (partGroupkryptonComboBox1.SelectedItem != null)
+            {
+                PartGroup p = (PartGroup)partGroupkryptonComboBox1.SelectedItem;
+                partGroupkryptonTextBox.Text = p.NAME;
+            }
+        }
+
+        private void partCategorykryptonComboBox5_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            partCategorykryptonTextBox.Text = "";
+            if (partCategorykryptonComboBox5.SelectedItem != null)
+            {
+                PartCategory p = (PartCategory)partCategorykryptonComboBox5.SelectedItem;
+                partCategorykryptonTextBox.Text = p.NAME;
+            }
+        }
+
+        private void pricecategorykryptonComboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            priceCategorykryptonTextBox1.Text = "";
+            if (pricecategorykryptonComboBox4.SelectedItem != null)
+            {
+                PriceCategory p = (PriceCategory)pricecategorykryptonComboBox4.SelectedItem;
+                priceCategorykryptonTextBox1.Text = p.NAME;
             }
         }
 
