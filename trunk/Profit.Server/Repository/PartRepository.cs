@@ -701,7 +701,10 @@ namespace Profit.Server
         }
         public IList FindAllMarkDownSellingPrice(MarkUpDownSellingPrice mrk)
         {
-            string sql = Part.FindPartBy(mrk.PART_GROUP.ID > 0, mrk.PART_GROUP.ID, mrk.PART_CATEGORY.ID > 0, mrk.PART_CATEGORY.ID, mrk.PART.ID > 0, mrk.PART.ID);
+            string sql = Part.FindPartBy(mrk.PART_GROUP.ID > 0, mrk.PART_GROUP.ID, 
+                mrk.PART_CATEGORY.ID > 0, mrk.PART_CATEGORY.ID,
+                mrk.PART.ID > 0, mrk.PART.ID,
+                 mrk.PRICE_CATEGORY.ID > 0, mrk.PRICE_CATEGORY.ID            );
             OpenConnection();
             MySql.Data.MySqlClient.MySqlDataReader rdr;
             m_cmd.CommandText = sql;
