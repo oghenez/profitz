@@ -286,6 +286,9 @@ CREATE TABLE `table_currency` (
   `ccy_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `ccy_code` varchar(45) NOT NULL,
   `ccy_name` varchar(45) NOT NULL,
+  `modified_by` varchar(45) NOT NULL,
+  `modified_date` datetime NOT NULL,
+  `modified_computer` varchar(45) NOT NULL,
   PRIMARY KEY (`ccy_id`),
   UNIQUE KEY `Index_2` (`ccy_code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
@@ -295,11 +298,11 @@ CREATE TABLE `table_currency` (
 --
 
 /*!40000 ALTER TABLE `table_currency` DISABLE KEYS */;
-INSERT INTO `table_currency` (`ccy_id`,`ccy_code`,`ccy_name`) VALUES 
- (1,'IDR','Indonesian Rupiah'),
- (2,'SGD','Singapore Dollar'),
- (3,'USD','US Dollar'),
- (7,'RP','Rupiah');
+INSERT INTO `table_currency` (`ccy_id`,`ccy_code`,`ccy_name`,`modified_by`,`modified_date`,`modified_computer`) VALUES 
+ (1,'IDR','Indonesian Rupiah','','2011-09-26 04:17:15',''),
+ (2,'SGD','Singapore Dollar','','2011-09-26 04:17:22',''),
+ (3,'USD','US Dollar','','2011-09-26 04:17:24',''),
+ (7,'RP','Rupiah','','2011-09-26 04:17:27','');
 /*!40000 ALTER TABLE `table_currency` ENABLE KEYS */;
 
 
