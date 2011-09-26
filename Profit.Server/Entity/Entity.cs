@@ -7,10 +7,8 @@ namespace Profit.Server
 {
     public abstract class Entity
     {
-        public User USER = null;
-        public DateTime CREATED_DATE = DateTime.Today;
-        public DateTime MODIFIED_DATE = DateTime.Today;
-        public string CREATED_COMPUTER_NAME = "";
+        public string MODIFIED_BY = "";
+        public DateTime MODIFIED_DATE = DateTime.Now;
         public string MODIFIED_COMPUTER_NAME = "";
     }
 }

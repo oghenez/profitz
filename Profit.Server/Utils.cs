@@ -9,7 +9,8 @@ namespace Profit.Server
 {
     public class Utils
     {
-        public const string DATE_FORMAT = "yyyy/MM/dd";
+        //public const string DATE_FORMAT = "yyyy/MM/dd";
+        public const string DATE_FORMAT = "yyyy/MM/dd hh:mm:ss";
         public static void GetListCode(StringCollection list, IList dtos)
         {
             foreach (IEntity cod in dtos)
