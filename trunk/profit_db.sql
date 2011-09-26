@@ -255,6 +255,9 @@ CREATE TABLE `table_bank` (
   `bank_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `bank_code` varchar(45) NOT NULL,
   `bank_name` varchar(45) NOT NULL,
+  `modified_by` varchar(45) NOT NULL,
+  `modified_date` datetime NOT NULL,
+  `modified_computer` varchar(45) NOT NULL,
   PRIMARY KEY (`bank_id`),
   UNIQUE KEY `Index_2` (`bank_code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
@@ -264,13 +267,13 @@ CREATE TABLE `table_bank` (
 --
 
 /*!40000 ALTER TABLE `table_bank` DISABLE KEYS */;
-INSERT INTO `table_bank` (`bank_id`,`bank_code`,`bank_name`) VALUES 
- (2,'BCA','BCA cabang Jodoh'),
- (3,'BTN','Bank Tabungan Negara Tiban'),
- (4,'DNM','Danamon Bank'),
- (5,'MGA','Bank Mega'),
- (6,'INDX','Bank Index Cabang Jodoh'),
- (8,'BRI','BRI cabang batam');
+INSERT INTO `table_bank` (`bank_id`,`bank_code`,`bank_name`,`modified_by`,`modified_date`,`modified_computer`) VALUES 
+ (2,'BCA','BCA cabang Jodoh','Administrator','2011-09-26 03:57:09','DDWP_MDT_02825'),
+ (3,'BTN','Bank Tabungan Negara Tiban','Administrator','2011-09-26 03:57:11','DDWP_MDT_02825'),
+ (4,'DNM','Danamon Bank','','2011-09-26 02:00:03',''),
+ (5,'MGA','Bank Mega','','2011-09-26 02:00:03',''),
+ (6,'INDX','Bank Index Cabang Jodoh','','2011-09-26 02:00:03',''),
+ (8,'BRI','BRI cabang batam','','2011-09-26 02:00:03','');
 /*!40000 ALTER TABLE `table_bank` ENABLE KEYS */;
 
 
@@ -8541,7 +8544,7 @@ CREATE TABLE `table_stockcard` (
   CONSTRAINT `FK_table_stockcard_1` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`),
   CONSTRAINT `FK_table_stockcard_2` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
   CONSTRAINT `FK_table_stockcard_3` FOREIGN KEY (`period_id`) REFERENCES `table_period` (`period_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=198 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=199 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_stockcard`
@@ -8568,7 +8571,8 @@ INSERT INTO `table_stockcard` (`sc_id`,`part_id`,`warehouse_id`,`period_id`,`sc_
  (194,9099,1,21,0,20,0),
  (195,15535,1,21,0,0,0),
  (196,9090,1,21,5,0,0),
- (197,9077,1,21,98,0,0);
+ (197,9077,1,21,98,0,0),
+ (198,11035,1,21,10,0,0);
 /*!40000 ALTER TABLE `table_stockcard` ENABLE KEYS */;
 
 
@@ -8590,7 +8594,7 @@ CREATE TABLE `table_stockcardentry` (
   KEY `FK_table_stockcardentry_2` (`sc_id`),
   CONSTRAINT `FK_table_stockcardentry_1` FOREIGN KEY (`unit_id`) REFERENCES `table_unit` (`unit_id`),
   CONSTRAINT `FK_table_stockcardentry_2` FOREIGN KEY (`sc_id`) REFERENCES `table_stockcard` (`sc_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=383 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=384 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_stockcardentry`
@@ -8645,7 +8649,8 @@ INSERT INTO `table_stockcardentry` (`sce_id`,`sc_id`,`sce_stockcardentrytype`,`s
  (379,196,'OpeningStock','2011-09-01 00:00:00',1,10,7),
  (380,196,'POS','2011-09-22 00:00:00',1,5,8),
  (381,197,'OpeningStock','2011-09-01 00:00:00',1,100,8),
- (382,197,'POS','2011-09-22 00:00:00',1,2,9);
+ (382,197,'POS','2011-09-22 00:00:00',1,2,9),
+ (383,198,'SupplierInvoice','2011-09-26 12:00:00',1,10,81);
 /*!40000 ALTER TABLE `table_stockcardentry` ENABLE KEYS */;
 
 
@@ -8849,7 +8854,7 @@ CREATE TABLE `table_supplierinvoice` (
   CONSTRAINT `FK_table_supplierinvoice_3` FOREIGN KEY (`top_id`) REFERENCES `table_termofpayment` (`top_id`),
   CONSTRAINT `FK_table_supplierinvoice_4` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_supplierinvoice_6` FOREIGN KEY (`sup_id`) REFERENCES `table_supplier` (`sup_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_supplierinvoice`
@@ -8864,7 +8869,8 @@ INSERT INTO `table_supplierinvoice` (`si_id`,`si_date`,`si_noticedate`,`si_scent
  (33,'2011-09-09 00:00:00','2011-09-09 00:00:00','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-09-09 00:00:00',1,100000,0,0,0,1,0,0,100000,'SP005/09/2011',1,'','2011-09-09 00:00:00'),
  (34,'2011-09-14 00:00:00','2011-09-14 00:00:00','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-09-14 00:00:00',1,1500000,0,0,0,1,0,0,1500000,'SP006/09/2011',1,'','2011-09-14 00:00:00'),
  (35,'2011-09-16 00:00:00','2011-09-16 00:00:00','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-09-16 00:00:00',1,150000,0,0,0,1,0,0,150000,'SP007/09/2011',1,'','2011-09-16 00:00:00'),
- (36,'2011-09-20 00:00:00','2011-09-20 00:00:00','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-09-20 00:00:00',1,725000,0,0,0,1,0,0,725000,'SP008/09/2011',1,'','2011-09-20 00:00:00');
+ (36,'2011-09-20 00:00:00','2011-09-20 00:00:00','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-09-20 00:00:00',1,725000,0,0,0,1,0,0,725000,'SP008/09/2011',1,'','2011-09-20 00:00:00'),
+ (37,'2011-09-26 12:00:00','2011-09-26 03:59:32','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-09-26 12:00:00',1,100000,0,0,0,1,0,0,100000,'SP009/09/2011',1,'','2011-09-26 12:00:00');
 /*!40000 ALTER TABLE `table_supplierinvoice` ENABLE KEYS */;
 
 
@@ -8903,7 +8909,7 @@ CREATE TABLE `table_supplierinvoiceitem` (
   CONSTRAINT `FK_table_supplierinvoiceitem_2` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`),
   CONSTRAINT `FK_table_supplierinvoiceitem_3` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
   CONSTRAINT `FK_table_supplierinvoiceitem_4` FOREIGN KEY (`unit_id`) REFERENCES `table_unit` (`unit_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_supplierinvoiceitem`
@@ -8922,7 +8928,8 @@ INSERT INTO `table_supplierinvoiceitem` (`sii_id`,`si_id`,`part_id`,`warehouse_i
  (77,33,14361,1,10,0,'SupplierInvoice',0,1,10000,0,0,0,100000,'',0,0,0,'',0),
  (78,34,9457,1,100,0,'SupplierInvoice',0,1,15000,0,0,0,1500000,'',0,0,0,'',0),
  (79,35,9068,1,10,0,'SupplierInvoice',0,1,15000,0,0,0,150000,'',0,0,0,'',0),
- (80,36,9068,1,5,0,'SupplierInvoice',0,2,145000,0,0,0,725000,'',0,0,0,'',0);
+ (80,36,9068,1,5,0,'SupplierInvoice',0,2,145000,0,0,0,725000,'',0,0,0,'',0),
+ (81,37,11035,1,10,0,'SupplierInvoice',0,1,10000,0,0,0,100000,'',0,0,0,'',0);
 /*!40000 ALTER TABLE `table_supplierinvoiceitem` ENABLE KEYS */;
 
 
@@ -8959,7 +8966,7 @@ CREATE TABLE `table_supplierinvoicejournal` (
   CONSTRAINT `FK_table_supplierinvoicejournal_1` FOREIGN KEY (`sup_id`) REFERENCES `table_supplier` (`sup_id`),
   CONSTRAINT `FK_table_supplierinvoicejournal_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_supplierinvoicejournal_3` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_supplierinvoicejournal`
@@ -8974,7 +8981,8 @@ INSERT INTO `table_supplierinvoicejournal` (`sij_id`,`sij_code`,`sij_date`,`sup_
  (36,'SP005/09/2011','2011-09-09 00:00:00',1,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,100000,1,33,'Close'),
  (37,'SP006/09/2011','2011-09-14 00:00:00',1,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,1500000,1,34,'Open'),
  (38,'SP007/09/2011','2011-09-16 00:00:00',1,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,150000,1,35,'Open'),
- (40,'SP008/09/2011','2011-09-20 00:00:00',1,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,725000,1,36,'Open');
+ (40,'SP008/09/2011','2011-09-20 00:00:00',1,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,725000,1,36,'Open'),
+ (41,'SP009/09/2011','2011-09-26 12:00:00',1,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,100000,1,37,'Open');
 /*!40000 ALTER TABLE `table_supplierinvoicejournal` ENABLE KEYS */;
 
 
@@ -9015,7 +9023,7 @@ CREATE TABLE `table_supplierinvoicejournalitem` (
   CONSTRAINT `FK_table_supplierinvoicejournalitem_3` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_supplierinvoicejournalitem_4` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`),
   CONSTRAINT `FK_table_supplierinvoicejournalitem_5` FOREIGN KEY (`top_id`) REFERENCES `table_termofpayment` (`top_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_supplierinvoicejournalitem`
@@ -9030,7 +9038,8 @@ INSERT INTO `table_supplierinvoicejournalitem` (`siji_id`,`sij_id`,`sup_id`,`ccy
  (36,36,1,1,100000,0,0,'SupplierInvoice','2011-09-09 00:00:00','SP005/09/2011','2011-09-09 00:00:00',1,0,0,1,'','','Open',100000,0),
  (37,37,1,1,1500000,0,0,'SupplierInvoice','2011-09-14 00:00:00','SP006/09/2011','2011-09-14 00:00:00',1,0,0,1,'','','Open',1500000,0),
  (38,38,1,1,150000,0,0,'SupplierInvoice','2011-09-16 00:00:00','SP007/09/2011','2011-09-16 00:00:00',1,0,0,1,'','','Open',150000,0),
- (40,40,1,1,725000,0,0,'SupplierInvoice','2011-09-20 00:00:00','SP008/09/2011','2011-09-20 00:00:00',1,0,0,1,'','','Open',725000,0);
+ (40,40,1,1,725000,0,0,'SupplierInvoice','2011-09-20 00:00:00','SP008/09/2011','2011-09-20 00:00:00',1,0,0,1,'','','Open',725000,0),
+ (41,41,1,1,100000,0,0,'SupplierInvoice','2011-09-26 12:00:00','SP009/09/2011','2011-09-26 12:00:00',1,0,0,1,'','','Open',100000,0);
 /*!40000 ALTER TABLE `table_supplierinvoicejournalitem` ENABLE KEYS */;
 
 
@@ -16600,7 +16609,7 @@ CREATE TABLE `table_vendorbalance` (
 
 /*!40000 ALTER TABLE `table_vendorbalance` DISABLE KEYS */;
 INSERT INTO `table_vendorbalance` (`vb_id`,`vb_vendorbalancetype`,`period_id`,`vendor_id`,`ccy_id`,`vb_balance`) VALUES 
- (8,'Supplier',21,1,1,4425000),
+ (8,'Supplier',21,1,1,4525000),
  (9,'Supplier',21,3,1,0),
  (10,'Customer',21,3,1,0),
  (12,'Customer',21,1,1,7640000);
@@ -16625,7 +16634,7 @@ CREATE TABLE `table_vendorbalanceentry` (
   KEY `FK_table_vendorbalanceentry_2` (`ccy_id`),
   CONSTRAINT `FK_table_vendorbalanceentry_1` FOREIGN KEY (`vb_id`) REFERENCES `table_vendorbalance` (`vb_id`),
   CONSTRAINT `FK_table_vendorbalanceentry_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=205 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=206 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_vendorbalanceentry`
@@ -16664,7 +16673,8 @@ INSERT INTO `table_vendorbalanceentry` (`vbe_id`,`vb_id`,`vbe_vendorbalanceentry
  (185,10,'CustomerInvoice','2011-09-22 00:00:00',1,25875,30),
  (186,10,'Receipt','2011-09-22 00:00:00',1,25875,25),
  (187,10,'CustomerInvoice','2011-09-22 00:00:00',1,12474,31),
- (188,10,'Receipt','2011-09-22 00:00:00',1,12474,26);
+ (188,10,'Receipt','2011-09-22 00:00:00',1,12474,26),
+ (205,8,'SupplierInvoice','2011-09-26 12:00:00',1,100000,41);
 /*!40000 ALTER TABLE `table_vendorbalanceentry` ENABLE KEYS */;
 
 
