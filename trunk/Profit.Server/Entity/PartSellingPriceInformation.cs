@@ -7,7 +7,7 @@ using System.Collections;
 
 namespace Profit.Server
 {
-    public class PartSellingPriceInformation : IEntity
+    public class PartSellingPriceInformation : Entity, IEntity
     {
         public int ID = 0;
         public string CODE = "B001";
@@ -43,6 +43,9 @@ namespace Profit.Server
                 bank.ID = Convert.ToInt32(aReader[0]);
                 bank.CODE = aReader[1].ToString();
                 bank.NAME = aReader[2].ToString();
+                bank.MODIFIED_BY = aReader["modified_by"].ToString();
+                bank.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                bank.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
             }
             return bank;
         }
@@ -98,6 +101,9 @@ namespace Profit.Server
                 bank.ID = Convert.ToInt32(aReader[0]);
                 bank.CODE = aReader[1].ToString();
                 bank.NAME = aReader[2].ToString();
+                bank.MODIFIED_BY = aReader["modified_by"].ToString();
+                bank.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                bank.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
                 result.Add(bank);
             }
             return result;

@@ -110,6 +110,8 @@ namespace Profit
             m_user.TAX_NO = taxNokryptonTextBox.Text.Trim();
             m_user.WEBSITE = websiteKryptonTextBox.Text.Trim();
             m_user.START_ENTRY_PERIOD = (Period)startEntryPeriodkryptonComboBox1.SelectedItem;
+            m_user.MODIFIED_BY = m_mainForm.CurrentUser.NAME;
+            m_user.MODIFIED_COMPUTER_NAME = Environment.MachineName;
             m_user.AUTONUMBER_LIST.Clear();
             for (int i = 0; i < gridAutonumber.Rows.Count; i++)
             {

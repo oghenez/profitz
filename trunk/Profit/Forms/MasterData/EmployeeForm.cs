@@ -125,6 +125,8 @@ namespace Profit
             m_emp.IS_PURCHASER = kryptonCheckBoxPurchaser.Checked;
             m_emp.IS_SALESMAN = kryptonCheckBoxSalesman.Checked;
             m_emp.IS_STOREMAN = kryptonCheckBoxStoreman.Checked;
+            m_emp.MODIFIED_BY = m_mainForm.CurrentUser.NAME;
+            m_emp.MODIFIED_COMPUTER_NAME = Environment.MachineName;
         }
         public void ClearForm()
         {

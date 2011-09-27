@@ -122,6 +122,8 @@ namespace Profit
             m_top.CODE = textBoxCode.Text.Trim();
             m_top.NAME = textBoxName.Text.Trim();
             m_top.DAYS = Convert.ToInt16(kryptonNumericUpDownDAY.Value);
+            m_top.MODIFIED_BY = m_mainForm.CurrentUser.NAME;
+            m_top.MODIFIED_COMPUTER_NAME = Environment.MachineName;
         }
         public void ClearForm()
         {

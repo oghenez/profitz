@@ -8,7 +8,7 @@ using System.Data;
 
 namespace Profit.Server
 {
-    public class Part : IEntity
+    public class Part : Entity, IEntity
     {
         public int ID = 0;
         public string CODE = "B001";
@@ -74,6 +74,9 @@ namespace Profit.Server
                 part.PICTURE_NAME = r["part_picture"].ToString();
                 part.TAX = new Tax(Convert.ToInt32(r["tax_id"]));
                 part.PRICE_CATEGORY = new PriceCategory(Convert.ToInt32(r["pricecat_id"]));
+                part.MODIFIED_BY = r["modified_by"].ToString();
+                part.MODIFIED_DATE = Convert.ToDateTime(r["modified_date"].ToString());
+                part.MODIFIED_COMPUTER_NAME = r["modified_computer"].ToString();
              }
             return part;
         }
@@ -102,6 +105,9 @@ namespace Profit.Server
                 part.PICTURE_NAME = r["part_picture"].ToString();
                 part.TAX = new Tax(Convert.ToInt32(r["tax_id"]));
                 part.PRICE_CATEGORY = new PriceCategory(Convert.ToInt32(r["pricecat_id"]));
+                part.MODIFIED_BY = r["modified_by"].ToString();
+                part.MODIFIED_DATE = Convert.ToDateTime(r["modified_date"].ToString());
+                part.MODIFIED_COMPUTER_NAME = r["modified_computer"].ToString();
             }
             return part;
         }
@@ -125,7 +131,7 @@ namespace Profit.Server
                     unit_id,
                     part_picture,
                     tax_id,
-                    pricecat_id) 
+                    pricecat_id, modified_by, modified_date, modified_computer) 
                 VALUES (
                     '{0}',
                     '{1}',
@@ -144,7 +150,10 @@ namespace Profit.Server
                     '{14}',
                     '{15}',
                     {16},
-                    {17}
+                    {17},
+                    '{18}',
+                    '{19}',
+                    '{20}'
                     )",
                 CODE, 
                 NAME,
@@ -163,7 +172,10 @@ namespace Profit.Server
                 UNIT.ID,
                 CODE,
                 TAX==null?0:TAX.ID,
-                PRICE_CATEGORY==null?0:PRICE_CATEGORY.ID
+                PRICE_CATEGORY == null ? 0 : PRICE_CATEGORY.ID, 
+                MODIFIED_BY, 
+                DateTime.Now.ToString(Utils.DATE_FORMAT), 
+                MODIFIED_COMPUTER_NAME
                 );
         }
         public string GetDeleteSQL()
@@ -190,8 +202,11 @@ namespace Profit.Server
                 unit_id='{14}',
                 part_picture = '{15}',
                 tax_id = {16},
-                pricecat_id = {17}
-                where part_id = {18}",
+                pricecat_id = {17},
+                modified_by='{18}', 
+                modified_date='{19}',
+                modified_computer='{20}'
+                where part_id = {21}",
                 CODE, NAME, ACTIVE,
                 BARCODE,
                 COST_METHOD.ToString(),
@@ -207,7 +222,10 @@ namespace Profit.Server
                 UNIT.ID,
                 CODE,
                 TAX==null?0:TAX.ID,
-                PRICE_CATEGORY==null?0:PRICE_CATEGORY.ID,
+                PRICE_CATEGORY == null ? 0 : PRICE_CATEGORY.ID, 
+                MODIFIED_BY, 
+                DateTime.Now.ToString(Utils.DATE_FORMAT), 
+                MODIFIED_COMPUTER_NAME,
                 ID);
         }
         public string GetByIDSQL(int ID)
@@ -284,6 +302,9 @@ namespace Profit.Server
                 part.PICTURE_NAME = r["part_picture"].ToString();
                 part.TAX = new Tax(Convert.ToInt32(r["tax_id"]));
                 part.PRICE_CATEGORY = new PriceCategory(Convert.ToInt32(r["pricecat_id"]));
+                part.MODIFIED_BY = r["modified_by"].ToString();
+                part.MODIFIED_DATE = Convert.ToDateTime(r["modified_date"].ToString());
+                part.MODIFIED_COMPUTER_NAME = r["modified_computer"].ToString();
                 result.Add(part);
             }
             return result;
@@ -315,6 +336,9 @@ namespace Profit.Server
                 part.PRICE_CATEGORY = new PriceCategory(Convert.ToInt32(r["pricecat_id"]));
                 part.UNIT_BY_SEARCH = part.UNIT;//pos control
                 part.SELL_PRICE_BY_SEARCH = part.SELL_PRICE;//pos control
+                part.MODIFIED_BY = r["modified_by"].ToString();
+                part.MODIFIED_DATE = Convert.ToDateTime(r["modified_date"].ToString());
+                part.MODIFIED_COMPUTER_NAME = r["modified_computer"].ToString();
                 result.Add(part);
             }
             return result;
@@ -345,6 +369,9 @@ namespace Profit.Server
                 part.PICTURE_NAME = r["part_picture"].ToString();
                 part.TAX = new Tax(Convert.ToInt32(r["tax_id"]));
                 part.PRICE_CATEGORY = new PriceCategory(Convert.ToInt32(r["pricecat_id"]));
+                part.MODIFIED_BY = r["modified_by"].ToString();
+                part.MODIFIED_DATE = Convert.ToDateTime(r["modified_date"].ToString());
+                part.MODIFIED_COMPUTER_NAME = r["modified_computer"].ToString();
                 result.Add(part);
             }
             return result;

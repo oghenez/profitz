@@ -7,7 +7,7 @@ using System.Collections;
 
 namespace Profit.Server
 {
-    public class FormAccess : IEntity
+    public class FormAccess : Entity, IEntity
     {
    
         public int ID = 0;
@@ -48,6 +48,9 @@ namespace Profit.Server
                 formaccess.POST = Convert.ToBoolean(aReader[6]);
                 formaccess.PRINT = Convert.ToBoolean(aReader[7]);
                 formaccess.USER = new User(Convert.ToInt32(aReader[8]));
+                formaccess.MODIFIED_BY = aReader["modified_by"].ToString();
+                formaccess.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                formaccess.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
             }
             return formaccess;
         }
@@ -61,9 +64,9 @@ namespace Profit.Server
                     formaccess_view,
                     formaccess_post,
                     formaccess_print,
-                    user_id) 
-                VALUES ('{0}','{1}',{2},{3},{4},{5},{6},{7})",
-                CODE, NAME,SAVE,DELETE,VIEW,POST,PRINT, USER.ID);
+                    user_id, modified_by, modified_date, modified_computer) 
+                VALUES ('{0}','{1}',{2},{3},{4},{5},{6},{7},'{8}','{9}','{10}')",
+                CODE, NAME, SAVE, DELETE, VIEW, POST, PRINT, USER.ID, MODIFIED_BY, DateTime.Now.ToString(Utils.DATE_FORMAT), MODIFIED_COMPUTER_NAME);
         }
         public string GetDeleteSQL()
         {
@@ -79,9 +82,12 @@ namespace Profit.Server
                     formaccess_view={4},
                     formaccess_post={5},
                     formaccess_print={6},
-                    user_id={7}
-                where formaccess_id = {8}",
-                CODE, NAME, SAVE, DELETE, VIEW, POST, PRINT, USER.ID, ID);
+                    user_id={7},
+                modified_by='{8}', 
+                modified_date='{9}',
+                modified_computer='{10}'
+                where formaccess_id = {11}",
+                CODE, NAME, SAVE, DELETE, VIEW, POST, PRINT, USER.ID, MODIFIED_BY, DateTime.Now.ToString(Utils.DATE_FORMAT), MODIFIED_COMPUTER_NAME, ID);
         }
         public string GetByIDSQL(int ID)
         {
@@ -126,6 +132,9 @@ namespace Profit.Server
                 formaccess.POST = Convert.ToBoolean(aReader[6]);
                 formaccess.PRINT = Convert.ToBoolean(aReader[7]);
                 formaccess.USER = new User(Convert.ToInt32(aReader[8]));
+                formaccess.MODIFIED_BY = aReader["modified_by"].ToString();
+                formaccess.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                formaccess.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
                 result.Add(formaccess);
             }
             return result;
@@ -145,6 +154,9 @@ namespace Profit.Server
                 formaccess.POST = Convert.ToBoolean(aReader[6]);
                 formaccess.PRINT = Convert.ToBoolean(aReader[7]);
                 formaccess.USER = new User(Convert.ToInt32(aReader[8]));
+                formaccess.MODIFIED_BY = aReader["modified_by"].ToString();
+                formaccess.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                formaccess.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
                 result.Add(formaccess);
             }
             return result;

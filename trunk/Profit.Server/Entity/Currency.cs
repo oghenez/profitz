@@ -59,7 +59,7 @@ namespace Profit.Server
             return String.Format(@"insert into table_currency 
                 (ccy_code,ccy_name) 
                 VALUES ('{0}','{1}', '{2}', '{3}', '{4}')",
-                CODE, NAME, MODIFIED_BY, MODIFIED_DATE.ToString(Utils.DATE_FORMAT), MODIFIED_COMPUTER_NAME);
+                CODE, NAME, MODIFIED_BY, DateTime.Now.ToString(Utils.DATE_FORMAT), MODIFIED_COMPUTER_NAME);
         }
         public string GetDeleteSQL()
         {

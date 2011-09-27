@@ -7,7 +7,7 @@ using System.Collections;
 
 namespace Profit.Server
 {
-    public class Tax : IEntity
+    public class Tax : Entity,IEntity
     {
         public int ID = 0;
         public string CODE = "B001";
@@ -36,15 +36,18 @@ namespace Profit.Server
                 tax.CODE = aReader[1].ToString();
                 tax.NAME = aReader[2].ToString();
                 tax.RATE = Convert.ToDouble(aReader[3]);
+                tax.MODIFIED_BY = aReader["modified_by"].ToString();
+                tax.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                tax.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
             }
             return tax;
         }
         public string GetInsertSQL()
         {
             return String.Format(@"insert into table_tax 
-                (tax_code,tax_name,tax_rate) 
-                VALUES ('{0}','{1}',{2})",
-                CODE, NAME, RATE);
+                (tax_code,tax_name,tax_rate, modified_by, modified_date, modified_computer) 
+                VALUES ('{0}','{1}',{2},'{3}','{4}','{5}')",
+                CODE, NAME, RATE, MODIFIED_BY, DateTime.Now.ToString(Utils.DATE_FORMAT), MODIFIED_COMPUTER_NAME);
         }
         public string GetDeleteSQL()
         {
@@ -55,9 +58,12 @@ namespace Profit.Server
             return String.Format(@"update table_tax set 
                 tax_code = '{0}', 
                 tax_name='{1}',
-                tax_rate={2}
-                where tax_id = {3}",
-                CODE, NAME, RATE, ID);
+                tax_rate={2},
+                modified_by='{3}', 
+                modified_date='{4}',
+                modified_computer='{5}'
+                where tax_id = {6}",
+                CODE, NAME, RATE, MODIFIED_BY, DateTime.Now.ToString(Utils.DATE_FORMAT), MODIFIED_COMPUTER_NAME, ID);
         }
         public string GetByIDSQL(int ID)
         {
@@ -93,6 +99,9 @@ namespace Profit.Server
                 tax.CODE = aReader[1].ToString();
                 tax.NAME = aReader[2].ToString();
                 tax.RATE = Convert.ToDouble(aReader[3]);
+                tax.MODIFIED_BY = aReader["modified_by"].ToString();
+                tax.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                tax.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
                 result.Add(tax);
             }
             return result;

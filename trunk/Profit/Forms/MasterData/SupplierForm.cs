@@ -160,6 +160,8 @@ namespace Profit
             m_supplier.TERM_OF_PAYMENT = (TermOfPayment)topkryptonComboBox1.SelectedItem;
             m_supplier.WEBSITE = websitekryptonTextBox7.Text;
             m_supplier.ZIPCODE = zipcodekryptonTextBox2.Text;
+            m_supplier.MODIFIED_BY = m_mainForm.CurrentUser.NAME;
+            m_supplier.MODIFIED_COMPUTER_NAME = Environment.MachineName;
         }
         public void ClearForm()
         {

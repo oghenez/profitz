@@ -7,7 +7,7 @@ using System.Collections;
 
 namespace Profit.Server
 {
-    public class SupplierCategory : IEntity
+    public class SupplierCategory : Entity, IEntity
     {
         public int ID = 0;
         public string CODE = "B001";
@@ -33,15 +33,18 @@ namespace Profit.Server
                 suppliercategory.ID = Convert.ToInt32(aReader[0]);
                 suppliercategory.CODE = aReader[1].ToString();
                 suppliercategory.NAME = aReader[2].ToString();
+                suppliercategory.MODIFIED_BY = aReader["modified_by"].ToString();
+                suppliercategory.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                suppliercategory.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
             }
             return suppliercategory;
         }
         public string GetInsertSQL()
         {
             return String.Format(@"insert into table_suppliercategory 
-                (supcat_code,supcat_name) 
-                VALUES ('{0}','{1}')",
-                CODE, NAME);
+                (supcat_code,supcat_name, modified_by, modified_date, modified_computer) 
+                VALUES ('{0}','{1}', '{2}', '{3}', '{4}')",
+                CODE, NAME, MODIFIED_BY, DateTime.Now.ToString(Utils.DATE_FORMAT), MODIFIED_COMPUTER_NAME);
         }
         public string GetDeleteSQL()
         {
@@ -51,9 +54,12 @@ namespace Profit.Server
         {
             return String.Format(@"update table_suppliercategory set 
                 supcat_code = '{0}', 
-                supcat_name='{1}'
-                where supcat_id = {2}",
-                CODE, NAME, ID);
+                supcat_name='{1}',
+                modified_by='{2}', 
+                modified_date='{3}',
+                modified_computer='{4}'
+                where supcat_id = {5}",
+                CODE, NAME, MODIFIED_BY, DateTime.Now.ToString(Utils.DATE_FORMAT), MODIFIED_COMPUTER_NAME, ID);
         }
         public string GetByIDSQL(int ID)
         {
@@ -88,6 +94,9 @@ namespace Profit.Server
                 suppliercategory.ID = Convert.ToInt32(aReader[0]);
                 suppliercategory.CODE = aReader[1].ToString();
                 suppliercategory.NAME = aReader[2].ToString();
+                suppliercategory.MODIFIED_BY = aReader["modified_by"].ToString();
+                suppliercategory.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                suppliercategory.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
                 result.Add(suppliercategory);
             }
             return result;

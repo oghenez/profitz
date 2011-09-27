@@ -51,6 +51,9 @@ namespace Profit.Server
                 customer.TERM_OF_PAYMENT = new TermOfPayment(Convert.ToInt32(aReader[16]));
                 customer.WEBSITE = aReader[17].ToString();
                 customer.ZIPCODE = aReader[18].ToString();
+                customer.MODIFIED_BY = aReader["modified_by"].ToString();
+                customer.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                customer.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
             }
             return customer;
         }
@@ -74,7 +77,10 @@ namespace Profit.Server
                 cus_taxno,
                 top_id,
                 cus_website,
-                cus_zipcode
+                cus_zipcode, 
+                modified_by, 
+                modified_date, 
+                modified_computer
                 ) 
                 VALUES (
                 '{0}',
@@ -94,7 +100,7 @@ namespace Profit.Server
                 '{14}',
                 '{15}',
                 '{16}',
-                '{17}'
+                '{17}','{18}','{19}','{20}'
                 )",
                 CODE, 
                 NAME,
@@ -113,7 +119,10 @@ namespace Profit.Server
                 TAX_NO,
                 TERM_OF_PAYMENT.ID,
                 WEBSITE,
-                ZIPCODE);
+                ZIPCODE,
+                MODIFIED_BY,
+                DateTime.Now.ToString(Utils.DATE_FORMAT),
+                MODIFIED_COMPUTER_NAME);
         }
         public string GetDeleteSQL()
         {
@@ -139,8 +148,11 @@ namespace Profit.Server
                 cus_taxno='{14}',
                 top_id={15},
                 cus_website='{16}',
-                cus_zipcode='{17}'
-                where cus_id = {18}",
+                cus_zipcode='{17}',
+                modified_by='{18}', 
+                modified_date='{19}', 
+                modified_computer='{20}'
+                where cus_id = {21}",
                 CODE, 
                 NAME, 
                 ACTIVE,
@@ -159,6 +171,9 @@ namespace Profit.Server
                 TERM_OF_PAYMENT.ID,
                 WEBSITE,
                 ZIPCODE,
+                MODIFIED_BY,
+                DateTime.Now.ToString(Utils.DATE_FORMAT),
+                MODIFIED_COMPUTER_NAME,
                 ID);
         }
         public string GetByIDSQL(int ID)
@@ -214,6 +229,9 @@ namespace Profit.Server
                 customer.TERM_OF_PAYMENT = new TermOfPayment(Convert.ToInt32(aReader[16]));
                 customer.WEBSITE = aReader[17].ToString();
                 customer.ZIPCODE = aReader[18].ToString();
+                customer.MODIFIED_BY = aReader["modified_by"].ToString();
+                customer.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                customer.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
                 result.Add(customer);
             }
             return result;
@@ -243,6 +261,9 @@ namespace Profit.Server
                 customer.TERM_OF_PAYMENT = new TermOfPayment(Convert.ToInt32(aReader[16]));
                 customer.WEBSITE = aReader[17].ToString();
                 customer.ZIPCODE = aReader[18].ToString();
+                customer.MODIFIED_BY = aReader["modified_by"].ToString();
+                customer.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                customer.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
                 result.Add(customer);
             }
             return result;

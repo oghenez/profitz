@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Profit.Server
 {
-    public abstract class Vendor 
+    public abstract class Vendor :Entity
     {
         public int ID = 0;
         public string CODE = "B001";
