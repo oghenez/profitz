@@ -73,8 +73,8 @@ namespace Profit.Server
                 modified_by='{2}', 
                 modified_date='{3}',
                 modified_computer='{4}'
-                where unit_id = {2}",
-                CODE, NAME, ID);
+                where unit_id = {5}",
+                CODE, NAME, MODIFIED_BY, DateTime.Now.ToString(Utils.DATE_FORMAT), MODIFIED_COMPUTER_NAME, ID);
         }
         public string GetByIDSQL(int ID)
         {
