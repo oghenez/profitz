@@ -36,9 +36,12 @@ namespace Profit.Server
                     stk_amount,
                     ccy_id,
                     stk_stocktakingtype,
-                    stk_code
+                    stk_code, 
+                    modified_by, 
+                    modified_date, 
+                    modified_computer
                 ) 
-                VALUES ('{0}','{1}','{2}',{3},'{4}',{5},'{6}',{7},{8},{9},'{10}','{11}')",
+                VALUES ('{0}','{1}','{2}',{3},'{4}',{5},'{6}',{7},{8},{9},'{10}','{11}','{12}','{13}','{14}')",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                 StockCardEntryType.StockTaking.ToString(),//STOCK_CARD_ENTRY_TYPE.ToString(),
@@ -50,7 +53,10 @@ namespace Profit.Server
                 AMOUNT,
                 CURRENCY.ID,
                 STOCK_TAKING_TYPE.ToString(),
-                CODE
+                CODE,
+                MODIFIED_BY,
+                DateTime.Now.ToString(Utils.DATE_FORMAT),
+                MODIFIED_COMPUTER_NAME
                 );
         }
         public override string GetUpdateSQL()
@@ -67,8 +73,11 @@ namespace Profit.Server
                     stk_amount= {8},
                     ccy_id= {9},
                     stk_stocktakingtype = '{10}',
-                    stk_code = '{11}'
-                where stk_id = {12}",
+                    stk_code = '{11}',
+                modified_by='{12}', 
+                modified_date='{13}',
+                modified_computer='{14}'
+                where stk_id = {15}",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                  StockCardEntryType.StockTaking.ToString(), //STOCK_CARD_ENTRY_TYPE.ToString(),
@@ -81,6 +90,9 @@ namespace Profit.Server
                 CURRENCY.ID,
                 STOCK_TAKING_TYPE.ToString(),
                 CODE,
+                MODIFIED_BY,
+                DateTime.Now.ToString(Utils.DATE_FORMAT),
+                MODIFIED_COMPUTER_NAME,
                 ID);
         }
         public static StockTaking TransformReader(MySql.Data.MySqlClient.MySqlDataReader aReader)
@@ -103,6 +115,9 @@ namespace Profit.Server
                 transaction.CURRENCY = new Currency(Convert.ToInt32(aReader["ccy_id"]));
                 transaction.STOCK_TAKING_TYPE = (StockTakingType)Enum.Parse(typeof(StockTakingType), aReader["stk_stocktakingtype"].ToString());
                 transaction.CODE = aReader["stk_code"].ToString();
+                transaction.MODIFIED_BY = aReader["modified_by"].ToString();
+                transaction.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                transaction.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
             }
             return transaction;
         }
@@ -125,6 +140,9 @@ namespace Profit.Server
                 transaction.CURRENCY = new Currency(Convert.ToInt32(aReader["ccy_id"]));
                 transaction.STOCK_TAKING_TYPE = (StockTakingType)Enum.Parse(typeof(StockTakingType), aReader["stk_stocktakingtype"].ToString());
                 transaction.CODE = aReader["stk_code"].ToString();
+                transaction.MODIFIED_BY = aReader["modified_by"].ToString();
+                transaction.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                transaction.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
                 result.Add(transaction);
             }
             return result;

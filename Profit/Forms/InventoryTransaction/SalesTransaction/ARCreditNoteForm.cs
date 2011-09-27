@@ -365,6 +365,8 @@ namespace Profit
             m_prn.VENDOR = (Customer)supplierkryptonComboBox.SelectedItem;
             m_prn.NET_AMOUNT = Convert.ToDouble(netAmountkryptonNumericUpDown.Value);
             m_prn.CURRENCY = (Currency)currencyKryptonComboBox.SelectedItem;
+            m_prn.MODIFIED_BY = m_mainForm.CurrentUser.NAME;
+            m_prn.MODIFIED_COMPUTER_NAME = Environment.MachineName;
             m_prn.EVENT_JOURNAL_ITEMS = getItems();
         }
 
@@ -390,6 +392,7 @@ namespace Profit
                 st.SALES_RETURN = (SalesReturn)itemsDataGrid[invoiceNoColumn.Index, i].Tag;
                 st.NOTES = itemsDataGrid[notesColumn.Index, i].Value == null ? "" : itemsDataGrid[notesColumn.Index, i].Value.ToString();
                 st.EMPLOYEE = m_prn.EMPLOYEE;
+
                 items.Add(st);
             }
             return items;

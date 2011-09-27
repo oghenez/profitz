@@ -37,9 +37,12 @@ namespace Profit.Server
                     arcr_otherexpense,
                     arcr_netamount,
                     emp_id,
-                    arcr_usedforreceipt
+                    arcr_usedforreceipt, 
+                    modified_by, 
+                    modified_date, 
+                    modified_computer
                 ) 
-                VALUES ('{0}','{1}',{2},{3},'{4}','{5}',{6},'{7}',{8},{9},{10},{11},{12},{13},{14},{15},{16})",
+                VALUES ('{0}','{1}',{2},{3},'{4}','{5}',{6},'{7}',{8},{9},{10},{11},{12},{13},{14},{15},{16},'{17}','{18}','{19}')",
                 CODE,
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 VENDOR.ID,
@@ -56,7 +59,10 @@ namespace Profit.Server
                 OTHER_EXPENSE,
                 NET_AMOUNT,
                 EMPLOYEE.ID,
-                USED_FOR_RECEIPT
+                USED_FOR_RECEIPT,
+                MODIFIED_BY,
+                DateTime.Now.ToString(Utils.DATE_FORMAT),
+                MODIFIED_COMPUTER_NAME
                 );
         }
         public override string GetUpdateSQL()
@@ -78,8 +84,11 @@ namespace Profit.Server
                     arcr_otherexpense= {13},
                     arcr_netamount= {14},
                     emp_id= {15},
-                    arcr_usedforreceipt = {16}
-                where arcr_id = {17}",
+                    arcr_usedforreceipt = {16},
+                modified_by='{17}', 
+                modified_date='{18}',
+                modified_computer='{19}'
+                where arcr_id = {20}",
                 CODE,
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 VENDOR.ID,
@@ -97,6 +106,9 @@ namespace Profit.Server
                 NET_AMOUNT,
                 EMPLOYEE.ID,
                 USED_FOR_RECEIPT,
+                MODIFIED_BY,
+                DateTime.Now.ToString(Utils.DATE_FORMAT),
+                MODIFIED_COMPUTER_NAME,
                 ID);
         }
         public static ARCreditNote TransformReader(MySql.Data.MySqlClient.MySqlDataReader r)
@@ -124,6 +136,9 @@ namespace Profit.Server
                 tr.NET_AMOUNT = Convert.ToDouble(r["arcr_netamount"]);
                 tr.EMPLOYEE = new Employee(Convert.ToInt32(r["emp_id"]));
                 tr.USED_FOR_RECEIPT = Convert.ToBoolean(r["arcr_usedforreceipt"]);
+                tr.MODIFIED_BY = r["modified_by"].ToString();
+                tr.MODIFIED_DATE = Convert.ToDateTime(r["modified_date"].ToString());
+                tr.MODIFIED_COMPUTER_NAME = r["modified_computer"].ToString();
             }
             return tr;
         }
@@ -152,6 +167,9 @@ namespace Profit.Server
                 tr.NET_AMOUNT = Convert.ToDouble(r["arcr_netamount"]);
                 tr.EMPLOYEE = new Employee(Convert.ToInt32(r["emp_id"]));
                 tr.USED_FOR_RECEIPT = Convert.ToBoolean(r["arcr_usedforreceipt"]);
+                tr.MODIFIED_BY = r["modified_by"].ToString();
+                tr.MODIFIED_DATE = Convert.ToDateTime(r["modified_date"].ToString());
+                tr.MODIFIED_COMPUTER_NAME = r["modified_computer"].ToString();
                 result.Add(tr);
             }
             return result;

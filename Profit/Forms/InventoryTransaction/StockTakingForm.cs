@@ -301,6 +301,8 @@ namespace Profit
             m_stocktaking.AMOUNT = Convert.ToDouble(totalAmountkryptonNumericUpDown.Value);
             m_stocktaking.STOCK_TAKING_TYPE = (StockTakingType)Enum.Parse(typeof(StockTakingType), stocktakingTypekryptonComboBox.SelectedItem.ToString());
             m_stocktaking.NOTES = notesKryptonTextBox.Text;
+            m_stocktaking.MODIFIED_BY = m_mainForm.CurrentUser.NAME;
+            m_stocktaking.MODIFIED_COMPUTER_NAME = Environment.MachineName;
             m_stocktaking.EVENT_ITEMS = getItems();
         }
 
