@@ -45,6 +45,9 @@ CREATE TABLE `table_apdebitnote` (
   `apdn_netamount` double NOT NULL,
   `emp_id` int(10) unsigned NOT NULL,
   `apdn_usedforpayment` tinyint(1) NOT NULL,
+  `modified_by` varchar(45) NOT NULL,
+  `modified_date` datetime NOT NULL,
+  `modified_computer` varchar(45) NOT NULL,
   PRIMARY KEY (`apdn_id`),
   UNIQUE KEY `Index_2` (`apdn_code`),
   KEY `FK_table_apdebitnote_1` (`sup_id`),
@@ -60,8 +63,8 @@ CREATE TABLE `table_apdebitnote` (
 --
 
 /*!40000 ALTER TABLE `table_apdebitnote` DISABLE KEYS */;
-INSERT INTO `table_apdebitnote` (`apdn_id`,`apdn_code`,`apdn_date`,`sup_id`,`ccy_id`,`entry_type`,`apdn_notes`,`apdn_posted`,`apdn_eventstatus`,`apdn_subtotalamount`,`apdn_discpercent`,`apdn_amountafterdiscpercent`,`apdn_discamount`,`apdn_amountafterdiscamount`,`apdn_otherexpense`,`apdn_netamount`,`emp_id`,`apdn_usedforpayment`) VALUES 
- (10,'APDN001/09/2011','2011-09-07 00:00:00',1,1,'APDebitNote','',1,'Confirm',0,0,0,0,0,0,54000,2,1);
+INSERT INTO `table_apdebitnote` (`apdn_id`,`apdn_code`,`apdn_date`,`sup_id`,`ccy_id`,`entry_type`,`apdn_notes`,`apdn_posted`,`apdn_eventstatus`,`apdn_subtotalamount`,`apdn_discpercent`,`apdn_amountafterdiscpercent`,`apdn_discamount`,`apdn_amountafterdiscamount`,`apdn_otherexpense`,`apdn_netamount`,`emp_id`,`apdn_usedforpayment`,`modified_by`,`modified_date`,`modified_computer`) VALUES 
+ (10,'APDN001/09/2011','2011-09-07 00:00:00',1,1,'APDebitNote','',1,'Confirm',0,0,0,0,0,0,54000,2,1,'Administrator','2011-09-23 00:00:00','ADMIN_COMP');
 /*!40000 ALTER TABLE `table_apdebitnote` ENABLE KEYS */;
 
 
@@ -134,6 +137,9 @@ CREATE TABLE `table_arcreditnote` (
   `arcr_netamount` double NOT NULL,
   `emp_id` int(10) unsigned NOT NULL,
   `arcr_usedforreceipt` tinyint(1) NOT NULL,
+  `modified_by` varchar(45) NOT NULL,
+  `modified_date` datetime NOT NULL,
+  `modified_computer` varchar(45) NOT NULL,
   PRIMARY KEY (`arcr_id`),
   KEY `FK_table_arcreditnote_1` (`cus_id`),
   KEY `FK_table_arcreditnote_2` (`ccy_id`),
@@ -148,8 +154,8 @@ CREATE TABLE `table_arcreditnote` (
 --
 
 /*!40000 ALTER TABLE `table_arcreditnote` DISABLE KEYS */;
-INSERT INTO `table_arcreditnote` (`arcr_id`,`arcr_code`,`arcr_date`,`cus_id`,`ccy_id`,`entry_type`,`arcr_notes`,`arcr_posted`,`arcr_eventstatus`,`arcr_subtotalamount`,`arcr_discpercent`,`arcr_amountafterdiscpercent`,`arcr_discamount`,`arcr_amountafterdiscamount`,`arcr_otherexpense`,`arcr_netamount`,`emp_id`,`arcr_usedforreceipt`) VALUES 
- (1,'ARCR001/09/2011','2011-09-09 00:00:00',1,1,'ARCreditNote','',1,'Confirm',0,0,0,0,0,0,675000,2,1);
+INSERT INTO `table_arcreditnote` (`arcr_id`,`arcr_code`,`arcr_date`,`cus_id`,`ccy_id`,`entry_type`,`arcr_notes`,`arcr_posted`,`arcr_eventstatus`,`arcr_subtotalamount`,`arcr_discpercent`,`arcr_amountafterdiscpercent`,`arcr_discamount`,`arcr_amountafterdiscamount`,`arcr_otherexpense`,`arcr_netamount`,`emp_id`,`arcr_usedforreceipt`,`modified_by`,`modified_date`,`modified_computer`) VALUES 
+ (1,'ARCR001/09/2011','2011-09-09 00:00:00',1,1,'ARCreditNote','',1,'Confirm',0,0,0,0,0,0,675000,2,1,'Administrator','2011-09-23 00:00:00','ADMIN_COMP');
 /*!40000 ALTER TABLE `table_arcreditnote` ENABLE KEYS */;
 
 
@@ -522,6 +528,9 @@ CREATE TABLE `table_customerinvoicejournal` (
   `ci_id` int(10) unsigned NOT NULL,
   `cij_againstreceiptstatus` varchar(45) NOT NULL,
   `pos_id` int(10) unsigned NOT NULL,
+  `modified_by` varchar(45) NOT NULL,
+  `modified_date` datetime NOT NULL,
+  `modified_computer` varchar(45) NOT NULL,
   PRIMARY KEY (`cij_id`),
   UNIQUE KEY `Index_5` (`cij_code`),
   KEY `FK_table_customerinvoicejournal_1` (`cus_id`),
@@ -537,15 +546,15 @@ CREATE TABLE `table_customerinvoicejournal` (
 --
 
 /*!40000 ALTER TABLE `table_customerinvoicejournal` DISABLE KEYS */;
-INSERT INTO `table_customerinvoicejournal` (`cij_id`,`cij_code`,`cij_date`,`cus_id`,`ccy_id`,`entry_type`,`cij_notes`,`cij_posted`,`cij_eventstatus`,`cij_subtotalamount`,`cij_discpercent`,`cij_amountafterdiscpercent`,`cij_discamount`,`cij_amountafterdiscamount`,`cij_otherexpense`,`cij_netamount`,`emp_id`,`ci_id`,`cij_againstreceiptstatus`,`pos_id`) VALUES 
- (5,'CI001/09/2011','2011-09-09 00:00:00',1,1,'CustomerInvoice','',1,'Confirm',0,0,0,0,0,0,3000000,1,2,'Open',0),
- (6,'CI002/09/2011','2011-09-09 00:00:00',1,1,'CustomerInvoice','',1,'Confirm',0,0,0,0,0,0,315000,1,3,'Open',0),
- (15,'POS001/09/2011','2011-09-14 00:00:00',3,1,'CustomerInvoice','',1,'Confirm',0,0,0,0,0,0,20000,1,0,'Open',1),
- (23,'POS002/09/2011','2011-09-14 00:00:00',3,1,'CustomerInvoice','',1,'Confirm',0,0,0,0,0,0,80000,1,0,'Open',2),
- (24,'POS004/09/2011','2011-09-15 00:00:00',3,1,'CustomerInvoice','',1,'Confirm',0,0,0,0,0,0,15000,1,0,'Open',4),
- (28,'POS006/09/2011','2011-09-21 00:00:00',3,1,'CustomerInvoice','',1,'Confirm',0,0,0,0,0,0,25000,1,0,'Open',6),
- (30,'POS008/09/2011','2011-09-22 00:00:00',3,1,'CustomerInvoice','',1,'Confirm',0,0,0,0,0,0,25875,1,0,'Open',8),
- (31,'POS009/09/2011','2011-09-22 00:00:00',3,1,'CustomerInvoice','',1,'Confirm',0,0,0,0,0,0,12474,1,0,'Open',9);
+INSERT INTO `table_customerinvoicejournal` (`cij_id`,`cij_code`,`cij_date`,`cus_id`,`ccy_id`,`entry_type`,`cij_notes`,`cij_posted`,`cij_eventstatus`,`cij_subtotalamount`,`cij_discpercent`,`cij_amountafterdiscpercent`,`cij_discamount`,`cij_amountafterdiscamount`,`cij_otherexpense`,`cij_netamount`,`emp_id`,`ci_id`,`cij_againstreceiptstatus`,`pos_id`,`modified_by`,`modified_date`,`modified_computer`) VALUES 
+ (5,'CI001/09/2011','2011-09-09 00:00:00',1,1,'CustomerInvoice','',1,'Confirm',0,0,0,0,0,0,3000000,1,2,'Open',0,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (6,'CI002/09/2011','2011-09-09 00:00:00',1,1,'CustomerInvoice','',1,'Confirm',0,0,0,0,0,0,315000,1,3,'Open',0,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (15,'POS001/09/2011','2011-09-14 00:00:00',3,1,'CustomerInvoice','',1,'Confirm',0,0,0,0,0,0,20000,1,0,'Open',1,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (23,'POS002/09/2011','2011-09-14 00:00:00',3,1,'CustomerInvoice','',1,'Confirm',0,0,0,0,0,0,80000,1,0,'Open',2,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (24,'POS004/09/2011','2011-09-15 00:00:00',3,1,'CustomerInvoice','',1,'Confirm',0,0,0,0,0,0,15000,1,0,'Open',4,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (28,'POS006/09/2011','2011-09-21 00:00:00',3,1,'CustomerInvoice','',1,'Confirm',0,0,0,0,0,0,25000,1,0,'Open',6,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (30,'POS008/09/2011','2011-09-22 00:00:00',3,1,'CustomerInvoice','',1,'Confirm',0,0,0,0,0,0,25875,1,0,'Open',8,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (31,'POS009/09/2011','2011-09-22 00:00:00',3,1,'CustomerInvoice','',1,'Confirm',0,0,0,0,0,0,12474,1,0,'Open',9,'Administrator','2011-09-23 00:00:00','ADMIN_COMP');
 /*!40000 ALTER TABLE `table_customerinvoicejournal` ENABLE KEYS */;
 
 
@@ -627,6 +636,9 @@ CREATE TABLE `table_customeroutstandinginvoice` (
   `costi_netamount` double NOT NULL,
   `emp_id` int(10) unsigned NOT NULL,
   `costi_againstreceiptstatus` varchar(45) NOT NULL,
+  `modified_by` varchar(45) NOT NULL,
+  `modified_date` datetime NOT NULL,
+  `modified_computer` varchar(45) NOT NULL,
   PRIMARY KEY (`costi_id`),
   KEY `Index_2` (`costi_code`),
   KEY `FK_table_customeroutstandinginvoice_1` (`cus_id`),
@@ -642,8 +654,8 @@ CREATE TABLE `table_customeroutstandinginvoice` (
 --
 
 /*!40000 ALTER TABLE `table_customeroutstandinginvoice` DISABLE KEYS */;
-INSERT INTO `table_customeroutstandinginvoice` (`costi_id`,`costi_code`,`costi_date`,`cus_id`,`ccy_id`,`entry_type`,`costi_notes`,`costi_posted`,`costi_eventstatus`,`costi_subtotalamount`,`costi_discpercent`,`costi_amountafterdiscpercent`,`costi_discamount`,`costi_amountafterdiscamount`,`costi_otherexpense`,`costi_netamount`,`emp_id`,`costi_againstreceiptstatus`) VALUES 
- (2,'COI002/09/2011','2011-09-09 00:00:00',1,1,'CustomerOutStandingInvoice','',1,'Confirm',0,0,0,0,0,0,5000000,1,'Close');
+INSERT INTO `table_customeroutstandinginvoice` (`costi_id`,`costi_code`,`costi_date`,`cus_id`,`ccy_id`,`entry_type`,`costi_notes`,`costi_posted`,`costi_eventstatus`,`costi_subtotalamount`,`costi_discpercent`,`costi_amountafterdiscpercent`,`costi_discamount`,`costi_amountafterdiscamount`,`costi_otherexpense`,`costi_netamount`,`emp_id`,`costi_againstreceiptstatus`,`modified_by`,`modified_date`,`modified_computer`) VALUES 
+ (2,'COI002/09/2011','2011-09-09 00:00:00',1,1,'CustomerOutStandingInvoice','',1,'Confirm',0,0,0,0,0,0,5000000,1,'Close','Administrator','2011-09-23 00:00:00','ADMIN_COMP');
 /*!40000 ALTER TABLE `table_customeroutstandinginvoice` ENABLE KEYS */;
 
 
@@ -7807,6 +7819,9 @@ CREATE TABLE `table_payment` (
   `pay_otherexpense` double NOT NULL,
   `pay_netamount` double NOT NULL,
   `emp_id` int(10) unsigned NOT NULL,
+  `modified_by` varchar(45) NOT NULL,
+  `modified_date` datetime NOT NULL,
+  `modified_computer` varchar(45) NOT NULL,
   PRIMARY KEY (`pay_id`),
   UNIQUE KEY `Index_2` (`pay_code`),
   KEY `FK_table_payment_1` (`sup_id`),
@@ -7822,11 +7837,11 @@ CREATE TABLE `table_payment` (
 --
 
 /*!40000 ALTER TABLE `table_payment` DISABLE KEYS */;
-INSERT INTO `table_payment` (`pay_id`,`pay_code`,`pay_date`,`sup_id`,`ccy_id`,`entry_type`,`pay_notes`,`pay_posted`,`pay_eventstatus`,`pay_subtotalamount`,`pay_discpercent`,`pay_amountafterdiscpercent`,`pay_discamount`,`pay_amountafterdiscamount`,`pay_otherexpense`,`pay_netamount`,`emp_id`) VALUES 
- (26,'PYMN001/09/2011','2011-09-07 00:00:00',1,1,'Payment','',1,'Confirm',0,0,0,0,0,0,54000,2),
- (27,'PYMN002/09/2011','2011-09-07 00:00:00',1,1,'Payment','',1,'Confirm',0,0,0,0,0,0,228500,2),
- (28,'PYMN003/09/2011','2011-09-07 00:00:00',3,1,'Payment','',1,'Confirm',0,0,0,0,0,0,539000,2),
- (29,'PYMN004/09/2011','2011-09-08 00:00:00',1,1,'Payment','',1,'Confirm',0,0,0,0,0,0,3000000,2);
+INSERT INTO `table_payment` (`pay_id`,`pay_code`,`pay_date`,`sup_id`,`ccy_id`,`entry_type`,`pay_notes`,`pay_posted`,`pay_eventstatus`,`pay_subtotalamount`,`pay_discpercent`,`pay_amountafterdiscpercent`,`pay_discamount`,`pay_amountafterdiscamount`,`pay_otherexpense`,`pay_netamount`,`emp_id`,`modified_by`,`modified_date`,`modified_computer`) VALUES 
+ (26,'PYMN001/09/2011','2011-09-07 00:00:00',1,1,'Payment','',1,'Confirm',0,0,0,0,0,0,54000,2,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (27,'PYMN002/09/2011','2011-09-07 00:00:00',1,1,'Payment','',1,'Confirm',0,0,0,0,0,0,228500,2,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (28,'PYMN003/09/2011','2011-09-07 00:00:00',3,1,'Payment','',1,'Confirm',0,0,0,0,0,0,539000,2,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (29,'PYMN004/09/2011','2011-09-08 00:00:00',1,1,'Payment','',1,'Confirm',0,0,0,0,0,0,3000000,2,'Administrator','2011-09-23 00:00:00','ADMIN_COMP');
 /*!40000 ALTER TABLE `table_payment` ENABLE KEYS */;
 
 
@@ -8244,6 +8259,9 @@ CREATE TABLE `table_purchasereturn` (
   `sup_id` int(10) unsigned NOT NULL,
   `prn_docno` varchar(45) NOT NULL,
   `prn_docdate` datetime NOT NULL,
+  `modified_by` varchar(45) NOT NULL,
+  `modified_date` datetime NOT NULL,
+  `modified_computer` varchar(45) NOT NULL,
   PRIMARY KEY (`prn_id`),
   UNIQUE KEY `Index_2` (`prn_code`),
   KEY `FK_table_purchasereturn_1` (`emp_id`),
@@ -8257,8 +8275,8 @@ CREATE TABLE `table_purchasereturn` (
 --
 
 /*!40000 ALTER TABLE `table_purchasereturn` DISABLE KEYS */;
-INSERT INTO `table_purchasereturn` (`prn_id`,`prn_date`,`prn_noticedate`,`prn_scentrytype`,`emp_id`,`prn_notes`,`prn_posted`,`prn_eventstatus`,`prn_code`,`sup_id`,`prn_docno`,`prn_docdate`) VALUES 
- (14,'2011-09-07 00:00:00','2011-09-07 00:00:00','PurchaseReturn',2,'',1,'Confirm','PR001/09/2011',1,'','2011-09-07 00:00:00');
+INSERT INTO `table_purchasereturn` (`prn_id`,`prn_date`,`prn_noticedate`,`prn_scentrytype`,`emp_id`,`prn_notes`,`prn_posted`,`prn_eventstatus`,`prn_code`,`sup_id`,`prn_docno`,`prn_docdate`,`modified_by`,`modified_date`,`modified_computer`) VALUES 
+ (14,'2011-09-07 00:00:00','2011-09-07 00:00:00','PurchaseReturn',2,'',1,'Confirm','PR001/09/2011',1,'','2011-09-07 00:00:00','Administrator','2011-09-23 00:00:00','ADMIN_COMP');
 /*!40000 ALTER TABLE `table_purchasereturn` ENABLE KEYS */;
 
 
@@ -8328,6 +8346,9 @@ CREATE TABLE `table_receipt` (
   `rec_otherexpense` double NOT NULL,
   `rec_netamount` double NOT NULL,
   `emp_id` int(10) unsigned NOT NULL,
+  `modified_by` varchar(45) NOT NULL,
+  `modified_date` datetime NOT NULL,
+  `modified_computer` varchar(45) NOT NULL,
   PRIMARY KEY (`rec_id`),
   KEY `Index_2` (`rec_code`),
   KEY `FK_table_receipt_1` (`cus_id`),
@@ -8343,14 +8364,14 @@ CREATE TABLE `table_receipt` (
 --
 
 /*!40000 ALTER TABLE `table_receipt` DISABLE KEYS */;
-INSERT INTO `table_receipt` (`rec_id`,`rec_code`,`rec_date`,`cus_id`,`ccy_id`,`entry_type`,`rec_notes`,`rec_posted`,`rec_eventstatus`,`rec_subtotalamount`,`rec_discpercent`,`rec_amountafterdiscpercent`,`rec_discamount`,`rec_amountafterdiscamount`,`rec_otherexpense`,`rec_netamount`,`emp_id`) VALUES 
- (4,'RC002/09/2011','2011-09-09 00:00:00',1,1,'Receipt','',1,'Confirm',0,0,0,0,0,0,675000,2),
- (10,'RC003/09/2011','2011-09-14 00:00:00',3,1,'Receipt','Auto generate from POS Transaction',1,'Confirm',0,0,0,0,0,0,20000,1),
- (18,'RC004/09/2011','2011-09-14 00:00:00',3,1,'Receipt','Auto generate from POS Transaction',1,'Confirm',0,0,0,0,0,0,80000,1),
- (19,'RC005/09/2011','2011-09-15 00:00:00',3,1,'Receipt','Auto generate from POS Transaction',1,'Confirm',0,0,0,0,0,0,15000,1),
- (23,'RC006/09/2011','2011-09-21 00:00:00',3,1,'Receipt','Auto generate from POS Transaction',1,'Confirm',0,0,0,0,0,0,25000,1),
- (25,'RC007/09/2011','2011-09-22 00:00:00',3,1,'Receipt','Auto generate from POS Transaction',1,'Confirm',0,0,0,0,0,0,25875,1),
- (26,'RC008/09/2011','2011-09-22 00:00:00',3,1,'Receipt','Auto generate from POS Transaction',1,'Confirm',0,0,0,0,0,0,12474,1);
+INSERT INTO `table_receipt` (`rec_id`,`rec_code`,`rec_date`,`cus_id`,`ccy_id`,`entry_type`,`rec_notes`,`rec_posted`,`rec_eventstatus`,`rec_subtotalamount`,`rec_discpercent`,`rec_amountafterdiscpercent`,`rec_discamount`,`rec_amountafterdiscamount`,`rec_otherexpense`,`rec_netamount`,`emp_id`,`modified_by`,`modified_date`,`modified_computer`) VALUES 
+ (4,'RC002/09/2011','2011-09-09 00:00:00',1,1,'Receipt','',1,'Confirm',0,0,0,0,0,0,675000,2,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (10,'RC003/09/2011','2011-09-14 00:00:00',3,1,'Receipt','Auto generate from POS Transaction',1,'Confirm',0,0,0,0,0,0,20000,1,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (18,'RC004/09/2011','2011-09-14 00:00:00',3,1,'Receipt','Auto generate from POS Transaction',1,'Confirm',0,0,0,0,0,0,80000,1,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (19,'RC005/09/2011','2011-09-15 00:00:00',3,1,'Receipt','Auto generate from POS Transaction',1,'Confirm',0,0,0,0,0,0,15000,1,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (23,'RC006/09/2011','2011-09-21 00:00:00',3,1,'Receipt','Auto generate from POS Transaction',1,'Confirm',0,0,0,0,0,0,25000,1,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (25,'RC007/09/2011','2011-09-22 00:00:00',3,1,'Receipt','Auto generate from POS Transaction',1,'Confirm',0,0,0,0,0,0,25875,1,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (26,'RC008/09/2011','2011-09-22 00:00:00',3,1,'Receipt','Auto generate from POS Transaction',1,'Confirm',0,0,0,0,0,0,12474,1,'Administrator','2011-09-23 00:00:00','ADMIN_COMP');
 /*!40000 ALTER TABLE `table_receipt` ENABLE KEYS */;
 
 
@@ -8438,6 +8459,9 @@ CREATE TABLE `table_salesorder` (
   `cus_id` int(10) unsigned NOT NULL,
   `so_docno` varchar(45) NOT NULL,
   `so_docdate` datetime NOT NULL,
+  `modified_by` varchar(45) NOT NULL,
+  `modified_date` datetime NOT NULL,
+  `modified_computer` varchar(45) NOT NULL,
   PRIMARY KEY (`so_id`),
   KEY `Index_2` (`so_code`),
   KEY `FK_table_salesorder_1` (`emp_id`),
@@ -8457,9 +8481,9 @@ CREATE TABLE `table_salesorder` (
 --
 
 /*!40000 ALTER TABLE `table_salesorder` DISABLE KEYS */;
-INSERT INTO `table_salesorder` (`so_id`,`so_date`,`so_noticedate`,`so_scentrytype`,`emp_id`,`so_notes`,`so_posted`,`so_eventstatus`,`div_id`,`top_id`,`so_duedate`,`ccy_id`,`so_subtotal`,`so_discpercent`,`so_discafteramount`,`so_discamount`,`tax_id`,`so_taxafteramount`,`so_otherexpense`,`so_nettotal`,`so_againsdostatus`,`so_code`,`cus_id`,`so_docno`,`so_docdate`) VALUES 
- (2,'2011-09-08 00:00:00','2011-09-08 00:00:00','SalesOrder',1,'',1,'Confirm',1,1,'2011-09-08 00:00:00',1,450000,0,0,0,1,0,0,450000,'Outstanding','SLA001/09/2011',1,'','2011-09-08 00:00:00'),
- (3,'2011-09-12 00:00:00','2011-09-12 00:00:00','SalesOrder',2,'',1,'Confirm',1,1,'2011-09-12 00:00:00',1,106000,0,0,0,1,0,0,106000,'Open','SLA002/09/2011',1,'','2011-09-12 00:00:00');
+INSERT INTO `table_salesorder` (`so_id`,`so_date`,`so_noticedate`,`so_scentrytype`,`emp_id`,`so_notes`,`so_posted`,`so_eventstatus`,`div_id`,`top_id`,`so_duedate`,`ccy_id`,`so_subtotal`,`so_discpercent`,`so_discafteramount`,`so_discamount`,`tax_id`,`so_taxafteramount`,`so_otherexpense`,`so_nettotal`,`so_againsdostatus`,`so_code`,`cus_id`,`so_docno`,`so_docdate`,`modified_by`,`modified_date`,`modified_computer`) VALUES 
+ (2,'2011-09-08 00:00:00','2011-09-08 00:00:00','SalesOrder',1,'',1,'Confirm',1,1,'2011-09-08 00:00:00',1,450000,0,0,0,1,0,0,450000,'Outstanding','SLA001/09/2011',1,'','2011-09-08 00:00:00','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (3,'2011-09-12 00:00:00','2011-09-12 00:00:00','SalesOrder',2,'',1,'Confirm',1,1,'2011-09-12 00:00:00',1,106000,0,0,0,1,0,0,106000,'Open','SLA002/09/2011',1,'','2011-09-12 00:00:00','Administrator','2011-09-23 00:00:00','ADMIN_COMP');
 /*!40000 ALTER TABLE `table_salesorder` ENABLE KEYS */;
 
 
@@ -8531,6 +8555,9 @@ CREATE TABLE `table_salesreturn` (
   `srn_eventstatus` varchar(45) NOT NULL,
   `srn_code` varchar(45) NOT NULL,
   `cus_id` int(10) unsigned NOT NULL,
+  `modified_by` varchar(45) NOT NULL,
+  `modified_date` datetime NOT NULL,
+  `modified_computer` varchar(45) NOT NULL,
   PRIMARY KEY (`srn_id`),
   UNIQUE KEY `Index_2` (`srn_code`),
   KEY `FK_table_salesreturn_1` (`emp_id`),
@@ -8544,8 +8571,8 @@ CREATE TABLE `table_salesreturn` (
 --
 
 /*!40000 ALTER TABLE `table_salesreturn` DISABLE KEYS */;
-INSERT INTO `table_salesreturn` (`srn_id`,`srn_date`,`srn_noticedate`,`srn_scentrytype`,`emp_id`,`srn_notes`,`srn_posted`,`srn_eventstatus`,`srn_code`,`cus_id`) VALUES 
- (3,'2011-09-09 00:00:00','2011-09-09 00:00:00','SalesReturn',2,'',1,'Confirm','SR001/09/2011',1);
+INSERT INTO `table_salesreturn` (`srn_id`,`srn_date`,`srn_noticedate`,`srn_scentrytype`,`emp_id`,`srn_notes`,`srn_posted`,`srn_eventstatus`,`srn_code`,`cus_id`,`modified_by`,`modified_date`,`modified_computer`) VALUES 
+ (3,'2011-09-09 00:00:00','2011-09-09 00:00:00','SalesReturn',2,'',1,'Confirm','SR001/09/2011',1,'Administrator','2011-09-23 00:00:00','ADMIN_COMP');
 /*!40000 ALTER TABLE `table_salesreturn` ENABLE KEYS */;
 
 
@@ -8738,6 +8765,9 @@ CREATE TABLE `table_stocktaking` (
   `ccy_id` int(10) unsigned NOT NULL,
   `stk_stocktakingtype` varchar(45) NOT NULL,
   `stk_code` varchar(45) NOT NULL,
+  `modified_by` varchar(45) NOT NULL,
+  `modified_date` datetime NOT NULL,
+  `modified_computer` varchar(45) NOT NULL,
   PRIMARY KEY (`stk_id`),
   UNIQUE KEY `Index_5` (`stk_code`),
   KEY `FK_table_stocktaking_1` (`warehouse_id`),
@@ -8753,9 +8783,9 @@ CREATE TABLE `table_stocktaking` (
 --
 
 /*!40000 ALTER TABLE `table_stocktaking` DISABLE KEYS */;
-INSERT INTO `table_stocktaking` (`stk_id`,`stk_date`,`stk_noticedate`,`stk_scentrytype`,`emp_id`,`stk_notes`,`stk_posted`,`stk_eventstatus`,`warehouse_id`,`stk_amount`,`ccy_id`,`stk_stocktakingtype`,`stk_code`) VALUES 
- (3,'2011-10-12 00:00:00','2011-09-12 00:00:00','StockTaking',1,'',0,'Entry',1,200000,1,'Adjustment','PMST/001/09/2011'),
- (4,'2011-09-20 00:00:00','2011-09-20 00:00:00','StockTaking',1,'',1,'Confirm',1,150000,1,'Adjustment','PMST/002/09/2011');
+INSERT INTO `table_stocktaking` (`stk_id`,`stk_date`,`stk_noticedate`,`stk_scentrytype`,`emp_id`,`stk_notes`,`stk_posted`,`stk_eventstatus`,`warehouse_id`,`stk_amount`,`ccy_id`,`stk_stocktakingtype`,`stk_code`,`modified_by`,`modified_date`,`modified_computer`) VALUES 
+ (3,'2011-10-12 00:00:00','2011-09-12 00:00:00','StockTaking',1,'',0,'Entry',1,200000,1,'Adjustment','PMST/001/09/2011','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (4,'2011-09-20 00:00:00','2011-09-20 00:00:00','StockTaking',1,'',1,'Confirm',1,150000,1,'Adjustment','PMST/002/09/2011','Administrator','2011-09-23 00:00:00','ADMIN_COMP');
 /*!40000 ALTER TABLE `table_stocktaking` ENABLE KEYS */;
 
 
@@ -8912,6 +8942,9 @@ CREATE TABLE `table_supplierinvoice` (
   `sup_id` int(10) unsigned NOT NULL,
   `si_docno` varchar(45) NOT NULL,
   `si_docdate` datetime NOT NULL,
+  `modified_by` varchar(45) NOT NULL,
+  `modified_date` datetime NOT NULL,
+  `modified_computer` varchar(45) NOT NULL,
   PRIMARY KEY (`si_id`),
   UNIQUE KEY `Index_2` (`si_code`) USING BTREE,
   KEY `FK_table_supplierinvoice_1` (`emp_id`),
@@ -8932,16 +8965,16 @@ CREATE TABLE `table_supplierinvoice` (
 --
 
 /*!40000 ALTER TABLE `table_supplierinvoice` DISABLE KEYS */;
-INSERT INTO `table_supplierinvoice` (`si_id`,`si_date`,`si_noticedate`,`si_scentrytype`,`emp_id`,`si_notes`,`si_posted`,`si_eventstatus`,`div_id`,`top_id`,`si_duedate`,`ccy_id`,`si_subtotal`,`si_discpercent`,`si_discafteramount`,`si_discamount`,`tax_id`,`si_taxafteramount`,`si_otherexpense`,`si_nettotal`,`si_code`,`sup_id`,`si_docno`,`si_docdate`) VALUES 
- (29,'2011-09-07 00:00:00','2011-09-07 00:00:00','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-09-07 00:00:00',1,282500,0,0,0,1,0,0,282500,'SP001/09/2011',1,'','2011-09-07 00:00:00'),
- (30,'2011-09-07 00:00:00','2011-09-07 00:00:00','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-09-07 00:00:00',1,539000,0,0,0,1,0,0,539000,'SP002/09/2011',3,'','2011-09-07 00:00:00'),
- (31,'2011-09-07 00:00:00','2011-09-07 00:00:00','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-09-07 00:00:00',1,3000000,0,0,0,1,0,0,3000000,'SP003/09/2011',1,'','2011-09-07 00:00:00'),
- (32,'2011-09-09 00:00:00','2011-09-09 00:00:00','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-09-09 00:00:00',1,450000,0,0,0,1,0,0,450000,'SP004/09/2011',1,'','2011-09-09 00:00:00'),
- (33,'2011-09-09 00:00:00','2011-09-09 00:00:00','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-09-09 00:00:00',1,100000,0,0,0,1,0,0,100000,'SP005/09/2011',1,'','2011-09-09 00:00:00'),
- (34,'2011-09-14 00:00:00','2011-09-14 00:00:00','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-09-14 00:00:00',1,1500000,0,0,0,1,0,0,1500000,'SP006/09/2011',1,'','2011-09-14 00:00:00'),
- (35,'2011-09-16 00:00:00','2011-09-16 00:00:00','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-09-16 00:00:00',1,150000,0,0,0,1,0,0,150000,'SP007/09/2011',1,'','2011-09-16 00:00:00'),
- (36,'2011-09-20 00:00:00','2011-09-20 00:00:00','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-09-20 00:00:00',1,725000,0,0,0,1,0,0,725000,'SP008/09/2011',1,'','2011-09-20 00:00:00'),
- (37,'2011-09-26 12:00:00','2011-09-26 03:59:32','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-09-26 12:00:00',1,100000,0,0,0,1,0,0,100000,'SP009/09/2011',1,'','2011-09-26 12:00:00');
+INSERT INTO `table_supplierinvoice` (`si_id`,`si_date`,`si_noticedate`,`si_scentrytype`,`emp_id`,`si_notes`,`si_posted`,`si_eventstatus`,`div_id`,`top_id`,`si_duedate`,`ccy_id`,`si_subtotal`,`si_discpercent`,`si_discafteramount`,`si_discamount`,`tax_id`,`si_taxafteramount`,`si_otherexpense`,`si_nettotal`,`si_code`,`sup_id`,`si_docno`,`si_docdate`,`modified_by`,`modified_date`,`modified_computer`) VALUES 
+ (29,'2011-09-07 00:00:00','2011-09-07 00:00:00','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-09-07 00:00:00',1,282500,0,0,0,1,0,0,282500,'SP001/09/2011',1,'','2011-09-07 00:00:00','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (30,'2011-09-07 00:00:00','2011-09-07 00:00:00','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-09-07 00:00:00',1,539000,0,0,0,1,0,0,539000,'SP002/09/2011',3,'','2011-09-07 00:00:00','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (31,'2011-09-07 00:00:00','2011-09-07 00:00:00','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-09-07 00:00:00',1,3000000,0,0,0,1,0,0,3000000,'SP003/09/2011',1,'','2011-09-07 00:00:00','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (32,'2011-09-09 00:00:00','2011-09-09 00:00:00','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-09-09 00:00:00',1,450000,0,0,0,1,0,0,450000,'SP004/09/2011',1,'','2011-09-09 00:00:00','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (33,'2011-09-09 00:00:00','2011-09-09 00:00:00','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-09-09 00:00:00',1,100000,0,0,0,1,0,0,100000,'SP005/09/2011',1,'','2011-09-09 00:00:00','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (34,'2011-09-14 00:00:00','2011-09-14 00:00:00','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-09-14 00:00:00',1,1500000,0,0,0,1,0,0,1500000,'SP006/09/2011',1,'','2011-09-14 00:00:00','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (35,'2011-09-16 00:00:00','2011-09-16 00:00:00','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-09-16 00:00:00',1,150000,0,0,0,1,0,0,150000,'SP007/09/2011',1,'','2011-09-16 00:00:00','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (36,'2011-09-20 00:00:00','2011-09-20 00:00:00','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-09-20 00:00:00',1,725000,0,0,0,1,0,0,725000,'SP008/09/2011',1,'','2011-09-20 00:00:00','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (37,'2011-09-26 12:00:00','2011-09-26 03:59:32','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-09-26 12:00:00',1,100000,0,0,0,1,0,0,100000,'SP009/09/2011',1,'','2011-09-26 12:00:00','Administrator','2011-09-23 00:00:00','ADMIN_COMP');
 /*!40000 ALTER TABLE `table_supplierinvoice` ENABLE KEYS */;
 
 
@@ -9029,6 +9062,9 @@ CREATE TABLE `table_supplierinvoicejournal` (
   `emp_id` int(10) unsigned NOT NULL,
   `si_id` int(10) unsigned NOT NULL,
   `sij_againstpaymentstatus` varchar(45) NOT NULL,
+  `modified_by` varchar(45) NOT NULL,
+  `modified_date` datetime NOT NULL,
+  `modified_computer` varchar(45) NOT NULL,
   PRIMARY KEY (`sij_id`),
   UNIQUE KEY `Index_5` (`sij_code`),
   KEY `FK_table_supplierinvoicejournal_1` (`sup_id`),
@@ -9044,16 +9080,16 @@ CREATE TABLE `table_supplierinvoicejournal` (
 --
 
 /*!40000 ALTER TABLE `table_supplierinvoicejournal` DISABLE KEYS */;
-INSERT INTO `table_supplierinvoicejournal` (`sij_id`,`sij_code`,`sij_date`,`sup_id`,`ccy_id`,`entry_type`,`sij_notes`,`sij_posted`,`sij_eventstatus`,`sij_subtotalamount`,`sij_discpercent`,`sij_amountafterdiscpercent`,`sij_discamount`,`sij_amountafterdiscamount`,`sij_otherexpense`,`sij_netamount`,`emp_id`,`si_id`,`sij_againstpaymentstatus`) VALUES 
- (31,'SP001/09/2011','2011-09-07 00:00:00',1,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,282500,1,29,'Open'),
- (32,'SP002/09/2011','2011-09-07 00:00:00',3,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,539000,1,30,'Open'),
- (33,'SP003/09/2011','2011-09-07 00:00:00',1,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,3000000,1,31,'Open'),
- (34,'SP004/09/2011','2011-09-09 00:00:00',1,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,450000,1,32,'Open'),
- (36,'SP005/09/2011','2011-09-09 00:00:00',1,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,100000,1,33,'Close'),
- (37,'SP006/09/2011','2011-09-14 00:00:00',1,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,1500000,1,34,'Open'),
- (38,'SP007/09/2011','2011-09-16 00:00:00',1,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,150000,1,35,'Open'),
- (40,'SP008/09/2011','2011-09-20 00:00:00',1,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,725000,1,36,'Open'),
- (41,'SP009/09/2011','2011-09-26 12:00:00',1,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,100000,1,37,'Open');
+INSERT INTO `table_supplierinvoicejournal` (`sij_id`,`sij_code`,`sij_date`,`sup_id`,`ccy_id`,`entry_type`,`sij_notes`,`sij_posted`,`sij_eventstatus`,`sij_subtotalamount`,`sij_discpercent`,`sij_amountafterdiscpercent`,`sij_discamount`,`sij_amountafterdiscamount`,`sij_otherexpense`,`sij_netamount`,`emp_id`,`si_id`,`sij_againstpaymentstatus`,`modified_by`,`modified_date`,`modified_computer`) VALUES 
+ (31,'SP001/09/2011','2011-09-07 00:00:00',1,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,282500,1,29,'Open','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (32,'SP002/09/2011','2011-09-07 00:00:00',3,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,539000,1,30,'Open','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (33,'SP003/09/2011','2011-09-07 00:00:00',1,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,3000000,1,31,'Open','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (34,'SP004/09/2011','2011-09-09 00:00:00',1,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,450000,1,32,'Open','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (36,'SP005/09/2011','2011-09-09 00:00:00',1,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,100000,1,33,'Close','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (37,'SP006/09/2011','2011-09-14 00:00:00',1,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,1500000,1,34,'Open','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (38,'SP007/09/2011','2011-09-16 00:00:00',1,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,150000,1,35,'Open','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (40,'SP008/09/2011','2011-09-20 00:00:00',1,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,725000,1,36,'Open','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (41,'SP009/09/2011','2011-09-26 12:00:00',1,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,100000,1,37,'Open','Administrator','2011-09-23 00:00:00','ADMIN_COMP');
 /*!40000 ALTER TABLE `table_supplierinvoicejournal` ENABLE KEYS */;
 
 
@@ -9138,6 +9174,9 @@ CREATE TABLE `table_supplieroutstandinginvoice` (
   `sosti_netamount` double NOT NULL,
   `emp_id` int(10) unsigned NOT NULL,
   `sosti_againstpaymentstatus` varchar(45) NOT NULL,
+  `modified_by` varchar(45) NOT NULL,
+  `modified_date` datetime NOT NULL,
+  `modified_computer` varchar(45) NOT NULL,
   PRIMARY KEY (`sosti_id`),
   UNIQUE KEY `Index_2` (`sosti_code`),
   KEY `FK_table_supplieroutstandinginvoice_1` (`sup_id`),
@@ -9153,8 +9192,8 @@ CREATE TABLE `table_supplieroutstandinginvoice` (
 --
 
 /*!40000 ALTER TABLE `table_supplieroutstandinginvoice` DISABLE KEYS */;
-INSERT INTO `table_supplieroutstandinginvoice` (`sosti_id`,`sosti_code`,`sosti_date`,`sup_id`,`ccy_id`,`entry_type`,`sosti_notes`,`sosti_posted`,`sosti_eventstatus`,`sosti_subtotalamount`,`sosti_discpercent`,`sosti_amountafterdiscpercent`,`sosti_discamount`,`sosti_amountafterdiscamount`,`sosti_otherexpense`,`sosti_netamount`,`emp_id`,`sosti_againstpaymentstatus`) VALUES 
- (15,'SPOI001/09/2011','2011-09-07 00:00:00',1,1,'SupplierOutStandingInvoice','',1,'Confirm',0,0,0,0,0,0,1500000,2,'Open');
+INSERT INTO `table_supplieroutstandinginvoice` (`sosti_id`,`sosti_code`,`sosti_date`,`sup_id`,`ccy_id`,`entry_type`,`sosti_notes`,`sosti_posted`,`sosti_eventstatus`,`sosti_subtotalamount`,`sosti_discpercent`,`sosti_amountafterdiscpercent`,`sosti_discamount`,`sosti_amountafterdiscamount`,`sosti_otherexpense`,`sosti_netamount`,`emp_id`,`sosti_againstpaymentstatus`,`modified_by`,`modified_date`,`modified_computer`) VALUES 
+ (15,'SPOI001/09/2011','2011-09-07 00:00:00',1,1,'SupplierOutStandingInvoice','',1,'Confirm',0,0,0,0,0,0,1500000,2,'Open','Administrator','2011-09-23 00:00:00','ADMIN_COMP');
 /*!40000 ALTER TABLE `table_supplieroutstandinginvoice` ENABLE KEYS */;
 
 

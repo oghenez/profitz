@@ -54,9 +54,13 @@ namespace Profit.Server
                     emp_id,
                     ci_id,
                     cij_againstreceiptstatus,
-                    pos_id
+                    pos_id, 
+                    modified_by, 
+                    modified_date, 
+                    modified_computer
                 ) 
-                VALUES ('{0}','{1}',{2},{3},'{4}','{5}',{6},'{7}',{8},{9},{10},{11},{12},{13},{14},{15},{16},'{17}',{18})",
+                VALUES ('{0}','{1}',{2},{3},'{4}','{5}',{6},'{7}',
+{8},{9},{10},{11},{12},{13},{14},{15},{16},'{17}',{18},'{19}','{20}','{21}')",
                 CODE,
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 VENDOR.ID,
@@ -75,7 +79,10 @@ namespace Profit.Server
                 EMPLOYEE.ID,
                 CUSTOMER_INVOICE == null ? 0 : CUSTOMER_INVOICE.ID,
                 AGAINST_RECEIPT_STATUS.ToString(),
-                POS_INVOICE == null ? 0 : POS_INVOICE.ID
+                POS_INVOICE == null ? 0 : POS_INVOICE.ID,
+                MODIFIED_BY,
+                DateTime.Now.ToString(Utils.DATE_FORMAT),
+                MODIFIED_COMPUTER_NAME
                 );
         }
         public override string GetUpdateSQL()
@@ -99,8 +106,11 @@ namespace Profit.Server
                     emp_id = {15},
                      ci_id = {16},
                     cij_againstreceiptstatus = '{17}',
-                    pos_id = {18}
-                where cij_id = {19}",
+                    pos_id = {18},
+                modified_by='{19}', 
+                modified_date='{20}',
+                modified_computer='{21}'
+                where cij_id = {22}",
                 CODE,
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 VENDOR.ID,
@@ -120,6 +130,9 @@ namespace Profit.Server
                 CUSTOMER_INVOICE == null ? 0 : CUSTOMER_INVOICE.ID,
                 AGAINST_RECEIPT_STATUS.ToString(),
                 POS_INVOICE == null ? 0 : POS_INVOICE.ID,
+                MODIFIED_BY,
+                DateTime.Now.ToString(Utils.DATE_FORMAT),
+                MODIFIED_COMPUTER_NAME,
                 ID);
         }
         public static CustomerInvoiceJournal TransformReader(MySql.Data.MySqlClient.MySqlDataReader r)
@@ -149,6 +162,9 @@ namespace Profit.Server
                 tr.CUSTOMER_INVOICE = new CustomerInvoice(Convert.ToInt32(r["ci_id"]));
                 tr.AGAINST_RECEIPT_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), r["cij_againstreceiptstatus"].ToString());
                 tr.POS_INVOICE = new POS(Convert.ToInt32(r["pos_id"]));
+                tr.MODIFIED_BY = r["modified_by"].ToString();
+                tr.MODIFIED_DATE = Convert.ToDateTime(r["modified_date"].ToString());
+                tr.MODIFIED_COMPUTER_NAME = r["modified_computer"].ToString();
             }
             return tr;
         }
@@ -178,7 +194,9 @@ namespace Profit.Server
                 tr.CUSTOMER_INVOICE = new CustomerInvoice(Convert.ToInt32(r["ci_id"]));
                 tr.AGAINST_RECEIPT_STATUS = (AgainstStatus)Enum.Parse(typeof(AgainstStatus), r["cij_againstreceiptstatus"].ToString());
                 tr.POS_INVOICE = new POS(Convert.ToInt32(r["pos_id"]));
-
+                tr.MODIFIED_BY = r["modified_by"].ToString();
+                tr.MODIFIED_DATE = Convert.ToDateTime(r["modified_date"].ToString());
+                tr.MODIFIED_COMPUTER_NAME = r["modified_computer"].ToString();
                 result.Add(tr);
             }
             return result;

@@ -37,9 +37,13 @@ namespace Profit.Server
                     apdn_otherexpense,
                     apdn_netamount,
                     emp_id,
-                    apdn_usedforpayment
+                    apdn_usedforpayment, 
+                    modified_by, 
+                    modified_date, 
+                    modified_computer
                 ) 
-                VALUES ('{0}','{1}',{2},{3},'{4}','{5}',{6},'{7}',{8},{9},{10},{11},{12},{13},{14},{15},{16})",
+                VALUES ('{0}','{1}',{2},{3},'{4}','{5}',{6},'{7}',{8},{9},{10},{11},{12},{13},{14},{15},{16}
+                ,'{17}','{18}','{19}')",
                 CODE,
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 VENDOR.ID,
@@ -56,7 +60,10 @@ namespace Profit.Server
                 OTHER_EXPENSE,
                 NET_AMOUNT,
                 EMPLOYEE.ID,
-                USED_FOR_PAYMENT
+                USED_FOR_PAYMENT,
+                MODIFIED_BY,
+                DateTime.Now.ToString(Utils.DATE_FORMAT),
+                MODIFIED_COMPUTER_NAME
                 );
         }
         public override string GetUpdateSQL()
@@ -78,8 +85,11 @@ namespace Profit.Server
                     apdn_otherexpense= {13},
                     apdn_netamount= {14},
                     emp_id= {15},
-                    apdn_usedforpayment = {16}
-                where apdn_id = {17}",
+                    apdn_usedforpayment = {16},
+                modified_by='{17}', 
+                modified_date='{18}',
+                modified_computer='{19}'
+                where apdn_id = {20}",
                 CODE,
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 VENDOR.ID,
@@ -97,6 +107,9 @@ namespace Profit.Server
                 NET_AMOUNT,
                 EMPLOYEE.ID,
                 USED_FOR_PAYMENT,
+                MODIFIED_BY,
+                DateTime.Now.ToString(Utils.DATE_FORMAT),
+                MODIFIED_COMPUTER_NAME,
                 ID);
         }
         public static APDebitNote TransformReader(MySql.Data.MySqlClient.MySqlDataReader r)
@@ -124,6 +137,9 @@ namespace Profit.Server
                 tr.NET_AMOUNT = Convert.ToDouble(r["apdn_netamount"]);
                 tr.EMPLOYEE = new Employee(Convert.ToInt32(r["emp_id"]));
                 tr.USED_FOR_PAYMENT = Convert.ToBoolean(r["apdn_usedforpayment"]);
+                tr.MODIFIED_BY = r["modified_by"].ToString();
+                tr.MODIFIED_DATE = Convert.ToDateTime(r["modified_date"].ToString());
+                tr.MODIFIED_COMPUTER_NAME = r["modified_computer"].ToString();
             }
             return tr;
         }
@@ -152,6 +168,9 @@ namespace Profit.Server
                 tr.NET_AMOUNT = Convert.ToDouble(r["apdn_netamount"]);
                 tr.EMPLOYEE = new Employee(Convert.ToInt32(r["emp_id"]));
                 tr.USED_FOR_PAYMENT = Convert.ToBoolean(r["apdn_usedforpayment"]);
+                tr.MODIFIED_BY = r["modified_by"].ToString();
+                tr.MODIFIED_DATE = Convert.ToDateTime(r["modified_date"].ToString());
+                tr.MODIFIED_COMPUTER_NAME = r["modified_computer"].ToString();
                 result.Add(tr);
             }
             return result;

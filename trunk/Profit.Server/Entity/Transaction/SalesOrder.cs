@@ -70,10 +70,13 @@ namespace Profit.Server
                     so_code,
                     cus_id,
                     so_docno,
-                    so_docdate
+                    so_docdate, 
+                    modified_by, 
+                    modified_date, 
+                    modified_computer
                 ) 
                 VALUES ('{0}','{1}','{2}',{3},'{4}',{5},'{6}',{7},{8},'{9}',{10},
-                        {11},{12},{13},{14},{15},{16},{17},{18},'{19}','{20}',{21},'{22}','{23}')",
+                        {11},{12},{13},{14},{15},{16},{17},{18},'{19}','{20}',{21},'{22}','{23}','{24}','{25}','{26}')",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                 StockCardEntryType.SalesOrder.ToString(),
@@ -97,7 +100,10 @@ namespace Profit.Server
                 CODE,
                 CUSTOMER == null ? 0 : CUSTOMER.ID,
                 DOCUMENT_NO,
-                DOCUMENT_DATE.ToString(Utils.DATE_FORMAT)
+                DOCUMENT_DATE.ToString(Utils.DATE_FORMAT),
+                MODIFIED_BY,
+                DateTime.Now.ToString(Utils.DATE_FORMAT),
+                MODIFIED_COMPUTER_NAME
                 );
         }
         public override string GetUpdateSQL()
@@ -126,8 +132,11 @@ namespace Profit.Server
                     so_code = '{20}',
                     cus_id = {21},
                     so_docno = '{22}',
-                    so_docdate ='{23}'
-                where so_id = {24}",
+                    so_docdate ='{23}',
+                modified_by='{24}', 
+                modified_date='{25}',
+                modified_computer='{26}'
+                where so_id = {27}",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                 StockCardEntryType.SalesOrder.ToString(),
@@ -152,6 +161,9 @@ namespace Profit.Server
                 CUSTOMER == null ? 0 : CUSTOMER.ID,
                 DOCUMENT_NO,
                 DOCUMENT_DATE.ToString(Utils.DATE_FORMAT),
+                 MODIFIED_BY,
+                DateTime.Now.ToString(Utils.DATE_FORMAT),
+                MODIFIED_COMPUTER_NAME,
                 ID);
         }
         public static SalesOrder TransformReader(MySql.Data.MySqlClient.MySqlDataReader aReader)
@@ -187,6 +199,9 @@ namespace Profit.Server
                 transaction.DOCUMENT_NO = aReader["so_docno"].ToString();
                 transaction.DOCUMENT_DATE = Convert.ToDateTime(aReader["so_docdate"]);
                 transaction.VENDOR = transaction.CUSTOMER;
+                transaction.MODIFIED_BY = aReader["modified_by"].ToString();
+                transaction.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                transaction.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
             }
             return transaction;
         }
@@ -222,6 +237,9 @@ namespace Profit.Server
                 transaction.DOCUMENT_NO = aReader["so_docno"].ToString();
                 transaction.DOCUMENT_DATE = Convert.ToDateTime(aReader["so_docdate"]);
                 transaction.VENDOR = transaction.CUSTOMER;
+                transaction.MODIFIED_BY = aReader["modified_by"].ToString();
+                transaction.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                transaction.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
                 result.Add(transaction);
             }
             return result;

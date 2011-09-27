@@ -6,7 +6,7 @@ using System.Collections;
 
 namespace Profit.Server
 {
-    public abstract class EventJournal : IEntity
+    public abstract class EventJournal : Entity, IEntity
     {
         public int ID = 0;
         public string CODE = "---";

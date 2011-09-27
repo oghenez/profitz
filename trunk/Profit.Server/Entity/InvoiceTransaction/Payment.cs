@@ -35,9 +35,12 @@ namespace Profit.Server
                     pay_amountafterdiscamount,
                     pay_otherexpense,
                     pay_netamount,
-                    emp_id
+                    emp_id, 
+                    modified_by, 
+                    modified_date, 
+                    modified_computer
                 ) 
-                VALUES ('{0}','{1}',{2},{3},'{4}','{5}',{6},'{7}',{8},{9},{10},{11},{12},{13},{14},{15})",
+                VALUES ('{0}','{1}',{2},{3},'{4}','{5}',{6},'{7}',{8},{9},{10},{11},{12},{13},{14},{15},'{16}','{17}','{18}')",
                 CODE,
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 VENDOR.ID,
@@ -53,7 +56,10 @@ namespace Profit.Server
                 AMOUNT_AFTER_DISC_AMOUNT,
                 OTHER_EXPENSE,
                 NET_AMOUNT,
-                EMPLOYEE.ID
+                EMPLOYEE.ID,
+                MODIFIED_BY,
+                DateTime.Now.ToString(Utils.DATE_FORMAT),
+                MODIFIED_COMPUTER_NAME
                 );
         }
         public override string GetUpdateSQL()
@@ -74,8 +80,11 @@ namespace Profit.Server
                     pay_amountafterdiscamount= {12},
                     pay_otherexpense= {13},
                     pay_netamount= {14},
-                    emp_id= {15}
-                where pay_id = {16}",
+                    emp_id= {15},
+                modified_by='{16}', 
+                modified_date='{17}',
+                modified_computer='{18}'
+                where pay_id = {19}",
                 CODE,
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 VENDOR.ID,
@@ -92,6 +101,9 @@ namespace Profit.Server
                 OTHER_EXPENSE,
                 NET_AMOUNT,
                 EMPLOYEE.ID,
+                MODIFIED_BY,
+                DateTime.Now.ToString(Utils.DATE_FORMAT),
+                MODIFIED_COMPUTER_NAME,
                 ID);
         }
         public static Payment TransformReader(MySql.Data.MySqlClient.MySqlDataReader r)
@@ -118,7 +130,9 @@ namespace Profit.Server
                 tr.OTHER_EXPENSE = Convert.ToDouble(r["pay_otherexpense"]);
                 tr.NET_AMOUNT = Convert.ToDouble(r["pay_netamount"]);
                 tr.EMPLOYEE = new Employee(Convert.ToInt32(r["emp_id"]));
-                
+                tr.MODIFIED_BY = r["modified_by"].ToString();
+                tr.MODIFIED_DATE = Convert.ToDateTime(r["modified_date"].ToString());
+                tr.MODIFIED_COMPUTER_NAME = r["modified_computer"].ToString();
             }
             return tr;
         }
@@ -145,6 +159,9 @@ namespace Profit.Server
                 tr.OTHER_EXPENSE = Convert.ToDouble(r["pay_otherexpense"]);
                 tr.NET_AMOUNT = Convert.ToDouble(r["pay_netamount"]);
                 tr.EMPLOYEE = new Employee(Convert.ToInt32(r["emp_id"]));
+                tr.MODIFIED_BY = r["modified_by"].ToString();
+                tr.MODIFIED_DATE = Convert.ToDateTime(r["modified_date"].ToString());
+                tr.MODIFIED_COMPUTER_NAME = r["modified_computer"].ToString();
                 result.Add(tr);
             }
             return result;

@@ -31,9 +31,12 @@ namespace Profit.Server
                     srn_posted,
                     srn_eventstatus,
                     srn_code,
-                    cus_id
+                    cus_id, 
+                    modified_by, 
+                    modified_date, 
+                    modified_computer
                 ) 
-                VALUES ('{0}','{1}','{2}',{3},'{4}',{5},'{6}','{7}',{8})",
+                VALUES ('{0}','{1}','{2}',{3},'{4}',{5},'{6}','{7}',{8},'{9}','{10}','{11}')",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                 StockCardEntryType.SalesReturn.ToString(),
@@ -42,7 +45,10 @@ namespace Profit.Server
                 POSTED,
                 EVENT_STATUS.ToString(),
                 CODE,
-                CUSTOMER == null ? 0 : CUSTOMER.ID
+                CUSTOMER == null ? 0 : CUSTOMER.ID,
+                MODIFIED_BY,
+                DateTime.Now.ToString(Utils.DATE_FORMAT),
+                MODIFIED_COMPUTER_NAME
                 );
         }
         public override string GetUpdateSQL()
@@ -56,8 +62,11 @@ namespace Profit.Server
                     srn_posted= {5},
                     srn_eventstatus= '{6}',
                     srn_code = '{7}',
-                    cus_id = {8}
-                where srn_id = {9}",
+                    cus_id = {8},
+                    modified_by='{9}', 
+                    modified_date='{10}',
+                    modified_computer='{11}'
+                where srn_id = {12}",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                 StockCardEntryType.SalesReturn.ToString(),
@@ -67,6 +76,9 @@ namespace Profit.Server
                 EVENT_STATUS.ToString(),
                 CODE,
                 CUSTOMER == null ? 0 : CUSTOMER.ID,
+                MODIFIED_BY,
+                DateTime.Now.ToString(Utils.DATE_FORMAT),
+                MODIFIED_COMPUTER_NAME,
                 ID);
         }
         public static SalesReturn TransformReader(MySql.Data.MySqlClient.MySqlDataReader aReader)
@@ -87,6 +99,9 @@ namespace Profit.Server
                 transaction.CODE = aReader["srn_code"].ToString();
                 transaction.CUSTOMER = new Customer(Convert.ToInt32(aReader["cus_id"]));
                 transaction.VENDOR = transaction.CUSTOMER;
+                transaction.MODIFIED_BY = aReader["modified_by"].ToString();
+                transaction.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                transaction.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
             }
             return transaction;
         }
@@ -107,6 +122,9 @@ namespace Profit.Server
                 transaction.CODE = aReader["srn_code"].ToString();
                 transaction.CUSTOMER = new Customer(Convert.ToInt32(aReader["cus_id"]));
                 transaction.VENDOR = transaction.CUSTOMER;
+                transaction.MODIFIED_BY = aReader["modified_by"].ToString();
+                transaction.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                transaction.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
                 result.Add(transaction);
             }
             return result;

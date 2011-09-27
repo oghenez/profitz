@@ -357,6 +357,8 @@ namespace Profit
             m_prn.VENDOR = (Supplier)supplierkryptonComboBox.SelectedItem;
             m_prn.NET_AMOUNT = Convert.ToDouble(netAmountkryptonNumericUpDown.Value);
             m_prn.CURRENCY = (Currency)currencyKryptonComboBox.SelectedItem;
+            m_prn.MODIFIED_BY = m_mainForm.CurrentUser.NAME;
+            m_prn.MODIFIED_COMPUTER_NAME = Environment.MachineName;
             m_prn.EVENT_JOURNAL_ITEMS = getItems();
         }
 
