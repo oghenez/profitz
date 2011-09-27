@@ -38,7 +38,7 @@ namespace Profit.Server
                     modified_date, 
                     modified_computer
                 ) 
-                VALUES ('{0}','{1}','{2}',{3},'{4}',{5},'{6}','{7}',{8},'{9}','{10}')",
+                VALUES ('{0}','{1}','{2}',{3},'{4}',{5},'{6}','{7}',{8},'{9}','{10}','{11}','{12}','{13}')",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                 StockCardEntryType.PurchaseReturn.ToString(),
@@ -49,7 +49,10 @@ namespace Profit.Server
                 CODE,
                 SUPPLIER == null ? 0 : SUPPLIER.ID,
                 DOCUMENT_NO,
-                DOCUMENT_DATE.ToString(Utils.DATE_FORMAT)
+                DOCUMENT_DATE.ToString(Utils.DATE_FORMAT),
+                MODIFIED_BY,
+                DateTime.Now.ToString(Utils.DATE_FORMAT),
+                MODIFIED_COMPUTER_NAME
                 );
         }
         public override string GetUpdateSQL()
@@ -65,8 +68,11 @@ namespace Profit.Server
                     prn_code = '{7}',
                     sup_id = {8},
                     prn_docno = '{9}',
-                    prn_docdate ='{10}'
-                where prn_id = {11}",
+                    prn_docdate ='{10}',
+                modified_by='{11}', 
+                modified_date='{12}',
+                modified_computer='{13}'
+                where prn_id = {14}",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                 StockCardEntryType.PurchaseReturn.ToString(),
@@ -76,8 +82,11 @@ namespace Profit.Server
                 EVENT_STATUS.ToString(),
                 CODE,
                 SUPPLIER == null ? 0 : SUPPLIER.ID,
-                 DOCUMENT_NO,
+                DOCUMENT_NO,
                 DOCUMENT_DATE.ToString(Utils.DATE_FORMAT),
+                MODIFIED_BY,
+                DateTime.Now.ToString(Utils.DATE_FORMAT),
+                MODIFIED_COMPUTER_NAME,
                 ID);
         }
         public static PurchaseReturn TransformReader(MySql.Data.MySqlClient.MySqlDataReader aReader)
