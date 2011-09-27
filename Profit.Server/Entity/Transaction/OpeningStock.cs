@@ -34,9 +34,12 @@ namespace Profit.Server
                     warehouse_id,
                     opst_amount,
                     ccy_id,
-                    opst_code
+                    opst_code, 
+                    modified_by, 
+                    modified_date, 
+                    modified_computer
                 ) 
-                VALUES ('{0}','{1}','{2}',{3},'{4}',{5},'{6}',{7},{8},{9},'{10}')",
+                VALUES ('{0}','{1}','{2}',{3},'{4}',{5},'{6}',{7},{8},{9},'{10}','{11}','{12}','{13}')",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                 StockCardEntryType.OpeningStock.ToString(),//STOCK_CARD_ENTRY_TYPE.ToString(),
@@ -47,7 +50,10 @@ namespace Profit.Server
                 WAREHOUSE.ID,
                 AMOUNT,
                 CURRENCY.ID,
-                CODE
+                CODE,
+                MODIFIED_BY,
+                DateTime.Now.ToString(Utils.DATE_FORMAT),
+                MODIFIED_COMPUTER_NAME
                 );
         }
         public override string GetUpdateSQL()
@@ -63,8 +69,11 @@ namespace Profit.Server
                     warehouse_id= {7},
                     opst_amount= {8},
                     ccy_id= {9},
-                    opst_code = '{10}'
-                where opst_id = {11}",
+                    opst_code = '{10}',
+                modified_by='{11}', 
+                modified_date='{12}',
+                modified_computer='{13}'
+                where opst_id = {14}",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                  StockCardEntryType.OpeningStock.ToString(), //STOCK_CARD_ENTRY_TYPE.ToString(),
@@ -76,6 +85,9 @@ namespace Profit.Server
                 AMOUNT,
                 CURRENCY.ID,
                 CODE,
+                 MODIFIED_BY,
+                DateTime.Now.ToString(Utils.DATE_FORMAT),
+                MODIFIED_COMPUTER_NAME,
                 ID);
         }
         public static OpeningStock TransformReader(MySql.Data.MySqlClient.MySqlDataReader aReader)
@@ -97,6 +109,9 @@ namespace Profit.Server
                 transaction.AMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["opst_amount"]));
                 transaction.CURRENCY = new Currency(Convert.ToInt32(aReader["ccy_id"]));
                 transaction.CODE = aReader["opst_code"].ToString();
+                transaction.MODIFIED_BY = aReader["modified_by"].ToString();
+                transaction.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                transaction.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
             }
             return transaction;
         }
@@ -118,6 +133,9 @@ namespace Profit.Server
                 transaction.AMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["opst_amount"]));
                 transaction.CURRENCY = new Currency(Convert.ToInt32(aReader["ccy_id"]));
                 transaction.CODE = aReader["opst_code"].ToString();
+                transaction.MODIFIED_BY = aReader["modified_by"].ToString();
+                transaction.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                transaction.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
                 result.Add(transaction);
             }
             return result;

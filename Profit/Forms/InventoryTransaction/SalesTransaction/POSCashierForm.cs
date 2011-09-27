@@ -477,6 +477,8 @@ namespace Profit
             m_si.CUSTOMER = m_customer;// (Customer)supplierkryptonComboBox.SelectedItem;
             m_si.DOCUMENT_NO = docnokryptonTextBox.Text;
             m_si.DOCUMENT_DATE = DateTime.Today;// docdatekryptonDateTimePicker.Value;
+            m_si.MODIFIED_BY = m_mainForm.CurrentUser.NAME;
+            m_si.MODIFIED_COMPUTER_NAME = Environment.MachineName;
             m_si.EVENT_ITEMS = getItems();
         }
 
