@@ -336,6 +336,8 @@ namespace Profit
             m_prn.SUPPLIER = (Supplier)supplierkryptonComboBox.SelectedItem;
             m_prn.DOCUMENT_DATE = docdatekryptonDateTimePicker.Value;
             m_prn.DOCUMENT_NO = docnokryptonTextBox.Text;
+            m_prn.MODIFIED_BY = m_mainForm.CurrentUser.NAME;
+            m_prn.MODIFIED_COMPUTER_NAME = Environment.MachineName;
             m_prn.EVENT_ITEMS = getItems();
         }
 
