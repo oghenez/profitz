@@ -473,6 +473,7 @@ namespace Profit
         private void BankForm_Activated(object sender, EventArgs e)
         {
             ReloadMainFormButton();
+
         }
         private void employeeKryptonComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -540,6 +541,11 @@ namespace Profit
                 dataItemskryptonDataGridView.Rows[count].HeaderCell.Value = string.Format((count + 1).ToString(), "0");
                 dataItemskryptonDataGridView.Rows[count].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
             }
+        }
+
+        private void StockTakingForm_Shown(object sender, EventArgs e)
+        {
+            customTabControl1.Invalidate();
         }
     }
 }
