@@ -150,6 +150,8 @@ namespace Profit
                 c.VIEW = Convert.ToBoolean(formAccessKryptonDataGridView1[ViewColumn.Index, i].Value);
                 c.POST = Convert.ToBoolean(formAccessKryptonDataGridView1[ViewColumn.Index, i].Value);
                 c.PRINT = Convert.ToBoolean(formAccessKryptonDataGridView1[ViewColumn.Index, i].Value);
+                c.MODIFIED_BY = m_mainForm.CurrentUser.NAME;
+                c.MODIFIED_COMPUTER_NAME = Environment.MachineName;
                 c.USER = m_user;
                 if(!m_user.FORM_ACCESS_LIST.ContainsKey(c.CODE))
                     m_user.FORM_ACCESS_LIST.Add(c.CODE, c);

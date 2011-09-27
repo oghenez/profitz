@@ -7,7 +7,7 @@ using System.Collections;
 
 namespace Profit.Server
 {
-    public class ExchangeRate : IEntity
+    public class ExchangeRate : Entity, IEntity
     {
         string DATE_FORMAT = "yyyy/MM/dd";
         public int ID = 0;
@@ -41,6 +41,9 @@ namespace Profit.Server
                 excrate.END_DATE = Convert.ToDateTime(aReader[3]);
                 excrate.RATE_TO_BASE = Convert.ToDouble(aReader[4]);
                 excrate.CURRENCY = new Currency(Convert.ToInt32(aReader[5]));
+                excrate.MODIFIED_BY = aReader["modified_by"].ToString();
+                excrate.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                excrate.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
             }
             return excrate;
         }
@@ -48,13 +51,13 @@ namespace Profit.Server
         {
             if (CURRENCY.ID == 0) throw new Exception("Please select Currency");
             return String.Format(@"insert into table_exchangerate 
-                (excrate_code,excrate_start,excrate_end,excrate_rate,ccy_id) 
-                VALUES ('{0}','{1}','{2}',{3},{4})",
+                (excrate_code,excrate_start,excrate_end,excrate_rate,ccy_id, modified_by, modified_date, modified_computer) 
+                VALUES ('{0}','{1}','{2}',{3},{4},'{5}','{6}','{7}')",
                 CODE, 
                 START_DATE.ToString(DATE_FORMAT),
                 END_DATE.ToString(DATE_FORMAT), 
                 RATE_TO_BASE,
-                CURRENCY.ID);
+                CURRENCY.ID, MODIFIED_BY, DateTime.Now.ToString(Utils.DATE_FORMAT), MODIFIED_COMPUTER_NAME);
         }
         public string GetDeleteSQL()
         {
@@ -68,13 +71,16 @@ namespace Profit.Server
                 excrate_start= '{1}',
                 excrate_end= '{2}',
                 excrate_rate= {3},
-                ccy_id = {4}
-                where excrate_id = {5}",
+                ccy_id = {4},
+                modified_by='{5}', 
+                modified_date='{6}',
+                modified_computer='{7}'
+                where excrate_id = {8}",
                 CODE, 
                 START_DATE.ToString(DATE_FORMAT),
                 END_DATE.ToString(DATE_FORMAT), 
                 RATE_TO_BASE, 
-                CURRENCY.ID,
+                CURRENCY.ID, MODIFIED_BY , DateTime.Now.ToString(Utils.DATE_FORMAT),MODIFIED_COMPUTER_NAME,
                 ID);
         }
         public string GetByIDSQL(int ID)
@@ -113,6 +119,9 @@ namespace Profit.Server
                 excrate.END_DATE = Convert.ToDateTime(aReader[3]);
                 excrate.RATE_TO_BASE = Convert.ToDouble(aReader[4]);
                 excrate.CURRENCY = new Currency(Convert.ToInt32(aReader[5]));
+                excrate.MODIFIED_BY = aReader["modified_by"].ToString();
+                excrate.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                excrate.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
                 result.Add(excrate);
             }
             return result;

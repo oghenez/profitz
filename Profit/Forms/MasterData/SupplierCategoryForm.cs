@@ -119,6 +119,8 @@ namespace Profit
         {
             m_supcat.CODE = textBoxCode.Text.Trim();
             m_supcat.NAME = textBoxName.Text.Trim();
+            m_supcat.MODIFIED_BY = m_mainForm.CurrentUser.NAME;
+            m_supcat.MODIFIED_COMPUTER_NAME = Environment.MachineName;
         }
         public void ClearForm()
         {

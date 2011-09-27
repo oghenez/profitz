@@ -122,6 +122,8 @@ namespace Profit
             m_tax.CODE = textBoxCode.Text.Trim();
             m_tax.NAME = textBoxName.Text.Trim();
             m_tax.RATE = Convert.ToDouble(kryptonNumericUpDownDAY.Value);
+            m_tax.MODIFIED_BY = m_mainForm.CurrentUser.NAME;
+            m_tax.MODIFIED_COMPUTER_NAME = Environment.MachineName;
         }
         public void ClearForm()
         {

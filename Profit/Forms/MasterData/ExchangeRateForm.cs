@@ -132,6 +132,8 @@ namespace Profit
             m_excRate.END_DATE = kryptonDateTimePickerEndDate.Value;
             m_excRate.RATE_TO_BASE = Convert.ToDouble(kryptonNumericUpDownRAte.Value);
             m_excRate.CURRENCY = (Currency)kryptonComboBoxCurrency.SelectedItem;
+            m_excRate.MODIFIED_BY = m_mainForm.CurrentUser.NAME;
+            m_excRate.MODIFIED_COMPUTER_NAME = Environment.MachineName;
         }
         public void ClearForm()
         {

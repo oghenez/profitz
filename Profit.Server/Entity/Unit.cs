@@ -7,7 +7,7 @@ using System.Collections;
 
 namespace Profit.Server
 {
-    public class Unit : IEntity
+    public class Unit : Entity, IEntity
     {
         public int ID = 0;
         public string CODE = "B001";
@@ -33,6 +33,9 @@ namespace Profit.Server
                 unit.ID = Convert.ToInt32(aReader[0]);
                 unit.CODE = aReader[1].ToString();
                 unit.NAME = aReader[2].ToString();
+                unit.MODIFIED_BY = aReader["modified_by"].ToString();
+                unit.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                unit.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
             }
             return unit;
         }
@@ -45,15 +48,18 @@ namespace Profit.Server
                 unit.ID = Convert.ToInt32(aReader[0]);
                 unit.CODE = aReader[1].ToString();
                 unit.NAME = aReader[2].ToString();
+                unit.MODIFIED_BY = aReader["modified_by"].ToString();
+                unit.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                unit.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
             }
             return unit;
         }
         public string GetInsertSQL()
         {
             return String.Format(@"insert into table_unit 
-                (unit_code,unit_name) 
-                VALUES ('{0}','{1}')",
-                CODE, NAME);
+                (unit_code,unit_name, modified_by, modified_date, modified_computer) 
+                VALUES ('{0}','{1}','{2}','{3}','{4}')",
+                CODE, NAME, MODIFIED_BY, DateTime.Now.ToString(Utils.DATE_FORMAT), MODIFIED_COMPUTER_NAME);
         }
         public string GetDeleteSQL()
         {
@@ -63,7 +69,10 @@ namespace Profit.Server
         {
             return String.Format(@"update table_unit set 
                 unit_code = '{0}', 
-                unit_name='{1}'
+                unit_name='{1}',
+                modified_by='{2}', 
+                modified_date='{3}',
+                modified_computer='{4}'
                 where unit_id = {2}",
                 CODE, NAME, ID);
         }
@@ -108,6 +117,9 @@ namespace Profit.Server
                 unit.ID = Convert.ToInt32(aReader[0]);
                 unit.CODE = aReader[1].ToString();
                 unit.NAME = aReader[2].ToString();
+                unit.MODIFIED_BY = aReader["modified_by"].ToString();
+                unit.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                unit.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
                 result.Add(unit);
             }
             return result;

@@ -7,7 +7,7 @@ using System.Collections;
 
 namespace Profit.Server
 {
-    public class Period : IEntity
+    public class Period : Entity, IEntity
     {
         string DATE_FORMAT = "yyyy/MM/dd";
         public int ID = 0;
@@ -51,6 +51,9 @@ namespace Profit.Server
                 period.START_DATE = Convert.ToDateTime(aReader[4]);
                 period.END_DATA = Convert.ToDateTime(aReader[5]);
                 period.CLOSED_DATE = Convert.ToDateTime(aReader[6]);
+                period.MODIFIED_BY = aReader["modified_by"].ToString();
+                period.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                period.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
             }
             return period;
         }
@@ -62,15 +65,18 @@ namespace Profit.Server
                 year_id,
                 period_start,
                 period_end,
-                period_close
+                period_close, modified_by, modified_date, modified_computer
                 ) 
-                VALUES ('{0}','{1}',{2},'{3}','{4}','{5}')",
+                VALUES ('{0}','{1}',{2},'{3}','{4}','{5}','{6}','{7}','{8}')",
                 CODE, 
                 PERIOD_STATUS.ToString(),
                 YEAR.ID,
                 START_DATE.ToString(DATE_FORMAT),
                 END_DATA.ToString(DATE_FORMAT),
-                CLOSED_DATE.ToString(DATE_FORMAT)
+                CLOSED_DATE.ToString(DATE_FORMAT), 
+                MODIFIED_BY, 
+                DateTime.Now.ToString(Utils.DATE_FORMAT), 
+                MODIFIED_COMPUTER_NAME
                 );
         }
         public string GetDeleteSQL()
@@ -85,14 +91,20 @@ namespace Profit.Server
                 year_id= {2},
                 period_start= '{3}',
                 period_end= '{4}',
-                period_close= '{5}'
-                where period_id = {6}",
+                period_close= '{5}',
+                modified_by='{6}', 
+                modified_date='{7}',
+                modified_computer='{8}'
+                where period_id = {9}",
                 CODE,
                 PERIOD_STATUS.ToString(),
                 YEAR.ID,
                 START_DATE.ToString(DATE_FORMAT),
                 END_DATA.ToString(DATE_FORMAT),
                 CLOSED_DATE.ToString(DATE_FORMAT), 
+                MODIFIED_BY, 
+                DateTime.Now.ToString(Utils.DATE_FORMAT), 
+                MODIFIED_COMPUTER_NAME, 
                 ID);
         }
         public string GetByIDSQL(int ID)
@@ -140,6 +152,9 @@ namespace Profit.Server
                 period.START_DATE = Convert.ToDateTime(aReader["period_start"]);
                 period.END_DATA = Convert.ToDateTime(aReader["period_end"]);
                 period.CLOSED_DATE = Convert.ToDateTime(aReader["period_close"]);
+                period.MODIFIED_BY = aReader["modified_by"].ToString();
+                period.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                period.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
                 result.Add(period);
             }
             return result;
@@ -157,6 +172,9 @@ namespace Profit.Server
                 period.START_DATE = Convert.ToDateTime(aReader["period_start"]);
                 period.END_DATA = Convert.ToDateTime(aReader["period_end"]);
                 period.CLOSED_DATE = Convert.ToDateTime(aReader["period_close"]);
+                period.MODIFIED_BY = aReader["modified_by"].ToString();
+                period.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                period.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
                 result.Add(period);
             }
             return result;

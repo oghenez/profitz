@@ -7,7 +7,7 @@ using System.Collections;
 
 namespace Profit.Server
 {
-    public class Employee : IEntity
+    public class Employee : Entity, IEntity
     {
         public int ID = 0;
         public string CODE = "B001";
@@ -40,6 +40,9 @@ namespace Profit.Server
                 employee.IS_SALESMAN = Convert.ToBoolean(aReader[3]);
                 employee.IS_STOREMAN = Convert.ToBoolean(aReader[4]);
                 employee.IS_PURCHASER = Convert.ToBoolean(aReader[5]);
+                employee.MODIFIED_BY = aReader["modified_by"].ToString();
+                employee.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                employee.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
             }
             return employee;
         }
@@ -55,15 +58,18 @@ namespace Profit.Server
                 employee.IS_SALESMAN = Convert.ToBoolean(aReader[3]);
                 employee.IS_STOREMAN = Convert.ToBoolean(aReader[4]);
                 employee.IS_PURCHASER = Convert.ToBoolean(aReader[5]);
+                employee.MODIFIED_BY = aReader["modified_by"].ToString();
+                employee.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                employee.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
             }
             return employee;
         }
         public string GetInsertSQL()
         {
             return String.Format(@"insert into table_employee 
-                (emp_code,emp_name,emp_salesman,emp_storeman,emp_purchaser) 
-                VALUES ('{0}','{1}',{2},{3},{4})",
-                CODE, NAME,IS_SALESMAN,IS_STOREMAN,IS_PURCHASER);
+                (emp_code,emp_name,emp_salesman,emp_storeman,emp_purchaser, modified_by, modified_date, modified_computer) 
+                VALUES ('{0}','{1}',{2},{3},{4},'{5}','{6}','{7}')",
+                CODE, NAME, IS_SALESMAN, IS_STOREMAN, IS_PURCHASER, MODIFIED_BY, DateTime.Now.ToString(Utils.DATE_FORMAT), MODIFIED_COMPUTER_NAME);
         }
         public string GetDeleteSQL()
         {
@@ -76,9 +82,13 @@ namespace Profit.Server
                 emp_name='{1}',
                 emp_salesman={2},
                 emp_storeman={3},
-                emp_purchaser={4}
-                where emp_id = {5}",
-                CODE, NAME, IS_SALESMAN, IS_STOREMAN, IS_PURCHASER, ID);
+                emp_purchaser={4},
+                modified_by='{5}', 
+                modified_date='{6}',
+                modified_computer='{7}'
+                where emp_id = {8}",
+                CODE, NAME, IS_SALESMAN, IS_STOREMAN, IS_PURCHASER
+                , MODIFIED_BY, DateTime.Now.ToString(Utils.DATE_FORMAT), MODIFIED_COMPUTER_NAME, ID);
         }
         public string GetByIDSQL(int ID)
         {
@@ -120,6 +130,9 @@ namespace Profit.Server
                 employee.IS_SALESMAN = Convert.ToBoolean(aReader[3]);
                 employee.IS_STOREMAN = Convert.ToBoolean(aReader[4]);
                 employee.IS_PURCHASER = Convert.ToBoolean(aReader[5]);
+                employee.MODIFIED_BY = aReader["modified_by"].ToString();
+                employee.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                employee.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
                 result.Add(employee);
             }
             return result;

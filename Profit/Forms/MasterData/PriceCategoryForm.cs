@@ -120,6 +120,8 @@ namespace Profit
             m_pricecat.CODE = textBoxCode.Text.Trim();
             m_pricecat.NAME = textBoxName.Text.Trim();
             m_pricecat.DISCOUNT_PERCENT = Convert.ToDouble(discountkryptonNumericUpDown1.Value);
+            m_pricecat.MODIFIED_BY = m_mainForm.CurrentUser.NAME;
+            m_pricecat.MODIFIED_COMPUTER_NAME = Environment.MachineName;
         }
         public void ClearForm()
         {

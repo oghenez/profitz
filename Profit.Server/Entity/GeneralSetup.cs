@@ -7,7 +7,7 @@ using System.Collections;
 
 namespace Profit.Server
 {
-    public class GeneralSetup : IEntity
+    public class GeneralSetup : Entity,IEntity
     {
         public int ID = 0;
         public string COMPANY_NAME = string.Empty;
@@ -44,6 +44,9 @@ namespace Profit.Server
                 generalsetup.EMAIL = aReader[7].ToString();
                 generalsetup.WEBSITE = aReader[8].ToString();
                 generalsetup.START_ENTRY_PERIOD = new Period(Convert.ToInt32(aReader[9]));
+                generalsetup.MODIFIED_BY = aReader["modified_by"].ToString();
+                generalsetup.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                generalsetup.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
             }
             return generalsetup;
         }
@@ -59,9 +62,10 @@ namespace Profit.Server
                 gst_regdate,
                 gst_email,
                 gst_website,
-                gst_startentryperiod    
+                gst_startentryperiod,
+                modified_by, modified_date, modified_computer    
                 ) 
-                VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}',{8})",
+                VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}',{8},'{9}','{10}',{11})",
                                          COMPANY_NAME,
                                          ADDRESS,
                                          PHONE,
@@ -70,7 +74,7 @@ namespace Profit.Server
                                          REG_DATE.ToString(Utils.DATE_FORMAT),
                                          EMAIL,
                                          WEBSITE,
-                                         START_ENTRY_PERIOD.ID
+                                         START_ENTRY_PERIOD.ID, MODIFIED_BY, DateTime.Now.ToString(Utils.DATE_FORMAT), MODIFIED_COMPUTER_NAME
                 );
         }
         public string GetDeleteSQL()
@@ -88,8 +92,11 @@ namespace Profit.Server
                 gst_regdate ='{5}',
                 gst_email ='{6}',
                 gst_website  ='{7}',
-                gst_startentryperiod = {8}
-                where gst_id = {9}",
+                gst_startentryperiod = {8},
+                modified_by='{9}', 
+                modified_date='{10}',
+                modified_computer='{11}'
+                where gst_id = {12}",
                 COMPANY_NAME,
                  ADDRESS,
                  PHONE,
@@ -98,7 +105,10 @@ namespace Profit.Server
                  REG_DATE.ToString(Utils.DATE_FORMAT),
                  EMAIL,
                  WEBSITE,
-                 START_ENTRY_PERIOD.ID,
+                 START_ENTRY_PERIOD.ID, 
+                 MODIFIED_BY, 
+                 DateTime.Now.ToString(Utils.DATE_FORMAT), 
+                 MODIFIED_COMPUTER_NAME,
                  ID);
         }
         public string GetByIDSQL(int ID)
@@ -145,6 +155,9 @@ namespace Profit.Server
                 generalsetup.EMAIL = aReader[7].ToString();
                 generalsetup.WEBSITE = aReader[8].ToString();
                 generalsetup.START_ENTRY_PERIOD = new Period(Convert.ToInt32(aReader[9]));
+                generalsetup.MODIFIED_BY = aReader["modified_by"].ToString();
+                generalsetup.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                generalsetup.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
                 result.Add(generalsetup);
             }
             return result;

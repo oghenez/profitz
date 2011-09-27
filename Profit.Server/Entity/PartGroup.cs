@@ -7,7 +7,7 @@ using System.Collections;
 
 namespace Profit.Server
 {
-    public class PartGroup : IEntity
+    public class PartGroup : Entity, IEntity
     {
         public int ID = 0;
         public string CODE = "B001";
@@ -33,6 +33,9 @@ namespace Profit.Server
                 partgroup.ID = Convert.ToInt32(aReader[0]);
                 partgroup.CODE = aReader[1].ToString();
                 partgroup.NAME = aReader[2].ToString();
+                partgroup.MODIFIED_BY = aReader["modified_by"].ToString();
+                partgroup.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                partgroup.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
             }
             return partgroup;
         }
@@ -45,15 +48,18 @@ namespace Profit.Server
                 partgroup.ID = Convert.ToInt32(aReader[0]);
                 partgroup.CODE = aReader[1].ToString();
                 partgroup.NAME = aReader[2].ToString();
+                partgroup.MODIFIED_BY = aReader["modified_by"].ToString();
+                partgroup.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                partgroup.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
             }
             return partgroup;
         }
         public string GetInsertSQL()
         {
             return String.Format(@"insert into table_partgroup 
-                (prtgroup_code,prtgroup_name) 
-                VALUES ('{0}','{1}')",
-                CODE, NAME);
+                (prtgroup_code,prtgroup_name, modified_by, modified_date, modified_computer) 
+                VALUES ('{0}','{1}', '{2}', '{3}', '{4}')",
+                CODE, NAME, MODIFIED_BY, DateTime.Now.ToString(Utils.DATE_FORMAT), MODIFIED_COMPUTER_NAME);
         }
         public string GetDeleteSQL()
         {
@@ -63,9 +69,12 @@ namespace Profit.Server
         {
             return String.Format(@"update table_partgroup set 
                 prtgroup_code = '{0}', 
-                prtgroup_name='{1}'
-                where prtgroup_id = {2}",
-                CODE, NAME, ID);
+                prtgroup_name='{1}',
+                modified_by='{2}', 
+                modified_date='{3}',
+                modified_computer='{4}'
+                where prtgroup_id = {5}",
+                CODE, NAME, MODIFIED_BY, DateTime.Now.ToString(Utils.DATE_FORMAT), MODIFIED_COMPUTER_NAME, ID);
         }
         public string GetByIDSQL(int ID)
         {
@@ -100,6 +109,9 @@ namespace Profit.Server
                 partgroup.ID = Convert.ToInt32(aReader[0]);
                 partgroup.CODE = aReader[1].ToString();
                 partgroup.NAME = aReader[2].ToString();
+                partgroup.MODIFIED_BY = aReader["modified_by"].ToString();
+                partgroup.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                partgroup.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
                 result.Add(partgroup);
             }
             return result;

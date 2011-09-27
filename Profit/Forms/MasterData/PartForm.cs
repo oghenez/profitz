@@ -273,6 +273,8 @@ namespace Profit
             m_part.TAX = (Tax)taxkryptonComboBox1.SelectedItem;
             m_part.PRICE_CATEGORY = (PriceCategory)pricecatkryptonComboBox1.SelectedItem;
             m_part.UNIT_CONVERSION_LIST.Clear();
+            m_part.MODIFIED_BY = m_mainForm.CurrentUser.NAME;
+            m_part.MODIFIED_COMPUTER_NAME = Environment.MachineName;
             //if (m_part.PICTURE != null) m_part.PICTURE.Dispose();
             //m_part.PICTURE = null; 
             m_part.PICTURE = pictureBox.Image == null ? null : imageToByteArray(pictureBox.Image);

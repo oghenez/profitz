@@ -7,7 +7,7 @@ using System.Collections;
 
 namespace Profit.Server
 {
-    public class TermOfPayment : IEntity
+    public class TermOfPayment : Entity, IEntity
     {
         public int ID = 0;
         public string CODE = "B001";
@@ -36,6 +36,9 @@ namespace Profit.Server
                 top.CODE = aReader[1].ToString();
                 top.NAME = aReader[2].ToString();
                 top.DAYS = Convert.ToInt16(aReader[3]);
+                top.MODIFIED_BY = aReader["modified_by"].ToString();
+                top.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                top.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
             }
             return top;
         }
@@ -49,15 +52,18 @@ namespace Profit.Server
                 top.CODE = aReader[1].ToString();
                 top.NAME = aReader[2].ToString();
                 top.DAYS = Convert.ToInt16(aReader[3]);
+                top.MODIFIED_BY = aReader["modified_by"].ToString();
+                top.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                top.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
             }
             return top;
         }
         public string GetInsertSQL()
         {
             return String.Format(@"insert into table_termofpayment 
-                (top_code,top_name,top_days) 
-                VALUES ('{0}','{1}',{2})",
-                CODE, NAME, DAYS);
+                (top_code,top_name,top_days, modified_by, modified_date, modified_computer) 
+                VALUES ('{0}','{1}',{2},'{3}','{4}','{5}')",
+                CODE, NAME, DAYS, MODIFIED_BY, DateTime.Now.ToString(Utils.DATE_FORMAT), MODIFIED_COMPUTER_NAME);
         }
         public string GetDeleteSQL()
         {
@@ -68,9 +74,12 @@ namespace Profit.Server
             return String.Format(@"update table_termofpayment set 
                 top_code = '{0}', 
                 top_name='{1}',
-                top_days={2}
-                where top_id = {3}",
-                CODE, NAME, DAYS, ID);
+                top_days={2},
+                modified_by='{3}', 
+                modified_date='{4}',
+                modified_computer='{5}'
+                where top_id = {6}",
+                CODE, NAME, DAYS, MODIFIED_BY, DateTime.Now.ToString(Utils.DATE_FORMAT), MODIFIED_COMPUTER_NAME, ID);
         }
         public string GetByIDSQL(int ID)
         {
@@ -110,6 +119,9 @@ namespace Profit.Server
                 top.CODE = aReader[1].ToString();
                 top.NAME = aReader[2].ToString();
                 top.DAYS = Convert.ToInt16(aReader[3]);
+                top.MODIFIED_BY = aReader["modified_by"].ToString();
+                top.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                top.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
                 result.Add(top);
             }
             return result;
