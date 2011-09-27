@@ -33,7 +33,10 @@ namespace Profit.Server
                     prn_code,
                     sup_id,
                     prn_docno,
-                    prn_docdate
+                    prn_docdate, 
+                    modified_by, 
+                    modified_date, 
+                    modified_computer
                 ) 
                 VALUES ('{0}','{1}','{2}',{3},'{4}',{5},'{6}','{7}',{8},'{9}','{10}')",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
@@ -97,6 +100,9 @@ namespace Profit.Server
                 transaction.DOCUMENT_NO = aReader["prn_docno"].ToString();
                 transaction.DOCUMENT_DATE = Convert.ToDateTime(aReader["prn_docdate"]);
                 transaction.VENDOR = transaction.SUPPLIER;
+                transaction.MODIFIED_BY = aReader["modified_by"].ToString();
+                transaction.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                transaction.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
             }
             return transaction;
         }
@@ -119,6 +125,9 @@ namespace Profit.Server
                 transaction.DOCUMENT_NO = aReader["prn_docno"].ToString();
                 transaction.DOCUMENT_DATE = Convert.ToDateTime(aReader["prn_docdate"]);
                 transaction.VENDOR = transaction.SUPPLIER;
+                transaction.MODIFIED_BY = aReader["modified_by"].ToString();
+                transaction.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                transaction.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
                 result.Add(transaction);
             }
             return result;

@@ -7,7 +7,7 @@ using System.Data.Odbc;
 
 namespace Profit.Server
 {
-    public class Event : IEntity
+    public class Event : Entity, IEntity
     {
         public int ID = 0;
         public string CODE = string.Empty;

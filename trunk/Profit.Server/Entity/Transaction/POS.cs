@@ -66,10 +66,13 @@ namespace Profit.Server
                     pos_docno,
                     pos_docdate,
                     pos_cashpayamount,
-                    pos_changepayamount
+                    pos_changepayamount, 
+                    modified_by, 
+                    modified_date, 
+                    modified_computer
                 ) 
                 VALUES ('{0}','{1}','{2}',{3},'{4}',{5},'{6}',{7},{8},'{9}',{10},
-                        {11},{12},{13},{14},{15},{16},{17},{18},'{19}',{20},'{21}','{22}',{23},{24})",
+                        {11},{12},{13},{14},{15},{16},{17},{18},'{19}',{20},'{21}','{22}',{23},{24},'{25}','{26}','{27}')",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                 StockCardEntryType.POS.ToString(),
@@ -94,7 +97,10 @@ namespace Profit.Server
                 DOCUMENT_NO,
                 DOCUMENT_DATE.ToString(Utils.DATE_FORMAT),
                 CASH_PAY_AMOUNT,
-                CHANGE_AMOUNT
+                CHANGE_AMOUNT,
+                MODIFIED_BY,
+                DateTime.Now.ToString(Utils.DATE_FORMAT),
+                MODIFIED_COMPUTER_NAME
                 );
         }
         public override string GetUpdateSQL()
@@ -124,8 +130,11 @@ namespace Profit.Server
                     pos_docno= '{21}',
                     pos_docdate= '{22}',
                     pos_cashpayamount = {23},
-                    pos_changepayamount = {24}
-                where pos_id = {25}",
+                    pos_changepayamount = {24},
+                modified_by='{25}', 
+                modified_date='{26}',
+                modified_computer='{27}'
+                where pos_id = {28}",
                 TRANSACTION_DATE.ToString(Utils.DATE_FORMAT),
                 NOTICE_DATE.ToString(Utils.DATE_FORMAT),
                 StockCardEntryType.POS.ToString(),
@@ -151,6 +160,9 @@ namespace Profit.Server
                 DOCUMENT_DATE.ToString(Utils.DATE_FORMAT),
                 CASH_PAY_AMOUNT,
                 CHANGE_AMOUNT,
+                 MODIFIED_BY,
+                DateTime.Now.ToString(Utils.DATE_FORMAT),
+                MODIFIED_COMPUTER_NAME,
                 ID);
         }
         public static POS TransformReader(MySql.Data.MySqlClient.MySqlDataReader aReader)
@@ -185,6 +197,9 @@ namespace Profit.Server
                 transaction.DOCUMENT_NO = aReader["pos_docno"].ToString();
                 transaction.DOCUMENT_DATE = Convert.ToDateTime(aReader["pos_docdate"]);
                 transaction.VENDOR = transaction.CUSTOMER;
+                transaction.MODIFIED_BY = aReader["modified_by"].ToString();
+                transaction.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                transaction.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
             }
             return transaction;
         }
@@ -219,6 +234,9 @@ namespace Profit.Server
                 transaction.DOCUMENT_NO = aReader["pos_docno"].ToString();
                 transaction.DOCUMENT_DATE = Convert.ToDateTime(aReader["pos_docdate"]);
                 transaction.VENDOR = transaction.CUSTOMER;
+                transaction.MODIFIED_BY = aReader["modified_by"].ToString();
+                transaction.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                transaction.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
                 result.Add(transaction);
             }
             return result;
