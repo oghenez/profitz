@@ -134,6 +134,8 @@ namespace Profit
             m_user.NAME = textBoxName.Text.Trim();
             m_user.PASSWORD = passwordKryptonTextBox.Text.Trim();
             m_user.ACTIVE = activekryptonCheckBox.Checked;
+            m_user.MODIFIED_BY = m_mainForm.CurrentUser.NAME;
+            m_user.MODIFIED_COMPUTER_NAME = Environment.MachineName;
             m_user.FORM_ACCESS_LIST.Clear();
             for (int i = 0; i < formAccessKryptonDataGridView1.Rows.Count; i++)
             {

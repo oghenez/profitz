@@ -7,7 +7,7 @@ using System.Collections;
 
 namespace Profit.Server
 {
-    public class User : IEntity
+    public class User : Entity, IEntity
     {
         Crypto m_crypto = new Crypto();
 
@@ -40,6 +40,9 @@ namespace Profit.Server
                 user.NAME = aReader[2].ToString();
                 user.PASSWORD = m_crypto.Decrypt(aReader[3].ToString());
                 user.ACTIVE = Convert.ToBoolean(aReader[4]);
+                user.MODIFIED_BY = aReader["modified_by"].ToString();
+                user.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                user.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
             }
             return user;
         }
@@ -55,15 +58,18 @@ namespace Profit.Server
                 user.NAME = aReader[2].ToString();
                 user.PASSWORD = m_crypto.Decrypt(aReader[3].ToString());
                 user.ACTIVE = Convert.ToBoolean(aReader[4]);
+                user.MODIFIED_BY = aReader["modified_by"].ToString();
+                user.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                user.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
             }
             return user;
         }
         public string GetInsertSQL()
         {
             return String.Format(@"insert into table_user 
-                (user_code,user_name, user_password, user_active) 
-                VALUES ('{0}','{1}','{2}',{3})",
-                CODE, NAME, m_crypto.Encrypt(PASSWORD),ACTIVE);
+                (user_code,user_name, user_password, user_active, modified_by, modified_date, modified_computer) 
+                VALUES ('{0}','{1}','{2}',{3},'{4}','{5}','{6}')",
+                CODE, NAME, m_crypto.Encrypt(PASSWORD), ACTIVE, MODIFIED_BY, DateTime.Now.ToString(Utils.DATE_FORMAT), MODIFIED_COMPUTER_NAME);
         }
         public string GetDeleteSQL()
         {
@@ -75,9 +81,13 @@ namespace Profit.Server
                 user_code = '{0}', 
                 user_name='{1}',
                 user_password='{2}',
-                user_active = {3}
-                where user_id = {4}",
-                CODE, NAME,m_crypto.Encrypt(PASSWORD), ACTIVE, ID);
+                user_active = {3},
+                modified_by='{4}', 
+                modified_date='{5}',
+                modified_computer='{6}'
+                where user_id = {7}",
+                CODE, NAME, m_crypto.Encrypt(PASSWORD), ACTIVE, 
+                MODIFIED_BY, DateTime.Now.ToString(Utils.DATE_FORMAT), MODIFIED_COMPUTER_NAME, ID);
         }
         public string GetByIDSQL(int ID)
         {
@@ -118,6 +128,9 @@ namespace Profit.Server
                 user.NAME = aReader[2].ToString();
                 user.PASSWORD = m_crypto.Decrypt(aReader[3].ToString());
                 user.ACTIVE = Convert.ToBoolean(aReader[4]);
+                user.MODIFIED_BY = aReader["modified_by"].ToString();
+                user.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                user.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
                 result.Add(user);
             }
             return result;

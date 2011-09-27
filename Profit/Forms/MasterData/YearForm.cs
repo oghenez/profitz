@@ -124,6 +124,8 @@ namespace Profit
             m_year.NAME = textBoxName.Text.Trim();
             m_year.START_DATE = startDatekryptonDateTimePicker1.Value;
             m_year.END_DATE = endDatekryptonDateTimePicker2.Value;
+            m_year.MODIFIED_BY = m_mainForm.CurrentUser.NAME;
+            m_year.MODIFIED_COMPUTER_NAME = Environment.MachineName;
         }
         public void ClearForm()
         {

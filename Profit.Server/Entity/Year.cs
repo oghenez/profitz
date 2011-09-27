@@ -7,7 +7,7 @@ using System.Collections;
 
 namespace Profit.Server
 {
-    public class Year : IEntity
+    public class Year : Entity, IEntity
     {
         string DATE_FORMAT = "yyyy/MM/dd";
         public int ID = 0;
@@ -40,6 +40,9 @@ namespace Profit.Server
                 year.NAME = aReader[2].ToString();
                 year.START_DATE = Convert.ToDateTime(aReader[3]);
                 year.END_DATE = Convert.ToDateTime(aReader[4]);
+                year.MODIFIED_BY = aReader["modified_by"].ToString();
+                year.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                year.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
             }
             return year;
         }
@@ -50,13 +53,16 @@ namespace Profit.Server
 year_code,
 year_name,
 year_start,
-year_end
+year_end, modified_by, modified_date, modified_computer
 ) 
-                VALUES ('{0}','{1}','{2}','{3}')",
+                VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}')",
                 CODE, 
                 NAME,
                 START_DATE.ToString(DATE_FORMAT),
-                END_DATE.ToString(DATE_FORMAT)
+                END_DATE.ToString(DATE_FORMAT), 
+                MODIFIED_BY, 
+                DateTime.Now.ToString(Utils.DATE_FORMAT), 
+                MODIFIED_COMPUTER_NAME
                 );
         }
         public string GetDeleteSQL()
@@ -69,12 +75,18 @@ year_end
                 year_code = '{0}', 
                 year_name='{1}',
                 year_start='{2}',
-                year_end='{3}'
-                where year_id = {4}",
+                year_end='{3}',
+                modified_by='{4}', 
+                modified_date='{5}',
+                modified_computer='{6}'
+                where year_id = {7}",
                 CODE, 
                 NAME, 
                 START_DATE.ToString(DATE_FORMAT),
-                END_DATE.ToString(DATE_FORMAT),
+                END_DATE.ToString(DATE_FORMAT), 
+                MODIFIED_BY, 
+                DateTime.Now.ToString(Utils.DATE_FORMAT), 
+                MODIFIED_COMPUTER_NAME,
                 ID);
         }
         public string GetByIDSQL(int ID)
@@ -112,6 +124,9 @@ year_end
                 year.NAME = aReader[2].ToString();
                 year.START_DATE = Convert.ToDateTime(aReader[3]);
                 year.END_DATE = Convert.ToDateTime(aReader[4]);
+                year.MODIFIED_BY = aReader["modified_by"].ToString();
+                year.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                year.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
                 result.Add(year);
             }
             return result;

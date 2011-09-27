@@ -119,6 +119,8 @@ namespace Profit
         {
             m_warehouse.CODE = textBoxCode.Text.Trim();
             m_warehouse.NAME = textBoxName.Text.Trim();
+            m_warehouse.MODIFIED_BY = m_mainForm.CurrentUser.NAME;
+            m_warehouse.MODIFIED_COMPUTER_NAME = Environment.MachineName;
         }
         public void ClearForm()
         {
