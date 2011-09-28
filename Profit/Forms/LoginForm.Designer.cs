@@ -39,7 +39,6 @@
             this.passwordkryptonTextBox2 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.fadeTimer = new System.Windows.Forms.Timer(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
@@ -49,19 +48,18 @@
             this.kryptonGroupBox1.Panel.SuspendLayout();
             this.kryptonGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.messageLabelkryptonLabel);
             this.kryptonPanel1.Controls.Add(this.kryptonGroupBox1);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
-            this.kryptonPanel1.Controls.Add(this.pictureBox1);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(615, 249);
+            this.kryptonPanel1.Size = new System.Drawing.Size(614, 170);
             this.kryptonPanel1.TabIndex = 1;
             // 
             // kryptonGroupBox1
@@ -71,7 +69,6 @@
             // 
             // kryptonGroupBox1.Panel
             // 
-            this.kryptonGroupBox1.Panel.Controls.Add(this.messageLabelkryptonLabel);
             this.kryptonGroupBox1.Panel.Controls.Add(this.pictureBox2);
             this.kryptonGroupBox1.Panel.Controls.Add(this.userCodekryptonTextBox1);
             this.kryptonGroupBox1.Panel.Controls.Add(this.loginkryptonButton1);
@@ -85,11 +82,11 @@
             // 
             // messageLabelkryptonLabel
             // 
-            this.messageLabelkryptonLabel.Location = new System.Drawing.Point(3, 72);
+            this.messageLabelkryptonLabel.Location = new System.Drawing.Point(327, 126);
             this.messageLabelkryptonLabel.Name = "messageLabelkryptonLabel";
-            this.messageLabelkryptonLabel.Size = new System.Drawing.Size(6, 2);
+            this.messageLabelkryptonLabel.Size = new System.Drawing.Size(28, 19);
             this.messageLabelkryptonLabel.TabIndex = 9;
-            this.messageLabelkryptonLabel.Values.Text = "";
+            this.messageLabelkryptonLabel.Values.Text = "tew";
             // 
             // pictureBox2
             // 
@@ -145,21 +142,11 @@
             // 
             // kryptonLabel1
             // 
-            this.kryptonLabel1.Location = new System.Drawing.Point(3, 227);
+            this.kryptonLabel1.Location = new System.Drawing.Point(378, 145);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(199, 19);
+            this.kryptonLabel1.Size = new System.Drawing.Size(229, 19);
             this.kryptonLabel1.TabIndex = 1;
-            this.kryptonLabel1.Values.Text = "Copyright 2011 - dagado@gmail.com";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::Profit.Properties.Resources.Logo;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(321, 222);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.kryptonLabel1.Values.Text = "Profit Copyright 2011 - dagado@gmail.com";
             // 
             // fadeTimer
             // 
@@ -174,7 +161,7 @@
             this.AcceptButton = this.loginkryptonButton1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(615, 249);
+            this.ClientSize = new System.Drawing.Size(614, 170);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "LoginForm";
@@ -191,7 +178,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).EndInit();
             this.kryptonGroupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
@@ -199,7 +185,6 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
