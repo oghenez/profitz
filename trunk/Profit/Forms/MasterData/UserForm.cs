@@ -15,6 +15,7 @@ namespace Profit
     public partial class UserForm : KryptonForm, IChildForm
     {
         User m_user = new User();
+        Repository r_empRep = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.EMPLOYEE_REPOSITORY);
         UserRepository r_userRep = (UserRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.USER_REPOSITORY);
         IMainForm m_mainForm;
 
@@ -32,6 +33,7 @@ namespace Profit
         private void InitializeDataSource()
         {
             Utils.GetListCode(FormAccessCodeColumn.Items, m_mainForm.GetFormAccessList());
+            employeekryptonComboBox1.DataSource = r_empRep.GetAll();
         }
         private void InitializeButtonClick()
         {
@@ -121,12 +123,14 @@ namespace Profit
             bool a = textBoxCode.Text == "";
             bool b = textBoxName.Text == "";
             bool c = passwordKryptonTextBox.Text == "";
+            bool d = employeekryptonComboBox1.SelectedItem == null;
 
             if (a) errorProvider1.SetError(textBoxCode, "Code Can not Empty");
             if (b) errorProvider1.SetError(textBoxName, "Name Can not Empty");
             if (c) errorProvider1.SetError(passwordKryptonTextBox, "Password Can not Empty");
+            if (d) errorProvider1.SetError(employeekryptonComboBox1, "Pegawai harus di isi");
 
-            return !a && !b && !c;
+            return !a && !b && !c && !d;
         }
         private void UpdateEntity()
         {
@@ -136,6 +140,7 @@ namespace Profit
             m_user.ACTIVE = activekryptonCheckBox.Checked;
             m_user.MODIFIED_BY = m_mainForm.CurrentUser.NAME;
             m_user.MODIFIED_COMPUTER_NAME = Environment.MachineName;
+            m_user.EMPLOYEE = (Employee)employeekryptonComboBox1.SelectedItem;
             m_user.FORM_ACCESS_LIST.Clear();
             for (int i = 0; i < formAccessKryptonDataGridView1.Rows.Count; i++)
             {
@@ -155,6 +160,14 @@ namespace Profit
                 c.MODIFIED_BY = m_mainForm.CurrentUser.NAME;
                 c.MODIFIED_COMPUTER_NAME = Environment.MachineName;
                 c.USER = m_user;
+                //foreach (FormAccess d in m_mainForm.GetFormAccessList())
+                //{
+                //    if (d.CODE == c.CODE)
+                //    {
+                //        c.FORM_TYPE = d.FORM_TYPE;
+                //        break;
+                //    }
+                //}
                 if(!m_user.FORM_ACCESS_LIST.ContainsKey(c.CODE))
                     m_user.FORM_ACCESS_LIST.Add(c.CODE, c);
             }
@@ -192,8 +205,33 @@ namespace Profit
             ViewColumn.ReadOnly = !enable;
             PostColumn.ReadOnly = !enable;
             PrintColumn.ReadOnly = !enable;
+            accessColumn.ReadOnly = !enable;
+            employeekryptonComboBox1.Enabled = enable;
             formAccessKryptonDataGridView1.AllowUserToAddRows = enable;
             formAccessKryptonDataGridView1.AllowUserToDeleteRows = enable;
+            for (int t = 0; t < formAccessKryptonDataGridView1.Rows.Count; t++)
+            {
+                if (formAccessKryptonDataGridView1[FormAccessCodeColumn.Index, t].Value == null)
+                    continue;
+                FormAccess c = (FormAccess)formAccessKryptonDataGridView1.Rows[t].Tag;
+                switch (c.FORM_TYPE)
+                {
+                    case FormType.Master:
+                        formAccessKryptonDataGridView1[PostColumn.Index, t].Style.BackColor = System.Drawing.SystemColors.InactiveCaption;
+                        formAccessKryptonDataGridView1[PostColumn.Index, t].ReadOnly = true;
+                        break;
+                    case FormType.Report:
+                        formAccessKryptonDataGridView1[PostColumn.Index, t].Style.BackColor = System.Drawing.SystemColors.InactiveCaption;
+                        formAccessKryptonDataGridView1[PostColumn.Index, t].ReadOnly = true;
+                        formAccessKryptonDataGridView1[SaveColumn.Index, t].Style.BackColor = System.Drawing.SystemColors.InactiveCaption;
+                        formAccessKryptonDataGridView1[SaveColumn.Index, t].ReadOnly = true;
+                        formAccessKryptonDataGridView1[DeleteColumn.Index, t].Style.BackColor = System.Drawing.SystemColors.InactiveCaption;
+                        formAccessKryptonDataGridView1[DeleteColumn.Index, t].ReadOnly = true;
+                        formAccessKryptonDataGridView1[PrintColumn.Index, t].Style.BackColor = System.Drawing.SystemColors.InactiveCaption;
+                        formAccessKryptonDataGridView1[PrintColumn.Index, t].ReadOnly = true;
+                        break;
+                }
+            }
         }
         private void setEditMode(EditMode editmode)
         {
@@ -274,15 +312,36 @@ namespace Profit
             try
             {
                 m_user = r_userRep.getUser(m_user.CODE);
+                m_user.EMPLOYEE = (Employee)r_empRep.GetById(m_user.EMPLOYEE);
+
                 textBoxCode.Text = m_user.CODE;
                 textBoxName.Text = m_user.NAME;
                 passwordKryptonTextBox.Text = m_user.PASSWORD;
                 activekryptonCheckBox.Checked = m_user.ACTIVE;
+                employeekryptonComboBox1.Text = m_user.EMPLOYEE.ToString();
                 foreach (string kys in m_user.FORM_ACCESS_LIST.Keys)
                 {
                     FormAccess f = m_user.FORM_ACCESS_LIST[kys];
-                    int t = formAccessKryptonDataGridView1.Rows.Add(f.NAME, f.SAVE, f.DELETE, f.VIEW, f.POST, f.PRINT);
+                    int t = formAccessKryptonDataGridView1.Rows.Add(f.NAME, true ,f.SAVE, f.DELETE, f.VIEW, f.POST, f.PRINT);
                     formAccessKryptonDataGridView1.Rows[t].Tag = f;
+                    switch (f.FORM_TYPE)
+                    {
+                        case FormType.Master:
+                            formAccessKryptonDataGridView1[PostColumn.Index, t].Style.BackColor = System.Drawing.SystemColors.InactiveCaption;
+                            formAccessKryptonDataGridView1[PostColumn.Index, t].ReadOnly = true;
+                            break;
+                        case FormType.Report:
+                            formAccessKryptonDataGridView1[PostColumn.Index, t].Style.BackColor = System.Drawing.SystemColors.InactiveCaption;
+                            formAccessKryptonDataGridView1[PostColumn.Index, t].ReadOnly = true;
+                            formAccessKryptonDataGridView1[SaveColumn.Index, t].Style.BackColor = System.Drawing.SystemColors.InactiveCaption;
+                            formAccessKryptonDataGridView1[SaveColumn.Index, t].ReadOnly = true;
+                            formAccessKryptonDataGridView1[DeleteColumn.Index, t].Style.BackColor = System.Drawing.SystemColors.InactiveCaption;
+                            formAccessKryptonDataGridView1[DeleteColumn.Index, t].ReadOnly = true;
+                            formAccessKryptonDataGridView1[PrintColumn.Index, t].Style.BackColor = System.Drawing.SystemColors.InactiveCaption;
+                            formAccessKryptonDataGridView1[PrintColumn.Index, t].ReadOnly = true;
+                            break;
+                    }
+
                 }
             }
             catch (Exception x)
@@ -309,6 +368,11 @@ namespace Profit
         private void BankForm_Activated(object sender, EventArgs e)
         {
             ReloadMainFormButton();
+        }
+
+        private void formAccessKryptonDataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            UserSetting.AddNumberToGrid(formAccessKryptonDataGridView1);
         }
     }
 }

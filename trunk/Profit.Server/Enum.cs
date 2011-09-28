@@ -144,4 +144,10 @@ namespace Profit.Server
         Up,
         Down
     }
+    public enum FormType
+    {
+        Master,
+        Transaction,
+        Report
+    }
 }

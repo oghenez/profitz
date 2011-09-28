@@ -20,6 +20,8 @@ namespace Profit.Server
         public bool PRINT = true;
         public User USER = null;
         public bool UPDATED = false;
+        public FormType FORM_TYPE = FormType.Master;
+
         public FormAccess()
         {
         }
@@ -27,11 +29,12 @@ namespace Profit.Server
         {
             ID = id;
         }
-        public FormAccess(int id, string code, string name)
+        public FormAccess(int id, string code, string name, FormType frmtype)
         {
             ID = id;
             CODE = code;
             NAME = name;
+            FORM_TYPE = frmtype;
         }
         public IEntity Get(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
@@ -51,6 +54,8 @@ namespace Profit.Server
                 formaccess.MODIFIED_BY = aReader["modified_by"].ToString();
                 formaccess.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
                 formaccess.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
+                formaccess.FORM_TYPE = (FormType)Enum.Parse(typeof(FormType), aReader["form_type"].ToString()); 
+
             }
             return formaccess;
         }
@@ -64,9 +69,10 @@ namespace Profit.Server
                     formaccess_view,
                     formaccess_post,
                     formaccess_print,
-                    user_id, modified_by, modified_date, modified_computer) 
-                VALUES ('{0}','{1}',{2},{3},{4},{5},{6},{7},'{8}','{9}','{10}')",
-                CODE, NAME, SAVE, DELETE, VIEW, POST, PRINT, USER.ID, MODIFIED_BY, DateTime.Now.ToString(Utils.DATE_FORMAT), MODIFIED_COMPUTER_NAME);
+                    user_id, modified_by, modified_date, modified_computer,form_type
+                ) 
+                VALUES ('{0}','{1}',{2},{3},{4},{5},{6},{7},'{8}','{9}','{10}','{11}')",
+                CODE, NAME, SAVE, DELETE, VIEW, POST, PRINT, USER.ID, MODIFIED_BY, DateTime.Now.ToString(Utils.DATE_FORMAT), MODIFIED_COMPUTER_NAME, FORM_TYPE.ToString());
         }
         public string GetDeleteSQL()
         {
@@ -85,9 +91,10 @@ namespace Profit.Server
                     user_id={7},
                 modified_by='{8}', 
                 modified_date='{9}',
-                modified_computer='{10}'
-                where formaccess_id = {11}",
-                CODE, NAME, SAVE, DELETE, VIEW, POST, PRINT, USER.ID, MODIFIED_BY, DateTime.Now.ToString(Utils.DATE_FORMAT), MODIFIED_COMPUTER_NAME, ID);
+                modified_computer='{10}',
+                form_type = '{11}'
+                where formaccess_id = {12}",
+                CODE, NAME, SAVE, DELETE, VIEW, POST, PRINT, USER.ID, MODIFIED_BY, DateTime.Now.ToString(Utils.DATE_FORMAT), MODIFIED_COMPUTER_NAME, FORM_TYPE.ToString(), ID);
         }
         public string GetByIDSQL(int ID)
         {
@@ -135,6 +142,7 @@ namespace Profit.Server
                 formaccess.MODIFIED_BY = aReader["modified_by"].ToString();
                 formaccess.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
                 formaccess.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
+                formaccess.FORM_TYPE = (FormType)Enum.Parse(typeof(FormType), aReader["form_type"].ToString()); 
                 result.Add(formaccess);
             }
             return result;

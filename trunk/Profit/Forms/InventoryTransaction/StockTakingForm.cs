@@ -542,10 +542,5 @@ namespace Profit
                 dataItemskryptonDataGridView.Rows[count].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
             }
         }
-
-        private void StockTakingForm_Shown(object sender, EventArgs e)
-        {
-            customTabControl1.Invalidate();
-        }
     }
 }

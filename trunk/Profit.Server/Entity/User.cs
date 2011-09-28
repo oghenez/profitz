@@ -16,6 +16,7 @@ namespace Profit.Server
         public string NAME = "";
         public string PASSWORD = "1234";
         public bool ACTIVE = true;
+        public Employee EMPLOYEE = null;
         public IDictionary<string, FormAccess> FORM_ACCESS_LIST= new Dictionary<string, FormAccess>();
         public User()
         {
@@ -43,6 +44,7 @@ namespace Profit.Server
                 user.MODIFIED_BY = aReader["modified_by"].ToString();
                 user.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
                 user.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
+                user.EMPLOYEE = new Employee(Convert.ToInt32(aReader["emp_id"]));
             }
             return user;
         }
@@ -61,15 +63,21 @@ namespace Profit.Server
                 user.MODIFIED_BY = aReader["modified_by"].ToString();
                 user.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
                 user.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
+                user.EMPLOYEE = new Employee(Convert.ToInt32(aReader["emp_id"]));
+
             }
             return user;
         }
         public string GetInsertSQL()
         {
             return String.Format(@"insert into table_user 
-                (user_code,user_name, user_password, user_active, modified_by, modified_date, modified_computer) 
+                (user_code,user_name, user_password, user_active, modified_by, modified_date, modified_computer, emp_id) 
                 VALUES ('{0}','{1}','{2}',{3},'{4}','{5}','{6}')",
-                CODE, NAME, m_crypto.Encrypt(PASSWORD), ACTIVE, MODIFIED_BY, DateTime.Now.ToString(Utils.DATE_FORMAT), MODIFIED_COMPUTER_NAME);
+                CODE, NAME, m_crypto.Encrypt(PASSWORD), 
+                ACTIVE, MODIFIED_BY, DateTime.Now.ToString(Utils.DATE_FORMAT), 
+                MODIFIED_COMPUTER_NAME,
+                EMPLOYEE==null?0:EMPLOYEE.ID
+                );
         }
         public string GetDeleteSQL()
         {
@@ -84,10 +92,14 @@ namespace Profit.Server
                 user_active = {3},
                 modified_by='{4}', 
                 modified_date='{5}',
-                modified_computer='{6}'
-                where user_id = {7}",
+                modified_computer='{6}',
+                emp_id = {7}
+                where user_id = {8}",
                 CODE, NAME, m_crypto.Encrypt(PASSWORD), ACTIVE, 
-                MODIFIED_BY, DateTime.Now.ToString(Utils.DATE_FORMAT), MODIFIED_COMPUTER_NAME, ID);
+                MODIFIED_BY, DateTime.Now.ToString(Utils.DATE_FORMAT), 
+                MODIFIED_COMPUTER_NAME, 
+                EMPLOYEE==null?0:EMPLOYEE.ID,
+                ID);
         }
         public string GetByIDSQL(int ID)
         {
@@ -131,6 +143,8 @@ namespace Profit.Server
                 user.MODIFIED_BY = aReader["modified_by"].ToString();
                 user.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
                 user.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
+                user.EMPLOYEE = new Employee(Convert.ToInt32(aReader["emp_id"]));
+
                 result.Add(user);
             }
             return result;
