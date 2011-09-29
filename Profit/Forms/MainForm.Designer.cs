@@ -156,6 +156,9 @@
             this.MasterDatakryptonCheckButton1 = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.kryptonCheckSet1 = new ComponentFactory.Krypton.Toolkit.KryptonCheckSet(this.components);
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.naviToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel4)).BeginInit();
@@ -227,6 +230,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItemM,
+            this.viewToolStripMenuItem,
             this.helpToolStripMenuItem,
             this.pOSToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -362,14 +366,14 @@
             this.editToolStripMenuItem.Image = global::Profit.Properties.Resources.edit;
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(137, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
             // 
             // helpToolStripMenuItem
             // 
@@ -415,7 +419,7 @@
             // 
             this.itemsToolStripMenuItem.Name = "itemsToolStripMenuItem";
             this.itemsToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.itemsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.itemsToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.itemsToolStripMenuItem.Text = "Items";
             this.itemsToolStripMenuItem.Click += new System.EventHandler(this.itemsToolStripMenuItem_Click);
             // 
@@ -423,7 +427,7 @@
             // 
             this.barcodeToolStripMenuItem.Name = "barcodeToolStripMenuItem";
             this.barcodeToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.barcodeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.barcodeToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.barcodeToolStripMenuItem.Text = "Barcode";
             this.barcodeToolStripMenuItem.Click += new System.EventHandler(this.barcodeToolStripMenuItem_Click);
             // 
@@ -431,7 +435,7 @@
             // 
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
             this.helpToolStripMenuItem1.ShortcutKeys = System.Windows.Forms.Keys.F3;
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(144, 22);
             this.helpToolStripMenuItem1.Text = "Help";
             this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
             // 
@@ -439,7 +443,7 @@
             // 
             this.refreshToolStripMenuItem1.Name = "refreshToolStripMenuItem1";
             this.refreshToolStripMenuItem1.ShortcutKeys = System.Windows.Forms.Keys.F4;
-            this.refreshToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.refreshToolStripMenuItem1.Size = new System.Drawing.Size(144, 22);
             this.refreshToolStripMenuItem1.Text = "Refresh";
             this.refreshToolStripMenuItem1.Click += new System.EventHandler(this.refreshToolStripMenuItem1_Click);
             // 
@@ -447,7 +451,7 @@
             // 
             this.memberToolStripMenuItem.Name = "memberToolStripMenuItem";
             this.memberToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.memberToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.memberToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.memberToolStripMenuItem.Text = "Member";
             this.memberToolStripMenuItem.Click += new System.EventHandler(this.memberToolStripMenuItem_Click);
             // 
@@ -455,7 +459,7 @@
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F7;
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
@@ -463,14 +467,14 @@
             // 
             this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
             this.saveToolStripMenuItem1.ShortcutKeys = System.Windows.Forms.Keys.F9;
-            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(144, 22);
             this.saveToolStripMenuItem1.Text = "Save";
             this.saveToolStripMenuItem1.Click += new System.EventHandler(this.saveToolStripMenuItem1_Click);
             // 
             // postToolStripMenuItem
             // 
             this.postToolStripMenuItem.Name = "postToolStripMenuItem";
-            this.postToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.postToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.postToolStripMenuItem.Text = "Post";
             this.postToolStripMenuItem.Click += new System.EventHandler(this.postToolStripMenuItem_Click);
             // 
@@ -478,7 +482,7 @@
             // 
             this.printToolStripMenuItem1.Name = "printToolStripMenuItem1";
             this.printToolStripMenuItem1.ShortcutKeys = System.Windows.Forms.Keys.F10;
-            this.printToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.printToolStripMenuItem1.Size = new System.Drawing.Size(144, 22);
             this.printToolStripMenuItem1.Text = "Print";
             this.printToolStripMenuItem1.Click += new System.EventHandler(this.printToolStripMenuItem1_Click);
             // 
@@ -486,7 +490,7 @@
             // 
             this.antrianToolStripMenuItem.Name = "antrianToolStripMenuItem";
             this.antrianToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F11;
-            this.antrianToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.antrianToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.antrianToolStripMenuItem.Text = "Antrian";
             this.antrianToolStripMenuItem.Click += new System.EventHandler(this.antrianToolStripMenuItem_Click);
             // 
@@ -494,7 +498,7 @@
             // 
             this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
             this.exitToolStripMenuItem1.ShortcutKeys = System.Windows.Forms.Keys.F12;
-            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(144, 22);
             this.exitToolStripMenuItem1.Text = "Exit";
             this.exitToolStripMenuItem1.Click += new System.EventHandler(this.exitToolStripMenuItem1_Click);
             // 
@@ -504,6 +508,7 @@
             this.treeView3.Dock = System.Windows.Forms.DockStyle.Top;
             this.treeView3.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.treeView3.FullRowSelect = true;
+            this.treeView3.LineColor = System.Drawing.Color.Empty;
             this.treeView3.Location = new System.Drawing.Point(0, 76);
             this.treeView3.Name = "treeView3";
             treeNode1.Name = "Node0";
@@ -813,7 +818,7 @@
             // kryptonSeparator1
             // 
             this.kryptonSeparator1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.kryptonSeparator1.Location = new System.Drawing.Point(0, 879);
+            this.kryptonSeparator1.Location = new System.Drawing.Point(0, 876);
             this.kryptonSeparator1.Name = "kryptonSeparator1";
             this.kryptonSeparator1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             this.kryptonSeparator1.Size = new System.Drawing.Size(220, 5);
@@ -1065,7 +1070,7 @@
             // 
             this.TransactionkryptonCheckButton2.Checked = true;
             this.TransactionkryptonCheckButton2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.TransactionkryptonCheckButton2.Location = new System.Drawing.Point(0, 884);
+            this.TransactionkryptonCheckButton2.Location = new System.Drawing.Point(0, 881);
             this.TransactionkryptonCheckButton2.Name = "TransactionkryptonCheckButton2";
             this.TransactionkryptonCheckButton2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.TransactionkryptonCheckButton2.Size = new System.Drawing.Size(220, 30);
@@ -1078,7 +1083,7 @@
             // MasterDatakryptonCheckButton1
             // 
             this.MasterDatakryptonCheckButton1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.MasterDatakryptonCheckButton1.Location = new System.Drawing.Point(0, 914);
+            this.MasterDatakryptonCheckButton1.Location = new System.Drawing.Point(0, 911);
             this.MasterDatakryptonCheckButton1.Name = "MasterDatakryptonCheckButton1";
             this.MasterDatakryptonCheckButton1.Size = new System.Drawing.Size(220, 30);
             this.MasterDatakryptonCheckButton1.StateCommon.Content.Image.ImageH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Near;
@@ -1102,6 +1107,28 @@
             this.kryptonCheckSet1.CheckButtons.Add(this.TransactionkryptonCheckButton2);
             this.kryptonCheckSet1.CheckedButton = this.TransactionkryptonCheckButton2;
             this.kryptonCheckSet1.CheckedButtonChanged += new System.EventHandler(this.kryptonCheckSet1_CheckedButtonChanged);
+            // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.naviToolStripMenuItem});
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.viewToolStripMenuItem.Text = "View";
+            // 
+            // naviToolStripMenuItem
+            // 
+            this.naviToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showToolStripMenuItem});
+            this.naviToolStripMenuItem.Name = "naviToolStripMenuItem";
+            this.naviToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.naviToolStripMenuItem.Text = "Navigation Pane";
+            // 
+            // showToolStripMenuItem
+            // 
+            this.showToolStripMenuItem.Name = "showToolStripMenuItem";
+            this.showToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.showToolStripMenuItem.Text = "Show";
             // 
             // MainForm
             // 
@@ -1222,6 +1249,9 @@
         private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem antrianToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem naviToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
 
 
     }
