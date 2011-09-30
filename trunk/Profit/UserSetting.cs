@@ -43,6 +43,11 @@ namespace Profit
             UserSettingsRepository r_setting = RepositoryFactory.GetInstance().UserSetting();
             return r_setting.GetIntValue(userid, formname + uniqname, defaultVal);
         }
+        public static bool GetBoolValue(string uniqname, int userid, string formname)
+        {
+            UserSettingsRepository r_setting = RepositoryFactory.GetInstance().UserSetting();
+            return r_setting.GetBoolValue(userid, formname + uniqname);
+        }
         public static void AddNumberToGrid(KryptonDataGridView dgrid)
         {
             for (int count = 0; (count <= (dgrid.Rows.Count - 1)); count++)
