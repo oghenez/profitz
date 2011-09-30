@@ -89,272 +89,278 @@ namespace Profit
         void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            if (e.Node.Name == "NodeBank")
+            string nodename = e.Node.Name;
+            ExecuteForm(nodename);
+        }
+
+        private void ExecuteForm(string nodename)
+        {
+            if (nodename == "NodeBank")
             {
                 if (isChild(BANK_FORM)) { this.Cursor = Cursors.Default; return; }
                 BankForm user = new BankForm(this, BANK_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodeCurrency")
+            if (nodename == "NodeCurrency")
             {
                 if (isChild(CURRENCY_FORM)) { this.Cursor = Cursors.Default; return; }
                 CurrencyForm user = new CurrencyForm(this, CURRENCY_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodeDivision")
+            if (nodename == "NodeDivision")
             {
                 if (isChild(DIVISION_FORM)) { this.Cursor = Cursors.Default; return; }
                 DivisionForm user = new DivisionForm(this, DIVISION_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodeEmployee")
+            if (nodename == "NodeEmployee")
             {
                 if (isChild(EMPLOYEE_FORM)) { this.Cursor = Cursors.Default; return; }
                 EmployeeForm user = new EmployeeForm(this, EMPLOYEE_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
-            } 
-            if (e.Node.Name == "NodeTOP")
+            }
+            if (nodename == "NodeTOP")
             {
                 if (isChild(TOP_FORM)) { this.Cursor = Cursors.Default; return; }
                 TOPForm user = new TOPForm(this, TOP_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
-            } 
-            if (e.Node.Name == "NodeUnit")
+            }
+            if (nodename == "NodeUnit")
             {
                 if (isChild(UNIT_FORM)) { this.Cursor = Cursors.Default; return; }
                 UnitForm user = new UnitForm(this, UNIT_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodeCustomerCategory")
+            if (nodename == "NodeCustomerCategory")
             {
                 if (isChild(CUSTOMER_CATEGORY_FORM)) { this.Cursor = Cursors.Default; return; }
                 CustomerCategoryForm user = new CustomerCategoryForm(this, CUSTOMER_CATEGORY_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodeSupplierCategory")
+            if (nodename == "NodeSupplierCategory")
             {
                 if (isChild(SUPPLIER_CATEGORY_FORM)) { this.Cursor = Cursors.Default; return; }
                 SupplierCategoryForm user = new SupplierCategoryForm(this, SUPPLIER_CATEGORY_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodePriceCategory")
+            if (nodename == "NodePriceCategory")
             {
                 if (isChild(PRICE_CATEGORY_FORM)) { this.Cursor = Cursors.Default; return; }
                 PriceCategoryForm user = new PriceCategoryForm(this, PRICE_CATEGORY_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodeTax")
+            if (nodename == "NodeTax")
             {
                 if (isChild(TAX_FORM)) { this.Cursor = Cursors.Default; return; }
                 TaxForm user = new TaxForm(this, TAX_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodePartGroup")
+            if (nodename == "NodePartGroup")
             {
                 if (isChild(PART_GROUP_FORM)) { this.Cursor = Cursors.Default; return; }
                 PartGroupForm user = new PartGroupForm(this, PART_GROUP_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodeWarehouse")
+            if (nodename == "NodeWarehouse")
             {
                 if (isChild(WAREHOUSE_FORM)) { this.Cursor = Cursors.Default; return; }
                 WarehouseForm user = new WarehouseForm(this, WAREHOUSE_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
-            } 
-            if (e.Node.Name == "NodePartCategory")
+            }
+            if (nodename == "NodePartCategory")
             {
                 if (isChild(PART_CATEGORY_FORM)) { this.Cursor = Cursors.Default; return; }
                 PartCategoryForm user = new PartCategoryForm(this, PART_CATEGORY_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
-            } 
-            if (e.Node.Name == "NodeDocumentType")
+            }
+            if (nodename == "NodeDocumentType")
             {
                 if (isChild(DOC_TYPE_FORM)) { this.Cursor = Cursors.Default; return; }
                 DocumentTypeForm user = new DocumentTypeForm(this, DOC_TYPE_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodeExchangeRate")
+            if (nodename == "NodeExchangeRate")
             {
                 if (isChild(EXCHANGE_RATE_FORM)) { this.Cursor = Cursors.Default; return; }
                 ExchangeRateForm user = new ExchangeRateForm(this, EXCHANGE_RATE_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
-            } if (e.Node.Name == "NodeCustomer")
+            } if (nodename == "NodeCustomer")
             {
                 if (isChild(CUSTOMER_FORM)) { this.Cursor = Cursors.Default; return; }
                 CustomerForm user = new CustomerForm(this, CUSTOMER_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodeSupplier")
+            if (nodename == "NodeSupplier")
             {
                 if (isChild(SUPPLIER_FORM)) { this.Cursor = Cursors.Default; return; }
                 SupplierForm user = new SupplierForm(this, SUPPLIER_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodeYear")
+            if (nodename == "NodeYear")
             {
                 if (isChild(YEAR_FORM)) { this.Cursor = Cursors.Default; return; }
                 YearForm user = new YearForm(this, YEAR_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodePart")
+            if (nodename == "NodePart")
             {
                 if (isChild(PART_FORM)) { this.Cursor = Cursors.Default; return; }
                 PartForm user = new PartForm(this, PART_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodeStockTaking")
+            if (nodename == "NodeStockTaking")
             {
                 if (isChild(STOCK_TAKING_FORM)) { this.Cursor = Cursors.Default; return; }
                 StockTakingForm user = new StockTakingForm(this, STOCK_TAKING_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodePurchaseOrder")
+            if (nodename == "NodePurchaseOrder")
             {
                 if (isChild(PURCHASE_ORDER_FORM)) { this.Cursor = Cursors.Default; return; }
                 PurchaseOrderForm user = new PurchaseOrderForm(this, PURCHASE_ORDER_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodeGoodReceiveNote")
+            if (nodename == "NodeGoodReceiveNote")
             {
                 if (isChild(GOOD_RECEIVE_NOTE_FORM)) { this.Cursor = Cursors.Default; return; }
                 GoodReceiptNoteForm user = new GoodReceiptNoteForm(this, GOOD_RECEIVE_NOTE_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodePurchaseReturn")
+            if (nodename == "NodePurchaseReturn")
             {
                 if (isChild(PURCHASE_RETURN_FORM)) { this.Cursor = Cursors.Default; return; }
                 PurchaseReturnForm user = new PurchaseReturnForm(this, PURCHASE_RETURN_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodeSupplierInvoice")
+            if (nodename == "NodeSupplierInvoice")
             {
                 if (isChild(SUPPLIER_INVOICE_FORM)) { this.Cursor = Cursors.Default; return; }
                 SupplierInvoiceForm user = new SupplierInvoiceForm(this, SUPPLIER_INVOICE_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodeSupplierOutstandingInvoice")
+            if (nodename == "NodeSupplierOutstandingInvoice")
             {
                 if (isChild(SUPPLIER_OUTSTANDING_INVOICE_FORM)) { this.Cursor = Cursors.Default; return; }
                 SupplierOutstandingInvoiceForm user = new SupplierOutstandingInvoiceForm(this, SUPPLIER_OUTSTANDING_INVOICE_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodePayment")
+            if (nodename == "NodePayment")
             {
                 if (isChild(PAYMENT_FORM)) { this.Cursor = Cursors.Default; return; }
                 PaymentForm user = new PaymentForm(this, PAYMENT_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodeAPDebitNote")
+            if (nodename == "NodeAPDebitNote")
             {
                 if (isChild(AP_DEBIT_NOTE_FORM)) { this.Cursor = Cursors.Default; return; }
                 APDebitNoteForm user = new APDebitNoteForm(this, AP_DEBIT_NOTE_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodeSalesOrder")
+            if (nodename == "NodeSalesOrder")
             {
                 if (isChild(SALES_ORDER_FORM)) { this.Cursor = Cursors.Default; return; }
                 SalesOrderForm user = new SalesOrderForm(this, SALES_ORDER_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodeDeliveryOrder")
+            if (nodename == "NodeDeliveryOrder")
             {
                 if (isChild(DELIVERY_ORDER_FORM)) { this.Cursor = Cursors.Default; return; }
                 DeliveryOrderForm user = new DeliveryOrderForm(this, DELIVERY_ORDER_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodeCustomerOutstandingInvoice")
+            if (nodename == "NodeCustomerOutstandingInvoice")
             {
                 if (isChild(CUSTOMER_OS_INVOICE_FORM)) { this.Cursor = Cursors.Default; return; }
                 CustomerOutstandingInvoiceForm user = new CustomerOutstandingInvoiceForm(this, CUSTOMER_OS_INVOICE_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodeCustomerInvoice")
+            if (nodename == "NodeCustomerInvoice")
             {
                 if (isChild(CUSTOMER_INVOICE_FORM)) { this.Cursor = Cursors.Default; return; }
                 CustomerInvoiceForm user = new CustomerInvoiceForm(this, CUSTOMER_INVOICE_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodeReceipt")
+            if (nodename == "NodeReceipt")
             {
                 if (isChild(RECEIPT_FORM)) { this.Cursor = Cursors.Default; return; }
                 ReceiptForm user = new ReceiptForm(this, RECEIPT_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodeSalesReturn")
+            if (nodename == "NodeSalesReturn")
             {
                 if (isChild(SALES_RETURN_FORM)) { this.Cursor = Cursors.Default; return; }
                 SalesReturnForm user = new SalesReturnForm(this, SALES_RETURN_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodeARCreditNote")
+            if (nodename == "NodeARCreditNote")
             {
                 if (isChild(AR_CREDIT_NOTE_FORM)) { this.Cursor = Cursors.Default; return; }
                 ARCreditNoteForm user = new ARCreditNoteForm(this, AR_CREDIT_NOTE_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodeOpeningStock")
+            if (nodename == "NodeOpeningStock")
             {
                 if (isChild(OPENING_STOCK_FORM)) { this.Cursor = Cursors.Default; return; }
                 OpeningStockForm user = new OpeningStockForm(this, OPENING_STOCK_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodePOS")
+            if (nodename == "NodePOS")
             {
                 if (isChild(POS_FORM)) { this.Cursor = Cursors.Default; return; }
                 POSForm user = new POSForm(this, POS_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodePOSCashier")
+            if (nodename == "NodePOSCashier")
             {
                 if (isChild(POS_CASHIER_FORM)) { this.Cursor = Cursors.Default; return; }
                 POSCashierForm user = new POSCashierForm(this, POS_CASHIER_FORM);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodeSupplierTransactionSummary")
+            if (nodename == "NodeSupplierTransactionSummary")
             {
                 if (isChild(SUPPLIER_TRANSACTION_SUMMARY)) { this.Cursor = Cursors.Default; return; }
                 SupplierTransactionSummaryForm user = new SupplierTransactionSummaryForm(this, SUPPLIER_TRANSACTION_SUMMARY);
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
-            if (e.Node.Name == "NodeCustomerTransactionSummary")
+            if (nodename == "NodeCustomerTransactionSummary")
             {
                 if (isChild(CUSTOMER_TRANSACTION_SUMMARY)) { this.Cursor = Cursors.Default; return; }
                 CustomerTransactionSummaryForm user = new CustomerTransactionSummaryForm(this, CUSTOMER_TRANSACTION_SUMMARY);
@@ -521,18 +527,52 @@ namespace Profit
             }
             this.Width = UserSetting.GetIntValue("mainformwidth", CurrentUser.ID, this.Name, 1024);
             this.Height = UserSetting.GetIntValue("mainformheight", CurrentUser.ID, this.Name, 600);
+
+            showToolStripMenuItem.Checked = UserSetting.GetBoolValue(showToolStripMenuItem.Name, CurrentUser.ID, this.Name);
         }
 
         private void SetAuthorityFormAccess()
         {
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(BANK_FORM)) financeTreeView.Nodes["NodeBank"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(CURRENCY_FORM)) generalMenuTreeView.Nodes["NodeCurrency"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(DIVISION_FORM)) generalMenuTreeView.Nodes["NodeDivision"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(EMPLOYEE_FORM)) generalMenuTreeView.Nodes["NodeEmployee"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(TOP_FORM)) distributionTreeView.Nodes["NodeTOP"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(CUSTOMER_CATEGORY_FORM)) distributionTreeView.Nodes["NodeCustomerCategory"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(SUPPLIER_CATEGORY_FORM)) distributionTreeView.Nodes["NodeSupplierCategory"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PRICE_CATEGORY_FORM)) distributionTreeView.Nodes["NodePriceCategory"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(BANK_FORM))
+            {
+                financeTreeView.Nodes["NodeBank"].Remove();
+                mstf001bankToolStripMenuItem.Visible = false;
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(CURRENCY_FORM))
+            {
+                generalMenuTreeView.Nodes["NodeCurrency"].Remove();
+                mSTG001MataUangToolStripMenuItem.Visible = false;
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(DIVISION_FORM))
+            {
+                generalMenuTreeView.Nodes["NodeDivision"].Remove();
+                mSTG003DivisiToolStripMenuItem.Visible = false;
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(EMPLOYEE_FORM))
+            { 
+                generalMenuTreeView.Nodes["NodeEmployee"].Remove();
+                mSTG002KAryawanToolStripMenuItem.Visible = false;
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(TOP_FORM))
+            {
+                distributionTreeView.Nodes["NodeTOP"].Remove();
+                mSTD007TerminToolStripMenuItem.Visible = false;
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(CUSTOMER_CATEGORY_FORM))
+            {
+                distributionTreeView.Nodes["NodeCustomerCategory"].Remove();
+                mSTD003KategoriPelangganToolStripMenuItem.Visible = false;
+            }
+
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(SUPPLIER_CATEGORY_FORM))
+            {
+                distributionTreeView.Nodes["NodeSupplierCategory"].Remove();
+                mSTD004KategoriPemasokToolStripMenuItem.Visible = false;
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PRICE_CATEGORY_FORM))
+            {
+                distributionTreeView.Nodes["NodePriceCategory"].Remove();
+            }
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(TAX_FORM)) distributionTreeView.Nodes["NodeTax"].Remove();
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PART_GROUP_FORM)) inventoryTreeView.Nodes["NodePartGroup"].Remove();
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(WAREHOUSE_FORM)) inventoryTreeView.Nodes["NodeWarehouse"].Remove();
@@ -731,6 +771,8 @@ namespace Profit
             UserSetting.SaveSetting("menuwidth", kryptonPanel4.Width.ToString(), CurrentUser.ID, this.Name, typeof(int));
             UserSetting.SaveSetting("mainformwidth", this.Width.ToString(), CurrentUser.ID, this.Name, typeof(int));
             UserSetting.SaveSetting("mainformheight", this.Height.ToString(), CurrentUser.ID, this.Name, typeof(int));
+            UserSetting.SaveSetting(showToolStripMenuItem.Name, showToolStripMenuItem.Checked.ToString(), CurrentUser.ID, this.Name, typeof(bool));
+
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -823,6 +865,36 @@ namespace Profit
             IPOSChildForm frm = this.ActiveMdiChild as IPOSChildForm;
             if (frm == null) return;
             frm.Exit(sender, e);
+        }
+
+        private void showToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            this.kryptonPanel4.Visible = showToolStripMenuItem.Checked;
+        }
+
+        private void showToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showToolStripMenuItem.Checked = !showToolStripMenuItem.Checked;
+        }
+
+        private void mstf001bankToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExecuteForm("NodeBank");
+        }
+
+        private void mSTF002DocumentTypeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExecuteForm("NodeDocumentType");
+        }
+
+        private void mSTF003ExchangeRateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExecuteForm("NodeExchangeRate");
+        }
+
+        private void mSTF004YearToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExecuteForm("NodeYear");
         }
     }
 }

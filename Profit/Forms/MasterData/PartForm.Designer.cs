@@ -142,6 +142,7 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.buttonSpecAny1 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.kryptonGroup3 = new ComponentFactory.Krypton.Toolkit.KryptonGroup();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
@@ -180,6 +181,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
             this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroup3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroup3.Panel)).BeginInit();
+            this.kryptonGroup3.Panel.SuspendLayout();
+            this.kryptonGroup3.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonHeader1
@@ -573,7 +578,7 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.dataGridViewUOM);
+            this.tabPage1.Controls.Add(this.kryptonGroup3);
             this.tabPage1.Controls.Add(this.unitKryptonTextBox);
             this.tabPage1.Controls.Add(this.unitkryptonComboBox2);
             this.tabPage1.Controls.Add(this.kryptonLabel8);
@@ -591,9 +596,6 @@
             // 
             // dataGridViewUOM
             // 
-            this.dataGridViewUOM.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewUOM.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.barcodeColumn,
             this.ConversionQTy,
@@ -602,9 +604,11 @@
             this.OrigUnit,
             this.CostPrice,
             this.SellPrice});
-            this.dataGridViewUOM.Location = new System.Drawing.Point(8, 44);
+            this.dataGridViewUOM.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewUOM.HideOuterBorders = true;
+            this.dataGridViewUOM.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewUOM.Name = "dataGridViewUOM";
-            this.dataGridViewUOM.Size = new System.Drawing.Size(672, 190);
+            this.dataGridViewUOM.Size = new System.Drawing.Size(765, 192);
             this.dataGridViewUOM.TabIndex = 0;
             // 
             // barcodeColumn
@@ -1423,6 +1427,19 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // kryptonGroup3
+            // 
+            this.kryptonGroup3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.kryptonGroup3.Location = new System.Drawing.Point(8, 44);
+            this.kryptonGroup3.Name = "kryptonGroup3";
+            // 
+            // kryptonGroup3.Panel
+            // 
+            this.kryptonGroup3.Panel.Controls.Add(this.dataGridViewUOM);
+            this.kryptonGroup3.Size = new System.Drawing.Size(767, 194);
+            this.kryptonGroup3.TabIndex = 30;
+            // 
             // PartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1483,6 +1500,10 @@
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroup3.Panel)).EndInit();
+            this.kryptonGroup3.Panel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroup3)).EndInit();
+            this.kryptonGroup3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1595,5 +1616,6 @@
         private System.Windows.Forms.TabPage tabPage6;
         private ComponentFactory.Krypton.Toolkit.KryptonGroup kryptonGroup1;
         private ComponentFactory.Krypton.Toolkit.KryptonGroup kryptonGroup2;
+        private ComponentFactory.Krypton.Toolkit.KryptonGroup kryptonGroup3;
     }
 }
