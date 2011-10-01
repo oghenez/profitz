@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonHeader1 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
@@ -103,6 +103,8 @@
             this.dgName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgSubject = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.exittoolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
@@ -149,7 +151,9 @@
             this.toolStripButtonEdit,
             this.toolStripButtonDelete,
             this.toolStripButtonClear,
-            this.toolStripButtonRefresh});
+            this.toolStripButtonRefresh,
+            this.exittoolStripButton1,
+            this.toolStripSeparator1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 29);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(924, 25);
@@ -451,7 +455,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 27);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(601, 207);
+            this.tabPage4.Size = new System.Drawing.Size(910, 207);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "Other";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -594,7 +598,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 27);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(601, 207);
+            this.tabPage1.Size = new System.Drawing.Size(910, 207);
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "Transaction";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -668,7 +672,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 27);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(601, 207);
+            this.tabPage2.Size = new System.Drawing.Size(910, 207);
             this.tabPage2.TabIndex = 3;
             this.tabPage2.Text = "Balance History";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -731,10 +735,10 @@
             // amountVBEColumn
             // 
             this.amountVBEColumn.DecimalPlaces = 2;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.NullValue = "0";
-            this.amountVBEColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.NullValue = "0";
+            this.amountVBEColumn.DefaultCellStyle = dataGridViewCellStyle5;
             this.amountVBEColumn.HeaderText = "Amount";
             this.amountVBEColumn.Increment = new decimal(new int[] {
             1,
@@ -763,7 +767,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 27);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(601, 207);
+            this.tabPage5.Size = new System.Drawing.Size(910, 207);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Balance Status";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -815,9 +819,9 @@
             // balanceVBColumn
             // 
             this.balanceVBColumn.DecimalPlaces = 2;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.NullValue = "0";
-            this.balanceVBColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.NullValue = "0";
+            this.balanceVBColumn.DefaultCellStyle = dataGridViewCellStyle6;
             this.balanceVBColumn.HeaderText = "Balance";
             this.balanceVBColumn.Increment = new decimal(new int[] {
             1000,
@@ -923,6 +927,20 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // exittoolStripButton1
+            // 
+            this.exittoolStripButton1.Image = global::Profit.Properties.Resources.Exit;
+            this.exittoolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.exittoolStripButton1.Name = "exittoolStripButton1";
+            this.exittoolStripButton1.Size = new System.Drawing.Size(45, 22);
+            this.exittoolStripButton1.Text = "Exit";
+            this.exittoolStripButton1.Click += new System.EventHandler(this.exittoolStripButton1_Click);
+            // 
             // CustomerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -931,7 +949,6 @@
             this.Controls.Add(this.kryptonSplitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.kryptonHeader1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "CustomerForm";
             this.Text = "Customer";
             this.Load += new System.EventHandler(this.CustomerForm_Load);
@@ -1047,5 +1064,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn ccyVBColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn balanceVBColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn periodstatusVBColumn;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton exittoolStripButton1;
     }
 }

@@ -467,5 +467,11 @@ namespace Profit
         {
             dataGrid_RowsAdded(sender, null);
         }
+
+        private void exittoolStripButton1_Click(object sender, EventArgs e)
+        {
+            if (KryptonMessageBox.Show("Are you sure to Exit this Form?", "Exit Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                this.Close();
+        }
     }
 }

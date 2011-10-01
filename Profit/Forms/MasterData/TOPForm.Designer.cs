@@ -38,18 +38,20 @@
             this.toolStripButtonRefresh = new System.Windows.Forms.ToolStripButton();
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonNumericUpDownDAY = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
+            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.textBoxCode = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.textBoxName = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.gridData = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonNumericUpDownDAY = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
-            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.dgName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgSubject = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Term = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.exittoolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
@@ -81,7 +83,9 @@
             this.toolStripButtonEdit,
             this.toolStripButtonDelete,
             this.toolStripButtonClear,
-            this.toolStripButtonRefresh});
+            this.toolStripButtonRefresh,
+            this.toolStripSeparator1,
+            this.exittoolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 29);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(609, 25);
@@ -168,6 +172,34 @@
             this.kryptonPanel1.Size = new System.Drawing.Size(609, 63);
             this.kryptonPanel1.TabIndex = 4;
             // 
+            // kryptonLabel4
+            // 
+            this.kryptonLabel4.Location = new System.Drawing.Point(381, 34);
+            this.kryptonLabel4.Name = "kryptonLabel4";
+            this.kryptonLabel4.Size = new System.Drawing.Size(40, 19);
+            this.kryptonLabel4.TabIndex = 6;
+            this.kryptonLabel4.Values.Text = "day(s)";
+            // 
+            // kryptonNumericUpDownDAY
+            // 
+            this.kryptonNumericUpDownDAY.Location = new System.Drawing.Point(326, 34);
+            this.kryptonNumericUpDownDAY.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.kryptonNumericUpDownDAY.Name = "kryptonNumericUpDownDAY";
+            this.kryptonNumericUpDownDAY.Size = new System.Drawing.Size(49, 21);
+            this.kryptonNumericUpDownDAY.TabIndex = 5;
+            // 
+            // kryptonLabel3
+            // 
+            this.kryptonLabel3.Location = new System.Drawing.Point(283, 34);
+            this.kryptonLabel3.Name = "kryptonLabel3";
+            this.kryptonLabel3.Size = new System.Drawing.Size(41, 19);
+            this.kryptonLabel3.TabIndex = 4;
+            this.kryptonLabel3.Values.Text = "Term :";
+            // 
             // textBoxCode
             // 
             this.textBoxCode.Location = new System.Drawing.Point(59, 6);
@@ -224,38 +256,6 @@
             this.gridData.TabIndex = 1;
             this.gridData.SelectionChanged += new System.EventHandler(this.gridData_SelectionChanged);
             // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
-            // kryptonLabel3
-            // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(283, 34);
-            this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Size = new System.Drawing.Size(41, 19);
-            this.kryptonLabel3.TabIndex = 4;
-            this.kryptonLabel3.Values.Text = "Term :";
-            // 
-            // kryptonNumericUpDownDAY
-            // 
-            this.kryptonNumericUpDownDAY.Location = new System.Drawing.Point(326, 34);
-            this.kryptonNumericUpDownDAY.Maximum = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
-            this.kryptonNumericUpDownDAY.Name = "kryptonNumericUpDownDAY";
-            this.kryptonNumericUpDownDAY.Size = new System.Drawing.Size(49, 21);
-            this.kryptonNumericUpDownDAY.TabIndex = 5;
-            // 
-            // kryptonLabel4
-            // 
-            this.kryptonLabel4.Location = new System.Drawing.Point(381, 34);
-            this.kryptonLabel4.Name = "kryptonLabel4";
-            this.kryptonLabel4.Size = new System.Drawing.Size(40, 19);
-            this.kryptonLabel4.TabIndex = 6;
-            this.kryptonLabel4.Values.Text = "day(s)";
-            // 
             // dgName
             // 
             this.dgName.DataPropertyName = "Code";
@@ -295,6 +295,24 @@
             this.Term.ReadOnly = true;
             this.Term.Width = 100;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // exittoolStripButton1
+            // 
+            this.exittoolStripButton1.Image = global::Profit.Properties.Resources.Exit;
+            this.exittoolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.exittoolStripButton1.Name = "exittoolStripButton1";
+            this.exittoolStripButton1.Size = new System.Drawing.Size(45, 22);
+            this.exittoolStripButton1.Text = "Exit";
+            this.exittoolStripButton1.Click += new System.EventHandler(this.exittoolStripButton1_Click);
+            // 
             // TOPForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -303,7 +321,6 @@
             this.Controls.Add(this.kryptonSplitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.kryptonHeader1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "TOPForm";
             this.Text = "Term Of Payment";
             this.Activated += new System.EventHandler(this.BankForm_Activated);
@@ -348,5 +365,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgName;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgSubject;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn Term;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton exittoolStripButton1;
     }
 }

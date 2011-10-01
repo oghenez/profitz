@@ -38,6 +38,9 @@
             this.toolStripButtonRefresh = new System.Windows.Forms.ToolStripButton();
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.discountkryptonNumericUpDown1 = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
             this.textBoxCode = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.textBoxName = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -46,9 +49,8 @@
             this.dgName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgSubject = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.discountkryptonNumericUpDown1 = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
-            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.exittoolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
@@ -80,7 +82,9 @@
             this.toolStripButtonEdit,
             this.toolStripButtonDelete,
             this.toolStripButtonClear,
-            this.toolStripButtonRefresh});
+            this.toolStripButtonRefresh,
+            this.toolStripSeparator1,
+            this.exittoolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 29);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(609, 25);
@@ -167,6 +171,34 @@
             this.kryptonPanel1.Size = new System.Drawing.Size(609, 63);
             this.kryptonPanel1.TabIndex = 4;
             // 
+            // kryptonLabel4
+            // 
+            this.kryptonLabel4.Location = new System.Drawing.Point(406, 37);
+            this.kryptonLabel4.Name = "kryptonLabel4";
+            this.kryptonLabel4.Size = new System.Drawing.Size(19, 19);
+            this.kryptonLabel4.TabIndex = 6;
+            this.kryptonLabel4.Values.Text = "%";
+            // 
+            // kryptonLabel3
+            // 
+            this.kryptonLabel3.Location = new System.Drawing.Point(266, 37);
+            this.kryptonLabel3.Name = "kryptonLabel3";
+            this.kryptonLabel3.Size = new System.Drawing.Size(60, 19);
+            this.kryptonLabel3.TabIndex = 5;
+            this.kryptonLabel3.Values.Text = "Discount :";
+            // 
+            // discountkryptonNumericUpDown1
+            // 
+            this.discountkryptonNumericUpDown1.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.discountkryptonNumericUpDown1.Location = new System.Drawing.Point(332, 35);
+            this.discountkryptonNumericUpDown1.Name = "discountkryptonNumericUpDown1";
+            this.discountkryptonNumericUpDown1.Size = new System.Drawing.Size(68, 21);
+            this.discountkryptonNumericUpDown1.TabIndex = 4;
+            // 
             // textBoxCode
             // 
             this.textBoxCode.Location = new System.Drawing.Point(59, 6);
@@ -243,33 +275,19 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // discountkryptonNumericUpDown1
+            // toolStripSeparator1
             // 
-            this.discountkryptonNumericUpDown1.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.discountkryptonNumericUpDown1.Location = new System.Drawing.Point(332, 35);
-            this.discountkryptonNumericUpDown1.Name = "discountkryptonNumericUpDown1";
-            this.discountkryptonNumericUpDown1.Size = new System.Drawing.Size(68, 21);
-            this.discountkryptonNumericUpDown1.TabIndex = 4;
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // kryptonLabel3
+            // exittoolStripButton1
             // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(266, 37);
-            this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Size = new System.Drawing.Size(60, 19);
-            this.kryptonLabel3.TabIndex = 5;
-            this.kryptonLabel3.Values.Text = "Discount :";
-            // 
-            // kryptonLabel4
-            // 
-            this.kryptonLabel4.Location = new System.Drawing.Point(406, 37);
-            this.kryptonLabel4.Name = "kryptonLabel4";
-            this.kryptonLabel4.Size = new System.Drawing.Size(19, 19);
-            this.kryptonLabel4.TabIndex = 6;
-            this.kryptonLabel4.Values.Text = "%";
+            this.exittoolStripButton1.Image = global::Profit.Properties.Resources.Exit;
+            this.exittoolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.exittoolStripButton1.Name = "exittoolStripButton1";
+            this.exittoolStripButton1.Size = new System.Drawing.Size(45, 22);
+            this.exittoolStripButton1.Text = "Exit";
+            this.exittoolStripButton1.Click += new System.EventHandler(this.exittoolStripButton1_Click);
             // 
             // PriceCategoryForm
             // 
@@ -279,7 +297,6 @@
             this.Controls.Add(this.kryptonSplitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.kryptonHeader1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "PriceCategoryForm";
             this.Text = "Price Category";
             this.Activated += new System.EventHandler(this.BankForm_Activated);
@@ -323,5 +340,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
         private ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown discountkryptonNumericUpDown1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton exittoolStripButton1;
     }
 }
