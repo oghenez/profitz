@@ -81,6 +81,13 @@ namespace Profit.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Add_Files_To_Archive_Yellow_32 {
+            get {
+                object obj = ResourceManager.GetObject("Add-Files-To-Archive-Yellow-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap advanced_data_grid {
             get {
                 object obj = ResourceManager.GetObject("advanced_data_grid", resourceCulture);
