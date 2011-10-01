@@ -38,6 +38,12 @@
             this.toolStripButtonRefresh = new System.Windows.Forms.ToolStripButton();
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonGroup();
+            this.periodskryptonDataGridView1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.PeriodCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Start = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewDateTimePickerColumn();
+            this.EndPeriod = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewDateTimePickerColumn();
+            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.endDatekryptonDateTimePicker2 = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
             this.startDatekryptonDateTimePicker1 = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
             this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -50,11 +56,8 @@
             this.dgName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgSubject = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.periodskryptonDataGridView1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.PeriodCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Start = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewDateTimePickerColumn();
-            this.EndPeriod = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewDateTimePickerColumn();
-            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.exittoolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
@@ -64,9 +67,13 @@
             this.kryptonSplitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroup1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroup1.Panel)).BeginInit();
+            this.kryptonGroup1.Panel.SuspendLayout();
+            this.kryptonGroup1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.periodskryptonDataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.periodskryptonDataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonHeader1
@@ -87,7 +94,9 @@
             this.toolStripButtonEdit,
             this.toolStripButtonDelete,
             this.toolStripButtonClear,
-            this.toolStripButtonRefresh});
+            this.toolStripButtonRefresh,
+            this.toolStripSeparator1,
+            this.exittoolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 29);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(609, 25);
@@ -155,13 +164,13 @@
             // 
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.gridData);
             this.kryptonSplitContainer1.Size = new System.Drawing.Size(609, 357);
-            this.kryptonSplitContainer1.SplitterDistance = 294;
+            this.kryptonSplitContainer1.SplitterDistance = 297;
             this.kryptonSplitContainer1.TabIndex = 4;
             // 
             // kryptonPanel1
             // 
             this.kryptonPanel1.AutoScroll = true;
-            this.kryptonPanel1.Controls.Add(this.periodskryptonDataGridView1);
+            this.kryptonPanel1.Controls.Add(this.kryptonGroup1);
             this.kryptonPanel1.Controls.Add(this.endDatekryptonDateTimePicker2);
             this.kryptonPanel1.Controls.Add(this.startDatekryptonDateTimePicker1);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel4);
@@ -173,8 +182,77 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(609, 294);
+            this.kryptonPanel1.Size = new System.Drawing.Size(609, 297);
             this.kryptonPanel1.TabIndex = 4;
+            // 
+            // kryptonGroup1
+            // 
+            this.kryptonGroup1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.kryptonGroup1.Location = new System.Drawing.Point(3, 59);
+            this.kryptonGroup1.Name = "kryptonGroup1";
+            // 
+            // kryptonGroup1.Panel
+            // 
+            this.kryptonGroup1.Panel.Controls.Add(this.periodskryptonDataGridView1);
+            this.kryptonGroup1.Size = new System.Drawing.Size(536, 232);
+            this.kryptonGroup1.TabIndex = 9;
+            // 
+            // periodskryptonDataGridView1
+            // 
+            this.periodskryptonDataGridView1.AllowUserToAddRows = false;
+            this.periodskryptonDataGridView1.AllowUserToDeleteRows = false;
+            this.periodskryptonDataGridView1.AllowUserToResizeRows = false;
+            this.periodskryptonDataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.PeriodCode,
+            this.Start,
+            this.EndPeriod,
+            this.Status});
+            this.periodskryptonDataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.periodskryptonDataGridView1.HideOuterBorders = true;
+            this.periodskryptonDataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.periodskryptonDataGridView1.Name = "periodskryptonDataGridView1";
+            this.periodskryptonDataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.periodskryptonDataGridView1.Size = new System.Drawing.Size(534, 230);
+            this.periodskryptonDataGridView1.StateCommon.Background.Color1 = System.Drawing.Color.White;
+            this.periodskryptonDataGridView1.StateCommon.Background.Color2 = System.Drawing.Color.White;
+            this.periodskryptonDataGridView1.StateCommon.BackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.GridBackgroundList;
+            this.periodskryptonDataGridView1.TabIndex = 8;
+            // 
+            // PeriodCode
+            // 
+            this.PeriodCode.HeaderText = "Period Code";
+            this.PeriodCode.Name = "PeriodCode";
+            this.PeriodCode.ReadOnly = true;
+            // 
+            // Start
+            // 
+            this.Start.CalendarTodayDate = new System.DateTime(2011, 7, 21, 0, 0, 0, 0);
+            this.Start.Checked = false;
+            this.Start.CustomFormat = "dd-MM-yyyy";
+            this.Start.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.Start.HeaderText = "Start Period";
+            this.Start.Name = "Start";
+            this.Start.ReadOnly = true;
+            this.Start.Width = 100;
+            // 
+            // EndPeriod
+            // 
+            this.EndPeriod.CalendarTodayDate = new System.DateTime(2011, 7, 21, 0, 0, 0, 0);
+            this.EndPeriod.Checked = false;
+            this.EndPeriod.CustomFormat = "dd-MM-yyyy";
+            this.EndPeriod.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.EndPeriod.HeaderText = "End Period";
+            this.EndPeriod.Name = "EndPeriod";
+            this.EndPeriod.ReadOnly = true;
+            this.EndPeriod.Width = 100;
+            // 
+            // Status
+            // 
+            this.Status.HeaderText = "Period Status";
+            this.Status.Name = "Status";
+            this.Status.ReadOnly = true;
+            this.Status.Width = 150;
             // 
             // endDatekryptonDateTimePicker2
             // 
@@ -259,7 +337,7 @@
             this.gridData.RowHeadersVisible = false;
             this.gridData.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gridData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridData.Size = new System.Drawing.Size(609, 58);
+            this.gridData.Size = new System.Drawing.Size(609, 55);
             this.gridData.StateCommon.BackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlClient;
             this.gridData.StateCommon.DataCell.Border.DrawBorders = ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom;
             this.gridData.TabIndex = 1;
@@ -286,59 +364,19 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // periodskryptonDataGridView1
+            // toolStripSeparator1
             // 
-            this.periodskryptonDataGridView1.AllowUserToAddRows = false;
-            this.periodskryptonDataGridView1.AllowUserToDeleteRows = false;
-            this.periodskryptonDataGridView1.AllowUserToResizeRows = false;
-            this.periodskryptonDataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.PeriodCode,
-            this.Start,
-            this.EndPeriod,
-            this.Status});
-            this.periodskryptonDataGridView1.Location = new System.Drawing.Point(11, 72);
-            this.periodskryptonDataGridView1.Name = "periodskryptonDataGridView1";
-            this.periodskryptonDataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.periodskryptonDataGridView1.Size = new System.Drawing.Size(555, 219);
-            this.periodskryptonDataGridView1.StateCommon.Background.Color1 = System.Drawing.Color.White;
-            this.periodskryptonDataGridView1.StateCommon.Background.Color2 = System.Drawing.Color.White;
-            this.periodskryptonDataGridView1.StateCommon.BackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.GridBackgroundList;
-            this.periodskryptonDataGridView1.TabIndex = 8;
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // PeriodCode
+            // exittoolStripButton1
             // 
-            this.PeriodCode.HeaderText = "Period Code";
-            this.PeriodCode.Name = "PeriodCode";
-            this.PeriodCode.ReadOnly = true;
-            // 
-            // Start
-            // 
-            this.Start.CalendarTodayDate = new System.DateTime(2011, 7, 21, 0, 0, 0, 0);
-            this.Start.Checked = false;
-            this.Start.CustomFormat = "dd-MM-yyyy";
-            this.Start.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.Start.HeaderText = "Start Period";
-            this.Start.Name = "Start";
-            this.Start.ReadOnly = true;
-            this.Start.Width = 100;
-            // 
-            // EndPeriod
-            // 
-            this.EndPeriod.CalendarTodayDate = new System.DateTime(2011, 7, 21, 0, 0, 0, 0);
-            this.EndPeriod.Checked = false;
-            this.EndPeriod.CustomFormat = "dd-MM-yyyy";
-            this.EndPeriod.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.EndPeriod.HeaderText = "End Period";
-            this.EndPeriod.Name = "EndPeriod";
-            this.EndPeriod.ReadOnly = true;
-            this.EndPeriod.Width = 100;
-            // 
-            // Status
-            // 
-            this.Status.HeaderText = "Period Status";
-            this.Status.Name = "Status";
-            this.Status.ReadOnly = true;
-            this.Status.Width = 150;
+            this.exittoolStripButton1.Image = global::Profit.Properties.Resources.Exit;
+            this.exittoolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.exittoolStripButton1.Name = "exittoolStripButton1";
+            this.exittoolStripButton1.Size = new System.Drawing.Size(45, 22);
+            this.exittoolStripButton1.Text = "Exit";
+            this.exittoolStripButton1.Click += new System.EventHandler(this.exittoolStripButton1_Click);
             // 
             // YearForm
             // 
@@ -348,7 +386,6 @@
             this.Controls.Add(this.kryptonSplitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.kryptonHeader1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "YearForm";
             this.Text = "Year";
             this.Activated += new System.EventHandler(this.BankForm_Activated);
@@ -363,9 +400,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroup1.Panel)).EndInit();
+            this.kryptonGroup1.Panel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroup1)).EndInit();
+            this.kryptonGroup1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.periodskryptonDataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.periodskryptonDataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -399,5 +440,8 @@
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewDateTimePickerColumn Start;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewDateTimePickerColumn EndPeriod;
         private System.Windows.Forms.DataGridViewTextBoxColumn Status;
+        private ComponentFactory.Krypton.Toolkit.KryptonGroup kryptonGroup1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton exittoolStripButton1;
     }
 }

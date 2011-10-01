@@ -529,6 +529,7 @@ namespace Profit
             this.Height = UserSetting.GetIntValue("mainformheight", CurrentUser.ID, this.Name, 600);
 
             showToolStripMenuItem.Checked = UserSetting.GetBoolValue(showToolStripMenuItem.Name, CurrentUser.ID, this.Name);
+            this.WindowState = (FormWindowState)Enum.Parse(typeof(FormWindowState), UserSetting.GetStringValue("windowsstate", this.CurrentUser.ID, this.Name, FormWindowState.Normal.ToString()));
         }
 
         private void SetAuthorityFormAccess()
@@ -549,7 +550,7 @@ namespace Profit
                 mSTG003DivisiToolStripMenuItem.Visible = false;
             }
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(EMPLOYEE_FORM))
-            { 
+            {
                 generalMenuTreeView.Nodes["NodeEmployee"].Remove();
                 mSTG002KAryawanToolStripMenuItem.Visible = false;
             }
@@ -572,38 +573,142 @@ namespace Profit
             if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PRICE_CATEGORY_FORM))
             {
                 distributionTreeView.Nodes["NodePriceCategory"].Remove();
+                mSTD005KategoriHargaToolStripMenuItem.Visible = false;
             }
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(TAX_FORM)) distributionTreeView.Nodes["NodeTax"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PART_GROUP_FORM)) inventoryTreeView.Nodes["NodePartGroup"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(WAREHOUSE_FORM)) inventoryTreeView.Nodes["NodeWarehouse"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PART_CATEGORY_FORM)) inventoryTreeView.Nodes["NodePartCategory"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(DOC_TYPE_FORM)) financeTreeView.Nodes["NodeDocumentType"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(EXCHANGE_RATE_FORM)) financeTreeView.Nodes["NodeExchangeRate"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(CUSTOMER_FORM)) distributionTreeView.Nodes["NodeCustomer"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(SUPPLIER_FORM)) distributionTreeView.Nodes["NodeSupplier"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(YEAR_FORM)) financeTreeView.Nodes["NodeYear"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PART_FORM)) internalTreeView.Nodes["NodePart"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(STOCK_TAKING_FORM)) internalTreeView.Nodes["NodeStockTaking"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(UNIT_FORM)) inventoryTreeView.Nodes["NodeUnit"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PURCHASE_ORDER_FORM)) purchaseTreeView.Nodes["NodePurchaseOrder"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(GOOD_RECEIVE_NOTE_FORM)) purchaseTreeView.Nodes["NodeGoodReceiveNote"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PURCHASE_RETURN_FORM)) purchaseTreeView.Nodes["NodePurchaseReturn"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(SUPPLIER_INVOICE_FORM)) purchaseTreeView.Nodes["NodeSupplierInvoice"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(SUPPLIER_OUTSTANDING_INVOICE_FORM)) purchaseTreeView.Nodes["NodeSupplierOutstandingInvoice"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PAYMENT_FORM)) purchaseTreeView.Nodes["NodePayment"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(AP_DEBIT_NOTE_FORM)) purchaseTreeView.Nodes["NodeAPDebitNote"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(SALES_ORDER_FORM)) SalesTreeView.Nodes["NodeSalesOrder"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(DELIVERY_ORDER_FORM)) SalesTreeView.Nodes["NodeDeliveryOrder"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(CUSTOMER_OS_INVOICE_FORM)) SalesTreeView.Nodes["NodeCustomerOutstandingInvoice"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(CUSTOMER_INVOICE_FORM)) SalesTreeView.Nodes["NodeCustomerInvoice"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(RECEIPT_FORM)) SalesTreeView.Nodes["NodeReceipt"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(SALES_RETURN_FORM)) SalesTreeView.Nodes["NodeSalesReturn"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(AR_CREDIT_NOTE_FORM)) SalesTreeView.Nodes["NodeARCreditNote"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(OPENING_STOCK_FORM)) internalTreeView.Nodes["NodeOpeningStock"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(POS_FORM)) SalesTreeView.Nodes["NodePOS"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(POS_CASHIER_FORM)) SalesTreeView.Nodes["NodePOSCashier"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(SUPPLIER_TRANSACTION_SUMMARY)) purchaseTreeView.Nodes["NodeSupplierTransactionSummary"].Remove();
-            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(CUSTOMER_TRANSACTION_SUMMARY)) SalesTreeView.Nodes["NodeCustomerTransactionSummary"].Remove();
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(TAX_FORM))
+            {
+                distributionTreeView.Nodes["NodeTax"].Remove();
+                mSTD006PajakToolStripMenuItem.Visible = false;
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PART_GROUP_FORM))
+            {
+                inventoryTreeView.Nodes["NodePartGroup"].Remove();
+                mSTI001ItemGroupToolStripMenuItem.Visible = false;
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(WAREHOUSE_FORM))
+            {
+                inventoryTreeView.Nodes["NodeWarehouse"].Remove();
+                mSTI004GudangToolStripMenuItem.Visible = false;
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PART_CATEGORY_FORM))
+            {
+                inventoryTreeView.Nodes["NodePartCategory"].Remove();
+                mSTI002ItemKategoriToolStripMenuItem.Visible = false;
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(DOC_TYPE_FORM))
+            {
+                financeTreeView.Nodes["NodeDocumentType"].Remove();
+                mSTF002DocumentTypeToolStripMenuItem.Visible = false;
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(EXCHANGE_RATE_FORM))
+            {
+                financeTreeView.Nodes["NodeExchangeRate"].Remove();
+                mSTF003ExchangeRateToolStripMenuItem.Visible = false;
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(CUSTOMER_FORM))
+            {
+                distributionTreeView.Nodes["NodeCustomer"].Remove();
+                mSTD002SupplierToolStripMenuItem.Visible = false;
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(SUPPLIER_FORM))
+            {
+                distributionTreeView.Nodes["NodeSupplier"].Remove();
+                mSTD002SupplierToolStripMenuItem.Visible = false;
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(YEAR_FORM))
+            {
+                financeTreeView.Nodes["NodeYear"].Remove();
+                mSTF004YearToolStripMenuItem.Visible = false;
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PART_FORM))
+            {
+                internalTreeView.Nodes["NodePart"].Remove();
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(STOCK_TAKING_FORM))
+            {
+                internalTreeView.Nodes["NodeStockTaking"].Remove();
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(UNIT_FORM))
+            {
+                inventoryTreeView.Nodes["NodeUnit"].Remove();
+                mSTI003SatuanToolStripMenuItem.Visible = false;
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PURCHASE_ORDER_FORM))
+            {
+                purchaseTreeView.Nodes["NodePurchaseOrder"].Remove();
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(GOOD_RECEIVE_NOTE_FORM))
+            {
+                purchaseTreeView.Nodes["NodeGoodReceiveNote"].Remove();
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PURCHASE_RETURN_FORM))
+            {
+                purchaseTreeView.Nodes["NodePurchaseReturn"].Remove();
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(SUPPLIER_INVOICE_FORM))
+            {
+                purchaseTreeView.Nodes["NodeSupplierInvoice"].Remove();
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(SUPPLIER_OUTSTANDING_INVOICE_FORM))
+            {
+                purchaseTreeView.Nodes["NodeSupplierOutstandingInvoice"].Remove();
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(PAYMENT_FORM))
+            {
+                purchaseTreeView.Nodes["NodePayment"].Remove();
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(AP_DEBIT_NOTE_FORM))
+            {
+                purchaseTreeView.Nodes["NodeAPDebitNote"].Remove();
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(SALES_ORDER_FORM))
+            {
+                SalesTreeView.Nodes["NodeSalesOrder"].Remove();
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(DELIVERY_ORDER_FORM))
+            {
+                SalesTreeView.Nodes["NodeDeliveryOrder"].Remove();
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(CUSTOMER_OS_INVOICE_FORM))
+            {
+                SalesTreeView.Nodes["NodeCustomerOutstandingInvoice"].Remove();
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(CUSTOMER_INVOICE_FORM))
+            {
+                SalesTreeView.Nodes["NodeCustomerInvoice"].Remove();
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(RECEIPT_FORM))
+            {
+                SalesTreeView.Nodes["NodeReceipt"].Remove();
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(SALES_RETURN_FORM))
+            {
+                SalesTreeView.Nodes["NodeSalesReturn"].Remove();
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(AR_CREDIT_NOTE_FORM))
+            {
+                SalesTreeView.Nodes["NodeARCreditNote"].Remove();
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(OPENING_STOCK_FORM))
+            {
+                internalTreeView.Nodes["NodeOpeningStock"].Remove();
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(POS_FORM))
+            {
+                SalesTreeView.Nodes["NodePOS"].Remove();
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(POS_CASHIER_FORM))
+            {
+                SalesTreeView.Nodes["NodePOSCashier"].Remove();
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(SUPPLIER_TRANSACTION_SUMMARY))
+            {
+                purchaseTreeView.Nodes["NodeSupplierTransactionSummary"].Remove();
+            }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(CUSTOMER_TRANSACTION_SUMMARY))
+            {
+                SalesTreeView.Nodes["NodeCustomerTransactionSummary"].Remove();
+            }
 
 
             inventoryKryptonHeader.Visible = inventoryTreeView.Visible = inventoryTreeView.Nodes.Count > 0;
@@ -772,7 +877,7 @@ namespace Profit
             UserSetting.SaveSetting("mainformwidth", this.Width.ToString(), CurrentUser.ID, this.Name, typeof(int));
             UserSetting.SaveSetting("mainformheight", this.Height.ToString(), CurrentUser.ID, this.Name, typeof(int));
             UserSetting.SaveSetting(showToolStripMenuItem.Name, showToolStripMenuItem.Checked.ToString(), CurrentUser.ID, this.Name, typeof(bool));
-
+            UserSetting.SaveSetting("windowsstate", this.WindowState.ToString(), CurrentUser.ID, this.Name, typeof(string));
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -895,6 +1000,76 @@ namespace Profit
         private void mSTF004YearToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ExecuteForm("NodeYear");
+        }
+
+        private void mSTG001MataUangToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExecuteForm("NodeCurrency");
+        }
+
+        private void mSTG002KAryawanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExecuteForm("NodeEmployee");
+        }
+
+        private void mSTG003DivisiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExecuteForm("NodeDivision");
+        }
+
+        private void mSTI001ItemGroupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExecuteForm("NodePartGroup");
+        }
+
+        private void mSTI002ItemKategoriToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExecuteForm("NodePartCategory");
+        }
+
+        private void mSTI003SatuanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExecuteForm("NodeUnit");
+        }
+
+        private void mSTI004GudangToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExecuteForm("NodeWarehouse");
+        }
+
+        private void mSTD001PelangganToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExecuteForm("NodeCustomer");
+        }
+
+        private void mSTD002SupplierToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExecuteForm("NodeSupplier");
+        }
+
+        private void mSTD003KategoriPelangganToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExecuteForm("NodeCustomerCategory");
+        }
+
+        private void mSTD004KategoriPemasokToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExecuteForm("NodeSupplierCategory");
+        }
+
+        private void mSTD005KategoriHargaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExecuteForm("NodePriceCategory");
+        }
+
+        private void mSTD006PajakToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExecuteForm("NodeTax");
+        }
+
+        private void mSTD007TerminToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExecuteForm("NodeTOP");
         }
     }
 }

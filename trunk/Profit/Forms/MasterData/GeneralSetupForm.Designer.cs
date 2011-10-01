@@ -57,16 +57,18 @@
             this.emailKryptonTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.gridAutonumber = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.kryptonLabel9 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.startEntryPeriodkryptonComboBox1 = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.FormNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PrefixColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StartColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
             this.DigitColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
             this.InitColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
             this.AutonumberColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.kryptonLabel9 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.startEntryPeriodkryptonComboBox1 = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.exittoolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -97,7 +99,9 @@
             this.toolStripButtonEdit,
             this.toolStripButtonDelete,
             this.toolStripButtonClear,
-            this.toolStripButtonRefresh});
+            this.toolStripButtonRefresh,
+            this.toolStripSeparator1,
+            this.exittoolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 29);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(878, 25);
@@ -215,7 +219,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 27);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(635, 347);
+            this.tabPage1.Size = new System.Drawing.Size(864, 347);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "General Info";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -376,40 +380,6 @@
             this.gridAutonumber.StateCommon.BackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.GridBackgroundList;
             this.gridAutonumber.TabIndex = 9;
             // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.kryptonLabel9);
-            this.tabPage3.Controls.Add(this.startEntryPeriodkryptonComboBox1);
-            this.tabPage3.Location = new System.Drawing.Point(4, 27);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(635, 303);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "tabPage3";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // kryptonLabel9
-            // 
-            this.kryptonLabel9.Location = new System.Drawing.Point(6, 6);
-            this.kryptonLabel9.Name = "kryptonLabel9";
-            this.kryptonLabel9.Size = new System.Drawing.Size(104, 19);
-            this.kryptonLabel9.TabIndex = 23;
-            this.kryptonLabel9.Values.Text = "Start Entry Month :";
-            // 
-            // startEntryPeriodkryptonComboBox1
-            // 
-            this.startEntryPeriodkryptonComboBox1.DropDownWidth = 198;
-            this.startEntryPeriodkryptonComboBox1.Location = new System.Drawing.Point(6, 31);
-            this.startEntryPeriodkryptonComboBox1.Name = "startEntryPeriodkryptonComboBox1";
-            this.startEntryPeriodkryptonComboBox1.Size = new System.Drawing.Size(198, 22);
-            this.startEntryPeriodkryptonComboBox1.TabIndex = 22;
-            this.startEntryPeriodkryptonComboBox1.Validating += new System.ComponentModel.CancelEventHandler(this.startEntryPeriodkryptonComboBox1_Validating);
-            this.startEntryPeriodkryptonComboBox1.SelectedIndexChanged += new System.EventHandler(this.startEntryPeriodkryptonComboBox1_SelectedIndexChanged);
-            // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
             // FormNameColumn
             // 
             this.FormNameColumn.HeaderText = "Form";
@@ -478,6 +448,54 @@
             this.AutonumberColumn.Name = "AutonumberColumn";
             this.AutonumberColumn.Width = 76;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.kryptonLabel9);
+            this.tabPage3.Controls.Add(this.startEntryPeriodkryptonComboBox1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 27);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(864, 347);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "tabPage3";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // kryptonLabel9
+            // 
+            this.kryptonLabel9.Location = new System.Drawing.Point(6, 6);
+            this.kryptonLabel9.Name = "kryptonLabel9";
+            this.kryptonLabel9.Size = new System.Drawing.Size(104, 19);
+            this.kryptonLabel9.TabIndex = 23;
+            this.kryptonLabel9.Values.Text = "Start Entry Month :";
+            // 
+            // startEntryPeriodkryptonComboBox1
+            // 
+            this.startEntryPeriodkryptonComboBox1.DropDownWidth = 198;
+            this.startEntryPeriodkryptonComboBox1.Location = new System.Drawing.Point(6, 31);
+            this.startEntryPeriodkryptonComboBox1.Name = "startEntryPeriodkryptonComboBox1";
+            this.startEntryPeriodkryptonComboBox1.Size = new System.Drawing.Size(198, 22);
+            this.startEntryPeriodkryptonComboBox1.TabIndex = 22;
+            this.startEntryPeriodkryptonComboBox1.Validating += new System.ComponentModel.CancelEventHandler(this.startEntryPeriodkryptonComboBox1_Validating);
+            this.startEntryPeriodkryptonComboBox1.SelectedIndexChanged += new System.EventHandler(this.startEntryPeriodkryptonComboBox1_SelectedIndexChanged);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // exittoolStripButton1
+            // 
+            this.exittoolStripButton1.Image = global::Profit.Properties.Resources.Exit;
+            this.exittoolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.exittoolStripButton1.Name = "exittoolStripButton1";
+            this.exittoolStripButton1.Size = new System.Drawing.Size(45, 22);
+            this.exittoolStripButton1.Text = "Exit";
+            this.exittoolStripButton1.Click += new System.EventHandler(this.exittoolStripButton1_Click);
+            // 
             // GeneralSetupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -486,7 +504,6 @@
             this.Controls.Add(this.kryptonPanel1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.kryptonHeader1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "GeneralSetupForm";
             this.Text = "General Setup";
             this.Activated += new System.EventHandler(this.BankForm_Activated);
@@ -548,5 +565,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn DigitColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn InitColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn AutonumberColumn;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton exittoolStripButton1;
     }
 }

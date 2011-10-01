@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonHeader1 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
@@ -66,6 +66,13 @@
             this.EmployeeSearchbuttonSpecAny = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.dateKryptonDateTimePicker = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
             this.dataItemskryptonDataGridView = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.scanColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QtyColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.unitColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
+            this.priceColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.totalAmountColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
             this.textBoxCode = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
@@ -75,13 +82,8 @@
             this.buttonSpecAny4 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.buttonSpecAny5 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.buttonSpecAny6 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.scanColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QtyColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
-            this.unitColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn();
-            this.priceColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
-            this.totalAmountColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.exittoolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -117,7 +119,9 @@
             this.searchToolStripButton,
             this.toolStripSeparator2,
             this.postToolStripButton,
-            this.toolStripButtonPrint});
+            this.toolStripButtonPrint,
+            this.toolStripSeparator3,
+            this.exittoolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 29);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(856, 25);
@@ -423,6 +427,112 @@
             this.dataItemskryptonDataGridView.TabIndex = 5;
             this.dataItemskryptonDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataItemskryptonDataGridView_RowsAdded);
             // 
+            // scanColumn
+            // 
+            this.scanColumn.HeaderText = "Barcode / Cari";
+            this.scanColumn.Name = "scanColumn";
+            // 
+            // codeColumn
+            // 
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.codeColumn.DefaultCellStyle = dataGridViewCellStyle11;
+            this.codeColumn.HeaderText = "Code";
+            this.codeColumn.Name = "codeColumn";
+            this.codeColumn.ReadOnly = true;
+            this.codeColumn.Width = 80;
+            // 
+            // nameColumn
+            // 
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.nameColumn.DefaultCellStyle = dataGridViewCellStyle12;
+            this.nameColumn.HeaderText = "Name";
+            this.nameColumn.Name = "nameColumn";
+            this.nameColumn.ReadOnly = true;
+            this.nameColumn.Width = 250;
+            // 
+            // QtyColumn
+            // 
+            dataGridViewCellStyle13.NullValue = "0";
+            this.QtyColumn.DefaultCellStyle = dataGridViewCellStyle13;
+            this.QtyColumn.HeaderText = "Qty";
+            this.QtyColumn.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.QtyColumn.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.QtyColumn.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.QtyColumn.Name = "QtyColumn";
+            this.QtyColumn.Width = 50;
+            // 
+            // unitColumn
+            // 
+            this.unitColumn.DropDownWidth = 121;
+            this.unitColumn.HeaderText = "Unit";
+            this.unitColumn.Name = "unitColumn";
+            this.unitColumn.Width = 60;
+            // 
+            // priceColumn
+            // 
+            this.priceColumn.DecimalPlaces = 2;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle14.NullValue = "0";
+            this.priceColumn.DefaultCellStyle = dataGridViewCellStyle14;
+            this.priceColumn.HeaderText = "Price";
+            this.priceColumn.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.priceColumn.Maximum = new decimal(new int[] {
+            -727379968,
+            232,
+            0,
+            0});
+            this.priceColumn.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.priceColumn.Name = "priceColumn";
+            this.priceColumn.ThousandsSeparator = true;
+            this.priceColumn.Width = 100;
+            // 
+            // totalAmountColumn
+            // 
+            this.totalAmountColumn.DecimalPlaces = 2;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle15.NullValue = "0";
+            this.totalAmountColumn.DefaultCellStyle = dataGridViewCellStyle15;
+            this.totalAmountColumn.HeaderText = "Amount";
+            this.totalAmountColumn.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.totalAmountColumn.Maximum = new decimal(new int[] {
+            -727379968,
+            232,
+            0,
+            0});
+            this.totalAmountColumn.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.totalAmountColumn.Name = "totalAmountColumn";
+            this.totalAmountColumn.ReadOnly = true;
+            this.totalAmountColumn.ThousandsSeparator = true;
+            this.totalAmountColumn.Width = 100;
+            // 
             // textBoxCode
             // 
             this.textBoxCode.Location = new System.Drawing.Point(90, 4);
@@ -473,111 +583,19 @@
             this.buttonSpecAny6.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.Close;
             this.buttonSpecAny6.UniqueName = "95BED338EBB14361B2927C3CB003454A";
             // 
-            // scanColumn
+            // toolStripSeparator3
             // 
-            this.scanColumn.HeaderText = "Barcode / Cari";
-            this.scanColumn.Name = "scanColumn";
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
-            // codeColumn
+            // exittoolStripButton1
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.codeColumn.DefaultCellStyle = dataGridViewCellStyle1;
-            this.codeColumn.HeaderText = "Code";
-            this.codeColumn.Name = "codeColumn";
-            this.codeColumn.ReadOnly = true;
-            this.codeColumn.Width = 80;
-            // 
-            // nameColumn
-            // 
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.nameColumn.DefaultCellStyle = dataGridViewCellStyle2;
-            this.nameColumn.HeaderText = "Name";
-            this.nameColumn.Name = "nameColumn";
-            this.nameColumn.ReadOnly = true;
-            this.nameColumn.Width = 250;
-            // 
-            // QtyColumn
-            // 
-            dataGridViewCellStyle3.NullValue = "0";
-            this.QtyColumn.DefaultCellStyle = dataGridViewCellStyle3;
-            this.QtyColumn.HeaderText = "Qty";
-            this.QtyColumn.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.QtyColumn.Maximum = new decimal(new int[] {
-            10000000,
-            0,
-            0,
-            0});
-            this.QtyColumn.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.QtyColumn.Name = "QtyColumn";
-            this.QtyColumn.Width = 50;
-            // 
-            // unitColumn
-            // 
-            this.unitColumn.DropDownWidth = 121;
-            this.unitColumn.HeaderText = "Unit";
-            this.unitColumn.Name = "unitColumn";
-            this.unitColumn.Width = 60;
-            // 
-            // priceColumn
-            // 
-            this.priceColumn.DecimalPlaces = 2;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.NullValue = "0";
-            this.priceColumn.DefaultCellStyle = dataGridViewCellStyle4;
-            this.priceColumn.HeaderText = "Price";
-            this.priceColumn.Increment = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.priceColumn.Maximum = new decimal(new int[] {
-            -727379968,
-            232,
-            0,
-            0});
-            this.priceColumn.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.priceColumn.Name = "priceColumn";
-            this.priceColumn.ThousandsSeparator = true;
-            this.priceColumn.Width = 100;
-            // 
-            // totalAmountColumn
-            // 
-            this.totalAmountColumn.DecimalPlaces = 2;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.NullValue = "0";
-            this.totalAmountColumn.DefaultCellStyle = dataGridViewCellStyle5;
-            this.totalAmountColumn.HeaderText = "Amount";
-            this.totalAmountColumn.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.totalAmountColumn.Maximum = new decimal(new int[] {
-            -727379968,
-            232,
-            0,
-            0});
-            this.totalAmountColumn.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.totalAmountColumn.Name = "totalAmountColumn";
-            this.totalAmountColumn.ReadOnly = true;
-            this.totalAmountColumn.ThousandsSeparator = true;
-            this.totalAmountColumn.Width = 100;
+            this.exittoolStripButton1.Image = global::Profit.Properties.Resources.Exit;
+            this.exittoolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.exittoolStripButton1.Name = "exittoolStripButton1";
+            this.exittoolStripButton1.Size = new System.Drawing.Size(45, 22);
+            this.exittoolStripButton1.Text = "Exit";
+            this.exittoolStripButton1.Click += new System.EventHandler(this.exittoolStripButton1_Click);
             // 
             // OpeningStockForm
             // 
@@ -587,7 +605,6 @@
             this.Controls.Add(this.kryptonPanel1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.kryptonHeader1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "OpeningStockForm";
             this.Text = "Opening Stock";
             this.Activated += new System.EventHandler(this.BankForm_Activated);
@@ -656,5 +673,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewComboBoxColumn unitColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn priceColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn totalAmountColumn;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripButton exittoolStripButton1;
     }
 }

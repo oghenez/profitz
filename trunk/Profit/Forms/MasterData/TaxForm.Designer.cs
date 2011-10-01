@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonHeader1 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
@@ -47,10 +47,12 @@
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.gridData = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.dgName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgSubject = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Term = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.exittoolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
@@ -82,7 +84,9 @@
             this.toolStripButtonEdit,
             this.toolStripButtonDelete,
             this.toolStripButtonClear,
-            this.toolStripButtonRefresh});
+            this.toolStripButtonRefresh,
+            this.toolStripSeparator1,
+            this.exittoolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 29);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(609, 25);
@@ -255,10 +259,6 @@
             this.gridData.TabIndex = 1;
             this.gridData.SelectionChanged += new System.EventHandler(this.gridData_SelectionChanged);
             // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
             // dgName
             // 
             this.dgName.DataPropertyName = "Code";
@@ -279,10 +279,10 @@
             // Term
             // 
             this.Term.DecimalPlaces = 2;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = "0";
-            this.Term.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N2";
+            dataGridViewCellStyle4.NullValue = "0";
+            this.Term.DefaultCellStyle = dataGridViewCellStyle4;
             this.Term.HeaderText = "Rate (%)";
             this.Term.Increment = new decimal(new int[] {
             1,
@@ -303,6 +303,24 @@
             this.Term.ReadOnly = true;
             this.Term.Width = 100;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // exittoolStripButton1
+            // 
+            this.exittoolStripButton1.Image = global::Profit.Properties.Resources.Exit;
+            this.exittoolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.exittoolStripButton1.Name = "exittoolStripButton1";
+            this.exittoolStripButton1.Size = new System.Drawing.Size(45, 22);
+            this.exittoolStripButton1.Text = "Exit";
+            this.exittoolStripButton1.Click += new System.EventHandler(this.exittoolStripButton1_Click);
+            // 
             // TaxForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -311,7 +329,6 @@
             this.Controls.Add(this.kryptonSplitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.kryptonHeader1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "TaxForm";
             this.Text = "Tax";
             this.Activated += new System.EventHandler(this.BankForm_Activated);
@@ -356,5 +373,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgName;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgSubject;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn Term;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton exittoolStripButton1;
     }
 }

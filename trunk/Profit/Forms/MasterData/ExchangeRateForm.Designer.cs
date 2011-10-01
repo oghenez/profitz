@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonHeader1 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
@@ -39,23 +39,25 @@
             this.toolStripButtonRefresh = new System.Windows.Forms.ToolStripButton();
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonComboBoxCurrency = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.kryptonNumericUpDownRAte = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
+            this.kryptonDateTimePickerEndDate = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
+            this.kryptonDateTimePickerStartDate = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
             this.textBoxCode = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.gridData = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.kryptonDateTimePickerStartDate = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
-            this.kryptonDateTimePickerEndDate = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
-            this.kryptonNumericUpDownRAte = new ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown();
-            this.kryptonComboBoxCurrency = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
-            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.dgName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CCY = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StartDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EndDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RAte = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.exittoolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
@@ -65,9 +67,9 @@
             this.kryptonSplitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonComboBoxCurrency)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonComboBoxCurrency)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonHeader1
@@ -88,7 +90,9 @@
             this.toolStripButtonEdit,
             this.toolStripButtonDelete,
             this.toolStripButtonClear,
-            this.toolStripButtonRefresh});
+            this.toolStripButtonRefresh,
+            this.toolStripSeparator1,
+            this.exittoolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 29);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(609, 25);
@@ -178,6 +182,78 @@
             this.kryptonPanel1.Size = new System.Drawing.Size(609, 120);
             this.kryptonPanel1.TabIndex = 4;
             // 
+            // kryptonLabel5
+            // 
+            this.kryptonLabel5.Location = new System.Drawing.Point(206, 9);
+            this.kryptonLabel5.Name = "kryptonLabel5";
+            this.kryptonLabel5.Size = new System.Drawing.Size(60, 19);
+            this.kryptonLabel5.TabIndex = 10;
+            this.kryptonLabel5.Values.Text = "Currency :";
+            // 
+            // kryptonLabel4
+            // 
+            this.kryptonLabel4.Location = new System.Drawing.Point(7, 87);
+            this.kryptonLabel4.Name = "kryptonLabel4";
+            this.kryptonLabel4.Size = new System.Drawing.Size(80, 19);
+            this.kryptonLabel4.TabIndex = 9;
+            this.kryptonLabel4.Values.Text = "Rate To Base :";
+            // 
+            // kryptonLabel3
+            // 
+            this.kryptonLabel3.Location = new System.Drawing.Point(26, 62);
+            this.kryptonLabel3.Name = "kryptonLabel3";
+            this.kryptonLabel3.Size = new System.Drawing.Size(61, 19);
+            this.kryptonLabel3.TabIndex = 8;
+            this.kryptonLabel3.Values.Text = "End Date :";
+            // 
+            // kryptonComboBoxCurrency
+            // 
+            this.kryptonComboBoxCurrency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.kryptonComboBoxCurrency.DropDownWidth = 121;
+            this.kryptonComboBoxCurrency.Location = new System.Drawing.Point(272, 6);
+            this.kryptonComboBoxCurrency.Name = "kryptonComboBoxCurrency";
+            this.kryptonComboBoxCurrency.Size = new System.Drawing.Size(121, 22);
+            this.kryptonComboBoxCurrency.TabIndex = 7;
+            // 
+            // kryptonNumericUpDownRAte
+            // 
+            this.kryptonNumericUpDownRAte.DecimalPlaces = 2;
+            this.kryptonNumericUpDownRAte.Increment = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.kryptonNumericUpDownRAte.Location = new System.Drawing.Point(90, 87);
+            this.kryptonNumericUpDownRAte.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.kryptonNumericUpDownRAte.Name = "kryptonNumericUpDownRAte";
+            this.kryptonNumericUpDownRAte.Size = new System.Drawing.Size(120, 21);
+            this.kryptonNumericUpDownRAte.TabIndex = 6;
+            this.kryptonNumericUpDownRAte.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.kryptonNumericUpDownRAte.ThousandsSeparator = true;
+            // 
+            // kryptonDateTimePickerEndDate
+            // 
+            this.kryptonDateTimePickerEndDate.CustomFormat = "dd-MM-yyyy";
+            this.kryptonDateTimePickerEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.kryptonDateTimePickerEndDate.Location = new System.Drawing.Point(90, 61);
+            this.kryptonDateTimePickerEndDate.Name = "kryptonDateTimePickerEndDate";
+            this.kryptonDateTimePickerEndDate.Size = new System.Drawing.Size(83, 20);
+            this.kryptonDateTimePickerEndDate.TabIndex = 5;
+            this.kryptonDateTimePickerEndDate.ValueChanged += new System.EventHandler(this.kryptonDateTimePicker2_ValueChanged);
+            // 
+            // kryptonDateTimePickerStartDate
+            // 
+            this.kryptonDateTimePickerStartDate.CustomFormat = "dd-MM-yyyy";
+            this.kryptonDateTimePickerStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.kryptonDateTimePickerStartDate.Location = new System.Drawing.Point(90, 36);
+            this.kryptonDateTimePickerStartDate.Name = "kryptonDateTimePickerStartDate";
+            this.kryptonDateTimePickerStartDate.Size = new System.Drawing.Size(83, 20);
+            this.kryptonDateTimePickerStartDate.TabIndex = 4;
+            // 
             // textBoxCode
             // 
             this.textBoxCode.Location = new System.Drawing.Point(90, 6);
@@ -229,82 +305,6 @@
             this.gridData.TabIndex = 1;
             this.gridData.SelectionChanged += new System.EventHandler(this.gridData_SelectionChanged);
             // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
-            // kryptonDateTimePickerStartDate
-            // 
-            this.kryptonDateTimePickerStartDate.CustomFormat = "dd-MM-yyyy";
-            this.kryptonDateTimePickerStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.kryptonDateTimePickerStartDate.Location = new System.Drawing.Point(90, 36);
-            this.kryptonDateTimePickerStartDate.Name = "kryptonDateTimePickerStartDate";
-            this.kryptonDateTimePickerStartDate.Size = new System.Drawing.Size(83, 20);
-            this.kryptonDateTimePickerStartDate.TabIndex = 4;
-            // 
-            // kryptonDateTimePickerEndDate
-            // 
-            this.kryptonDateTimePickerEndDate.CustomFormat = "dd-MM-yyyy";
-            this.kryptonDateTimePickerEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.kryptonDateTimePickerEndDate.Location = new System.Drawing.Point(90, 61);
-            this.kryptonDateTimePickerEndDate.Name = "kryptonDateTimePickerEndDate";
-            this.kryptonDateTimePickerEndDate.Size = new System.Drawing.Size(83, 20);
-            this.kryptonDateTimePickerEndDate.TabIndex = 5;
-            this.kryptonDateTimePickerEndDate.ValueChanged += new System.EventHandler(this.kryptonDateTimePicker2_ValueChanged);
-            // 
-            // kryptonNumericUpDownRAte
-            // 
-            this.kryptonNumericUpDownRAte.DecimalPlaces = 2;
-            this.kryptonNumericUpDownRAte.Increment = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.kryptonNumericUpDownRAte.Location = new System.Drawing.Point(90, 87);
-            this.kryptonNumericUpDownRAte.Maximum = new decimal(new int[] {
-            1000000000,
-            0,
-            0,
-            0});
-            this.kryptonNumericUpDownRAte.Name = "kryptonNumericUpDownRAte";
-            this.kryptonNumericUpDownRAte.Size = new System.Drawing.Size(120, 21);
-            this.kryptonNumericUpDownRAte.TabIndex = 6;
-            this.kryptonNumericUpDownRAte.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.kryptonNumericUpDownRAte.ThousandsSeparator = true;
-            // 
-            // kryptonComboBoxCurrency
-            // 
-            this.kryptonComboBoxCurrency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.kryptonComboBoxCurrency.DropDownWidth = 121;
-            this.kryptonComboBoxCurrency.Location = new System.Drawing.Point(272, 6);
-            this.kryptonComboBoxCurrency.Name = "kryptonComboBoxCurrency";
-            this.kryptonComboBoxCurrency.Size = new System.Drawing.Size(121, 22);
-            this.kryptonComboBoxCurrency.TabIndex = 7;
-            // 
-            // kryptonLabel3
-            // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(26, 62);
-            this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Size = new System.Drawing.Size(61, 19);
-            this.kryptonLabel3.TabIndex = 8;
-            this.kryptonLabel3.Values.Text = "End Date :";
-            // 
-            // kryptonLabel4
-            // 
-            this.kryptonLabel4.Location = new System.Drawing.Point(7, 87);
-            this.kryptonLabel4.Name = "kryptonLabel4";
-            this.kryptonLabel4.Size = new System.Drawing.Size(80, 19);
-            this.kryptonLabel4.TabIndex = 9;
-            this.kryptonLabel4.Values.Text = "Rate To Base :";
-            // 
-            // kryptonLabel5
-            // 
-            this.kryptonLabel5.Location = new System.Drawing.Point(206, 9);
-            this.kryptonLabel5.Name = "kryptonLabel5";
-            this.kryptonLabel5.Size = new System.Drawing.Size(60, 19);
-            this.kryptonLabel5.TabIndex = 10;
-            this.kryptonLabel5.Values.Text = "Currency :";
-            // 
             // dgName
             // 
             this.dgName.DataPropertyName = "Code";
@@ -339,8 +339,8 @@
             // RAte
             // 
             this.RAte.DecimalPlaces = 2;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.RAte.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.RAte.DefaultCellStyle = dataGridViewCellStyle4;
             this.RAte.HeaderText = "Rate To Base";
             this.RAte.Increment = new decimal(new int[] {
             1,
@@ -362,6 +362,24 @@
             this.RAte.ThousandsSeparator = true;
             this.RAte.Width = 100;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // exittoolStripButton1
+            // 
+            this.exittoolStripButton1.Image = global::Profit.Properties.Resources.Exit;
+            this.exittoolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.exittoolStripButton1.Name = "exittoolStripButton1";
+            this.exittoolStripButton1.Size = new System.Drawing.Size(45, 22);
+            this.exittoolStripButton1.Text = "Exit";
+            this.exittoolStripButton1.Click += new System.EventHandler(this.exittoolStripButton1_Click);
+            // 
             // ExchangeRateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -370,7 +388,6 @@
             this.Controls.Add(this.kryptonSplitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.kryptonHeader1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ExchangeRateForm";
             this.Text = "Exchange Rate";
             this.Activated += new System.EventHandler(this.BankForm_Activated);
@@ -385,9 +402,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonComboBoxCurrency)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonComboBoxCurrency)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -421,5 +438,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn StartDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn EndDate;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewNumericUpDownColumn RAte;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton exittoolStripButton1;
     }
 }

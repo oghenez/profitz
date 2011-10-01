@@ -549,5 +549,11 @@ namespace Profit
             //dataItemskryptonDataGridView[priceColumn.Index, e.RowIndex].Value = 0;
             //dataItemskryptonDataGridView[totalAmountColumn.Index, e.RowIndex].Value = 0;
         }
+
+        private void exittoolStripButton1_Click(object sender, EventArgs e)
+        {
+            if (KryptonMessageBox.Show("Are you sure to Exit this Form?", "Exit Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                this.Close();
+        }
     }
 }

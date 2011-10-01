@@ -74,6 +74,13 @@ namespace Profit.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Add_Files_To_Archive_32 {
+            get {
+                object obj = ResourceManager.GetObject("Add-Files-To-Archive-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap advanced_data_grid {
             get {
                 object obj = ResourceManager.GetObject("advanced_data_grid", resourceCulture);
@@ -144,9 +151,44 @@ namespace Profit.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Exit {
+            get {
+                object obj = ResourceManager.GetObject("Exit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Gnome_Applications_Other_32 {
+            get {
+                object obj = ResourceManager.GetObject("Gnome-Applications-Other-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Gnome_Applications_Other_321 {
+            get {
+                object obj = ResourceManager.GetObject("Gnome-Applications-Other-321", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Gnome_Edit_Redo_32 {
             get {
                 object obj = ResourceManager.GetObject("Gnome_Edit_Redo_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Gnome_Software_Update_Urgent_32 {
+            get {
+                object obj = ResourceManager.GetObject("Gnome-Software-Update-Urgent-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Gnome_X_Office_Calendar_32 {
+            get {
+                object obj = ResourceManager.GetObject("Gnome-X-Office-Calendar-32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
