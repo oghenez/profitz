@@ -182,6 +182,8 @@
             this.MasterDatakryptonCheckButton1 = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.kryptonCheckSet1 = new ComponentFactory.Krypton.Toolkit.KryptonCheckSet(this.components);
+            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.activePeriodtoolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel4)).BeginInit();
@@ -203,7 +205,9 @@
             this.toolStripStatusLabel2,
             this.timelogintoolStripStatusLabel3,
             this.toolStripStatusLabel3,
-            this.datelogintoolStripStatusLabel4});
+            this.datelogintoolStripStatusLabel4,
+            this.toolStripStatusLabel4,
+            this.activePeriodtoolStripStatusLabel5});
             this.statusStrip1.Location = new System.Drawing.Point(0, 544);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
@@ -1341,6 +1345,18 @@
             this.kryptonCheckSet1.CheckedButton = this.TransactionkryptonCheckButton2;
             this.kryptonCheckSet1.CheckedButtonChanged += new System.EventHandler(this.kryptonCheckSet1_CheckedButtonChanged);
             // 
+            // toolStripStatusLabel4
+            // 
+            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(109, 17);
+            this.toolStripStatusLabel4.Text = "          Active Period :";
+            // 
+            // activePeriodtoolStripStatusLabel5
+            // 
+            this.activePeriodtoolStripStatusLabel5.Name = "activePeriodtoolStripStatusLabel5";
+            this.activePeriodtoolStripStatusLabel5.Size = new System.Drawing.Size(54, 17);
+            this.activePeriodtoolStripStatusLabel5.Text = "Sep-2011";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1487,6 +1503,8 @@
         private System.Windows.Forms.ToolStripMenuItem mSTD005KategoriHargaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mSTD006PajakToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mSTD007TerminToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+        private System.Windows.Forms.ToolStripStatusLabel activePeriodtoolStripStatusLabel5;
 
 
     }
