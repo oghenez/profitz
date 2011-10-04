@@ -853,7 +853,8 @@ namespace Profit
         public Period CurrentPeriod
         {
             get { return m_currentPeriod; }
-            set { m_currentPeriod = value; }
+            set { m_currentPeriod = value;
+                activePeriodtoolStripStatusLabel5.Text = value.START_DATE.ToString("MMM-yyyy"); }
         }
 
         private void generalSetupToolStripMenuItem_Click(object sender, EventArgs e)

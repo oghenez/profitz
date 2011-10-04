@@ -617,5 +617,10 @@ namespace Profit
                 searchToolStripButton_Click(null, null);
             }
         }
+
+        private void kryptonPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
