@@ -56,7 +56,7 @@ CREATE TABLE `table_apdebitnote` (
   CONSTRAINT `FK_table_apdebitnote_1` FOREIGN KEY (`sup_id`) REFERENCES `table_supplier` (`sup_id`),
   CONSTRAINT `FK_table_apdebitnote_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_apdebitnote_3` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_apdebitnote`
@@ -64,7 +64,8 @@ CREATE TABLE `table_apdebitnote` (
 
 /*!40000 ALTER TABLE `table_apdebitnote` DISABLE KEYS */;
 INSERT INTO `table_apdebitnote` (`apdn_id`,`apdn_code`,`apdn_date`,`sup_id`,`ccy_id`,`entry_type`,`apdn_notes`,`apdn_posted`,`apdn_eventstatus`,`apdn_subtotalamount`,`apdn_discpercent`,`apdn_amountafterdiscpercent`,`apdn_discamount`,`apdn_amountafterdiscamount`,`apdn_otherexpense`,`apdn_netamount`,`emp_id`,`apdn_usedforpayment`,`modified_by`,`modified_date`,`modified_computer`) VALUES 
- (10,'APDN001/09/2011','2011-09-07 00:00:00',1,1,'APDebitNote','',1,'Confirm',0,0,0,0,0,0,54000,2,1,'Administrator','2011-09-23 00:00:00','ADMIN_COMP');
+ (10,'APDN001/09/2011','2011-09-07 00:00:00',1,1,'APDebitNote','',1,'Confirm',0,0,0,0,0,0,54000,2,1,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (11,'APDN002/10/2011','2011-09-05 12:00:00',3,1,'APDebitNote','',1,'Confirm',0,0,0,0,0,0,37500,2,0,'Administrator','2011-10-05 09:50:22','DDWP_MDT_02825');
 /*!40000 ALTER TABLE `table_apdebitnote` ENABLE KEYS */;
 
 
@@ -101,7 +102,7 @@ CREATE TABLE `table_apdebitnoteitem` (
   CONSTRAINT `FK_table_apdebitnoteitem_2` FOREIGN KEY (`sup_id`) REFERENCES `table_supplier` (`sup_id`),
   CONSTRAINT `FK_table_apdebitnoteitem_3` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_apdebitnoteitem_4` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_apdebitnoteitem`
@@ -109,7 +110,9 @@ CREATE TABLE `table_apdebitnoteitem` (
 
 /*!40000 ALTER TABLE `table_apdebitnoteitem` DISABLE KEYS */;
 INSERT INTO `table_apdebitnoteitem` (`apdni_id`,`apdn_id`,`sup_id`,`ccy_id`,`apdni_amount`,`vbe_id`,`vb_id`,`apdni_entrytype`,`apdni_invoicedate`,`apdni_invoiceno`,`apdni_duedate`,`emp_id`,`apdni_discount`,`apdni_amountbeforediscount`,`top_id`,`apdni_description`,`apdni_notes`,`prn_id`) VALUES 
- (10,10,1,1,54000,0,0,'APDebitNote','2011-09-07 00:00:00','PR001/09/2011','2011-09-07 00:00:00',2,0,0,0,'','Wizard from PR# PR001/09/2011',14);
+ (10,10,1,1,54000,0,0,'APDebitNote','2011-09-07 00:00:00','PR001/09/2011','2011-09-07 00:00:00',2,0,0,0,'','Wizard from PR# PR001/09/2011',14),
+ (11,11,3,1,15000,0,0,'APDebitNote','2011-10-05 12:00:00','1154','2011-10-05 12:00:00',2,0,0,0,'','',0),
+ (12,11,3,1,22500,0,0,'APDebitNote','2011-10-05 12:00:00','1145','2011-10-05 12:00:00',2,0,0,0,'','',0);
 /*!40000 ALTER TABLE `table_apdebitnoteitem` ENABLE KEYS */;
 
 
@@ -541,7 +544,7 @@ CREATE TABLE `table_customerinvoicejournal` (
   CONSTRAINT `FK_table_customerinvoicejournal_1` FOREIGN KEY (`cus_id`) REFERENCES `table_customer` (`cus_id`),
   CONSTRAINT `FK_table_customerinvoicejournal_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_customerinvoicejournal_3` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_customerinvoicejournal`
@@ -556,7 +559,10 @@ INSERT INTO `table_customerinvoicejournal` (`cij_id`,`cij_code`,`cij_date`,`cus_
  (24,'POS004/09/2011','2011-09-15 00:00:00',3,1,'CustomerInvoice','',1,'Confirm',0,0,0,0,0,0,15000,1,0,'Open',4,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
  (28,'POS006/09/2011','2011-09-21 00:00:00',3,1,'CustomerInvoice','',1,'Confirm',0,0,0,0,0,0,25000,1,0,'Open',6,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
  (30,'POS008/09/2011','2011-09-22 00:00:00',3,1,'CustomerInvoice','',1,'Confirm',0,0,0,0,0,0,25875,1,0,'Open',8,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
- (31,'POS009/09/2011','2011-09-22 00:00:00',3,1,'CustomerInvoice','',1,'Confirm',0,0,0,0,0,0,12474,1,0,'Open',9,'Administrator','2011-09-23 00:00:00','ADMIN_COMP');
+ (31,'POS009/09/2011','2011-09-22 00:00:00',3,1,'CustomerInvoice','',1,'Confirm',0,0,0,0,0,0,12474,1,0,'Open',9,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (52,'POS005/09/2011','2011-09-16 12:00:00',3,1,'CustomerInvoice','',1,'Confirm',0,0,0,0,0,0,160000,1,0,'Open',5,'','2011-10-05 11:12:49',''),
+ (59,'POS010/09/2011','2011-09-23 12:00:00',3,1,'CustomerInvoice','',1,'Confirm',0,0,0,0,0,0,0,1,0,'Open',10,'','2011-10-05 03:30:23',''),
+ (61,'POS016/10/2011','2011-09-05 12:00:00',3,1,'CustomerInvoice','',1,'Confirm',0,0,0,0,0,0,12271.5,1,0,'Open',16,'','2011-10-05 03:33:13','');
 /*!40000 ALTER TABLE `table_customerinvoicejournal` ENABLE KEYS */;
 
 
@@ -595,7 +601,7 @@ CREATE TABLE `table_customerinvoicejournalitem` (
   CONSTRAINT `FK_table_customerinvoicejournalitem_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_customerinvoicejournalitem_3` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`),
   CONSTRAINT `FK_table_customerinvoicejournalitem_4` FOREIGN KEY (`cij_id`) REFERENCES `table_customerinvoicejournal` (`cij_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_customerinvoicejournalitem`
@@ -610,7 +616,10 @@ INSERT INTO `table_customerinvoicejournalitem` (`ciji_id`,`cij_id`,`cus_id`,`ccy
  (24,24,3,1,15000,0,0,'CustomerInvoice','2011-09-15 00:00:00','POS004/09/2011','2011-09-15 00:00:00',1,0,0,1,'','','Close',0,15000),
  (28,28,3,1,25000,0,0,'CustomerInvoice','2011-09-21 00:00:00','POS006/09/2011','2011-09-21 00:00:00',1,0,0,1,'','','Close',0,25000),
  (30,30,3,1,25875,0,0,'CustomerInvoice','2011-09-22 00:00:00','POS008/09/2011','2011-09-22 00:00:00',1,0,0,1,'','','Close',0,25875),
- (31,31,3,1,12474,0,0,'CustomerInvoice','2011-09-22 00:00:00','POS009/09/2011','2011-09-22 00:00:00',1,0,0,1,'','','Close',0,12474);
+ (31,31,3,1,12474,0,0,'CustomerInvoice','2011-09-22 00:00:00','POS009/09/2011','2011-09-22 00:00:00',1,0,0,1,'','','Close',0,12474),
+ (52,52,3,1,160000,0,0,'CustomerInvoice','2011-09-16 12:00:00','POS005/09/2011','2011-09-16 12:00:00',1,0,0,1,'','','Close',0,160000),
+ (59,59,3,1,0,0,0,'CustomerInvoice','2011-09-23 12:00:00','POS010/09/2011','2011-09-23 12:00:00',1,0,0,1,'','','Open',0,0),
+ (61,61,3,1,12271.5,0,0,'CustomerInvoice','2011-09-05 12:00:00','POS016/10/2011','2011-10-05 12:00:00',1,0,0,1,'','','Close',0,12271.5);
 /*!40000 ALTER TABLE `table_customerinvoicejournalitem` ENABLE KEYS */;
 
 
@@ -934,7 +943,7 @@ CREATE TABLE `table_formaccess` (
   PRIMARY KEY (`formaccess_id`) USING BTREE,
   KEY `FK_table_formaccess_1` (`user_id`),
   CONSTRAINT `FK_table_formaccess_1` FOREIGN KEY (`user_id`) REFERENCES `table_user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_formaccess`
@@ -943,50 +952,50 @@ CREATE TABLE `table_formaccess` (
 /*!40000 ALTER TABLE `table_formaccess` DISABLE KEYS */;
 INSERT INTO `table_formaccess` (`formaccess_id`,`formaccess_code`,`formaccess_name`,`formaccess_save`,`formaccess_delete`,`formaccess_view`,`formaccess_post`,`formaccess_print`,`user_id`,`modified_by`,`modified_date`,`modified_computer`,`form_type`) VALUES 
  (1,'BankForm','MSTF001 - Bank',1,1,1,1,1,10,'Administrator','2011-09-23 00:00:00','ADMIN_COMP','Master'),
- (3,'DocumentTypeForm','MSTF002 - Document Type',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Master'),
- (4,'ExchangeRateForm','MSTF003 - Exchange Rate',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Master'),
- (5,'YearForm','MSTF004 - Year',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Master'),
+ (3,'DocumentTypeForm','MSTF002 - Document Type',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Master'),
+ (4,'ExchangeRateForm','MSTF003 - Exchange Rate',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Master'),
+ (5,'YearForm','MSTF004 - Year',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Master'),
  (6,'StockTakingForm','TRCI001 - Stock Taking',1,0,1,1,1,10,'Administrator','2011-09-23 00:00:00','ADMIN_COMP','Master'),
- (7,'BankForm','MSTF001 - Bank',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Master'),
- (8,'CurrencyForm','MSTG001 - Currency',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Master'),
- (9,'EmployeeForm','MSTG002 - Employee',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Master'),
- (10,'DivisionForm','MSTG003 - Division',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Master'),
- (11,'PartGroupForm','MSTI001 - Part Group',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Master'),
- (13,'UnitForm','MSTI003 - Unit',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Master'),
- (14,'WarehouseForm','MSTI004 - Warehouse',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Master'),
- (15,'CustomerForm','MSTD001 - Customer',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Master'),
- (16,'SupplierForm','MSTD002 - Supplier',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Master'),
- (17,'CustomerCategoryForm','MSTD003 - Customer Category',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Master'),
- (18,'SupplierCategoryForm','MSTD004 - Supplier Category',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Master'),
- (19,'TaxForm','MSTD006 - Tax',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Master'),
- (20,'TOPForm','MSTD007 - Term Of Payment',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Master'),
- (21,'StockTakingForm','TRCI001 - Stock Taking',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Transaction'),
- (22,'PartForm','TRCI002 - Part Master',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Master'),
- (23,'PartCategoryForm','MSTI002 - Part Category',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Master'),
- (24,'PriceCategoryForm','MSTD005 - Price Category',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Master'),
- (25,'UserForm','GSTP001 - User',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Master'),
- (26,'GeneralSetupForm','GSTP002 - General Setup',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Master'),
- (27,'PurchaseOrderForm','TRCP001 - Purchase Order',0,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Transaction'),
- (28,'GoodReceiveNoteForm','TRCP002 - Good Receive Note',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Transaction'),
- (29,'PurchaseReturnForm','TRCP005 - Purchase Return',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Transaction'),
- (30,'SupplierInvoiceForm','TRCP003 - Supplier Invoice',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Transaction'),
- (31,'SupplierOutstandingInvoiceForm','TRCP007 - Supplier Outstanding Invoice',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Transaction'),
- (32,'PaymentForm','TRCP004 - Payment',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Transaction'),
- (33,'APDebitNoteForm','TRCP006 - APDebitNote',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Transaction'),
- (34,'ProcessTransactionForm','GSTP003 - Process Transaction',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Transaction'),
- (35,'SalesOrderForm','TRCS001 - Sales Order',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Transaction'),
- (36,'DeliveryOrderForm','TRCS002 - Delivery Order',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Transaction'),
+ (8,'CurrencyForm','MSTG001 - Currency',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Master'),
+ (9,'EmployeeForm','MSTG002 - Employee',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Master'),
+ (10,'DivisionForm','MSTG003 - Division',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Master'),
+ (11,'PartGroupForm','MSTI001 - Part Group',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Master'),
+ (13,'UnitForm','MSTI003 - Unit',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Master'),
+ (14,'WarehouseForm','MSTI004 - Warehouse',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Master'),
+ (15,'CustomerForm','MSTD001 - Customer',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Master'),
+ (16,'SupplierForm','MSTD002 - Supplier',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Master'),
+ (17,'CustomerCategoryForm','MSTD003 - Customer Category',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Master'),
+ (18,'SupplierCategoryForm','MSTD004 - Supplier Category',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Master'),
+ (19,'TaxForm','MSTD006 - Tax',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Master'),
+ (20,'TOPForm','MSTD007 - Term Of Payment',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Master'),
+ (21,'StockTakingForm','TRCI001 - Stock Taking',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Transaction'),
+ (22,'PartForm','TRCI002 - Part Master',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Master'),
+ (23,'PartCategoryForm','MSTI002 - Part Category',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Master'),
+ (24,'PriceCategoryForm','MSTD005 - Price Category',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Master'),
+ (25,'UserForm','GSTP001 - User',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Master'),
+ (26,'GeneralSetupForm','GSTP002 - General Setup',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Master'),
+ (27,'PurchaseOrderForm','TRCP001 - Purchase Order',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Transaction'),
+ (28,'GoodReceiveNoteForm','TRCP002 - Good Receive Note',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Transaction'),
+ (29,'PurchaseReturnForm','TRCP005 - Purchase Return',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Transaction'),
+ (30,'SupplierInvoiceForm','TRCP003 - Supplier Invoice',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Transaction'),
+ (31,'SupplierOutstandingInvoiceForm','TRCP007 - Supplier Outstanding Invoice',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Transaction'),
+ (32,'PaymentForm','TRCP004 - Payment',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Transaction'),
+ (33,'APDebitNoteForm','TRCP006 - APDebitNote',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Transaction'),
+ (34,'ProcessTransactionForm','GSTP003 - Process Transaction',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Transaction'),
+ (35,'SalesOrderForm','TRCS001 - Sales Order',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Transaction'),
+ (36,'DeliveryOrderForm','TRCS002 - Delivery Order',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Transaction'),
  (39,'BankForm','MSTF001 - Bank',1,1,1,1,1,11,'Administrator','2011-09-23 00:00:00','ADMIN_COMP','Master'),
- (40,'CustomerOutStandingInvoiceForm','TRCS007 - Customer Outstanding Invoice',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Transaction'),
- (41,'CustomerInvoiceForm','TRCS003 - Customer Invoice',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Transaction'),
- (43,'ReceiptInvoiceForm','TRCS004 - Receipt',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Transaction'),
- (44,'SalesReturnForm','TRCS005 - Sales Return',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Transaction'),
- (45,'ARCreditNoteForm','TRCS006 - AR Credit Note',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Transaction'),
- (46,'OpeningStockForm','TRCI003 - Opening Stock',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Transaction'),
- (47,'POSForm','TRCS008 - POS',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Transaction'),
- (49,'SupplierTransactionSummary','TRCP008 - Supplier Transaction Summary',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Report'),
- (50,'CustomerTransactionSummary','TRCP010 - Customer Transaction Summary',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Report'),
- (51,'POSCashierForm','TRCS009 - POS Cashier',1,1,1,1,1,1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825','Transaction');
+ (40,'CustomerOutStandingInvoiceForm','TRCS007 - Customer Outstanding Invoice',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Transaction'),
+ (41,'CustomerInvoiceForm','TRCS003 - Customer Invoice',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Transaction'),
+ (43,'ReceiptInvoiceForm','TRCS004 - Receipt',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Transaction'),
+ (44,'SalesReturnForm','TRCS005 - Sales Return',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Transaction'),
+ (45,'ARCreditNoteForm','TRCS006 - AR Credit Note',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Transaction'),
+ (46,'OpeningStockForm','TRCI003 - Opening Stock',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Transaction'),
+ (47,'POSForm','TRCS008 - POS',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Transaction'),
+ (49,'SupplierTransactionSummary','TRCP008 - Supplier Transaction Summary',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Report'),
+ (50,'CustomerTransactionSummary','TRCP010 - Customer Transaction Summary',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Report'),
+ (51,'POSCashierForm','TRCS009 - POS Cashier',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Transaction'),
+ (52,'BankForm','MSTF001 - Bank',1,1,1,1,1,1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825','Master');
 /*!40000 ALTER TABLE `table_formaccess` ENABLE KEYS */;
 
 
@@ -1050,7 +1059,7 @@ CREATE TABLE `table_goodreceivenote` (
   KEY `FK_table_goodreceivenote_2` (`sup_id`),
   CONSTRAINT `FK_table_goodreceivenote_1` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`),
   CONSTRAINT `FK_table_goodreceivenote_2` FOREIGN KEY (`sup_id`) REFERENCES `table_supplier` (`sup_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_goodreceivenote`
@@ -1059,7 +1068,9 @@ CREATE TABLE `table_goodreceivenote` (
 /*!40000 ALTER TABLE `table_goodreceivenote` DISABLE KEYS */;
 INSERT INTO `table_goodreceivenote` (`grn_id`,`grn_date`,`grn_noticedate`,`grn_scentrytype`,`emp_id`,`grn_notes`,`grn_posted`,`grn_eventstatus`,`grn_againstprstatus`,`grn_code`,`sup_id`,`grn_docno`,`grn_docdate`,`modified_by`,`modified_date`,`modified_computer`) VALUES 
  (30,'2011-09-07','2011-09-07','GoodReceiveNote',2,'',1,'Confirm','Outstanding','GRN001/09/2011',1,'','2011-09-07 00:00:00','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
- (31,'2011-09-16','2011-09-16','GoodReceiveNote',2,'',0,'Entry','Open','GRN002/09/2011',1,'','2011-09-16 00:00:00','Administrator','2011-09-23 00:00:00','ADMIN_COMP');
+ (31,'2011-09-16','2011-09-16','GoodReceiveNote',2,'',1,'Confirm','Open','GRN002/09/2011',1,'','2011-09-16 00:00:00','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (32,'2011-10-04 12:00:00','2011-10-04 02:43:22','GoodReceiveNote',2,'',0,'Entry','Open','GRN003/10/2011',1,'','2011-10-04 12:00:00','Administrator','2011-10-04 02:44:50','DDWP_MDT_02825'),
+ (33,'2011-09-30 12:00:00','2011-10-05 03:24:38','GoodReceiveNote',2,'',1,'Confirm','Open','GRN004/10/2011',1,'','2011-10-05 12:00:00','Administrator','2011-10-05 03:25:03','DDWP_MDT_02825');
 /*!40000 ALTER TABLE `table_goodreceivenote` ENABLE KEYS */;
 
 
@@ -1094,7 +1105,7 @@ CREATE TABLE `table_goodreceivenoteitem` (
   CONSTRAINT `FK_table_goodreceivenoteitem_3` FOREIGN KEY (`unit_id`) REFERENCES `table_unit` (`unit_id`),
   CONSTRAINT `FK_table_goodreceivenoteitem_4` FOREIGN KEY (`poi_id`) REFERENCES `table_purchaseorderitem` (`poi_id`),
   CONSTRAINT `FK_table_goodreceivenoteitem_5` FOREIGN KEY (`grn_id`) REFERENCES `table_goodreceivenote` (`grn_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_goodreceivenoteitem`
@@ -1107,7 +1118,14 @@ INSERT INTO `table_goodreceivenoteitem` (`grni_id`,`grn_id`,`part_id`,`warehouse
  (94,30,9497,1,4,0,'GoodReceiveNote',0,1,'',65,'Outstanding',3,1),
  (95,30,10760,1,2,0,'GoodReceiveNote',0,1,'',66,'Outstanding',1,1),
  (96,31,12579,1,20,0,'GoodReceiveNote',0,1,'',69,'Open',20,0),
- (97,31,9099,1,20,0,'GoodReceiveNote',0,1,'',70,'Open',20,0);
+ (97,31,9099,1,20,0,'GoodReceiveNote',0,1,'',70,'Open',20,0),
+ (98,32,9816,1,1,0,'GoodReceiveNote',0,1,'',63,'Open',1,0),
+ (99,32,9496,1,1,0,'GoodReceiveNote',0,1,'',64,'Open',1,0),
+ (100,32,9497,1,1,0,'GoodReceiveNote',0,1,'',65,'Open',1,0),
+ (101,32,10760,1,1,0,'GoodReceiveNote',0,1,'',66,'Open',1,0),
+ (102,32,9816,1,100,0,'GoodReceiveNote',0,1,'',67,'Open',100,0),
+ (103,32,12747,1,1,0,'GoodReceiveNote',0,1,'',68,'Open',1,0),
+ (104,33,9505,1,5,0,'GoodReceiveNote',0,1,'',71,'Open',5,0);
 /*!40000 ALTER TABLE `table_goodreceivenoteitem` ENABLE KEYS */;
 
 
@@ -7835,7 +7853,7 @@ CREATE TABLE `table_payment` (
   CONSTRAINT `FK_table_payment_1` FOREIGN KEY (`sup_id`) REFERENCES `table_supplier` (`sup_id`),
   CONSTRAINT `FK_table_payment_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_payment_3` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_payment`
@@ -7846,7 +7864,8 @@ INSERT INTO `table_payment` (`pay_id`,`pay_code`,`pay_date`,`sup_id`,`ccy_id`,`e
  (26,'PYMN001/09/2011','2011-09-07 00:00:00',1,1,'Payment','',1,'Confirm',0,0,0,0,0,0,54000,2,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
  (27,'PYMN002/09/2011','2011-09-07 00:00:00',1,1,'Payment','',1,'Confirm',0,0,0,0,0,0,228500,2,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
  (28,'PYMN003/09/2011','2011-09-07 00:00:00',3,1,'Payment','',1,'Confirm',0,0,0,0,0,0,539000,2,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
- (29,'PYMN004/09/2011','2011-09-08 00:00:00',1,1,'Payment','',1,'Confirm',0,0,0,0,0,0,3000000,2,'Administrator','2011-09-23 00:00:00','ADMIN_COMP');
+ (29,'PYMN004/09/2011','2011-09-08 00:00:00',1,1,'Payment','',1,'Confirm',0,0,0,0,0,0,3000000,2,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (30,'PYMN005/10/2011','2011-09-16 12:00:00',1,1,'Payment','',1,'Confirm',0,0,0,0,0,0,1650000,2,'Administrator','2011-10-05 02:34:21','DDWP_MDT_02825');
 /*!40000 ALTER TABLE `table_payment` ENABLE KEYS */;
 
 
@@ -7885,7 +7904,7 @@ CREATE TABLE `table_paymentitem` (
   CONSTRAINT `FK_table_paymentitem_1` FOREIGN KEY (`pay_id`) REFERENCES `table_payment` (`pay_id`),
   CONSTRAINT `FK_table_paymentitem_2` FOREIGN KEY (`sup_id`) REFERENCES `table_supplier` (`sup_id`),
   CONSTRAINT `FK_table_paymentitem_3` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_paymentitem`
@@ -7896,7 +7915,9 @@ INSERT INTO `table_paymentitem` (`payi_id`,`pay_id`,`sup_id`,`ccy_id`,`payi_amou
  (33,26,1,1,54000,0,0,'Payment','2011-09-07 00:00:00','APDN001/09/2011','2011-09-07 00:00:00',2,0,0,0,'','return',31,'SupplierInvoice',0,'APDebitNote',10),
  (34,27,1,1,228500,0,0,'Payment','2011-09-07 00:00:00','--849','2011-09-07 00:00:00',2,0,0,0,'','pembayaran',31,'SupplierInvoice',4,'Bank',0),
  (35,28,3,1,539000,0,0,'Payment','2011-09-07 00:00:00','11561/2011','2011-09-07 00:00:00',2,0,0,0,'','test',32,'SupplierInvoice',0,'Cash',0),
- (36,29,1,1,3000000,0,0,'Payment','2011-09-08 00:00:00','22456787','2011-09-08 00:00:00',2,0,0,0,'','test',33,'SupplierInvoice',0,'Cash',0);
+ (36,29,1,1,3000000,0,0,'Payment','2011-09-08 00:00:00','22456787','2011-09-08 00:00:00',2,0,0,0,'','test',33,'SupplierInvoice',0,'Cash',0),
+ (37,30,1,1,1500000,0,0,'Payment','2011-10-05 12:00:00','114565','2011-10-05 12:00:00',2,0,0,0,'','',37,'SupplierInvoice',0,'Cash',0),
+ (38,30,1,1,150000,0,0,'Payment','2011-10-05 12:00:00','55479','2011-10-05 12:00:00',2,0,0,0,'','',38,'SupplierInvoice',0,'Cash',0);
 /*!40000 ALTER TABLE `table_paymentitem` ENABLE KEYS */;
 
 
@@ -8012,7 +8033,7 @@ CREATE TABLE `table_pos` (
   CONSTRAINT `FK_table_pos_2` FOREIGN KEY (`top_id`) REFERENCES `table_termofpayment` (`top_id`),
   CONSTRAINT `FK_table_pos_3` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_pos_4` FOREIGN KEY (`cus_id`) REFERENCES `table_customer` (`cus_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_pos`
@@ -8022,18 +8043,20 @@ CREATE TABLE `table_pos` (
 INSERT INTO `table_pos` (`pos_id`,`pos_date`,`pos_noticedate`,`pos_scentrytype`,`emp_id`,`pos_notes`,`pos_posted`,`pos_eventstatus`,`div_id`,`top_id`,`pos_duedate`,`ccy_id`,`pos_subtotal`,`pos_discpercent`,`pos_discafteramount`,`pos_discamount`,`tax_id`,`pos_taxafteramount`,`pos_otherexpense`,`pos_nettotal`,`pos_code`,`cus_id`,`pos_docno`,`pos_docdate`,`pos_cashpayamount`,`pos_changepayamount`,`modified_by`,`modified_date`,`modified_computer`) VALUES 
  (1,'2011-09-14 00:00:00','2011-09-14 00:00:00','POS',1,'',1,'Confirm',1,1,'2011-09-14 00:00:00',1,20000,0,0,0,1,0,0,20000,'POS001/09/2011',3,'TEST','2011-09-14 00:00:00',0,0,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
  (2,'2011-09-14 00:00:00','2011-09-14 00:00:00','POS',1,'',1,'Confirm',1,1,'2011-09-14 00:00:00',1,80000,0,0,0,1,0,0,80000,'POS002/09/2011',3,'','2011-09-14 00:00:00',0,0,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
- (3,'2011-09-14 00:00:00','2011-09-14 00:00:00','POS',1,'',0,'Entry',1,1,'2011-09-14 00:00:00',1,150000,0,0,0,1,0,0,150000,'POS003/09/2011',3,'','2011-09-14 00:00:00',0,0,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (3,'2011-09-14 12:00:00','2011-09-14 12:00:00','POS',1,'werwe\r\nwerw\r\nwer',0,'Entry',1,1,'2011-09-14 12:00:00',1,150000,0,0,0,1,0,0,150000,'POS003/09/2011',3,'','2011-09-14 12:00:00',0,0,'Administrator','2011-10-05 11:03:34','DDWP_MDT_02825'),
  (4,'2011-09-15 00:00:00','2011-09-15 00:00:00','POS',1,'',1,'Confirm',1,1,'2011-09-15 00:00:00',1,15000,0,0,0,1,0,0,15000,'POS004/09/2011',3,'','2011-09-15 00:00:00',0,0,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
- (5,'2011-09-16 00:00:00','2011-09-16 00:00:00','POS',1,'',0,'Entry',1,1,'2011-09-16 00:00:00',1,160000,0,0,0,1,0,0,160000,'POS005/09/2011',3,'','2011-09-16 00:00:00',0,0,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (5,'2011-09-16 00:00:00','2011-09-16 00:00:00','POS',1,'',1,'Confirm',1,1,'2011-09-16 00:00:00',1,160000,0,0,0,1,0,0,160000,'POS005/09/2011',3,'','2011-09-16 00:00:00',0,0,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
  (6,'2011-09-21 00:00:00','2011-09-21 00:00:00','POS',1,'',1,'Confirm',1,1,'2011-09-21 00:00:00',1,25000,0,0,0,1,0,0,25000,'POS006/09/2011',3,'','2011-09-21 00:00:00',0,0,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
- (7,'2011-09-21 00:00:00','2011-09-21 00:00:00','POS',1,'',0,'Entry',1,1,'2011-09-21 00:00:00',1,0,0,0,0,1,0,0,0,'POS007/09/2011',3,'','2011-09-21 00:00:00',0,0,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (7,'2011-09-21 12:00:00','2011-09-21 12:00:00','POS',1,'',0,'Entry',1,1,'2011-09-21 12:00:00',1,0,0,0,0,1,0,0,0,'POS007/09/2011',3,'','2011-09-21 12:00:00',0,0,'Administrator','2011-10-05 11:15:13','DDWP_MDT_02825'),
  (8,'2011-09-22 00:00:00','2011-09-22 00:00:00','POS',1,'',1,'Confirm',1,1,'2011-09-22 00:00:00',1,28750,10,2875,0,1,0,0,25875,'POS008/09/2011',3,'','2011-09-22 00:00:00',0,0,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
  (9,'2011-09-22 00:00:00','2011-09-22 00:00:00','POS',1,'',1,'Confirm',1,1,'2011-09-22 00:00:00',1,13860,10,1386,0,1,0,0,12474,'POS009/09/2011',3,'','2011-09-22 00:00:00',0,0,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
- (10,'2011-09-23 00:00:00','2011-09-23 00:00:00','POS',1,'',0,'Entry',1,1,'2011-09-23 00:00:00',1,0,10,0,0,1,0,0,0,'POS010/09/2011',3,'','2011-09-23 00:00:00',0,0,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (10,'2011-09-23 00:00:00','2011-09-23 00:00:00','POS',1,'',1,'Confirm',1,1,'2011-09-23 00:00:00',1,0,10,0,0,1,0,0,0,'POS010/09/2011',3,'','2011-09-23 00:00:00',0,0,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
  (11,'2011-09-23 00:00:00','2011-09-23 00:00:00','POS',1,'',0,'Entry',1,1,'2011-09-23 00:00:00',1,1000,10,100,0,1,0,0,900,'POS011/09/2011',3,'','2011-09-23 00:00:00',1000,100,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
  (12,'2011-09-23 00:00:00','2011-09-23 00:00:00','POS',1,'',0,'Entry',1,1,'2011-09-23 00:00:00',1,5000,10,500,0,1,0,0,4500,'POS012/09/2011',3,'','2011-09-23 00:00:00',1500,0,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
  (13,'2011-09-23 00:00:00','2011-09-23 00:00:00','POS',1,'',0,'Entry',1,1,'2011-09-23 00:00:00',1,2000,10,200,0,1,0,0,1800,'POS013/09/2011',3,'','2011-09-23 00:00:00',2000,200,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
- (14,'2011-09-23 00:00:00','2011-09-23 00:00:00','POS',1,'',0,'Entry',1,1,'2011-09-23 00:00:00',1,17500,10,1750,0,1,0,0,15750,'POS014/09/2011',3,'','2011-09-23 00:00:00',16000,250,'Administrator','2011-09-23 00:00:00','ADMIN_COMP');
+ (14,'2011-09-23 00:00:00','2011-09-23 00:00:00','POS',1,'',0,'Entry',1,1,'2011-09-23 00:00:00',1,17500,10,1750,0,1,0,0,15750,'POS014/09/2011',3,'','2011-09-23 00:00:00',16000,250,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (15,'2011-10-01 12:00:00','2011-10-01 10:29:55','POS',1,'',0,'Entry',1,1,'2011-10-01 12:00:00',1,112222,10,11222.2,0,1,0,0,100999.8,'POS015/10/2011',3,'','2011-10-01 12:00:00',150000,49000.2,'Administrator','2011-10-01 10:31:43','DDWP_MDT_02825'),
+ (16,'2011-09-05 12:00:00','2011-10-05 03:31:41','POS',1,'',1,'Confirm',1,1,'2011-10-05 12:00:00',1,13635,10,1363.5,0,1,0,0,12271.5,'POS016/10/2011',3,'','2011-10-05 12:00:00',0,0,'Administrator','2011-10-05 03:33:08','DDWP_MDT_02825');
 /*!40000 ALTER TABLE `table_pos` ENABLE KEYS */;
 
 
@@ -8072,7 +8095,7 @@ CREATE TABLE `table_positem` (
   CONSTRAINT `FK_table_positem_2` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`),
   CONSTRAINT `FK_table_positem_3` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
   CONSTRAINT `FK_table_positem_4` FOREIGN KEY (`unit_id`) REFERENCES `table_unit` (`unit_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_positem`
@@ -8086,7 +8109,7 @@ INSERT INTO `table_positem` (`posi_id`,`pos_id`,`part_id`,`warehouse_id`,`posi_a
  (4,4,14361,1,1,0,'POS',0,1,15000,0,0,0,15000,'',0,0,0,'',0),
  (5,5,9068,1,10,0,'POS',0,1,16000,0,0,0,160000,'',0,0,0,'',0),
  (6,6,15535,1,10,0,'POS',0,1,2500,0,0,0,25000,'',0,0,0,'',0),
- (7,7,14242,1,1,0,'POS',0,1,0,0,0,0,0,'',0,0,0,'',0),
+ (7,7,14242,2,9,0,'POS',0,1,0,0,0,0,0,'',0,0,0,'',0),
  (8,8,9090,1,5,0,'POS',0,1,5750,0,0,0,28750,'',0,0,0,'',0),
  (9,9,9077,1,2,0,'POS',0,1,7700,10,0,770,13860,'',0,0,0,'',0),
  (10,10,9073,1,1,0,'POS',0,1,0,0,0,0,0,'',0,0,0,'',0),
@@ -8094,7 +8117,11 @@ INSERT INTO `table_positem` (`posi_id`,`pos_id`,`part_id`,`warehouse_id`,`posi_a
  (12,12,9073,1,1,0,'POS',0,1,5000,0,0,0,5000,'',0,0,0,'',0),
  (13,13,13838,1,1,0,'POS',0,1,2000,0,0,0,2000,'',0,0,0,'',0),
  (14,14,14773,1,1,0,'POS',0,1,2500,0,0,0,2500,'',0,0,0,'',0),
- (15,14,14568,1,1,0,'POS',0,1,15000,0,0,0,15000,'',0,0,0,'',0);
+ (15,14,14568,1,1,0,'POS',0,1,15000,0,0,0,15000,'',0,0,0,'',0),
+ (16,15,10735,1,3,0,'POS',0,1,20000,0,0,0,60000,'',0,0,0,'',0),
+ (17,15,9469,1,2,0,'POS',0,1,25111,0,0,0,50222,'',0,0,0,'',0),
+ (18,15,12570,1,1,0,'POS',0,1,2000,0,0,0,2000,'',0,0,0,'',0),
+ (19,16,9068,1,1,0,'POS',0,1,15150,10,0,1515,13635,'',0,0,0,'',0);
 /*!40000 ALTER TABLE `table_positem` ENABLE KEYS */;
 
 
@@ -8174,7 +8201,7 @@ CREATE TABLE `table_purchaseorder` (
   CONSTRAINT `FK_table_purchaseorder_3` FOREIGN KEY (`top_id`) REFERENCES `table_termofpayment` (`top_id`),
   CONSTRAINT `FK_table_purchaseorder_4` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_purchaseorder_5` FOREIGN KEY (`sup_id`) REFERENCES `table_supplier` (`sup_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_purchaseorder`
@@ -8185,7 +8212,8 @@ INSERT INTO `table_purchaseorder` (`po_id`,`po_date`,`po_noticedate`,`po_scentry
  (30,'2011-09-07 00:00:00','2011-09-07 00:00:00','PurchaseOrder',1,'',1,'Confirm',1,2,'2011-10-07 00:00:00',1,540000,0,0,0,1,0,0,540000,'Outstanding','PMPO/001/09/2011',1,'','2011-09-07 00:00:00','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
  (31,'2011-09-07 00:00:00','2011-09-07 00:00:00','PurchaseOrder',1,'',1,'Confirm',1,1,'2011-09-07 00:00:00',1,2100000,0,0,0,1,0,0,2100000,'Open','PMPO/002/09/2011',1,'','2011-09-07 00:00:00','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
  (32,'2011-09-08 00:00:00','2011-09-08 00:00:00','PurchaseOrder',1,'',1,'Confirm',1,1,'2011-09-08 00:00:00',1,150000,0,0,0,1,0,0,150000,'Open','PMPO/003/09/2011',1,'','2011-09-08 00:00:00','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
- (33,'2011-09-16 00:00:00','2011-09-16 00:00:00','PurchaseOrder',1,'',1,'Confirm',1,1,'2011-09-16 00:00:00',1,2000000,0,0,0,1,0,0,2000000,'Open','PMPO/004/09/2011',1,'','2011-09-16 00:00:00','Administrator','2011-09-23 00:00:00','ADMIN_COMP');
+ (33,'2011-09-16 00:00:00','2011-09-16 00:00:00','PurchaseOrder',1,'',1,'Confirm',1,1,'2011-09-16 00:00:00',1,2000000,0,0,0,1,0,0,2000000,'Close','PMPO/004/09/2011',1,'','2011-09-16 00:00:00','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (34,'2011-09-30 12:00:00','2011-10-05 03:23:44','PurchaseOrder',1,'',1,'Confirm',1,1,'2011-10-05 12:00:00',1,50000,0,0,0,1,0,0,50000,'Outstanding','PMPO/005/10/2011',1,'','2011-10-05 12:00:00','Administrator','2011-10-05 03:24:01','DDWP_MDT_02825');
 /*!40000 ALTER TABLE `table_purchaseorder` ENABLE KEYS */;
 
 
@@ -8227,7 +8255,7 @@ CREATE TABLE `table_purchaseorderitem` (
   CONSTRAINT `FK_table_purchaseorderitem_2` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`),
   CONSTRAINT `FK_table_purchaseorderitem_3` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
   CONSTRAINT `FK_table_purchaseorderitem_4` FOREIGN KEY (`unit_id`) REFERENCES `table_unit` (`unit_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_purchaseorderitem`
@@ -8241,8 +8269,9 @@ INSERT INTO `table_purchaseorderitem` (`poi_id`,`po_id`,`part_id`,`warehouse_id`
  (66,30,10760,1,10,0,'PurchaseOrder',0,1,18000,0,0,0,180000,'',0,0,0,'','Outstanding',8,2,18000),
  (67,31,9816,1,14,0,'PurchaseOrder',0,2,150000,0,0,0,2100000,'',0,0,0,'','Open',140,0,1071.42857142857),
  (68,32,12747,1,5,0,'PurchaseOrder',0,1,30000,0,0,0,150000,'',0,0,0,'','Open',5,0,30000),
- (69,33,12579,1,20,0,'PurchaseOrder',0,1,50000,0,0,0,1000000,'',0,0,0,'','Open',20,0,50000),
- (70,33,9099,1,20,0,'PurchaseOrder',0,1,50000,0,0,0,1000000,'',0,0,0,'','Open',20,0,50000);
+ (69,33,12579,1,20,0,'PurchaseOrder',0,1,50000,0,0,0,1000000,'',0,0,0,'','Close',0,20,50000),
+ (70,33,9099,1,20,0,'PurchaseOrder',0,1,50000,0,0,0,1000000,'',0,0,0,'','Close',0,20,50000),
+ (71,34,9505,1,10,0,'PurchaseOrder',0,1,5000,0,0,0,50000,'',0,0,0,'','Outstanding',5,5,5000);
 /*!40000 ALTER TABLE `table_purchaseorderitem` ENABLE KEYS */;
 
 
@@ -8362,7 +8391,7 @@ CREATE TABLE `table_receipt` (
   CONSTRAINT `FK_table_receipt_1` FOREIGN KEY (`cus_id`) REFERENCES `table_customer` (`cus_id`),
   CONSTRAINT `FK_table_receipt_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_receipt_3` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_receipt`
@@ -8376,7 +8405,10 @@ INSERT INTO `table_receipt` (`rec_id`,`rec_code`,`rec_date`,`cus_id`,`ccy_id`,`e
  (19,'RC005/09/2011','2011-09-15 00:00:00',3,1,'Receipt','Auto generate from POS Transaction',1,'Confirm',0,0,0,0,0,0,15000,1,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
  (23,'RC006/09/2011','2011-09-21 00:00:00',3,1,'Receipt','Auto generate from POS Transaction',1,'Confirm',0,0,0,0,0,0,25000,1,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
  (25,'RC007/09/2011','2011-09-22 00:00:00',3,1,'Receipt','Auto generate from POS Transaction',1,'Confirm',0,0,0,0,0,0,25875,1,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
- (26,'RC008/09/2011','2011-09-22 00:00:00',3,1,'Receipt','Auto generate from POS Transaction',1,'Confirm',0,0,0,0,0,0,12474,1,'Administrator','2011-09-23 00:00:00','ADMIN_COMP');
+ (26,'RC008/09/2011','2011-09-22 00:00:00',3,1,'Receipt','Auto generate from POS Transaction',1,'Confirm',0,0,0,0,0,0,12474,1,'Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (47,'RC009/10/2011','2011-09-16 12:00:00',3,1,'Receipt','Auto generate from POS Transaction',1,'Confirm',0,0,0,0,0,0,160000,1,'','2011-10-05 11:12:49',''),
+ (54,'RC010/10/2011','2011-09-23 12:00:00',3,1,'Receipt','Auto generate from POS Transaction',1,'Confirm',0,0,0,0,0,0,0,1,'','2011-10-05 03:30:23',''),
+ (56,'RC011/10/2011','2011-09-05 12:00:00',3,1,'Receipt','Auto generate from POS Transaction',1,'Confirm',0,0,0,0,0,0,12271.5,1,'','2011-10-05 03:33:13','');
 /*!40000 ALTER TABLE `table_receipt` ENABLE KEYS */;
 
 
@@ -8415,7 +8447,7 @@ CREATE TABLE `table_receiptitem` (
   CONSTRAINT `FK_table_receiptitem_1` FOREIGN KEY (`rec_id`) REFERENCES `table_receipt` (`rec_id`),
   CONSTRAINT `FK_table_receiptitem_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_receiptitem_3` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_receiptitem`
@@ -8429,7 +8461,10 @@ INSERT INTO `table_receiptitem` (`reci_id`,`rec_id`,`cus_id`,`ccy_id`,`reci_amou
  (19,19,3,1,15000,0,0,'Receipt','2011-09-15 00:00:00','POS004/09/2011','2011-09-15 00:00:00',1,0,0,0,'','Autogenerate Payment from POS transaction',24,'CustomerInvoice',0,'Cash',0),
  (23,23,3,1,25000,0,0,'Receipt','2011-09-21 00:00:00','POS006/09/2011','2011-09-21 00:00:00',1,0,0,0,'','Autogenerate Payment from POS transaction',28,'CustomerInvoice',0,'Cash',0),
  (25,25,3,1,25875,0,0,'Receipt','2011-09-22 00:00:00','POS008/09/2011','2011-09-22 00:00:00',1,0,0,0,'','Autogenerate Payment from POS transaction',30,'CustomerInvoice',0,'Cash',0),
- (26,26,3,1,12474,0,0,'Receipt','2011-09-22 00:00:00','POS009/09/2011','2011-09-22 00:00:00',1,0,0,0,'','Autogenerate Payment from POS transaction',31,'CustomerInvoice',0,'Cash',0);
+ (26,26,3,1,12474,0,0,'Receipt','2011-09-22 00:00:00','POS009/09/2011','2011-09-22 00:00:00',1,0,0,0,'','Autogenerate Payment from POS transaction',31,'CustomerInvoice',0,'Cash',0),
+ (47,47,3,1,160000,0,0,'Receipt','2011-09-16 12:00:00','POS005/09/2011','2011-09-16 12:00:00',1,0,0,0,'','Autogenerate Payment from POS transaction',52,'CustomerInvoice',0,'Cash',0),
+ (54,54,3,1,0,0,0,'Receipt','2011-09-23 12:00:00','POS010/09/2011','2011-09-23 12:00:00',1,0,0,0,'','Autogenerate Payment from POS transaction',59,'CustomerInvoice',0,'Cash',0),
+ (56,56,3,1,12271.5,0,0,'Receipt','2011-09-05 12:00:00','POS016/10/2011','2011-09-05 12:00:00',1,0,0,0,'','Autogenerate Payment from POS transaction',61,'CustomerInvoice',0,'Cash',0);
 /*!40000 ALTER TABLE `table_receiptitem` ENABLE KEYS */;
 
 
@@ -8641,7 +8676,7 @@ CREATE TABLE `table_stockcard` (
   CONSTRAINT `FK_table_stockcard_1` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`),
   CONSTRAINT `FK_table_stockcard_2` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
   CONSTRAINT `FK_table_stockcard_3` FOREIGN KEY (`period_id`) REFERENCES `table_period` (`period_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=204 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=209 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_stockcard`
@@ -8653,8 +8688,8 @@ INSERT INTO `table_stockcard` (`sc_id`,`part_id`,`warehouse_id`,`period_id`,`sc_
  (88,9496,1,21,1008,1,0),
  (89,9497,1,21,3,6,0),
  (90,10760,1,21,1,8,0),
- (91,9068,1,21,70,0,0),
- (92,11844,1,21,0,0,0),
+ (91,9068,1,21,59,0,0),
+ (92,11844,1,21,120,0,0),
  (93,12747,1,21,10,5,4),
  (94,14361,1,21,9,0,0),
  (95,13858,1,21,0,0,10),
@@ -8664,17 +8699,22 @@ INSERT INTO `table_stockcard` (`sc_id`,`part_id`,`warehouse_id`,`period_id`,`sc_
  (99,11083,1,21,0,0,0),
  (191,15533,1,21,0,0,0),
  (192,9457,1,21,95,0,0),
- (193,12579,1,21,0,20,0),
- (194,9099,1,21,0,20,0),
+ (193,12579,1,21,20,0,0),
+ (194,9099,1,21,20,0,0),
  (195,15535,1,21,0,0,0),
  (196,9090,1,21,5,0,0),
  (197,9077,1,21,98,0,0),
  (198,11035,1,21,10,0,0),
- (199,9073,1,21,20,0,0),
+ (199,9073,1,21,19,0,0),
  (200,9175,1,21,20,0,0),
  (201,9887,1,21,20,0,0),
  (202,12201,1,21,20,0,0),
- (203,11034,1,21,20,0,0);
+ (203,11034,1,21,20,0,0),
+ (204,14771,2,21,120,0,0),
+ (205,14242,1,21,2,0,0),
+ (206,14242,2,21,0,0,0),
+ (207,11844,2,21,10,0,0),
+ (208,9505,1,21,105,5,0);
 /*!40000 ALTER TABLE `table_stockcard` ENABLE KEYS */;
 
 
@@ -8696,7 +8736,7 @@ CREATE TABLE `table_stockcardentry` (
   KEY `FK_table_stockcardentry_2` (`sc_id`),
   CONSTRAINT `FK_table_stockcardentry_1` FOREIGN KEY (`unit_id`) REFERENCES `table_unit` (`unit_id`),
   CONSTRAINT `FK_table_stockcardentry_2` FOREIGN KEY (`sc_id`) REFERENCES `table_stockcard` (`sc_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=391 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=407 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_stockcardentry`
@@ -8757,7 +8797,22 @@ INSERT INTO `table_stockcardentry` (`sce_id`,`sc_id`,`sce_stockcardentrytype`,`s
  (387,200,'StockTaking','2011-09-20 12:00:00',1,20,6),
  (388,201,'StockTaking','2011-09-20 12:00:00',1,20,7),
  (389,202,'StockTaking','2011-09-20 12:00:00',1,20,8),
- (390,203,'StockTaking','2011-09-20 12:00:00',1,20,9);
+ (390,203,'StockTaking','2011-09-20 12:00:00',1,20,9),
+ (391,204,'StockTaking','2011-09-29 12:00:00',1,120,10),
+ (392,193,'GoodReceiveNote','2011-09-16 12:00:00',1,20,96),
+ (393,194,'GoodReceiveNote','2011-09-16 12:00:00',1,20,97),
+ (394,91,'POS','2011-09-16 12:00:00',1,10,5),
+ (395,205,'StockTaking','2011-09-01 12:00:00',1,5,12),
+ (397,205,'StockTaking','2011-09-05 12:00:00',1,-3,14),
+ (398,92,'StockTaking','2011-09-05 12:00:00',1,100,15),
+ (399,207,'StockTaking','2011-09-05 12:00:00',1,10,16),
+ (400,92,'StockTaking','2011-09-01 12:00:00',1,20,3),
+ (401,208,'SupplierInvoice','2011-09-30 12:00:00',1,100,88),
+ (402,208,'PurchaseOrder','2011-09-30 12:00:00',1,10,71),
+ (403,208,'GoodReceiveNote','2011-09-30 12:00:00',1,5,104),
+ (404,208,'SupplierInvoice','2011-09-30 12:00:00',1,5,89),
+ (405,199,'POS','2011-09-23 12:00:00',1,1,10),
+ (406,91,'POS','2011-09-05 12:00:00',1,1,19);
 /*!40000 ALTER TABLE `table_stockcardentry` ENABLE KEYS */;
 
 
@@ -8791,7 +8846,7 @@ CREATE TABLE `table_stocktaking` (
   CONSTRAINT `FK_table_stocktaking_1` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
   CONSTRAINT `FK_table_stocktaking_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_stocktaking_3` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_stocktaking`
@@ -8799,8 +8854,15 @@ CREATE TABLE `table_stocktaking` (
 
 /*!40000 ALTER TABLE `table_stocktaking` DISABLE KEYS */;
 INSERT INTO `table_stocktaking` (`stk_id`,`stk_date`,`stk_noticedate`,`stk_scentrytype`,`emp_id`,`stk_notes`,`stk_posted`,`stk_eventstatus`,`warehouse_id`,`stk_amount`,`ccy_id`,`stk_stocktakingtype`,`stk_code`,`modified_by`,`modified_date`,`modified_computer`) VALUES 
- (3,'2011-10-12 00:00:00','2011-09-12 00:00:00','StockTaking',1,'',0,'Entry',1,200000,1,'Adjustment','PMST/001/09/2011','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
- (4,'2011-09-20 12:00:00','2011-09-20 12:00:00','StockTaking',1,'',1,'Confirm',1,265200,1,'Adjustment','PMST/002/09/2011','Administrator','2011-09-28 03:59:04','DDWP_MDT_02825');
+ (3,'2011-09-01 12:00:00','2011-09-12 12:00:00','StockTaking',1,'',1,'Confirm',1,200000,1,'Adjustment','PMST/001/09/2011','Administrator','2011-10-05 01:45:29','DDWP_MDT_02825'),
+ (4,'2011-09-20 12:00:00','2011-09-20 12:00:00','StockTaking',1,'',1,'Confirm',1,265200,1,'Adjustment','PMST/002/09/2011','Administrator','2011-09-28 03:59:04','DDWP_MDT_02825'),
+ (5,'2011-09-29 12:00:00','2011-09-29 11:00:40','StockTaking',6,'',1,'Confirm',2,1800000,1,'Conversion','PMST/003/09/2011','Administrator','2011-09-29 11:01:40','DDWP_MDT_02825'),
+ (6,'2011-10-04 12:00:00','2011-10-04 01:48:24','StockTaking',1,'',0,'Entry',1,0,1,'Adjustment','PMST/004/10/2011','Administrator','2011-10-04 01:57:41','DDWP_MDT_02825'),
+ (7,'2011-09-01 12:00:00','2011-10-05 11:13:28','StockTaking',1,'',1,'Confirm',1,0,1,'Adjustment','PMST/005/10/2011','Administrator','2011-10-05 11:13:50','DDWP_MDT_02825'),
+ (8,'2011-09-01 12:00:00','2011-10-05 11:14:20','StockTaking',1,'',0,'Entry',2,25000,1,'Adjustment','PMST/006/10/2011','Administrator','2011-10-05 11:14:45','DDWP_MDT_02825'),
+ (9,'2011-09-05 12:00:00','2011-10-05 11:18:13','StockTaking',1,'',1,'Confirm',1,15000,1,'Adjustment','PMST/007/10/2011','Administrator','2011-10-05 11:18:48','DDWP_MDT_02825'),
+ (10,'2011-09-05 12:00:00','2011-10-05 01:40:31','StockTaking',1,'',1,'Confirm',1,1500000,1,'Adjustment','PMST/008/10/2011','Administrator','2011-10-05 01:40:50','DDWP_MDT_02825'),
+ (11,'2011-09-05 12:00:00','2011-10-05 01:43:18','StockTaking',1,'',1,'Confirm',2,150000,1,'Adjustment','PMST/009/10/2011','Administrator','2011-10-05 01:43:36','DDWP_MDT_02825');
 /*!40000 ALTER TABLE `table_stocktaking` ENABLE KEYS */;
 
 
@@ -8830,7 +8892,7 @@ CREATE TABLE `table_stocktakingitem` (
   CONSTRAINT `FK_table_stocktakingitem_2` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`),
   CONSTRAINT `FK_table_stocktakingitem_3` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
   CONSTRAINT `FK_table_stocktakingitem_4` FOREIGN KEY (`stk_id`) REFERENCES `table_stocktaking` (`stk_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_stocktakingitem`
@@ -8844,7 +8906,14 @@ INSERT INTO `table_stocktakingitem` (`stki_id`,`stk_id`,`part_id`,`warehouse_id`
  (6,4,9175,1,20,0,'StockTaking',0,1,1230,24600),
  (7,4,9887,1,20,0,'StockTaking',0,1,1365,27300),
  (8,4,12201,1,20,0,'StockTaking',0,1,1542,30840),
- (9,4,11034,1,20,0,'StockTaking',0,1,123,2460);
+ (9,4,11034,1,20,0,'StockTaking',0,1,123,2460),
+ (10,5,14771,2,120,0,'StockTaking',0,1,15000,1800000),
+ (11,6,11035,1,10,0,'StockTaking',0,1,0,0),
+ (12,7,14242,1,5,0,'StockTaking',0,1,0,0),
+ (13,8,14242,2,5,0,'StockTaking',0,1,5000,25000),
+ (14,9,14242,1,-3,0,'StockTaking',0,1,5000,15000),
+ (15,10,11844,1,100,0,'StockTaking',0,1,15000,1500000),
+ (16,11,11844,2,10,0,'StockTaking',0,1,15000,150000);
 /*!40000 ALTER TABLE `table_stocktakingitem` ENABLE KEYS */;
 
 
@@ -8978,7 +9047,7 @@ CREATE TABLE `table_supplierinvoice` (
   CONSTRAINT `FK_table_supplierinvoice_3` FOREIGN KEY (`top_id`) REFERENCES `table_termofpayment` (`top_id`),
   CONSTRAINT `FK_table_supplierinvoice_4` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_supplierinvoice_6` FOREIGN KEY (`sup_id`) REFERENCES `table_supplier` (`sup_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_supplierinvoice`
@@ -8994,7 +9063,10 @@ INSERT INTO `table_supplierinvoice` (`si_id`,`si_date`,`si_noticedate`,`si_scent
  (34,'2011-09-14 00:00:00','2011-09-14 00:00:00','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-09-14 00:00:00',1,1500000,0,0,0,1,0,0,1500000,'SP006/09/2011',1,'','2011-09-14 00:00:00','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
  (35,'2011-09-16 00:00:00','2011-09-16 00:00:00','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-09-16 00:00:00',1,150000,0,0,0,1,0,0,150000,'SP007/09/2011',1,'','2011-09-16 00:00:00','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
  (36,'2011-09-20 00:00:00','2011-09-20 00:00:00','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-09-20 00:00:00',1,725000,0,0,0,1,0,0,725000,'SP008/09/2011',1,'','2011-09-20 00:00:00','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
- (37,'2011-09-26 12:00:00','2011-09-26 03:59:32','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-09-26 12:00:00',1,100000,0,0,0,1,0,0,100000,'SP009/09/2011',1,'','2011-09-26 12:00:00','Administrator','2011-09-23 00:00:00','ADMIN_COMP');
+ (37,'2011-09-26 12:00:00','2011-09-26 03:59:32','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-09-26 12:00:00',1,100000,0,0,0,1,0,0,100000,'SP009/09/2011',1,'','2011-09-26 12:00:00','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (38,'2011-10-01 12:00:00','2011-10-01 11:11:17','SupplierInvoice',1,'',0,'Entry',1,1,'2011-10-01 12:00:00',1,388010,0,0,0,1,0,0,388010,'SP010/10/2011',1,'','2011-10-01 12:00:00','Administrator','2011-10-05 08:46:29','DDWP_MDT_02825'),
+ (39,'2011-09-30 12:00:00','2011-10-05 03:20:43','SupplierInvoice',1,'',1,'Confirm',1,2,'2011-11-04 12:00:00',1,500000,0,0,0,1,0,0,500000,'SP011/10/2011',1,'','2011-10-05 12:00:00','Administrator','2011-10-05 03:21:10','DDWP_MDT_02825'),
+ (40,'2011-09-30 12:00:00','2011-10-05 03:25:28','SupplierInvoice',1,'',1,'Confirm',1,1,'2011-10-05 12:00:00',1,25000,0,0,0,1,0,0,25000,'SP012/10/2011',1,'','2011-10-05 12:00:00','Administrator','2011-10-05 03:25:48','DDWP_MDT_02825');
 /*!40000 ALTER TABLE `table_supplierinvoice` ENABLE KEYS */;
 
 
@@ -9033,7 +9105,7 @@ CREATE TABLE `table_supplierinvoiceitem` (
   CONSTRAINT `FK_table_supplierinvoiceitem_2` FOREIGN KEY (`part_id`) REFERENCES `table_part` (`part_id`),
   CONSTRAINT `FK_table_supplierinvoiceitem_3` FOREIGN KEY (`warehouse_id`) REFERENCES `table_warehouse` (`warehouse_id`),
   CONSTRAINT `FK_table_supplierinvoiceitem_4` FOREIGN KEY (`unit_id`) REFERENCES `table_unit` (`unit_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_supplierinvoiceitem`
@@ -9053,7 +9125,15 @@ INSERT INTO `table_supplierinvoiceitem` (`sii_id`,`si_id`,`part_id`,`warehouse_i
  (78,34,9457,1,100,0,'SupplierInvoice',0,1,15000,0,0,0,1500000,'',0,0,0,'',0),
  (79,35,9068,1,10,0,'SupplierInvoice',0,1,15000,0,0,0,150000,'',0,0,0,'',0),
  (80,36,9068,1,5,0,'SupplierInvoice',0,2,145000,0,0,0,725000,'',0,0,0,'',0),
- (81,37,11035,1,10,0,'SupplierInvoice',0,1,10000,0,0,0,100000,'',0,0,0,'',0);
+ (81,37,11035,1,10,0,'SupplierInvoice',0,1,10000,0,0,0,100000,'',0,0,0,'',0),
+ (82,38,11035,1,1,0,'SupplierInvoice',0,1,10000,0,0,0,10000,'',0,0,0,'',0),
+ (83,38,10097,1,2,0,'SupplierInvoice',0,1,15000,0,0,0,30000,'',0,0,0,'',0),
+ (84,38,11037,1,3,0,'SupplierInvoice',0,1,12630,0,0,0,37890,'',0,0,0,'',0),
+ (85,38,9068,1,10,0,'SupplierInvoice',0,1,15000,0,0,0,150000,'',0,0,0,'',0),
+ (86,38,10440,1,10,0,'SupplierInvoice',0,1,16000,0,0,0,160000,'',0,0,0,'',0),
+ (87,38,10016,1,10,0,'SupplierInvoice',0,1,12,0,0,0,120,'',0,0,0,'',0),
+ (88,39,9505,1,100,0,'SupplierInvoice',0,1,5000,0,0,0,500000,'',0,0,0,'',0),
+ (89,40,9505,1,5,0,'SupplierInvoice',0,1,5000,0,0,0,25000,'',0,0,0,'',104);
 /*!40000 ALTER TABLE `table_supplierinvoiceitem` ENABLE KEYS */;
 
 
@@ -9093,7 +9173,7 @@ CREATE TABLE `table_supplierinvoicejournal` (
   CONSTRAINT `FK_table_supplierinvoicejournal_1` FOREIGN KEY (`sup_id`) REFERENCES `table_supplier` (`sup_id`),
   CONSTRAINT `FK_table_supplierinvoicejournal_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_supplierinvoicejournal_3` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_supplierinvoicejournal`
@@ -9109,7 +9189,9 @@ INSERT INTO `table_supplierinvoicejournal` (`sij_id`,`sij_code`,`sij_date`,`sup_
  (37,'SP006/09/2011','2011-09-14 00:00:00',1,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,1500000,1,34,'Open','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
  (38,'SP007/09/2011','2011-09-16 00:00:00',1,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,150000,1,35,'Open','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
  (40,'SP008/09/2011','2011-09-20 00:00:00',1,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,725000,1,36,'Open','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
- (41,'SP009/09/2011','2011-09-26 12:00:00',1,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,100000,1,37,'Open','Administrator','2011-09-23 00:00:00','ADMIN_COMP');
+ (41,'SP009/09/2011','2011-09-26 12:00:00',1,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,100000,1,37,'Close','Administrator','2011-09-23 00:00:00','ADMIN_COMP'),
+ (42,'SP011/10/2011','2011-09-30 12:00:00',1,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,500000,1,39,'Open','','2011-10-05 03:21:14',''),
+ (43,'SP012/10/2011','2011-09-30 12:00:00',1,1,'SupplierInvoice','',1,'Confirm',0,0,0,0,0,0,25000,1,40,'Open','','2011-10-05 03:25:52','');
 /*!40000 ALTER TABLE `table_supplierinvoicejournal` ENABLE KEYS */;
 
 
@@ -9150,7 +9232,7 @@ CREATE TABLE `table_supplierinvoicejournalitem` (
   CONSTRAINT `FK_table_supplierinvoicejournalitem_3` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`),
   CONSTRAINT `FK_table_supplierinvoicejournalitem_4` FOREIGN KEY (`emp_id`) REFERENCES `table_employee` (`emp_id`),
   CONSTRAINT `FK_table_supplierinvoicejournalitem_5` FOREIGN KEY (`top_id`) REFERENCES `table_termofpayment` (`top_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_supplierinvoicejournalitem`
@@ -9163,10 +9245,12 @@ INSERT INTO `table_supplierinvoicejournalitem` (`siji_id`,`sij_id`,`sup_id`,`ccy
  (33,33,1,1,3000000,0,0,'SupplierInvoice','2011-09-07 00:00:00','SP003/09/2011','2011-09-07 00:00:00',1,0,0,1,'','','Close',0,3000000),
  (34,34,1,1,450000,0,0,'SupplierInvoice','2011-09-09 00:00:00','SP004/09/2011','2011-09-09 00:00:00',1,0,0,1,'','','Open',450000,0),
  (36,36,1,1,100000,0,0,'SupplierInvoice','2011-09-09 00:00:00','SP005/09/2011','2011-09-09 00:00:00',1,0,0,1,'','','Open',100000,0),
- (37,37,1,1,1500000,0,0,'SupplierInvoice','2011-09-14 00:00:00','SP006/09/2011','2011-09-14 00:00:00',1,0,0,1,'','','Open',1500000,0),
- (38,38,1,1,150000,0,0,'SupplierInvoice','2011-09-16 00:00:00','SP007/09/2011','2011-09-16 00:00:00',1,0,0,1,'','','Open',150000,0),
+ (37,37,1,1,1500000,0,0,'SupplierInvoice','2011-09-14 00:00:00','SP006/09/2011','2011-09-14 00:00:00',1,0,0,1,'','','Close',0,1500000),
+ (38,38,1,1,150000,0,0,'SupplierInvoice','2011-09-16 00:00:00','SP007/09/2011','2011-09-16 00:00:00',1,0,0,1,'','','Close',0,150000),
  (40,40,1,1,725000,0,0,'SupplierInvoice','2011-09-20 00:00:00','SP008/09/2011','2011-09-20 00:00:00',1,0,0,1,'','','Open',725000,0),
- (41,41,1,1,100000,0,0,'SupplierInvoice','2011-09-26 12:00:00','SP009/09/2011','2011-09-26 12:00:00',1,0,0,1,'','','Open',100000,0);
+ (41,41,1,1,100000,0,0,'SupplierInvoice','2011-09-26 12:00:00','SP009/09/2011','2011-09-26 12:00:00',1,0,0,1,'','','Open',100000,0),
+ (42,42,1,1,500000,0,0,'SupplierInvoice','2011-09-30 12:00:00','SP011/10/2011','2011-11-04 12:00:00',1,0,0,2,'','','Open',500000,0),
+ (43,43,1,1,25000,0,0,'SupplierInvoice','2011-09-30 12:00:00','SP012/10/2011','2011-10-05 12:00:00',1,0,0,1,'','','Open',25000,0);
 /*!40000 ALTER TABLE `table_supplierinvoicejournalitem` ENABLE KEYS */;
 
 
@@ -15887,7 +15971,7 @@ CREATE TABLE `table_user` (
 
 /*!40000 ALTER TABLE `table_user` DISABLE KEYS */;
 INSERT INTO `table_user` (`user_id`,`user_code`,`user_name`,`user_password`,`user_active`,`modified_by`,`modified_date`,`modified_computer`,`emp_id`) VALUES 
- (1,'ADMIN','Administrator','cos78Xt+gjx0BMPN7wpv9g==',1,'Administrator','2011-09-28 03:19:30','DDWP_MDT_02825',2),
+ (1,'ADMIN','Administrator','QryxZcrHurVmXx/TfD53ytEqwfUNUkBL3j5SXuim+cA=',1,'Administrator','2011-10-05 03:23:29','DDWP_MDT_02825',2),
  (10,'TEST','test','IaxuwwC6VETuZ0f8Wy+TeQ==',0,'Administrator','2011-09-23 00:00:00','ADMIN_COMP',1),
  (11,'TEST2','TEST2','GT9PVcBysqM2GD+hSyWiCQ==',1,'Administrator','2011-09-23 00:00:00','ADMIN_COMP',1);
 /*!40000 ALTER TABLE `table_user` ENABLE KEYS */;
@@ -15907,7 +15991,7 @@ CREATE TABLE `table_usersettings` (
   PRIMARY KEY (`us_id`),
   KEY `FK_table_usersettings_1` (`user_id`),
   CONSTRAINT `FK_table_usersettings_1` FOREIGN KEY (`user_id`) REFERENCES `table_user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=865 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=877 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_usersettings`
@@ -15919,9 +16003,9 @@ INSERT INTO `table_usersettings` (`us_id`,`user_id`,`us_name`,`us_value`,`us_typ
  (54,1,'PurchaseOrderFormscanColumnVisible','True','System.Boolean'),
  (55,1,'PurchaseOrderFormcodeColumnWidth','63','System.Int32'),
  (56,1,'PurchaseOrderFormcodeColumnVisible','True','System.Boolean'),
- (57,1,'PurchaseOrderFormnameColumnWidth','351','System.Int32'),
+ (57,1,'PurchaseOrderFormnameColumnWidth','318','System.Int32'),
  (58,1,'PurchaseOrderFormnameColumnVisible','True','System.Boolean'),
- (59,1,'PurchaseOrderFormQtyColumnWidth','47','System.Int32'),
+ (59,1,'PurchaseOrderFormQtyColumnWidth','36','System.Int32'),
  (60,1,'PurchaseOrderFormQtyColumnVisible','True','System.Boolean'),
  (61,1,'PurchaseOrderFormunitColumnWidth','64','System.Int32'),
  (62,1,'PurchaseOrderFormunitColumnVisible','True','System.Boolean'),
@@ -16002,7 +16086,7 @@ INSERT INTO `table_usersettings` (`us_id`,`user_id`,`us_name`,`us_value`,`us_typ
  (137,1,'SearchPartFormActiveColVisible','True','System.Boolean'),
  (138,1,'SearchPartFormbarcodeColWidth','100','System.Int32'),
  (139,1,'SearchPartFormbarcodeColVisible','True','System.Boolean'),
- (140,1,'SearchStockTakingFormdgNameWidth','100','System.Int32'),
+ (140,1,'SearchStockTakingFormdgNameWidth','146','System.Int32'),
  (141,1,'SearchStockTakingFormdgNameVisible','True','System.Boolean'),
  (142,1,'SearchStockTakingFormdgSubjectWidth','70','System.Int32'),
  (143,1,'SearchStockTakingFormdgSubjectVisible','True','System.Boolean'),
@@ -16102,7 +16186,7 @@ INSERT INTO `table_usersettings` (`us_id`,`user_id`,`us_name`,`us_value`,`us_typ
  (237,1,'SupplierOutstandingInvoiceForminvoicerColumnVisible','True','System.Boolean'),
  (238,1,'SupplierOutstandingInvoiceFormamountColumnWidth','83','System.Int32'),
  (239,1,'SupplierOutstandingInvoiceFormamountColumnVisible','True','System.Boolean'),
- (240,1,'MainFormmenuwidth','35','System.Int32'),
+ (240,1,'MainFormmenuwidth','217','System.Int32'),
  (241,1,'SearchGRNForSuppInvoiceFormcheckColumnWidth','41','System.Int32'),
  (242,1,'SearchGRNForSuppInvoiceFormcheckColumnVisible','True','System.Boolean'),
  (243,1,'SearchGRNForSuppInvoiceFormpurchaseorderNoColumnWidth','120','System.Int32'),
@@ -16219,8 +16303,8 @@ INSERT INTO `table_usersettings` (`us_id`,`user_id`,`us_name`,`us_value`,`us_typ
  (354,1,'SearchOstSuppInvForPaymentFormqtyColumnVisible','True','System.Boolean'),
  (355,1,'PurchaseReturnFormgrnQtyColumnWidth','58','System.Int32'),
  (356,1,'PurchaseReturnFormgrnQtyColumnVisible','True','System.Boolean'),
- (357,1,'MainFormmainformwidth','918','System.Int32'),
- (358,1,'MainFormmainformheight','600','System.Int32'),
+ (357,1,'MainFormmainformwidth','1200','System.Int32'),
+ (358,1,'MainFormmainformheight','683','System.Int32'),
  (359,1,'SearchPurchaseOrderFormsupplierColumnWidth','103','System.Int32'),
  (360,1,'SearchPurchaseOrderFormsupplierColumnVisible','True','System.Boolean'),
  (361,1,'SearchGoodReceiveNoteFormsupplierColumnWidth','108','System.Int32'),
@@ -16726,7 +16810,19 @@ INSERT INTO `table_usersettings` (`us_id`,`user_id`,`us_name`,`us_value`,`us_typ
  (861,1,'POSCashierFormnotesColumnWidth','50','System.Int32'),
  (862,1,'POSCashierFormnotesColumnVisible','False','System.Boolean'),
  (863,1,'POSCashierFormtaxableColumnWidth','47','System.Int32'),
- (864,1,'POSCashierFormtaxableColumnVisible','True','System.Boolean');
+ (864,1,'POSCashierFormtaxableColumnVisible','True','System.Boolean'),
+ (865,1,'MainFormshowToolStripMenuItem','True','System.Boolean'),
+ (866,1,'MainFormwindowsstate','Normal','System.String'),
+ (867,1,'PartFormwarehouseColumnWidth','117','System.Int32'),
+ (868,1,'PartFormwarehouseColumnVisible','True','System.Boolean'),
+ (869,1,'PartFormorderedColumnWidth','56','System.Int32'),
+ (870,1,'PartFormorderedColumnVisible','True','System.Boolean'),
+ (871,1,'PartFormBookingColumn1Width','56','System.Int32'),
+ (872,1,'PartFormBookingColumn1Visible','True','System.Boolean'),
+ (873,1,'PartFormavailableColumn1Width','63','System.Int32'),
+ (874,1,'PartFormavailableColumn1Visible','True','System.Boolean'),
+ (875,1,'PartFormunitstockColumn1Width','50','System.Int32'),
+ (876,1,'PartFormunitstockColumn1Visible','True','System.Boolean');
 /*!40000 ALTER TABLE `table_usersettings` ENABLE KEYS */;
 
 
@@ -16755,7 +16851,7 @@ CREATE TABLE `table_vendorbalance` (
 
 /*!40000 ALTER TABLE `table_vendorbalance` DISABLE KEYS */;
 INSERT INTO `table_vendorbalance` (`vb_id`,`vb_vendorbalancetype`,`period_id`,`vendor_id`,`ccy_id`,`vb_balance`) VALUES 
- (8,'Supplier',21,1,1,4525000),
+ (8,'Supplier',21,1,1,3400000),
  (9,'Supplier',21,3,1,0),
  (10,'Customer',21,3,1,0),
  (12,'Customer',21,1,1,7640000);
@@ -16780,7 +16876,7 @@ CREATE TABLE `table_vendorbalanceentry` (
   KEY `FK_table_vendorbalanceentry_2` (`ccy_id`),
   CONSTRAINT `FK_table_vendorbalanceentry_1` FOREIGN KEY (`vb_id`) REFERENCES `table_vendorbalance` (`vb_id`),
   CONSTRAINT `FK_table_vendorbalanceentry_2` FOREIGN KEY (`ccy_id`) REFERENCES `table_currency` (`ccy_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=206 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=275 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_vendorbalanceentry`
@@ -16820,7 +16916,19 @@ INSERT INTO `table_vendorbalanceentry` (`vbe_id`,`vb_id`,`vbe_vendorbalanceentry
  (186,10,'Receipt','2011-09-22 00:00:00',1,25875,25),
  (187,10,'CustomerInvoice','2011-09-22 00:00:00',1,12474,31),
  (188,10,'Receipt','2011-09-22 00:00:00',1,12474,26),
- (205,8,'SupplierInvoice','2011-09-26 12:00:00',1,100000,41);
+ (205,8,'SupplierInvoice','2011-09-26 12:00:00',1,100000,41),
+ (206,9,'APDebitNote','2011-09-05 12:00:00',1,15000,11),
+ (207,9,'APDebitNote','2011-09-05 12:00:00',1,22500,12),
+ (248,10,'CustomerInvoice','2011-09-16 12:00:00',1,160000,52),
+ (249,10,'Receipt','2011-09-16 12:00:00',1,160000,47),
+ (265,8,'Payment','2011-09-16 12:00:00',1,1500000,37),
+ (266,8,'Payment','2011-09-16 12:00:00',1,150000,38),
+ (267,8,'SupplierInvoice','2011-09-30 12:00:00',1,500000,42),
+ (268,8,'SupplierInvoice','2011-09-30 12:00:00',1,25000,43),
+ (269,10,'CustomerInvoice','2011-09-23 12:00:00',1,0,59),
+ (270,10,'Receipt','2011-09-23 12:00:00',1,0,54),
+ (273,10,'CustomerInvoice','2011-09-05 12:00:00',1,12271.5,61),
+ (274,10,'Receipt','2011-09-05 12:00:00',1,12271.5,56);
 /*!40000 ALTER TABLE `table_vendorbalanceentry` ENABLE KEYS */;
 
 
