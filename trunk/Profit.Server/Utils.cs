@@ -11,6 +11,7 @@ namespace Profit.Server
     {
         //public const string DATE_FORMAT = "yyyy/MM/dd";
         public const string DATE_FORMAT = "yyyy/MM/dd hh:mm:ss";
+        public const string DATE_FORMAT_SHORT = "yyyy/MM/dd";
         public static void GetListCode(StringCollection list, IList dtos)
         {
             foreach (IEntity cod in dtos)

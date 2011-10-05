@@ -442,6 +442,25 @@ namespace Profit.Server
             }
             return result;
         }
+        public IList GetStockCardInfoList(int partID)
+        {
+            OpenConnection();
+            MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand();
+            cmd.Connection = m_connection;
+            Period p = PeriodRepository.FindCurrentPeriod(cmd);
+            cmd.CommandText = StockCard.FindByPartPeriod(partID, p.ID);
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
+            IList stockcards = StockCard.TransforReaderList(r);
+            r.Close();
+            IList stockInfoList = new ArrayList();
+            foreach (StockCard sc in stockcards)
+            {
+                StockCardInfo sci = new StockCardInfo(sc.BALANCE, sc.BOOKED,sc.BACK_ORDER, sc.WAREHOUSE);
+                sci.WAREHOUSE = StockCardRepository.FindWarehouse(cmd, sc.WAREHOUSE.ID);
+                stockInfoList.Add(sci);
+            }
+            return stockInfoList;
+        }
         public void SavePicture(byte[] image, string name)
         {
             try

@@ -28,7 +28,7 @@ namespace Profit.Server
         }
         public static Period FindPeriodByDate(MySql.Data.MySqlClient.MySqlCommand cmd, DateTime date)
         {
-            string hql = String.Format("select * from table_period p where p.period_start <= '{0}' and p.period_end >= '{0}'", date.ToString(Utils.DATE_FORMAT));
+            string hql = String.Format("select * from table_period p where p.period_start <= '{0}' and p.period_end >= '{0}'", date.ToString(Utils.DATE_FORMAT_SHORT));
 //            OdbcParameter st = new OdbcParameter(":date", date);
             cmd.CommandText = hql;
          //   cmd.Parameters.Add(st);

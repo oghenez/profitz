@@ -205,8 +205,8 @@ namespace Profit.Server
         }
         public bool IsInRange(DateTime date)
         {
-            bool a = date >= START_DATE;
-            bool b = date <= END_DATA;
+            bool a = date.Date >= START_DATE.Date;
+            bool b = date.Date <= END_DATA.Date;
             return a && b;
         }
         public override bool Equals(object obj)

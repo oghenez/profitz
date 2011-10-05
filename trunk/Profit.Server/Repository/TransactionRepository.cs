@@ -103,6 +103,8 @@ namespace Profit.Server
         protected void SetStockCard(EventItem item, Period period)
         {
             StockCard sc = StockCardRepository.FindStockCardHeader(m_command, item.PART.ID, item.WAREHOUSE.ID, period.ID);
+            item.WAREHOUSE = StockCardRepository.FindWarehouse(m_command, item.WAREHOUSE.ID);
+            item.PART.UNIT = StockCardRepository.FindUnit(m_command, item.PART.UNIT.ID);
             if (sc == null)
             {
                 sc = StockCard.CreateStockCard(item, period);
