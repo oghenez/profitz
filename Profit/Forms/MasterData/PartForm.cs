@@ -857,6 +857,10 @@ namespace Profit
             {
                 r = i - 1;
                 double p1 = Convert.ToDouble(pricemovementkryptonDataGridView1[pricemovementColumn.Index, r].Value);
+                if (p1 == 0)
+                {
+                    p1 = Convert.ToDouble(pricemovementkryptonDataGridView1[priceprcmovColumn.Index, r].Value);
+                }
                 double p2 = Convert.ToDouble(pricemovementkryptonDataGridView1[priceprcmovColumn.Index, i].Value);
                 pricemovementkryptonDataGridView1[pricemovementColumn.Index, i].Value = (p1 + p2) / 2;
 
