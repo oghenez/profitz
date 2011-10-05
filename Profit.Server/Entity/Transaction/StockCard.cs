@@ -191,17 +191,28 @@ namespace Profit.Server
         private void assertNotMinusBalanceStock()
         {
             if (BALANCE < 0)
-                throw new Exception(" Stock Card (" + PART.NAME + "): Minus Balance Stock Stock On Warehouse (" + WAREHOUSE.NAME + "). Available Balance : " + BALANCE_AVAILABLE + " " + PART.UNIT.CODE);
+                throw new Exception(@"
+            Stok barang (" + PART.NAME + ") kurang di Gudang (" + WAREHOUSE.NAME + @"),
+            Stok yang ada : " + BALANCE_AVAILABLE + " " + PART.UNIT.CODE);
+
+            //Stock Card (" + PART.NAME + "): Minus Balance Stock Stock On Warehouse (" + WAREHOUSE.NAME + "). \r\n Available Balance : " + BALANCE_AVAILABLE + " " + PART.UNIT.CODE);
+                //throw new Exception(" Stock Card (" + PART.NAME + "): Minus Balance Stock Stock On Warehouse (" + WAREHOUSE.NAME + "). \r\n Available Balance : " + BALANCE_AVAILABLE + " " + PART.UNIT.CODE);
         }
         private void assertNotMinusBackOrderStock()
         {
             if (BACK_ORDER < 0)
-                throw new Exception(" Stock Card (" + PART.NAME + "): Minus BackOder Stock On Warehouse (" + WAREHOUSE.NAME + "). Available BackOrder : " + BACK_ORDER_AVAILABLE + " " + PART.UNIT.CODE);
+                throw new Exception(@"
+            Stok Order barang (" + PART.NAME + ") kurang di Gudang (" + WAREHOUSE.NAME + @"),
+            Stok Order yang ada : " + BACK_ORDER_AVAILABLE + " " + PART.UNIT.CODE);
+               // throw new Exception(" Stock Card (" + PART.NAME + "): Minus BackOder Stock On Warehouse (" + WAREHOUSE.NAME + "). Available BackOrder : " + BACK_ORDER_AVAILABLE + " " + PART.UNIT.CODE);
         }
         private void assertNotMinusBookedStock()
         {
             if (BOOKED < 0)
-                throw new Exception(" Stock Card (" + PART.NAME + "): Minus Booked Stock Stock On Warehouse (" + WAREHOUSE.NAME + "). Available Booked : " + BOOK_AVAILABLE + " " + PART.UNIT.CODE);
+                throw new Exception(@"
+            Stok Booking barang (" + PART.NAME + ") kurang di Gudang (" + WAREHOUSE.NAME + @"),
+            Stok Booking yang ada : " + BOOK_AVAILABLE + " " + PART.UNIT.CODE);
+              //  throw new Exception(" Stock Card (" + PART.NAME + "): Minus Booked Stock Stock On Warehouse (" + WAREHOUSE.NAME + "). Available Booked : " + BOOK_AVAILABLE + " " + PART.UNIT.CODE);
         }
         private void createStockCardEntry(EventItem item)
         {

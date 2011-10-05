@@ -324,6 +324,9 @@ namespace Profit
                 bookedKryptonTextBox.Text = "0";
                 BackOrderKryptonTextBox.Text = "0";
                 pictureBox.Image = null;
+                unitkryptonLabel.Text = "";
+                unitkryptonLabel18.Text = "";
+                unitkryptonLabel19.Text = "";
                 m_part = new Part();
                 errorProvider1.Clear();
                 movemntkryptonDataGridView.Rows.Clear();
@@ -471,10 +474,7 @@ namespace Profit
             unitkryptonComboBox2.Text = m_part.UNIT.ToString();
             taxkryptonComboBox1.Text = m_part.TAX.ToString();
             pricecatkryptonComboBox1.Text = m_part.PRICE_CATEGORY.ToString();
-            StockCardInfo sci = r_part.GetStockCardInfo(m_part.ID);
-            balanceKryptonTextBox.Text = sci.BALANCE.ToString();
-            BackOrderKryptonTextBox.Text = sci.BACKORDER.ToString();
-            bookedKryptonTextBox.Text = sci.BOOKED.ToString();
+            UpdateStockInfo();
             pictureBox.Image = byteArrayToImage(r_part.GetImage(m_part.CODE));//m_part.PICTURE;// m_part.PICTURE == null ? null : byteArrayToImage(m_part.PICTURE);
             dataGridViewUOM.Rows.Clear();
             IList l = r_part.GetUnitConversions(m_part.ID);
@@ -563,13 +563,44 @@ namespace Profit
         {
             if(toolStripButtonSave.Enabled) InitializeDataSource();
             //loadRecords(); 
-            StockCardInfo sci = r_part.GetStockCardInfo(m_part.ID);
-            balanceKryptonTextBox.Text = sci.BALANCE.ToString();
-            BackOrderKryptonTextBox.Text = sci.BACKORDER.ToString();
-            bookedKryptonTextBox.Text = sci.BOOKED.ToString();
+            //StockCardInfo sci = r_part.GetStockCardInfo(m_part.ID);
+            //balanceKryptonTextBox.Text = sci.BALANCE.ToString();
+            //BackOrderKryptonTextBox.Text = sci.BACKORDER.ToString();
+            //bookedKryptonTextBox.Text = sci.BOOKED.ToString();
+
+            UpdateStockInfo();
 
            // gridData.Rows.Clear();
            // gridData.ClearSelection(); 
+        }
+
+        private void UpdateStockInfo()
+        {
+            if (m_part.ID == 0) return;
+            double totalBalance = 0;
+            double totalOrder = 0;
+            double totalBook = 0;
+            stockInfokryptonDataGridView2.Rows.Clear();
+            IList scis = r_part.GetStockCardInfoList(m_part.ID);
+            foreach (StockCardInfo sc in scis)
+            {
+                int p = stockInfokryptonDataGridView2.Rows.Add();
+                stockInfokryptonDataGridView2[warehouseColumn.Index, p].Value = sc.WAREHOUSE.NAME;
+                stockInfokryptonDataGridView2[BookingColumn1.Index, p].Value = sc.BOOKED;
+                stockInfokryptonDataGridView2[orderedColumn.Index, p].Value = sc.BACKORDER;
+                stockInfokryptonDataGridView2[availableColumn1.Index, p].Value = sc.BALANCE;
+                stockInfokryptonDataGridView2[unitstockColumn1.Index, p].Value = m_part.UNIT.CODE;
+                totalBalance += sc.BALANCE;
+                totalOrder += sc.BACKORDER;
+                totalBook += sc.BOOKED;
+            }
+            balanceKryptonTextBox.Text = totalBalance.ToString();
+            BackOrderKryptonTextBox.Text = totalOrder.ToString();
+            bookedKryptonTextBox.Text = totalBook.ToString();
+            UserSetting.AddNumberToGrid(stockInfokryptonDataGridView2);
+            unitkryptonLabel.Text = m_part.UNIT.CODE;
+            unitkryptonLabel18.Text = m_part.UNIT.CODE;
+            unitkryptonLabel19.Text = m_part.UNIT.CODE;
         }
 
         public void Print(object sender, EventArgs e)
@@ -749,12 +780,14 @@ namespace Profit
         {
             UserSetting.LoadSetting(movemntkryptonDataGridView, m_mainForm.CurrentUser.ID, this.Name);
             UserSetting.LoadSetting(pricemovementkryptonDataGridView1, m_mainForm.CurrentUser.ID, this.Name);
+            UserSetting.LoadSetting(stockInfokryptonDataGridView2, m_mainForm.CurrentUser.ID, this.Name);
         }
 
         private void PartForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             UserSetting.SaveSetting(movemntkryptonDataGridView, m_mainForm.CurrentUser.ID, this.Name);
             UserSetting.SaveSetting(pricemovementkryptonDataGridView1, m_mainForm.CurrentUser.ID, this.Name);
+            UserSetting.SaveSetting(stockInfokryptonDataGridView2, m_mainForm.CurrentUser.ID, this.Name);
         }
 
         private void refreshMovementkryptonButton_Click(object sender, EventArgs e)
@@ -823,7 +856,7 @@ namespace Profit
             for (int i = 1; i < pricemovementkryptonDataGridView1.Rows.Count; i++)
             {
                 r = i - 1;
-                double p1 = Convert.ToDouble(pricemovementkryptonDataGridView1[priceprcmovColumn.Index, r].Value);
+                double p1 = Convert.ToDouble(pricemovementkryptonDataGridView1[pricemovementColumn.Index, r].Value);
                 double p2 = Convert.ToDouble(pricemovementkryptonDataGridView1[priceprcmovColumn.Index, i].Value);
                 pricemovementkryptonDataGridView1[pricemovementColumn.Index, i].Value = (p1 + p2) / 2;
 
@@ -839,6 +872,11 @@ namespace Profit
         {
             if (KryptonMessageBox.Show("Are you sure to Exit this Form?", "Exit Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 this.Close();
+        }
+
+        private void toolStripButtonRefresh_Click(object sender, EventArgs e)
+        {
+
         }
         //private void toolStripButtonMigrate_Click(object sender, EventArgs e)
         //{

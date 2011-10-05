@@ -101,10 +101,12 @@ namespace Profit.Server
             cmd.CommandText = String.Format("select * from table_stockcard where part_id = {0} and warehouse_id = {1} and period_id = {2}", partId, locationId, periodId);
             MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             StockCard sc = StockCard.TransformReader(r);
+            
             r.Close();
             if (sc != null)
             {
                 sc.PERIOD = PeriodRepository.FindPeriod(cmd, sc.PERIOD.ID);
+                sc.WAREHOUSE = StockCardRepository.FindWarehouse(cmd, sc.WAREHOUSE.ID);
             }
             return sc;
         }
@@ -121,6 +123,22 @@ namespace Profit.Server
             cmd.CommandText = String.Format("select * from table_stockcard where period_id = {0}", periodId);
             MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             IList sc = StockCard.TransforReaderList(r);
+            r.Close();
+            return sc;
+        }
+        public static Warehouse FindWarehouse(MySql.Data.MySqlClient.MySqlCommand cmd, int wareHOuseID)
+        {
+            cmd.CommandText = Warehouse.GetByIDSQLStatic(wareHOuseID);
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
+            Warehouse sc = Warehouse.GetWarehouse(r);
+            r.Close();
+            return sc;
+        }
+        public static Unit FindUnit(MySql.Data.MySqlClient.MySqlCommand cmd, int unitID)
+        {
+            cmd.CommandText = Unit.GetByIDSQLstatic(unitID);
+            MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
+            Unit sc = Unit.GetUnit(r);
             r.Close();
             return sc;
         }
