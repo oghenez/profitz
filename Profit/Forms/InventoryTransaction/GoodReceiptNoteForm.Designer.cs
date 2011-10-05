@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonHeader1 = new ComponentFactory.Krypton.Toolkit.KryptonHeader();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
@@ -264,7 +264,7 @@
             // kryptonGroupBox1
             // 
             this.kryptonGroupBox1.CaptionStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ItalicControl;
-            this.kryptonGroupBox1.Location = new System.Drawing.Point(6, 3);
+            this.kryptonGroupBox1.Location = new System.Drawing.Point(9, 3);
             this.kryptonGroupBox1.Name = "kryptonGroupBox1";
             // 
             // kryptonGroupBox1.Panel
@@ -492,13 +492,13 @@
             this.kryptonGroupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             this.kryptonGroupBox2.CaptionStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ItalicControl;
-            this.kryptonGroupBox2.Location = new System.Drawing.Point(6, 126);
+            this.kryptonGroupBox2.Location = new System.Drawing.Point(9, 122);
             this.kryptonGroupBox2.Name = "kryptonGroupBox2";
             // 
             // kryptonGroupBox2.Panel
             // 
             this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonGroup1);
-            this.kryptonGroupBox2.Size = new System.Drawing.Size(1025, 182);
+            this.kryptonGroupBox2.Size = new System.Drawing.Size(1025, 186);
             this.kryptonGroupBox2.TabIndex = 62;
             this.kryptonGroupBox2.Text = "Details";
             this.kryptonGroupBox2.Values.Heading = "Details";
@@ -514,7 +514,7 @@
             // kryptonGroup1.Panel
             // 
             this.kryptonGroup1.Panel.Controls.Add(this.itemsDataGrid);
-            this.kryptonGroup1.Size = new System.Drawing.Size(1015, 155);
+            this.kryptonGroup1.Size = new System.Drawing.Size(1015, 159);
             this.kryptonGroup1.TabIndex = 60;
             // 
             // itemsDataGrid
@@ -540,7 +540,7 @@
             this.itemsDataGrid.HideOuterBorders = true;
             this.itemsDataGrid.Location = new System.Drawing.Point(0, 0);
             this.itemsDataGrid.Name = "itemsDataGrid";
-            this.itemsDataGrid.Size = new System.Drawing.Size(1013, 153);
+            this.itemsDataGrid.Size = new System.Drawing.Size(1013, 157);
             this.itemsDataGrid.TabIndex = 4;
             this.itemsDataGrid.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.itemsDataGrid_RowsAdded);
             // 
@@ -551,8 +551,8 @@
             // 
             // codeColumn
             // 
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.codeColumn.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.codeColumn.DefaultCellStyle = dataGridViewCellStyle21;
             this.codeColumn.HeaderText = "Code";
             this.codeColumn.Name = "codeColumn";
             this.codeColumn.ReadOnly = true;
@@ -560,8 +560,8 @@
             // 
             // nameColumn
             // 
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.nameColumn.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.nameColumn.DefaultCellStyle = dataGridViewCellStyle22;
             this.nameColumn.HeaderText = "Name";
             this.nameColumn.Name = "nameColumn";
             this.nameColumn.ReadOnly = true;
@@ -569,8 +569,8 @@
             // 
             // poQtyColumn
             // 
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.poQtyColumn.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.poQtyColumn.DefaultCellStyle = dataGridViewCellStyle23;
             this.poQtyColumn.HeaderText = "PO Qty";
             this.poQtyColumn.Increment = new decimal(new int[] {
             1,
@@ -593,8 +593,8 @@
             // 
             // poUnitColumn
             // 
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.poUnitColumn.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.poUnitColumn.DefaultCellStyle = dataGridViewCellStyle24;
             this.poUnitColumn.HeaderText = "PO Unit";
             this.poUnitColumn.Name = "poUnitColumn";
             this.poUnitColumn.ReadOnly = true;
@@ -602,10 +602,10 @@
             // 
             // OutstandingPOColumn
             // 
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            dataGridViewCellStyle15.NullValue = "0";
-            this.OutstandingPOColumn.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle25.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle25.NullValue = "0";
+            this.OutstandingPOColumn.DefaultCellStyle = dataGridViewCellStyle25;
             this.OutstandingPOColumn.HeaderText = "O/S Qty";
             this.OutstandingPOColumn.Increment = new decimal(new int[] {
             1,
@@ -630,8 +630,8 @@
             // 
             // OutstandingunitColumn
             // 
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.OutstandingunitColumn.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.OutstandingunitColumn.DefaultCellStyle = dataGridViewCellStyle26;
             this.OutstandingunitColumn.HeaderText = "O/S Unit";
             this.OutstandingunitColumn.Name = "OutstandingunitColumn";
             this.OutstandingunitColumn.ReadOnly = true;
@@ -639,8 +639,8 @@
             // 
             // QtyColumn
             // 
-            dataGridViewCellStyle17.NullValue = "0";
-            this.QtyColumn.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle27.NullValue = "0";
+            this.QtyColumn.DefaultCellStyle = dataGridViewCellStyle27;
             this.QtyColumn.HeaderText = "Qty";
             this.QtyColumn.Increment = new decimal(new int[] {
             1,
@@ -669,8 +669,8 @@
             // 
             // warehouseColumn
             // 
-            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.warehouseColumn.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle28.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.warehouseColumn.DefaultCellStyle = dataGridViewCellStyle28;
             this.warehouseColumn.DropDownWidth = 121;
             this.warehouseColumn.HeaderText = "Warehouse";
             this.warehouseColumn.Name = "warehouseColumn";
@@ -687,10 +687,10 @@
             // 
             // returnedColumn
             // 
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            dataGridViewCellStyle19.NullValue = "0";
-            this.returnedColumn.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle29.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle29.NullValue = "0";
+            this.returnedColumn.DefaultCellStyle = dataGridViewCellStyle29;
             this.returnedColumn.HeaderText = "Return Qty";
             this.returnedColumn.Increment = new decimal(new int[] {
             1,
@@ -713,8 +713,8 @@
             // 
             // returnedunitColumn
             // 
-            dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.returnedunitColumn.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle30.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.returnedunitColumn.DefaultCellStyle = dataGridViewCellStyle30;
             this.returnedunitColumn.HeaderText = "Returned Unit";
             this.returnedunitColumn.Name = "returnedunitColumn";
             this.returnedunitColumn.ReadOnly = true;
