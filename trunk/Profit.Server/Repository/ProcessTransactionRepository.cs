@@ -219,8 +219,15 @@ namespace Profit.Server
                     StockCard sCard = stockcards[i] as StockCard;
                     newSCards.Add(sCard.Create(nextPeriod));
                 }
+                //create LS
+                
+
+
                 foreach (StockCard sc in newSCards)
                 {
+                    OpeningStock ops = new OpeningStock();
+                    
+
                     StockCardRepository.SaveHeader(m_command, sc);
                 }
 
