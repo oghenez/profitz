@@ -152,5 +152,17 @@ namespace Profit.Server
             order by h.stk_date asc",
              id);
         }
+        public static string GetByPartIDOrderByDateRangeSQL(int id, DateTime start, DateTime end)
+        {
+            return String.Format(@"SELECT i.* from table_stocktaking h, 
+            table_stocktakingitem i 
+            where 
+            h.stk_id = i.stk_id 
+            and i.part_id = {0}
+            and h.stk_posted = True
+            and h.stk_date between '{1}' and '{2}'
+            order by h.stk_date asc",
+             id, start.ToString(Utils.DATE_FORMAT_SHORT), end.ToString(Utils.DATE_FORMAT_SHORT));
+        }
     }
 }

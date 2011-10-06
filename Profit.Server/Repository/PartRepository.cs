@@ -881,6 +881,49 @@ namespace Profit.Server
                 m_cmd.ExecuteNonQuery();
             }
         }
+        public static IList GetLatestPriceMovementItemPeriod(MySql.Data.MySqlClient.MySqlCommand m_command,
+            int partID, DateTime start, DateTime end)
+        {
+            MySql.Data.MySqlClient.MySqlDataReader rdr;
+            Part p = PartRepository.GetByID(m_command, partID);
+            ArrayList result = new ArrayList();
+
+            m_command.CommandText = SupplierInvoiceItem.GetByPartIDOrderByDateRangeSQL(partID,start,end);
+            rdr = m_command.ExecuteReader();
+            IList piis = SupplierInvoiceItem.TransformReaderList(rdr);
+            rdr.Close();
+            foreach (SupplierInvoiceItem itm in piis)
+            {
+                itm.EVENT = SupplierInvoiceRepository.GetHeaderOnly(m_command, itm.EVENT.ID);
+                itm.PART = p;
+                result.Add(itm);
+            }
+
+            m_command.CommandText = StockTakingItems.GetByPartIDOrderByDateSQL(partID);
+            rdr = m_command.ExecuteReader();
+            IList sti = StockTakingItems.TransformReaderList(rdr);
+            rdr.Close();
+            foreach (StockTakingItems itm in sti)
+            {
+                itm.EVENT = StockTakingRepository.GetHeaderOnly(m_command, itm.EVENT.ID);
+                itm.PART = p;
+                result.Add(itm);
+            }
+
+            m_command.CommandText = OpeningStockItem.GetByPartIDOrderByDateSQL(partID);
+            rdr = m_command.ExecuteReader();
+            IList opi = OpeningStockItem.TransformReaderList(rdr);
+            rdr.Close();
+            foreach (OpeningStockItem itm in opi)
+            {
+                itm.EVENT = OpeningStockRepository.GetHeaderOnly(m_command, itm.EVENT.ID);
+                itm.PART = p;
+                result.Add(itm);
+            }
+
+            result.Sort(new Profit.Server.PartRepository.EventDateComparer());
+            return result;
+        }
     }
 
 }

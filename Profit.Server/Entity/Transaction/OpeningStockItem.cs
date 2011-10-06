@@ -132,6 +132,18 @@ namespace Profit.Server
             order by h.opst_date asc",
              id);
         }
+        public static string GetByPartIDOrderByDateRangeSQL(int id, DateTime start, DateTime end)
+        {
+            return String.Format(@"SELECT i.* from table_openingstock h, 
+            table_openingstockitem i 
+            where 
+            h.opst_id = i.opst_id 
+            and i.part_id = {0}
+            and h.opst_posted = True
+            and h.opst_date between '{1}' and '{2}'
+            order by h.opst_date asc",
+             id, start.ToString(Utils.DATE_FORMAT_SHORT), end.ToString(Utils.DATE_FORMAT_SHORT));
+        }
         public static string DeleteUpdate(int id, IList notIN)
         {
             StringBuilder poisSB = new StringBuilder();
