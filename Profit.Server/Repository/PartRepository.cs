@@ -920,8 +920,32 @@ namespace Profit.Server
                 itm.PART = p;
                 result.Add(itm);
             }
-
             result.Sort(new Profit.Server.PartRepository.EventDateComparer());
+
+            double average = 0;
+            double price = 0;
+            for(int i = 0; i<result.Count;i++)
+            {
+                if(result[i] is OpeningStockItem)
+                {
+                    price = ((OpeningStockItem)result[i]).TOTAL_AMOUNT / ((OpeningStockItem)result[i]).GetAmountInSmallestUnit();
+                }
+                if(result[i] is StockTakingItems)
+                {
+                    price = ((StockTakingItems)result[i]).TOTAL_AMOUNT / ((StockTakingItems)result[i]).GetAmountInSmallestUnit();
+                }
+                if(result[i] is SupplierInvoiceItem)
+                {
+                    price = ((SupplierInvoiceItem)result[i]).SUBTOTAL/ ((SupplierInvoiceItem)result[i]).GetAmountInSmallestUnit();
+                }
+                if (i == 0)
+                    average = price;
+                else  
+                {
+                    average = (average + price) / 2;
+                }
+            }
+
             return result;
         }
     }
