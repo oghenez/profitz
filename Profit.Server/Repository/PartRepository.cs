@@ -946,7 +946,7 @@ namespace Profit.Server
                 }
             }
 
-            return result;
+            return average;
         }
     }
 
