@@ -137,6 +137,7 @@
     <Compile Include="Repository\AutoNumberSetupRepository.cs" />
     <Compile Include="Repository\APDebitNoteRepository.cs" />
     <Compile Include="Repository\ARCreditNoteRepository.cs" />
+    <Compile Include="Repository\CurrencyRepository.cs" />
     <Compile Include="Repository\POSRepository.cs" />
     <Compile Include="Repository\OpeningStockRepository.cs" />
     <Compile Include="Repository\ReceiptRepository.cs" />

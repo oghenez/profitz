@@ -129,7 +129,7 @@ namespace Profit
                 kryptonTextBox1.Text = "";
                 if (KryptonMessageBox.Show("Are Sure Want To Process The Current Month?", "Transaction Process", MessageBoxButtons.YesNo, MessageBoxIcon.Question).Equals(DialogResult.Yes))
                 {
-                    r_prtr.ProcessTransaction(m_mainForm.CurrentPeriod.ID);
+                    r_prtr.ProcessTransaction(m_mainForm.CurrentPeriod.ID, m_mainForm.CurrentUser.EMPLOYEE);
                     m_mainForm.CurrentPeriod = r_period.FindCurrentPeriod();
                     kryptonDateTimePicker1.Value = m_mainForm.CurrentPeriod.START_DATE;
                     kryptonTextBox1.Text = "Process Succeeded";
