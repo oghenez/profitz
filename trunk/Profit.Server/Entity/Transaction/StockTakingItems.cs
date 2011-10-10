@@ -103,8 +103,8 @@ namespace Profit.Server
                 transaction.STOCK_CARD_ENTRY_TYPE = (StockCardEntryType)Enum.Parse(typeof(StockCardEntryType), aReader["stk_scentrytype"].ToString());
                 transaction.STOCK_CARD = new StockCard(Convert.ToInt32(aReader["sc_id"]));
                 transaction.UNIT = new Unit(Convert.ToInt32(aReader["unit_id"]));//         
-                transaction.PRICE = Convert.ToDouble(Convert.ToInt32(aReader["stki_price"]));
-                transaction.TOTAL_AMOUNT = Convert.ToDouble(Convert.ToInt32(aReader["stki_totalamount"]));
+                transaction.PRICE = Convert.ToDouble(Convert.ToDouble(aReader["stki_price"]));
+                transaction.TOTAL_AMOUNT = Convert.ToDouble(Convert.ToDouble(aReader["stki_totalamount"]));
                 result.Add(transaction);
             }
             return result;
@@ -162,7 +162,7 @@ namespace Profit.Server
             and h.stk_posted = True
             and h.stk_date between '{1}' and '{2}'
             order by h.stk_date asc",
-             id, start.ToString(Utils.DATE_FORMAT_SHORT), end.ToString(Utils.DATE_FORMAT_SHORT));
+             id, start.ToString(Utils.DATE_FORMAT_SHORT), end.ToString(Utils.DATE_FORMAT_SHORT_END));
         }
     }
 }

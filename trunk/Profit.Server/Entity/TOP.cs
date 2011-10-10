@@ -89,6 +89,10 @@ namespace Profit.Server
         {
             return String.Format("select * from table_termofpayment where top_id = {0}", ID);
         }
+        public static string GetByCodeStaticSQL(string code)
+        {
+            return String.Format("select * from table_termofpayment where top_code = '{0}'", code);
+        }
         public string GetByCodeSQL(string code)
         {
             return String.Format("select * from table_termofpayment where top_code = '{0}'", code);

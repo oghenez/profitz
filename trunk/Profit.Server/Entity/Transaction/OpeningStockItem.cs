@@ -142,7 +142,7 @@ namespace Profit.Server
             and h.opst_posted = True
             and h.opst_date between '{1}' and '{2}'
             order by h.opst_date asc",
-             id, start.ToString(Utils.DATE_FORMAT_SHORT), end.ToString(Utils.DATE_FORMAT_SHORT));
+             id, start.ToString(Utils.DATE_FORMAT_SHORT), end.ToString(Utils.DATE_FORMAT_SHORT_END));
         }
         public static string DeleteUpdate(int id, IList notIN)
         {

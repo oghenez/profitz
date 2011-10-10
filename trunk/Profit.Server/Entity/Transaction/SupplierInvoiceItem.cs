@@ -211,7 +211,7 @@ namespace Profit.Server
             and h.si_posted = True
             and h.si_date between '{1}' and '{2}'
             order by h.si_date asc",
-             id, start.ToString(Utils.DATE_FORMAT_SHORT), end.ToString(Utils.DATE_FORMAT_SHORT));
+             id, start.ToString(Utils.DATE_FORMAT_SHORT), end.ToString(Utils.DATE_FORMAT_SHORT_END));
         }
         public static string DeleteUpdate(int id, IList notIN)
         {

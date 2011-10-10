@@ -881,7 +881,7 @@ namespace Profit.Server
                 m_cmd.ExecuteNonQuery();
             }
         }
-        public static IList GetLatestPriceMovementItemPeriod(MySql.Data.MySqlClient.MySqlCommand m_command,
+        public static double GetLatestPriceMovementItemPeriod(MySql.Data.MySqlClient.MySqlCommand m_command,
             int partID, DateTime start, DateTime end)
         {
             MySql.Data.MySqlClient.MySqlDataReader rdr;
@@ -924,29 +924,45 @@ namespace Profit.Server
 
             double average = 0;
             double price = 0;
+            double priceBaseCcy = 0;
+            Currency baseccy = CurrencyRepository.GetBaseCurrency(m_command);
+
             for(int i = 0; i<result.Count;i++)
             {
                 if(result[i] is OpeningStockItem)
                 {
                     price = ((OpeningStockItem)result[i]).TOTAL_AMOUNT / ((OpeningStockItem)result[i]).GetAmountInSmallestUnit();
+                    if (baseccy.ID == ((OpeningStock)((OpeningStockItem)result[i]).EVENT).CURRENCY.ID)
+                        priceBaseCcy = price;
+                    else
+                        priceBaseCcy = CurrencyRepository.ConvertToBaseCurrency(m_command, ((OpeningStock)((OpeningStockItem)result[i]).EVENT).CURRENCY, price, DateTime.Today);
                 }
                 if(result[i] is StockTakingItems)
                 {
                     price = ((StockTakingItems)result[i]).TOTAL_AMOUNT / ((StockTakingItems)result[i]).GetAmountInSmallestUnit();
+                    if (baseccy.ID == ((StockTaking)((StockTakingItems)result[i]).EVENT).CURRENCY.ID)
+                        priceBaseCcy = price;
+                    else
+                        priceBaseCcy = CurrencyRepository.ConvertToBaseCurrency(m_command, ((StockTaking)((StockTakingItems)result[i]).EVENT).CURRENCY, price, DateTime.Today);
+
                 }
                 if(result[i] is SupplierInvoiceItem)
                 {
                     price = ((SupplierInvoiceItem)result[i]).SUBTOTAL/ ((SupplierInvoiceItem)result[i]).GetAmountInSmallestUnit();
+                    if (baseccy.ID == ((SupplierInvoice)((SupplierInvoiceItem)result[i]).EVENT).CURRENCY.ID)
+                        priceBaseCcy = price;
+                    else
+                        priceBaseCcy = CurrencyRepository.ConvertToBaseCurrency(m_command, ((SupplierInvoice)((SupplierInvoiceItem)result[i]).EVENT).CURRENCY, price, DateTime.Today);
                 }
                 if (i == 0)
-                    average = price;
+                    average = priceBaseCcy;
                 else  
                 {
-                    average = (average + price) / 2;
+                    average = (average + priceBaseCcy) / 2;
                 }
             }
 
-            return average;
+            return average < 0 ? -average : average;
         }
     }
 

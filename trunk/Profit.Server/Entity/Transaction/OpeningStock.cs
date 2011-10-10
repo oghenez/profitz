@@ -148,6 +148,10 @@ namespace Profit.Server
         {
             return String.Format("SELECT * from table_openingstock where opst_id ={0}", id);
         }
+        public static string GetByNotesSQL(string notes)
+        {
+            return String.Format("SELECT * from table_openingstock where opst_notes ='{0}'", notes);
+        }
         public static string SelectCountByCode(string code)
         {
             return String.Format("SELECT count(*) from table_openingstock where opst_code ='{0}'", code);

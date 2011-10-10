@@ -266,7 +266,7 @@ namespace Profit.Server
         {
             return String.Format(@"SELECT * from table_pos where 
             pos_date between '{0}' and '{1}' {2} {3}",
-                startDate.ToString(Utils.DATE_FORMAT), endDate.ToString(Utils.DATE_FORMAT),
+                startDate.ToString(Utils.DATE_FORMAT), endDate.ToString(Utils.DATE_FORMAT_SHORT_END),
                 supid == 0 ? "" : " and cus_id = " + supid,
                 allStatus ? "" : " and pos_posted = " + status);
         }

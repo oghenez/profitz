@@ -27,7 +27,7 @@ namespace Profit
         IList m_partCategoryList = new ArrayList();
         Repository r_unit = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.UNIT_REPOSITORY);
         Repository r_tax = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.TAX_REPOSITORY);
-        Repository r_ccy = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY);
+        CurrencyRepository r_ccy = (CurrencyRepository)RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY);
         Repository r_prtCat = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_CATEGORY_REPOSITORY);
         Repository r_prtGrp = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PART_GROUP_REPOSITORY);
         Repository r_priceCat = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.PRICE_CATEGORY_REPOSITORY);
@@ -818,6 +818,7 @@ namespace Profit
             pricemovementkryptonDataGridView1.Rows.Clear();
             if (m_part.ID == 0) return;
             IList movs = r_sir.GetSupplierInvoiceItem(m_part.ID);
+            
             foreach (EventItem itm in movs)
             {
                 int r = pricemovementkryptonDataGridView1.Rows.Add();
@@ -833,15 +834,23 @@ namespace Profit
                         SupplierInvoice si = (SupplierInvoice)sii.EVENT;
                         si.SUPPLIER = (Supplier)r_sup.GetById(si.SUPPLIER);
                         pricemovementkryptonDataGridView1[vendorprcmovColumn4.Index, r].Value = si.SUPPLIER.NAME;
-                        pricemovementkryptonDataGridView1[priceprcmovColumn.Index, r].Value = sii.SUBTOTAL / sii.GetAmountInSmallestUnit();
+                        double c = sii.SUBTOTAL / sii.GetAmountInSmallestUnit();
+                        c = r_ccy.ConvertToBaseCurrency(si.CURRENCY, c, si.TRANSACTION_DATE);
+                        pricemovementkryptonDataGridView1[priceprcmovColumn.Index, r].Value = c < 0 ? -c : c;
                         break;
                     case StockCardEntryType.StockTaking:
                         StockTakingItems stk = (StockTakingItems)itm;
-                        pricemovementkryptonDataGridView1[priceprcmovColumn.Index, r].Value = stk.TOTAL_AMOUNT / stk.GetAmountInSmallestUnit();
+                        StockTaking stkh = (StockTaking)itm.EVENT;
+                        double p =stk.TOTAL_AMOUNT / stk.GetAmountInSmallestUnit();
+                        p = r_ccy.ConvertToBaseCurrency(stkh.CURRENCY, p, stkh.TRANSACTION_DATE);
+                        pricemovementkryptonDataGridView1[priceprcmovColumn.Index, r].Value = p < 0 ? -p : p;
                         break;
                     case StockCardEntryType.OpeningStock:
                         OpeningStockItem opn = (OpeningStockItem)itm;
-                        pricemovementkryptonDataGridView1[priceprcmovColumn.Index, r].Value = opn.TOTAL_AMOUNT / opn.GetAmountInSmallestUnit();
+                        OpeningStock opnh = (OpeningStock)itm.EVENT;
+                        double x = opn.TOTAL_AMOUNT / opn.GetAmountInSmallestUnit();
+                        x = r_ccy.ConvertToBaseCurrency(opnh.CURRENCY, x, opnh.TRANSACTION_DATE);
+                        pricemovementkryptonDataGridView1[priceprcmovColumn.Index, r].Value = x < 0 ? -x : x;
                         break;
                 }
                 pricemovementkryptonDataGridView1[statusMovementColumn.Index, r].Value = itm.EVENT.POSTED.ToString();
@@ -857,6 +866,8 @@ namespace Profit
             {
                 r = i - 1;
                 double p1 = Convert.ToDouble(pricemovementkryptonDataGridView1[pricemovementColumn.Index, r].Value);
+                if (p1 < 0)
+                    p1 = 0 - p1;
                 if (p1 == 0)
                 {
                     p1 = Convert.ToDouble(pricemovementkryptonDataGridView1[priceprcmovColumn.Index, r].Value);

@@ -47,6 +47,24 @@ namespace Profit.Server
             }
             return excrate;
         }
+        public static ExchangeRate GetExchangeRate(MySql.Data.MySqlClient.MySqlDataReader aReader)
+        {
+            ExchangeRate excrate = null;
+            while (aReader.Read())
+            {
+                excrate = new ExchangeRate();
+                excrate.ID = Convert.ToInt32(aReader[0]);
+                excrate.CODE = aReader[1].ToString();
+                excrate.START_DATE = Convert.ToDateTime(aReader[2]);
+                excrate.END_DATE = Convert.ToDateTime(aReader[3]);
+                excrate.RATE_TO_BASE = Convert.ToDouble(aReader[4]);
+                excrate.CURRENCY = new Currency(Convert.ToInt32(aReader[5]));
+                excrate.MODIFIED_BY = aReader["modified_by"].ToString();
+                excrate.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                excrate.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
+            }
+            return excrate;
+        }
         public string GetInsertSQL()
         {
             if (CURRENCY.ID == 0) throw new Exception("Please select Currency");
@@ -91,6 +109,20 @@ namespace Profit.Server
         {
             return String.Format("select * from table_exchangerate where excrate_code = '{0}'", code);
         }
+        public static string GetBaseCCySQL()
+        {
+            return String.Format("select * from table_exchangerate where excrate_rate = 1");
+        }
+        public static string GetByCcyAndDateSQL(int ccyID, DateTime date)
+        {
+            return String.Format(@"select * from table_exchangerate where '{0}' between excrate_start 
+            and excrate_end and ccy_id = {1}", date.ToString(Utils.DATE_FORMAT_SHORT), ccyID);
+        }
+        public static string GetByCcyDesc(int ccyID)
+        {
+            return String.Format(@"select * from table_exchangerate where ccy_id = {0} order by 
+                excrate_end desc", ccyID);
+        }
         public string GetByCodeLikeSQL(string text)
         {
             return String.Format("select * from table_exchangerate where excrate_code like '%{0}%'", text);
@@ -108,6 +140,25 @@ namespace Profit.Server
             return "";
         }
         public IList GetAll(MySql.Data.MySqlClient.MySqlDataReader aReader)
+        {
+            IList result = new ArrayList();
+            while (aReader.Read())
+            {
+                ExchangeRate excrate = new ExchangeRate();
+                excrate.ID = Convert.ToInt32(aReader[0]);
+                excrate.CODE = aReader[1].ToString();
+                excrate.START_DATE = Convert.ToDateTime(aReader[2]);
+                excrate.END_DATE = Convert.ToDateTime(aReader[3]);
+                excrate.RATE_TO_BASE = Convert.ToDouble(aReader[4]);
+                excrate.CURRENCY = new Currency(Convert.ToInt32(aReader[5]));
+                excrate.MODIFIED_BY = aReader["modified_by"].ToString();
+                excrate.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                excrate.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
+                result.Add(excrate);
+            }
+            return result;
+        }
+        public static IList GetAllStatic(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
             while (aReader.Read())

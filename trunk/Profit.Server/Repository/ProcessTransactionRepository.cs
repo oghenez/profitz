@@ -10,9 +10,12 @@ namespace Profit.Server
     public class ProcessTransactionRepository : Repository
     {
         MySql.Data.MySqlClient.MySqlCommand m_command;
+        OpeningStockRepository r_openingStock = null;
+
         public ProcessTransactionRepository(): base(null)
         {
             m_command = new MySql.Data.MySqlClient.MySqlCommand("", m_connection);
+            r_openingStock = new OpeningStockRepository();
         }
         public int GetTotalTransactionCount()
         {
@@ -85,7 +88,7 @@ namespace Profit.Server
                     select pss.pos_code from table_pos pss where pss.pos_posted = false and pss.pos_date between '{0}' and '{1}'
 ", 
                      start.ToString(Utils.DATE_FORMAT),
-                     end.ToString(Utils.DATE_FORMAT));
+                     end.ToString(Utils.DATE_FORMAT_SHORT_END));
             MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             IList result = new ArrayList();
             if (r.HasRows)
@@ -137,7 +140,7 @@ namespace Profit.Server
                     select pss.pos_code from table_pos pss where pss.pos_posted = true and pss.pos_date between '{0}' and '{1}'
 ",
                      start.ToString(Utils.DATE_FORMAT),
-                     end.ToString(Utils.DATE_FORMAT));
+                     end.ToString(Utils.DATE_FORMAT_SHORT_END));
             MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             IList result = new ArrayList();
             if (r.HasRows)
@@ -178,7 +181,7 @@ namespace Profit.Server
                 return null;
             return periods[prev] as Period;
         }
-        public void ProcessTransaction(int currentPeriodId)
+        public void ProcessTransaction(int currentPeriodId, Employee emp)
         {
             OpenConnection();
             MySql.Data.MySqlClient.MySqlTransaction trc = m_connection.BeginTransaction();
@@ -213,23 +216,55 @@ namespace Profit.Server
                     throw new Exception("Next Period Not Define!");
 
                 IList stockcards = StockCardRepository.FindStockCardByPeriod(m_command, crntPeriod.ID);
+
+                nextPeriod.PERIOD_STATUS = PeriodStatus.Current;
+                nextPeriod.CLOSED_DATE = DateTime.Now;
+                PeriodRepository.UpdatePeriod(m_command, nextPeriod);
+
+                crntPeriod.PERIOD_STATUS = PeriodStatus.Close;
+                crntPeriod.CLOSED_DATE = DateTime.Now;
+
+                PeriodRepository.UpdatePeriod(m_command, crntPeriod);
+
                 IList newSCards = new ArrayList();
+
+                OpeningStock ops = new OpeningStock();
+                ops.TRANSACTION_DATE = nextPeriod.START_DATE;
+                ops.CURRENCY = CurrencyRepository.GetBaseCurrency(m_command);
+                ops.DOCUMENT_DATE = DateTime.Today;
+                ops.EMPLOYEE = emp;
+                ops.MODIFIED_BY = emp.NAME;
+                ops.MODIFIED_DATE = DateTime.Today;
+                ops.NOTES = "AUTO" + nextPeriod.START_DATE.ToString(Utils.DATE_FORMAT_SHORT);
+                ops.NOTICE_DATE = DateTime.Today;
+                ops.WAREHOUSE = getCommonStore();
+                double total = 0;
+
                 for (int i = 0; i < stockcards.Count; i++)
                 {
                     StockCard sCard = stockcards[i] as StockCard;
-                    newSCards.Add(sCard.Create(nextPeriod));
+                    if (sCard.BALANCE == 0) continue;
+                    OpeningStockItem opi = new OpeningStockItem();
+                    opi.EVENT = ops;
+                    opi.PART = sCard.PART;
+                    opi.PRICE = PartRepository.GetLatestPriceMovementItemPeriod(m_command, sCard.PART.ID,
+                        crntPeriod.START_DATE, crntPeriod.END_DATA);
+                    opi.QYTAMOUNT = sCard.BALANCE;
+                    opi.TOTAL_AMOUNT = opi.PRICE * sCard.BALANCE;
+                    Part p = PartRepository.GetByID(m_command, sCard.PART.ID);
+                    opi.UNIT = p.UNIT;
+                    opi.WAREHOUSE = sCard.WAREHOUSE;
+                    ops.EVENT_ITEMS.Add(opi);
+                    total+=opi.TOTAL_AMOUNT;
+                    // newSCards.Add(sCard.Create(nextPeriod));
                 }
-                //create LS
-                
-
-
-                foreach (StockCard sc in newSCards)
-                {
-                    OpeningStock ops = new OpeningStock();
-                    
-
-                    StockCardRepository.SaveHeader(m_command, sc);
-                }
+                ops.AMOUNT = total;
+                r_openingStock.SaveNoTransaction(ops, m_command);
+                r_openingStock.ConfirmNoTransaction(ops.ID, m_command);
+                //foreach (StockCard sc in newSCards)
+                //{
+                   // StockCardRepository.SaveHeader(m_command, sc);
+               // }
 
                 IList vbalances = VendorBalanceRepository.FindVendorBalanceByPeriod(m_command, crntPeriod.ID);
                 IList newvbalances = new ArrayList();
@@ -237,18 +272,34 @@ namespace Profit.Server
                 {
                     VendorBalance vb = vbalances[i] as VendorBalance;
                     newvbalances.Add(vb.Create(nextPeriod));
+                    //if (vb.VENDOR_BALANCE_TYPE == VendorBalanceType.Customer)
+                    //{
+                    //    CustomerOutStandingInvoice cosi = new CustomerOutStandingInvoice();
+                    //    cosi.CURRENCY = vb.CURRENCY;
+                    //    cosi.TRANSACTION_DATE = nextPeriod.START_DATE;
+                    //    cosi.EMPLOYEE = emp;
+                    //    cosi.MODIFIED_BY = emp.NAME;
+                    //    cosi.MODIFIED_COMPUTER_NAME = Environment.MachineName;
+                    //    cosi.MODIFIED_DATE = DateTime.Now;
+                    //    cosi.NOTES = "AUTO";
+                    //    cosi.NOTICE_DATE = DateTime.Now;
+                    //    cosi.VENDOR = vb.VENDOR;
+                    //    CustomerOutStandingInvoiceItem cosii = new CustomerOutStandingInvoiceItem();
+                    //    cosii.EVENT_JOURNAL = cosi;
+                    //    cosii.INVOICE_NO = "AUTO_OPENING_BALANCE";
+                    //    cosii.INVOICE_DATE = DateTime.Today;
+                    //    cosii.TOP = getCommonTOP();
+                    //    cosii.DUE_DATE = DateTime.Today;
+                    //    cosii.EMPLOYEE = emp;
+                    //    cosii.AMOUNT = vb.BALANCE;
+                    //    cosii.
+                    //}
                 }
                 foreach (VendorBalance sc in newvbalances)
                 {
                     VendorBalanceRepository.SaveHeader(m_command, sc);
                 }
-                nextPeriod.PERIOD_STATUS = PeriodStatus.Current;
-                nextPeriod.CLOSED_DATE = DateTime.Now;
-                PeriodRepository.UpdatePeriod(m_command, nextPeriod);
-
-                crntPeriod.PERIOD_STATUS = PeriodStatus.Close;
-                crntPeriod.CLOSED_DATE = DateTime.Now;
-                PeriodRepository.UpdatePeriod(m_command, crntPeriod);
+               
                 trc.Commit();
             }
             catch (Exception x)
@@ -273,6 +324,11 @@ namespace Profit.Server
                  GeneralSetup gs = GeneralSetupRepository.GetGeneralSetup(m_command);
                  if (gs.START_ENTRY_PERIOD == null)
                      throw new Exception("Start Entry Month Not Found!");
+
+                 OpeningStock p = r_openingStock.GetOpeningStockByNotes("AUTO" + crntPeriod.START_DATE.ToString(Utils.DATE_FORMAT_SHORT));
+                 r_openingStock.ReviseNoTransaction(p.ID, m_command);
+                 r_openingStock.DeleteNoTransaction(p, m_command);
+
                  IList invTrs = GetAllCodeListOfPostedEvent(crntPeriod.START_DATE, crntPeriod.END_DATA);
                  //this.GetAllCodeListOfNotPostedEvent(crntPeriod.START_DATE, crntPeriod.END_DATA);
                  string invCodes = string.Empty;
@@ -312,7 +368,22 @@ namespace Profit.Server
                  trc.Rollback();
                  throw x;
              }
-
+        }
+        private Warehouse getCommonStore()
+        {
+            m_command.CommandText = Warehouse.GetByCodeSQLStatic("CMN");
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
+            Warehouse re = Warehouse.GetWarehouse(r);
+            r.Close();
+            return re;
+        }
+        private TermOfPayment getCommonTOP()
+        {
+            m_command.CommandText = TermOfPayment.GetByCodeStaticSQL("COD");
+            MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
+            TermOfPayment re = TermOfPayment.GetTOP(r);
+            r.Close();
+            return re;
         }
         public class PeriodComparer : IComparer
         {

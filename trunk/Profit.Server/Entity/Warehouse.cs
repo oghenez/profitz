@@ -84,6 +84,10 @@ namespace Profit.Server
         {
             return String.Format("select * from table_warehouse where warehouse_id = {0}", ID);
         }
+        public static string GetByCodeSQLStatic(string code)
+        {
+            return String.Format("select * from table_warehouse where warehouse_code = '{0}'", code);
+        }
         public string GetByCodeSQL(string code)
         {
             return String.Format("select * from table_warehouse where warehouse_code = '{0}'", code);

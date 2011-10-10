@@ -71,7 +71,7 @@ namespace Profit
         public RepositoryFactory()
         {
             Repository bankRepository = new Repository(new Bank());
-            Repository ccyRepository = new Repository(new Currency());
+            CurrencyRepository ccyRepository = new CurrencyRepository();
             Repository divRepository = new Repository(new Division());
             Repository empRepository = new EmployeeRepository(new Employee());
             Repository topRepository = new Repository(new TermOfPayment());
