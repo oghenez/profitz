@@ -766,6 +766,9 @@ namespace Profit
 
                     em.EMPLOYEE = (Employee)r_employee.GetById(em.EMPLOYEE);
                     employeeKryptonComboBox.Text = em.EMPLOYEE.ToString();
+
+                    em.CURRENCY = (Currency)r_ccy.GetById(em.CURRENCY);
+                    currencyKryptonComboBox.Text = em.CURRENCY.ToString();
                 }
             }
             addressKryptonTextBox.Text = em == null ? "" : em.ADDRESS;

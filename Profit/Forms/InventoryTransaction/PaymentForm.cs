@@ -681,8 +681,9 @@ namespace Profit
                 addressKryptonTextBox.Text = em == null ? "" : em.ADDRESS;
                 em.CURRENCY = (Currency)r_ccy.GetById(em.CURRENCY);
                 currencyKryptonComboBox.Text = em.CURRENCY.ToString();
+                itemsDataGrid.Rows.Clear();
             }
-            itemsDataGrid.Rows.Clear();
+            
         }
 
         private void itemsDataGrid_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
