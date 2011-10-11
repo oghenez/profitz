@@ -621,7 +621,7 @@ namespace Profit
             supplierKryptonTextBox.Text = em == null ? "" : em.NAME;
             addressKryptonTextBox.Text = em == null ? "" : em.ADDRESS;
             contactPersonKryptonTextBox.Text = em == null ? "" : em.CONTACT;
-            itemsDataGrid.Rows.Clear();
+            itemsDataGrid.Rows.Clear();---------------------
         }
 
         private void itemsDataGrid_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
