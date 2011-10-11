@@ -618,11 +618,16 @@ namespace Profit
 
         private void supplierkryptonComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Customer em = (Customer)supplierkryptonComboBox.SelectedItem;
-            supplierKryptonTextBox.Text = em == null ? "" : em.NAME;
-            addressKryptonTextBox.Text = em == null ? "" : em.ADDRESS;
-            contactPersonKryptonTextBox.Text = em == null ? "" : em.CONTACT;
-            itemsDataGrid.Rows.Clear();
+            if (toolStripButtonSave.Enabled)
+            {
+                Customer em = (Customer)supplierkryptonComboBox.SelectedItem;
+                supplierKryptonTextBox.Text = em == null ? "" : em.NAME;
+                addressKryptonTextBox.Text = em == null ? "" : em.ADDRESS;
+                contactPersonKryptonTextBox.Text = em == null ? "" : em.CONTACT;
+                em.CURRENCY = (Currency)r_ccy.GetById(em.CURRENCY);
+                currencyKryptonComboBox.Text = em.CURRENCY.ToString();
+                itemsDataGrid.Rows.Clear();
+            }
         }
 
         private void itemsDataGrid_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
