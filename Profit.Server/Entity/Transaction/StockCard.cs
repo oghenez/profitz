@@ -20,6 +20,9 @@ namespace Profit.Server
         double BALANCE_AVAILABLE = 0;
         double BOOK_AVAILABLE = 0;
         double BACK_ORDER_AVAILABLE = 0;
+        double BALANCE_AVAILABLE_RECALCULATE = 0;
+        double BOOK_AVAILABLE_RECALCULATE = 0;
+        double BACK_ORDER_AVAILABLE_RECALCULATE = 0;
 
         public StockCard()
         {
@@ -40,45 +43,59 @@ namespace Profit.Server
             assertPeriodIsCurrent();
             assertInPeriodRange(item.EVENT.TRANSACTION_DATE);
             double qty = item.GetAmountInSmallestUnit();
+            recalculateAvailable();
             switch (item.STOCK_CARD_ENTRY_TYPE)
             {
                 case StockCardEntryType.OpeningStock:
                     BALANCE += qty;
+                    BALANCE_AVAILABLE_RECALCULATE += qty;
                     break;
                 case StockCardEntryType.StockTaking:
                     BALANCE += qty;
+                    BALANCE_AVAILABLE_RECALCULATE += qty;
                     assertNotMinusBalanceStock();
                     break;
                 case StockCardEntryType.PurchaseOrder:
                     BACK_ORDER += qty;
+                    BACK_ORDER_AVAILABLE_RECALCULATE += qty;
                     break;
                 case StockCardEntryType.GoodReceiveNote:
                     BALANCE += qty;
+                    BALANCE_AVAILABLE_RECALCULATE += qty;
                     BACK_ORDER -= qty;
+                    BACK_ORDER_AVAILABLE_RECALCULATE -= qty;
                     assertNotMinusBackOrderStock();
                     break;
                 case StockCardEntryType.SalesOrder:
                     BOOKED += qty;
+                    BOOK_AVAILABLE_RECALCULATE += qty;
                     break;
                 case StockCardEntryType.DeliveryOrder:
                     BOOKED -= qty;
+                    BOOK_AVAILABLE_RECALCULATE -= qty;
                     assertNotMinusBookedStock();
                     BALANCE -= qty;
+                    BALANCE_AVAILABLE_RECALCULATE -= qty;
                     assertNotMinusBalanceStock();
                     break;
                 case StockCardEntryType.PurchaseReturn:
                     BALANCE -= qty;
+                    BALANCE_AVAILABLE_RECALCULATE -= qty;
                     assertNotMinusBalanceStock();
                     break;
                 case StockCardEntryType.SalesReturn:
                     BALANCE += qty;
+                    BALANCE_AVAILABLE_RECALCULATE += qty;
                     break;
                 case StockCardEntryType.SupplierInvoice:
                     SupplierInvoiceItem sit = (SupplierInvoiceItem)item;
                     if (sit.GRN_ITEM != null)
                     {
                         if (sit.GRN_ITEM.ID == 0)
+                        {
                             BALANCE += qty;
+                            BALANCE_AVAILABLE_RECALCULATE += qty;
+                        }
                     }
                     break;
                 case StockCardEntryType.CustomerInvoice:
@@ -88,12 +105,14 @@ namespace Profit.Server
                         if (cit.DO_ITEM.ID == 0)
                         {
                             BALANCE -= qty;
+                            BALANCE_AVAILABLE_RECALCULATE -= qty;
                             assertNotMinusBalanceStock();
                         }
                     }
                     break;
                 case StockCardEntryType.POS:
                     BALANCE -= qty;
+                    BALANCE_AVAILABLE_RECALCULATE -= qty;
                     assertNotMinusBalanceStock();
                     break;
                 default:
@@ -107,38 +126,49 @@ namespace Profit.Server
             assertPeriodIsCurrent();
             assertInPeriodRange(item.EVENT.TRANSACTION_DATE);
             double qty = item.GetAmountInSmallestUnit();
+            recalculateAvailable();
             switch (item.STOCK_CARD_ENTRY_TYPE)
             {
                 case StockCardEntryType.OpeningStock:
                     BALANCE -= qty;
+                    BALANCE_AVAILABLE_RECALCULATE -= qty;
                     assertNotMinusBalanceStock();
                     break;
                 case StockCardEntryType.StockTaking:
                     BALANCE -= qty;
+                    BALANCE_AVAILABLE_RECALCULATE -= qty;
                     assertNotMinusBalanceStock();
                     break;
                 case StockCardEntryType.PurchaseOrder:
                     BACK_ORDER -= qty;
+                    BACK_ORDER_AVAILABLE_RECALCULATE -= qty;
                     assertNotMinusBackOrderStock();
                     break;
                 case StockCardEntryType.GoodReceiveNote:
                     BALANCE -= qty;
+                    BALANCE_AVAILABLE_RECALCULATE -= qty;
                     BACK_ORDER += qty;
+                    BACK_ORDER_AVAILABLE_RECALCULATE += qty;
                     assertNotMinusBalanceStock();
                     break;
                 case StockCardEntryType.SalesOrder:
                     BOOKED -= qty;
+                    BOOK_AVAILABLE_RECALCULATE -= qty;
                     assertNotMinusBookedStock();
                     break;
                 case StockCardEntryType.DeliveryOrder:
                     BOOKED += qty;
+                    BOOK_AVAILABLE_RECALCULATE += qty;
                     BALANCE += qty;
+                    BALANCE_AVAILABLE_RECALCULATE += qty;
                     break;
                 case StockCardEntryType.PurchaseReturn:
                     BALANCE += qty;
+                    BALANCE_AVAILABLE_RECALCULATE += qty;
                     break;
                 case StockCardEntryType.SalesReturn:
                     BALANCE -= qty;
+                    BALANCE_AVAILABLE_RECALCULATE -= qty;
                     assertNotMinusBalanceStock();
                     break;
                 case StockCardEntryType.SupplierInvoice:
@@ -148,6 +178,7 @@ namespace Profit.Server
                         if (sit.GRN_ITEM.ID == 0)
                         {
                             BALANCE -= qty;
+                            BALANCE_AVAILABLE_RECALCULATE -= qty;
                             assertNotMinusBalanceStock();
                         }
                     }
@@ -160,11 +191,13 @@ namespace Profit.Server
                          if (cit.DO_ITEM.ID == 0)
                          {
                              BALANCE += qty;
+                             BALANCE_AVAILABLE_RECALCULATE += qty;
                          }
                      }
                     break;
                 case StockCardEntryType.POS:
                     BALANCE += qty;
+                    BALANCE_AVAILABLE_RECALCULATE += qty;
                     break;
                 default:
                     break;
@@ -190,7 +223,7 @@ namespace Profit.Server
         }
         private void assertNotMinusBalanceStock()
         {
-            if (BALANCE < 0)
+            if (BALANCE_AVAILABLE_RECALCULATE < 0)
                 throw new Exception(@"
             Stok barang (" + PART.NAME + ") kurang di Gudang (" + WAREHOUSE.NAME + @"),
             Stok yang ada : " + BALANCE_AVAILABLE + " " + PART.UNIT.CODE);
@@ -200,7 +233,7 @@ namespace Profit.Server
         }
         private void assertNotMinusBackOrderStock()
         {
-            if (BACK_ORDER < 0)
+            if (BACK_ORDER_AVAILABLE_RECALCULATE < 0)
                 throw new Exception(@"
             Stok Order barang (" + PART.NAME + ") kurang di Gudang (" + WAREHOUSE.NAME + @"),
             Stok Order yang ada : " + BACK_ORDER_AVAILABLE + " " + PART.UNIT.CODE);
@@ -208,7 +241,7 @@ namespace Profit.Server
         }
         private void assertNotMinusBookedStock()
         {
-            if (BOOKED < 0)
+            if (BOOK_AVAILABLE_RECALCULATE < 0)
                 throw new Exception(@"
             Stok Booking barang (" + PART.NAME + ") kurang di Gudang (" + WAREHOUSE.NAME + @"),
             Stok Booking yang ada : " + BOOK_AVAILABLE + " " + PART.UNIT.CODE);
@@ -366,6 +399,73 @@ namespace Profit.Server
         public static string FindByPartPeriod(int part, int period)
         {
             return String.Format("SELECT * from table_stockcard where period_id = {0} and part_id = {1}",period,part);
+        }
+
+        private void recalculateAvailable()
+        {
+            BALANCE_AVAILABLE = 0;
+            BOOK_AVAILABLE = 0;
+            BACK_ORDER_AVAILABLE = 0;
+            if (STOCK_CARD_ENTRIES.Count == 0) return;
+            foreach (StockCardEntry item in STOCK_CARD_ENTRIES)
+            {
+                switch (item.STOCK_CARD_ENTRY_TYPE)
+                {
+                    case StockCardEntryType.OpeningStock:
+                        BALANCE_AVAILABLE += item.AMOUNT;
+                        break;
+                    case StockCardEntryType.StockTaking:
+                        BALANCE_AVAILABLE += item.AMOUNT;
+                        assertNotMinusBalanceStock();
+                        break;
+                    case StockCardEntryType.PurchaseOrder:
+                        BACK_ORDER_AVAILABLE += item.AMOUNT;
+                        break;
+                    case StockCardEntryType.GoodReceiveNote:
+                        BALANCE_AVAILABLE += item.AMOUNT;
+                        BACK_ORDER_AVAILABLE -= item.AMOUNT;
+                        break;
+                    case StockCardEntryType.SalesOrder:
+                        BOOK_AVAILABLE += item.AMOUNT;
+                        break;
+                    case StockCardEntryType.DeliveryOrder:
+                        BOOK_AVAILABLE -= item.AMOUNT;
+                        BALANCE_AVAILABLE -= item.AMOUNT;
+                        break;
+                    case StockCardEntryType.PurchaseReturn:
+                        BALANCE_AVAILABLE -= item.AMOUNT;
+                        break;
+                    case StockCardEntryType.SalesReturn:
+                        BALANCE_AVAILABLE += item.AMOUNT;
+                        break;
+                    case StockCardEntryType.SupplierInvoice:
+                        SupplierInvoiceItem sit = (SupplierInvoiceItem)item.EVENT_ITEM;
+                        if (sit.GRN_ITEM != null)
+                        {
+                            if (sit.GRN_ITEM.ID == 0)
+                                BALANCE += item.AMOUNT;
+                        }
+                        break;
+                    case StockCardEntryType.CustomerInvoice:
+                        CustomerInvoiceItem cit = (CustomerInvoiceItem)item.EVENT_ITEM;
+                        if (cit.DO_ITEM != null)
+                        {
+                            if (cit.DO_ITEM.ID == 0)
+                            {
+                                BALANCE -= item.AMOUNT;
+                            }
+                        }
+                        break;
+                    case StockCardEntryType.POS:
+                        BALANCE -= item.AMOUNT;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            BALANCE_AVAILABLE_RECALCULATE = BALANCE_AVAILABLE;
+            BOOK_AVAILABLE_RECALCULATE = BOOK_AVAILABLE;
+            BACK_ORDER_AVAILABLE_RECALCULATE = BACK_ORDER_AVAILABLE;
         }
         #region IEntity Members
 

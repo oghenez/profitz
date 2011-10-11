@@ -96,17 +96,40 @@ namespace Profit.Server
             }
             return sc;
         }
-        public static StockCard FindStockCardHeader(MySql.Data.MySqlClient.MySqlCommand cmd, long partId, long locationId, long periodId)
+        public static StockCard FindStockCardHeader(MySql.Data.MySqlClient.MySqlCommand cmd, long partId, 
+            long locationId, Period periodId, DateTime trDate)
         {
-            cmd.CommandText = String.Format("select * from table_stockcard where part_id = {0} and warehouse_id = {1} and period_id = {2}", partId, locationId, periodId);
+            cmd.CommandText = String.Format("select * from table_stockcard where part_id = {0} and warehouse_id = {1} and period_id = {2}", partId, locationId, periodId.ID);
             MySql.Data.MySqlClient.MySqlDataReader r = cmd.ExecuteReader();
             StockCard sc = StockCard.TransformReader(r);
-            
             r.Close();
             if (sc != null)
             {
                 sc.PERIOD = PeriodRepository.FindPeriod(cmd, sc.PERIOD.ID);
                 sc.WAREHOUSE = StockCardRepository.FindWarehouse(cmd, sc.WAREHOUSE.ID);
+
+                cmd.CommandText = StockCardEntry.FindByStockCard(sc.ID, periodId.START_DATE, trDate);
+                MySql.Data.MySqlClient.MySqlDataReader rx = cmd.ExecuteReader();
+                sc.STOCK_CARD_ENTRIES = StockCardEntry.TransformReaderList(rx);
+                rx.Close();
+                foreach (StockCardEntry e in sc.STOCK_CARD_ENTRIES)
+                {
+                    if(e.STOCK_CARD_ENTRY_TYPE == StockCardEntryType.SupplierInvoice)
+                    {
+                        cmd.CommandText = SupplierInvoiceItem.GetByIDSQL(e.EVENT_ITEM.ID);
+                        rx = cmd.ExecuteReader();
+                        e.EVENT_ITEM = SupplierInvoiceItem.TransformReader(rx);
+                        rx.Close();
+                    }
+                    if (e.STOCK_CARD_ENTRY_TYPE == StockCardEntryType.CustomerInvoice)
+                    {
+                        cmd.CommandText = CustomerInvoiceItem.GetByIDSQL(e.EVENT_ITEM.ID);
+                        rx = cmd.ExecuteReader();
+                        e.EVENT_ITEM = CustomerInvoiceItem.TransformReader(rx);
+                        rx.Close();
+                    }
+                }
+                
             }
             return sc;
         }

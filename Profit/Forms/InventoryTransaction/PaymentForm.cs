@@ -673,10 +673,15 @@ namespace Profit
 
         private void supplierkryptonComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Supplier em = (Supplier)supplierkryptonComboBox.SelectedItem;
-            supplierKryptonTextBox.Text = em == null ? "" : em.NAME;
-            contactPersonKryptonTextBox.Text = em == null ? "" : em.CONTACT;
-            addressKryptonTextBox.Text = em == null ? "" : em.ADDRESS;
+            if (toolStripButtonSave.Enabled)
+            {
+                Supplier em = (Supplier)supplierkryptonComboBox.SelectedItem;
+                supplierKryptonTextBox.Text = em == null ? "" : em.NAME;
+                contactPersonKryptonTextBox.Text = em == null ? "" : em.CONTACT;
+                addressKryptonTextBox.Text = em == null ? "" : em.ADDRESS;
+                em.CURRENCY = (Currency)r_ccy.GetById(em.CURRENCY);
+                currencyKryptonComboBox.Text = em.CURRENCY.ToString();
+            }
             itemsDataGrid.Rows.Clear();
         }
 
