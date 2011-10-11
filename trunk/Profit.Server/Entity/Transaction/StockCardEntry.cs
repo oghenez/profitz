@@ -17,6 +17,7 @@ namespace Profit.Server
         public Unit UNIT;
         public double AMOUNT;
         public EventItem EVENT_ITEM;
+        public bool IS_INVOICE_ONLY = false; //checking Supplier/Customer Invoice type
 
         public bool UPDATED = false;
 
@@ -123,6 +124,11 @@ namespace Profit.Server
         public static string FindByStockCard(int id)
         {
             return String.Format("Select * from table_stockcardentry where sc_id ={0}", id);
+        }
+        public static string FindByStockCard(int id, DateTime start, DateTime end)
+        {
+            return String.Format("Select * from table_stockcardentry where sc_id ={0} and sce_date between '{1}' and '{2}'",
+                id, start.ToString(Utils.DATE_FORMAT_SHORT), end.ToString(Utils.DATE_FORMAT_SHORT_END));
         }
         public override bool Equals(object obj)
         {

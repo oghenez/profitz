@@ -815,49 +815,55 @@ namespace Profit
 
         private void pricemovkryptonButton1_Click(object sender, EventArgs e)
         {
-            pricemovementkryptonDataGridView1.Rows.Clear();
-            if (m_part.ID == 0) return;
-            IList movs = r_sir.GetSupplierInvoiceItem(m_part.ID);
-            
-            foreach (EventItem itm in movs)
+            try
             {
-                int r = pricemovementkryptonDataGridView1.Rows.Add();
-                pricemovementkryptonDataGridView1[dateprcmovColumn1.Index, r].Value = itm.EVENT.TRANSACTION_DATE;
-                pricemovementkryptonDataGridView1[codeprcmovColumn2.Index, r].Value = itm.EVENT.CODE;
-                pricemovementkryptonDataGridView1[typeprcmovColumn1.Index, r].Value = itm.STOCK_CARD_ENTRY_TYPE.ToString();
-                pricemovementkryptonDataGridView1[qtyprcmovColumn1.Index, r].Value = itm.GetAmountInSmallestUnit();
-                pricemovementkryptonDataGridView1[unitprcmovColumn3.Index, r].Value = m_part.UNIT.CODE;
-                switch (itm.STOCK_CARD_ENTRY_TYPE)
-                {
-                    case StockCardEntryType.SupplierInvoice:
-                        SupplierInvoiceItem sii = (SupplierInvoiceItem)itm;
-                        SupplierInvoice si = (SupplierInvoice)sii.EVENT;
-                        si.SUPPLIER = (Supplier)r_sup.GetById(si.SUPPLIER);
-                        pricemovementkryptonDataGridView1[vendorprcmovColumn4.Index, r].Value = si.SUPPLIER.NAME;
-                        double c = sii.SUBTOTAL / sii.GetAmountInSmallestUnit();
-                        c = r_ccy.ConvertToBaseCurrency(si.CURRENCY, c, si.TRANSACTION_DATE);
-                        pricemovementkryptonDataGridView1[priceprcmovColumn.Index, r].Value = c < 0 ? -c : c;
-                        break;
-                    case StockCardEntryType.StockTaking:
-                        StockTakingItems stk = (StockTakingItems)itm;
-                        StockTaking stkh = (StockTaking)itm.EVENT;
-                        double p =stk.TOTAL_AMOUNT / stk.GetAmountInSmallestUnit();
-                        p = r_ccy.ConvertToBaseCurrency(stkh.CURRENCY, p, stkh.TRANSACTION_DATE);
-                        pricemovementkryptonDataGridView1[priceprcmovColumn.Index, r].Value = p < 0 ? -p : p;
-                        break;
-                    case StockCardEntryType.OpeningStock:
-                        OpeningStockItem opn = (OpeningStockItem)itm;
-                        OpeningStock opnh = (OpeningStock)itm.EVENT;
-                        double x = opn.TOTAL_AMOUNT / opn.GetAmountInSmallestUnit();
-                        x = r_ccy.ConvertToBaseCurrency(opnh.CURRENCY, x, opnh.TRANSACTION_DATE);
-                        pricemovementkryptonDataGridView1[priceprcmovColumn.Index, r].Value = x < 0 ? -x : x;
-                        break;
-                }
-                pricemovementkryptonDataGridView1[statusMovementColumn.Index, r].Value = itm.EVENT.POSTED.ToString();
-            }
-            UserSetting.AddNumberToGrid(pricemovementkryptonDataGridView1);
-            updatePriceMovement();
+                pricemovementkryptonDataGridView1.Rows.Clear();
+                if (m_part.ID == 0) return;
+                IList movs = r_sir.GetSupplierInvoiceItem(m_part.ID);
 
+                foreach (EventItem itm in movs)
+                {
+                    int r = pricemovementkryptonDataGridView1.Rows.Add();
+                    pricemovementkryptonDataGridView1[dateprcmovColumn1.Index, r].Value = itm.EVENT.TRANSACTION_DATE;
+                    pricemovementkryptonDataGridView1[codeprcmovColumn2.Index, r].Value = itm.EVENT.CODE;
+                    pricemovementkryptonDataGridView1[typeprcmovColumn1.Index, r].Value = itm.STOCK_CARD_ENTRY_TYPE.ToString();
+                    pricemovementkryptonDataGridView1[qtyprcmovColumn1.Index, r].Value = itm.GetAmountInSmallestUnit();
+                    pricemovementkryptonDataGridView1[unitprcmovColumn3.Index, r].Value = m_part.UNIT.CODE;
+                    switch (itm.STOCK_CARD_ENTRY_TYPE)
+                    {
+                        case StockCardEntryType.SupplierInvoice:
+                            SupplierInvoiceItem sii = (SupplierInvoiceItem)itm;
+                            SupplierInvoice si = (SupplierInvoice)sii.EVENT;
+                            si.SUPPLIER = (Supplier)r_sup.GetById(si.SUPPLIER);
+                            pricemovementkryptonDataGridView1[vendorprcmovColumn4.Index, r].Value = si.SUPPLIER.NAME;
+                            double c = sii.SUBTOTAL / sii.GetAmountInSmallestUnit();
+                            c = r_ccy.ConvertToCurrency(si.CURRENCY, m_part.CURRENCY, c, si.TRANSACTION_DATE);
+                            pricemovementkryptonDataGridView1[priceprcmovColumn.Index, r].Value = c < 0 ? -c : c;
+                            break;
+                        case StockCardEntryType.StockTaking:
+                            StockTakingItems stk = (StockTakingItems)itm;
+                            StockTaking stkh = (StockTaking)itm.EVENT;
+                            double p = stk.TOTAL_AMOUNT / stk.GetAmountInSmallestUnit();
+                            p = r_ccy.ConvertToCurrency(stkh.CURRENCY, m_part.CURRENCY, p, stkh.TRANSACTION_DATE);
+                            pricemovementkryptonDataGridView1[priceprcmovColumn.Index, r].Value = p < 0 ? -p : p;
+                            break;
+                        case StockCardEntryType.OpeningStock:
+                            OpeningStockItem opn = (OpeningStockItem)itm;
+                            OpeningStock opnh = (OpeningStock)itm.EVENT;
+                            double x = opn.TOTAL_AMOUNT / opn.GetAmountInSmallestUnit();
+                            x = r_ccy.ConvertToCurrency(opnh.CURRENCY, m_part.CURRENCY, x, opnh.TRANSACTION_DATE);
+                            pricemovementkryptonDataGridView1[priceprcmovColumn.Index, r].Value = x < 0 ? -x : x;
+                            break;
+                    }
+                    pricemovementkryptonDataGridView1[statusMovementColumn.Index, r].Value = itm.EVENT.POSTED.ToString();
+                }
+                UserSetting.AddNumberToGrid(pricemovementkryptonDataGridView1);
+                updatePriceMovement();
+            }
+            catch (Exception x)
+            {
+                KryptonMessageBox.Show(x.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
         private void updatePriceMovement()
         {

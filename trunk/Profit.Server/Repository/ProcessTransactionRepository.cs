@@ -101,7 +101,7 @@ namespace Profit.Server
             r.Close();
             return result;
         }
-        private IList GetAllCodeListOfPostedEvent(DateTime start, DateTime end)
+        private IList GetAllCodeListOfPostedEvent(DateTime start, DateTime end, int opException)
         {
             m_command.CommandText = String.Format(@"select p.po_code from table_purchaseorder p where p.po_posted = true and p.po_date between '{0}' and '{1}'
                     union
@@ -138,9 +138,11 @@ namespace Profit.Server
                     select py.rec_code from table_receipt py where py.rec_posted = true and py.rec_date between '{0}' and '{1}'
                     union
                     select pss.pos_code from table_pos pss where pss.pos_posted = true and pss.pos_date between '{0}' and '{1}'
+                    union
+                    select ops.opst_code from table_openingstock ops where ops.opst_id <> {2} and ops.opst_posted = true and ops.opst_date between '{0}' and '{1}'
 ",
                      start.ToString(Utils.DATE_FORMAT),
-                     end.ToString(Utils.DATE_FORMAT_SHORT_END));
+                     end.ToString(Utils.DATE_FORMAT_SHORT_END), opException);
             MySql.Data.MySqlClient.MySqlDataReader r = m_command.ExecuteReader();
             IList result = new ArrayList();
             if (r.HasRows)
@@ -326,10 +328,9 @@ namespace Profit.Server
                      throw new Exception("Start Entry Month Not Found!");
 
                  OpeningStock p = r_openingStock.GetOpeningStockByNotes("AUTO" + crntPeriod.START_DATE.ToString(Utils.DATE_FORMAT_SHORT));
-                 r_openingStock.ReviseNoTransaction(p.ID, m_command);
-                 r_openingStock.DeleteNoTransaction(p, m_command);
+                 if (p == null) throw new Exception("Opening Stock Closing is missing");
 
-                 IList invTrs = GetAllCodeListOfPostedEvent(crntPeriod.START_DATE, crntPeriod.END_DATA);
+                 IList invTrs = GetAllCodeListOfPostedEvent(crntPeriod.START_DATE, crntPeriod.END_DATA, p.ID);
                  //this.GetAllCodeListOfNotPostedEvent(crntPeriod.START_DATE, crntPeriod.END_DATA);
                  string invCodes = string.Empty;
                  if (invTrs.Count > 0)
@@ -345,6 +346,11 @@ namespace Profit.Server
                  Period prevPeriod = this.GetPrevPeriod(crntPeriod) as Period;
                  if (prevPeriod == null)
                      throw new Exception("Previous Period Not Define!");
+
+                 
+                 r_openingStock.ReviseNoTransaction(p.ID, m_command);
+                 r_openingStock.DeleteNoTransaction(p, m_command);
+
                  IList stockcards = StockCardRepository.FindStockCardByPeriod(m_command, crntPeriod.ID);
                  IList vbalances = VendorBalanceRepository.FindVendorBalanceByPeriod(m_command, crntPeriod.ID);
 
