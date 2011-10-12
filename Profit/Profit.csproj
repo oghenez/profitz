@@ -426,6 +426,12 @@
     <Compile Include="Forms\InventoryTransaction\POSPaymentForm.Designer.cs">
       <DependentUpon>POSPaymentForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Report\StockReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Report\StockReportForm.Designer.cs">
+      <DependentUpon>StockReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SearchPartForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -736,6 +742,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryTransaction\POSPaymentForm.resx">
       <DependentUpon>POSPaymentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Report\StockReportForm.resx">
+      <DependentUpon>StockReportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SearchPartForm.resx">
       <DependentUpon>SearchPartForm.cs</DependentUpon>
