@@ -147,6 +147,7 @@
     <Compile Include="Repository\CustomerRepository.cs" />
     <Compile Include="Repository\PaymentRepository.cs" />
     <Compile Include="Repository\ProcessTransactionRepository.cs" />
+    <Compile Include="Repository\Report\StockReportRepository.cs" />
     <Compile Include="Repository\SupplierInvoiceJournalRepository.cs" />
     <Compile Include="Repository\SupplierOutStandingInvoiceRepository.cs" />
     <Compile Include="Repository\SupplierRepository.cs" />
