@@ -56,6 +56,7 @@ namespace Profit
         const string POS_CASHIER_FORM = "POSCashierForm";
         const string SUPPLIER_TRANSACTION_SUMMARY = "SupplierTransactionSummary";
         const string CUSTOMER_TRANSACTION_SUMMARY = "CustomerTransactionSummary";
+        const string STOCK_REPORT_FORM = "StockReportForm";
 
 
         IList m_listForm = new ArrayList();
@@ -367,11 +368,19 @@ namespace Profit
                 user.WindowState = FormWindowState.Maximized;
                 user.Show();
             }
+            if (nodename == "NodeStockReport")
+            {
+                if (isChild(STOCK_REPORT_FORM)) { this.Cursor = Cursors.Default; return; }
+                StockReportForm user = new StockReportForm(this, STOCK_REPORT_FORM);
+                user.WindowState = FormWindowState.Maximized;
+                user.Show();
+            }
             this.Cursor = Cursors.Default;
         }
         bool isChild(string name)
         {
             bool result = false;
+            pOSToolStripMenuItem.Visible = name == POS_CASHIER_FORM;
             foreach (Form ch in this.MdiChildren)
             {
                 if (ch.Name == name)
@@ -709,6 +718,11 @@ namespace Profit
             {
                 SalesTreeView.Nodes["NodeCustomerTransactionSummary"].Remove();
             }
+            if (!m_currentUser.FORM_ACCESS_LIST.ContainsKey(STOCK_REPORT_FORM))
+            {
+                //SalesTreeView.Nodes["NodeCustomerTransactionSummary"].Remove();
+                RPIN001stokToolStripMenuItem.Visible = false;
+            }
 
 
             inventoryKryptonHeader.Visible = inventoryTreeView.Visible = inventoryTreeView.Nodes.Count > 0;
@@ -822,6 +836,7 @@ namespace Profit
             m_listForm.Add(new FormAccess(0, MainForm.POS_CASHIER_FORM.ToString(), "TRCS009 - POS Cashier", FormType.Transaction));
             m_listForm.Add(new FormAccess(0, MainForm.SUPPLIER_TRANSACTION_SUMMARY.ToString(), "TRCP008 - Supplier Transaction Summary", FormType.Report));
             m_listForm.Add(new FormAccess(0, MainForm.CUSTOMER_TRANSACTION_SUMMARY.ToString(), "TRCP010 - Customer Transaction Summary", FormType.Report));
+            m_listForm.Add(new FormAccess(0, MainForm.STOCK_REPORT_FORM.ToString(), "RPIN001 - Stock Report", FormType.Report));
         }
 
         private void userMaintenanceToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1071,6 +1086,11 @@ namespace Profit
         private void mSTD007TerminToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ExecuteForm("NodeTOP");
+        }
+
+        private void RPIN001stokToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExecuteForm("NodeStockReport");
         }
     }
 }

@@ -29,51 +29,51 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("TRCP001 - Purchase");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("TRCP002 - Good Receipt");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("TRCP003 - Supplier Invoice");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("TRCP004 - Payment");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("TRCP005 - Purchase Return");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("TRCP006 - Debit Note");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("MSTD001 - Customer");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("MSTD002 - Supplier");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("MSTD003 - Customer Category");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("MSTD004 - Supplier Category");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("MSTD005 - Price Category");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("MSTD006 - Tax");
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("MSTD007 - Term Of Payment");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("MSTI001 - Part Group");
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("MSTI002 - Part Category");
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("MSTI003 - Unit");
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("MSTI004 - Warehouse");
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("MSTG001 - Currency");
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("MSTG002 - Employee");
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("MSTG003 - Division");
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("MSTF001 - Bank");
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("MSTF002 - Document Type");
-            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("MSTF003 - Exchange Rate");
-            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("MSTF004 - Year");
-            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("TRCP001 - Purchase Order");
-            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("TRCP002 - Good Receive");
-            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("TRCP003 - Supplier Invoice");
-            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("TRCP004 - Payment");
-            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("TRCP005 - Purchase Return");
-            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("TRCP006 - Debit Note");
-            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("TRCP007 - Supplier Outstanding Invoice");
-            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("TRCP008 - Supplier Transaction Summary");
-            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("TRCS001 - Sales Order");
-            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("TRCS002 - Delivery Order");
-            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("TRCS003 - Customer Invoice");
-            System.Windows.Forms.TreeNode treeNode36 = new System.Windows.Forms.TreeNode("TRCS004 - Receipt");
-            System.Windows.Forms.TreeNode treeNode37 = new System.Windows.Forms.TreeNode("TRCS005 - Sales Return");
-            System.Windows.Forms.TreeNode treeNode38 = new System.Windows.Forms.TreeNode("TRCS006 - Credit Note");
-            System.Windows.Forms.TreeNode treeNode39 = new System.Windows.Forms.TreeNode("TRCS007 - Customer Outstanding Invoice");
-            System.Windows.Forms.TreeNode treeNode40 = new System.Windows.Forms.TreeNode("TRCS008 - POS");
-            System.Windows.Forms.TreeNode treeNode41 = new System.Windows.Forms.TreeNode("TRCS009 - POS Cashier");
-            System.Windows.Forms.TreeNode treeNode42 = new System.Windows.Forms.TreeNode("TRCS010 - Customer Transaction Summary");
-            System.Windows.Forms.TreeNode treeNode43 = new System.Windows.Forms.TreeNode("TRCI001 - Stock Taking");
-            System.Windows.Forms.TreeNode treeNode44 = new System.Windows.Forms.TreeNode("TRCI002 - Part Master");
-            System.Windows.Forms.TreeNode treeNode45 = new System.Windows.Forms.TreeNode("TRCI003 - Opening Stock");
+            System.Windows.Forms.TreeNode treeNode46 = new System.Windows.Forms.TreeNode("TRCP001 - Purchase");
+            System.Windows.Forms.TreeNode treeNode47 = new System.Windows.Forms.TreeNode("TRCP002 - Good Receipt");
+            System.Windows.Forms.TreeNode treeNode48 = new System.Windows.Forms.TreeNode("TRCP003 - Supplier Invoice");
+            System.Windows.Forms.TreeNode treeNode49 = new System.Windows.Forms.TreeNode("TRCP004 - Payment");
+            System.Windows.Forms.TreeNode treeNode50 = new System.Windows.Forms.TreeNode("TRCP005 - Purchase Return");
+            System.Windows.Forms.TreeNode treeNode51 = new System.Windows.Forms.TreeNode("TRCP006 - Debit Note");
+            System.Windows.Forms.TreeNode treeNode52 = new System.Windows.Forms.TreeNode("MSTD001 - Customer");
+            System.Windows.Forms.TreeNode treeNode53 = new System.Windows.Forms.TreeNode("MSTD002 - Supplier");
+            System.Windows.Forms.TreeNode treeNode54 = new System.Windows.Forms.TreeNode("MSTD003 - Customer Category");
+            System.Windows.Forms.TreeNode treeNode55 = new System.Windows.Forms.TreeNode("MSTD004 - Supplier Category");
+            System.Windows.Forms.TreeNode treeNode56 = new System.Windows.Forms.TreeNode("MSTD005 - Price Category");
+            System.Windows.Forms.TreeNode treeNode57 = new System.Windows.Forms.TreeNode("MSTD006 - Tax");
+            System.Windows.Forms.TreeNode treeNode58 = new System.Windows.Forms.TreeNode("MSTD007 - Term Of Payment");
+            System.Windows.Forms.TreeNode treeNode59 = new System.Windows.Forms.TreeNode("MSTI001 - Part Group");
+            System.Windows.Forms.TreeNode treeNode60 = new System.Windows.Forms.TreeNode("MSTI002 - Part Category");
+            System.Windows.Forms.TreeNode treeNode61 = new System.Windows.Forms.TreeNode("MSTI003 - Unit");
+            System.Windows.Forms.TreeNode treeNode62 = new System.Windows.Forms.TreeNode("MSTI004 - Warehouse");
+            System.Windows.Forms.TreeNode treeNode63 = new System.Windows.Forms.TreeNode("MSTG001 - Currency");
+            System.Windows.Forms.TreeNode treeNode64 = new System.Windows.Forms.TreeNode("MSTG002 - Employee");
+            System.Windows.Forms.TreeNode treeNode65 = new System.Windows.Forms.TreeNode("MSTG003 - Division");
+            System.Windows.Forms.TreeNode treeNode66 = new System.Windows.Forms.TreeNode("MSTF001 - Bank");
+            System.Windows.Forms.TreeNode treeNode67 = new System.Windows.Forms.TreeNode("MSTF002 - Document Type");
+            System.Windows.Forms.TreeNode treeNode68 = new System.Windows.Forms.TreeNode("MSTF003 - Exchange Rate");
+            System.Windows.Forms.TreeNode treeNode69 = new System.Windows.Forms.TreeNode("MSTF004 - Year");
+            System.Windows.Forms.TreeNode treeNode70 = new System.Windows.Forms.TreeNode("TRCP001 - Purchase Order");
+            System.Windows.Forms.TreeNode treeNode71 = new System.Windows.Forms.TreeNode("TRCP002 - Good Receive");
+            System.Windows.Forms.TreeNode treeNode72 = new System.Windows.Forms.TreeNode("TRCP003 - Supplier Invoice");
+            System.Windows.Forms.TreeNode treeNode73 = new System.Windows.Forms.TreeNode("TRCP004 - Payment");
+            System.Windows.Forms.TreeNode treeNode74 = new System.Windows.Forms.TreeNode("TRCP005 - Purchase Return");
+            System.Windows.Forms.TreeNode treeNode75 = new System.Windows.Forms.TreeNode("TRCP006 - Debit Note");
+            System.Windows.Forms.TreeNode treeNode76 = new System.Windows.Forms.TreeNode("TRCP007 - Supplier Outstanding Invoice");
+            System.Windows.Forms.TreeNode treeNode77 = new System.Windows.Forms.TreeNode("TRCP008 - Supplier Transaction Summary");
+            System.Windows.Forms.TreeNode treeNode78 = new System.Windows.Forms.TreeNode("TRCS001 - Sales Order");
+            System.Windows.Forms.TreeNode treeNode79 = new System.Windows.Forms.TreeNode("TRCS002 - Delivery Order");
+            System.Windows.Forms.TreeNode treeNode80 = new System.Windows.Forms.TreeNode("TRCS003 - Customer Invoice");
+            System.Windows.Forms.TreeNode treeNode81 = new System.Windows.Forms.TreeNode("TRCS004 - Receipt");
+            System.Windows.Forms.TreeNode treeNode82 = new System.Windows.Forms.TreeNode("TRCS005 - Sales Return");
+            System.Windows.Forms.TreeNode treeNode83 = new System.Windows.Forms.TreeNode("TRCS006 - Credit Note");
+            System.Windows.Forms.TreeNode treeNode84 = new System.Windows.Forms.TreeNode("TRCS007 - Customer Outstanding Invoice");
+            System.Windows.Forms.TreeNode treeNode85 = new System.Windows.Forms.TreeNode("TRCS008 - POS");
+            System.Windows.Forms.TreeNode treeNode86 = new System.Windows.Forms.TreeNode("TRCS009 - POS Cashier");
+            System.Windows.Forms.TreeNode treeNode87 = new System.Windows.Forms.TreeNode("TRCS010 - Customer Transaction Summary");
+            System.Windows.Forms.TreeNode treeNode88 = new System.Windows.Forms.TreeNode("TRCI001 - Stock Taking");
+            System.Windows.Forms.TreeNode treeNode89 = new System.Windows.Forms.TreeNode("TRCI002 - Part Master");
+            System.Windows.Forms.TreeNode treeNode90 = new System.Windows.Forms.TreeNode("TRCI003 - Opening Stock");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -82,6 +82,8 @@
             this.timelogintoolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.datelogintoolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.activePeriodtoolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -126,6 +128,12 @@
             this.mSTD005KategoriHargaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mSTD006PajakToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mSTD007TerminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.laporanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.inventoryToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.RPIN001stokToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stokHargaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.inventoryToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.stockTakingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.themeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
@@ -182,8 +190,6 @@
             this.MasterDatakryptonCheckButton1 = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.kryptonCheckSet1 = new ComponentFactory.Krypton.Toolkit.KryptonCheckSet(this.components);
-            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.activePeriodtoolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel4)).BeginInit();
@@ -251,6 +257,18 @@
             this.datelogintoolStripStatusLabel4.Size = new System.Drawing.Size(69, 17);
             this.datelogintoolStripStatusLabel4.Text = "dd-MM-yyyy";
             // 
+            // toolStripStatusLabel4
+            // 
+            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(109, 17);
+            this.toolStripStatusLabel4.Text = "          Active Period :";
+            // 
+            // activePeriodtoolStripStatusLabel5
+            // 
+            this.activePeriodtoolStripStatusLabel5.Name = "activePeriodtoolStripStatusLabel5";
+            this.activePeriodtoolStripStatusLabel5.Size = new System.Drawing.Size(54, 17);
+            this.activePeriodtoolStripStatusLabel5.Text = "Sep-2011";
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 8.25F);
@@ -259,6 +277,7 @@
             this.editToolStripMenuItemM,
             this.viewToolStripMenuItem,
             this.dataMasterToolStripMenuItem,
+            this.laporanToolStripMenuItem,
             this.helpToolStripMenuItem,
             this.pOSToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -448,7 +467,7 @@
             this.mSTF003ExchangeRateToolStripMenuItem,
             this.mSTF004YearToolStripMenuItem});
             this.financeToolStripMenuItem.Name = "financeToolStripMenuItem";
-            this.financeToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.financeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.financeToolStripMenuItem.Text = "Keuangan";
             // 
             // mstf001bankToolStripMenuItem
@@ -486,7 +505,7 @@
             this.mSTG002KAryawanToolStripMenuItem,
             this.mSTG003DivisiToolStripMenuItem});
             this.generalMenuToolStripMenuItem.Name = "generalMenuToolStripMenuItem";
-            this.generalMenuToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.generalMenuToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.generalMenuToolStripMenuItem.Text = "Menu Umum";
             // 
             // mSTG001MataUangToolStripMenuItem
@@ -518,7 +537,7 @@
             this.mSTI003SatuanToolStripMenuItem,
             this.mSTI004GudangToolStripMenuItem});
             this.inventoryToolStripMenuItem.Name = "inventoryToolStripMenuItem";
-            this.inventoryToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.inventoryToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.inventoryToolStripMenuItem.Text = "Inventori";
             // 
             // mSTI001ItemGroupToolStripMenuItem
@@ -560,7 +579,7 @@
             this.mSTD006PajakToolStripMenuItem,
             this.mSTD007TerminToolStripMenuItem});
             this.distribusiToolStripMenuItem.Name = "distribusiToolStripMenuItem";
-            this.distribusiToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.distribusiToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.distribusiToolStripMenuItem.Text = "Distribusi";
             // 
             // mSTD001PelangganToolStripMenuItem
@@ -612,6 +631,50 @@
             this.mSTD007TerminToolStripMenuItem.Text = "MSTD007 - Termin";
             this.mSTD007TerminToolStripMenuItem.Click += new System.EventHandler(this.mSTD007TerminToolStripMenuItem_Click);
             // 
+            // laporanToolStripMenuItem
+            // 
+            this.laporanToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.inventoryToolStripMenuItem1});
+            this.laporanToolStripMenuItem.Name = "laporanToolStripMenuItem";
+            this.laporanToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.laporanToolStripMenuItem.Text = "Laporan";
+            // 
+            // inventoryToolStripMenuItem1
+            // 
+            this.inventoryToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.RPIN001stokToolStripMenuItem,
+            this.stokHargaToolStripMenuItem,
+            this.inventoryToolStripMenuItem2,
+            this.stockTakingToolStripMenuItem});
+            this.inventoryToolStripMenuItem1.Name = "inventoryToolStripMenuItem1";
+            this.inventoryToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.inventoryToolStripMenuItem1.Text = "Inventory";
+            // 
+            // RPIN001stokToolStripMenuItem
+            // 
+            this.RPIN001stokToolStripMenuItem.Name = "RPIN001stokToolStripMenuItem";
+            this.RPIN001stokToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.RPIN001stokToolStripMenuItem.Text = "RPIN001 - Stock Report";
+            this.RPIN001stokToolStripMenuItem.Click += new System.EventHandler(this.RPIN001stokToolStripMenuItem_Click);
+            // 
+            // stokHargaToolStripMenuItem
+            // 
+            this.stokHargaToolStripMenuItem.Name = "stokHargaToolStripMenuItem";
+            this.stokHargaToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.stokHargaToolStripMenuItem.Text = "Stok [Harga]";
+            // 
+            // inventoryToolStripMenuItem2
+            // 
+            this.inventoryToolStripMenuItem2.Name = "inventoryToolStripMenuItem2";
+            this.inventoryToolStripMenuItem2.Size = new System.Drawing.Size(199, 22);
+            this.inventoryToolStripMenuItem2.Text = "Inventory";
+            // 
+            // stockTakingToolStripMenuItem
+            // 
+            this.stockTakingToolStripMenuItem.Name = "stockTakingToolStripMenuItem";
+            this.stockTakingToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.stockTakingToolStripMenuItem.Text = "Stock Taking";
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -651,6 +714,7 @@
             this.pOSToolStripMenuItem.Name = "pOSToolStripMenuItem";
             this.pOSToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.pOSToolStripMenuItem.Text = "POS";
+            this.pOSToolStripMenuItem.Visible = false;
             // 
             // itemsToolStripMenuItem
             // 
@@ -748,25 +812,25 @@
             this.treeView3.LineColor = System.Drawing.Color.Empty;
             this.treeView3.Location = new System.Drawing.Point(0, 76);
             this.treeView3.Name = "treeView3";
-            treeNode1.Name = "Node0";
-            treeNode1.Text = "TRCP001 - Purchase";
-            treeNode2.Name = "Node1";
-            treeNode2.Text = "TRCP002 - Good Receipt";
-            treeNode3.Name = "Node2";
-            treeNode3.Text = "TRCP003 - Supplier Invoice";
-            treeNode4.Name = "Node3";
-            treeNode4.Text = "TRCP004 - Payment";
-            treeNode5.Name = "Node4";
-            treeNode5.Text = "TRCP005 - Purchase Return";
-            treeNode6.Name = "Node5";
-            treeNode6.Text = "TRCP006 - Debit Note";
+            treeNode46.Name = "Node0";
+            treeNode46.Text = "TRCP001 - Purchase";
+            treeNode47.Name = "Node1";
+            treeNode47.Text = "TRCP002 - Good Receipt";
+            treeNode48.Name = "Node2";
+            treeNode48.Text = "TRCP003 - Supplier Invoice";
+            treeNode49.Name = "Node3";
+            treeNode49.Text = "TRCP004 - Payment";
+            treeNode50.Name = "Node4";
+            treeNode50.Text = "TRCP005 - Purchase Return";
+            treeNode51.Name = "Node5";
+            treeNode51.Text = "TRCP006 - Debit Note";
             this.treeView3.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3,
-            treeNode4,
-            treeNode5,
-            treeNode6});
+            treeNode46,
+            treeNode47,
+            treeNode48,
+            treeNode49,
+            treeNode50,
+            treeNode51});
             this.treeView3.Size = new System.Drawing.Size(192, 98);
             this.treeView3.TabIndex = 6;
             // 
@@ -828,28 +892,28 @@
             this.distributionTreeView.LineColor = System.Drawing.Color.White;
             this.distributionTreeView.Location = new System.Drawing.Point(1, 267);
             this.distributionTreeView.Name = "distributionTreeView";
-            treeNode7.Name = "NodeCustomer";
-            treeNode7.Text = "MSTD001 - Customer";
-            treeNode8.Name = "NodeSupplier";
-            treeNode8.Text = "MSTD002 - Supplier";
-            treeNode9.Name = "NodeCustomerCategory";
-            treeNode9.Text = "MSTD003 - Customer Category";
-            treeNode10.Name = "NodeSupplierCategory";
-            treeNode10.Text = "MSTD004 - Supplier Category";
-            treeNode11.Name = "NodePriceCategory";
-            treeNode11.Text = "MSTD005 - Price Category";
-            treeNode12.Name = "NodeTax";
-            treeNode12.Text = "MSTD006 - Tax";
-            treeNode13.Name = "NodeTOP";
-            treeNode13.Text = "MSTD007 - Term Of Payment";
+            treeNode52.Name = "NodeCustomer";
+            treeNode52.Text = "MSTD001 - Customer";
+            treeNode53.Name = "NodeSupplier";
+            treeNode53.Text = "MSTD002 - Supplier";
+            treeNode54.Name = "NodeCustomerCategory";
+            treeNode54.Text = "MSTD003 - Customer Category";
+            treeNode55.Name = "NodeSupplierCategory";
+            treeNode55.Text = "MSTD004 - Supplier Category";
+            treeNode56.Name = "NodePriceCategory";
+            treeNode56.Text = "MSTD005 - Price Category";
+            treeNode57.Name = "NodeTax";
+            treeNode57.Text = "MSTD006 - Tax";
+            treeNode58.Name = "NodeTOP";
+            treeNode58.Text = "MSTD007 - Term Of Payment";
             this.distributionTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode7,
-            treeNode8,
-            treeNode9,
-            treeNode10,
-            treeNode11,
-            treeNode12,
-            treeNode13});
+            treeNode52,
+            treeNode53,
+            treeNode54,
+            treeNode55,
+            treeNode56,
+            treeNode57,
+            treeNode58});
             this.distributionTreeView.Size = new System.Drawing.Size(259, 117);
             this.distributionTreeView.TabIndex = 20;
             this.distributionTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
@@ -887,19 +951,19 @@
             this.inventoryTreeView.HideSelection = false;
             this.inventoryTreeView.Location = new System.Drawing.Point(1, 179);
             this.inventoryTreeView.Name = "inventoryTreeView";
-            treeNode14.Name = "NodePartGroup";
-            treeNode14.Text = "MSTI001 - Part Group";
-            treeNode15.Name = "NodePartCategory";
-            treeNode15.Text = "MSTI002 - Part Category";
-            treeNode16.Name = "NodeUnit";
-            treeNode16.Text = "MSTI003 - Unit";
-            treeNode17.Name = "NodeWarehouse";
-            treeNode17.Text = "MSTI004 - Warehouse";
+            treeNode59.Name = "NodePartGroup";
+            treeNode59.Text = "MSTI001 - Part Group";
+            treeNode60.Name = "NodePartCategory";
+            treeNode60.Text = "MSTI002 - Part Category";
+            treeNode61.Name = "NodeUnit";
+            treeNode61.Text = "MSTI003 - Unit";
+            treeNode62.Name = "NodeWarehouse";
+            treeNode62.Text = "MSTI004 - Warehouse";
             this.inventoryTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode14,
-            treeNode15,
-            treeNode16,
-            treeNode17});
+            treeNode59,
+            treeNode60,
+            treeNode61,
+            treeNode62});
             this.inventoryTreeView.Size = new System.Drawing.Size(259, 67);
             this.inventoryTreeView.TabIndex = 18;
             this.inventoryTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
@@ -938,16 +1002,16 @@
             this.generalMenuTreeView.HideSelection = false;
             this.generalMenuTreeView.Location = new System.Drawing.Point(1, 107);
             this.generalMenuTreeView.Name = "generalMenuTreeView";
-            treeNode18.Name = "NodeCurrency";
-            treeNode18.Text = "MSTG001 - Currency";
-            treeNode19.Name = "NodeEmployee";
-            treeNode19.Text = "MSTG002 - Employee";
-            treeNode20.Name = "NodeDivision";
-            treeNode20.Text = "MSTG003 - Division";
+            treeNode63.Name = "NodeCurrency";
+            treeNode63.Text = "MSTG001 - Currency";
+            treeNode64.Name = "NodeEmployee";
+            treeNode64.Text = "MSTG002 - Employee";
+            treeNode65.Name = "NodeDivision";
+            treeNode65.Text = "MSTG003 - Division";
             this.generalMenuTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode18,
-            treeNode19,
-            treeNode20});
+            treeNode63,
+            treeNode64,
+            treeNode65});
             this.generalMenuTreeView.Size = new System.Drawing.Size(259, 51);
             this.generalMenuTreeView.TabIndex = 16;
             this.generalMenuTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
@@ -986,19 +1050,19 @@
             this.financeTreeView.HideSelection = false;
             this.financeTreeView.Location = new System.Drawing.Point(1, 22);
             this.financeTreeView.Name = "financeTreeView";
-            treeNode21.Name = "NodeBank";
-            treeNode21.Text = "MSTF001 - Bank";
-            treeNode22.Name = "NodeDocumentType";
-            treeNode22.Text = "MSTF002 - Document Type";
-            treeNode23.Name = "NodeExchangeRate";
-            treeNode23.Text = "MSTF003 - Exchange Rate";
-            treeNode24.Name = "NodeYear";
-            treeNode24.Text = "MSTF004 - Year";
+            treeNode66.Name = "NodeBank";
+            treeNode66.Text = "MSTF001 - Bank";
+            treeNode67.Name = "NodeDocumentType";
+            treeNode67.Text = "MSTF002 - Document Type";
+            treeNode68.Name = "NodeExchangeRate";
+            treeNode68.Text = "MSTF003 - Exchange Rate";
+            treeNode69.Name = "NodeYear";
+            treeNode69.Text = "MSTF004 - Year";
             this.financeTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode21,
-            treeNode22,
-            treeNode23,
-            treeNode24});
+            treeNode66,
+            treeNode67,
+            treeNode68,
+            treeNode69});
             this.financeTreeView.Size = new System.Drawing.Size(259, 64);
             this.financeTreeView.TabIndex = 14;
             this.financeTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
@@ -1087,31 +1151,31 @@
             this.purchaseTreeView.FullRowSelect = true;
             this.purchaseTreeView.Location = new System.Drawing.Point(1, 304);
             this.purchaseTreeView.Name = "purchaseTreeView";
-            treeNode25.Name = "NodePurchaseOrder";
-            treeNode25.Text = "TRCP001 - Purchase Order";
-            treeNode26.Name = "NodeGoodReceiveNote";
-            treeNode26.Text = "TRCP002 - Good Receive";
-            treeNode27.Name = "NodeSupplierInvoice";
-            treeNode27.Text = "TRCP003 - Supplier Invoice";
-            treeNode28.Name = "NodePayment";
-            treeNode28.Text = "TRCP004 - Payment";
-            treeNode29.Name = "NodePurchaseReturn";
-            treeNode29.Text = "TRCP005 - Purchase Return";
-            treeNode30.Name = "NodeAPDebitNote";
-            treeNode30.Text = "TRCP006 - Debit Note";
-            treeNode31.Name = "NodeSupplierOutstandingInvoice";
-            treeNode31.Text = "TRCP007 - Supplier Outstanding Invoice";
-            treeNode32.Name = "NodeSupplierTransactionSummary";
-            treeNode32.Text = "TRCP008 - Supplier Transaction Summary";
+            treeNode70.Name = "NodePurchaseOrder";
+            treeNode70.Text = "TRCP001 - Purchase Order";
+            treeNode71.Name = "NodeGoodReceiveNote";
+            treeNode71.Text = "TRCP002 - Good Receive";
+            treeNode72.Name = "NodeSupplierInvoice";
+            treeNode72.Text = "TRCP003 - Supplier Invoice";
+            treeNode73.Name = "NodePayment";
+            treeNode73.Text = "TRCP004 - Payment";
+            treeNode74.Name = "NodePurchaseReturn";
+            treeNode74.Text = "TRCP005 - Purchase Return";
+            treeNode75.Name = "NodeAPDebitNote";
+            treeNode75.Text = "TRCP006 - Debit Note";
+            treeNode76.Name = "NodeSupplierOutstandingInvoice";
+            treeNode76.Text = "TRCP007 - Supplier Outstanding Invoice";
+            treeNode77.Name = "NodeSupplierTransactionSummary";
+            treeNode77.Text = "TRCP008 - Supplier Transaction Summary";
             this.purchaseTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode25,
-            treeNode26,
-            treeNode27,
-            treeNode28,
-            treeNode29,
-            treeNode30,
-            treeNode31,
-            treeNode32});
+            treeNode70,
+            treeNode71,
+            treeNode72,
+            treeNode73,
+            treeNode74,
+            treeNode75,
+            treeNode76,
+            treeNode77});
             this.purchaseTreeView.Size = new System.Drawing.Size(259, 151);
             this.purchaseTreeView.TabIndex = 19;
             this.purchaseTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
@@ -1147,37 +1211,37 @@
             this.SalesTreeView.FullRowSelect = true;
             this.SalesTreeView.Location = new System.Drawing.Point(1, 97);
             this.SalesTreeView.Name = "SalesTreeView";
-            treeNode33.Name = "NodeSalesOrder";
-            treeNode33.Text = "TRCS001 - Sales Order";
-            treeNode34.Name = "NodeDeliveryOrder";
-            treeNode34.Text = "TRCS002 - Delivery Order";
-            treeNode35.Name = "NodeCustomerInvoice";
-            treeNode35.Text = "TRCS003 - Customer Invoice";
-            treeNode36.Name = "NodeReceipt";
-            treeNode36.Text = "TRCS004 - Receipt";
-            treeNode37.Name = "NodeSalesReturn";
-            treeNode37.Text = "TRCS005 - Sales Return";
-            treeNode38.Name = "NodeARCreditNote";
-            treeNode38.Text = "TRCS006 - Credit Note";
-            treeNode39.Name = "NodeCustomerOutstandingInvoice";
-            treeNode39.Text = "TRCS007 - Customer Outstanding Invoice";
-            treeNode40.Name = "NodePOS";
-            treeNode40.Text = "TRCS008 - POS";
-            treeNode41.Name = "NodePOSCashier";
-            treeNode41.Text = "TRCS009 - POS Cashier";
-            treeNode42.Name = "NodeCustomerTransactionSummary";
-            treeNode42.Text = "TRCS010 - Customer Transaction Summary";
+            treeNode78.Name = "NodeSalesOrder";
+            treeNode78.Text = "TRCS001 - Sales Order";
+            treeNode79.Name = "NodeDeliveryOrder";
+            treeNode79.Text = "TRCS002 - Delivery Order";
+            treeNode80.Name = "NodeCustomerInvoice";
+            treeNode80.Text = "TRCS003 - Customer Invoice";
+            treeNode81.Name = "NodeReceipt";
+            treeNode81.Text = "TRCS004 - Receipt";
+            treeNode82.Name = "NodeSalesReturn";
+            treeNode82.Text = "TRCS005 - Sales Return";
+            treeNode83.Name = "NodeARCreditNote";
+            treeNode83.Text = "TRCS006 - Credit Note";
+            treeNode84.Name = "NodeCustomerOutstandingInvoice";
+            treeNode84.Text = "TRCS007 - Customer Outstanding Invoice";
+            treeNode85.Name = "NodePOS";
+            treeNode85.Text = "TRCS008 - POS";
+            treeNode86.Name = "NodePOSCashier";
+            treeNode86.Text = "TRCS009 - POS Cashier";
+            treeNode87.Name = "NodeCustomerTransactionSummary";
+            treeNode87.Text = "TRCS010 - Customer Transaction Summary";
             this.SalesTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode33,
-            treeNode34,
-            treeNode35,
-            treeNode36,
-            treeNode37,
-            treeNode38,
-            treeNode39,
-            treeNode40,
-            treeNode41,
-            treeNode42});
+            treeNode78,
+            treeNode79,
+            treeNode80,
+            treeNode81,
+            treeNode82,
+            treeNode83,
+            treeNode84,
+            treeNode85,
+            treeNode86,
+            treeNode87});
             this.SalesTreeView.Size = new System.Drawing.Size(259, 186);
             this.SalesTreeView.TabIndex = 17;
             this.SalesTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
@@ -1212,16 +1276,16 @@
             this.internalTreeView.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.internalTreeView.Location = new System.Drawing.Point(1, 22);
             this.internalTreeView.Name = "internalTreeView";
-            treeNode43.Name = "NodeStockTaking";
-            treeNode43.Text = "TRCI001 - Stock Taking";
-            treeNode44.Name = "NodePart";
-            treeNode44.Text = "TRCI002 - Part Master";
-            treeNode45.Name = "NodeOpeningStock";
-            treeNode45.Text = "TRCI003 - Opening Stock";
+            treeNode88.Name = "NodeStockTaking";
+            treeNode88.Text = "TRCI001 - Stock Taking";
+            treeNode89.Name = "NodePart";
+            treeNode89.Text = "TRCI002 - Part Master";
+            treeNode90.Name = "NodeOpeningStock";
+            treeNode90.Text = "TRCI003 - Opening Stock";
             this.internalTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode43,
-            treeNode44,
-            treeNode45});
+            treeNode88,
+            treeNode89,
+            treeNode90});
             this.internalTreeView.Size = new System.Drawing.Size(259, 54);
             this.internalTreeView.TabIndex = 15;
             this.internalTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
@@ -1344,18 +1408,6 @@
             this.kryptonCheckSet1.CheckButtons.Add(this.TransactionkryptonCheckButton2);
             this.kryptonCheckSet1.CheckedButton = this.TransactionkryptonCheckButton2;
             this.kryptonCheckSet1.CheckedButtonChanged += new System.EventHandler(this.kryptonCheckSet1_CheckedButtonChanged);
-            // 
-            // toolStripStatusLabel4
-            // 
-            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(109, 17);
-            this.toolStripStatusLabel4.Text = "          Active Period :";
-            // 
-            // activePeriodtoolStripStatusLabel5
-            // 
-            this.activePeriodtoolStripStatusLabel5.Name = "activePeriodtoolStripStatusLabel5";
-            this.activePeriodtoolStripStatusLabel5.Size = new System.Drawing.Size(54, 17);
-            this.activePeriodtoolStripStatusLabel5.Text = "Sep-2011";
             // 
             // MainForm
             // 
@@ -1505,6 +1557,12 @@
         private System.Windows.Forms.ToolStripMenuItem mSTD007TerminToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.ToolStripStatusLabel activePeriodtoolStripStatusLabel5;
+        private System.Windows.Forms.ToolStripMenuItem laporanToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem inventoryToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem RPIN001stokToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stokHargaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem inventoryToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem stockTakingToolStripMenuItem;
 
 
     }
