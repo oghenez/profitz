@@ -165,6 +165,13 @@ namespace Profit.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap FlashScreen {
+            get {
+                object obj = ResourceManager.GetObject("FlashScreen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Gnome_Applications_Other_32 {
             get {
                 object obj = ResourceManager.GetObject("Gnome-Applications-Other-32", resourceCulture);

@@ -27,6 +27,7 @@ namespace Profit
             this.Opacity = 0.0;
             fadeTimer.Start();
             mainForm = new MainForm(this);
+            kryptonManager1.GlobalPaletteMode = PaletteModeManager.Office2010Blue;
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
