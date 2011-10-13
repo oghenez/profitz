@@ -20,6 +20,12 @@ namespace Profit.Server
             m_cmd = new MySql.Data.MySqlClient.MySqlCommand();
             m_cmd.Connection = m_connection;
         }
+        public PartRepository()
+            : base(new Part())
+        {
+            m_cmd = new MySql.Data.MySqlClient.MySqlCommand();
+            m_cmd.Connection = m_connection;
+        }
         public override void Save(IEntity en)
         {
             OpenConnection();

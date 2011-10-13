@@ -21,6 +21,7 @@ namespace Profit
         Repository r_ccy = RepositoryFactory.GetInstance().GetRepository(RepositoryFactory.CURRENCY_REPOSITORY);
 
         ArrayList l_supplier = new ArrayList();
+        StockReportRepository r_stockRep = new StockReportRepository();
 
         public StockReportForm(IMainForm mainForm, string formName)
         {
@@ -40,7 +41,18 @@ namespace Profit
             status.Add("ALL");
             status.Add("TRUE");
             status.Add("FALSE");
-            
+
+            IList parts = r_stockRep.GetAllPartForReport();
+            IList groups = r_stockRep.GetAllPartGroupForReport();
+            IList parts2 = r_stockRep.GetAllPartForReport();
+            IList groups2 = r_stockRep.GetAllPartGroupForReport();
+
+            partstartkryptonComboBox3.DataSource = parts;
+            partendkryptonComboBox4.DataSource = parts2;
+
+            groupstartkryptonComboBox1.DataSource = groups;
+            groupendkryptonComboBox2.DataSource = groups2;
+
 
             //supplierkryptonComboBox.DataSource = l_supplier;
             //trtypekryptonComboBox1.DataSource = Enum.GetValues(typeof(StockCardEntryTypeSupplier));
@@ -116,6 +128,25 @@ namespace Profit
         private void transactionkryptonDataGridView_Sorted(object sender, EventArgs e)
         {
           //  UserSetting.AddNumberToGrid(transactionkryptonDataGridView);
+        }
+
+        private void allpartkryptonCheckBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            partendkryptonComboBox4.Enabled = !allpartkryptonCheckBox2.Checked;
+            partstartkryptonComboBox3.Enabled = !allpartkryptonCheckBox2.Checked;
+        }
+
+        private void allgroupkryptonCheckBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            groupendkryptonComboBox2.Enabled = !allgroupkryptonCheckBox1.Checked;
+            groupstartkryptonComboBox1.Enabled = !allgroupkryptonCheckBox1.Checked;
+        }
+
+        private void runReporttoolStripButton_Click(object sender, EventArgs e)
+        {
+            r_stockRep.GetStockReport(allpartkryptonCheckBox2.Checked, partstartkryptonComboBox3.Text,
+                partendkryptonComboBox4.Text, allgroupkryptonCheckBox1.Checked, groupstartkryptonComboBox1.Text,
+                groupendkryptonComboBox2.Text, asofDatekryptonDateTimePicker1.Value);
         }
     }
 }

@@ -256,6 +256,10 @@ namespace Profit.Server
         {
             return String.Format("select * from table_part");
         }
+        public static string GetAllSQLStatic()
+        {
+            return String.Format("select * from table_part order by part_name asc");
+        }
         public static string GetSearchSQL(string search, bool active)
         {
            // return String.Format(@"select * from table_part p where part_active = {0} 
@@ -376,6 +380,40 @@ namespace Profit.Server
             }
             return result;
         }
+        public static IList GetAllStaticForReport(MySql.Data.MySqlClient.MySqlDataReader r)
+        {
+            IList result = new ArrayList();
+            while (r.Read())
+            {
+                Part part = new Part();
+                part.ID = Convert.ToInt32(r[0]);
+                //part.CODE = r["part_code"].ToString();
+                part.CODE = r["part_name"].ToString();
+                //part.ACTIVE = Convert.ToBoolean(r["part_active"]);
+                //part.BARCODE = r["part_barcode"].ToString();
+                //part.COST_METHOD = (CostMethod)Enum.Parse(typeof(CostMethod), r["part_costmethod"].ToString());
+                //part.COST_PRICE = Convert.ToDouble(r["part_costprice"]);
+                //part.CURRENCY = new Currency(Convert.ToInt32(r["ccy_id"]));
+                //part.CURRENT_STOCK = Convert.ToDouble(r["part_currentstock"]);
+                //part.MAXIMUM_STOCK = Convert.ToDouble(r["part_maximumstock"]);
+                //part.MINIMUM_STOCK = Convert.ToDouble(r["part_minimumstock"]);
+                //part.PART_CATEGORY = new PartCategory(Convert.ToInt32(r["prtcat_id"]));
+                //part.PART_GROUP = new PartGroup(Convert.ToInt32(r["prtgroup_id"]));
+                //part.SELL_PRICE = Convert.ToDouble(r["part_sellprice"]);
+                //part.TAXABLE = Convert.ToBoolean(r["part_taxable"]);
+                //part.UNIT = new Unit(Convert.ToInt32(r["unit_id"]));
+                //part.PICTURE_NAME = r["part_picture"].ToString();
+                //part.TAX = new Tax(Convert.ToInt32(r["tax_id"]));
+                //part.PRICE_CATEGORY = new PriceCategory(Convert.ToInt32(r["pricecat_id"]));
+                //part.UNIT_BY_SEARCH = part.UNIT;//pos control
+                //part.SELL_PRICE_BY_SEARCH = part.SELL_PRICE;//pos control
+                //part.MODIFIED_BY = r["modified_by"].ToString();
+                //part.MODIFIED_DATE = Convert.ToDateTime(r["modified_date"].ToString());
+                //part.MODIFIED_COMPUTER_NAME = r["modified_computer"].ToString();
+                result.Add(part);
+            }
+            return result;
+        }
         public int GetID()
         {
             return ID;
@@ -425,6 +463,13 @@ namespace Profit.Server
         internal string updateSellingPrice()
         {
             return "update table_part set part_sellprice = " + this.NEW_SELL_PRICE;
+        }
+        public static string GetStockReport(bool allPart, string partStart, string partEnd, bool allGroup,
+            string groupStart, string groupEnd)
+        {
+            return String.Format(@"select * from table_part p, table_partgroup g where g.prtgroup_id = p.prtgroup_id {0} {1}",
+                allPart?"":" and p.part_name between '"+partStart+"' and '"+partEnd+"'", 
+                allGroup?"":" and g.prtgroup_name between '"+groupStart+"' and '"+groupEnd+"'");
         }
     }
 }

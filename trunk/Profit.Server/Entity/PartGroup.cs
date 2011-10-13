@@ -100,6 +100,10 @@ namespace Profit.Server
         {
             return String.Format("select * from table_partgroup");
         }
+        public static string GetAllSQLStatic()
+        {
+            return String.Format("select * from table_partgroup");
+        }
         public IList GetAll(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
@@ -112,6 +116,22 @@ namespace Profit.Server
                 partgroup.MODIFIED_BY = aReader["modified_by"].ToString();
                 partgroup.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
                 partgroup.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
+                result.Add(partgroup);
+            }
+            return result;
+        }
+        public static IList GetAllStaticForReport(MySql.Data.MySqlClient.MySqlDataReader aReader)
+        {
+            IList result = new ArrayList();
+            while (aReader.Read())
+            {
+                PartGroup partgroup = new PartGroup();
+                partgroup.ID = Convert.ToInt32(aReader[0]);
+                //partgroup.CODE = aReader[1].ToString();
+                partgroup.CODE = aReader[2].ToString();
+                //partgroup.MODIFIED_BY = aReader["modified_by"].ToString();
+                //partgroup.MODIFIED_DATE = Convert.ToDateTime(aReader["modified_date"].ToString());
+                //partgroup.MODIFIED_COMPUTER_NAME = aReader["modified_computer"].ToString();
                 result.Add(partgroup);
             }
             return result;

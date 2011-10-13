@@ -127,8 +127,14 @@ namespace Profit.Server
         }
         public static string FindByStockCard(int id, DateTime start, DateTime end)
         {
-            return String.Format("Select * from table_stockcardentry where sc_id ={0} and sce_date between '{1}' and '{2}'",
+            return String.Format("Select * from table_stockcardentry where sc_id ={0} and sce_date between '{1}' and '{2}' order by sce_date asc",
                 id, start.ToString(Utils.DATE_FORMAT_SHORT), end.ToString(Utils.DATE_FORMAT_SHORT_END));
+        }
+        public static string FindByStockCardEntryByPart(int partid, DateTime start, DateTime end)
+        {
+            return String.Format(@"Select * from table_stockcardentry se, table_stockcard s where
+se.sc_id = s.sc_id and s.part_id ={0} and sce_date between '{1}' and '{2}' order by sce_date asc",
+                partid, start.ToString(Utils.DATE_FORMAT_SHORT), end.ToString(Utils.DATE_FORMAT_SHORT_END));
         }
         public override bool Equals(object obj)
         {

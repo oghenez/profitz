@@ -17,9 +17,9 @@ namespace Profit.Server
         public double BOOKED = 0;
         public double BACK_ORDER = 0;
         public IList STOCK_CARD_ENTRIES = new ArrayList();
-        double BALANCE_AVAILABLE = 0;
-        double BOOK_AVAILABLE = 0;
-        double BACK_ORDER_AVAILABLE = 0;
+        public double BALANCE_AVAILABLE = 0;
+        public double BOOK_AVAILABLE = 0;
+        public double BACK_ORDER_AVAILABLE = 0;
         double BALANCE_AVAILABLE_RECALCULATE = 0;
         double BOOK_AVAILABLE_RECALCULATE = 0;
         double BACK_ORDER_AVAILABLE_RECALCULATE = 0;
@@ -401,7 +401,7 @@ namespace Profit.Server
             return String.Format("SELECT * from table_stockcard where period_id = {0} and part_id = {1}",period,part);
         }
 
-        private void recalculateAvailable()
+        public void recalculateAvailable()
         {
             BALANCE_AVAILABLE = 0;
             BOOK_AVAILABLE = 0;
