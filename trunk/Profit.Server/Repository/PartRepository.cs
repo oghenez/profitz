@@ -429,6 +429,14 @@ namespace Profit.Server
             aReader.Close();
             return a;
         }
+        public static PartGroup GetPartGroupByID(MySql.Data.MySqlClient.MySqlCommand cmd, int unitID)
+        {
+            cmd.CommandText = PartGroup.GetByIDSQLstatic(unitID);
+            MySql.Data.MySqlClient.MySqlDataReader aReader = cmd.ExecuteReader();
+            PartGroup a = PartGroup.GetPartGroup(aReader);
+            aReader.Close();
+            return a;
+        }
         public StockCardInfo GetStockCardInfo(int partID)
         {
             OpenConnection();

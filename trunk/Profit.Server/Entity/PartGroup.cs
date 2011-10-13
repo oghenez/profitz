@@ -104,6 +104,10 @@ namespace Profit.Server
         {
             return String.Format("select * from table_partgroup");
         }
+        public static string GetByIDSQLstatic(int ID)
+        {
+            return String.Format("select * from table_partgroup where prtgroup_id = {0}", ID);
+        }
         public IList GetAll(MySql.Data.MySqlClient.MySqlDataReader aReader)
         {
             IList result = new ArrayList();
