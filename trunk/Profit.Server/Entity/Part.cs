@@ -388,7 +388,7 @@ namespace Profit.Server
                 Part part = new Part();
                 part.ID = Convert.ToInt32(r[0]);
                 //part.CODE = r["part_code"].ToString();
-                part.CODE = r["part_code"].ToString()+" ~ "+r["part_name"].ToString();
+                part.CODE = r["part_name"].ToString() + " ~ " + r["part_code"].ToString();
                 //part.ACTIVE = Convert.ToBoolean(r["part_active"]);
                 //part.BARCODE = r["part_barcode"].ToString();
                 //part.COST_METHOD = (CostMethod)Enum.Parse(typeof(CostMethod), r["part_costmethod"].ToString());
